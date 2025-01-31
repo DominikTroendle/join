@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: column;
     gap: 48px;
+    background-color: #F6F7F8;
 }
 
 #main h1 {
@@ -25,4 +26,31 @@
 #form-add-task {
     display: flex;
     
+}
+
+#form-left,
+#form-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.label-add-task,
+.asterisk {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.label-add-task {
+    color: #2A3647;
+}
+
+.asterisk {
+    color: red;
+}
+
+.input-add-task {
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
 }
