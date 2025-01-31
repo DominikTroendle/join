@@ -1,8 +1,28 @@
-*{
+@font-face {
+    font-family: Inter;
+    src: url(/assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf);
+}
+
+* {
     margin: 0;
+    font-family: Inter;
 }
 
 #main {
     height: calc(100vh - 96px);
     padding: 110px 0 0 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+#main h1 {
+    font-size: 61px;
+    line-height: 73.2px;
+    font-weight: 700;
+}
+
+#form-add-task {
+    display: flex;
+    
 }
