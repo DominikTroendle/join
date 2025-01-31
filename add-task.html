@@ -33,20 +33,28 @@
             <hr>
             <div id="form-right">
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Due date<span class="asterisk">&#42;</span></label>
-                    <input id="due-date" class="input-add-task" type="text" name="due-date" placeholder="dd/mm/yyyyy">
+                    <label for="due-date" class="label-add-task">Due date<span class="asterisk">&#42;</span></label>
+                    <input id="due-date" class="input-add-task" type="text" name="due-date" placeholder="dd/mm/yyyy">
                 </div>
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Prio</label>
-                    <input id="prio" class="input-add-task" type="text" name="prio">
+                    <label for="prio" class="label-add-task">Prio</label>
+                    <div id="buttons-prio">
+                        <button id="urgent" class="button-prio">Urgent <img src="./assets/icons/urgent.svg" alt="icon-urgent"></button>
+                        <button id="medium" class="button-prio">Medium <img src="./assets/icons/medium.svg" alt="icon-medium"></button>
+                        <button id="low" class="button-prio">Low <img src="./assets/icons/low.svg" alt="icon-low"></button>
+                    </div>
                 </div>
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Category<span class="asterisk">&#42;</span></label>
-                    <input id="category" class="input-add-task" type="text" name="category">
+                    <label for="category" class="label-add-task">Category<span class="asterisk">&#42;</span></label>
+                    <select id="category" class="input-add-task" name="category">
+                        <option value="" disabled selected hidden>Select task category</option>
+                        <option value="Technical Task">Technical Task</option>
+                        <option value="User Story">User Story</option>
+                    </select>
                 </div>
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Subtasks</label placeholder="Add new subtask">
-                    <input id="subtasks" class="input-add-task" type="text" name="subtasks">
+                    <label for="subtasks" class="label-add-task">Subtasks</label placeholder="Add new subtask">
+                    <input id="subtasks" class="input-add-task" type="text" name="subtasks" placeholder="Add new subtask">
                 </div>
             </div>
         </form>
