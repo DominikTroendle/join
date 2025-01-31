@@ -13,16 +13,21 @@
         <form id="form-add-task">
             <div id="form-left">
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Title</label>
+                    <label for="title" class="label-add-task">Title</label>
                     <input id="title" class="input-add-task" type="text" name="title" placeholder="Enter a title">
                 </div>
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Description</label>
+                    <label for="description" class="label-add-task">Description</label>
                     <textarea id="description" class="input-add-task" name="description" placeholder="Enter a Description"></textarea>
                 </div>
                 <div class="container-input-label">
-                    <label for="" class="label-add-task">Assigned to</label>
-                    <input id="assigned-to" class="input-add-task" type="text" name="assigned-to">
+                    <label for="assigned-to" class="label-add-task">Assigned to</label>
+                    <select id="assigned-to" class="input-add-task" name="assigned-to">
+                        <option value="" disabled selected hidden>Select contacts to assign</option>
+                        <option value="Demo1">Demo1</option>
+                        <option value="Demo2">Demo2</option>
+                        <option value="Demo3">Demo3</option>
+                    </select>
                 </div>
             </div>
             <hr>
