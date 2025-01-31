@@ -1,13 +1,216 @@
-form{
-    height: 300px;
-    width: 400px;
-    background-color: beige;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f4f4f4;
+    overflow: hidden;
+}
+
+.logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-30%, -30%);
+    width: 150px;
+    height: auto;
+    animation: moveLogo 0.7s ease-in-out forwards;
+}
+@keyframes moveLogo {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-20%, -20%) scale(1);
+    }
+    100% {
+        top: 20px;
+        left: 20px;
+        transform: translate(0, 0) scale(0.5);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .login-container{
+    margin-bottom: 100px;
+}
+
+.register-link{
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    animation: fadeIn 1s ease-in-out 0.275s forwards;
+
+    display: flex;
+    justify-content: end;
+    gap: 30px;
+
+    margin-top: 65px;
+    padding-right: 40px;
+}
+
+.register-link a{
+    padding: 8px;
+    border-radius: 5px;
+
+    background-color: black;
+    color: white;
+}
+
+.register-link a:hover{
+    background-color: #29ABE2;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.user-login-container{
+    width: 100%;
+
+    display: flex;
+    align-items: start;
+    justify-content: center;
+
+    background-color: #f4f4f4;
+}
+
+.user-login{
+    height: 330px;
+    width: 430px;
+    margin-top: 80px;
+    padding: 50px;
+
+    background-color: white;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    animation: fadeIn 1s ease-in-out 0.275s forwards;
+}
+
+.blue-line{
+    margin: 8px;
+    margin-left: 100px;
+    height: 2px;
+    width: 80px;
+    background-color: #29ABE2;
+}
+
+.login form{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-container input {
+    width: 280px;
+    padding: 10px 40px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.input-icon {
+    position: absolute;
+    right: 10px; 
+    width: 20px;
+    height: 20px;
+    margin-top: 15px;
+}
+
+.login input::placeholder{
+    color: rgba(128, 128, 128, 0.356);
+}
+
+.login input:focus{
+    border: 1px solid #29ABE2;
+    transition: all 175ms ease-in-out;
+}
+
+.no-value-content {
+    height: 20px;
+    margin-top: 2px;
+}
+
+.error-massage{
+    display: none;
+    font-size: 9px;
+    color: red;
+    margin-right: 80px;
+}
+
+.login-buttons{
+    margin-top: 10px;
+}
+
+.login-buttons button[type=submit]{
+    padding: 8px 20px;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+}
+
+.login-buttons button[type=submit]:hover{
+    transition: 175ms ease-in-out;
+    background-color: #29ABE2;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+}
+
+.login-buttons button[type=button]{
+    padding: 8px 20px;
+    margin-left: 20px;
+    border-radius: 8px;
+
+    transition: 175px ease-in-out;
+    background-color: white;
+    border: 1px solid black;
+    
+}
+
+.login-buttons button[type=button]:hover{
+    border: 1px solid #29ABE2;
+    color: #29ABE2;
+
+    transition: 175px ease-in-out;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    transform: scale(1.01);
+}
+
+.legal-information{
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    animation: fadeIn 1s ease-in-out 0.275s forwards;
+
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+
+    margin-top: 250px;
+    font-size: 12px;
+}
+
+.legal-information a:hover{
+    color: #29ABE2;
+    transition: 75ms ease-in-out;
+    transform: scale(1.03);
+    font-weight: 500;
+}
+
