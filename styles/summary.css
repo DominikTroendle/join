@@ -26,6 +26,33 @@ body {
     flex: 1;
 }
 
+.text-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    margin-left: 96px;
+    margin-top: 110px;
+}
+
+.text-big {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+}
+
+.separator {
+    width: 3px;
+    height: 59px;
+    background-color: #29abe2;
+}
+
+.text-small {
+    font-size: 27px;
+    line-height: 32.4px;
+    font-weight: 400px;
+}
+
 .button-top-box {
     display: flex;
     justify-content: center;
@@ -33,6 +60,7 @@ body {
     width: 560px;
     height: 562px;
     gap: 24px;
+    margin-left: 96px;
 }
 
 .button-top {
