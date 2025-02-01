@@ -76,6 +76,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     padding-left: 52px;
+    cursor: pointer;
 }
 
 .menu-button:hover {
@@ -106,6 +107,7 @@ body {
     align-items: center;
     padding: 8px;
     padding-left: 52px;
+    cursor: pointer;
 }
 
 .menu-button-bottom:hover {

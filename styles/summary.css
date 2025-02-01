@@ -1,7 +1,12 @@
+@font-face {
+    font-family: Inter;
+    src: url(/assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
-    font-family: 'Open-Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 html {
@@ -53,6 +58,33 @@ body {
     font-weight: 400px;
 }
 
+.text-big-button-top-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.text-big-button-top {
+    font-size: 64px;
+    line-height: 76.8px;
+    text-align: center;
+    font-weight: 600;
+    color: #000000;
+}
+
+.button-img {
+    width: 69px;
+    height: 69px;
+}
+
+.text-small-button-top {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #2A3647;
+}
+
 .button-top-box {
     display: flex;
     justify-content: center;
@@ -71,7 +103,19 @@ body {
     justify-content: center;
     border-radius: 30px;
     border: none;
+    background-color: #FFFFFF;
 }
+
+.button-top:hover {
+    background-color: #2A3647;
+}
+
+.button-top:hover .text-big-button-top, 
+.button-top:hover .text-small-button-top {
+    color: #FFFFFF;
+}
+
+
 
 footer {
     display: flex;

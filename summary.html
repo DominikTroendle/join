@@ -24,8 +24,23 @@
             </div>
             <div class="all-button-box">
                 <div class="button-top-box">
-                    <button class="button-top"><img src="assets/icons/Frame 59.png" alt=""><img src="assets/icons/Frame 62.png" alt=""></button>
-                    <button class="button-top"><img src="assets/icons/Frame 59(1).png" alt=""><img src="assets/icons/Group 6.png" alt=""></button>
+                    <button class="button-top"
+                        onmouseover="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"
+                        onmouseleave="changeImgSource('to-do-img', 'assets/icons/Frame 59.png')"><img id="to-do-img"
+                            class="button-img" src="assets/icons/Frame 59.png" alt="">
+                        <div class="text-big-button-top-box">
+                            <span class="text-big-button-top">1</span>
+                            <span class="text-small-button-top">To-do</span>
+                        </div>
+                    </button>
+                    <button class="button-top" onmouseover="changeImgSource('done-img', 'assets/icons/Group 7.png')"
+                        onmouseleave="changeImgSource('done-img', 'assets/icons/Frame 59(1).png')"><img id="done-img"
+                            class="button-img" src="assets/icons/Frame 59(1).png" alt="">
+                        <div class="text-big-button-top-box">
+                            <span class="text-big-button-top">1</span>
+                            <span class="text-small-button-top">Done</span>
+                        </div>
+                    </button>
                 </div>
                 <button class="button-middle"></button>
                 <div class="button-bottom-box">
@@ -39,7 +54,7 @@
     <footer>
 
     </footer>
-    <script src="script.js"></script>
+    <script src="scripts/summary.js"></script>
 </body>
 
 </html>
