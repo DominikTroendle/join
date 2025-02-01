@@ -1,7 +1,12 @@
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
-    font-family: 'Open-Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 html {
