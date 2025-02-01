@@ -89,6 +89,11 @@ body {
     color: #FFFFFF;
 }
 
+.menu-button:focus {
+    background-color: #091931;
+    color: #FFFFFF;
+}
+
 .menu-button-bottom-box {
     display: flex;
     justify-content: center;
@@ -118,6 +123,10 @@ body {
 .menu-button-bottom:hover {
     color: #29ABE2;
     font-size: 17px;
+}
+
+.menu-button-bottom:focus {
+    background-color: #091931;
 }
 
 .menu-button-img {

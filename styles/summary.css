@@ -64,6 +64,13 @@ body {
     font-weight: 400px;
 }
 
+.button-name-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+
 .all-button-box {
     display: flex;
     justify-content: center;
@@ -120,6 +127,18 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 13px;
+    width: 178px;
+    height: 57px;
+}
+
+.button-middle-inside-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    width: 130px;
+    height: 96px;
 }
 
 .button-top-box {
@@ -140,6 +159,7 @@ body {
     border-radius: 30px;
     border: none;
     background-color: #FFFFFF;
+    width: 264px;
 }
 
 .button-top:hover {
@@ -159,6 +179,7 @@ body {
     border-radius: 30px;
     border: none;
     background-color: #FFFFFF;
+    width: 560px;
 }
 
 .button-middle-img-text-box {
@@ -173,8 +194,24 @@ body {
 }
 
 .button-middle:hover .text-big-button-top,
-.button-middle:hover .text-small-button-top {
+.button-middle:hover .text-small-button-top,
+.button-middle:hover .deadline-date,
+.button-middle:hover .text-small-button-middle {
     color: #FFFFFF;
+}
+
+.deadline-date {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    color: #2A3647;
+}
+
+.text-small-button-middle {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #2A3647;
 }
 
 .button-bottom-box {
@@ -182,6 +219,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 24px;
+    width: 560px;
 }
 
 .button-bottom {
@@ -204,6 +242,27 @@ body {
 .button-bottom:hover .text-big-button-top,
 .button-bottom:hover .text-small-button-top {
     color: #FFFFFF;
+}
+
+.name-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.daytime-text {
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    color: #2A3647;
+}
+
+.name-text {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 76.8px;
+    color: #29ABE2;
 }
 
 footer {
