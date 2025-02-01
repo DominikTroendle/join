@@ -18,8 +18,10 @@ return `
                     <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
                 </div>
                 <div class="input-container">
-                    <input type="password" id="password" placeholder="Password" required />
-                    <img src="assets/img/lock.png" alt="Lock Icon" class="input-icon">
+                    <input type="password" id="password" placeholder="Password" required 
+                    onfocus="changePasswordIcon(true)" 
+                    onblur="changePasswordIcon(false)"/>
+                    <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon" onclick="togglePasswordVisibility()">
                 </div>
                 <div class="no-value-content">
                 <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>

@@ -125,6 +125,7 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-top: 15px;
+    outline: none;
 }
 
 .input-icon {
@@ -203,7 +204,7 @@ body {
     justify-content: center;
     gap: 50px;
 
-    margin-top: 250px;
+    margin-top: 280px;
     font-size: 12px;
 }
 

@@ -1,6 +1,7 @@
 const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
 const BASE_JOIN_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
 let allUsers = [];
+let isPasswordVisible = false;
 
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -44,7 +45,6 @@ async function allDatas() {
             }
         )
     }
-    console.log(allUsers);
 }
 
 async function UserLogin() {
@@ -55,7 +55,7 @@ async function UserLogin() {
     password.value = "";
     if (user) {
         console.log("user gefunden");
-        window.location.href = 'index.html?=Du hast die efolgereich eingelogt';
+        window.location.href = 'homepage.html?';
     }else{
         console.log("kein user vorhanden");
         email.style.border = "1px solid red";
@@ -65,5 +65,28 @@ async function UserLogin() {
 }
 
 function loginGuastAccount() {
-    window.location.href = "index.html?"
+    window.location.href = "homepage.html?"
+}
+
+function changePasswordIcon(focused) {
+    const icon = document.getElementById("passwordIcon");
+    if (focused && !isPasswordVisible) {
+        icon.src = "assets/img/visibility_off.png";
+    } else if (!focused && !isPasswordVisible) {
+        icon.src = "assets/img/lock.png";
+    }
+}
+
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById("password");
+    const icon = document.getElementById("passwordIcon");
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.src = "assets/img/visibility.png";
+        isPasswordVisible = true;
+    } else {
+        passwordInput.type = "password";
+        icon.src = "assets/img/visibility_off.png";
+        isPasswordVisible = false;
+    }
 }
