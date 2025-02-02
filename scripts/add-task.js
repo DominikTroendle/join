@@ -1,6 +1,6 @@
 // add assigned-to dropdown onclick
 
-function prioButtonSelected(prio) {
+function selectPrioButton(prio) {
     clearPrioButtons();
     let button = document.getElementById(`${prio}`);
     let svg = document.getElementById(`svg-${prio}`);

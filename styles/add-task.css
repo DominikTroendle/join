@@ -36,10 +36,10 @@
 #main {
     height: calc(100vh - 96px);
     width: calc(100vw - 232px);
-    padding: 110px 0 0 96px;
+    padding: 110px 0 64px 96px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    justify-content: space-between;
     background-color: #F6F7F8;
 }
 
@@ -47,6 +47,12 @@
     font-size: 61px;
     line-height: 73.2px;
     font-weight: 700;
+}
+
+#container-form {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
 }
 
 #form-add-task {
@@ -132,7 +138,9 @@
 }
 
 #description {
-    height: 120px;
+    min-height: 120px;
+    max-height: 220px;
+    max-width: 440px;
     padding: 18px 16px;
     display: flex;
     background-image: url(../assets/icons/resizer.svg);
