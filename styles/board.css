@@ -163,8 +163,9 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: 0 64px;
-    width: 100%;
+    width: 1208px;
     gap: 24px;
+    margin-bottom: 12px;
 }
 
 .to-do__box {
@@ -303,6 +304,143 @@ h1 {
     font-weight: 700;
     line-height: 24px;
     color: #42526E;
+}
+
+.all-drag-field-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 26px;
+    padding: 0 64px;
+}
+
+.drag-field {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 252px;
+    height: 688px;
+    gap: 16px;
+    background-color: rgb(0, 0, 0, 0.2);
+}
+
+.user-story__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 10px;
+    border-radius: 24px;
+    background-color: #FFFFFF;
+    width: 252px;
+    height: 225px;
+}
+
+.user-story__category-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 113px;
+    height: 27px;
+    border-radius: 8px;
+    padding: 4px 16px;
+    gap: 10px;
+    background-color: #0038FF;
+}
+
+.user-story__category-text {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #FFFFFF;
+}
+
+.user-story__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 19.2px;
+    color: #2A3647;
+}
+
+.user-story__discription {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #ABA8A8;
+}
+
+.user-story__scale-text-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 220px;
+    height: 16px;
+}
+
+.user-story__subtask-scale-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 128px;
+    height: 8px;
+    border-radius: 8px;
+    background-color: #F4F4F4;
+}
+
+.user-story__subtask-scale-fill {
+    height: 100%;
+    width: 50%;
+    background-color: #4589FF;
+    border-radius: 8px;
+}
+
+.user-story__subtask-text {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: #000000;
+}
+
+.user-story__name-priority-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 220px;
+    height: 32px;
+}
+
+.user-story__name-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-story__name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    color: #FFFFFF;
+    border-radius: 45px;
+    gap: 10px;
+    margin-right: -7.5px;
+}
+
+.background-color-1 {
+    background-color: #9327FF;
+}
+
+.background-color-2 {
+    background-color: #FC71FF;
+}
+
+.background-color-3 {
+    background-color: #FFBB2B;
 }
 
 footer {
