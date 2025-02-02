@@ -151,11 +151,19 @@ body {
 }
 
 .transform-origin-right {
-    transform-origin: top right;
+    transform-origin: right top;
+}
+
+.transform-origin-center-right {
+    transform-origin: right center;
 }
 
 .transform-origin-left {
-    transform-origin: top left;
+    transform-origin: left top;
+}
+
+.transform-origin-center-left {
+    transform-origin: left center;
 }
 
 .button-top {
@@ -225,6 +233,22 @@ body {
     color: #FFFFFF;
 }
 
+.button-middle:active {
+    background-color: #FFFFFF;
+    transform: scale(1.0, 1.0);
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+}
+
+.button-middle:active .text-big-button-top {
+    color: #000000;
+}
+
+.button-middle:active .text-small-button-top,
+.button-middle:active .deadline-date,
+.button-middle:active .text-small-button-middle {
+    color: #2A3647;
+}
+
 .button-middle-img-text-box {
     gap: 61px;
     display: flex;
@@ -265,16 +289,34 @@ body {
     background-color: #FFFFFF;
     width: 168px;
     height: 168px;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
     cursor: pointer;
 }
 
 .button-bottom:hover {
     background-color: #2A3647;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.095, 1.095);
 }
 
 .button-bottom:hover .text-big-button-top,
 .button-bottom:hover .text-small-button-top {
     color: #FFFFFF;
+}
+
+.button-bottom:active {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.0, 1.0);
+}
+
+.button-bottom:active .text-big-button-top {
+    color: #000000;
+}
+
+.button-bottom:active .text-small-button-top {
+    color: #2A3647;
 }
 
 .name-box {
