@@ -1,5 +1,3 @@
-// add assigned-to dropdown onclick
-
 function selectPrioButton(prio) {
     clearPrioButtons();
     let button = document.getElementById(`${prio}`);
@@ -19,5 +17,12 @@ function clearPrioButtons() {
         svg.classList.remove('filter-white');
     }
 }
+
+function openSelectOptions() {
+    let container = document.getElementById('container-custom-select-options');
+    container.classList.toggle('d-none');
+}
+
+// add category dropdown onclick
 
 // change arrow direction of assigned-to & category onclick
