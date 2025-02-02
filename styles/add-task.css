@@ -9,8 +9,17 @@
     box-sizing: border-box;
 }
 
+.d-none {
+    display: none;
+}
+
+.grey {
+    color: #F6F7F8;
+}
+
 #main {
     height: calc(100vh - 96px);
+    /* width: calc(100vw - 232px); */
     padding: 110px 0 0 96px;
     display: flex;
     flex-direction: column;
@@ -34,26 +43,18 @@
     width: 440px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
 }
 
 .container-input-label {
-    padding-bottom: 10px;
+    padding-bottom: 16px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-}
-
-.label-add-task,
-.asterisk {
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
 }
 
 .label-add-task {
     color: #2A3647;
+    padding-bottom: 8px;
 }
 
 .asterisk {
@@ -63,6 +64,13 @@
 .input-add-task {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.required {
+    height: 16px;
+    font-size: 14px;
+    padding-top: 2px;
 }
 
 #title {
@@ -70,14 +78,38 @@
     padding: 12px 21px;
 }
 
+.label-add-task,
+.asterisk,
+#title,
+#description,
+#due-date,
+#assigned-to,
+#category,
+#subtasks {
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
 #title::placeholder,
 #description::placeholder,
-#due-date::placeholder {
+#due-date::placeholder,
+#subtasks::placeholder {
     color: #D1D1D1;
     font-family: Inter;
     font-weight: 400;
     font-size: 20px;
     line-height: 24px;
+}
+
+#title:focus,
+#description:focus,
+#due-date:focus,
+#subtasks:focus,
+#assigned-to:focus,
+#category:focus  {
+    outline: 1px solid #94D5F0;
 }
 
 #description {
@@ -97,16 +129,20 @@
 #assigned-to,
 #category {
     height: 48px;
-    padding: 12px 21px;
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    padding: 12px 21px 11px 21px;
     appearance: none;
     background-image: url(../assets/icons/arrow_drop_down.svg);
     background-repeat: no-repeat;
     background-size: 10px;
     background-position: top 21px right 20px;
+}
+
+#assigned-to::placeholder {
+    color: black;
+}
+
+#assigned-to:focus::placeholder {
+    color: transparent;
 }
 
 hr {
@@ -120,15 +156,6 @@ hr {
     background-repeat: no-repeat;
     background-size: 24px;
     background-position: top 12px left 403px;
-}
-
-#due-date::placeholder,
-#subtasks::placeholder {
-    color: #D1D1D1;
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
 }
 
 #prio {
@@ -169,8 +196,25 @@ hr {
     justify-content: center;
     align-items: center;
     gap: 8px;
+    cursor: pointer;
+}
+
+.urgent {
+    background-color: #FF3D00;
+}
+
+.medium {
+    background-color: #FFA800;
+}
+
+.low {
+    background-color: #7AE229;
 }
 
 .button-prio:hover {
     box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+}
+
+input:focus {
+    border: 1px solid #94D5F0;
 }

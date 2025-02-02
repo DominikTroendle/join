@@ -13,8 +13,9 @@
         <form id="form-add-task">
             <div id="form-left">
                 <div class="container-input-label">
-                    <label for="title" class="label-add-task">Title</label>
+                    <label for="title" class="label-add-task">Title<span class="asterisk">&#42;</span></label>
                     <input id="title" class="input-add-task" type="text" name="title" placeholder="Enter a title">
+                    <p class="required grey">This field is required</p>
                 </div>
                 <div class="container-input-label">
                     <label for="description" class="label-add-task">Description</label>
@@ -22,12 +23,7 @@
                 </div>
                 <div class="container-input-label">
                     <label for="assigned-to" class="label-add-task">Assigned to</label>
-                    <select id="assigned-to" class="input-add-task" name="assigned-to">
-                        <option value="" disabled selected hidden>Select contacts to assign</option>
-                        <option value="Demo1">Demo1</option>
-                        <option value="Demo2">Demo2</option>
-                        <option value="Demo3">Demo3</option>
-                    </select>
+                    <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign">
                 </div>
             </div>
             <hr>
@@ -35,13 +31,14 @@
                 <div class="container-input-label">
                     <label for="due-date" class="label-add-task">Due date<span class="asterisk">&#42;</span></label>
                     <input id="due-date" class="input-add-task" type="text" name="due-date" placeholder="dd/mm/yyyy">
+                    <p class="required grey">This field is required</p>
                 </div>
                 <div class="container-input-label">
                     <label for="prio" class="label-add-task">Prio</label>
                     <div id="buttons-prio">
-                        <button id="urgent" class="button-prio">Urgent <img src="assets/icons/urgent.svg" alt="icon-urgent"></button>
-                        <button id="medium" class="button-prio">Medium <img src="assets/icons/medium.svg" alt="icon-medium"></button>
-                        <button id="low" class="button-prio">Low <img src="assets/icons/low.svg" alt="icon-low"></button>
+                        <button id="urgent" class="button-prio" type="button" onclick="prioButtonSelected('urgent')">Urgent <img src="assets/icons/urgent.svg" alt="icon-urgent"></button>
+                        <button id="medium" class="button-prio" type="button" onclick="prioButtonSelected('medium')">Medium <img src="assets/icons/medium.svg" alt="icon-medium"></button>
+                        <button id="low" class="button-prio" type="button" onclick="prioButtonSelected('low')">Low <img src="assets/icons/low.svg" alt="icon-low"></button>
                     </div>
                 </div>
                 <div class="container-input-label">
@@ -51,6 +48,7 @@
                         <option value="Technical Task">Technical Task</option>
                         <option value="User Story">User Story</option>
                     </select>
+                    <p class="required grey">This field is required</p>
                 </div>
                 <div class="container-input-label">
                     <label for="subtasks" class="label-add-task">Subtasks</label placeholder="Add new subtask">
@@ -59,5 +57,7 @@
             </div>
         </form>
     </section>
+
+    <script src="./scripts/add-task.js"></script>
 </body>
 </html>
