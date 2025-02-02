@@ -147,7 +147,7 @@ body {
     align-items: center;
     width: 560px;
     height: 168px;
-    gap: 24px;
+    gap: 32px;
 }
 
 .button-top {
@@ -160,6 +160,7 @@ body {
     border: none;
     background-color: #FFFFFF;
     width: 264px;
+    cursor: pointer;
 }
 
 .button-top:hover {
@@ -180,6 +181,7 @@ body {
     border: none;
     background-color: #FFFFFF;
     width: 560px;
+    cursor: pointer;
 }
 
 .button-middle-img-text-box {
@@ -218,7 +220,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 28px;
     width: 560px;
 }
 
@@ -233,6 +235,7 @@ body {
     background-color: #FFFFFF;
     width: 168px;
     height: 168px;
+    cursor: pointer;
 }
 
 .button-bottom:hover {

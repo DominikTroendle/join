@@ -188,6 +188,12 @@ nav {
     background-color: #FFFFFF;
     color: #29ABE2;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.small-menu-button:hover {
+    background-color: rgba(12, 46, 98, 0.12);
 }
 
 .help-img:hover {
