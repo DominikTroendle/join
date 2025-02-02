@@ -117,12 +117,68 @@ h1 {
     height: 24px;
 }
 
+.to-do__text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #42526E;
+}
+
+.to-do__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid #2A3647;
+    padding: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2A3647;
+    cursor: pointer;
+    background-color: #F6F7F8;
+}
+
+.to-do__button:hover {
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
+}
+
 .in-progress__box {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 244px;
     height: 24px;
+}
+
+.in-progress__text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #42526E;
+}
+
+.in-progress__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid #2A3647;
+    padding: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2A3647;
+    cursor: pointer;
+    background-color: #F6F7F8;
+}
+
+.in-progress__button:hover {
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
 }
 
 .await-feedback__box {
@@ -133,12 +189,47 @@ h1 {
     height: 24px;
 }
 
+.await-feedback__text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #42526E;
+}
+
+.await-feedback__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: 2px solid #2A3647;
+    padding: 3px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #2A3647;
+    cursor: pointer;
+    background-color: #F6F7F8;
+}
+
+.await-feedback__button:hover {
+    border: 2px solid #29ABE2;
+    color: #29ABE2;
+}
+
 .done__box {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 244px;
     height: 24px;
+}
+
+.done__text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #42526E;
 }
 
 footer {
