@@ -16,8 +16,16 @@
                 <div class="title-input-button__box">
                     <h1>Board</h1>
                     <div class="input-button__box">
-                        <input class="search-field__input" type="text" placeholder="Find Task" />
-                        <button class="add-task__button">Add task <img class="add-task__img" src="assets/icons/add.png" alt=""></button>
+                        <div class="search-field__box">
+                            <input class="search-field__input" type="text" placeholder="Find Task">
+                            <button class="search-field__button"
+                                onmousedown="changeImgSource('search-field__img', 'assets/icons/Property 1=click.png')"
+                                onmouseup="changeImgSource('search-field__img', 'assets/icons/search.png')"><img
+                                    class="search-field__img" id="search-field__img" src="assets/icons/search.png"
+                                    alt=""></button>
+                        </div>
+                        <button class="add-task__button">Add task <img class="add-task__img" src="assets/icons/add.png"
+                                alt=""></button>
                     </div>
                 </div>
                 <div class="tasks-category__box">
@@ -43,11 +51,11 @@
                     <div class="drag-field" id="await-feedback-drag-field"></div>
                     <div class="drag-field" id="done-drag-field"></div>
                 </div>
+
             </div>
         </div>
-    </div>
 
-    <script src="scripts/board.js"></script>
+        <script src="scripts/board.js"></script>
 </body>
 
 </html>

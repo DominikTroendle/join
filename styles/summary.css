@@ -150,6 +150,14 @@ body {
     gap: 32px;
 }
 
+.transform-origin-right {
+    transform-origin: top right;
+}
+
+.transform-origin-left {
+    transform-origin: top left;
+}
+
 .button-top {
     padding: 38px 58px;
     gap: 18px;
@@ -161,15 +169,33 @@ body {
     background-color: #FFFFFF;
     width: 264px;
     cursor: pointer;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
 }
 
 .button-top:hover {
     background-color: #2A3647;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.07, 1.095);
 }
 
 .button-top:hover .text-big-button-top,
 .button-top:hover .text-small-button-top {
     color: #FFFFFF;
+}
+
+.button-top:active {
+    background-color: #F9F9F9;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.0, 1.0);
+}
+
+.button-top:active .text-big-button-top {
+    color: #000000;
+}
+
+.button-top:active .text-small-button-top {
+    color: #2A3647;
 }
 
 .button-middle {

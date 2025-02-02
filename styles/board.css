@@ -68,16 +68,62 @@ h1 {
     gap: 32px;
 }
 
-.search-field__input {
+.search-field__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 312px;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #ABA8A8;
     padding: 8px 16px;
+    background-color: #FFFFFF;
+}
+
+.search-field__box:focus-within {
+    border: 1px solid #29ABE2;
+}
+
+.search-field__input {
     font-size: 20px;
     line-height: 24px;
     font-weight: 400;
+    color: #000000;
+    width: 240px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.search-field__input::placeholder {
     color: #D1D1D1;
+}
+
+.search-field__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 32px;
+    padding-left: 14px;
+    background-color: #FFFFFF;
+    border: none;
+    border-left: 1px solid #D1D1D1;
+    cursor: pointer;
+}
+
+.search-field__img {
+    width: 32px;
+    height: 32px;
+}
+
+.search-field__button:hover .search-field__img {
+    background-color: #EEEEEE;
+    border-radius: 45px;
+}
+
+.search-field__button:active .search-field__img {
+    background-color: #FFFFFF;
 }
 
 .add-task__button {
@@ -93,6 +139,18 @@ h1 {
     font-weight: 700;
     color: #FFFFFF;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-task__button:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
+}
+
+.add-task__button:active {
+    background-color: #091931;
+    border: 1px solid #2A3647;
+    box-shadow: none;
 }
 
 .add-task__img {
@@ -145,6 +203,11 @@ h1 {
     color: #29ABE2;
 }
 
+.to-do__button:active {
+    border: 2px solid #2A3647;
+    color: #2A3647;
+}
+
 .in-progress__box {
     display: flex;
     justify-content: space-between;
@@ -181,6 +244,11 @@ h1 {
     color: #29ABE2;
 }
 
+.in-progress__button:active {
+    border: 2px solid #2A3647;
+    color: #2A3647;
+}
+
 .await-feedback__box {
     display: flex;
     justify-content: space-between;
@@ -215,6 +283,11 @@ h1 {
 .await-feedback__button:hover {
     border: 2px solid #29ABE2;
     color: #29ABE2;
+}
+
+.await-feedback__button:active {
+    border: 2px solid #2A3647;
+    color: #2A3647;
 }
 
 .done__box {
