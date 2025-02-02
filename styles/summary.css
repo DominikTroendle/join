@@ -208,17 +208,14 @@ body {
     background-color: #FFFFFF;
     width: 560px;
     cursor: pointer;
-}
-
-.button-middle-img-text-box {
-    gap: 61px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
 }
 
 .button-middle:hover {
     background-color: #2A3647;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.0286, 1.095);
 }
 
 .button-middle:hover .text-big-button-top,
@@ -226,6 +223,13 @@ body {
 .button-middle:hover .deadline-date,
 .button-middle:hover .text-small-button-middle {
     color: #FFFFFF;
+}
+
+.button-middle-img-text-box {
+    gap: 61px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .deadline-date {
