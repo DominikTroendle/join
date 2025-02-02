@@ -13,7 +13,7 @@
         <form id="form-add-task">
             <div id="form-left">
                 <div class="container-input-label">
-                    <label for="title" class="label-add-task">Title<span class="asterisk">&#42;</span></label>
+                    <label for="title" class="label-add-task flex">Title<span class="asterisk">&#42;</span></label>
                     <input id="title" class="input-add-task" type="text" name="title" placeholder="Enter a title">
                     <p class="required grey">This field is required</p>
                 </div>
@@ -29,7 +29,7 @@
             <hr>
             <div id="form-right">
                 <div class="container-input-label">
-                    <label for="due-date" class="label-add-task">Due date<span class="asterisk">&#42;</span></label>
+                    <label for="due-date" class="label-add-task flex">Due date<span class="asterisk">&#42;</span></label>
                     <input id="due-date" class="input-add-task" type="text" name="due-date" placeholder="dd/mm/yyyy">
                     <p class="required grey">This field is required</p>
                 </div>
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="container-input-label">
-                    <label for="category" class="label-add-task">Category<span class="asterisk">&#42;</span></label>
+                    <label for="category" class="label-add-task flex">Category<span class="asterisk">&#42;</span></label>
                     <select id="category" class="input-add-task" name="category">
                         <option value="" disabled selected hidden>Select task category</option>
                         <option value="Technical Task">Technical Task</option>
@@ -56,6 +56,17 @@
                 </div>
             </div>
         </form>
+        <div id="footer-add-task">
+            <p class="flex"><span class="asterisk">&#42;</span>This field is required</p>
+            <div>
+                <button id="button-clear">Clear
+                    <img src=".//assets/icons/cancel.svg" alt="icon-cancel">
+                </button>
+                <button id="button-create">Create task
+                    <img src=".//assets/icons/check.svg" alt="icon-check">
+                </button>
+            </div>
+        </div>
     </section>
 
     <script src="./scripts/add-task.js"></script>
