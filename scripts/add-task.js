@@ -1,3 +1,13 @@
+let contacts = [
+    {name: "David Müller"},
+    {name: "Daniel Meier"},
+    {name: "Richard Renner"},
+    {name: "Paul Poost"},
+    {name: "Franz Ferdinand"},
+    {name: "Thomas Deller"}
+
+]
+
 function selectPrioButton(prio) {
     clearPrioButtons();
     let button = document.getElementById(`${prio}`);
@@ -18,11 +28,13 @@ function clearPrioButtons() {
     }
 }
 
-function openSelectOptions() {
+function toggleSelectOptions() {
     let container = document.getElementById('container-custom-select-options');
     container.classList.toggle('d-none');
 }
 
-// add category dropdown onclick
+function selectContact() {
+    let 
+}
 
 // change arrow direction of assigned-to & category onclick
