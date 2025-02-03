@@ -1,4 +1,5 @@
 const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
+let isPasswordVisible = false;
 
 async function init() {
     await loadContent();
@@ -68,11 +69,18 @@ async function UserLogin() {
 
 function changePasswordIcon(focused) {
     const icon = document.getElementById("passwordIcon");
+    const passwordInput = document.getElementById("password")
     if (focused && !isPasswordVisible) {
         icon.src = "assets/img/visibility_off.png";
-    } else if (!focused && !isPasswordVisible) {
+    }
+    else if (passwordInput.value.trim().length > 0) {
+        // Wenn das Feld nicht leer ist, bleibt das visibility_off-Icon sichtbar
+        icon.src = "assets/img/visibility_off.png";
+    } else {
+        // Wenn das Feld leer ist, zeige das Schloss-Icon
         icon.src = "assets/img/lock.png";
     }
+   
 }
 
 function togglePasswordVisibility() {

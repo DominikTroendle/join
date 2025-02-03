@@ -15,20 +15,20 @@ return `
                         <img src="assets/img/person.png" alt="person Icon" class="input-icon">
                     </div>
                     <div class="input-container">
-                    <input type="email" id="email" placeholder="Email" required />
-                    <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
+                        <input type="email" id="email" placeholder="Email" required />
+                        <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
                     </div>
                     <div class="input-container">
-                    <input type="password" id="password" placeholder="Password" required
-                    onfocus="changePasswordIcon(true)" 
-                    onblur="changePasswordIcon(false)"/>
-                    <img src="assets/img/lock.png" alt="lock Icon" class="input-icon">
+                        <input type="password" id="password" placeholder="Password" required
+                        onfocus="changePasswordIcon(true)" 
+                        onblur="changePasswordIcon(false)"/>
+                        <img id="passwordIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon">
                     </div>
                     <div class="input-container">
-                    <input type="password" id="controllPassword" placeholder="Password" required
-                    onfocus="changePasswordIcon(true)" 
-                    onblur="changePasswordIcon(false)"/>
-                    <img src="assets/img/lock.png" alt="lock Icon" class="input-icon" onclick="togglePasswordVisibility()">
+                        <input type="password" id="controllPassword" placeholder="Password" required
+                        // onfocus="changePasswordIcon(true)" 
+                        // onblur="changePasswordIcon(false)"/>
+                        <img id="passwordControllIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon">
                     </div>
                 <div>
                 <div class="privacy-policy">

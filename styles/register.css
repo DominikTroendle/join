@@ -90,6 +90,11 @@ h1{
     margin-top: 15px;
 }
 
+.user-register input:focus{
+    border: 1px solid #29ABE2;
+    transition: all 175ms ease-in-out;
+}
+
 .privacy-policy{
     text-align: center;
 }

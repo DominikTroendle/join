@@ -43,7 +43,7 @@ body {
     gap: 30px;
     margin-left: 96px;
     margin-top: 110px;
-    margin-bottom: 36px;
+    margin-bottom: 56px;
 }
 
 .title__text-big {
@@ -62,6 +62,13 @@ body {
     font-size: 27px;
     line-height: 32.4px;
     font-weight: 400px;
+}
+
+.button-name-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
 }
 
 .all-button-box {
@@ -120,6 +127,18 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 13px;
+    width: 178px;
+    height: 57px;
+}
+
+.button-middle-inside-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    width: 130px;
+    height: 96px;
 }
 
 .button-top-box {
@@ -128,7 +147,23 @@ body {
     align-items: center;
     width: 560px;
     height: 168px;
-    gap: 24px;
+    gap: 32px;
+}
+
+.transform-origin-right {
+    transform-origin: right top;
+}
+
+.transform-origin-center-right {
+    transform-origin: right center;
+}
+
+.transform-origin-left {
+    transform-origin: left top;
+}
+
+.transform-origin-center-left {
+    transform-origin: left center;
 }
 
 .button-top {
@@ -140,15 +175,35 @@ body {
     border-radius: 30px;
     border: none;
     background-color: #FFFFFF;
+    width: 264px;
+    cursor: pointer;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
 }
 
 .button-top:hover {
     background-color: #2A3647;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.07, 1.095);
 }
 
 .button-top:hover .text-big-button-top,
 .button-top:hover .text-small-button-top {
     color: #FFFFFF;
+}
+
+.button-top:active {
+    background-color: #F9F9F9;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.0, 1.0);
+}
+
+.button-top:active .text-big-button-top {
+    color: #000000;
+}
+
+.button-top:active .text-small-button-top {
+    color: #2A3647;
 }
 
 .button-middle {
@@ -159,6 +214,39 @@ body {
     border-radius: 30px;
     border: none;
     background-color: #FFFFFF;
+    width: 560px;
+    cursor: pointer;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
+}
+
+.button-middle:hover {
+    background-color: #2A3647;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.0286, 1.095);
+}
+
+.button-middle:hover .text-big-button-top,
+.button-middle:hover .text-small-button-top,
+.button-middle:hover .deadline-date,
+.button-middle:hover .text-small-button-middle {
+    color: #FFFFFF;
+}
+
+.button-middle:active {
+    background-color: #FFFFFF;
+    transform: scale(1.0, 1.0);
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+}
+
+.button-middle:active .text-big-button-top {
+    color: #000000;
+}
+
+.button-middle:active .text-small-button-top,
+.button-middle:active .deadline-date,
+.button-middle:active .text-small-button-middle {
+    color: #2A3647;
 }
 
 .button-middle-img-text-box {
@@ -168,20 +256,26 @@ body {
     align-items: center;
 }
 
-.button-middle:hover {
-    background-color: #2A3647;
+.deadline-date {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    color: #2A3647;
 }
 
-.button-middle:hover .text-big-button-top,
-.button-middle:hover .text-small-button-top {
-    color: #FFFFFF;
+.text-small-button-middle {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #2A3647;
 }
 
 .button-bottom-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 28px;
+    width: 560px;
 }
 
 .button-bottom {
@@ -195,15 +289,55 @@ body {
     background-color: #FFFFFF;
     width: 168px;
     height: 168px;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    transition: all 100ms ease-in-out;
+    cursor: pointer;
 }
 
 .button-bottom:hover {
     background-color: #2A3647;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.095, 1.095);
 }
 
 .button-bottom:hover .text-big-button-top,
 .button-bottom:hover .text-small-button-top {
     color: #FFFFFF;
+}
+
+.button-bottom:active {
+    background-color: #FFFFFF;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+    transform: scale(1.0, 1.0);
+}
+
+.button-bottom:active .text-big-button-top {
+    color: #000000;
+}
+
+.button-bottom:active .text-small-button-top {
+    color: #2A3647;
+}
+
+.name-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.daytime-text {
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    color: #2A3647;
+}
+
+.name-text {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 76.8px;
+    color: #29ABE2;
 }
 
 footer {
