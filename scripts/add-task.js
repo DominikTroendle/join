@@ -8,6 +8,10 @@ let contacts = [
 
 ]
 
+function init() {
+    renderSelectOptions();
+}
+
 function selectPrioButton(prio) {
     clearPrioButtons();
     let button = document.getElementById(`${prio}`);
@@ -33,8 +37,35 @@ function toggleSelectOptions() {
     container.classList.toggle('d-none');
 }
 
-function selectContact() {
-    let 
+function renderSelectOptions() {
+    let dropDown = document.getElementById('container-custom-select-options');
+    dropDown.innerHTML = "";
+    for (let i = 0; i < contacts.length; i++) {
+        let name = contacts[i].name;
+        dropDown.innerHTML += returnAssignedContactHTML(name);
+        let nameSpan = document.getElementById(`${name}`);
+        nameSpan.innerText = name;
+    }
+}
+
+function selectContact(name) {
+    let contactDiv = document.getElementById(`container-${name}`);
+    let icon = document.getElementById(`icon-${name}`);
+    if (!isContactSelected(contactDiv)) {
+        contactDiv.classList.add('bg-blue');
+        contactDiv.classList.add('white');
+        icon.src = "./assets/icons/checked.svg";
+        icon.classList.add('filter-white');
+    } else {
+        contactDiv.classList.remove('bg-blue');
+        contactDiv.classList.remove('white');
+        icon.src = "./assets/icons/unchecked.svg";
+        icon.classList.remove('filter-white');
+    }
+}
+
+function isContactSelected(contactDiv) {
+    return contactDiv.classList.contains('bg-blue');
 }
 
 // change arrow direction of assigned-to & category onclick
