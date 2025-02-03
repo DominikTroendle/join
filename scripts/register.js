@@ -4,7 +4,7 @@ let isPasswordVisible = false;
 async function init() {
     await loadContent();
     await loadAllUserData();
-    // await allDatas()
+    await addUserToRegister();
 }
 
 async function loadAllUserData(path) {
@@ -41,29 +41,28 @@ async function addUserToRegister() {
         "email" : email.value,
         "password" : password.value,
     };
-    await UserLogin()
     await sendData("/allUser", newUser);
     name.value = '';
     title.value = '';
     description.value = '';
 
-    window.location.href = 'login.html?msg=Du hast dich erfolgreich regestriert';
+    window.location.href = 'index.html?msg=Du hast dich erfolgreich regestriert';
     return false;
 }
 
-async function UserLogin() {
-    let password = document.getElementById('password');
-    let conrollPassword = document.getElementById('conrollPassword');
-    let user = allUsers.find(u => u.password == password.value && u.conrollPassword == conrollPassword.value)
-    if (user) {
-        console.log("user gefunden");
-        email.value = "";
+async function UserRegister() {
+    const password = document.getElementById('password');
+    const conrollPassword = document.getElementById('controllPassword');
+
+    if (password.value === conrollPassword.value) {
+        console.log("Passwörter stimmen überein");
         password.value = "";
-        window.location.href = 'login.html?';
-    }else{
-        console.log("kein user vorhanden");
+        conrollPassword.value = "";
+        window.location.href = 'index.html?';
+    } else {
+        console.log("Passwörter stimmen nicht überein");
         conrollPassword.style.border = "1px solid red";
-        document.getElementById('notCorrectValue').style.display = ("flex")
+        document.getElementById('notCorrectValue').style.display = "flex";
     }
 }
 
@@ -72,20 +71,30 @@ function changePasswordIcon(focused) {
     const passwordInput = document.getElementById("password")
     if (focused && !isPasswordVisible) {
         icon.src = "assets/img/visibility_off.png";
-    }
-    else if (passwordInput.value.trim().length > 0) {
-        // Wenn das Feld nicht leer ist, bleibt das visibility_off-Icon sichtbar
+    } else if (passwordInput.value.trim().length > 0) {
         icon.src = "assets/img/visibility_off.png";
     } else {
-        // Wenn das Feld leer ist, zeige das Schloss-Icon
+        icon.src = "assets/img/lock.png";
+    }
+   
+}
+
+function changeConrollPasswordIcon(focused) {
+    const icon = document.getElementById("passwordControllIcon");
+    const passwordInput = document.getElementById("controllPassword")
+    if (focused && !isPasswordVisible) {
+        icon.src = "assets/img/visibility_off.png";
+    } else if (passwordInput.value.trim().length > 0) {
+        icon.src = "assets/img/visibility_off.png";
+    } else {
         icon.src = "assets/img/lock.png";
     }
    
 }
 
 function togglePasswordVisibility() {
-    const passwordInput = document.getElementById("password");
-    const icon = document.getElementById("passwordIcon");
+    const passwordInput = document.getElementById("controllPassword");
+    const icon = document.getElementById("passwordControllIcon");
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
         icon.src = "assets/img/visibility.png";

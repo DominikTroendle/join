@@ -26,16 +26,19 @@ return `
                     </div>
                     <div class="input-container">
                         <input type="password" id="controllPassword" placeholder="Password" required
-                        // onfocus="changePasswordIcon(true)" 
-                        // onblur="changePasswordIcon(false)"/>
-                        <img id="passwordControllIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon">
+                        // onfocus="changeConrollPasswordIcon(true)" 
+                        // onblur="changeConrollPasswordIcon(false)"/>
+                        <img id="passwordControllIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon" onclick="togglePasswordVisibility()">
                     </div>
-                <div>
+                    <div class="no-value-content">
+                        <p id="notCorrectValue" class="error-massage">Your passwords don't match. Please try again.</p>
+                    </div>
+                </div>
                 <div class="privacy-policy">
                     I accept the <a href="">Privacy policy</a>
                 </div>
                 <div class="register-button">
-                    <button>Sign up</button>
+                    <button onclick="UserRegister()">Sign up</button>
                 </div>
             </form>
         </div>

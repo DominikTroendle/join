@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="styles/add-task.css">
 </head>
-<body>
+<body onload="init()">
     <section id="main">
         <div id="container-form">
             <h1>Add Task</h1>
@@ -24,64 +24,8 @@
                     </div>
                     <div class="container-input-label custom-select">
                         <label for="assigned-to" class="label-add-task">Assigned to</label>
-                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="openSelectOptions()">
+                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions()">
                         <div id="container-custom-select-options" class="d-none">
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
-                            <div class="custom-select-option">
-                                <div class="flex-align gap-15">
-                                    <span class="initials">TT</span>
-                                    <span class="name">Test Test</span>
-                                </div>
-                                <img src="./assets/icons/unchecked.svg" alt="">
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,5 +74,6 @@
     </section>
 
     <script src="./scripts/add-task.js"></script>
+    <script src="./templates/add-task-template.js"></script>
 </body>
 </html>

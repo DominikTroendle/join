@@ -23,7 +23,7 @@ body{
 }
 
 .user-register{
-    height: 330px;
+    height: 400px;
     width: 430px;
 
     background-color: white;
@@ -93,6 +93,18 @@ h1{
 .user-register input:focus{
     border: 1px solid #29ABE2;
     transition: all 175ms ease-in-out;
+}
+
+.no-value-content {
+    height: 20px;
+    margin-top: 2px;
+}
+
+.error-massage{
+    display: none;
+    font-size: 9px;
+    color: red;
+    margin-right: 90px;
 }
 
 .privacy-policy{
