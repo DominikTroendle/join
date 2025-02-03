@@ -10,10 +10,26 @@ return `
             <div class="blue-line"></div>
             <form onsubmit="UserRegister(); return false">
                 <div class="register-input">
-                    <input type="name" id="name" placeholder="Name" required />
+                    <div class="input-container">
+                        <input type="name" id="name" placeholder="Name" required />
+                        <img src="assets/img/person.png" alt="person Icon" class="input-icon">
+                    </div>
+                    <div class="input-container">
                     <input type="email" id="email" placeholder="Email" required />
-                    <input type="password" id="password" placeholder="Password" required/>
-                    <input type="password" id="password" placeholder="Password" required/>
+                    <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
+                    </div>
+                    <div class="input-container">
+                    <input type="password" id="password" placeholder="Password" required
+                    onfocus="changePasswordIcon(true)" 
+                    onblur="changePasswordIcon(false)"/>
+                    <img src="assets/img/lock.png" alt="lock Icon" class="input-icon">
+                    </div>
+                    <div class="input-container">
+                    <input type="password" id="controllPassword" placeholder="Password" required
+                    onfocus="changePasswordIcon(true)" 
+                    onblur="changePasswordIcon(false)"/>
+                    <img src="assets/img/lock.png" alt="lock Icon" class="input-icon" onclick="togglePasswordVisibility()">
+                    </div>
                 <div>
                 <div class="privacy-policy">
                     I accept the <a href="">Privacy policy</a>
