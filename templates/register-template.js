@@ -4,7 +4,7 @@ return `
     <div class="user-register-container">
         <div class="user-register">
             <div class="Sign-up">
-                <button class="left-btn"><img src="assets/img/arrow-left-line.png" alt=""></button>
+                <button class="left-btn"><img src="assets/img/arrow-left-line.png" alt="" onclick="backToLogin()"></button>
                 <h1>Sign up</h1>
             </div>
             <div class="blue-line"></div>

@@ -50,6 +50,10 @@ async function addUserToRegister() {
     return false;
 }
 
+function backToLogin() {
+    window.location.href = 'index.html?';
+}
+
 async function UserRegister() {
     const password = document.getElementById('password');
     const conrollPassword = document.getElementById('controllPassword');
