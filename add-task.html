@@ -24,7 +24,8 @@
                     </div>
                     <div class="container-input-label custom-select">
                         <label for="assigned-to" class="label-add-task">Assigned to</label>
-                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
+                        <input readonly id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
+                        <div class="container-arrow-dropdown" onclick="toggleSelectOptions(), stopPropagation(event)"></div>
                         <div id="container-custom-select-options" class="d-none">
                         </div>
                     </div>
@@ -51,6 +52,7 @@
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
                         </select>
+                        <div class="container-arrow-dropdown" onclick="toggleSelectOptions(), stopPropagation(event)"></div>
                         <p class="required grey">This field is required</p>
                     </div>
                     <div class="container-input-label">
