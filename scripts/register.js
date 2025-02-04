@@ -5,6 +5,7 @@ async function init() {
     await loadContent();
     await loadAllUserData();
     await addUserToRegister();
+    
 }
 
 async function loadAllUserData(path) {
@@ -29,22 +30,26 @@ async function sendData(path="", data={}) {
     return responseToJson;
 }
 
-async function addUserToRegister() {
+async function addUserToRegister(event) {
     event.preventDefault();
+
+    if (!UserRegister()) {
+        return false; // Stoppe die Funktion, falls die Validierung fehlschlägt
+    }
 
     let name = document.getElementById('name');
     let title = document.getElementById('email');
-    let description = document.getElementById('password');
-
+    let password = document.getElementById('password');
     let newUser = {
         "user" : name.value,
         "email" : email.value,
         "password" : password.value,
     };
+    
     await sendData("/allUser", newUser);
     name.value = '';
     title.value = '';
-    description.value = '';
+    password.value = '';
 
     window.location.href = 'index.html?msg=Du hast dich erfolgreich regestriert';
     return false;
@@ -57,17 +62,25 @@ function backToLogin() {
 async function UserRegister() {
     const password = document.getElementById('password');
     const conrollPassword = document.getElementById('controllPassword');
+    const checkbox = document.getElementById('checkbox');
+    let isValid = true;
 
-    if (password.value === conrollPassword.value) {
-        console.log("Passwörter stimmen überein");
-        password.value = "";
-        conrollPassword.value = "";
-        window.location.href = 'index.html?';
+    if (!checkbox.checked) {
+        checkbox.style.border = "2px solid red";
+        isValid = false;
     } else {
-        console.log("Passwörter stimmen nicht überein");
+        checkbox.style.border = "none";
+    } 
+    if (password.value !== conrollPassword.value) {
         conrollPassword.style.border = "1px solid red";
         document.getElementById('notCorrectValue').style.display = "flex";
+        isValid = false;
+    } else {
+        conrollPassword.style.border = "none";
+        document.getElementById('notCorrectValue').style.display = "none";
     }
+
+    return isValid;
 }
 
 function changePasswordIcon(focused) {

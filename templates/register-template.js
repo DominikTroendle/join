@@ -8,7 +8,7 @@ return `
                 <h1>Sign up</h1>
             </div>
             <div class="blue-line"></div>
-            <form onsubmit="UserRegister(); return false">
+            <form onsubmit="return addUserToRegister(event);">
                 <div class="register-input">
                     <div class="input-container">
                         <input type="name" id="name" placeholder="Name" required />
@@ -35,11 +35,12 @@ return `
                     </div>
                 </div>
                 <div class="checkbox-privacy-policy-container">
-                        <input type="checkbox" id="checkbox"> 
+                        <input type="checkbox" id="checkbox">  
                     <div class="privacy-policy">
                         <p>I accept the</p>
                         <a href="">Privacy policy</a>
                     </div>
+                    <div id="acceptPrivacyPolicy" class="accept-privacy-policy"></div>
                 </div>
                 <div class="register-button">
                     <button type="submit">Sign up</button>
