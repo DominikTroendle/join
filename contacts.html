@@ -9,17 +9,53 @@
 </head>
 <body>
     <section id="contacts">
-        <div id="button-add-contact">
-            <span>Add new contact</span>
-            <img src="" alt="icon-add-contact">
+        <div id="container-contacts">
+            <button>Add new contact
+                <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
+            </button>
+            <div class="container-letter">
+                <span>A</span>
+            </div>
+            <hr>
+            <div class="container-contact" onclick="selectContact()">
+                <div class="container-initials">AM</div>
+                <div class="container-contact-preview">
+                    <span class="contact-preview-name">Anton Mayer</span>
+                    <span class="contact-preview-mail">anton.meier@web.de</span>
+                </div>
+            </div>
+            <div class="container-contact">
+                <div class="container-initials">AM</div>
+                <div class="container-contact-preview">
+                    <span class="contact-preview-name">Anton Mayer</span>
+                    <span class="contact-preview-mail">anton.meier@web.de</span>
+                </div>
+            </div>
+            <div class="container-contact">
+                <div class="container-initials">AM</div>
+                <div class="container-contact-preview">
+                    <span class="contact-preview-name">Anton Mayer</span>
+                    <span class="contact-preview-mail">anton.meier@web.de</span>
+                </div>
+            </div>
+            <div class="container-contact">
+                <div class="container-initials">AM</div>
+                <div class="container-contact-preview">
+                    <span class="contact-preview-name">Anton Mayer</span>
+                    <span class="contact-preview-mail">anton.meier@web.de</span>
+                </div>
+            </div>
         </div>
     </section>
     <section id="contact-details">
         <div id="contact-headline">
             <h1>Contacts</h1>
-            <hr>
+            <img src="./assets/icons/vector.svg" alt="icon-line">
             <span>Better with a team</span>
         </div>
     </section>
+
+    <script src="./scripts/contacts.js"></script>
+    <script src="./templates/contacts-template.js"></script>
 </body>
 </html>
