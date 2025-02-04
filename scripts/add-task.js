@@ -37,6 +37,15 @@ function toggleSelectOptions() {
     container.classList.toggle('d-none');
 }
 
+function closeSelectOptions() {
+    let container = document.getElementById('container-custom-select-options');
+    container.classList.add('d-none');
+}
+
+function stopPropagation(event) {
+    event.stopPropagation();
+}
+
 function renderSelectOptions() {
     let dropDown = document.getElementById('container-custom-select-options');
     dropDown.innerHTML = "";

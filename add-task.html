@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles/add-task.css">
 </head>
 <body onload="init()">
-    <section id="main">
+    <section id="main" onclick="closeSelectOptions(), stopPropagation(event)">
         <div id="container-form">
             <h1>Add Task</h1>
             <form id="form-add-task">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="container-input-label custom-select">
                         <label for="assigned-to" class="label-add-task">Assigned to</label>
-                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions()">
+                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
                         <div id="container-custom-select-options" class="d-none">
                         </div>
                     </div>
