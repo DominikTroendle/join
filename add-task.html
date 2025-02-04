@@ -24,7 +24,7 @@
                     </div>
                     <div class="container-input-label custom-select">
                         <label for="assigned-to" class="label-add-task">Assigned to</label>
-                        <input readonly id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
+                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
                         <div class="container-arrow-dropdown" onclick="toggleSelectOptions(), stopPropagation(event)"></div>
                         <div id="container-custom-select-options" class="d-none">
                         </div>
@@ -65,7 +65,7 @@
         <div id="footer-add-task">
             <p class="flex"><span class="asterisk">&#42;</span>This field is required</p>
             <div>
-                <button id="button-clear">Clear
+                <button id="button-clear" onclick="clearInputs()">Clear
                     <img src=".//assets/icons/cancel.svg" alt="icon-cancel">
                 </button>
                 <button id="button-create">Create task

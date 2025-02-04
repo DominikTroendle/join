@@ -6,7 +6,9 @@ let contacts = [
     {name: "Franz Ferdinand"},
     {name: "Thomas Deller"}
 
-]
+];
+
+let selectedContacts = [];
 
 function init() {
     renderSelectOptions();
@@ -65,16 +67,49 @@ function selectContact(name) {
         contactDiv.classList.add('white');
         icon.src = "./assets/icons/checked.svg";
         icon.classList.add('filter-white');
+        updateSelectedContacts(true, name);
     } else {
         contactDiv.classList.remove('bg-blue');
         contactDiv.classList.remove('white');
         icon.src = "./assets/icons/unchecked.svg";
         icon.classList.remove('filter-white');
+        updateSelectedContacts(false, name);
+    }
+    // changeAssignedToValue();
+}
+
+function updateSelectedContacts(boolean, name) {
+    if (boolean) {
+        selectedContacts.push(name);
+    } else {
+        let index = selectedContacts.indexOf(name);
+        selectedContacts.splice(index, 1);
     }
 }
 
 function isContactSelected(contactDiv) {
     return contactDiv.classList.contains('bg-blue');
+}
+
+/* function changeAssignedToValue() {
+    let value = document.getElementById('assigned-to').value;
+    value = "";
+    for (let i = 0; i < selectedContacts.length; i++) {
+        value += selectedContacts[i];
+    }
+    console.log(document.getElementById('assigned-to').value);
+} */
+
+function clearInputs() {
+    clearPrioButtons();
+    let inputs = ["title", "description", "due-date", "subtasks"];
+    for (let i = 0; i <inputs.length; i++) {
+        document.getElementById(`${inputs[i]}`).value = "";
+    }
+}
+
+function saveTask() {
+
 }
 
 // change arrow direction of assigned-to & category onclick
