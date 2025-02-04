@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    scroll-behavior: smooth;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+}
+
+#contacts {
+    width: 456px;
+    box-shadow: 4px 0 6px 0 rgba(0,0,0,0.8);
+}
+
+#contact-details {
+    padding-top: 110px;
+    padding-left: 55px;
+    flex: 1;
+    background-color: #F6F7F8;
+}
