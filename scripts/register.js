@@ -80,20 +80,19 @@ function changePasswordIcon(focused) {
     } else {
         icon.src = "assets/img/lock.png";
     }
-   
 }
 
 function changeConrollPasswordIcon(focused) {
     const icon = document.getElementById("passwordControllIcon");
-    const passwordInput = document.getElementById("controllPassword")
-    if (focused && !isPasswordVisible) {
+    const passwordInput = document.getElementById("controllPassword");
+    if (isPasswordVisible) return;
+    if (focused) {
         icon.src = "assets/img/visibility_off.png";
     } else if (passwordInput.value.trim().length > 0) {
         icon.src = "assets/img/visibility_off.png";
     } else {
         icon.src = "assets/img/lock.png";
     }
-   
 }
 
 function togglePasswordVisibility() {
