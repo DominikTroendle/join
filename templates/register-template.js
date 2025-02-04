@@ -34,8 +34,9 @@ return `
                         <p id="notCorrectValue" class="error-massage">Your passwords don't match. Please try again.</p>
                     </div>
                 </div>
-                <div class="privacy-policy">
-                    I accept the <a href="">Privacy policy</a>
+                <div class="privacy-policy-container">
+                    <input type="checkbox" id="checkbox" class="checkbox"> 
+                    <label for="checkbox">I accept the <a href="">Privacy policy</a></label
                 </div>
                 <div class="register-button">
                     <button onclick="UserRegister()">Sign up</button>

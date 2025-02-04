@@ -55,9 +55,9 @@ h1{
 
 .blue-line{
     margin: 8px;
-    margin-left: 100px;
+    margin-left: 165px;
     height: 2px;
-    width: 80px;
+    width: 130px;
     background-color: #29ABE2;
 }
 
@@ -107,8 +107,12 @@ h1{
     margin-right: 90px;
 }
 
-.privacy-policy{
+.privacy-policy-container{
     text-align: center;
+}
+
+.checkbox{
+    border: 100px solid black;
 }
 
 .register-button{
