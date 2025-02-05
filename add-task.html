@@ -15,16 +15,19 @@
                 <div id="form-left">
                     <div class="container-input-label">
                         <label for="title" class="label-add-task flex">Title<span class="asterisk">&#42;</span></label>
-                        <input id="title" class="input-add-task" type="text" name="title" placeholder="Enter a title">
+                        <input id="title" class="input" type="text" name="title" placeholder="Enter a title">
                         <p class="required grey">This field is required</p>
                     </div>
                     <div class="container-input-label">
                         <label for="description" class="label-add-task">Description</label>
-                        <textarea id="description" class="input-add-task" name="description" placeholder="Enter a Description"></textarea>
+                        <textarea id="description" class="input" name="description" placeholder="Enter a Description"></textarea>
                     </div>
                     <div class="container-input-label custom-select">
                         <label for="assigned-to" class="label-add-task">Assigned to</label>
-                        <input id="assigned-to" class="input-add-task" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
+                        <div id="container-input-assigned">
+                            <input readonly id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleSelectOptions(), stopPropagation(event)">
+                            <button class="button-dropdown" type="button"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleSelectOptions(), stopPropagation(event)"></button>
+                        </div>
                         <div class="container-arrow-dropdown" onclick="toggleSelectOptions(), stopPropagation(event)"></div>
                         <div id="container-custom-select-options" class="d-none">
                         </div>
@@ -34,7 +37,7 @@
                 <div id="form-right">
                     <div class="container-input-label">
                         <label for="due-date" class="label-add-task flex">Due date<span class="asterisk">&#42;</span></label>
-                        <input id="due-date" class="input-add-task" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
+                        <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
                         <p class="required grey">This field is required</p>
                     </div>
                     <div class="container-input-label">
@@ -47,7 +50,7 @@
                     </div>
                     <div class="container-input-label">
                         <label for="category" class="label-add-task flex">Category<span class="asterisk">&#42;</span></label>
-                        <select id="category" class="input-add-task" name="category">
+                        <select id="category" class="input" name="category">
                             <option value="" disabled selected hidden>Select task category</option>
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
@@ -57,7 +60,7 @@
                     </div>
                     <div class="container-input-label">
                         <label for="subtasks" class="label-add-task">Subtasks</label placeholder="Add new subtask">
-                        <input id="subtasks" class="input-add-task" type="text" name="subtasks" placeholder="Add new subtask">
+                        <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask">
                     </div>
                 </div>
             </form>

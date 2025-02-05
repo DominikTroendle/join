@@ -75,7 +75,7 @@ function selectContact(name) {
         icon.classList.remove('filter-white');
         updateSelectedContacts(false, name);
     }
-    // changeAssignedToValue();
+    changeAssignedToValue();
 }
 
 function updateSelectedContacts(boolean, name) {
@@ -91,14 +91,9 @@ function isContactSelected(contactDiv) {
     return contactDiv.classList.contains('bg-blue');
 }
 
-/* function changeAssignedToValue() {
-    let value = document.getElementById('assigned-to').value;
-    value = "";
-    for (let i = 0; i < selectedContacts.length; i++) {
-        value += selectedContacts[i];
-    }
-    console.log(document.getElementById('assigned-to').value);
-} */
+function changeAssignedToValue() {
+    document.getElementById('assigned-to').value = selectedContacts.join(', ');
+}
 
 function clearInputs() {
     clearPrioButtons();
