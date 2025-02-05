@@ -46,11 +46,13 @@ async function allDatas() {
         allUsers.push(
             {
                 key : userKeysArray[index],
-                email : userResponse[userKeysArray[index]]?.user,
+                email : userResponse[userKeysArray[index]]?.email,
                 password : userResponse[userKeysArray[index]]?.password,
             }
         )
     }
+    console.log(allUsers);
+    
 }
 
 async function UserLogin() {
