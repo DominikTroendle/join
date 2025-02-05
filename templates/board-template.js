@@ -1,5 +1,5 @@
 function smallCardTemplate(id) {
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id})">
+    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)">
                 <div class="user-story__category-box">
                     <span class="user-story__category-text">User Story</span>
                 </div>
@@ -19,5 +19,11 @@ function smallCardTemplate(id) {
                     </div>
                     <img class="user-story__img" src="assets/icons/Priority symbols.png" alt="">
                 </div>
+            </div>`
+}
+
+function noCardTemplate() {
+    return `<div class="no-task-box">
+                <span class="no-task-text">No tasks To do</span>
             </div>`
 }
