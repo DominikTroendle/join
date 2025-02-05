@@ -131,7 +131,6 @@
 #description,
 #due-date,
 #assigned-to,
-#category,
 #subtasks {
     font-family: Inter;
     font-weight: 400;
@@ -153,8 +152,7 @@
 #title:focus,
 #description:focus,
 #due-date:focus,
-#subtasks:focus,
-#category:focus  {
+#subtasks:focus  {
     outline: 1px solid #94D5F0;
 }
 
@@ -240,7 +238,7 @@
     position: relative;
 }
 
-#container-custom-select-options {
+.container-custom-select-options {
     position: absolute;
     top: 32px;
     z-index: 0;
@@ -439,4 +437,10 @@ input:focus {
 #button-create:hover {
     background-color: #29abe2;
     box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+}
+
+@media only screen and (max-height: 800px) {
+    #main {
+        padding-top: 20px;
+    }
 }

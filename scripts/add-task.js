@@ -11,7 +11,7 @@ let contacts = [
 let selectedContacts = [];
 
 function init() {
-    renderSelectOptions();
+    renderAssignOptions();
 }
 
 function selectPrioButton(prio) {
@@ -34,22 +34,28 @@ function clearPrioButtons() {
     }
 }
 
-function toggleSelectOptions() {
-    let container = document.getElementById('container-custom-select-options');
+function toggleAssignOptions() {
+    let container = document.getElementById('dropdown-assign');
     container.classList.toggle('d-none');
 }
 
-function closeSelectOptions() {
-    let container = document.getElementById('container-custom-select-options');
-    container.classList.add('d-none');
+function toggleCategoryOptions() {
+    let container = document.getElementById();
+}
+
+function closeDropdown() {
+    let dropdownAssign = document.getElementById('dropdown-assign');
+    let dropdownCategory = document.getElementById('dropdown-category');
+    dropdownAssign.classList.add('d-none');
+    dropdownCategory.classList.add('d-none');
 }
 
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
-function renderSelectOptions() {
-    let dropDown = document.getElementById('container-custom-select-options');
+function renderAssignOptions() {
+    let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i].name;
