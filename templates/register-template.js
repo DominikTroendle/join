@@ -8,7 +8,7 @@ return `
                 <h1>Sign up</h1>
             </div>
             <div class="blue-line"></div>
-            <form onsubmit="return addUserToRegister(event);">
+            <form onsubmit="return addUserToRegister(event, this);">
                 <div class="register-input">
                     <div class="input-container">
                         <input type="name" id="name" placeholder="Name" required />

@@ -30,16 +30,12 @@ async function sendData(path="", data={}) {
     return responseToJson;
 }
 
-async function addUserToRegister(event) {
+async function addUserToRegister(event, form) {
     event.preventDefault();
 
-    if (!UserRegister()) {
-        return false; // Stoppe die Funktion, falls die Validierung fehlschlägt
-    }
-
-    let name = document.getElementById('name');
-    let title = document.getElementById('email');
-    let password = document.getElementById('password');
+    let name = form.querySelector('#name');
+    let email = form.querySelector('#email');
+    let password = form.querySelector('#password');
     let newUser = {
         "user" : name.value,
         "email" : email.value,
