@@ -4,8 +4,6 @@ let isPasswordVisible = false;
 async function init() {
     await loadContent();
     await loadAllUserData();
-    await addUserToRegister();
-    
 }
 
 async function loadAllUserData(path) {
@@ -33,6 +31,11 @@ async function sendData(path="", data={}) {
 async function addUserToRegister(event, form) {
     event.preventDefault();
 
+    let isValid = await UserRegister();
+    if (!isValid) {
+        return false; // Falls Fehler, abbrechen
+    }
+
     let name = form.querySelector('#name');
     let email = form.querySelector('#email');
     let password = form.querySelector('#password');
@@ -41,10 +44,9 @@ async function addUserToRegister(event, form) {
         "email" : email.value,
         "password" : password.value,
     };
-    
     await sendData("/allUser", newUser);
     name.value = '';
-    title.value = '';
+    email.value = '';
     password.value = '';
 
     window.location.href = 'index.html?msg=Du hast dich erfolgreich regestriert';
@@ -65,14 +67,16 @@ async function UserRegister() {
         checkbox.style.border = "2px solid red";
         isValid = false;
     } else {
-        checkbox.style.border = "none";
+        checkbox.style.border = "2px solid black";
     } 
     if (password.value !== conrollPassword.value) {
         conrollPassword.style.border = "1px solid red";
+        conrollPassword.style.boxShadow = "0px 0px 4px 1px red"
         document.getElementById('notCorrectValue').style.display = "flex";
         isValid = false;
     } else {
-        conrollPassword.style.border = "none";
+        conrollPassword.style.border = "1px solid black";
+        conrollPassword.style.boxShadow = "none"
         document.getElementById('notCorrectValue').style.display = "none";
     }
 
