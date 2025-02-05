@@ -30,12 +30,10 @@ async function sendData(path="", data={}) {
 
 async function addUserToRegister(event, form) {
     event.preventDefault();
-
     let isValid = await UserRegister();
     if (!isValid) {
-        return false; // Falls Fehler, abbrechen
+        return false;
     }
-
     let name = form.querySelector('#name');
     let email = form.querySelector('#email');
     let password = form.querySelector('#password');
@@ -48,8 +46,7 @@ async function addUserToRegister(event, form) {
     name.value = '';
     email.value = '';
     password.value = '';
-
-    window.location.href = 'index.html?msg=Du hast dich erfolgreich regestriert';
+    window.location.href = 'index.html?msg=You Signed Up successfully';
     return false;
 }
 

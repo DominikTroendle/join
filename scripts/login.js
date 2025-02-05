@@ -8,9 +8,15 @@ const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 
 if (msg) {
-    msgBox.innerHTML = msg;
-}else{
-    document.getElementById('msgBox').style.display="none";
+    const msgBox = document.getElementById('msgBox');
+    const msgText = document.getElementById('msgText');
+
+    msgText.innerHTML = msg;
+    msgBox.classList.add('show');
+    history.replaceState(null, "", window.location.pathname);
+    setTimeout(() => {
+        msgBox.classList.remove('show');
+    }, 2000);
 }
 
 async function init() {
