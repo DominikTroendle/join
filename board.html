@@ -51,11 +51,11 @@
                         ondrop="allowDrop2(event, toDoArray)">
                     </div>
                     <div class="drag-field" id="in-progress-drag-field"
-                        ondragstart="moveTo(event, 'to-do-drag-field', inProgressArray)" ondragover="allowDrop(event)"
+                        ondragstart="moveTo(event, 'in-progress-drag-field', inProgressArray)" ondragover="allowDrop(event)"
                         ondrop="allowDrop2(event, inProgressArray)"></div>
-                    <div class="drag-field" id="await-feedback-drag-field" ondrop="moveTo(event)"
-                        ondragover="allowDrop(event)"></div>
-                    <div class="drag-field" id="done-drag-field" ondrop="moveTo(event)" ondragover="allowDrop(event)">
+                    <div class="drag-field" id="await-feedback-drag-field" ondragstart="moveTo(event, 'await-feedback-drag-field', awaitFeedbackArray)"
+                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, awaitFeedbackArray)"></div>
+                    <div class="drag-field" id="done-drag-field" ondragstart="moveTo(event, 'done-drag-field', doneArray)" ondragover="allowDrop(event)" ondrop="allowDrop2(event, doneArray)">
                     </div>
                 </div>
             </div>

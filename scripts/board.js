@@ -1,6 +1,6 @@
 let currentDraggedElement;
 let toDoArray = [{ id: 1 }, { id: 2 }];
-let inProgressArray = [];
+let inProgressArray = [{ id: 3 }, { id: 4 }];
 let awaitFeedbackArray = [];
 let doneArray = [];
 let oldArray = [];
@@ -53,6 +53,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
     }
 }
 renderSmallCard("to-do-drag-field", toDoArray);
+renderSmallCard("in-progress-drag-field", inProgressArray);
 
 function changeDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);

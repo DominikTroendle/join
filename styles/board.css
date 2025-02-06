@@ -312,6 +312,10 @@ h1 {
     align-items: center;
     gap: 26px;
     padding: 0 64px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #2A3647 white;
+    border-width: 100px;
 }
 
 .drag-field {
@@ -322,7 +326,7 @@ h1 {
     width: 252px;
     height: 688px;
     gap: 16px;
-    background-color: rgb(0, 0, 0, 0.2);
+    /* background-color: rgb(0, 0, 0, 0.2); */
 }
 
 .user-story__box {
