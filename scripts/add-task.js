@@ -128,6 +128,25 @@ function clearDropDowns() {
     document.getElementById('category').value = "";
 }
 
+function changeInputButton(boolean) {
+    if (boolean) {
+        document.getElementById('button-add').classList.add('d-none');
+        document.getElementById('container-buttons').classList.remove('d-none');
+    } else {
+        document.getElementById('button-add').classList.remove('d-none');
+        document.getElementById('container-buttons').classList.add('d-none');
+    }
+}
+
+function clearSubtaskInput() {
+    changeInputButton();
+    document.getElementById('subtasks').value = "";
+}
+
+function addSubtask() {
+    
+}
+
 function saveTask() {
 
 }
