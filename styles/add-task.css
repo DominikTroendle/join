@@ -131,6 +131,7 @@
 #description,
 #due-date,
 #assigned-to,
+#category,
 #subtasks {
     font-family: Inter;
     font-weight: 400;
@@ -156,8 +157,9 @@
     outline: 1px solid #94D5F0;
 }
 
-#container-input-assigned:focus-within {
-    border: 2px solid #94D5F0;
+#container-input-assigned:focus-within,
+#container-input-category:focus-within {
+    border: 1px solid #94D5F0;
 }
 
 #description {
@@ -183,8 +185,9 @@
     appearance: none;
 }
 
-#container-input-assigned {
-    z-index: 1;
+#container-input-assigned,
+#container-input-category {
+    z-index: 2;
     border: 1px solid #D1D1D1;
     background-color: white;
     border-radius: 10px;
@@ -196,18 +199,21 @@
     cursor: pointer;
 }
 
-#assigned-to {
+#assigned-to,
+#category {
     border: none;
     outline: none;
     border-radius: 10px;
     flex: 1;
 }
 
-#assigned-to:hover {
+#assigned-to:hover,
+#category:hover {
     cursor: pointer;
 }
 
-#assigned-to::placeholder {
+#assigned-to::placeholder,
+#category::placeholder {
     color: black;
 }
 
@@ -241,7 +247,7 @@
 .container-custom-select-options {
     position: absolute;
     top: 32px;
-    z-index: 0;
+    z-index: 1;
     width: 440px;
     min-height: 48px;
     max-height: 248px;
@@ -301,7 +307,8 @@
     font-size: 12px;
 }
 
-.name {
+.name,
+.category {
     font-family: Inter;
     font-weight: 400;
     font-size: 20px;

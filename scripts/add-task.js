@@ -44,15 +44,9 @@ function toggleCategoryOptions() {
     container.classList.toggle('d-none');
 }
 
-/* function selectCategory(category) {
-    let container = document.getElementById(`${category}`);
-    if () {
-
-    }
-} */
-
-function isCategorySelected(container) {
-    return container.classList.contains('bg-blue');
+function displayCategory(category) {
+    document.getElementById('category').value = category;
+    closeDropdown();
 }
 
 function closeDropdown() {

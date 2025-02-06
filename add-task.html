@@ -49,25 +49,27 @@
                     </div>
                     <div class="container-input-label">
                         <label for="category" class="label-add-task flex">Category<span class="asterisk">&#42;</span></label>
-                        <div id="container-input-assigned">
+                        <div id="container-input-category">
                             <input readonly id="category" type="text" name="category" placeholder="Select task category" onclick="toggleCategoryOptions(), stopPropagation(event)">
                             <button class="button-dropdown" type="button"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleCategoryOptions(), stopPropagation(event)"></button>
                         </div>
                         <div class="container-arrow-dropdown" onclick="toggleCategoryOptions(), stopPropagation(event)"></div>
                         <div id="dropdown-category" class="container-custom-select-options d-none">
-                            <div id="technical-task" class="container-custom-select-option" onclick="selectCategory('technical-task'), stopPropagation(event)">
+                            <div id="technical-task" class="container-custom-select-option" onclick="displayCategory('Technical Task'), stopPropagation(event)">
                                 <div class="container-bg">
                                     <div>
-                                        <span>Technical Task</span>
+                                        <span class="category">Technical Task</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="user-story" class="container-custom-select-option" onclick="displayCategory('User Story'), stopPropagation(event)">
+                                <div class="container-bg">
+                                    <div>
+                                        <span class="category">User Story</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- <select id="category" class="input" name="category">
-                            <option value="" disabled selected hidden>Select task category</option>
-                            <option value="Technical Task">Technical Task</option>
-                            <option value="User Story">User Story</option>
-                        </select> -->
                         <p class="required grey">This field is required</p>
                     </div>
                     <div class="container-input-label">
