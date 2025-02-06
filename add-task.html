@@ -74,19 +74,32 @@
                     </div>
                     <div class="container-input-label">
                         <label for="subtasks" class="label-add-task">Subtasks</label placeholder="Add new subtask">
-                        <div id="container-input-category">
+                        <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
                             <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask">
-                            <button id="button-add" class="button-add" type="button" onclick="changeInputButton(true), stopPropagation(event)">
+                            <button id="button-add" class="button-add" type="button">
                                 <img src="./assets/icons/add.svg" alt="icon-arrow-down">
                             </button>
                             <div id="container-buttons" class="container-button-confirm d-none">
-                                <button type="button" class="button-add button-accept-reject">
+                                <button type="button" class="button-add button-accept-reject" onclick="processSubtask(false)">
                                     <img src="./assets/icons/close.svg" alt="icon-reject">
                                 </button>
                                 <hr>
-                                <button type="button" class="button-add button-accept-reject">
+                                <button type="button" class="button-add button-accept-reject" onclick="processSubtask(true)">
                                     <img src="./assets/icons/check_blue.svg" alt="icon-accept">
                                 </button>
+                            </div>
+                        </div>
+                        <div id="container-subtasks">
+                            <div class="container-subtask">
+                                <div class="subtask-text">
+                                    <span>&bull;</span>
+                                    <span id="subtask-1">Test1</span>
+                                </div>
+                                <div class="subtask-icons">
+                                    <img src="./assets/icons/edit.svg" alt="icon-edit">
+                                    <hr>
+                                    <img src="./assets/icons/delete.svg" alt="icon-delete">
+                                </div>
                             </div>
                         </div>
                     </div>

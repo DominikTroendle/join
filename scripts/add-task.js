@@ -138,9 +138,12 @@ function changeInputButton(boolean) {
     }
 }
 
-function clearSubtaskInput() {
-    changeInputButton();
-    document.getElementById('subtasks').value = "";
+function processSubtask(boolean) {
+    if (boolean) {
+        addSubtask();
+    } else {
+        document.getElementById('subtasks').value = "";
+    }
 }
 
 function addSubtask() {
