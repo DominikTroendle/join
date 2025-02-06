@@ -109,10 +109,23 @@ function changeAssignedToValue() {
 
 function clearInputs() {
     clearPrioButtons();
+    clearDropDowns();
     let inputs = ["title", "description", "due-date", "subtasks"];
     for (let i = 0; i <inputs.length; i++) {
         document.getElementById(`${inputs[i]}`).value = "";
     }
+}
+
+function clearDropDowns() {
+    for (let i = 0; i < selectedContacts.length; i++) {
+        document.getElementById(`container-${selectedContacts[i]}`).classList.remove('bg-blue');
+        document.getElementById(`container-${selectedContacts[i]}`).classList.remove('white');
+        document.getElementById(`icon-${selectedContacts[i]}`).classList.remove('filter-white');
+        document.getElementById(`icon-${selectedContacts[i]}`).src = "./assets/icons/unchecked.svg";
+    }
+    selectedContacts = [];
+    changeAssignedToValue();
+    document.getElementById('category').value = "";
 }
 
 function saveTask() {

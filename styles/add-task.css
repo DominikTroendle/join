@@ -55,8 +55,9 @@
 }
 
 #main {
-    height: calc(100vh - 96px);
-    width: calc(100vw - 232px);
+    height: 100vh;
+    /* height: calc(100vh - 96px); */
+    /* width: calc(100vw - 232px); */
     padding: 110px 0 64px 96px;
     display: flex;
     flex-direction: column;
