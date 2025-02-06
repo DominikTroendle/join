@@ -243,7 +243,8 @@
     top: 32px;
     z-index: 0;
     width: 440px;
-    height: 248px;
+    min-height: 48px;
+    max-height: 248px;
     background-color: white;
     border-radius: 10px;
     overflow-y: auto;

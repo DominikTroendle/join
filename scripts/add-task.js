@@ -40,7 +40,19 @@ function toggleAssignOptions() {
 }
 
 function toggleCategoryOptions() {
-    let container = document.getElementById();
+    let container = document.getElementById('dropdown-category');
+    container.classList.toggle('d-none');
+}
+
+/* function selectCategory(category) {
+    let container = document.getElementById(`${category}`);
+    if () {
+
+    }
+} */
+
+function isCategorySelected(container) {
+    return container.classList.contains('bg-blue');
 }
 
 function closeDropdown() {
