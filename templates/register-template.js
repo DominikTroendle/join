@@ -38,7 +38,7 @@ return `
                         <input type="checkbox" id="checkbox">  
                     <div class="privacy-policy">
                         <p>I accept the</p>
-                        <a href="">Privacy policy</a>
+                        <a href="privacy-policy.html" target="_blank">Privacy policy</a>
                     </div>
                     <div id="acceptPrivacyPolicy" class="accept-privacy-policy"></div>
                 </div>
@@ -49,7 +49,7 @@ return `
         </div>
     </div>
     <div class="legal-information">
-        <a href="">Privacy Policy</a>
+        <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
         <a href="">Legal notice</a>
     </div>
 `
