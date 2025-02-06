@@ -1,93 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join</title>
 
-    <link
-      rel="icon"
-      href="assets/img/join-logo.svg"
-      type="image/gif"
-      sizes="16x16"
-    />
+    <link rel="icon" href="assets/img/join-logo.svg" type="image/gif" sizes="16x16">
 
-    <link rel="stylesheet" href="./styles/main.css" />
-  </head>
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
 
-  <body onload="changeIframeSource('summary.html')">
+<body onload="changeIframeSource('summary.html')">
     <div class="all-content">
-      <div class="content">
-        <header>
-          <nav>
-            <span class="text-nav">Kanban Project Management Tool</span>
-            <div class="button-box">
-              <div class="help-box">
-                <img class="help-img" src="assets/img/Property 1=Default.png" />
-              </div>
-              <button class="small-menu-button">SM</button>
+        <div class="content">
+            <header>
+                <nav>
+                    <span class="text-nav">Kanban Project Management Tool</span>
+                    <div class="button-box">
+                        <div class="help-box">
+                            <img class="help-img" src="assets/img/Property 1=Default.png">
+                        </div>
+                        <button class="small-menu-button">SM</button>
+                    </div>
+                </nav>
+                
+            </header>
+            <div class="menu-box">
+                <img class="menu-logo" src="assets/img/Capa 2.png" alt="">
+                <div class="menu-button-box">
+                    <button class="menu-button" onclick="changeIframeSource('summary.html')"><img class="menu-button-icon" src="assets/icons/Icons.png" alt="">Summary</button>
+                    <button class="menu-button" onclick="changeIframeSource('add-task.html')"><img class="menu-button-icon" src="assets/icons/Icons(1).png" alt="">Add Task</button>
+                    <button class="menu-button" onclick="changeIframeSource('board.html')"><img class="menu-button-icon" src="assets/icons/Icons(2).png" alt="">Board</button>
+                    <button class="menu-button"><img class="menu-button-icon" src="assets/icons/Icons(3).png" alt="">Contacts</button>
+                </div>
+                <div class="menu-button-bottom-box">
+                    <button class="menu-button-bottom" onclick="changeIframeSource('privacy-policy.html')">Privacy Policy</button>
+                    <button class="menu-button-bottom">Legal notice</button>
+                </div>
             </div>
-          </nav>
-        </header>
-        <div class="menu-box">
-          <img class="menu-logo" src="assets/img/Capa 2.png" alt="" />
-          <div class="menu-button-box">
-            <button
-              class="menu-button"
-              onclick="changeIframeSource('summary.html')"
-            >
-              <img
-                class="menu-button-icon"
-                src="assets/icons/Icons.png"
-                alt=""
-              />Summary
-            </button>
-            <button
-              class="menu-button"
-              onclick="changeIframeSource('add-task.html')"
-            >
-              <img
-                class="menu-button-icon"
-                src="assets/icons/Icons(1).png"
-                alt=""
-              />Add Task
-            </button>
-            <button
-              class="menu-button"
-              onclick="changeIframeSource('board.html')"
-            >
-              <img
-                class="menu-button-icon"
-                src="assets/icons/Icons(2).png"
-                alt=""
-              />Board
-            </button>
-            <button class="menu-button">
-              <img
-                class="menu-button-icon"
-                src="assets/icons/Icons(3).png"
-                alt=""
-              />Contacts
-            </button>
-          </div>
-          <div class="menu-button-bottom-box">
-            <button
-              class="menu-button-bottom"
-              onclick="changeIframeSource('privacy-policy.html')"
-            >
-              Privacy Policy
-            </button>
-            <button class="menu-button-bottom">Legal notice</button>
-          </div>
+            <div class="iframe-box">
+                <iframe id="iframe" src="" frameborder="0"></iframe>
+            </div>
         </div>
-        <div class="iframe-box">
-          <iframe id="iframe" src="" frameborder="0"></iframe>
-        </div>
-      </div>
     </div>
-    <footer></footer>
+    <footer>
+
+    </footer>
 
     <script src="./scripts/main.js"></script>
-  </body>
+</body>
+
 </html>
