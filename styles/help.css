@@ -1,0 +1,24 @@
+body{
+    font-family: 'Open-Sans', sans-serif;
+    margin-left: 100px;
+    margin-top: 110px;
+}
+
+.text-container{
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.text-container > strong{
+    font-size: 25px;
+}
+
+d, a{
+    color: #29ABE2;
+    text-decoration: none;
+}
+
+.enjoy{
+    margin-top: 50px;
+}
