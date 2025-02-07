@@ -10,6 +10,8 @@ let contacts = [
 
 let selectedContacts = [];
 
+let subtasks = 0;
+
 function init() {
     renderAssignOptions();
 }
@@ -141,13 +143,39 @@ function changeInputButton(boolean) {
 function processSubtask(boolean) {
     if (boolean) {
         addSubtask();
+        document.getElementById('subtasks').value = "";
     } else {
         document.getElementById('subtasks').value = "";
     }
 }
 
+function toggleEditOptions(id) {
+    document.getElementById(`icons-subtask-${id}`).classList.toggle('d-none');
+}
+
 function addSubtask() {
-    
+    let input = document.getElementById('subtasks');
+    subtasks++;
+    document.getElementById('container-subtasks').innerHTML += returnSubtaskHTML(subtasks);
+    document.getElementById(`subtask-${subtasks}`).innerText = input.value;
+}
+
+function deleteSubtask(id) {
+    document.getElementById(`container-subtask-${id}`).remove();
+    subtasks--;
+}
+
+function editSubtask(id) {
+    document.getElementById(`details-subtask-${id}`).classList.add('d-none');
+    document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
+}
+
+function saveEditedSubtask(id) {
+    let input = document.getElementById(`input-subtask-${id}`);
+    document.getElementById(`details-subtask-${id}`).classList.remove('d-none');
+    document.getElementById(`edit-subtask-${id}`).classList.add('d-none');
+    document.getElementById(`subtask-${id}`).innerText = input.value;
+    toggleEditOptions(id);
 }
 
 function saveTask() {

@@ -407,14 +407,38 @@ input:focus {
     border: 1px solid #29abe2;
 }
 
+.position-relative {
+    position: relative;
+}
+
 #container-subtasks {
-    padding: 10px 20px 0 20px;
+    margin-top: 8px;
+    min-height: 120px;
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.container-subtask-edit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 30px;
+    z-index: 1;
+}
+
+.input-edit {
+    flex: 1;
 }
 
 .container-subtask {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 5px 15px;
+    border-radius: 10px;
 }
 
 .container-subtask:hover {
@@ -428,7 +452,19 @@ input:focus {
 
 .subtask-icons {
     display: flex;
-    gap: 5px;
+    gap: 7px;
+}
+
+.subtask-icons img {
+    width: 16px;
+}
+
+.subtask-icons img:hover {
+    cursor: pointer;
+}
+
+.subtask-icons hr {
+    height: 22px;
 }
 
 #footer-add-task {
