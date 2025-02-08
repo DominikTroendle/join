@@ -424,9 +424,16 @@ input:focus {
     left: 0;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 30px;
     z-index: 1;
+    background-color: white;
+    padding-right: 10px;
+}
+
+.container-subtask-edit img:hover {
+    cursor: pointer;
 }
 
 .padding-top {
@@ -434,7 +441,22 @@ input:focus {
 }
 
 .input-edit {
+    border: none;
+    outline: none;
     flex: 1;
+    padding-left: 20px;
+}
+
+.input-edit:focus {
+    border: none;
+}
+
+.check-blue {
+    width: 24px !important;
+}
+
+.edit-hr {
+    margin: 0 2px 0 7px;
 }
 
 .container-subtask {
