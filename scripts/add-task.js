@@ -166,16 +166,28 @@ function deleteSubtask(id) {
 }
 
 function editSubtask(id) {
+    let child = document.getElementById(`container-subtask-${id}`);
     document.getElementById(`details-subtask-${id}`).classList.add('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
+    if (isLastChild(child)) {
+        child.classList.add('padding-top');
+    }
 }
+
+function isLastChild(child) {
+    return (child === child.parentNode.children[child.parentNode.children.length-1]) 
+  }
 
 function saveEditedSubtask(id) {
     let input = document.getElementById(`input-subtask-${id}`);
+    let element = document.getElementById(`container-subtask-${id}`);
     document.getElementById(`details-subtask-${id}`).classList.remove('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.add('d-none');
     document.getElementById(`subtask-${id}`).innerText = input.value;
     toggleEditOptions(id);
+    if (element.classList.contains('padding-top')) {
+        element.classList.remove('padding-top');
+    }
 }
 
 function saveTask() {
