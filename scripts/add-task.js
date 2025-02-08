@@ -110,6 +110,8 @@ function changeAssignedToValue() {
 }
 
 function clearInputs() {
+    subtasks = 0;
+    document.getElementById('container-subtasks').innerHTML = "";
     clearPrioButtons();
     clearDropDowns();
     let inputs = ["title", "description", "due-date", "subtasks"];
@@ -167,6 +169,7 @@ function deleteSubtask(id) {
 
 function editSubtask(id) {
     let child = document.getElementById(`container-subtask-${id}`);
+    document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
     document.getElementById(`details-subtask-${id}`).classList.add('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
     if (isLastChild(child)) {
@@ -184,6 +187,7 @@ function saveEditedSubtask(id) {
     document.getElementById(`details-subtask-${id}`).classList.remove('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.add('d-none');
     document.getElementById(`subtask-${id}`).innerText = input.value;
+    document.getElementById(`input-subtask-${id}`).value = "";
     toggleEditOptions(id);
     if (element.classList.contains('padding-top')) {
         element.classList.remove('padding-top');
