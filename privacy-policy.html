@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/privacy-policy.css" />
   </head>
-  <body>
+  <body onload="addClassSelectedMenuBottomButton('privacy-policy-menu-button-bottom')">
+    <div class="all-content">
     <header>
       <nav>
           <span class="text-nav">Kanban Project Management Tool</span>
           <div class="button-box">
-              <div class="help-box">
-                  <img class="help-img" src="assets/img/Property 1=Default.png">
-              </div>
-              <button class="small-menu-button">SM</button>
-          </div>
+            <!-- <a href="help.html" class="help-button">
+                <img class="help-img" src="assets/img/Property 1=Default.png">
+            </a>
+            <button class="small-menu-button">SM</button> -->
+        </div>
       </nav>
   </header>
 <div class="menu-box">
@@ -65,7 +66,7 @@
           Responsible person within the meaning of data protection laws, in
           particular The EU General Data Protection Regulation (GDPR) is:
         </p>
-        <p class="generator_user_input">
+        <p class="generator_user_input bigger-area" >
           Nico Reckert, Dominik Tröndle, Kevin Breiter
         </p>
         <h2>Your data subject rights</h2>
@@ -103,7 +104,7 @@
           authority Federal state of your place of residence or to the person
           responsible for us competent authority.
         </p>
-        <p>
+        <p class="bigger-area">
           A list of supervisory authorities (for the non-public sector) with
           address can be found at:
           <a
@@ -279,7 +280,7 @@
           mandatory information is available place.
         </p>
         <h4>contradiction</h4>
-        <p>
+        <p class="bigger-area">
           Please read the information about your right to object in accordance
           with Art. 21 GDPR below.
         </p>
@@ -302,11 +303,11 @@
           processing serves to assert, exercise or defend legal claims.
         </p>
         <h3>Recipient of an objection</h3>
-        <p class="generator_user_input">
+        <p class="generator_user_input bigger-area">
           Nico Reckert, Dominik Tröndle, Kevin Breiter
         </p>
         <h2>Changes to our privacy policy</h2>
-        <p>
+        <p class="bigger-area">
           We reserve the right to adapt this data protection declaration so that
           it always corresponds to the current legal requirements to implement
           changes to our services in the data protection declaration, e.g. when
@@ -314,7 +315,7 @@
           data protection declaration.
         </p>
         <h2>Questions about data protection</h2>
-        <p>
+        <p class="bigger-area">
           If you have any questions about data protection, please write to us
           Email the person responsible above.
         </p>
@@ -334,5 +335,7 @@
         </p>
       </div>
     </div>
+  </div>
+  <script src="script.js"></script>
   </body>
 </html>

@@ -1,7 +1,18 @@
-body{
-    font-family: 'Open-Sans', sans-serif;
-    margin-left: 100px;
-    margin-top: 110px;
+.all-content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px);
+}
+
+nav{
+    padding: 20px 23px 20px 116px;
+}
+
+.text-content{
+    margin: 110px 0 0 96px;
 }
 
 .text-container{
@@ -14,6 +25,30 @@ body{
     font-size: 25px;
 }
 
+h1{
+    font-size: 61px;
+    margin-bottom: 35px;
+}
+
+h2{
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+h3{
+    font-size: 23;
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.bigger-area{
+    margin-bottom: 30px;
+}
+
 d, a{
     color: #29ABE2;
     text-decoration: none;
@@ -21,4 +56,37 @@ d, a{
 
 .enjoy{
     margin-top: 50px;
+}
+
+.account-menu-container{
+    position: absolute;
+    height: 150px;
+    width: 158px;
+
+    background-color:#2A3647;
+    border-radius: 20px 0 20px 20px;
+    margin-left: 510px;
+    margin-bottom: 1210px;
+}
+
+.account-menu-container ul{
+    padding: 10px;
+    list-style: none;
+}
+
+.account-menu-container ul li {
+    padding: 11px 16px;
+}
+
+.account-menu-container ul li:hover{
+    background-color: rgba(64, 6, 236, 0.205);
+    border-radius: 8px;
+}
+
+.account-menu-container a{
+    color: #CDCDCD;
+}
+
+.d-none{
+    display: none;
 }
