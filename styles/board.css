@@ -457,8 +457,28 @@ h1 {
     width: 252px;
     height: 244px;
     border-radius: 30px;
-    border: 1px dotted #ABA8A8;
+    border: 1px dashed #ABA8A8;
     box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.16);
+}
+
+.no-task-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 252px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px dashed #ABA8A8;
+    background-color: #E7E7E7;
+    box-shadow: 0 0 4 0 rgb(0, 0, 0, 0.16);
+}
+
+.no-task-text {
+    font-family: 'Open-Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #ABA8A8;
 }
 
 .background-color-1 {

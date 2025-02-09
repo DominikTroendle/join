@@ -22,9 +22,9 @@ function smallCardTemplate(id) {
             </div>`
 }
 
-function noCardTemplate() {
+function noCardTemplate(category) {
     return `<div class="no-task-box">
-                <span class="no-task-text">No tasks To do</span>
+                <span class="no-task-text">No tasks ${category}</span>
             </div>`
 }
 

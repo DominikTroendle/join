@@ -6,6 +6,7 @@ let doneArray = [];
 let oldArray = [];
 let newArray = [];
 let oldCategory;
+let oldCategoryName;
 let newCategory;
 let cardId;
 
@@ -25,6 +26,7 @@ function allowDrop(ev) {
 function moveTo(event, dragFieldId, dragFieldArray) {
     cardId = event.currentTarget.id;
     oldCategory = dragFieldId;
+    oldCategoryName = event.currentTarget.getAttribute("data-category")
     oldArray = dragFieldArray;
     const img = new Image();  // Leeres Bild erstellen
     img.src = '';             // Keine sichtbare Quelle
@@ -40,7 +42,7 @@ function allowDrop2(event, dragFieldArray) {
     if (oldArray.length !== 0) {
         renderSmallCard(oldCategory, oldArray);
     } else {
-        document.getElementById(oldCategory).innerHTML = noCardTemplate();
+        document.getElementById(oldCategory).innerHTML = noCardTemplate(oldCategoryName);
     }
 
     renderSmallCard(newCategory, newArray);
