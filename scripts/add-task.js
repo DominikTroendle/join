@@ -195,7 +195,15 @@ function saveEditedSubtask(id) {
 }
 
 function saveTask() {
+    let title = document.getElementById('').value;
+    let description = document.getElementById('').value;
+    let dueDate = document.getElementById('').value;
+    let priority = "high";
+    let categrory = document.getElementById('').value;
+    let subtasks = [];
+    let task = {
 
+    };
 }
 
 // change arrow direction of assigned-to & category onclick

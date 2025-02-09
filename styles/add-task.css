@@ -55,13 +55,11 @@
 }
 
 #main {
-    height: 100vh;
-    /* height: calc(100vh - 96px); */
-    /* width: calc(100vw - 232px); */
-    padding: 110px 0 64px 96px;
+    margin-left: 232px;
+    width: calc(100vw - 232px);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: #F6F7F8;
 }
 
@@ -69,12 +67,16 @@
     font-size: 61px;
     line-height: 73.2px;
     font-weight: 700;
+    margin-bottom: 48px;
 }
 
 #container-form {
+    flex: 1;
+    width: calc(100vw - 342px);
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    justify-content: space-between;
+    padding: 110px 0 64px 110px;
 }
 
 #form-add-task {
@@ -413,7 +415,7 @@ input:focus {
 
 #container-subtasks {
     margin-top: 8px;
-    min-height: 120px;
+    /* min-height: 120px; */
     max-height: 120px;
     overflow-y: auto;
 }
