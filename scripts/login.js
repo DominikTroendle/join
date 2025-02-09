@@ -57,7 +57,7 @@ async function UserLogin() {
     password.value = "";
     if (user) {
         console.log("user gefunden");
-        window.location.href = 'main.html?';
+        window.location.href = 'summary.html?';
     }else{
         console.log("kein user vorhanden");
         email.style.border = "1px solid red";
@@ -67,7 +67,7 @@ async function UserLogin() {
 }
 
 function loginGuastAccount() {
-    window.location.href = "main.html?"
+    window.location.href = "summary.html?"
 }
 
 function changePasswordIcon(focused) {
