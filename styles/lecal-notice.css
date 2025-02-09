@@ -11,6 +11,10 @@
     margin: 110px 0 0 96px;
 }
 
+.text-nav{
+    padding: 16px 0;
+}
+
 a {
     word-break: break-word;
     text-decoration: none;

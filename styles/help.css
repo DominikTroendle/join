@@ -7,6 +7,10 @@
     width: calc(100% - 232px);
 }
 
+nav{
+    padding: 20px 23px 20px 116px;
+}
+
 .text-content{
     margin: 110px 0 0 96px;
 }
