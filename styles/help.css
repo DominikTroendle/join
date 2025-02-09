@@ -1,7 +1,14 @@
-body{
-    font-family: 'Open-Sans', sans-serif;
-    margin-left: 100px;
-    margin-top: 110px;
+.all-content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px);
+}
+
+.text-content{
+    margin: 110px 0 0 96px;
 }
 
 .text-container{
@@ -12,6 +19,30 @@ body{
 
 .text-container > strong{
     font-size: 25px;
+}
+
+h1{
+    font-size: 61px;
+    margin-bottom: 35px;
+}
+
+h2{
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+h3{
+    font-size: 23;
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.bigger-area{
+    margin-bottom: 30px;
 }
 
 d, a{

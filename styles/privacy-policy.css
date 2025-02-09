@@ -1,0 +1,45 @@
+.all-content{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px);
+}
+
+#generator_results{
+    margin: 110px 0 0 96px;
+}
+
+a{
+    word-break: break-word;
+}
+
+h1{
+    font-size: 61px;
+    margin-bottom: 35px;
+}
+
+h2{
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+h3{
+    font-size: 23;
+    margin-bottom: 10px;
+}
+
+h4{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.bigger-area{
+    margin-bottom: 30px;
+}
