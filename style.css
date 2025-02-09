@@ -179,9 +179,13 @@ nav {
 }
 
 .help-img {
-    width: 20px;
-    height: 20px;
     cursor: pointer;
+    width: 32px;
+    height: 32px;
+}
+
+.help-button:hover {
+scale: 1.6;
 }
 
 .small-menu-button {
