@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    background-color: #F6F7F8;
 }
 
 .allcontent {
@@ -34,6 +35,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px);
 }
 
 .board__box {
@@ -312,10 +315,12 @@ h1 {
     align-items: center;
     gap: 26px;
     padding: 0 64px;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: #2A3647 white;
-    border-width: 100px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    width: 1208px;
+    height: 615px;
+    /* scrollbar-color: #2A3647 white; */
+    /* border-width: 100px; */
 }
 
 .drag-field {
@@ -323,8 +328,8 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    width: 252px;
-    height: 688px;
+    width: 270px;
+    height: 615px;
     gap: 16px;
     /* background-color: rgb(0, 0, 0, 0.2); */
 }
@@ -340,6 +345,11 @@ h1 {
     width: 252px;
     height: 225px;
     box-shadow: 0 0 10px 3px rgb(0, 0, 0, 0.08);
+    cursor: grab;
+}
+
+.user-story__box:active {
+    cursor: grabbing;
 }
 
 .drag-start-transform {
@@ -438,6 +448,17 @@ h1 {
     border-radius: 45px;
     gap: 10px;
     margin-right: -7.5px;
+}
+
+.card-border-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 252px;
+    height: 244px;
+    border-radius: 30px;
+    border: 1px dotted #ABA8A8;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.16);
 }
 
 .background-color-1 {

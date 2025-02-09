@@ -26,6 +26,9 @@ function moveTo(event, dragFieldId, dragFieldArray) {
     cardId = event.currentTarget.id;
     oldCategory = dragFieldId;
     oldArray = dragFieldArray;
+    const img = new Image();  // Leeres Bild erstellen
+    img.src = '';             // Keine sichtbare Quelle
+    event.dataTransfer.setDragImage(img, 0, 0);
 }
 
 function allowDrop2(event, dragFieldArray) {
@@ -36,10 +39,10 @@ function allowDrop2(event, dragFieldArray) {
     newArray.push(oldArray.splice(index, 1)[0]);
     if (oldArray.length !== 0) {
         renderSmallCard(oldCategory, oldArray);
-    }else {
+    } else {
         document.getElementById(oldCategory).innerHTML = noCardTemplate();
     }
-    
+
     renderSmallCard(newCategory, newArray);
 }
 
@@ -59,4 +62,37 @@ function changeDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);
     currentDragCard.classList.add("drag-start-transform");
 }
+
+// function createBorderCardForDragEntered(event) {
+//     document.getElementById(event.currentTarget.id).innerHTML += cardBorderdragEnterTemplate();
+// }
+
+// function createBorderCardForDragEntered(event) {
+//     const target = document.getElementById(event.currentTarget.id);
+
+//     // Prüfe, ob die card-border-box schon existiert
+//     if (!target.querySelector("#card-border-box")) {
+//         target.innerHTML += cardBorderdragEnterTemplate();
+//     }
+// }
+
+let originDragField = null; // Speichert das ursprüngliche Drag-Feld
+
+function onDragStart(event) {
+    originDragField = event.currentTarget.closest(".drag-field"); // Speichert das ursprüngliche Feld
+    document.body.style.cursor = "grabbing";
+}
+
+function createBorderCardForDragEntered(event) {
+    const target = document.getElementById(event.currentTarget.id);
+
+    // Falls es das Ursprungsfeld ist, keine Umrandung hinzufügen
+    if (target === originDragField) return;
+
+    // Prüfen, ob die Umrandung schon existiert
+    if (!target.querySelector("#card-border-box")) {
+        target.innerHTML += cardBorderdragEnterTemplate();
+    }
+}
+
 

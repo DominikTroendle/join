@@ -27,3 +27,8 @@ function noCardTemplate() {
                 <span class="no-task-text">No tasks To do</span>
             </div>`
 }
+
+function cardBorderdragEnterTemplate() {
+    return `<div class="card-border-box" id="card-border-box">
+            </div>`
+}

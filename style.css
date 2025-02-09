@@ -1,7 +1,12 @@
+@font-face {
+    font-family: Inter;
+    src: url('../assets/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
-    font-family: 'Open-Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 html {
@@ -16,26 +21,185 @@ body {
     flex-direction: column;
 }
 
-.allcontent {
+.menu-box {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     flex-direction: column;
-    width: 100%;
-    flex: 1;
+    padding-top: 64px;
+    padding-bottom: 64px;
+    width: 232px;
+    background-color: #2A3647;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-footer {
+.menu-logo {
+    width: 100px;
+    height: 122px;
+    object-fit: cover;
+}
+
+.menu-button-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.menu-button {
+    width: 100%;
+    height: 46px;
+    background-color: #2A3647;
+    border: none;
+    color: #CDCDCD;
+    font-size: 16px;
+    font-weight: 400;
+    gap: 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 56px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background-color: #2A3D59;
+}
+
+.menu-button-selected {
+    background-color: #091931;
+    color: #FFFFFF;
+    pointer-events: none;
+    cursor: default;
+}
+
+.menu-button-selected:hover {
+    background-color: #091931;
+}
+
+.menu-button-bottom-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    padding-top: 243px;
+}
+
+.menu-button-bottom {
+    width: 100%;
+    height: 35px;
+    background-color: #2A3647;
+    border: none;
+    color: #ABA8A8;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px;
+    padding-left: 52px;
+    cursor: pointer;
+}
+
+.menu-button-bottom:hover {
+    color: #29ABE2;
+    font-size: 17px;
+}
+
+.menu-button-bottom:focus {
+    background-color: #091931;
+}
+
+.menu-button-icon {
+    width: 30px;
+    height: 30px;
+    fill: #CDCDCD;
+}
+
+.menu-button-selected .menu-button-icon {
+    fill: #FFFFFF;
+}
+
+header {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-top: auto;
+    background-color: white;
+    box-shadow: 0px 4px 4px 0 rgb(0, 0, 0, 0.1);
+    margin-bottom: 4px;
 }
 
-a{
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+    padding-right: 40px;
+    padding-left: 116px;
+}
+
+.text-nav {
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.button-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.help-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+}
+
+.help-img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.small-menu-button {
+    width: 56px;
+    height: 56px;
+    border: 3px solid #2A3647;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    color: #29ABE2;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.small-menu-button:hover {
+    background-color: rgba(12, 46, 98, 0.12);
+}
+
+.help-img:hover {
+    width: 24px;
+    height: 24px;
+}
+
+a {
     text-decoration: none;
 }
 
-button{
+button {
     border: none;
     cursor: pointer;
     background-color: transparent;

@@ -20,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    background-color: #F6F7F8;
 }
 
 .allcontent {
@@ -34,6 +35,29 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px);
+}
+
+.small-menu-button {
+    width: 56px;
+    height: 56px;
+    border: 3px solid #2A3647;
+    border-radius: 100%;
+    background-color: #FFFFFF;
+    color: #29ABE2;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.small-menu-button:hover {
+    background-color: rgba(12, 46, 98, 0.12);
+}
+
+.help-img:hover {
+    width: 24px;
+    height: 24px;
 }
 
 .title__box {
