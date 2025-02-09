@@ -111,11 +111,21 @@ body {
 
 .menu-button-bottom:hover {
     color: #29ABE2;
-    font-size: 17px;
+    font-size: 16px;
+    font-weight: 700;
 }
 
-.menu-button-bottom:focus {
+.menu-button-bottom-selected {
     background-color: #091931;
+    pointer-events: none;
+    cursor: default;
+}
+
+.menu-button-bottom-selected:hover {
+    background-color: #091931;
+    color: #ABA8A8;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .menu-button-icon {
