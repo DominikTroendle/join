@@ -20,14 +20,8 @@ if (msg) {
 }
 
 async function init() {
-    await loadContent();
     await loadAllUserData();
     await allDatas()
-}
-
-async function loadContent() {
-    let refContent = document.getElementById('content');
-    refContent.innerHTML = await getTemplateLogin();
 }
 
 async function loadAllUserData(path) {

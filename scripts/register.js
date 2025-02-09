@@ -2,18 +2,12 @@ const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase
 let isPasswordVisible = false;
 
 async function init() {
-    await loadContent();
     await loadAllUserData();
 }
 
 async function loadAllUserData(path) {
     let response = await fetch(BASE_URL + path + ".json")
     return responseToJson = await response.json();
-}
-
-async function loadContent() {
-    let refContent = document.getElementById('content');
-    refContent.innerHTML = await getTemplateRegister();
 }
 
 async function sendData(path="", data={}) {
