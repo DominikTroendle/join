@@ -21,7 +21,7 @@ if (msg) {
 
 async function init() {
     await loadAllUserData();
-    await allDatas()
+    await allDatas();
 }
 
 async function loadAllUserData(path) {
