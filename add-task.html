@@ -6,7 +6,8 @@
     <title>Add Task</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles/add-task.css">
+    <link rel="stylesheet" href="./styles/colors.css">
+    <link rel="stylesheet" href="./styles/add-task.css">
 </head>
 <body onload="init(), addClassSelectedMenuButton('add-task-menu-button')">
     <section id="main" onclick="closeDropdown(), changeInputButton(false), stopPropagation(event)">
@@ -88,7 +89,7 @@
                                 <input readonly id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)">
                                 <button class="button-dropdown" type="button"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleAssignOptions(), stopPropagation(event)"></button>
                             </div>
-                            <div class="container-arrow-dropdown" onclick="toggleAssignOptions(), stopPropagation(event)"></div>
+                            <div id="container-assigned-contacts"></div>
                             <div id="dropdown-assign" class="container-custom-select-options d-none"></div>
                         </div>
                     </div>

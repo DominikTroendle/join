@@ -5,8 +5,9 @@ let contacts = [
     {name: "Paul Poost"},
     {name: "Franz Ferdinand"},
     {name: "Thomas Deller"}
-
 ];
+
+let colors = ["bg-orange", "bg-pink", "bg-bluepurple", "bg-purple", "bg-skyblue", "bg-turquoise", "bg-redorange", "bg-peach", "bg-rose", "bg-sun", "bg-darkblue", "bg-green", "bg-yellow", "bg-red", "bg-darkyellow"];
 
 let selectedContacts = [];
 
@@ -67,10 +68,27 @@ function renderAssignOptions() {
     dropDown.innerHTML = "";
     for (let i = 0; i < contacts.length; i++) {
         let name = contacts[i].name;
+        let color = getBgColor(name);
         dropDown.innerHTML += returnAssignedContactHTML(name);
-        let nameSpan = document.getElementById(`${name}`);
-        nameSpan.innerText = name;
+        document.getElementById(`${name}`).innerText = name;
+        document.getElementById(`initials-${name}`).innerText = getInitials(name);
+        document.getElementById(`initials-${name}`).classList.add(`${color}`);
     }
+}
+
+function getInitials(name) {
+    let names = name.split(' ');
+    let initials = "";
+    for (let i = 0; i < names.length; i++) {
+        initials += names[i].substring(0, 1).toUpperCase();
+    }
+    return initials;
+}
+
+function getBgColor() {
+    let randomNumber= Math.floor(Math.random() * colors.length);
+    let randomColor = colors[randomNumber];
+    return randomColor;
 }
 
 function selectContact(name) {
@@ -90,6 +108,17 @@ function selectContact(name) {
         updateSelectedContacts(false, name);
     }
     changeAssignedToValue();
+    displaySelectedContacts();
+}
+
+function displaySelectedContacts() {
+    let container = document.getElementById('container-assigned-contacts');
+    container.innerHTML = "";
+    for (let i = 0; i < selectedContacts.length; i++) {
+        let name = selectedContacts[i];
+        let initials = getInitials(name);
+        container.innerHTML += returnAssignedContactsHTML(initials);
+    }
 }
 
 function updateSelectedContacts(boolean, name) {
@@ -112,6 +141,7 @@ function changeAssignedToValue() {
 function clearInputs() {
     subtasks = 0;
     document.getElementById('container-subtasks').innerHTML = "";
+    document.getElementById('container-assigned-contacts').innerHTML = "";
     clearPrioButtons();
     clearDropDowns();
     let inputs = ["title", "description", "due-date", "subtasks"];
