@@ -96,12 +96,14 @@ function selectContact(name) {
     let icon = document.getElementById(`icon-${name}`);
     if (!isContactSelected(contactDiv)) {
         contactDiv.classList.add('bg-blue');
+        contactDiv.classList.add('selected-hover');
         contactDiv.classList.add('white');
         icon.src = "./assets/icons/checked.svg";
         icon.classList.add('filter-white');
         updateSelectedContacts(true, name);
     } else {
         contactDiv.classList.remove('bg-blue');
+        contactDiv.classList.remove('selected-hover');
         contactDiv.classList.remove('white');
         icon.src = "./assets/icons/unchecked.svg";
         icon.classList.remove('filter-white');
