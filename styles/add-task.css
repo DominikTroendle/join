@@ -406,8 +406,8 @@ input:focus {
 
 #container-subtasks {
     margin-top: 8px;
-    min-height: 60px;
-    max-height: 60px;
+    min-height: 30px;
+    max-height: 90px;
     overflow-y: auto;
 }
 
