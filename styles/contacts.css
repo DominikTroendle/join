@@ -256,8 +256,16 @@
 
 .close-btn{
     position: absolute;
+    padding: 5px;
     margin-left: 670px;
     margin-bottom: 480px;
+    transition: 100ms;
+}
+
+.close-btn:hover{
+    background-color: #cccccc52;
+    padding: 5px;
+    border-radius: 100%;
 }
 
 .new-user-image{
@@ -301,6 +309,10 @@
     right: 10px;
 }
 
+.input-area input::placeholder{
+    color: #D1D1D1;
+}
+
 .contact-button-container{
     display: flex;
     gap: 24px;
@@ -311,14 +323,31 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 126px;
+    width: 138px;
     height: 56px;
-    padding: 16px;
+    padding: 0 16px;
     gap: 8px;
     border-radius: 10px;
     border: solid 1px black;
     font-size: 24px;
     font-weight: 300;
+    transform-origin: left;
+    transition: 100ms;
+}
+
+.cancel-btn p{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.cancel-btn:hover{
+    color: #29abe2;
+    border: solid 2px #29abe2;
+    transform: scale(0.99);
+}
+
+button .close-icon:hover path{
+    stroke: #29abe2;
 }
 
 .create-btn{
@@ -334,4 +363,10 @@
     color: white;
     font-size: 24px;
     font-weight: 400;
+    transition: 100ms;
+}
+
+.create-btn:hover{
+    background-color: #29abe2;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
