@@ -283,15 +283,6 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* ::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: none;
-    border: none;
-} */
-
 .container-custom-select-option {
     border-radius: 10px;
 }

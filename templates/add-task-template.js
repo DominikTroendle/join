@@ -20,8 +20,8 @@ function returnSubtaskHTML(id) {
                         <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtask(${id})">
                     </div>
                 </div>
-                <div id="details-subtask-${id}" class="container-subtask" onmouseover="toggleEditOptions(${id})" onmouseleave="toggleEditOptions(${id})">
-                    <div class="subtask-text" onmouseover="toggleEditOptions(${id})" onmouseleave="toggleEditOptions(${id})">
+                <div id="details-subtask-${id}" class="container-subtask" onmouseover="showEditOptions(${id})" onmouseleave="showEditOptions(${id})">
+                    <div class="subtask-text" onmouseover="showEditOptions(${id})" onmouseleave="showEditOptions(${id})">
                         <span>&bull;</span>
                         <span id="subtask-${id}"></span>
                     </div>

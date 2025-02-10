@@ -151,8 +151,12 @@ function processSubtask(boolean) {
     }
 }
 
-function toggleEditOptions(id) {
-    document.getElementById(`icons-subtask-${id}`).classList.toggle('d-none');
+function showEditOptions(id, boolean) {
+    if (boolean) {
+        document.getElementById(`icons-subtask-${id}`).classList.remove('d-none');
+    } else {
+        document.getElementById(`icons-subtask-${id}`).classList.add('d-none');
+    }
 }
 
 function addSubtask() {
