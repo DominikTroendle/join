@@ -20,17 +20,19 @@
                         <a href="help.html" class="help-button">
                             <img class="help-img" src="assets/img/Property 1=Default.png">
                         </a>
-                        <button id="menuButton" onclick="accountClickMenu()" class="small-menu-button">SM</button>
+                        <button onclick="accountClickMenu()" class="small-menu-button">SM</button>
                     </div>
                 </nav>
             </header>
-            <div id="subMenu" class="account-submenu-container d-none">
-                <ul>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="legal-notice.html">Lecal Notic</a></li>
-                    <li><a href="index.html">Log out</a></li>
-                </ul>
-            </div>
+            <div id="subMenuOverlayContent" class="overlay">
+                <div class="account-submenu-container">
+                  <ul>
+                      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                      <li><a href="legal-notice.html">Lecal Notic</a></li>
+                      <li><a href="index.html">Log out</a></li>
+                  </ul>
+                </div>
+              </div>
             <div class="menu-box">
                 <img class="menu-logo" src="assets/img/Capa 2.png" alt="">
                 <div class="menu-button-box">
@@ -144,7 +146,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js" ></script>
     <script src="scripts/summary.js"></script>
 </body>
 
