@@ -4,6 +4,7 @@ let allContacts = [];
 async function init() {
     await loadAllUserContacts();
     await allUserContacts();
+    await loadContent();
 }
 
 function selectContact() {
@@ -82,4 +83,11 @@ async function allUserContacts() {
     }
     console.log(allContacts);
     
+}
+
+async function loadContent() {
+    let refContent = document.getElementById('contactList')
+    for (let i = 0; i < allContacts.length; i++) {
+        refContent.innerHTML += await getContactListTemplate(i);
+    }
 }

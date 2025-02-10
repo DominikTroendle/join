@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="./styles/contacts.css">
     <link rel="stylesheet" href="style.css">
+
+    <script src="./templates/contacts-template.js"></script>
+    <script src="./scripts/contacts.js"></script>
 </head>
 <body onload="init()">
     <div id="newContectOverlay" class="contact-overlay d-none">
@@ -128,102 +131,9 @@
                 </section>
 
             <div class="contacs-box-container">
-                <div class="container-letter">
-                    <span>A</span>
-                </div>
-                <hr>
-                <div class="container-contact" onclick="selectContact()">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-letter">
-                    <span>A</span>
-                </div>
-                <hr>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-letter">
-                    <span>A</span>
-                </div>
-                <hr>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
-                <div class="container-contact">
-                    <div class="container-initials">AM</div>
-                    <div class="container-contact-preview">
-                        <span class="contact-preview-name">Anton Mayer</span>
-                        <span class="contact-preview-mail">anton.meier@web.de</span>
-                    </div>
-                </div>
+                
+                <div id="contactList"></div>
+                
             </div>
 
             </div> 
@@ -236,8 +146,6 @@
         </div>
     
     
-
-    <script src="./scripts/contacts.js"></script>
-    <script src="./templates/contacts-template.js"></script>
+    
 </body>
 </html>
