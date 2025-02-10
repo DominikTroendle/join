@@ -10,6 +10,15 @@ body {
     height: 100vh;
 }
 
+.all-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px);
+}
+
 #contacts {
     width: 456px;
     box-shadow: 4px 0 6px 0 rgba(0,0,0,0.8);
