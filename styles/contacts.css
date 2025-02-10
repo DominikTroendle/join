@@ -176,3 +176,18 @@
     font-size: 16px;
     line-height: 19px;
 }
+
+
+.contact-overlay{
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.603);
+    z-index: 1000;
+}
+
+.d-none{
+    display: none;
+}
