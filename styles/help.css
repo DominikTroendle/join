@@ -15,10 +15,31 @@ nav{
     margin: 110px 0 0 96px;
 }
 
+.text-back-arrow-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 35px;
+}
+
 .text-container{
     display: flex;
     gap: 30px;
     margin-bottom: 20px;
+}
+
+.left-btn img{
+    width: 32px;
+    height: 32px;
+    margin-right: 20px;
+    cursor: pointer;
+    transform-origin: right;
+}
+
+.left-btn img:hover{
+    background-color: rgba(0, 0, 0, 0.034);
+    border-radius: 50px;
+    transform: scale(1.1);
 }
 
 .text-container > strong{
@@ -27,7 +48,6 @@ nav{
 
 h1{
     font-size: 61px;
-    margin-bottom: 35px;
 }
 
 h2{
