@@ -4,11 +4,11 @@ function selectContact() {
 
 
 function addNewContect() {
-    refOverlay = document.getElementById('nexContectOverlay');
-    refOverlay.classList.toggle('d-none')
+    refOverlay = document.getElementById('newContectOverlay');
+    refOverlay.classList.toggle('d-none');
     refOverlay.onclick = function(event) {
         if (event.target === refOverlay) {
-            refOverlay.classList.add('d-none');
+            refOverlay.classList.toggle('d-none');
         }
     };
 }

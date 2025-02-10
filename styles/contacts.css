@@ -186,8 +186,116 @@
     left: 0;
     background-color: rgba(0, 0, 0, 0.603);
     z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .d-none{
     display: none;
+}
+
+.new-Contect-Container{
+    width: 1200px;
+    height: 600px;
+    border-radius: 30px;
+
+    background-color: transparent;
+    display: flex;
+}
+
+.information-content-container{
+    width: 460px;
+    height: 100%;
+    border-radius: 30px 0 0 30px;
+    padding-left: 40px;
+
+    background-color: #2A3647;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 16px;
+}
+
+.information-content-container img{
+    width: 55px;
+}
+
+.information-content-container h1{
+    font-size: 61px;
+    font-weight: 700;
+    color: white;
+}
+
+.information-content-container p{
+    font-size: 27px;
+    font-weight: 400;
+    color: white;
+}
+
+.information-content-container hr{
+    border: none;
+    height: 2px;
+    width: 85px;
+    background-color: #29ABE2;
+
+}
+
+.add-input-contect-container{
+    width: 840px;
+    height: 100%;
+    border-radius: 0 30px 30px 0;
+
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.close-btn{
+    position: absolute;
+    margin-left: 670px;
+    margin-bottom: 480px;
+}
+
+.new-user-image{
+    height: 120px;
+    width: 120px;
+    border-radius: 70px;
+    border: solid 3px white;
+    background-color: #D1D1D1;
+    margin-left: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-area{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-area input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 35px; /* Platz für das Icon auf der rechten Seite */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-area img{
+    position: absolute;
+    right: 10px;
+    
 }
