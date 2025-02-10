@@ -20,11 +20,11 @@ function accountClickMenu() {
 
 document.onclick = function (event) {
     const subMenu = document.getElementById('subMenu');
-    const menuButton = document.getElementById('menuButton');
+    const submenuButton = document.getElementById('submenuButton');
 
     if (
         !subMenu.contains(event.target) && 
-        event.target !== menuButton
+        event.target !== submenuButton
     ) {
         subMenu.classList.add('d-none');
     }

@@ -219,3 +219,47 @@ button {
     background-color: transparent;
 }
 
+.account-submenu-container{
+    position: absolute;
+    height: 150px;
+    width: 158px;
+
+    background-color:#2A3647;
+    border-radius: 20px 0 20px 20px;
+    right: 10px;
+    top: 96px;
+}
+
+ul{
+    height: 100%;
+    list-style: none;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+li{
+    min-width: 100%;
+}
+
+.account-submenu-container a{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    color: #CDCDCD;
+    height: 100%; 
+    width: 100%; 
+    padding: 8px 16px; 
+}
+
+.account-submenu-container a:hover{
+    background-color: rgba(64, 6, 236, 0.205);
+    border-radius: 8px;
+}
+
+.d-none{
+    display: none;
+}
+
