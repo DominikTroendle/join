@@ -9,5 +9,9 @@ function addClassSelectedMenuBottomButton(id) {
 }
 
 function accountClickMenu() {
-    document.getElementById('subMenuOverlayContent').classList.toggle('active');
+    let overlay = document.getElementById('subMenuOverlayContent');
+    let menuBox = document.querySelector('.menu-box');
+
+    overlay.classList.toggle('active');
+    menuBox.classList.toggle('inactive');
 }
