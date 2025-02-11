@@ -1,16 +1,15 @@
 const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
 let allContacts = [];
+let contactNames = [];
 
 async function init() {
     await loadAllUserContacts();
     await allUserContacts();
-    await loadContent();
+    await loadContactList();
+    await findName();
+    
+    // await selectMoreContactInformation()
 }
-
-function selectContact() {
-    let element = document.getElementById('')
-}
-
 
 function addNewContect() {
     refOverlay = document.getElementById('newContectOverlay');
@@ -44,7 +43,7 @@ async function addUserToContactList(event, form) {
     };
     await sendData("/allContacts", newContact);
     name.value = ''; email.value = ''; phone.value = '';
-    successfullyContact()
+    successfullyContact();
     return false;
 }
 
@@ -67,7 +66,7 @@ async function loadAllUserContacts(path) {
 async function allUserContacts() {
     let contactResponse = await loadAllUserContacts("allContacts");
     if (!contactResponse) { 
-        console.error("Fehler: userResponse ist null oder undefined!");
+        console.error("Fehler: contactResponse ist null oder undefined!");
         return;
     }
     let contactKeysArray = Object.keys(contactResponse);
@@ -81,13 +80,48 @@ async function allUserContacts() {
             }
         )
     }
-    console.log(allContacts);
+}
+
+async function loadContactList() {
+    let refContent = document.getElementById('contactList')
+    refContent.innerHTML = "";
+    for (let i = 0; i < allContacts.length; i++) {
+        refContent.innerHTML += await getContactListTemplate(i);
+    } 
+}
+
+function showInitials() {
     
 }
 
-async function loadContent() {
-    let refContent = document.getElementById('contactList')
-    for (let i = 0; i < allContacts.length; i++) {
-        refContent.innerHTML += await getContactListTemplate(i);
+function selectContact() {
+    let element = document.getElementById('selectContact');
+    element.classList.toggle('select-contact');
+    
+    if (element) {
+        element.style.color = element.style.color === "white" ? "black" : "white";
     }
 }
+
+async function selectMoreContactInformation() {
+    let refMoreInfo = document.getElementById('moreInformationContact')
+    for (let i = 0; i < allContacts.length; i++) {
+        refMoreInfo.innerHTML += await selectMoreContactInformationTemplate(i);
+    }
+}
+
+async function findName() {
+    for (let i = 0; i < allContacts.length; i++) {
+        contactNames.push({
+            name : allContacts[i].name
+        })
+    }
+    console.log(contactNames);
+}
+
+async function findInitialsColors() {
+    
+}
+
+
+
