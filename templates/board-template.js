@@ -1,10 +1,10 @@
-function smallCardTemplate(id) {
+function smallCardTemplate(id, taskType, taskTitle, taskDiscription) {
     return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)">
                 <div class="user-story__category-box">
-                    <span class="user-story__category-text">User Story</span>
+                    <span class="user-story__category-text">${taskType}</span>
                 </div>
-                <span class="user-story__title">Kochwelt Page & Recipe Recommender</span>
-                <span class="user-story__discription">Build start page with recipe recommendation...</span>
+                <span class="user-story__title">${taskTitle}</span>
+                <span class="user-story__discription">${taskDiscription}</span>
                 <div class="user-story__scale-text-box">
                     <div class="user-story__subtask-scale-box">
                         <div class="user-story__subtask-scale-fill"></div>

@@ -1,6 +1,32 @@
 let currentDraggedElement;
-let toDoArray = [{ id: 1 }, { id: 2 }];
-let inProgressArray = [{ id: 3 }, { id: 4 }];
+let toDoArray = [
+    {
+        id: 1,
+        taskType: "User Story",
+        taskTitle: "Kochwelt Page & Recipe Recommender",
+        taskDiscription: "Build start page with recipe recommendation..."
+    },
+    {
+        id: 2,
+        taskType: "User Story",
+        taskTitle: "Kochwelt Page & Recipe Recommender",
+        taskDiscription: "Build start page with recipe recommendation..."
+    }
+];
+let inProgressArray = [
+    {
+        id: 3,
+        taskType: "User Story",
+        taskTitle: "Kochwelt Page & Recipe Recommender",
+        taskDiscription: "Build start page with recipe recommendation..."
+    },
+    {
+        id: 4,
+        taskType: "User Story",
+        taskTitle: "Kochwelt Page & Recipe Recommender",
+        taskDiscription: "Build start page with recipe recommendation..."
+    }
+];
 let awaitFeedbackArray = [];
 let doneArray = [];
 let oldArray = [];
@@ -53,7 +79,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id)
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDiscription)
         }
     }
 }
