@@ -7,14 +7,19 @@ let contacts = [
     {name: "Thomas Deller"}
 ];
 
+let contactsNames = [];
+
 let colors = ["bg-orange", "bg-pink", "bg-bluepurple", "bg-purple", "bg-skyblue", "bg-turquoise", "bg-redorange", "bg-peach", "bg-rose", "bg-sun", "bg-darkblue", "bg-green", "bg-yellow", "bg-red", "bg-darkyellow"];
 
 let selectedContacts = [];
 
+let filteredContacts = [];
+
 let subtasks = 0;
 
 function init() {
-    renderAssignOptions();
+    renderAssignOptions(contacts);
+    getContactsNames();
 }
 
 function selectPrioButton(prio) {  
@@ -48,12 +53,22 @@ function clearPrioButtons() {
 
 function toggleAssignOptions() {
     let container = document.getElementById('dropdown-assign');
+    let input = document.getElementById('assigned-to');
     container.classList.toggle('d-none');
+    if (input.placeholder == "Select contacts to assign") {
+        input.placeholder = "";
+    } else if (input.placeholder == "") {
+        input.placeholder = "Select contacts to assign";
+    }
 }
 
 function toggleCategoryOptions() {
     let container = document.getElementById('dropdown-category');
     container.classList.toggle('d-none');
+}
+
+function preventDefault(event) {
+    event.preventDefault();
 }
 
 function displayCategory(category) {
@@ -64,19 +79,21 @@ function displayCategory(category) {
 function closeDropdown() {
     let dropdownAssign = document.getElementById('dropdown-assign');
     let dropdownCategory = document.getElementById('dropdown-category');
+    let input = document.getElementById('assigned-to');
     dropdownAssign.classList.add('d-none');
     dropdownCategory.classList.add('d-none');
+    input.placeholder = "Select contacts to assign";
 }
 
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
-function renderAssignOptions() {
+function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
-    for (let i = 0; i < contacts.length; i++) {
-        let name = contacts[i].name;
+    for (let i = 0; i < array.length; i++) {
+        let name = array[i].name;
         let color = getBgColor(name);
         dropDown.innerHTML += returnAssignedContactHTML(name);
         document.getElementById(`${name}`).innerText = name;
@@ -118,8 +135,26 @@ function selectContact(name) {
         icon.classList.remove('filter-white');
         updateSelectedContacts(false, name);
     }
-    changeAssignedToValue();
     displaySelectedContacts();
+}
+
+function getContactsNames() {
+    for (let i = 0; i < contacts.length; i++) {
+        let name = contacts[i].name.toLowerCase();
+        contactsNames.push(name);
+    }
+}
+
+function filterContacts() {
+    filteredContacts = [];
+    let searchValue = document.getElementById('assigned-to').value.toLowerCase();
+    let filterResult = contactsNames.filter((name) => name.includes(searchValue));
+    for (let i = 0; i < filterResult.length; i++) {
+        let obj = {};
+        obj.name = filterResult[i];
+        filteredContacts.push(obj);
+    }
+    renderAssignOptions(filteredContacts);
 }
 
 function displaySelectedContacts() {
@@ -143,10 +178,6 @@ function updateSelectedContacts(boolean, name) {
 
 function isContactSelected(contactDiv) {
     return contactDiv.classList.contains('bg-blue');
-}
-
-function changeAssignedToValue() {
-    document.getElementById('assigned-to').value = selectedContacts.join(', ');
 }
 
 function clearInputs() {

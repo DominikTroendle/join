@@ -375,7 +375,7 @@ hr {
 }
 
 .button-prio-hover:hover {
-    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 input:focus {
@@ -518,12 +518,30 @@ input:focus {
     color: #29abe2;
     background-color: transparent;
     border: 2px solid #29abe2;
-    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#button-clear:hover img {
+    filter: brightness(0) saturate(100%) invert(61%) sepia(91%) saturate(1523%) hue-rotate(166deg) brightness(90%) contrast(97%);
+}
+
+#button-clear:active {
+    padding: 16px;
+    border: 1px solid #091931;
+    color: #091931;
+}
+
+#button-clear:active img {
+    filter: brightness(0) saturate(100%) invert(6%) sepia(70%) saturate(2170%) hue-rotate(205deg) brightness(94%) contrast(96%);
 }
 
 #button-create:hover {
     background-color: #29abe2;
-    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+#button-create:active {
+    background-color: #091931;
 }
 
 @media only screen and (max-height: 800px) {
