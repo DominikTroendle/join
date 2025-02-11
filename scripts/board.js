@@ -123,4 +123,41 @@ function createBorderCardForDragEntered(event) {
     }
 }
 
+function test() {
+    // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(error => console.error("Fehler beim Abrufen:", error));
+    
+    // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/inProgress.json", {
+    //     method: "PATCH",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //         "2": {
+    //             id: 2,
+    //             taskType: "User Story",
+    //             taskTitle: "Kochwelt Page & Recipe Recommender",
+    //             taskDiscription: "Build start page with recipe recommendation..."
+    //         }
+    //     })
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log("Daten gespeichert:", data))
+    // .catch(error => console.error("Fehler beim Speichern:", error));
+    toDoArray = [];
+    console.log("Array leer machen: " + toDoArray);
+    fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
+    .then(response => response.json())
+    .then(data => {
+        if (data) {
+            const toDoArray = Object.values(data); // Objekt in ein Array umwandeln
+            console.log(toDoArray);
+        } else {
+            console.log("Keine Daten gefunden.");
+        }
+    })
+    .catch(error => console.error("Fehler beim Abrufen:", error));
+    
+}
 
+test();
