@@ -1,5 +1,5 @@
-function returnAssignedContactHTML(name) {
-    return `<div id="container-${name}" class="container-custom-select-option" onclick="selectContact('${name}'), stopPropagation(event)">
+function returnAssignedContactHTML(name, color) {
+    return `<div id="container-${name}" class="container-custom-select-option" onclick="selectContact('${name}','${color}'), stopPropagation(event)">
                 <div class="flex-align gap-15">
                     <span id="initials-${name}" class="initials"></span>
                     <span id="${name}" class="name"></span>
@@ -8,8 +8,8 @@ function returnAssignedContactHTML(name) {
             </div>`;
 }
 
-function returnAssignedContactsHTML(initials) {
-    return `<span class="initials">${initials}</span>`;
+function returnAssignedContactsHTML(initials, color) {
+    return `<span class="initials ${color}">${initials}</span>`;
 }
 
 function returnSubtaskHTML(id) {

@@ -1,15 +1,31 @@
 let contacts = [
-    {name: "David Müller"},
-    {name: "Daniel Meier"},
-    {name: "Richard Renner"},
-    {name: "Paul Poost"},
-    {name: "Franz Ferdinand"},
-    {name: "Thomas Deller"}
+    {
+        name: "David Müller",
+        color: "bg-orange"
+    },
+    {
+        name: "Daniel Meier",
+        color: "bg-orange"
+    },
+    {
+        name: "Richard Renner",
+        color: "bg-pink"
+    },
+    {
+        name: "Paul Poost",
+        color: "bg-bluepurple"
+    },
+    {
+        name: "Franz Ferdinand",
+        color: "bg-turquoise"
+    },
+    {
+        name: "Thomas Deller",
+        color: "bg-rose"
+    }
 ];
 
 let contactsNames = [];
-
-let colors = ["bg-orange", "bg-pink", "bg-bluepurple", "bg-purple", "bg-skyblue", "bg-turquoise", "bg-redorange", "bg-peach", "bg-rose", "bg-sun", "bg-darkblue", "bg-green", "bg-yellow", "bg-red", "bg-darkyellow"];
 
 let selectedContacts = [];
 
@@ -18,7 +34,7 @@ let filteredContacts = [];
 let subtasks = 0;
 
 function init() {
-    renderAssignOptions(contacts);
+    renderAssignOptions();
     getContactsNames();
 }
 
@@ -89,21 +105,21 @@ function stopPropagation(event) {
     event.stopPropagation();
 }
 
-function renderAssignOptions(array) {
+function renderAssignOptions() {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
-    for (let i = 0; i < array.length; i++) {
-        let name = array[i].name;
-        let color = getBgColor(name);
-        dropDown.innerHTML += returnAssignedContactHTML(name);
-        document.getElementById(`${name}`).innerText = name;
-        document.getElementById(`initials-${name}`).innerText = getInitials(name);
-        document.getElementById(`initials-${name}`).classList.add(`${color}`);
+    for (let i = 0; i < contacts.length; i++) {
+        let contactName = contacts[i].name;
+        let color = contacts[i].color;
+        dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
+        document.getElementById(`${contactName}`).innerText = contactName;
+        document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
+        document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
     }
 }
 
-function getInitials(name) {
-    let names = name.split(' ');
+function getInitials(contactName) {
+    let names = contactName.split(' ');
     let initials = "";
     for (let i = 0; i < names.length; i++) {
         initials += names[i].substring(0, 1).toUpperCase();
@@ -111,13 +127,7 @@ function getInitials(name) {
     return initials;
 }
 
-function getBgColor() {
-    let randomNumber= Math.floor(Math.random() * colors.length);
-    let randomColor = colors[randomNumber];
-    return randomColor;
-}
-
-function selectContact(name) {
+function selectContact(name, color) {
     let contactDiv = document.getElementById(`container-${name}`);
     let icon = document.getElementById(`icon-${name}`);
     if (!isContactSelected(contactDiv)) {
@@ -126,14 +136,14 @@ function selectContact(name) {
         contactDiv.classList.add('white');
         icon.src = "./assets/icons/checked.svg";
         icon.classList.add('filter-white');
-        updateSelectedContacts(true, name);
+        updateSelectedContacts(true, name, color);
     } else {
         contactDiv.classList.remove('bg-blue');
         contactDiv.classList.remove('selected-hover');
         contactDiv.classList.remove('white');
         icon.src = "./assets/icons/unchecked.svg";
         icon.classList.remove('filter-white');
-        updateSelectedContacts(false, name);
+        updateSelectedContacts(false, name, color);
     }
     displaySelectedContacts();
 }
@@ -154,24 +164,37 @@ function filterContacts() {
         obj.name = filterResult[i];
         filteredContacts.push(obj);
     }
-    renderAssignOptions(filteredContacts);
+    renderFilteredContacts(filteredContacts);
+}
+
+function renderFilteredContacts(filteredContacts) {
+    let dropDown = document.getElementById('dropdown-assign');
+    dropDown.innerHTML = "";
+    for (let i = 0; i < filteredContacts.length; i++) {
+        let name = filteredContacts[i].name;
+        dropDown.innerHTML += returnAssignedContactHTML(name);
+        document.getElementById(`${name}`).innerText = name;
+        document.getElementById(`initials-${name}`).innerText = getInitials(name);
+    }
 }
 
 function displaySelectedContacts() {
     let container = document.getElementById('container-assigned-contacts');
     container.innerHTML = "";
     for (let i = 0; i < selectedContacts.length; i++) {
-        let name = selectedContacts[i];
+        let name = selectedContacts[i].name;
+        let color = selectedContacts[i].color;
         let initials = getInitials(name);
-        container.innerHTML += returnAssignedContactsHTML(initials);
+        container.innerHTML += returnAssignedContactsHTML(initials, color);
     }
 }
 
-function updateSelectedContacts(boolean, name) {
+function updateSelectedContacts(boolean, contactName, contactColor) {
+    let obj = {name: contactName, color: contactColor};
     if (boolean) {
-        selectedContacts.push(name);
+        selectedContacts.push(obj);
     } else {
-        let index = selectedContacts.indexOf(name);
+        let index = selectedContacts.indexOf(obj);
         selectedContacts.splice(index, 1);
     }
 }
