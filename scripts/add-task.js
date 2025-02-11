@@ -17,13 +17,21 @@ function init() {
     renderAssignOptions();
 }
 
-function selectPrioButton(prio) {
-    clearPrioButtons();
+function selectPrioButton(prio) {  
     let button = document.getElementById(`${prio}`);
     let svg = document.getElementById(`svg-${prio}`);
-    button.classList.add(`${prio}`);
-    button.classList.add('white');
-    svg.classList.add('filter-white');
+    if (button.classList.contains(`${prio}`)) {
+        button.classList.remove(`${prio}`);
+        button.classList.remove('white');
+        button.classList.add('button-prio-hover');
+        svg.classList.remove('filter-white');
+    } else {
+        clearPrioButtons();
+        button.classList.add(`${prio}`);
+        button.classList.add('white');
+        button.classList.remove('button-prio-hover');
+        svg.classList.add('filter-white');
+    }
 }
 
 function clearPrioButtons() {
@@ -33,6 +41,7 @@ function clearPrioButtons() {
         let svg = document.getElementById(`svg-${prios[i]}`);
         button.classList.remove(`${prios[i]}`);
         button.classList.remove('white');
+        button.classList.add('button-prio-hover');
         svg.classList.remove('filter-white');
     }
 }
