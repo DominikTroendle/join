@@ -11,11 +11,16 @@ const letterColors = {
     "Y": "bg-peach", "Z": "bg-rose"
 };
 
+let bgColors = [];
+
+
+loadColors().then(colors => bgColors = colors);
+
 async function init() {
     await loadAllUserContacts();
     await allUserContacts();
     await loadContactList();
-    // await selectMoreContactInformation()
+    await loadColors();
 }
 
 function addNewContect() {
@@ -27,6 +32,22 @@ function addNewContect() {
         }
     };
 }
+
+async function loadColors() {
+    let responseColors = await fetch("styles/colors.css");
+    let responseColorText = await responseColors.text(); // CSS als Text laden
+    const bgColors = [];
+    const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
+    let matches = [...responseColorText.matchAll(regex)]; // Alle Matches in einem Array speichern
+    for (let i = 0; i < matches.length; i++) {
+        bgColors.push({
+            name: `.bg-${matches[i][1]}`,
+            color: matches[i][2].trim()
+        });
+    }
+    return bgColors;
+}
+    
 
 async function sendData(path="", data={}) {
     let response = await fetch(BASE_URL + path + ".json",{
@@ -45,13 +66,20 @@ async function addUserToContactList(event, form) {
     let name = form.querySelector('#name');
     let email = form.querySelector('#email');
     let phone = form.querySelector('#phone');
+    let color = randomBgColor();
     let newContact = {
-        "name" : name.value, "email" : email.value, "phone" : phone.value,
+        "name" : name.value, "email" : email.value, "phone" : phone.value, "backgroundcolor": color
     };
     await sendData("/allContacts", newContact);
     name.value = ''; email.value = ''; phone.value = '';
-    successfullyContact();
+    successfullyContact();    
     return false;
+}
+
+function randomBgColor() {
+    if (bgColors.length === 0) return "#000"; // Falls bgColors leer ist, Standardfarbe zurückgeben
+    let randomIndex = Math.floor(Math.random() * bgColors.length);
+    return bgColors[randomIndex].name; // Farbwert aus dem Objekt zurückgeben
 }
 
 function successfullyContact() {
@@ -84,9 +112,11 @@ async function allUserContacts() {
                 name : contactResponse[contactKeysArray[index]]?.name,
                 email : contactResponse[contactKeysArray[index]]?.email,
                 phone : contactResponse[contactKeysArray[index]]?.phone,
+                color : contactResponse[contactKeysArray[index]]?.backgroundcolor,
             }
         )
     }
+    console.log(allContacts);
 }
 
 async function loadContactList() {
@@ -97,6 +127,7 @@ async function loadContactList() {
     for (let i = 0; i < allContacts.length; i++) {
         let contactName = allContacts[i].name;
         let contactMail = allContacts[i].email;
+        let colorName = allContacts[i].color;
         let firstLetter = contactName.charAt(0).toUpperCase();
         let isNewGroup = currentLetter !== firstLetter;
         if (isNewGroup) {
@@ -108,21 +139,17 @@ async function loadContactList() {
         }
         let groupContainer = document.getElementById(`group-${currentLetter}`);
         let isFirstContactInGroup = groupContainer.children.length === 0;
-        let bgColorClass = getBackgroundColor(contactName);
+        let bgColor = findBgColor(colorName);
 
         groupContainer.innerHTML += `
             ${isNewGroup || isFirstContactInGroup ? "<hr>" : ""}
-            ${await getContactListTemplate(contactName, contactMail, bgColorClass)}
+            ${await getContactListTemplate(contactName, contactMail, bgColor)}
         `;
         document.getElementById(`${contactName}`).innerText = contactName;
         document.getElementById(`doppelInitials-${contactName}`).innerText = findInitials(contactName);
     }
 }
 
-function getBackgroundColor(contactName) {
-    let firstLetter = contactName.charAt(0).toUpperCase();
-    return letterColors[firstLetter] || "bg-grey";
-}
 
 function findInitials(contactName) {
     let name = contactName.split(' ');

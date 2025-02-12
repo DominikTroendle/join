@@ -1,8 +1,8 @@
-async function getContactListTemplate(name, email, bgColorClass) {
+async function getContactListTemplate(name, email, bgColor) {
 return `
     <section>
         <div class="container-contact" onclick="selectContact(this)" id="selectContact">
-            <div class="container-initials ${bgColorClass}" id="doppelInitials-${name}">AM</div>
+            <div class="container-initials ${bgColor}" id="doppelInitials-${name}">AM</div>
                 <div class="container-contact-preview">
                     <span class="contact-preview-name" id="${name}">${name}</span>
                     <span class="contact-preview-mail">${email}</span>
