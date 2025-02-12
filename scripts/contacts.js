@@ -140,9 +140,27 @@ function selectContact(element) {
         contact.classList.remove('select-contact');
         contact.style.color = "black";
     });
+    let name = element.querySelector('.contact-preview-name').innerText;
     if (!isSelected) {
         element.classList.add('select-contact');
         element.style.color = "white";
+        moreContactInformation(name);
+    } else{
+        let contactInfoContainer = document.getElementById('moreInformationContact');
+        contactInfoContainer.innerHTML = '';
+    }
+    
+    
+}
+
+async function moreContactInformation(contactName) {
+    let contact = allContacts.find(c => c.name === contactName);
+    if (contact) {
+        let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact);
+        let contactInfoContainer = document.getElementById('moreInformationContact');
+        contactInfoContainer.innerHTML = contactDetailsTemplate;
+    } else {
+        console.error("Kontakt nicht gefunden!");
     }
 }
 
