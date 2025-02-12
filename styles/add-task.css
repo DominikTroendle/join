@@ -405,6 +405,7 @@ input:focus {
     z-index: 1;
     background-color: white;
     padding-right: 10px;
+    border-bottom: 1px solid #29ABE2;
 }
 
 .container-subtask-edit img:hover {

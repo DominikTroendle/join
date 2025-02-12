@@ -87,7 +87,7 @@
                             <label for="assigned-to" class="label-add-task">Assigned to</label>
                             <div id="container-input-assigned">
                                 <input id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
-                                <button class="button-dropdown" type="button"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleAssignOptions(), stopPropagation(event)"></button>
+                                <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down"></button>
                             </div>
                             <div id="container-assigned-contacts"></div>
                             <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
