@@ -144,6 +144,7 @@
 
 .container-contact:hover {
     cursor: pointer;
+    background-color: #cccccc59;
 }
 
 .container-initials {
@@ -151,7 +152,7 @@
     height: 42px;
     border-radius: 50%;
     border: 2px solid white;
-    background-color: orange;
+    /* background-color: orange; */
     display: flex;
     justify-content: center;
     align-items: center;
