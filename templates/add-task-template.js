@@ -8,7 +8,7 @@ function returnAssignedContactHTML(name, color) {
             </div>`;
 }
 
-function returnAssignedContactsHTML(initials, color) {
+function returnAssignedContactPreviewHTML(initials, color) {
     return `<span class="initials ${color}">${initials}</span>`;
 }
 

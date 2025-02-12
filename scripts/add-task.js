@@ -25,17 +25,29 @@ let contacts = [
     }
 ];
 
-let contactsNames = [];
-
 let selectedContacts = [];
 
-let filteredContacts = [];
+let task = [
+    {
+       id: 1,
+       taskDescription: "",
+       taskTitle: "",
+       taskType: "User Story",
+       taskDate: "",
+       taskPrio: "",
+       taskSubtasks:
+       {
+            subtask1: "",
+            sibtask2: ""
+       },
+       taskAssigned: ["David Müller", "Daniel Meier"]
+    }
+];
 
 let subtasks = 0;
 
 function init() {
-    renderAssignOptions();
-    getContactsNames();
+    renderAssignOptions(contacts);
 }
 
 function selectPrioButton(prio) {  
@@ -105,17 +117,62 @@ function stopPropagation(event) {
     event.stopPropagation();
 }
 
-function renderAssignOptions() {
+function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
-    for (let i = 0; i < contacts.length; i++) {
-        let contactName = contacts[i].name;
-        let color = contacts[i].color;
+    if (selectedContacts.length == 0) {
+        for (let i = 0; i < array.length; i++) {
+            let contactName = array[i].name;
+            let color = array[i].color;
+            dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
+            document.getElementById(`${contactName}`).innerText = contactName;
+            document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
+            document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
+        }
+    } else {
+        for (let i = 0; i < array.length; i++) {
+            let contactName = array[i].name;
+            let color = array[i].color;
+            console.log(selectedContacts.includes(contactName));
+            if (isInSelectedContacts(contactName)) {
+                dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
+                document.getElementById(`${contactName}`).innerText = contactName;
+                document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
+                document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
+                let contactDiv = document.getElementById(`container-${contactName}`);
+                let icon = document.getElementById(`icon-${contactName}`);
+                toggleSelection(true, contactDiv, icon);
+            } else {
+                dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
+                document.getElementById(`${contactName}`).innerText = contactName;
+                document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
+                document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
+            }
+        }
+    }
+
+    /* // check if selectedContacts = []
+    // if false: selectedContacts.includes(contactName)
+    // if true: continue
+    let dropDown = document.getElementById('dropdown-assign');
+    dropDown.innerHTML = "";
+    for (let i = 0; i < array.length; i++) {
+        let contactName = array[i].name;
+        // selectedContacts.includes(contactName)
+        // if true: toggleSelection(true);
+        // if false: continue
+        let color = array[i].color;
         dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
         document.getElementById(`${contactName}`).innerText = contactName;
         document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
         document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
-    }
+    } */
+}
+
+function isInSelectedContacts(contactName) {
+    let arr = [];
+    selectedContacts.forEach(contact => arr.push(contact.name));
+    return arr.includes(contactName);
 }
 
 function getInitials(contactName) {
@@ -131,43 +188,38 @@ function selectContact(name, color) {
     let contactDiv = document.getElementById(`container-${name}`);
     let icon = document.getElementById(`icon-${name}`);
     if (!isContactSelected(contactDiv)) {
+        toggleSelection(true, contactDiv, icon);
+        updateSelectedContacts(true, name, color);
+    } else {
+        toggleSelection(false, contactDiv, icon);
+        updateSelectedContacts(false, name, color);
+    }
+    displaySelectedContacts();
+}
+
+function toggleSelection(boolean, contactDiv, icon) {
+    if (boolean) {
         contactDiv.classList.add('bg-blue');
         contactDiv.classList.add('selected-hover');
         contactDiv.classList.add('white');
         icon.src = "./assets/icons/checked.svg";
         icon.classList.add('filter-white');
-        updateSelectedContacts(true, name, color);
     } else {
         contactDiv.classList.remove('bg-blue');
         contactDiv.classList.remove('selected-hover');
         contactDiv.classList.remove('white');
         icon.src = "./assets/icons/unchecked.svg";
         icon.classList.remove('filter-white');
-        updateSelectedContacts(false, name, color);
-    }
-    displaySelectedContacts();
-}
-
-function getContactsNames() {
-    for (let i = 0; i < contacts.length; i++) {
-        let name = contacts[i].name.toLowerCase();
-        contactsNames.push(name);
     }
 }
 
 function filterContacts() {
-    filteredContacts = [];
     let searchValue = document.getElementById('assigned-to').value.toLowerCase();
-    let filterResult = contactsNames.filter((name) => name.includes(searchValue));
-    for (let i = 0; i < filterResult.length; i++) {
-        let obj = {};
-        obj.name = filterResult[i];
-        filteredContacts.push(obj);
-    }
-    renderFilteredContacts(filteredContacts);
+    let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
+    renderAssignOptions(filteredContacts);
 }
 
-function renderFilteredContacts(filteredContacts) {
+/* function renderFilteredContacts(filteredContacts) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
     for (let i = 0; i < filteredContacts.length; i++) {
@@ -176,7 +228,7 @@ function renderFilteredContacts(filteredContacts) {
         document.getElementById(`${name}`).innerText = name;
         document.getElementById(`initials-${name}`).innerText = getInitials(name);
     }
-}
+} */
 
 function displaySelectedContacts() {
     let container = document.getElementById('container-assigned-contacts');
@@ -185,7 +237,7 @@ function displaySelectedContacts() {
         let name = selectedContacts[i].name;
         let color = selectedContacts[i].color;
         let initials = getInitials(name);
-        container.innerHTML += returnAssignedContactsHTML(initials, color);
+        container.innerHTML += returnAssignedContactPreviewHTML(initials, color);
     }
 }
 
