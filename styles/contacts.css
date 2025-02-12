@@ -74,6 +74,7 @@
 
 #container-contacts {
     margin-top: 32px;
+    margin-bottom: 32px;
     padding: 0 24px;
     width: 100%;
     display: flex;
@@ -147,12 +148,15 @@
     background-color: #cccccc59;
 }
 
+.container-contact.select-contact {
+    background-color: #2A3647;
+}
+
 .container-initials {
     width: 42px;
     height: 42px;
     border-radius: 50%;
     border: 2px solid white;
-    /* background-color: orange; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -179,11 +183,6 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
-}
-
-
-.select-contact{
-    background-color: #2A3647;
 }
 
 .more-info-initials{

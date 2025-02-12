@@ -134,11 +134,15 @@ function findInitials(contactName) {
 }
 
 
-function selectContact() {
-    let element = document.getElementById('selectContact');
-    element.classList.toggle('select-contact');
-    if (element) {
-        element.style.color = element.style.color === "white" ? "black" : "white";
+function selectContact(element) {
+    let isSelected = element.classList.contains('select-contact');
+    document.querySelectorAll('.container-contact').forEach(contact => {
+        contact.classList.remove('select-contact');
+        contact.style.color = "black";
+    });
+    if (!isSelected) {
+        element.classList.add('select-contact');
+        element.style.color = "white";
     }
 }
 
