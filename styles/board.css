@@ -360,12 +360,20 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 113px;
     height: 27px;
     border-radius: 8px;
     padding: 4px 16px;
     gap: 10px;
+}
+
+.user-story__category-box-user-story {
+    width: 113px;
     background-color: #0038FF;
+}
+
+.user-story__category-box-technical-task {
+    width: 144px;
+    background-color: #1FD7C1;
 }
 
 .user-story__category-text {

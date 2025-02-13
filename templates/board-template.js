@@ -1,6 +1,9 @@
 function smallCardTemplate(id, taskType, taskTitle, taskDiscription) {
+    let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
+        : `user-story__category-box-technical-task`;
+
     return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)">
-                <div class="user-story__category-box">
+                <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
                 <span class="user-story__title">${taskTitle}</span>

@@ -8,23 +8,23 @@ let toDoArray = [
     },
     {
         id: 2,
-        taskType: "User Story",
-        taskTitle: "Kochwelt Page & Recipe Recommender",
-        taskDiscription: "Build start page with recipe recommendation..."
+        taskType: "Technical Task",
+        taskTitle: "HTML Base Template Creation",
+        taskDiscription: "Create reusable HTML base templates..."
     }
 ];
 let inProgressArray = [
     {
         id: 3,
         taskType: "User Story",
-        taskTitle: "Kochwelt Page & Recipe Recommender",
-        taskDiscription: "Build start page with recipe recommendation..."
+        taskTitle: "Daily Kochwelt Recipe",
+        taskDiscription: "Implement daily recipe and portion calculator..."
     },
     {
         id: 4,
-        taskType: "User Story",
-        taskTitle: "Kochwelt Page & Recipe Recommender",
-        taskDiscription: "Build start page with recipe recommendation..."
+        taskType: "Technical Task",
+        taskTitle: "CSS Architecture Planning",
+        taskDiscription: "Define CSS naming conventions and structure..."
     }
 ];
 let awaitFeedbackArray = [];
@@ -146,7 +146,7 @@ function test() {
     // .catch(error => console.error("Fehler beim Speichern:", error));
     toDoArray = [];
     console.log("Array leer machen: " + toDoArray);
-    fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
+    fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/inProgress.json")
     .then(response => response.json())
     .then(data => {
         if (data) {
@@ -160,4 +160,4 @@ function test() {
     
 }
 
-test();
+// test();
