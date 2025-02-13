@@ -27,24 +27,9 @@ let contacts = [
 
 let selectedContacts = [];
 
-let task = [
-    {
-       id: 1,
-       taskDescription: "",
-       taskTitle: "",
-       taskType: "User Story",
-       taskDate: "",
-       taskPrio: "",
-       taskSubtasks:
-       {
-            subtask1: "",
-            sibtask2: ""
-       },
-       taskAssigned: ["David Müller", "Daniel Meier"]
-    }
-];
-
 let subtasks = 0;
+
+let task = {};
 
 function init() {
     renderAssignOptions(contacts);
@@ -129,34 +114,44 @@ function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
     if (selectedContacts.length == 0) {
-        for (let i = 0; i < array.length; i++) {
-            let contactName = array[i].name;
-            let color = array[i].color;
-            dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
-            document.getElementById(`${contactName}`).innerText = contactName;
-            document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
-            document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
-        }
+       renderDefaultContacts(array, dropDown);
     } else {
-        for (let i = 0; i < array.length; i++) {
-            let contactName = array[i].name;
-            let color = array[i].color;
-            if (isInSelectedContacts(contactName)) {
-                dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
-                document.getElementById(`${contactName}`).innerText = contactName;
-                document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
-                document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
-                let contactDiv = document.getElementById(`container-${contactName}`);
-                let icon = document.getElementById(`icon-${contactName}`);
-                toggleSelection(true, contactDiv, icon);
-            } else {
-                dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
-                document.getElementById(`${contactName}`).innerText = contactName;
-                document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
-                document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
-            }
+        renderSelectedContacts(array, dropDown);
+    }
+}
+
+function renderDefaultContacts(array, dropDown) {
+    for (let i = 0; i < array.length; i++) {
+        let contactName = array[i].name;
+        let color = array[i].color;
+        renderContactAsDefault(dropDown, contactName, color);
+    }
+}
+
+function renderSelectedContacts(array, dropDown) {
+    for (let i = 0; i < array.length; i++) {
+        let contactName = array[i].name;
+        let color = array[i].color;
+        if (isInSelectedContacts(contactName)) {
+            renderContactAsSelected(dropDown, contactName, color);
+        } else {
+            renderContactAsDefault(dropDown, contactName, color);
         }
     }
+}
+
+function renderContactAsSelected(dropDown, contactName, color) {
+    renderContactAsDefault(dropDown, contactName, color);
+    let contactDiv = document.getElementById(`container-${contactName}`);
+    let icon = document.getElementById(`icon-${contactName}`);
+    toggleSelection(true, contactDiv, icon);
+}
+
+function renderContactAsDefault(dropDown, contactName, color) {
+    dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
+    document.getElementById(`${contactName}`).innerText = contactName;
+    document.getElementById(`initials-${contactName}`).innerText = getInitials(contactName);
+    document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
 }
 
 function isInSelectedContacts(contactName) {
@@ -319,11 +314,24 @@ function saveTask() {
     let description = document.getElementById('').value;
     let dueDate = document.getElementById('').value;
     let priority = "high";
-    let categrory = document.getElementById('').value;
+    let category = document.getElementById('').value;
     let subtasks = [];
-    let task = {
-
+    task = {
+        id: 1,
+        taskDescription: "",
+        taskTitle: "",
+        taskType: "User Story",
+        taskDate: "",
+        taskPrio: "",
+        taskSubtasks:
+        {
+             subtask1: "",
+             sibtask2: ""
+        },
+        taskAssigned: ["David Müller", "Daniel Meier"]
     };
+    saveToFirebase();
+    task = {};
 }
 
 // change arrow direction of assigned-to & category onclick
