@@ -220,7 +220,7 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     if (boolean) {
         selectedContacts.push(obj);
     } else {
-        let index = selectedContacts.indexOf(obj);
+        let index = selectedContacts.map(e => e.name).indexOf(obj.name);
         selectedContacts.splice(index, 1);
     }
 }
