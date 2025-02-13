@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="./styles/add-task.css">
 </head>
 <body onload="init(), addClassSelectedMenuButton('add-task-menu-button')">
+    <div id="overlay-task-added">
+        <div id="task-added">
+            <span>Task added to board</span>
+            <img class="menu-button-icon" src="./assets/icons/board.svg" alt="icon-board">
+        </div>
+    </div>
     <section id="main" onclick="closeDropdown(), changeInputButton(false), stopPropagation(event)">
 
         <header>

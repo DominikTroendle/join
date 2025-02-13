@@ -545,6 +545,35 @@ input:focus {
     background-color: #091931;
 }
 
+#overlay-task-added {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+#task-added {
+    width: 326px;
+    height: 74px;
+    padding: 0 24px;
+    background-color: #2A3647;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+}
+
 @media only screen and (max-height: 800px) {
     #main {
         padding-top: 20px;
