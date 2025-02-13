@@ -309,6 +309,14 @@ function saveEditedSubtask(id) {
     }
 }
 
+function createTask() {
+    // saveTask();
+    document.getElementById('overlay-task-added').classList.remove('d-none');
+    setTimeout(() => {
+        window.location.href = 'board.html';
+    }, "900");
+}
+
 function saveTask() {
     let title = document.getElementById('').value;
     let description = document.getElementById('').value;
@@ -333,5 +341,3 @@ function saveTask() {
     saveToFirebase();
     task = {};
 }
-
-// change arrow direction of assigned-to & category onclick
