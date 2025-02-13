@@ -1,11 +1,11 @@
-async function getContactListTemplate(name, email, bgColor) {
+async function getContactListTemplate(contactName, contactMail, colorName) {
 return `
     <section>
         <div class="container-contact" onclick="selectContact(this)" id="selectContact">
-            <div class="container-initials ${bgColor}" id="doppelInitials-${name}">AM</div>
+            <div id="initials-${contactName}" class="container-initials ${colorName}"><p id="doppelInitials-${contactName}">AM</p></div>
                 <div class="container-contact-preview">
-                    <span class="contact-preview-name" id="${name}">${name}</span>
-                    <span class="contact-preview-mail">${email}</span>
+                    <span class="contact-preview-name" id="${contactName}">${contactName}</span>
+                    <span class="contact-preview-mail">${contactMail}</span>
                 </div>
             </div>
         </div>
@@ -13,13 +13,11 @@ return `
 `
 }
 
-async function selectMoreContactInformationTemplate(contact) {
-    let bgColorClass = getBackgroundColor(contact.name);
-    let initials = findInitials(contact.name);
+async function selectMoreContactInformationTemplate(contact, initials) {
     return `
         <section class="contact-info-container">
             <div class="info-name-container">
-                <div class="more-info-initials ${bgColorClass}" id="doppelInitials-${contact.name}">${initials}</div>
+                <div class="more-info-initials ${contact}" id="doppelInitials-${contact.name}">${initials}</div>
                 <div class="procressing-area">
                     <h1>${contact.name}</h1>
                     <div class="procressing-area-button-container">

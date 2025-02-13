@@ -14,13 +14,11 @@ const letterColors = {
 let bgColors = [];
 
 
-loadColors().then(colors => bgColors = colors);
-
 async function init() {
     await loadAllUserContacts();
     await allUserContacts();
     await loadContactList();
-    await loadColors();
+    // await loadColors();
 }
 
 function addNewContect() {
@@ -33,20 +31,19 @@ function addNewContect() {
     };
 }
 
-async function loadColors() {
-    let responseColors = await fetch("styles/colors.css");
-    let responseColorText = await responseColors.text(); // CSS als Text laden
-    const bgColors = [];
-    const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
-    let matches = [...responseColorText.matchAll(regex)]; // Alle Matches in einem Array speichern
-    for (let i = 0; i < matches.length; i++) {
-        bgColors.push({
-            name: `.bg-${matches[i][1]}`,
-            color: matches[i][2].trim()
-        });
-    }
-    return bgColors;
-}
+// async function loadColors() {
+//     let responseColors = await fetch("styles/colors.css");
+//     let responseColorText = await responseColors.text(); // CSS als Text laden
+//     const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
+//     let matches = [...responseColorText.matchAll(regex)]; // Alle Matches in einem Array speichern
+//     for (let i = 0; i < matches.length; i++) {
+//         bgColors.push({
+//             name: `.bg-${matches[i][1]}`,
+//             color: matches[i][2].trim()
+//         });
+//     }
+//     return bgColors;
+// }
     
 
 async function sendData(path="", data={}) {
@@ -139,14 +136,14 @@ async function loadContactList() {
         }
         let groupContainer = document.getElementById(`group-${currentLetter}`);
         let isFirstContactInGroup = groupContainer.children.length === 0;
-        let bgColor = findBgColor(colorName);
 
         groupContainer.innerHTML += `
             ${isNewGroup || isFirstContactInGroup ? "<hr>" : ""}
-            ${await getContactListTemplate(contactName, contactMail, bgColor)}
+            ${await getContactListTemplate(contactName, contactMail, colorName)}
         `;
         document.getElementById(`${contactName}`).innerText = contactName;
         document.getElementById(`doppelInitials-${contactName}`).innerText = findInitials(contactName);
+        document.getElementById(`initials-${contactName}`).classList.add(`${colorName}`);
     }
 }
 
