@@ -1,6 +1,23 @@
-function smallCardTemplate(id, taskType, taskTitle, taskDiscription) {
+function smallCardTemplate(id, taskType, taskTitle, taskDiscription, taskPriority) {
     let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
         : `user-story__category-box-technical-task`;
+
+    const priorityMapping = [
+        {
+            priority: "low",
+            src: "assets/icons/low.svg"
+        },
+        {
+            priority: "medium",
+            src: "assets/icons/medium.svg"
+        },
+        {
+            priority: "urgent",
+            src: "assets/icons/urgent.svg"
+        }
+    ];
+
+    let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
 
     return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)">
                 <div class="user-story__category-box ${taskTypeCssClass}">
@@ -20,7 +37,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDiscription) {
                         <span class="user-story__name background-color-2">EM</span>
                         <span class="user-story__name background-color-3">MB</span>
                     </div>
-                    <img class="user-story__img" src="assets/icons/Priority symbols.png" alt="">
+                    <img class="user-story__img" src="${taskPriorityImgSrc}" alt="">
                 </div>
             </div>`
 }
