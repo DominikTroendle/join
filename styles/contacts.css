@@ -152,6 +152,10 @@
     background-color: #2A3647;
 }
 
+.dark-border {
+    border: 2px solid #333; /* Dunkelgrau oder schwarz */
+}
+
 .container-initials {
     width: 42px;
     height: 42px;

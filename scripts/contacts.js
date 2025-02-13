@@ -1,49 +1,49 @@
 const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
 let allContacts = [];
 let contactNames = [];
-const letterColors = {
-    "A": "bg-blue", "B": "bg-orange", "C": "bg-pink", "D": "bg-bluepurple",
-    "E": "bg-purple", "F": "bg-skyblue", "G": "bg-turquoise", "H": "bg-redorange",
-    "I": "bg-peach", "J": "bg-rose", "K": "bg-sun", "L": "bg-darkblue",
-    "M": "bg-green", "N": "bg-yellow", "O": "bg-red", "P": "bg-darkyellow",
-    "Q": "bg-blue", "R": "bg-orange", "S": "bg-pink", "T": "bg-bluepurple",
-    "U": "bg-purple", "V": "bg-skyblue", "W": "bg-turquoise", "X": "bg-redorange",
-    "Y": "bg-peach", "Z": "bg-rose"
-};
-
 let bgColors = [];
 
 
 async function init() {
     await loadAllUserContacts();
     await allUserContacts();
+    await loadColors();
     await loadContactList();
-    // await loadColors();
 }
 
 function addNewContect() {
-    refOverlay = document.getElementById('newContectOverlay');
+    let refOverlay = document.getElementById('newContectOverlay');
     refOverlay.classList.toggle('d-none');
-    refOverlay.onclick = function(event) {
-        if (event.target === refOverlay) {
-            refOverlay.classList.toggle('d-none');
-        }
-    };
+    if (!refOverlay.dataset.listenerAdded) {
+        refOverlay.dataset.listenerAdded = "true";
+        refOverlay.onclick = function(event) {
+            if (event.target === refOverlay) {
+                refOverlay.classList.toggle('d-none');
+            }
+        };
+    }
 }
 
-// async function loadColors() {
-//     let responseColors = await fetch("styles/colors.css");
-//     let responseColorText = await responseColors.text(); // CSS als Text laden
-//     const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
-//     let matches = [...responseColorText.matchAll(regex)]; // Alle Matches in einem Array speichern
-//     for (let i = 0; i < matches.length; i++) {
-//         bgColors.push({
-//             name: `.bg-${matches[i][1]}`,
-//             color: matches[i][2].trim()
-//         });
-//     }
-//     return bgColors;
-// }
+function resetContactForm() {
+    let form = document.querySelector('#newContectOverlay form');
+    if (form) {
+        form.reset();
+    }
+}
+
+async function loadColors() {
+    let responseColors = await fetch("styles/colors.css");
+    let responseColorText = await responseColors.text();
+    const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
+    let matches = [...responseColorText.matchAll(regex)];
+    for (let i = 0; i < matches.length; i++) {
+        bgColors.push({
+            name: `.bg-${matches[i][1]}`,
+            color: matches[i][2].trim()
+        });
+    }
+    return bgColors;
+}
     
 
 async function sendData(path="", data={}) {
@@ -59,28 +59,40 @@ async function sendData(path="", data={}) {
 }
 
 async function addUserToContactList(event, form) {
-    event.preventDefault()
+    event.preventDefault();
     let name = form.querySelector('#name');
     let email = form.querySelector('#email');
     let phone = form.querySelector('#phone');
-    let color = randomBgColor();
+    let color = await randomBgColor();
     let newContact = {
-        "name" : name.value, "email" : email.value, "phone" : phone.value, "backgroundcolor": color
+        "name": name.value, 
+        "email": email.value, 
+        "phone": phone.value, 
+        "color": color
     };
-    await sendData("/allContacts", newContact);
-    name.value = ''; email.value = ''; phone.value = '';
-    successfullyContact();    
+    let response = await sendData("/allContacts", newContact);
+    newContact.key = response.name;
+    allContacts.push(newContact);
+    await loadContactList();
+    form.reset();
+    successfullyContact();
+    let addButton = document.getElementById('addContactButton');
+    if (addButton) {
+        addButton.onclick = addNewContect;
+    }
     return false;
 }
 
-function randomBgColor() {
-    if (bgColors.length === 0) return "#000"; // Falls bgColors leer ist, Standardfarbe zurückgeben
+async function randomBgColor() {
+    if (bgColors.length === 0) return "#F6F7F8";
     let randomIndex = Math.floor(Math.random() * bgColors.length);
-    return bgColors[randomIndex].name; // Farbwert aus dem Objekt zurückgeben
+    return bgColors[randomIndex].name.replace(/^\./, '');
 }
 
 function successfullyContact() {
-    document.getElementById('newContectOverlay').style.display = "none";
+    let overlay = document.getElementById('newContectOverlay');
+    overlay.classList.add("d-none");
+    
     setTimeout(() => {
         let messageBox = document.getElementById('succesfully-message-box');
         messageBox.style.display = "flex";
@@ -109,11 +121,11 @@ async function allUserContacts() {
                 name : contactResponse[contactKeysArray[index]]?.name,
                 email : contactResponse[contactKeysArray[index]]?.email,
                 phone : contactResponse[contactKeysArray[index]]?.phone,
-                color : contactResponse[contactKeysArray[index]]?.backgroundcolor,
+                color : contactResponse[contactKeysArray[index]]?.color,
             }
         )
+        console.log(allContacts[index].key);
     }
-    console.log(allContacts);
 }
 
 async function loadContactList() {
@@ -121,30 +133,35 @@ async function loadContactList() {
     contactList.innerHTML = "";
     allContacts.sort((a, b) => a.name.localeCompare(b.name));
     let currentLetter = "";
-    for (let i = 0; i < allContacts.length; i++) {
-        let contactName = allContacts[i].name;
-        let contactMail = allContacts[i].email;
-        let colorName = allContacts[i].color;
-        let firstLetter = contactName.charAt(0).toUpperCase();
-        let isNewGroup = currentLetter !== firstLetter;
-        if (isNewGroup) {
-            currentLetter = firstLetter;
-            contactList.innerHTML += `<div">
-                <div class="container-letter">${currentLetter}</div>
-                <div id="group-${currentLetter}"></div>
-            </div>`;
-        }
-        let groupContainer = document.getElementById(`group-${currentLetter}`);
-        let isFirstContactInGroup = groupContainer.children.length === 0;
 
-        groupContainer.innerHTML += `
-            ${isNewGroup || isFirstContactInGroup ? "<hr>" : ""}
-            ${await getContactListTemplate(contactName, contactMail, colorName)}
-        `;
-        document.getElementById(`${contactName}`).innerText = contactName;
-        document.getElementById(`doppelInitials-${contactName}`).innerText = findInitials(contactName);
-        document.getElementById(`initials-${contactName}`).classList.add(`${colorName}`);
+    for (let i = 0; i < allContacts.length; i++) {
+        currentLetter = await createContactGroup(allContacts[i], currentLetter, contactList);
     }
+}
+
+async function createContactGroup(contact, currentLetter, contactList) {
+    let firstLetter = contact.name.charAt(0).toUpperCase();
+    if (currentLetter !== firstLetter) {
+        currentLetter = firstLetter;
+        addGroupHeader(contactList, currentLetter);
+    }
+    await addContactToGroup(contact, currentLetter);
+    return currentLetter;
+}
+
+function addGroupHeader(contactList, letter) {
+    contactList.innerHTML += `<div>
+        <div class="container-letter">${letter}</div>
+        <div id="group-${letter}"></div>
+    </div>`;
+}
+
+async function addContactToGroup(contact, letter) {
+    let groupContainer = document.getElementById(`group-${letter}`);
+    let isFirst = groupContainer.children.length === 0;
+    groupContainer.innerHTML += `${isFirst ? "<hr>" : ""}${await getContactListTemplate(contact.name, contact.email, contact.color)}`;
+    document.getElementById(contact.name).innerText = contact.name;
+    document.getElementById(`doppelInitials-${contact.name}`).innerText = findInitials(contact.name);
 }
 
 
@@ -154,6 +171,7 @@ function findInitials(contactName) {
     for (let i = 0; i < name.length; i++) {
         initials += name[i].substring(0, 1).toUpperCase();
     }
+    
     return initials
 }
 
@@ -178,9 +196,13 @@ function selectContact(element) {
 }
 
 async function moreContactInformation(contactName) {
+    document.getElementById(`${contactName}`).innerText = contactName;
+    let initials = findInitials(contactName);
+    document.getElementById(`doppelInitials-${contactName}`).innerText = initials;
+    
     let contact = allContacts.find(c => c.name === contactName);
     if (contact) {
-        let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact);
+        let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
     } else {
@@ -188,21 +210,26 @@ async function moreContactInformation(contactName) {
     }
 }
 
-// async function selectMoreContactInformation() {
-//     let refMoreInfo = document.getElementById('moreInformationContact')
-//     for (let i = 0; i < allContacts.length; i++) {
-//         refMoreInfo.innerHTML += await selectMoreContactInformationTemplate(i);
-//     }
-// }
-
-// async function findName() {
-//     for (let i = 0; i < allContacts.length; i++) {
-//         contactNames.push({
-//             name : allContacts[i].name
-//         })
-//     }
-//     console.log(contactNames);
-// }
+async function deleteContact(key) {
+    if (!key) {
+        console.error("Fehler: Kein gültiger Key übergeben!");
+        return;
+    }
+    try {
+        let response = await fetch(`${BASE_URL}allContacts/${key}.json`, {
+            method: "DELETE",
+        });
+        if (!response.ok) {
+            throw new Error(`Löschen fehlgeschlagen: ${response.status}`);
+        }
+        console.log(`Kontakt mit Key ${key} erfolgreich gelöscht!`);
+        allContacts = allContacts.filter(contact => contact.key !== key);
+        loadContactList();
+        document.getElementById('moreInformationContact').innerHTML = '';
+    } catch (error) {
+        console.error("Fehler beim Löschen:", error);
+    }
+}
 
 
 

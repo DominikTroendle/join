@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/colors.css">
     <link rel="stylesheet" href="./styles/contacts.css">
     <link rel="stylesheet" href="style.css">
+    
 
     <script src="./templates/contacts-template.js"></script>
     <script src="./scripts/contacts.js"></script>
@@ -47,9 +48,9 @@
                             </div>
                         </div>
                         <div class="contact-button-container">
-                            <button class="cancel-btn" onclick="addNewContect()">Cancel <p>X</p>
+                            <button class="cancel-btn" onclick="addNewContect(); return false;">Cancel <p>X</p>
                             </button>
-                            <button class="create-btn">Create contact <img src="assets/icons/check.svg" alt=""></button>
+                            <button class="create-btn" type="submit">Create contact <img src="assets/icons/check.svg" alt=""></button>
                         </div>
                     </form>
                 </div>

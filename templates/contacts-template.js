@@ -1,8 +1,8 @@
 async function getContactListTemplate(contactName, contactMail, colorName) {
 return `
     <section>
-        <div class="container-contact" onclick="selectContact(this)" id="selectContact">
-            <div id="initials-${contactName}" class="container-initials ${colorName}"><p id="doppelInitials-${contactName}">AM</p></div>
+        <div class="container-contact" onclick="selectContact(this)" id="selectContact-${contactName}">
+            <div class="container-initials ${colorName}"><p id="doppelInitials-${contactName}">AM</p></div>
                 <div class="container-contact-preview">
                     <span class="contact-preview-name" id="${contactName}">${contactName}</span>
                     <span class="contact-preview-mail">${contactMail}</span>
@@ -13,11 +13,11 @@ return `
 `
 }
 
-async function selectMoreContactInformationTemplate(contact, initials) {
+async function selectMoreContactInformationTemplate(contact, init) {
     return `
         <section class="contact-info-container">
             <div class="info-name-container">
-                <div class="more-info-initials ${contact}" id="doppelInitials-${contact.name}">${initials}</div>
+                <div class="more-info-initials ${contact.color}"><p>${init}</p></div>
                 <div class="procressing-area">
                     <h1>${contact.name}</h1>
                     <div class="procressing-area-button-container">
@@ -25,8 +25,9 @@ async function selectMoreContactInformationTemplate(contact, initials) {
                             <img src="assets/icons/edit.svg" alt="">
                             <p>Edit</p>
                         </button>
-                        <button class="procressing-area-button">
-                            <img src="assets/icons/delete.svg" alt=""><p>Delete</p>
+                        <button class="procressing-area-button" onclick="deleteContact('${contact.key}')">
+                            <img src="assets/icons/delete.svg" alt="">
+                            <p>Delete</p>
                         </button>
                     </div>
                 </div>
