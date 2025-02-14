@@ -81,19 +81,28 @@
                 <form id="form-add-task">
                     <div id="form-left">
                         <div class="container-input-label">
-                            <label for="title" class="label-add-task flex">Title<span class="asterisk">&#42;</span></label>
+                            <label for="title" class="label-add-task flex">
+                                Title
+                                <span class="asterisk">&#42;</span>
+                            </label>
                             <input id="title" class="input" type="text" name="title" placeholder="Enter a title">
                             <p class="required grey">This field is required</p>
                         </div>
                         <div class="container-input-label">
-                            <label for="description" class="label-add-task">Description</label>
+                            <label for="description" class="label-add-task">
+                                Description
+                            </label>
                             <textarea id="description" class="input" name="description" placeholder="Enter a Description"></textarea>
                         </div>
                         <div class="container-input-label custom-select">
-                            <label for="assigned-to" class="label-add-task">Assigned to</label>
+                            <label for="assigned-to" class="label-add-task">
+                                Assigned to
+                            </label>
                             <div id="container-input-assigned">
                                 <input id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
-                                <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down"></button>
+                                <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)">
+                                    <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
+                                </button>
                             </div>
                             <div id="container-assigned-contacts"></div>
                             <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
@@ -102,23 +111,40 @@
                     <hr>
                     <div id="form-right">
                         <div class="container-input-label">
-                            <label for="due-date" class="label-add-task flex">Due date<span class="asterisk">&#42;</span></label>
+                            <label for="due-date" class="label-add-task flex">
+                                Due date
+                                <span class="asterisk">&#42;</span>
+                            </label>
                             <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
                             <p class="required grey">This field is required</p>
                         </div>
                         <div class="container-input-label">
                             <label for="buttons-prio" class="label-add-task">Prio</label>
                             <div id="buttons-prio">
-                                <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">Urgent <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent"></button>
-                                <button id="medium" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('medium')">Medium <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium"></button>
-                                <button id="low" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">Low <img id="svg-low" src="assets/icons/low.svg" alt="icon-low"></button>
+                                <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
+                                    Urgent
+                                    <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
+                                </button>
+                                <button id="medium" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('medium')">
+                                    Medium
+                                    <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium">
+                                </button>
+                                <button id="low" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">
+                                    Low
+                                    <img id="svg-low" src="assets/icons/low.svg" alt="icon-low">
+                                </button>
                             </div>
                         </div>
                         <div class="container-input-label">
-                            <label for="category" class="label-add-task flex">Category<span class="asterisk">&#42;</span></label>
+                            <label for="category" class="label-add-task flex">
+                                Category
+                                <span class="asterisk">&#42;</span>
+                            </label>
                             <div id="container-input-category">
                                 <input readonly id="category" type="text" name="category" placeholder="Select task category" onclick="toggleCategoryOptions(), stopPropagation(event)">
-                                <button class="button-dropdown" type="button"><img src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleCategoryOptions(), stopPropagation(event)"></button>
+                                <button class="button-dropdown" type="button">
+                                    <img id="arrow-dropdown-category" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleCategoryOptions(), stopPropagation(event)">
+                                </button>
                             </div>
                             <div class="container-arrow-dropdown" onclick="toggleCategoryOptions(), stopPropagation(event)"></div>
                             <div id="dropdown-category" class="container-custom-select-options d-none">

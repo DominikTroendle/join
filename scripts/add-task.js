@@ -71,8 +71,19 @@ function toggleAssignOptions() {
     renderAssignOptions(contacts);
     if (input.placeholder == "Select contacts to assign") {
         input.placeholder = "";
+        changeDropdownArrow(true, 'assigned');
     } else if (input.placeholder == "") {
         input.placeholder = "Select contacts to assign";
+        changeDropdownArrow(false, 'assigned');
+    }
+}
+
+function changeDropdownArrow(boolean, dropdown) {
+    let dropwdownArrow = document.getElementById(`arrow-dropdown-${dropdown}`);
+    if (boolean) {
+        dropwdownArrow.src = "./assets/icons/arrow_drop_down_mirrored.svg";
+    } else {
+        dropwdownArrow.src = "./assets/icons/arrow_drop_down.svg";
     }
 }
 
@@ -85,6 +96,11 @@ function toggleInputFocus() {
 function toggleCategoryOptions() {
     let container = document.getElementById('dropdown-category');
     container.classList.toggle('d-none');
+    if (!container.classList.contains('d-none')) {
+        changeDropdownArrow(true, 'category');
+    } else {
+        changeDropdownArrow(false, 'category');
+    }
 }
 
 function preventDefault(event) {
@@ -97,13 +113,12 @@ function displayCategory(category) {
 }
 
 function closeDropdown() {
-    let dropdownAssign = document.getElementById('dropdown-assign');
-    let dropdownCategory = document.getElementById('dropdown-category');
-    let input = document.getElementById('assigned-to');
-    dropdownAssign.classList.add('d-none');
-    dropdownCategory.classList.add('d-none');
-    input.value = "";
-    input.placeholder = "Select contacts to assign";
+    document.getElementById('dropdown-assign').classList.add('d-none');
+    document.getElementById('dropdown-category').classList.add('d-none');
+    document.getElementById('assigned-to').value = "";
+    document.getElementById('assigned-to').placeholder = "Select contacts to assign";
+    changeDropdownArrow(false, 'assigned');
+    changeDropdownArrow(false, 'category');
 }
 
 function stopPropagation(event) {
