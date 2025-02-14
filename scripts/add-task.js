@@ -325,11 +325,28 @@ function saveEditedSubtask(id) {
 }
 
 function createTask() {
-    // saveTask();
-    document.getElementById('overlay-task-added').classList.remove('d-none');
-    setTimeout(() => {
-        window.location.href = 'board.html';
-    }, "900");
+    let valid = validateInputs();
+    if (valid) {
+        // saveTask();
+        document.getElementById('overlay-task-added').classList.remove('d-none');
+        setTimeout(() => {
+            window.location.href = 'board.html';
+        }, "900");
+    } else {
+        console.error('Error');
+    }
+}
+
+function validateInputs() {
+    let valid = true;
+    let inputs = ["title", "due-date", "category"];
+    for (let i = 0; i < inputs.length; i++) {
+        let inputValue = document.getElementById(`${inputs[i]}`).value;
+        if (inputValue == "") {
+            valid = false;
+        }
+    }
+    return valid;
 }
 
 function saveTask() {
