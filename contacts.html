@@ -24,7 +24,7 @@
             </div>
             <div class="add-input-contect-container">
                 <div class="close-btn">
-                    <button onclick="addNewContect()"><img src="assets/icons/close.svg" alt=""></button>
+                    <button onclick="addNewContectOverlay()"><img src="assets/icons/close.svg" alt=""></button>
                 </div>
                 <div class="new-user-image">
                     <img src="assets/img/person.png" alt="">
@@ -32,23 +32,65 @@
                 <form onsubmit="return addUserToContactList(event, this);">
                     <div class="input-container">
                         <div class="input-area">
-                            <input type="text" placeholder="Name" id="name">
+                            <input type="text" placeholder="Name" id="name" required>
                             <img src="assets/img/person-grey.png" alt="">
                         </div>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="email" placeholder="Email" id="email">
+                                <input type="email" placeholder="Email" id="email" required>
                                 <img src="assets/img/mail.png" alt="">
                             </div> 
                         </div>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="tel" placeholder="Phone" id="phone">
+                                <input type="tel" placeholder="Phone" id="phone" required>
                                 <img src="assets/img/call.png" alt="">
                             </div>
                         </div>
                         <div class="contact-button-container">
-                            <button class="cancel-btn" onclick="addNewContect(); return false;">Cancel <p>X</p>
+                            <button class="cancel-btn" onclick="addNewContectOverlay(); return false;">Cancel <p>X</p>
+                            </button>
+                            <button class="create-btn" type="submit">Create contact <img src="assets/icons/check.svg" alt=""></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="editContactOverlay" class="contact-overlay d-none">
+        <div class="new-Contect-Container">
+            <div class="information-content-container">
+                <img src="assets/img/Capa 2.png" alt="">
+                <h1>Edit contact</h1>
+                <hr>
+            </div>
+            <div class="add-input-contect-container">
+                <div class="close-btn">
+                    <button onclick="editContactOverlay()"><img src="assets/icons/close.svg" alt=""></button>
+                </div>
+                <div class="edit-contact-initcolor" id="editUserInitials">
+                    <p class="edit-contact-initialien" id="editUserInitialsText">AB</p>
+                </div>
+                <form onsubmit="return editContact(event, this);">
+                    <div class="input-container">
+                        <div class="input-area">
+                            <input type="text" placeholder="Name" id="editName" required>
+                            <img src="assets/img/person-grey.png" alt="">
+                        </div>
+                        <div class="input-container">
+                            <div class="input-area">
+                                <input type="email" placeholder="Email" id="editEmail" required>
+                                <img src="assets/img/mail.png" alt="">
+                            </div> 
+                        </div>
+                        <div class="input-container">
+                            <div class="input-area">
+                                <input type="tel" placeholder="Phone" id="editPhone" required>
+                                <img src="assets/img/call.png" alt="">
+                            </div>
+                        </div>
+                        <div class="contact-button-container">
+                            <button class="cancel-btn" onclick="editContactOverlay(); return false;">Cancel <p>X</p>
                             </button>
                             <button class="create-btn" type="submit">Create contact <img src="assets/icons/check.svg" alt=""></button>
                         </div>
@@ -128,7 +170,7 @@
             
             <div id="contactlist-container">
                 <section id="container-contacts">
-                    <button onclick="addNewContect()">Add new contact
+                    <button onclick="addNewContectOverlay()">Add new contact
                         <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
                     </button>
                 </section>

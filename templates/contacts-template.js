@@ -13,15 +13,17 @@ return `
 `
 }
 
+
+
 async function selectMoreContactInformationTemplate(contact, init) {
     return `
-        <section class="contact-info-container">
+        <section class="contact-info-container" id="contact-${contact.key}">
             <div class="info-name-container">
                 <div class="more-info-initials ${contact.color}"><p>${init}</p></div>
                 <div class="procressing-area">
                     <h1>${contact.name}</h1>
                     <div class="procressing-area-button-container">
-                        <button class="procressing-area-button">
+                        <button class="procressing-area-button" onclick="editContactOverlay('${contact.key}')">
                             <img src="assets/icons/edit.svg" alt="">
                             <p>Edit</p>
                         </button>

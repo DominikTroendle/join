@@ -11,7 +11,46 @@ async function init() {
     await loadContactList();
 }
 
-function addNewContect() {
+async function loadAllUserContacts(path="") {
+    let response = await fetch(BASE_URL + path + ".json")
+    return responseToJson = await response.json();
+}
+
+async function loadColors() {
+    let responseColors = await fetch("styles/colors.css");
+    let responseColorText = await responseColors.text();
+    const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
+    let matches = [...responseColorText.matchAll(regex)];
+    for (let i = 0; i < matches.length; i++) {
+        bgColors.push({
+            name: `.bg-${matches[i][1]}`,
+            color: matches[i][2].trim()
+        });
+    }
+    return bgColors;
+}
+
+async function allUserContacts() {
+    let contactResponse = await loadAllUserContacts("allContacts");
+    if (!contactResponse) { 
+        console.error("Fehler: contactResponse ist null oder undefined!");
+        return;
+    }
+    let contactKeysArray = Object.keys(contactResponse);
+    for (let index = 0; index < contactKeysArray.length; index++) {
+        allContacts.push(
+            {
+                key : contactKeysArray[index],
+                name : contactResponse[contactKeysArray[index]]?.name,
+                email : contactResponse[contactKeysArray[index]]?.email,
+                phone : contactResponse[contactKeysArray[index]]?.phone,
+                color : contactResponse[contactKeysArray[index]]?.color,
+            }
+        )
+    }
+}
+
+function addNewContectOverlay() {
     let refOverlay = document.getElementById('newContectOverlay');
     refOverlay.classList.toggle('d-none');
     if (!refOverlay.dataset.listenerAdded) {
@@ -29,33 +68,6 @@ function resetContactForm() {
     if (form) {
         form.reset();
     }
-}
-
-async function loadColors() {
-    let responseColors = await fetch("styles/colors.css");
-    let responseColorText = await responseColors.text();
-    const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
-    let matches = [...responseColorText.matchAll(regex)];
-    for (let i = 0; i < matches.length; i++) {
-        bgColors.push({
-            name: `.bg-${matches[i][1]}`,
-            color: matches[i][2].trim()
-        });
-    }
-    return bgColors;
-}
-    
-
-async function sendData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    })
-    let responseToJson = await response.json();
-    return responseToJson;
 }
 
 async function addUserToContactList(event, form) {
@@ -78,7 +90,7 @@ async function addUserToContactList(event, form) {
     successfullyContact();
     let addButton = document.getElementById('addContactButton');
     if (addButton) {
-        addButton.onclick = addNewContect;
+        addButton.onclick = addNewContectOverlay;
     }
     return false;
 }
@@ -87,6 +99,18 @@ async function randomBgColor() {
     if (bgColors.length === 0) return "#F6F7F8";
     let randomIndex = Math.floor(Math.random() * bgColors.length);
     return bgColors[randomIndex].name.replace(/^\./, '');
+}
+
+async function sendData(path="", data={}) {
+    let response = await fetch(BASE_URL + path + ".json",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 function successfullyContact() {
@@ -100,32 +124,6 @@ function successfullyContact() {
             messageBox.style.display = "none";
         }, 2000);
     }, 500);
-}
-
-async function loadAllUserContacts(path) {
-    let response = await fetch(BASE_URL + path + ".json")
-    return responseToJson = await response.json();
-}
-
-async function allUserContacts() {
-    let contactResponse = await loadAllUserContacts("allContacts");
-    if (!contactResponse) { 
-        console.error("Fehler: contactResponse ist null oder undefined!");
-        return;
-    }
-    let contactKeysArray = Object.keys(contactResponse);
-    for (let index = 0; index < contactKeysArray.length; index++) {
-        allContacts.push(
-            {
-                key : contactKeysArray[index],
-                name : contactResponse[contactKeysArray[index]]?.name,
-                email : contactResponse[contactKeysArray[index]]?.email,
-                phone : contactResponse[contactKeysArray[index]]?.phone,
-                color : contactResponse[contactKeysArray[index]]?.color,
-            }
-        )
-        console.log(allContacts[index].key);
-    }
 }
 
 async function loadContactList() {
@@ -164,17 +162,14 @@ async function addContactToGroup(contact, letter) {
     document.getElementById(`doppelInitials-${contact.name}`).innerText = findInitials(contact.name);
 }
 
-
 function findInitials(contactName) {
     let name = contactName.split(' ');
     let initials = '';
     for (let i = 0; i < name.length; i++) {
         initials += name[i].substring(0, 1).toUpperCase();
     }
-    
     return initials
 }
-
 
 function selectContact(element) {
     let isSelected = element.classList.contains('select-contact');
@@ -208,6 +203,98 @@ async function moreContactInformation(contactName) {
     } else {
         console.error("Kontakt nicht gefunden!");
     }
+}
+
+function editContactOverlay(contactKey) {
+    let refOverlay = document.getElementById('editContactOverlay');
+    if (!refOverlay) {
+        console.error("Fehler: Overlay 'editContectOverlay' nicht gefunden!");
+        return;
+    }
+    refOverlay.classList.toggle('d-none');
+    if (!refOverlay.dataset.listenerAdded) {
+        refOverlay.dataset.listenerAdded = "true";
+        refOverlay.onclick = function(event) {
+            if (event.target === refOverlay) {
+                refOverlay.classList.toggle('d-none');
+            }
+        };
+    }
+    let contact = allContacts.find(c => c.key === contactKey);
+    if (!contact) {
+        console.error("Fehler: Kontakt nicht gefunden!");
+        return;
+    }
+    document.getElementById('editName').value = contact.name || "";
+    document.getElementById('editEmail').value = contact.email || "";
+    document.getElementById('editPhone').value = contact.phone || "";
+
+    let initials = findInitials(contact.name);
+    let initialsElement = document.getElementById('editUserInitialsText');
+    let initialsContainer = document.getElementById('editUserInitials');
+
+    if (initialsElement && initialsContainer) {
+        initialsElement.innerText = initials;
+        initialsElement.classList = `edit-contact-initialien`
+        initialsContainer.className = `edit-contact-initcolor ${contact.color}`;
+    } 
+
+    refOverlay.dataset.contactKey = contactKey;
+}
+
+async function editContact(event, form) {
+    event.preventDefault();
+    let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
+
+    if (!contactKey) {
+        console.error("Fehler: Kein gültiger Kontakt-Key gefunden!");
+        return;
+    }
+
+    let name = form.querySelector('#editName').value;
+    let email = form.querySelector('#editEmail').value;
+    let phone = form.querySelector('#editPhone').value;
+    let color = await randomBgColor();
+
+    let updatedContact = {
+        name,
+        email,
+        phone,
+        color
+    };
+    await putData(contactKey, updatedContact);
+    let contactIndex = allContacts.findIndex(c => c.key === contactKey);
+    if (contactIndex !== -1) {
+        allContacts[contactIndex] = { key: contactKey, ...updatedContact };
+    }
+    updateContactTemplate(contactKey, updatedContact);
+    await loadContactList();
+    editContactOverlay();
+}
+
+async function updateContactTemplate(contactKey, updatedContact) {
+    let contactElement = document.querySelector(`#contact-${contactKey}`);
+    if (contactElement) {
+        // Erstelle das neue HTML für den Kontakt
+        let initials = findInitials(updatedContact.name);
+        let template = await selectMoreContactInformationTemplate(updatedContact, initials);
+
+        // Ersetze den bestehenden Inhalt mit dem neuen Template
+        contactElement.innerHTML = template;
+    }
+}
+
+async function putData(key, data) {
+    let response = await fetch(`${BASE_URL}allContacts/${key}.json`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+
+    let responseToJson = await response.json();
+    return responseToJson;
 }
 
 async function deleteContact(key) {

@@ -388,6 +388,23 @@
     align-items: center;
 }
 
+.edit-contact-initialien{
+    font-size: 47px;
+    color: #FFFFFF;
+}
+
+.edit-contact-initcolor{
+    height: 120px;
+    width: 120px;
+    border-radius: 70px;
+    border: solid 3px white;
+    margin-left: 80px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .input-container{
     position: relative;
     display: flex;
