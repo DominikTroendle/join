@@ -333,20 +333,30 @@ function createTask() {
             window.location.href = 'board.html';
         }, "900");
     } else {
-        console.error('Error');
+        throwError();
     }
 }
+
+let unvalidInputs = [];
 
 function validateInputs() {
     let valid = true;
     let inputs = ["title", "due-date", "category"];
+    unvalidInputs = [];
     for (let i = 0; i < inputs.length; i++) {
         let inputValue = document.getElementById(`${inputs[i]}`).value;
         if (inputValue == "") {
             valid = false;
+            unvalidInputs.push(inputs[i]);
         }
     }
     return valid;
+}
+
+function throwError() {
+    unvalidInputs.forEach(element => {
+        document.getElementById(`required-${element}`).classList.remove('grey');
+    });
 }
 
 function saveTask() {
@@ -362,13 +372,20 @@ function saveTask() {
         taskTitle: "",
         taskType: "User Story",
         taskDate: "",
-        taskPrio: "",
+        taskPriority: "",
         taskSubtasks:
         {
              subtask1: "",
-             sibtask2: ""
+             subtask2: ""
         },
-        taskAssigned: ["David Müller", "Daniel Meier"]
+        taskAssigned:
+        [
+            {
+                name: "David Müller",
+                initials:  "",
+                color: ""
+            }
+        ]
     };
     saveToFirebase();
     task = {};
