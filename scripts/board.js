@@ -127,6 +127,19 @@ function createBorderCardForDragEntered(event) {
     }
 }
 
+function toggleDnoneBigTaskCard() {
+    document.getElementById("big-task-card__overlay").classList.toggle("d-none");
+}
+
+function addClassSlideBack() {
+    document.getElementById("big-task-card__box").classList.add("slide-back")
+    setTimeout(() => {
+        toggleDnoneBigTaskCard();
+        document.getElementById("big-task-card__box").classList.remove("slide-back")
+        clearTimeout();
+    }, 120);
+}
+
 function test() {
     // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
     // .then(response => response.json())

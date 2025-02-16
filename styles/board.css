@@ -526,6 +526,31 @@ h1 {
     gap: 24px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.16);
+    animation: slide-in 120ms ease-in-out forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(calc(+100% + 232px + 525px));
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.slide-back {
+    animation: slide-out 120ms ease-in-out forwards;
+}
+
+@keyframes slide-out {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(+100% + 232px + 525px));
+    }
 }
 
 .big-task-card__task-type-text-button-box {

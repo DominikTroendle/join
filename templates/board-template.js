@@ -19,7 +19,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
 
     let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
 
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)">
+    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard()">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
