@@ -26,13 +26,13 @@
             </header>
             <div id="subMenuOverlayContent" class="overlay" onclick="accountClickMenu()">
                 <div class="account-submenu-container">
-                  <ul>
-                      <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                      <li><a href="legal-notice.html">Lecal Notic</a></li>
-                      <li><a href="index.html">Log out</a></li>
-                  </ul>
+                    <ul>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="legal-notice.html">Lecal Notic</a></li>
+                        <li><a href="index.html">Log out</a></li>
+                    </ul>
                 </div>
-              </div>
+            </div>
             <div class="menu-box">
                 <img class="menu-logo" src="assets/img/Capa 2.png" alt="">
                 <div class="menu-button-box">
@@ -64,7 +64,8 @@
                         Contacts</a>
                 </div>
                 <div class="menu-button-bottom-box">
-                    <a href="privacy-policy.html" class="menu-button-bottom" id="privacy-policy-menu-button-bottom">Privacy
+                    <a href="privacy-policy.html" class="menu-button-bottom"
+                        id="privacy-policy-menu-button-bottom">Privacy
                         Policy</a>
                     <a href="legal-notice.html" class="menu-button-bottom" id="legal-notice-menu-button-bottom">Legal
                         notice</a>
@@ -125,11 +126,56 @@
                 </div>
             </div>
         </div>
-
-        
-        <script src="templates/board-template.js"></script>
-        <script src="scripts/board.js"></script>
-        <script src="script.js"></script>
+        <div class="big-task-card__overlay d-none" id="big-task-card__overlay">
+            <div class="big-task-card__box">
+                <div class="big-task-card__task-type-text-button-box">
+                    <div class="big-task-card__task-type-text-box">
+                        <span class="big-task-card__task-type-text">User Story</span>
+                    </div>
+                    <button class="big-task-card__task-type-button">x</button>
+                </div>
+                <div class="big-task-card__title-box">
+                    <span class="big-task-card__title">Kochwelt Page & Recipe Recommender</span>
+                </div>
+                <div class="big-task-card__task-description-box">
+                    <span class="big-task-card__task-description-text">Build start page with recipe recommendation</span>
+                </div>
+                <div class="big-task-card__due-date-box">
+                    <span class="big-task-card__due-date-text">Due date:</span>
+                    <span class="big-task-card__due-date-text">10/05/2023</span>
+                </div>
+                <div class="big-task-card__priority-box">
+                    <span class="big-task-card__priority-text"></span>
+                    <div class="big-task-card__priority-text-img-box">
+                        <span class="big-task-card__priority-text"></span>
+                        <img class="big-task-card__priority-img" src="assets/icons/medium.svg" alt="">
+                    </div>
+                    <div class="big-task-card__assigned-to-box">
+                        <span class="big-task-card__assigned-to-text"></span>
+                        <div class="big-task-card__assigned-to-names.box"></div>
+                    </div>
+                    <div class="big-task-card__subtasks-box">
+                        <span class="big-task-card__subtasks-title"></span>
+                        <div class="big-task-card__subtasks-check-text-box">
+                            <input class="big-task-card__subtasks-input" type="checkbox">
+                            <span class="big-task-card__subtasks-text"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="big-task-card__button-box">
+                            <button class="big-task-card__button"><img class="big-task-card__button-img" src=""
+                                    alt="">Delete</button>
+                            <button class="big-task-card__button"><img class="big-task-card__button-img" src=""
+                                    alt="">Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="templates/board-template.js"></script>
+    <script src="scripts/board.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
