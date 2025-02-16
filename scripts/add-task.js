@@ -58,29 +58,52 @@ let task = {};
 
 let unvalidInputs = [];
 
+
 function init() {
     renderAssignOptions(contacts);
 }
 
+/**
+ * Selects a priority button
+ * @param {string} prio - name of the selected priority by onclick
+ */
 function selectPrioButton(prio) {  
     let button = document.getElementById(`${prio}`);
     let svg = document.getElementById(`svg-${prio}`);
     if (button.classList.contains(`${prio}`)) {
-        button.classList.remove(`${prio}`);
-        button.classList.remove('white');
-        button.classList.add('button-prio-hover');
-        svg.classList.remove('filter-white');
+        toggleButtonClasses(true, button, svg, prio);
         selectedPriority = "";
     } else {
         clearPrioButtons();
-        button.classList.add(`${prio}`);
-        button.classList.add('white');
-        button.classList.remove('button-prio-hover');
-        svg.classList.add('filter-white');
+        toggleButtonClasses(false, button, svg, prio);
         selectedPriority = prio;
     }
 }
 
+/**
+ * toggles classes to show button as selected or deselected
+ * @param {boolean} boolean - determines whether button is selected or deselected
+ * @param {string} button - reference of the button-element
+ * @param {string} svg - reference of the svg-element
+ * @param {string} prio - name of the selected priority
+ */
+function toggleButtonClasses(boolean, button, svg, prio) {
+    if (boolean) {
+        button.classList.remove(`${prio}`);
+        button.classList.remove('white');
+        button.classList.add('button-prio-hover');
+        svg.classList.remove('filter-white');
+    } else {
+        button.classList.add(`${prio}`);
+        button.classList.add('white');
+        button.classList.remove('button-prio-hover');
+        svg.classList.add('filter-white');
+    }
+}
+
+/**
+ * removes classes from all buttons to deselect them
+ */
 function clearPrioButtons() {
     let prios = ["urgent", "medium", "low"];
     for (let i = 0; i < prios.length; i++) {
@@ -93,6 +116,9 @@ function clearPrioButtons() {
     }
 }
 
+/**
+ * toggles the assigned-to dropdown
+ */
 function toggleAssignOptions() {
     let container = document.getElementById('dropdown-assign');
     let input = document.getElementById('assigned-to');
@@ -107,6 +133,11 @@ function toggleAssignOptions() {
     }
 }
 
+/**
+ * changes src of dropdown arrow img
+ * @param {boolean} boolean - determines whether the dropdown is opened or closed onclick
+ * @param {string} dropdown - reference of the dropdown element
+ */
 function changeDropdownArrow(boolean, dropdown) {
     let dropwdownArrow = document.getElementById(`arrow-dropdown-${dropdown}`);
     if (boolean) {
@@ -116,12 +147,18 @@ function changeDropdownArrow(boolean, dropdown) {
     }
 }
 
+/**
+ * toggles the input focus
+ */
 function toggleInputFocus() {
     if (!document.getElementById('dropdown-assign').classList.contains('d-none')) {
         document.getElementById('assigned-to').focus();
     }
 }
 
+/**
+ * toggles the category dropdown
+ */
 function toggleCategoryOptions() {
     let container = document.getElementById('dropdown-category');
     container.classList.toggle('d-none');
@@ -132,6 +169,10 @@ function toggleCategoryOptions() {
     }
 }
 
+/**
+ * prevents triggering of the HTML event
+ * @param {*} event - the elements HTML event
+ */
 function preventDefault(event) {
     event.preventDefault();
 }
@@ -274,6 +315,7 @@ function isContactSelected(contactDiv) {
 }
 
 function clearInputs() {
+    removeError();
     subtasks = 0;
     document.getElementById('container-subtasks').innerHTML = "";
     document.getElementById('container-assigned-contacts').innerHTML = "";
