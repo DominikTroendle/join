@@ -4,14 +4,14 @@ let toDoArray = [
         id: 1,
         taskType: "User Story",
         taskTitle: "Kochwelt Page & Recipe Recommender",
-        taskDiscription: "Build start page with recipe recommendation...",
+        taskDescription: "Build start page with recipe recommendation...",
         taskPriority: "medium"
     },
     {
         id: 2,
         taskType: "Technical Task",
         taskTitle: "HTML Base Template Creation",
-        taskDiscription: "Create reusable HTML base templates...",
+        taskDescription: "Create reusable HTML base templates...",
         taskPriority: "low"
     }
 ];
@@ -20,14 +20,14 @@ let inProgressArray = [
         id: 3,
         taskType: "User Story",
         taskTitle: "Daily Kochwelt Recipe",
-        taskDiscription: "Implement daily recipe and portion calculator...",
+        taskDescription: "Implement daily recipe and portion calculator...",
         taskPriority: "medium"
     },
     {
         id: 4,
         taskType: "Technical Task",
         taskTitle: "CSS Architecture Planning",
-        taskDiscription: "Define CSS naming conventions and structure...",
+        taskDescription: "Define CSS naming conventions and structure...",
         taskPriority: "urgent"
     }
 ];
@@ -83,7 +83,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDiscription, dragFieldArray[index].taskPriority)
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority)
         }
     }
 }
@@ -141,7 +141,7 @@ function test() {
     //             id: 2,
     //             taskType: "User Story",
     //             taskTitle: "Kochwelt Page & Recipe Recommender",
-    //             taskDiscription: "Build start page with recipe recommendation..."
+    //             taskDescription: "Build start page with recipe recommendation..."
     //         }
     //     })
     // })

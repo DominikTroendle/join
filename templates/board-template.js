@@ -1,4 +1,4 @@
-function smallCardTemplate(id, taskType, taskTitle, taskDiscription, taskPriority) {
+function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority) {
     let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
         : `user-story__category-box-technical-task`;
 
@@ -24,7 +24,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDiscription, taskPriorit
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
                 <span class="user-story__title">${taskTitle}</span>
-                <span class="user-story__discription">${taskDiscription}</span>
+                <span class="user-story__discription">${taskDescription}</span>
                 <div class="user-story__scale-text-box">
                     <div class="user-story__subtask-scale-box">
                         <div class="user-story__subtask-scale-fill"></div>

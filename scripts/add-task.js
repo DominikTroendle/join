@@ -27,9 +27,34 @@ let contacts = [
 
 let selectedContacts = [];
 
+let selectedPriority = "";
+
 let subtasks = 0;
 
 let task = {};
+
+// default taskObj construction
+/* task = {
+    id: 1,
+    taskDescription: "",
+    taskTitle: "",
+    taskType: "User Story",
+    taskDate: "",
+    taskPriority: "",
+    taskSubtasks:
+    {
+         subtask1: "",
+         subtask2: ""
+    },
+    taskAssigned:
+    [
+        {
+            name: "David Müller",
+            initials:  "",
+            color: ""
+        }
+    ]
+}; */
 
 let unvalidInputs = [];
 
@@ -45,12 +70,14 @@ function selectPrioButton(prio) {
         button.classList.remove('white');
         button.classList.add('button-prio-hover');
         svg.classList.remove('filter-white');
+        selectedPriority = "";
     } else {
         clearPrioButtons();
         button.classList.add(`${prio}`);
         button.classList.add('white');
         button.classList.remove('button-prio-hover');
         svg.classList.add('filter-white');
+        selectedPriority = prio;
     }
 }
 
@@ -331,7 +358,7 @@ function createTask() {
     let valid = validateInputs();
     let validDateFormat = testDate();
     if (valid && validDateFormat) {
-        // saveTask();
+        saveTask();
         document.getElementById('overlay-task-added').classList.remove('d-none');
         setTimeout(() => {
             window.location.href = 'board.html';
@@ -384,33 +411,15 @@ function removeError() {
 }
 
 function saveTask() {
-    let title = document.getElementById('').value;
-    let description = document.getElementById('').value;
-    let dueDate = document.getElementById('').value;
-    let priority = "high";
-    let category = document.getElementById('').value;
-    let subtasks = [];
-    task = {
-        id: 1,
-        taskDescription: "",
-        taskTitle: "",
-        taskType: "User Story",
-        taskDate: "",
-        taskPriority: "",
-        taskSubtasks:
-        {
-             subtask1: "",
-             subtask2: ""
-        },
-        taskAssigned:
-        [
-            {
-                name: "David Müller",
-                initials:  "",
-                color: ""
-            }
-        ]
-    };
-    saveToFirebase();
+    task.taskId = 3;
+    task.taskType = document.getElementById('category').value;
+    task.taskTitle = document.getElementById('title').value;
+    task.taskDescription = document.getElementById('description').value;
+    task.taskPriority = selectedPriority;
+    toDoArray.push(task);
+    console.log(toDoArray);
+    // task.taskDate dueDate = document.getElementById('due-date').value;
+    // task.taskSubtasks = [];
+    // saveToFirebase();
     task = {};
 }
