@@ -31,6 +31,8 @@ let subtasks = 0;
 
 let task = {};
 
+let unvalidInputs = [];
+
 function init() {
     renderAssignOptions(contacts);
 }
@@ -325,19 +327,21 @@ function saveEditedSubtask(id) {
 }
 
 function createTask() {
+    removeError();
     let valid = validateInputs();
-    if (valid) {
+    let validDateFormat = testDate();
+    if (valid && validDateFormat) {
         // saveTask();
         document.getElementById('overlay-task-added').classList.remove('d-none');
         setTimeout(() => {
             window.location.href = 'board.html';
         }, "900");
+    } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
+        document.getElementById('invalid-date').classList.remove('grey');
     } else {
         throwError();
     }
 }
-
-let unvalidInputs = [];
 
 function validateInputs() {
     let valid = true;
@@ -353,10 +357,30 @@ function validateInputs() {
     return valid;
 }
 
+function testDate() {
+    let value = document.getElementById('due-date').value;
+    let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+    if (date === null) {
+        return false;
+    }
+    let day = +date[1], month = +date[2], year = +date[3];
+    let dateObj = new Date(`${year}-${month}-${day}`);
+    return dateObj.getFullYear() === year &&
+           (dateObj.getMonth() + 1) === month &&
+           dateObj.getDate() === day;
+}
+
 function throwError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('grey');
     });
+}
+
+function removeError() {
+    unvalidInputs.forEach(element => {
+        document.getElementById(`required-${element}`).classList.add('grey');
+    });
+    document.getElementById('invalid-date').classList.add('grey');
 }
 
 function saveTask() {
