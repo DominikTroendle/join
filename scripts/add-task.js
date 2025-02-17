@@ -177,11 +177,18 @@ function preventDefault(event) {
     event.preventDefault();
 }
 
+/**
+ * shows the selected dropdown option in the input field
+ * @param {string} category - value of the selected dropdown option
+ */
 function displayCategory(category) {
     document.getElementById('category').value = category;
     closeDropdown();
 }
 
+/**
+ * closes all dropdown menus
+ */
 function closeDropdown() {
     document.getElementById('dropdown-assign').classList.add('d-none');
     document.getElementById('dropdown-category').classList.add('d-none');
@@ -191,20 +198,33 @@ function closeDropdown() {
     changeDropdownArrow(false, 'category');
 }
 
+/**
+ * prevents propagation of the HTML event
+ * @param {*} event -  the elements HTML event
+ */
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
+/**
+ * renders the dropdown options of the assigned-to dropdown
+ * @param {string} array - array which contains the contacts to be rendered
+ */
 function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
     if (selectedContacts.length == 0) {
        renderDefaultContacts(array, dropDown);
     } else {
-        renderSelectedContacts(array, dropDown);
+        checkForSelectedContacts(array, dropDown);
     }
 }
 
+/**
+ * renders all contacts as options into the specified dropdown
+ * @param {string} array - array which contains the contacts to be rendered
+ * @param {string} dropDown - determines the dropdown menu
+ */
 function renderDefaultContacts(array, dropDown) {
     for (let i = 0; i < array.length; i++) {
         let contactName = array[i].name;
@@ -212,8 +232,12 @@ function renderDefaultContacts(array, dropDown) {
         renderContactAsDefault(dropDown, contactName, color);
     }
 }
-
-function renderSelectedContacts(array, dropDown) {
+ /**
+  * checks for selected contacts in an array
+  * @param {*} array - array which contains the contacts to be rendered
+  * @param {*} dropDown - determines the dropdown menu
+  */
+function checkForSelectedContacts(array, dropDown) {
     for (let i = 0; i < array.length; i++) {
         let contactName = array[i].name;
         let color = array[i].color;
@@ -225,6 +249,12 @@ function renderSelectedContacts(array, dropDown) {
     }
 }
 
+/**
+ * renders a single contact as selected dropdown option
+ * @param {*} dropDown - determines the dropdown menu
+ * @param {*} contactName - name of the selected contact
+ * @param {*} color - color of the selected contact
+ */
 function renderContactAsSelected(dropDown, contactName, color) {
     renderContactAsDefault(dropDown, contactName, color);
     let contactDiv = document.getElementById(`container-${contactName}`);
@@ -232,6 +262,12 @@ function renderContactAsSelected(dropDown, contactName, color) {
     toggleSelection(true, contactDiv, icon);
 }
 
+/**
+ * renders a single contact as default dropdown option
+ * @param {*} dropDown - determines the dropdown menu
+ * @param {*} contactName - name of the contact
+ * @param {*} color - color of the contact
+ */
 function renderContactAsDefault(dropDown, contactName, color) {
     dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
     document.getElementById(`${contactName}`).innerText = contactName;
@@ -239,12 +275,22 @@ function renderContactAsDefault(dropDown, contactName, color) {
     document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
 }
 
+/**
+ * checks if the contact exists in an array
+ * @param {*} contactName - name of the contact
+ * @returns - true if contact exists in array, otherwise false
+ */
 function isInSelectedContacts(contactName) {
     let arr = [];
     selectedContacts.forEach(contact => arr.push(contact.name));
     return arr.includes(contactName);
 }
 
+/**
+ * returns initials of a contact name
+ * @param {*} contactName - name of the contact 
+ * @returns initials of the contact
+ */
 function getInitials(contactName) {
     let names = contactName.split(' ');
     let initials = "";
@@ -254,6 +300,11 @@ function getInitials(contactName) {
     return initials;
 }
 
+/**
+ * selects the clicked dropdown option
+ * @param {*} name - name of the contact
+ * @param {*} color - color of the contact
+ */
 function selectContact(name, color) {
     let contactDiv = document.getElementById(`container-${name}`);
     let icon = document.getElementById(`icon-${name}`);
@@ -267,6 +318,12 @@ function selectContact(name, color) {
     displaySelectedContacts();
 }
 
+/**
+ * toggles selection of dropdown option onclick
+ * @param {*} boolean - determines whether option is selected or deselected
+ * @param {*} contactDiv - reference of the dropdown option
+ * @param {*} icon - icon of the dropdown menu
+ */
 function toggleSelection(boolean, contactDiv, icon) {
     if (boolean) {
         contactDiv.classList.add('bg-blue');
@@ -283,12 +340,18 @@ function toggleSelection(boolean, contactDiv, icon) {
     }
 }
 
+/**
+ * filters contacts
+ */
 function filterContacts() {
     let searchValue = document.getElementById('assigned-to').value.toLowerCase();
     let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
     renderAssignOptions(filteredContacts);
 }
 
+/**
+ * displays selected contacts in separate container below dropwdown
+ */
 function displaySelectedContacts() {
     let container = document.getElementById('container-assigned-contacts');
     container.innerHTML = "";
@@ -300,6 +363,12 @@ function displaySelectedContacts() {
     }
 }
 
+/**
+ * adds to or removes items from array
+ * @param {*} boolean - determines whether item should be added or removed
+ * @param {*} contactName - name of the contact
+ * @param {*} contactColor - color of the contact
+ */
 function updateSelectedContacts(boolean, contactName, contactColor) {
     let obj = {name: contactName, color: contactColor};
     if (boolean) {
@@ -310,10 +379,18 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     }
 }
 
+/**
+ * checks if dropdown option is selected
+ * @param {*} contactDiv - referencte of the dropdown option
+ * @returns - true if option is selected
+ */
 function isContactSelected(contactDiv) {
     return contactDiv.classList.contains('bg-blue');
 }
 
+/**
+ * clears all input fields
+ */
 function clearInputs() {
     removeError();
     subtasks = 0;
@@ -329,6 +406,10 @@ function clearInputs() {
     renderAssignOptions(contacts);
 }
 
+/**
+ * switches button of the input
+ * @param {*} boolean - determines which button should be shown
+ */
 function changeInputButton(boolean) {
     if (boolean) {
         document.getElementById('button-add').classList.add('d-none');
@@ -339,6 +420,10 @@ function changeInputButton(boolean) {
     }
 }
 
+/**
+ * processes if subtask should be saved or aborted
+ * @param {*} boolean - determines whether the task should be saved or aborted
+ */
 function processSubtask(boolean) {
     if (boolean) {
         addSubtask();
@@ -348,6 +433,11 @@ function processSubtask(boolean) {
     }
 }
 
+/**
+ * shows edit options of subtask
+ * @param {*} id - id of the subtask
+ * @param {*} boolean - determines whether edit options should be shown or hidden
+ */
 function showEditOptions(id, boolean) {
     if (boolean) {
         document.getElementById(`icons-subtask-${id}`).classList.remove('d-none');
@@ -356,6 +446,9 @@ function showEditOptions(id, boolean) {
     }
 }
 
+/**
+ * adds subtask to a container
+ */
 function addSubtask() {
     let input = document.getElementById('subtasks');
     subtasks++;
@@ -363,11 +456,19 @@ function addSubtask() {
     document.getElementById(`subtask-${subtasks}`).innerText = input.value;
 }
 
+/**
+ * deletes subtask from container
+ * @param {*} id - id of the subtask
+ */
 function deleteSubtask(id) {
     document.getElementById(`container-subtask-${id}`).remove();
     subtasks--;
 }
 
+/**
+ * opens edition menu for subtask
+ * @param {*} id - id of the subtask
+ */
 function editSubtask(id) {
     let child = document.getElementById(`container-subtask-${id}`);
     document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
@@ -378,10 +479,19 @@ function editSubtask(id) {
     }
 }
 
+/**
+ * checks for last child in subtask container
+ * @param {*} child - reference of the subtask
+ * @returns - true if it is the last child
+ */
 function isLastChild(child) {
     return (child === child.parentNode.children[child.parentNode.children.length-1]) 
-  }
+}
 
+/**
+ * saves edited subtask
+ * @param {*} id - id of the subtask
+ */
 function saveEditedSubtask(id) {
     let input = document.getElementById(`input-subtask-${id}`);
     let element = document.getElementById(`container-subtask-${id}`);
@@ -395,6 +505,9 @@ function saveEditedSubtask(id) {
     }
 }
 
+/**
+ * creates task to be shown on the board or throws error if inputs are unvalid
+ */
 function createTask() {
     removeError();
     let valid = validateInputs();
@@ -412,6 +525,10 @@ function createTask() {
     }
 }
 
+/**
+ * validates input fields
+ * @returns - true if all inputs are filled with value
+ */
 function validateInputs() {
     let valid = true;
     let inputs = ["title", "due-date", "category"];
@@ -426,6 +543,10 @@ function validateInputs() {
     return valid;
 }
 
+/**
+ * tests date for valid format
+ * @returns - true if date format is valid
+ */
 function testDate() {
     let value = document.getElementById('due-date').value;
     let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
@@ -439,12 +560,18 @@ function testDate() {
            dateObj.getDate() === day;
 }
 
+/**
+ * shows error messages on unvalid inputs
+ */
 function throwError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('grey');
     });
 }
 
+/**
+ * removes error message on valid inputs
+ */
 function removeError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.add('grey');
@@ -452,6 +579,9 @@ function removeError() {
     document.getElementById('invalid-date').classList.add('grey');
 }
 
+/**
+ * saves task as object
+ */
 function saveTask() {
     task.taskId = 3;
     task.taskType = document.getElementById('category').value;
