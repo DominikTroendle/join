@@ -140,12 +140,21 @@ function addClassSlideBack() {
     }, 120);
 }
 
+function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
+    let rectangleOpen = document.getElementById(idRectangleOpen);
+    let rectangleClose = document.getElementById(idRectangleClose);
+    let hook = document.getElementById(idHook);
+    rectangleOpen.classList.toggle("d-none");
+    rectangleClose.classList.toggle("d-none");
+    hook.classList.toggle("d-none");
+}
+
 function test() {
     // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
     // .then(response => response.json())
     // .then(data => console.log(data))
     // .catch(error => console.error("Fehler beim Abrufen:", error));
-    
+
     // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/inProgress.json", {
     //     method: "PATCH",
     //     headers: { "Content-Type": "application/json" },
@@ -164,17 +173,17 @@ function test() {
     toDoArray = [];
     console.log("Array leer machen: " + toDoArray);
     fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/inProgress.json")
-    .then(response => response.json())
-    .then(data => {
-        if (data) {
-            const toDoArray = Object.values(data); // Objekt in ein Array umwandeln
-            console.log(toDoArray);
-        } else {
-            console.log("Keine Daten gefunden.");
-        }
-    })
-    .catch(error => console.error("Fehler beim Abrufen:", error));
-    
+        .then(response => response.json())
+        .then(data => {
+            if (data) {
+                const toDoArray = Object.values(data); // Objekt in ein Array umwandeln
+                console.log(toDoArray);
+            } else {
+                console.log("Keine Daten gefunden.");
+            }
+        })
+        .catch(error => console.error("Fehler beim Abrufen:", error));
+
 }
 
 // test();

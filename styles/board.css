@@ -791,6 +791,14 @@ h1 {
     gap: 16px;
 }
 
+.big-task-card__checkbox {
+    transition: all 300ms ease-in-out;
+}
+
+.haken {
+    /* display: none; */
+}
+
 .big-task-card__button-box {
     display: flex;
     justify-content: flex-end;
