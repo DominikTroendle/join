@@ -154,6 +154,11 @@ function renderContentBigTaskCard() {
     bigTaskCard.innerHTML = bigTaskCardTemplate();
 }
 
+function renderContentBigTaskCardEdit() {
+    let bigTaskCard = document.getElementById("big-task-card__box");
+    bigTaskCard.innerHTML = bigTaskCardEditTemplate();
+}
+
 function test() {
     // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
     // .then(response => response.json())

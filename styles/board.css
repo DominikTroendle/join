@@ -815,6 +815,142 @@ h1 {
     fill: #2A3647;
 }
 
+.big-task-card-edit__task-type-text-button-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 445px;
+    height: 36px;
+}
+
+.big-task-card-edit__task-type-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 56px;
+    color: #2A3647;
+    font-size: 24px;
+}
+
+.big-task-card-edit__scroll-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 445px;
+    height: 697px;
+    gap: 24px;
+}
+
+.big-task-card-edit__text-input-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 445px;
+    height: 96px;
+    gap: 8px;
+}
+
+.big-task-card-edit__text {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #2A3647;
+}
+
+.big-task-card-edit__input {
+    width: 445px;
+    height: 48px;
+    border-radius: 10px;
+    padding: 12px 21px;
+    gap: 10px;
+    border: 1px solid #D1D1D1;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000000;
+    outline: none;
+    cursor: pointer;
+}
+
+.big-task-card-edit__text-textarea-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 445px;
+    height: 168px;
+    gap: 8px;
+}
+
+.big-task-card-edit__textarea {
+    width: 445px;
+    min-height: 138px;
+    height: 120px;
+    border-radius: 10px;
+    padding: 18px 16px;
+    gap: 10px;
+    border: 1px solid #D1D1D1;
+    resize: vertical;
+    outline: none;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000000;
+}
+
+.big-task-card-edit__text-button-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 445px;
+    height: 87px;
+    gap: 8px;
+}
+
+.big-task-card-edit__button-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 445px;
+    height: 56px;
+    gap: 16px;
+}
+
+.big-task-card-edit__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 137.67px;
+    height: 56px;
+    border-radius: 10px;
+    padding: 16px 10px;
+    gap: 8px;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #000000;
+    cursor: pointer;
+}
+
+.big-task-card-edit__Ok-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 89px;
+    height: 57px;
+    border-radius: 10px;
+    padding: 16px;
+    gap: 4px;
+    background-color: #2A3647;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    color: #FFFFFF;
+}
+
 
 
 
