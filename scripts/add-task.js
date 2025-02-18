@@ -1,31 +1,6 @@
 const BASE_URL = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/";
 
-let contacts = [
-    {
-        name: "David Müller",
-        color: "bg-orange"
-    },
-    {
-        name: "Daniel Meier",
-        color: "bg-orange"
-    },
-    {
-        name: "Richard Renner",
-        color: "bg-pink"
-    },
-    {
-        name: "Paul Poost",
-        color: "bg-bluepurple"
-    },
-    {
-        name: "Franz Ferdinand",
-        color: "bg-turquoise"
-    },
-    {
-        name: "Thomas Deller",
-        color: "bg-rose"
-    }
-];
+let contacts = [];
 
 let selectedContacts = [];
 
@@ -60,8 +35,12 @@ let task = {};
 
 let unvalidInputs = [];
 
-
-function init() {
+/**
+ * loads initial functions
+ */
+async function init() {
+    contacts = await getContacts("contacts");
+    console.log(contacts);
     renderAssignOptions(contacts);
 }
 
@@ -621,4 +600,16 @@ async function postData(path="", data={}) {
     });
     console.log(response);
     return response;
+}
+
+/**
+ * loads contacts from database
+ * @param {*} path - path of the data to be loaded
+ * @param {*} data - data to be loaded
+ * @returns - retrieved data in case of success, else error
+ */
+async function getContacts(path="") {
+    let response = await fetch(BASE_URL + path + ".json");
+    let responseJson = await response.json();
+    return responseJson;
 }
