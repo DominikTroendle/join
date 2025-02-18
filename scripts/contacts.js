@@ -52,6 +52,7 @@ async function allUserContacts() {
 
 function addNewContectOverlay() {
     let refOverlay = document.getElementById('newContectOverlay');
+    refOverlay.innerHTML = getToCreatANewContactTemplate();
     refOverlay.classList.toggle('d-none');
     if (!refOverlay.dataset.listenerAdded) {
         refOverlay.dataset.listenerAdded = "true";
@@ -86,6 +87,15 @@ async function addUserToContactList(event, form) {
     newContact.key = response.name;
     allContacts.push(newContact);
     await loadContactList();
+    moreContactInformation(newContact.name);
+    setTimeout(() => {
+        let newContactElement = [...document.querySelectorAll('.container-contact')]
+            .find(el => el.textContent.includes(newContact.name));
+    
+        if (newContactElement) {
+            selectContact(newContactElement);
+        }
+    }, 100);
     form.reset();
     successfullyContact();
     let addButton = document.getElementById('addContactButton');
@@ -186,8 +196,6 @@ function selectContact(element) {
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = '';
     }
-    
-    
 }
 
 async function moreContactInformation(contactName) {
@@ -200,17 +208,12 @@ async function moreContactInformation(contactName) {
         let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
-    } else {
-        console.error("Kontakt nicht gefunden!");
     }
 }
 
 function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
-    if (!refOverlay) {
-        console.error("Fehler: Overlay 'editContectOverlay' nicht gefunden!");
-        return;
-    }
+    refOverlay.innerHTML = getEditContactTemplate(contactKey);
     refOverlay.classList.toggle('d-none');
     if (!refOverlay.dataset.listenerAdded) {
         refOverlay.dataset.listenerAdded = "true";
@@ -275,11 +278,8 @@ async function editContact(event, form) {
 async function updateContactTemplate(contactKey, updatedContact) {
     let contactElement = document.querySelector(`#contact-${contactKey}`);
     if (contactElement) {
-        // Erstelle das neue HTML für den Kontakt
         let initials = findInitials(updatedContact.name);
         let template = await selectMoreContactInformationTemplate(updatedContact, initials);
-
-        // Ersetze den bestehenden Inhalt mit dem neuen Template
         contactElement.innerHTML = template;
     }
 }
