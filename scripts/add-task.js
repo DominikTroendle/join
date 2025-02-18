@@ -1,3 +1,5 @@
+const BASE_URL = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/";
+
 let contacts = [
     {
         name: "David Müller",
@@ -588,10 +590,35 @@ function saveTask() {
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
     task.taskPriority = selectedPriority;
-    toDoArray.push(task);
-    console.log(toDoArray);
     // task.taskDate dueDate = document.getElementById('due-date').value;
     // task.taskSubtasks = [];
-    // saveToFirebase();
+    saveToFirebase("toDos", task);
     task = {};
+}
+
+/**
+ * hands over the object to be saved on firebase
+ * @param {*} path - path of firebase save location
+ * @param {*} task - task to be saved
+ */
+async function saveToFirebase(path, task) {
+    await postData(path, task);
+}
+
+/**
+ * posts data to firebase
+ * @param {*} path - specifies save location
+ * @param {*} data - data to be saved
+ * @returns - saved object in case of success, else error 
+ */
+async function postData(path="", data={}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    console.log(response);
+    return response;
 }
