@@ -149,6 +149,11 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
     hook.classList.toggle("d-none");
 }
 
+function renderContentBigTaskCard() {
+    let bigTaskCard = document.getElementById("big-task-card__box");
+    bigTaskCard.innerHTML = bigTaskCardTemplate();
+}
+
 function test() {
     // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
     // .then(response => response.json())
