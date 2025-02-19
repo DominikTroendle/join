@@ -54,11 +54,18 @@ function addNewContectOverlay() {
     let refOverlay = document.getElementById('newContectOverlay');
     refOverlay.innerHTML = getToCreatANewContactTemplate();
     refOverlay.classList.toggle('d-none');
+    let container = refOverlay.querySelector('.new-Contect-Container');
+    setTimeout(() => {
+        container.style.transform = 'translateX(0)';
+    }, 10);
     if (!refOverlay.dataset.listenerAdded) {
         refOverlay.dataset.listenerAdded = "true";
         refOverlay.onclick = function(event) {
             if (event.target === refOverlay) {
-                refOverlay.classList.toggle('d-none');
+                container.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    refOverlay.classList.toggle('d-none');
+                }, 500);
             }
         };
     }
@@ -167,7 +174,7 @@ function addGroupHeader(contactList, letter) {
 async function addContactToGroup(contact, letter) {
     let groupContainer = document.getElementById(`group-${letter}`);
     let isFirst = groupContainer.children.length === 0;
-    groupContainer.innerHTML += `${isFirst ? "<hr>" : ""}${await getContactListTemplate(contact.name, contact.email, contact.color)}`;
+    groupContainer.innerHTML += `${isFirst ? "<hr class='line'>" : ""}${await getContactListTemplate(contact.name, contact.email, contact.color)}`;
     document.getElementById(contact.name).innerText = contact.name;
     document.getElementById(`doppelInitials-${contact.name}`).innerText = findInitials(contact.name);
 }
@@ -187,14 +194,13 @@ function selectContact(element) {
         contact.classList.remove('select-contact');
         contact.style.color = "black";
     });
-    let name = element.querySelector('.contact-preview-name').innerText;
-    if (!isSelected) {
+    if (isSelected) {
+        document.getElementById('moreInformationContact').style.transform = 'translateX(100%)';
+        setTimeout(() => document.getElementById('moreInformationContact').innerHTML = '', 500);
+    } else {
         element.classList.add('select-contact');
         element.style.color = "white";
-        moreContactInformation(name);
-    } else{
-        let contactInfoContainer = document.getElementById('moreInformationContact');
-        contactInfoContainer.innerHTML = '';
+        moreContactInformation(element.querySelector('.contact-preview-name').innerText);
     }
 }
 
@@ -202,12 +208,15 @@ async function moreContactInformation(contactName) {
     document.getElementById(`${contactName}`).innerText = contactName;
     let initials = findInitials(contactName);
     document.getElementById(`doppelInitials-${contactName}`).innerText = initials;
-    
     let contact = allContacts.find(c => c.name === contactName);
     if (contact) {
         let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
+        contactInfoContainer.style.transition = 'transform 0.5s ease-out';
+        setTimeout(() => {
+            contactInfoContainer.style.transform = 'translateX(0)';
+        }, 10);
     }
 }
 
@@ -215,61 +224,36 @@ function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
     refOverlay.innerHTML = getEditContactTemplate(contactKey);
     refOverlay.classList.toggle('d-none');
+    let container = refOverlay.querySelector('.new-Contect-Container');
+    setTimeout(() => container.style.transform = 'translateX(0)', 10);
     if (!refOverlay.dataset.listenerAdded) {
         refOverlay.dataset.listenerAdded = "true";
-        refOverlay.onclick = function(event) {
-            if (event.target === refOverlay) {
-                refOverlay.classList.toggle('d-none');
-            }
-        };
+        refOverlay.onclick = (e) => { if (e.target === refOverlay) { container.style.transform = 'translateX(100%)'; setTimeout(() => refOverlay.classList.toggle('d-none'), 500); } };
     }
     let contact = allContacts.find(c => c.key === contactKey);
-    if (!contact) {
-        console.error("Fehler: Kontakt nicht gefunden!");
-        return;
-    }
+    if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
     document.getElementById('editName').value = contact.name || "";
     document.getElementById('editEmail').value = contact.email || "";
     document.getElementById('editPhone').value = contact.phone || "";
-
     let initials = findInitials(contact.name);
-    let initialsElement = document.getElementById('editUserInitialsText');
-    let initialsContainer = document.getElementById('editUserInitials');
-
-    if (initialsElement && initialsContainer) {
-        initialsElement.innerText = initials;
-        initialsElement.classList = `edit-contact-initialien`
-        initialsContainer.className = `edit-contact-initcolor ${contact.color}`;
-    } 
-
+    document.getElementById('editUserInitialsText').innerText = initials;
+    document.getElementById('editUserInitials').className = `edit-contact-initcolor ${contact.color}`;
     refOverlay.dataset.contactKey = contactKey;
 }
 
 async function editContact(event, form) {
     event.preventDefault();
     let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
-
-    if (!contactKey) {
-        console.error("Fehler: Kein gültiger Kontakt-Key gefunden!");
-        return;
-    }
-
-    let name = form.querySelector('#editName').value;
-    let email = form.querySelector('#editEmail').value;
-    let phone = form.querySelector('#editPhone').value;
-    let color = await randomBgColor();
-
+    if (!contactKey) return console.error("Fehler: Kein gültiger Kontakt-Key gefunden!");
     let updatedContact = {
-        name,
-        email,
-        phone,
-        color
+        name: form.querySelector('#editName').value,
+        email: form.querySelector('#editEmail').value,
+        phone: form.querySelector('#editPhone').value,
+        color: await randomBgColor()
     };
     await putData(contactKey, updatedContact);
     let contactIndex = allContacts.findIndex(c => c.key === contactKey);
-    if (contactIndex !== -1) {
-        allContacts[contactIndex] = { key: contactKey, ...updatedContact };
-    }
+    if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
     updateContactTemplate(contactKey, updatedContact);
     await loadContactList();
     editContactOverlay();
@@ -317,6 +301,3 @@ async function deleteContact(key) {
         console.error("Fehler beim Löschen:", error);
     }
 }
-
-
-

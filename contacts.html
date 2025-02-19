@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="style.css">
     
 
-    <script src="./templates/contacts-template.js"></script>
-    <script src="./scripts/contacts.js"></script>
+    
 </head>
-<body onload="init()">
+<body onload="init(), addClassSelectedMenuButton('contacts-menu-button')">
     <div class="all-content">
         <div class="content">
             <header>
@@ -80,7 +79,7 @@
                     <img src="./assets/icons/vector.svg" alt="icon-line">
                     <span>Better with a team</span>
                 </div>
-                <div id="moreInformationContact"></div>
+                    <div id="moreInformationContact"></div>
             </section>
             
             <div id="contactlist-container">
@@ -92,6 +91,7 @@
                 <div class="contacs-box-container">
                     <div id="contactList"></div>
                 </div>
+
             </div> 
             <div id="newContectOverlay" class="contact-overlay d-none"></div>
             <div id="editContactOverlay" class="contact-overlay d-none"></div>
@@ -102,7 +102,10 @@
                 </div>
             </div>
         </div>
-    
+
+    <script src="./templates/contacts-template.js"></script>
+    <script src="./scripts/contacts.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
 
