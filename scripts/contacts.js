@@ -101,6 +101,7 @@ async function addUserToContactList(event, form) {
     
         if (newContactElement) {
             selectContact(newContactElement);
+            newContactElement.scrollIntoView({ behavior: "smooth", block: "center" });
         }
     }, 100);
     form.reset();
