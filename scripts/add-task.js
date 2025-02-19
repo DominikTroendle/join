@@ -569,7 +569,7 @@ function saveTask() {
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
     task.taskPriority = selectedPriority;
-    // task.taskDate dueDate = document.getElementById('due-date').value;
+    task.taskDate = document.getElementById('due-date').value;
     // task.taskSubtasks = [];
     saveToFirebase("toDos", task);
     task = {};
