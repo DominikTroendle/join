@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/summary.css">
 </head>
 
-<body onload="addClassSelectedMenuButton('summary-menu-button'), currentDate()">
+<body onload="addClassSelectedMenuButton('summary-menu-button'), init()">
     <div class="all-content">
         <div class="content">
             <header>
@@ -139,7 +139,7 @@
                     </div>
                 </div>
                 <div class="name-box">
-                    <span class="daytime-text">Good morning,</span>
+                    <span class="daytime-text" id="currentGreeting"></span>
                     <span class="name-text">Sofia Müller</span>
                 </div>
             </div>
