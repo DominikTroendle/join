@@ -1,4 +1,4 @@
-const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
+const BASE_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
 
 async function init() {

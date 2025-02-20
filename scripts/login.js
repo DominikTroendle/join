@@ -1,5 +1,5 @@
 const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
-const BASE_JOIN_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
+const BASE_JOIN_GUAST_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
 let allUsers = [];
 let isPasswordVisible = false;
 
@@ -25,7 +25,7 @@ async function init() {
 }
 
 async function loadAllUserData(path) {
-    let response = await fetch(BASE_URL + path + ".json")
+    let response = await fetch(BASE_JOIN_GUAST_URL + path + ".json")
     return responseToJson = await response.json();
 }
 

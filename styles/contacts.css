@@ -161,6 +161,10 @@
     margin: 10px 0;
 }
 
+.contactList{
+    padding-bottom: 40px;
+}
+
 .container-contact:hover {
     cursor: pointer;
     background-color: #cccccc59;
