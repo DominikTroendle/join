@@ -1,5 +1,5 @@
 function returnAssignedContactHTML(name, color) {
-    return `<div id="container-${name}" class="container-custom-select-option" onclick="selectContact('${name}','${color}'), stopPropagation(event)">
+    return `<div id="container-${name}" class="container-custom-select-option select-option-with-scrollbar" onclick="selectContact('${name}','${color}'), stopPropagation(event)">
                 <div class="flex-align gap-15">
                     <span id="initials-${name}" class="initials"></span>
                     <span id="${name}" class="name"></span>

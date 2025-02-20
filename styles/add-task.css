@@ -256,9 +256,35 @@
     position: relative;
 }
 
-/* .container-custom-select-options {
+#container-input-assigned {
+    position: relative;
+}
+
+#container-dropdown {
     position: absolute;
-    top: 34px;
+    top: 32px;
+    z-index: 1;
+    width: 440px;
+    min-height: 48px;
+    max-height: 298px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.container-custom-select-options {
+    z-index: 1;
+    width: 435px;
+    min-height: 48px;
+    max-height: 248px;
+    background-color: white;
+    border-radius: 10px;
+    overflow-y: auto;
+    margin-top: 50px;
+}
+
+.container-custom-select-options-noscroll {
+    position: absolute;
+    top: 32px;
     z-index: 1;
     width: 440px;
     min-height: 48px;
@@ -267,22 +293,10 @@
     border-radius: 10px;
     overflow-y: auto;
     padding-top: 48px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
-
-#container-input-assigned {
-    position: relative;
 }
 
-#container-dropdown {
-    position: absolute;
-    top: 80px;
-    z-index: 1;
-    width: 440px;
-    min-height: 48px;
-    max-height: 248px;
-    background-color: white;
-    border-radius: 10px;
+.box-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .container-custom-select-options::-webkit-scrollbar {
@@ -324,6 +338,10 @@
     align-items: center;
     padding: 0 21px;
     border-radius: 10px;
+}
+
+.select-option-with-scrollbar {
+    max-width: 423px;
 }
 
 .container-custom-select-option:hover {

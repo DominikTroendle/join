@@ -102,8 +102,10 @@ function clearPrioButtons() {
  */
 function toggleAssignOptions() {
     let container = document.getElementById('dropdown-assign');
+    let containerDropdown = document.getElementById('container-dropdown');
     let input = document.getElementById('assigned-to');
     container.classList.toggle('d-none');
+    containerDropdown.classList.toggle('box-shadow');
     renderAssignOptions(contacts);
     if (input.placeholder == "Select contacts to assign") {
         input.placeholder = "";
@@ -143,6 +145,7 @@ function toggleInputFocus() {
 function toggleCategoryOptions() {
     let container = document.getElementById('dropdown-category');
     container.classList.toggle('d-none');
+    container.classList.toggle('box-shadow');
     if (!container.classList.contains('d-none')) {
         changeDropdownArrow(true, 'category');
     } else {
@@ -173,6 +176,8 @@ function displayCategory(category) {
 function closeDropdown() {
     document.getElementById('dropdown-assign').classList.add('d-none');
     document.getElementById('dropdown-category').classList.add('d-none');
+    document.getElementById('dropdown-category').classList.remove('box-shadow');
+    document.getElementById('container-dropdown').classList.remove('box-shadow');
     document.getElementById('assigned-to').value = "";
     document.getElementById('assigned-to').placeholder = "Select contacts to assign";
     changeDropdownArrow(false, 'assigned');
