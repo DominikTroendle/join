@@ -149,7 +149,7 @@ body {
 .date-text-box {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
     flex-direction: column;
     gap: 13px;
     width: 178px;
@@ -281,7 +281,7 @@ body {
 }
 
 .deadline-date {
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 25.2px;
     color: #2A3647;

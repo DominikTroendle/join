@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/summary.css">
 </head>
 
-<body onload="addClassSelectedMenuButton('summary-menu-button')">
+<body onload="addClassSelectedMenuButton('summary-menu-button'), currentDate()">
     <div class="all-content">
         <div class="content">
             <header>
@@ -112,7 +112,7 @@
                             </div>
                             <span class="separator-button-middle"></span>
                             <div class="date-text-box">
-                                <span class="deadline-date">October 16, 2022</span>
+                                <span class="deadline-date" id="currentDate"></span>
                                 <span class="text-small-button-middle">Upcoming Deadline</span>
                             </div>
                         </div>
