@@ -26,22 +26,31 @@
     width: 456px;
     box-shadow: 0px 7px 6px 2px rgba(0, 0, 0, 0.11);
     background-color: #FFFFFF;
-    overflow-y: scroll;
+    overflow: auto;
 }
 
-/* #contactlist-container{
-    overflow-y: scroll;
-    scrollbar-color: #A8A8A8 #FFFFFF;
+#contactlist-container{
+    scrollbar-color: grey rgb(252, 252, 252);
     scrollbar-width: thin;
-} */
+}
 
 #contactlist-container::-webkit-scrollbar{
-    width: 4px;
+    width: 8px;
+}
+
+#contactlist-container::-webkit-scrollbar-track{
+    background: white;
 }
 
 #contactlist-container::-webkit-scrollbar-thumb{
-    border-radius: 30px;
-    background: #D1D1D1;
+    background: grey;
+    border-radius: 10px;
+    
+}
+
+#contactlist-container::-webkit-scrollbar-thumb:hover{
+    background: rgb(180, 180, 180);
+    cursor: pointer;
 }
 
 .contacs-box-container{

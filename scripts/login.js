@@ -1,6 +1,4 @@
-const BASE_URL = "https://join-skizze-default-rtdb.europe-west1.firebasedatabase.app/"
-const BASE_JOIN_GUAST_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
-let allUsers = [];
+const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
 
 
@@ -19,54 +17,30 @@ if (msg) {
     }, 2000);
 }
 
-async function init() {
-    await loadAllUserData();
-    await allDatas();
-}
-
-async function loadAllUserData(path) {
-    let response = await fetch(BASE_JOIN_GUAST_URL + path + ".json")
-    return responseToJson = await response.json();
-}
-
-async function allDatas() {
-    let userResponse = await loadAllUserData("allUser");
-    if (!userResponse) { 
-        console.error("Fehler: userResponse ist null oder undefined!");
-        return;
-    }
-    let userKeysArray = Object.keys(userResponse);
-    for (let index = 0; index < userKeysArray.length; index++) {
-        allUsers.push(
-            {
-                key : userKeysArray[index],
-                email : userResponse[userKeysArray[index]]?.email,
-                password : userResponse[userKeysArray[index]]?.password,
-            }
-        )
-    }
-    console.log(allUsers);
-    
-}
 
 async function UserLogin() {
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let user = allUsers.find(u => u.email == email.value && u.password == password.value)
-    email.value = "";
-    password.value = "";
-    if (user) {
-        console.log("user gefunden");
+    let emailInput = document.getElementById('email');
+    let passwordInput = document.getElementById('password');
+
+    let email = emailInput.value;
+    let password = passwordInput.value;
+
+    let usersResponse = await fetch(BASE_URL + "users.json");
+    let users = await usersResponse.json();
+    let userId = Object.keys(users).find(key => users[key].email === email && users[key].password === password);
+
+    if (userId) {
+        localStorage.setItem("userId", userId);
         window.location.href = 'summary.html?';
     }else{
-        console.log("kein user vorhanden");
-        email.style.border = "1px solid red";
-        password.style.border = "1px solid red";
-        document.getElementById('notCorrectValue').style.display = ("flex")
+        emailInput.style.border = "1px solid red";
+        passwordInput.style.border = "1px solid red";
+        document.getElementById('notCorrectValue').style.display = ("block")
     }
 }
 
 function loginGuastAccount() {
+    localStorage.setItem("userId", "guest");
     window.location.href = "summary.html?"
 }
 

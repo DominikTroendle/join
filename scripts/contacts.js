@@ -1,4 +1,4 @@
-const BASE_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
+const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let allContacts = [];
 let contactNames = [];
 let bgColors = [];
@@ -11,8 +11,8 @@ async function init() {
     await loadContactList();
 }
 
-async function loadAllUserContacts(path="") {
-    let response = await fetch(BASE_URL + path + ".json")
+async function loadAllUserContacts(path) {
+    let response = await fetch(`${BASE_URL}users/${path}.json`)
     return responseToJson = await response.json();
 }
 
@@ -31,7 +31,8 @@ async function loadColors() {
 }
 
 async function allUserContacts() {
-    let contactResponse = await loadAllUserContacts("allContacts");
+    let userId = localStorage.getItem("userId");
+    let contactResponse = await loadAllUserContacts(`${userId}/allContacts`);
     if (!contactResponse) { 
         console.error("Fehler: contactResponse ist null oder undefined!");
         return;
@@ -80,6 +81,7 @@ function resetContactForm() {
 
 async function addUserToContactList(event, form) {
     event.preventDefault();
+    let userId = localStorage.getItem("userId");
     let name = form.querySelector('#name');
     let email = form.querySelector('#email');
     let phone = form.querySelector('#phone');
@@ -90,7 +92,7 @@ async function addUserToContactList(event, form) {
         "phone": phone.value, 
         "color": color
     };
-    let response = await sendData("/allContacts", newContact);
+    let response = await sendData(`${userId}/allContacts`, newContact);
     newContact.key = response.name;
     allContacts.push(newContact);
     await loadContactList();
@@ -119,8 +121,8 @@ async function randomBgColor() {
     return bgColors[randomIndex].name.replace(/^\./, '');
 }
 
-async function sendData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
+async function sendData(path, data) {
+    let response = await fetch(`${BASE_URL}users/${path}.json`,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

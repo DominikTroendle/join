@@ -1,4 +1,4 @@
-const BASE_URL = "https://join-guast-account-default-rtdb.europe-west1.firebasedatabase.app/"
+const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
 
 async function init() {
@@ -36,7 +36,7 @@ async function addUserToRegister(event, form) {
         "email" : email.value,
         "password" : password.value,
     };
-    await sendData("/allUser", newUser);
+    await sendData("/users", newUser);
     name.value = '';
     email.value = '';
     password.value = '';
