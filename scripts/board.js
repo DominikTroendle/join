@@ -5,14 +5,18 @@ let toDoArray = [
         taskType: "User Story",
         taskTitle: "Kochwelt Page & Recipe Recommender",
         taskDescription: "Build start page with recipe recommendation...",
-        taskPriority: "medium"
+        taskPriority: "medium",
+        numberOfSubtasks: 2,
+        numberOfCompletedSubtasks: 1
     },
     {
         id: 2,
         taskType: "Technical Task",
         taskTitle: "HTML Base Template Creation",
         taskDescription: "Create reusable HTML base templates...",
-        taskPriority: "low"
+        taskPriority: "low",
+        numberOfSubtasks: 1,
+        numberOfCompletedSubtasks: 0
     }
 ];
 let inProgressArray = [
@@ -21,14 +25,18 @@ let inProgressArray = [
         taskType: "User Story",
         taskTitle: "Daily Kochwelt Recipe",
         taskDescription: "Implement daily recipe and portion calculator...",
-        taskPriority: "medium"
+        taskPriority: "medium",
+        numberOfSubtasks: 4,
+        numberOfCompletedSubtasks: 2
     },
     {
         id: 4,
         taskType: "Technical Task",
         taskTitle: "CSS Architecture Planning",
         taskDescription: "Define CSS naming conventions and structure...",
-        taskPriority: "urgent"
+        taskPriority: "urgent",
+        numberOfSubtasks: 6,
+        numberOfCompletedSubtasks: 2
     }
 ];
 let awaitFeedbackArray = [];
@@ -83,7 +91,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority)
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks)
         }
     }
 }

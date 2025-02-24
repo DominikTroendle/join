@@ -417,7 +417,7 @@ h1 {
 
 .user-story__subtask-scale-fill {
     height: 100%;
-    width: 50%;
+    /* width: 50%; */
     background-color: #4589FF;
     border-radius: 8px;
 }

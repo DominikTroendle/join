@@ -1,4 +1,4 @@
-function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority) {
+function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, namesInitials) {
     let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
         : `user-story__category-box-technical-task`;
 
@@ -19,18 +19,26 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
 
     let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
 
+    let subtaskHtml = "";
+    let scaleFillCalculate;
+
+    if (numberOfSubtasks != 0) {
+        scaleFillCalculate = (100 / numberOfSubtasks) * numberOfCompletedSubtasks;
+        subtaskHtml = `<div class="user-story__scale-text-box">
+                    <div class="user-story__subtask-scale-box">
+                        <div class="user-story__subtask-scale-fill" style="width: ${scaleFillCalculate}%"></div>
+                    </div>
+                    <span class="user-story__subtask-text">${numberOfCompletedSubtasks}/${numberOfSubtasks} Subtasks</span>
+                </div>`
+    }
+
     return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard()">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
                 <span class="user-story__title">${taskTitle}</span>
                 <span class="user-story__discription">${taskDescription}</span>
-                <div class="user-story__scale-text-box">
-                    <div class="user-story__subtask-scale-box">
-                        <div class="user-story__subtask-scale-fill"></div>
-                    </div>
-                    <span class="user-story__subtask-text">1/2 Subtasks</span>
-                </div>
+                ${subtaskHtml}
                 <div class="user-story__name-priority-box">
                     <div class="user-story__name-box">
                         <span class="user-story__name background-color-1">AM</span>
