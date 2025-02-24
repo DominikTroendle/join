@@ -1,4 +1,4 @@
-function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, namesInitials) {
+function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
     let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
         : `user-story__category-box-technical-task`;
 
@@ -32,6 +32,13 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                 </div>`
     }
 
+    let assignedContactsHtml = "";
+    let initials = assignedContacts.map(element => element.name.slice(0, 1) + element.name.slice(element.name.indexOf(" ") + 1, element.name.indexOf(" ") + 2) || "");
+    let backgroundColors = assignedContacts.map(element => element.color);
+    for (let index = 0; index < initials.length; index++) {
+        assignedContactsHtml += `<span class="user-story__name ${backgroundColors[index]}">${initials[index]}</span>`
+    }
+
     return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard()">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
@@ -41,9 +48,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                 ${subtaskHtml}
                 <div class="user-story__name-priority-box">
                     <div class="user-story__name-box">
-                        <span class="user-story__name background-color-1">AM</span>
-                        <span class="user-story__name background-color-2">EM</span>
-                        <span class="user-story__name background-color-3">MB</span>
+                        ${assignedContactsHtml}
                     </div>
                     <img class="user-story__img" src="${taskPriorityImgSrc}" alt="">
                 </div>

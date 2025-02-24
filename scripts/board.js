@@ -7,7 +7,8 @@ let toDoArray = [
         taskDescription: "Build start page with recipe recommendation...",
         taskPriority: "medium",
         numberOfSubtasks: 2,
-        numberOfCompletedSubtasks: 1
+        numberOfCompletedSubtasks: 1,
+        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
     },
     {
         id: 2,
@@ -16,7 +17,8 @@ let toDoArray = [
         taskDescription: "Create reusable HTML base templates...",
         taskPriority: "low",
         numberOfSubtasks: 1,
-        numberOfCompletedSubtasks: 0
+        numberOfCompletedSubtasks: 0,
+        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
     }
 ];
 let inProgressArray = [
@@ -27,7 +29,8 @@ let inProgressArray = [
         taskDescription: "Implement daily recipe and portion calculator...",
         taskPriority: "medium",
         numberOfSubtasks: 4,
-        numberOfCompletedSubtasks: 2
+        numberOfCompletedSubtasks: 2,
+        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
     },
     {
         id: 4,
@@ -36,7 +39,8 @@ let inProgressArray = [
         taskDescription: "Define CSS naming conventions and structure...",
         taskPriority: "urgent",
         numberOfSubtasks: 6,
-        numberOfCompletedSubtasks: 2
+        numberOfCompletedSubtasks: 2,
+        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
     }
 ];
 let awaitFeedbackArray = [];
@@ -91,7 +95,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks)
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
         }
     }
 }
