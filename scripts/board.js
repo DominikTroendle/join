@@ -1,5 +1,5 @@
 let currentDraggedElement;
-let toDoArray = [
+let toDoArray2 = [
     {
         id: 1,
         taskType: "User Story",
@@ -8,7 +8,7 @@ let toDoArray = [
         taskPriority: "medium",
         numberOfSubtasks: 2,
         numberOfCompletedSubtasks: 1,
-        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
+        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
     },
     {
         id: 2,
@@ -18,10 +18,10 @@ let toDoArray = [
         taskPriority: "low",
         numberOfSubtasks: 1,
         numberOfCompletedSubtasks: 0,
-        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
+        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
     }
 ];
-let inProgressArray = [
+let inProgressArray2 = [
     {
         id: 3,
         taskType: "User Story",
@@ -30,7 +30,7 @@ let inProgressArray = [
         taskPriority: "medium",
         numberOfSubtasks: 4,
         numberOfCompletedSubtasks: 2,
-        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
+        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
     },
     {
         id: 4,
@@ -40,9 +40,11 @@ let inProgressArray = [
         taskPriority: "urgent",
         numberOfSubtasks: 6,
         numberOfCompletedSubtasks: 2,
-        assignedContacts: [{name: "Anton Meyer", color: "bg-purple"}, {name: "Emil Mandolf", color: "bg-rose"}, {name: "Moritz Buchholz", color: "bg-darkyellow"}]
+        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
     }
 ];
+let toDoArray = [];
+let inProgressArray = [];
 let awaitFeedbackArray = [];
 let doneArray = [];
 let oldArray = [];
@@ -99,8 +101,6 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         }
     }
 }
-renderSmallCard("to-do-drag-field", toDoArray);
-renderSmallCard("in-progress-drag-field", inProgressArray);
 
 function changeDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);
@@ -171,41 +171,47 @@ function renderContentBigTaskCardEdit() {
     bigTaskCard.innerHTML = bigTaskCardEditTemplate();
 }
 
-function test() {
-    // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/toDos.json")
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(error => console.error("Fehler beim Abrufen:", error));
-
-    // fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/inProgress.json", {
-    //     method: "PATCH",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //         "2": {
-    //             id: 2,
-    //             taskType: "User Story",
-    //             taskTitle: "Kochwelt Page & Recipe Recommender",
-    //             taskDescription: "Build start page with recipe recommendation..."
-    //         }
-    //     })
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log("Daten gespeichert:", data))
-    // .catch(error => console.error("Fehler beim Speichern:", error));
-    toDoArray = [];
-    console.log("Array leer machen: " + toDoArray);
-    fetch("https://remotestorage-4c4b1-default-rtdb.europe-west1.firebasedatabase.app/inProgress.json")
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                const toDoArray = Object.values(data); // Objekt in ein Array umwandeln
-                console.log(toDoArray);
-            } else {
-                console.log("Keine Daten gefunden.");
-            }
-        })
-        .catch(error => console.error("Fehler beim Abrufen:", error));
-
+function init() {
+    readFromDatabase("guest", "todos", toDoArray, "to-do-drag-field")
+    readFromDatabase("guest", "inProgress", inProgressArray, "in-progress-drag-field")
+    readFromDatabase("guest", "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field")
+    readFromDatabase("guest", "done", doneArray, "done-drag-field")
 }
 
-// test();
+const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
+async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
+    try {
+        let result = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`);
+        if (!result.ok) {
+            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
+        }
+        let data = await result.json();
+        let dataArray = data ? Object.values(data) : [];
+        categoryArray = dataArray;
+        renderSmallCard(dragFieldId, categoryArray);
+    } catch (error) {
+        console.error("Fehler beim Laden der Daten:", error);
+    }
+}
+
+async function writeInDatabase(userKey, category) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            taskType: "Technical Task",
+            taskTitle: "CSS Architecture Planning",
+            taskDescription: "Define CSS naming conventions and structure...",
+            taskPriority: "urgent",
+            numberOfSubtasks: 6,
+            numberOfCompletedSubtasks: 2,
+            assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
+        })
+    });
+    if (response.ok) {
+        let result = await response.json();
+        console.log("Daten erfolgreich gespeichert:", result);
+    } else {
+        console.error("Fehler beim Speichern:", response.statusText);
+    }
+}
