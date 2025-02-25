@@ -1,6 +1,8 @@
 const BASE_URL_TEST = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/";
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
+let userId;
+
 let contacts = [];
 
 let selectedContacts = [];
@@ -46,9 +48,8 @@ let unvalidInputs = [];
  * loads initial functions
  */
 async function init() {
-    let contactsObj = await getContacts("contacts");
-    let contacts = loadContactInfo(contactsObj);
-    console.log(contacts);
+    let contactsObj = await getContacts();
+    loadContactInfo(contactsObj);
     renderAssignOptions(contacts);
 }
 
@@ -622,9 +623,9 @@ async function postData(path="", data={}) {
  * @returns - retrieved data in case of success, else error
  */
 async function getContacts(path="") {
-    let localId = localStorage.getItem('userId');
-    if (localId !== "guest") {
-        path = "-0JmGYUvy5TGgnx64ptq";
+    userId = localStorage.getItem('userId');
+    if (userId !== "guest") {
+        path = userId;
         let response = await fetch(BASE_URL + path + ".json");
         let responseJson = await response.json();
         return responseJson;
@@ -636,6 +637,18 @@ async function getContacts(path="") {
     }
 }
 
-/* function loadContactInfo(obj) {
-    
-} */
+/**
+ * saves relevant contact info in local contacts array
+ * @param {object} contactsObj - JSON with contacts retrieved from database 
+ */
+function loadContactInfo(contactsObj) {
+    let keys = Object.keys(contactsObj.allContacts);
+    for (let index = 0; index < keys.length; index++) {
+        let key = keys[index];
+        let contactObj = {
+            color: contactsObj.allContacts[key].color,
+            name: contactsObj.allContacts[key].name
+        };
+        contacts.push(contactObj);
+    }
+}
