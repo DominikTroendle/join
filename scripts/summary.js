@@ -17,7 +17,7 @@ async function loadUserData() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
         console.log("Kein eingeloggter User gefunden!");
-        return;
+        return window.location.href = "index.html?";
     }
     let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
