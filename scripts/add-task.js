@@ -1,4 +1,5 @@
-const BASE_URL = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL_TEST = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
 let contacts = [];
 
@@ -19,10 +20,16 @@ let task = {};
     taskDate: "",
     taskPriority: "",
     taskSubtasks:
-    {
-         subtask1: "",
-         subtask2: ""
-    },
+    [
+        {
+            subtask1: "",
+            done: false
+        },
+        {
+            subtask2: "",
+            done: false
+        }
+    ],
     taskAssigned:
     [
         {
@@ -39,7 +46,8 @@ let unvalidInputs = [];
  * loads initial functions
  */
 async function init() {
-    contacts = await getContacts("contacts");
+    let contactsObj = await getContacts("contacts");
+    let contacts = loadContactInfo(contactsObj);
     console.log(contacts);
     renderAssignOptions(contacts);
 }
@@ -312,13 +320,13 @@ function selectContact(name, color) {
  */
 function toggleSelection(boolean, contactDiv, icon) {
     if (boolean) {
-        contactDiv.classList.add('bg-blue');
+        contactDiv.classList.add('bg-selected');
         contactDiv.classList.add('selected-hover');
         contactDiv.classList.add('white');
         icon.src = "./assets/icons/checked.svg";
         icon.classList.add('filter-white');
     } else {
-        contactDiv.classList.remove('bg-blue');
+        contactDiv.classList.remove('bg-selected');
         contactDiv.classList.remove('selected-hover');
         contactDiv.classList.remove('white');
         icon.src = "./assets/icons/unchecked.svg";
@@ -371,7 +379,7 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
  * @returns - true if option is selected
  */
 function isContactSelected(contactDiv) {
-    return contactDiv.classList.contains('bg-blue');
+    return contactDiv.classList.contains('bg-selected');
 }
 
 /**
@@ -614,7 +622,20 @@ async function postData(path="", data={}) {
  * @returns - retrieved data in case of success, else error
  */
 async function getContacts(path="") {
-    let response = await fetch(BASE_URL + path + ".json");
-    let responseJson = await response.json();
-    return responseJson;
+    let localId = localStorage.getItem('userId');
+    if (localId !== "guest") {
+        path = "-0JmGYUvy5TGgnx64ptq";
+        let response = await fetch(BASE_URL + path + ".json");
+        let responseJson = await response.json();
+        return responseJson;
+    } else {
+        path = "guest";
+        let response = await fetch(BASE_URL + path + ".json");
+        let responseJson = await response.json();
+        return responseJson;
+    }
 }
+
+/* function loadContactInfo(obj) {
+    
+} */

@@ -14,11 +14,7 @@
     color: black;
 }
 
-.bg-white {
-    background-color: white;
-}
-
-.bg-blue {
+.bg-selected {
     background-color: #2A3647;
 }
 
@@ -35,49 +31,49 @@
 }
 
 .bg-purple {
-    background: #9327FF;
+    background-color: #9327FF;
 }
 
 .bg-skyblue {
-    background: #00BEE8;
+    background-color: #00BEE8;
 }
 
 .bg-turquoise {
-    background: #1FD7C1;
+    background-color: #1FD7C1;
 }
 
 .bg-redorange {
-    background: #FF745E;
+    background-color: #FF745E;
 }
 
 .bg-peach {
-    background: #FFA35E;
+    background-color: #FFA35E;
 }
 
 .bg-rose {
-    background: #FC71FF;
+    background-color: #FC71FF;
 }
 
 .bg-sun {
-    background: #FFC701;
+    background-color: #FFC701;
 }
 
 .bg-darkblue {
-    background: #0038FF;
+    background-color: #0038FF;
 }
 
 .bg-green {
-    background: #C3FF2B;
+    background-color: #C3FF2B;
 }
 
 .bg-yellow {
-    background: #FFE62B;
+    background-color: #FFE62B;
 }
 
 .bg-red {
-    background: #FF4646;
+    background-color: #FF4646;
 }
 
 .bg-darkyellow {
-    background: #FFBB2B;
+    background-color: #FFBB2B;
 }
