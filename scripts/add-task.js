@@ -209,9 +209,16 @@ function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
     if (selectedContacts.length == 0) {
-       renderDefaultContacts(array, dropDown);
+        renderDefaultContacts(array, dropDown);
     } else {
         checkForSelectedContacts(array, dropDown);
+    }
+    if (contacts.length < 5) {
+        dropDown.style.width = "440px";
+        let selectOptionsArray = Array.from(document.getElementsByClassName('container-custom-select-option'));
+        selectOptionsArray.forEach(element => {
+            element.classList.remove('select-option-with-scrollbar');
+        });
     }
 }
 
