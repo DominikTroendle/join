@@ -321,13 +321,13 @@ function selectContact(name, color) {
  */
 function toggleSelection(boolean, contactDiv, icon) {
     if (boolean) {
-        contactDiv.classList.add('bg-selected');
+        contactDiv.classList.add('selected');
         contactDiv.classList.add('selected-hover');
         contactDiv.classList.add('white');
         icon.src = "./assets/icons/checked.svg";
         icon.classList.add('filter-white');
     } else {
-        contactDiv.classList.remove('bg-selected');
+        contactDiv.classList.remove('selected');
         contactDiv.classList.remove('selected-hover');
         contactDiv.classList.remove('white');
         icon.src = "./assets/icons/unchecked.svg";
@@ -380,7 +380,7 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
  * @returns - true if option is selected
  */
 function isContactSelected(contactDiv) {
-    return contactDiv.classList.contains('bg-selected');
+    return contactDiv.classList.contains('selected');
 }
 
 /**
