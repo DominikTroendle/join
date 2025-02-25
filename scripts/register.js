@@ -22,6 +22,18 @@ async function sendData(path="", data={}) {
     return responseToJson;
 }
 
+async function putData(path="", data={}) {
+    let response = await fetch(BASE_URL + path + ".json",{
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+    let responseToJson = await response.json();
+    return responseToJson;
+}
+
 async function addUserToRegister(event, form) {
     event.preventDefault();
     let isValid = await UserRegister();
@@ -36,11 +48,19 @@ async function addUserToRegister(event, form) {
         "email" : email.value,
         "password" : password.value,
     };
-    await sendData("/users", newUser);
-    name.value = '';
-    email.value = '';
-    password.value = '';
-    window.location.href = 'index.html?msg=You Signed Up successfully';
+    let response = await sendData("/users", newUser);
+    if (response && response.name) {
+        let userId = response.name;
+        let tasks = { "awaitFeedback": "", "done": "", "inProgress": "", "toDos": "" };
+        await putData(`/users/${userId}/tasks`, tasks);
+
+        name.value = '';
+        email.value = '';
+        password.value = '';
+        window.location.href = 'index.html?msg=You Signed Up successfully';
+    } else {
+        console.error("User registration failed.");
+    }
     return false;
 }
 
