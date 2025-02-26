@@ -10,7 +10,6 @@ function changeImgSource(id, imgSource) {
 
 async function init() {
     await loadUserData()
-    currentTime();
 }
 
 async function loadUserData() {
@@ -22,10 +21,9 @@ async function loadUserData() {
     let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
-    
-    console.log("Daten des eingeloggten Users:", userData);
     document.getElementById('userName').innerHTML = userData.userDatas.user || "";
     document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user) || "G"
+    currentTime(userId);
 }
 
 function findInitials(contactName) {
@@ -37,13 +35,18 @@ function findInitials(contactName) {
     return initials
 }
 
-function currentTime() {
+function currentTime(userId) {
     const currentTime = new Date().getHours();
+    let greeting = "";
     if (currentTime < 12) {
-        document.getElementById('currentGreeting').innerHTML = "Good morning"
+        greeting = "Good morning";
     } else if (currentTime < 18) {
-        document.getElementById('currentGreeting').innerHTML = "Good day"
+        greeting = "Good day";
     } else {
-        document.getElementById('currentGreeting').innerHTML = "Good evening"
+        greeting = "Good evening";
     }
+    if (userId !== "guest") {
+        greeting += ",";
+    }
+    document.getElementById('currentGreeting').innerHTML = greeting;
 }
