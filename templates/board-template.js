@@ -39,7 +39,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         assignedContactsHtml += `<span class="user-story__name ${backgroundColors[index]}">${initials[index]}</span>`
     }
 
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard()">
+    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
@@ -66,19 +66,35 @@ function cardBorderdragEnterTemplate() {
             </div>`;
 }
 
-function bigTaskCardTemplate() {
+function bigTaskCardTemplate(taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
+    const priorityMapping = [
+        {
+            priority: "low",
+            src: "assets/icons/low.svg"
+        },
+        {
+            priority: "medium",
+            src: "assets/icons/medium.svg"
+        },
+        {
+            priority: "urgent",
+            src: "assets/icons/urgent.svg"
+        }
+    ];
+
+    let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
+
     return `    <div class="big-task-card__task-type-text-button-box">
                     <div class="big-task-card__task-type-text-box">
-                        <span class="big-task-card__task-type-text">User Story</span>
+                        <span class="big-task-card__task-type-text">${taskType}</span>
                     </div>
                     <button class="big-task-card__task-type-button" onclick="addClassSlideBack()">x</button>
                 </div>
                 <div class="big-task-card__title-box">
-                    <span class="big-task-card__title">Kochwelt Page & Recipe Recommender</span>
+                    <span class="big-task-card__title">${taskTitle}</span>
                 </div>
                 <div class="big-task-card__task-description-box">
-                    <span class="big-task-card__task-description-text">Build start page with recipe
-                        recommendation</span>
+                    <span class="big-task-card__task-description-text">${taskDescription}</span>
                 </div>
                 <div class="big-task-card__due-date-box">
                     <span class="big-task-card__due-date-text">Due date:</span>
@@ -88,7 +104,7 @@ function bigTaskCardTemplate() {
                     <span class="big-task-card__priority-text">Priority:</span>
                     <div class="big-task-card__priority-text-img-box">
                         <span class="big-task-card__priority-text">Medium</span>
-                        <img class="big-task-card__priority-img" src="assets/icons/medium.svg" alt="">
+                        <img class="big-task-card__priority-img" src=${taskPriorityImgSrc} alt="">
                     </div>
                 </div>
                 <div class="big-task-card__assigned-to-box">

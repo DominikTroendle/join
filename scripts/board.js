@@ -97,7 +97,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].taskTitle, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
         }
     }
 }
@@ -161,7 +161,9 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
     hook.classList.toggle("d-none");
 }
 
-function renderContentBigTaskCard() {
+function renderContentBigTaskCard(event) {
+    smallTaskCardId = event.currentTarget.id;
+    objectFromCurrentSmallTaskCard = toDoArray.find(element => element.taskTitle === smallTaskCardId);
     let bigTaskCard = document.getElementById("big-task-card__box");
     bigTaskCard.innerHTML = bigTaskCardTemplate();
 }
