@@ -9,7 +9,9 @@ let selectedContacts = [];
 
 let selectedPriority = "";
 
-let subtasks = 0;
+let subtasksCount = 0;
+
+let subtasks = [];
 
 let task = {};
 
@@ -395,7 +397,7 @@ function isContactSelected(contactDiv) {
  */
 function clearInputs() {
     removeError();
-    subtasks = 0;
+    subtasksCount = 0;
     document.getElementById('container-subtasks').innerHTML = "";
     document.getElementById('container-assigned-contacts').innerHTML = "";
     clearPrioButtons();
@@ -453,9 +455,12 @@ function showEditOptions(id, boolean) {
  */
 function addSubtask() {
     let input = document.getElementById('subtasks');
-    subtasks++;
-    document.getElementById('container-subtasks').innerHTML += returnSubtaskHTML(subtasks);
-    document.getElementById(`subtask-${subtasks}`).innerText = input.value;
+    subtasksCount++;
+    document.getElementById('container-subtasks').innerHTML += returnSubtaskHTML(subtasksCount);
+    document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
+    subtasks.push(input.value);
+
+    console.log(subtasks);
 }
 
 /**
@@ -463,8 +468,16 @@ function addSubtask() {
  * @param {*} id - id of the subtask
  */
 function deleteSubtask(id) {
-    document.getElementById(`container-subtask-${id}`).remove();
-    subtasks--;
+    let subtask = document.getElementById(`subtask-${id}`);
+    console.log(subtask.value);
+    
+    let subtaskContainer = document.getElementById(`container-subtask-${id}`);
+    let index = subtasks.indexOf(subtask.value);
+    subtasks.splice(index, 1);
+    subtaskContainer.remove();
+    subtasksCount--;
+
+    console.log(subtasks);
 }
 
 /**
@@ -585,14 +598,17 @@ function removeError() {
  * saves task as object
  */
 function saveTask() {
-    task.taskId = 3;
+    // task.taskId = 3;
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
     task.taskPriority = selectedPriority;
-    task.taskDate = document.getElementById('due-date').value;
-    // task.taskSubtasks = [];
-    saveToFirebase("toDos", task);
+    // task.taskDate = document.getElementById('due-date').value;
+    task.numberOfSubtasks = subtasksCount;
+    task.numberOfCompletedSubtasks = 0;
+    // task.taskSubtasks = subtasks;
+    task.assignedContacts = selectedContacts;
+    saveToFirebase("todos", task);
     task = {};
 }
 
@@ -602,7 +618,13 @@ function saveTask() {
  * @param {*} task - task to be saved
  */
 async function saveToFirebase(path, task) {
-    await postData(path, task);
+    if (userId == "guest") {
+        path = "guest/tasks/" + path;
+        await postData(path, task);
+    } else {
+        path = `${userId}/tasks/` + path;
+        await postData(path, task)
+    }
 }
 
 /**
