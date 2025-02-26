@@ -39,7 +39,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         assignedContactsHtml += `<span class="user-story__name ${backgroundColors[index]}">${initials[index]}</span>`
     }
 
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging(${id}); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
+    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); changeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
@@ -66,7 +66,10 @@ function cardBorderdragEnterTemplate() {
             </div>`;
 }
 
-function bigTaskCardTemplate(taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
+function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
+    let taskTypeCssClass = taskType == "User Story" ? `big-task-card__category-box-user-story`
+        : `big-task-card__category-box-technical-task`;
+
     const priorityMapping = [
         {
             priority: "low",
@@ -85,7 +88,7 @@ function bigTaskCardTemplate(taskType, taskTitle, taskDescription, taskPriority,
     let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
 
     return `    <div class="big-task-card__task-type-text-button-box">
-                    <div class="big-task-card__task-type-text-box">
+                    <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
                         <span class="big-task-card__task-type-text">${taskType}</span>
                     </div>
                     <button class="big-task-card__task-type-button" onclick="addClassSlideBack()">x</button>

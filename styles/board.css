@@ -565,12 +565,20 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 164px;
     height: 36px;
     border-radius: 8px;
     padding: 4px 24px;
     gap: 10px;
+}
+
+.big-task-card__category-box-user-story {
+    width: 164px;
     background-color: #0038FF;
+}
+
+.big-task-card__category-box-technical-task {
+    width: 208px;
+    background-color: #1FD7C1;
 }
 
 .big-task-card__task-type-text {

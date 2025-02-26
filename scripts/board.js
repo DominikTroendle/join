@@ -162,10 +162,10 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
 }
 
 function renderContentBigTaskCard(event) {
-    smallTaskCardId = event.currentTarget.id;
-    objectFromCurrentSmallTaskCard = toDoArray.find(element => element.taskTitle === smallTaskCardId);
+    let smallTaskCardId = event.currentTarget.id;
+    let objectFromCurrentSmallTaskCard = toDoArray.find(element => element.taskTitle == smallTaskCardId);
     let bigTaskCard = document.getElementById("big-task-card__box");
-    bigTaskCard.innerHTML = bigTaskCardTemplate();
+    bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts);
 }
 
 function renderContentBigTaskCardEdit() {
@@ -174,10 +174,10 @@ function renderContentBigTaskCardEdit() {
 }
 
 function init() {
-    readFromDatabase("guest", "todos", toDoArray, "to-do-drag-field")
-    readFromDatabase("guest", "inProgress", inProgressArray, "in-progress-drag-field")
-    readFromDatabase("guest", "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field")
-    readFromDatabase("guest", "done", doneArray, "done-drag-field")
+    readFromDatabase("guest", "todos", toDoArray, "to-do-drag-field");
+    readFromDatabase("guest", "inProgress", inProgressArray, "in-progress-drag-field");
+    readFromDatabase("guest", "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
+    readFromDatabase("guest", "done", doneArray, "done-drag-field");
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
@@ -189,7 +189,7 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         }
         let data = await result.json();
         let dataArray = data ? Object.values(data) : [];
-        categoryArray = dataArray;
+        dataArray.forEach(element => categoryArray.push(element));
         renderSmallCard(dragFieldId, categoryArray);
     } catch (error) {
         console.error("Fehler beim Laden der Daten:", error);
