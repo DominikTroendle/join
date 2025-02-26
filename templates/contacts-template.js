@@ -13,11 +13,11 @@ return `
 `
 }
 
-async function selectMoreContactInformationTemplate(contact, init) {
+async function selectMoreContactInformationTemplate(contact, initial) {
     return `
         <section class="contact-info-container" id="contact-${contact.key}">
             <div class="info-name-container">
-                <div class="more-info-initials ${contact.color}"><p>${init}</p></div>
+                <div class="more-info-initials ${contact.color}"><p>${initial}</p></div>
                 <div class="procressing-area">
                     <h1>${contact.name}</h1>
                     <div class="procressing-area-button-container">

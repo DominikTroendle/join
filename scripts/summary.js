@@ -24,7 +24,17 @@ async function loadUserData() {
     let userData = await response.json();
     
     console.log("Daten des eingeloggten Users:", userData);
-    document.getElementById('userName').innerHTML = userData.user || " ";
+    document.getElementById('userName').innerHTML = userData.userDatas.user || " ";
+    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user);
+}
+
+function findInitials(contactName) {
+    let name = contactName.split(' ');
+    let initials = '';
+    for (let i = 0; i < name.length; i++) {
+        initials += name[i].substring(0, 1).toUpperCase();
+    }
+    return initials
 }
 
 function currentTime() {
