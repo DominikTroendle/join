@@ -5,10 +5,25 @@ let bgColors = [];
 
 
 async function init() {
+    await loadSmallInitials();
     await loadAllUserContacts();
     await allUserContacts();
     await loadColors();
     await loadContactList();
+}
+
+async function loadSmallInitials() {
+    let userId = localStorage.getItem("userId");
+    if (!userId) {
+        console.log("Kein eingeloggter User gefunden!");
+        return window.location.href = "index.html?";
+    }
+    let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
+    let response = await fetch(BASE_URL + dataPath);
+    let userData = await response.json();
+    
+    console.log("Daten des eingeloggten Users:", userData);
+    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user);
 }
 
 async function loadAllUserContacts(path) {
