@@ -231,7 +231,8 @@ function editContactOverlay(contactKey) {
     setTimeout(() => container.style.transform = 'translateX(0)', 10);
     if (!refOverlay.dataset.listenerAdded) {
         refOverlay.dataset.listenerAdded = "true";
-        refOverlay.onclick = (e) => { if (e.target === refOverlay) { container.style.transform = 'translateX(100%)'; setTimeout(() => refOverlay.classList.toggle('d-none'), 500); } };
+        refOverlay.onclick = (e) => { if (e.target === refOverlay) { container.style.transform = 'translateX(100%)'; 
+        setTimeout(() => refOverlay.classList.toggle('d-none'), 500); } };
     }
     let contact = allContacts.find(c => c.key === contactKey);
     if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
@@ -246,6 +247,7 @@ function editContactOverlay(contactKey) {
 
 async function editContact(event, form) {
     event.preventDefault();
+    let userId = localStorage.getItem("userId");
     let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
     if (!contactKey) return console.error("Fehler: Kein gültiger Kontakt-Key gefunden!");
     let updatedContact = {
@@ -254,7 +256,7 @@ async function editContact(event, form) {
         phone: form.querySelector('#editPhone').value,
         color: await randomBgColor()
     };
-    await putData(contactKey, updatedContact);
+    await putData(contactKey, updatedContact, userId);
     let contactIndex = allContacts.findIndex(c => c.key === contactKey);
     if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
     updateContactTemplate(contactKey, updatedContact);
@@ -271,8 +273,8 @@ async function updateContactTemplate(contactKey, updatedContact) {
     }
 }
 
-async function putData(key, data) {
-    let response = await fetch(`${BASE_URL}allContacts/${key}.json`, {
+async function putData(key, data, path) {
+    let response = await fetch(`${BASE_URL}users/${path}/allContacts/${key}.json`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -285,12 +287,13 @@ async function putData(key, data) {
 }
 
 async function deleteContact(key) {
+    let userId = localStorage.getItem("userId");
     if (!key) {
         console.error("Fehler: Kein gültiger Key übergeben!");
         return;
     }
     try {
-        let response = await fetch(`${BASE_URL}allContacts/${key}.json`, {
+        let response = await fetch(`${BASE_URL}/users/${userId}/allContacts/${key}.json`, {
             method: "DELETE",
         });
         if (!response.ok) {
