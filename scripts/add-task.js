@@ -683,6 +683,10 @@ function loadContactInfo(contactsObj) {
     }
 }
 
+/**
+ * loads and displays the initials of the signed-in user
+ * @returns - forwards to login page if no user is signed-in
+ */
 async function loadSmallInitials() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
