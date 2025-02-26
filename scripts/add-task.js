@@ -53,6 +53,7 @@ async function init() {
     let contactsObj = await getContacts();
     loadContactInfo(contactsObj);
     renderAssignOptions(contacts);
+    loadSmallInitials();
 }
 
 /**
@@ -680,4 +681,16 @@ function loadContactInfo(contactsObj) {
         };
         contacts.push(contactObj);
     }
+}
+
+async function loadSmallInitials() {
+    let userId = localStorage.getItem("userId");
+    if (!userId) {
+        console.log("Kein eingeloggter User gefunden!");
+        return window.location.href = "index.html?";
+    }
+    let dataPath = userId === "guest" ? "guest.json" : `${userId}.json`;
+    let response = await fetch(BASE_URL + dataPath);
+    let userData = await response.json();
+    document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.user) || "G";
 }
