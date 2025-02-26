@@ -21,9 +21,7 @@ async function loadSmallInitials() {
     let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
-    
-    console.log("Daten des eingeloggten Users:", userData);
-    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user);
+    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user) || "G";
 }
 
 async function loadAllUserContacts(path) {

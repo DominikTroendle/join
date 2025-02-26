@@ -24,8 +24,8 @@ async function loadUserData() {
     let userData = await response.json();
     
     console.log("Daten des eingeloggten Users:", userData);
-    document.getElementById('userName').innerHTML = userData.userDatas.user || " ";
-    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user);
+    document.getElementById('userName').innerHTML = userData.userDatas.user || "";
+    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user) || "G"
 }
 
 function findInitials(contactName) {
