@@ -3,7 +3,9 @@ let allContacts = [];
 let contactNames = [];
 let bgColors = [];
 
-
+/**
+ * Initializes the application by loading necessary data.
+ */
 async function init() {
     await loadSmallInitials();
     await loadAllUserContacts();
@@ -12,6 +14,9 @@ async function init() {
     await loadContactList();
 }
 
+/**
+ * Loads and displays user initials.
+ */
 async function loadSmallInitials() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
@@ -24,11 +29,23 @@ async function loadSmallInitials() {
     document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user) || "G";
 }
 
+/**
+ * Loads user contacts.
+ * 
+ * @param {string} path - The user path.
+ * 
+ * @returns {Promise<Object>} The user contacts data.
+ */
 async function loadAllUserContacts(path) {
     let response = await fetch(`${BASE_URL}users/${path}.json`)
     return responseToJson = await response.json();
 }
 
+/**
+ * Loads background colors from a CSS file.
+ * 
+ * @returns {Promise<Array<{name: string, color: string}>>} Parsed colors.
+ */
 async function loadColors() {
     let responseColors = await fetch("styles/colors.css");
     let responseColorText = await responseColors.text();
@@ -43,6 +60,9 @@ async function loadColors() {
     return bgColors;
 }
 
+/**
+ * Loads all user contacts and stores them in allContacts.
+ */
 async function allUserContacts() {
     let userId = localStorage.getItem("userId");
     let contactResponse = await loadAllUserContacts(`${userId}/allContacts`);
@@ -64,6 +84,9 @@ async function allUserContacts() {
     }
 }
 
+/**
+ * Toggles the new contact overlay.
+ */
 function addNewContectOverlay() {
     let refOverlay = document.getElementById('newContectOverlay');
     refOverlay.innerHTML = getToCreatANewContactTemplate();
@@ -85,6 +108,9 @@ function addNewContectOverlay() {
     }
 }
 
+/**
+ * Resets the contact form.
+ */
 function resetContactForm() {
     let form = document.querySelector('#newContectOverlay form');
     if (form) {
@@ -92,33 +118,25 @@ function resetContactForm() {
     }
 }
 
+/**
+ * Adds a new user to the contact list.
+ * 
+ * @param {Event} event - The event object.
+ * 
+ * @param {HTMLFormElement} form - The form containing user data.
+ * 
+ * @returns {Promise<boolean>} False after execution.
+ */
 async function addUserToContactList(event, form) {
     event.preventDefault();
-    let userId = localStorage.getItem("userId");
-    let name = form.querySelector('#name');
-    let email = form.querySelector('#email');
-    let phone = form.querySelector('#phone');
-    let color = await randomBgColor();
-    let newContact = {
-        "name": name.value, 
-        "email": email.value, 
-        "phone": phone.value, 
-        "color": color
-    };
+    let userId = localStorage.getItem("userId"), color = await randomBgColor();
+    let newContact = await createContact(form, color);
     let response = await sendData(`${userId}/allContacts`, newContact);
     newContact.key = response.name;
     allContacts.push(newContact);
     await loadContactList();
     moreContactInformation(newContact.name);
-    setTimeout(() => {
-        let newContactElement = [...document.querySelectorAll('.container-contact')]
-            .find(el => el.textContent.includes(newContact.name));
-    
-        if (newContactElement) {
-            selectContact(newContactElement);
-            newContactElement.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-    }, 100);
+    highlightNewContact(newContact);
     form.reset();
     successfullyContact();
     let addButton = document.getElementById('addContactButton');
@@ -128,12 +146,60 @@ async function addUserToContactList(event, form) {
     return false;
 }
 
+/**
+ * Creates a contact object.
+ * 
+ * @param {HTMLFormElement} form - The form element.
+ * 
+ * @param {string} color - The contact color.
+ * 
+ * @returns {Promise<Object>} The contact data.
+ */
+async function createContact(form, color) {
+    return {
+        name: form.querySelector('#name').value,
+        email: form.querySelector('#email').value,
+        phone: form.querySelector('#phone').value,
+        color: color
+    };
+}
+
+/**
+ * Returns a random background color.
+ * 
+ * @returns {Promise<string>} A random background color or default.
+ */
 async function randomBgColor() {
     if (bgColors.length === 0) return "#F6F7F8";
     let randomIndex = Math.floor(Math.random() * bgColors.length);
     return bgColors[randomIndex].name.replace(/^\./, '');
 }
 
+/**
+ * Highlights and scrolls to the new contact.
+ * 
+ * @param {Object} contact - The contact object.
+ */
+function highlightNewContact(contact) {
+    setTimeout(() => {
+        let newContactElement = [...document.querySelectorAll('.container-contact')]
+            .find(el => el.textContent.includes(contact.name));
+        if (newContactElement) {
+            selectContact(newContactElement);
+            newContactElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }, 100);
+}
+
+/**
+ * Sends data to the specified path.
+ * 
+ * @param {string} path - The API endpoint.
+ * 
+ * @param {Object} data - The data to send.
+ * 
+ * @returns {Promise<Object>} The response JSON.
+ */
 async function sendData(path, data) {
     let response = await fetch(`${BASE_URL}users/${path}.json`,{
         method: "POST",
@@ -146,6 +212,9 @@ async function sendData(path, data) {
     return responseToJson;
 }
 
+/**
+ * Hides the contact overlay and briefly shows a success message.
+ */
 function successfullyContact() {
     let overlay = document.getElementById('newContectOverlay');
     overlay.classList.add("d-none");
@@ -159,6 +228,9 @@ function successfullyContact() {
     }, 500);
 }
 
+/**
+ * Loads and sorts the contact list.
+ */
 async function loadContactList() {
     let contactList = document.getElementById('contactList');
     contactList.innerHTML = "";
@@ -170,6 +242,17 @@ async function loadContactList() {
     }
 }
 
+/**
+ * Creates a contact group by first letter.
+ * 
+ * @param {Object} contact - The contact object.
+ * 
+ * @param {string} currentLetter - The current letter.
+ * 
+ * @param {Array} contactList - The contact list.
+ * 
+ * @returns {Promise<string>} The updated current letter.
+ */
 async function createContactGroup(contact, currentLetter, contactList) {
     let firstLetter = contact.name.charAt(0).toUpperCase();
     if (currentLetter !== firstLetter) {
@@ -180,6 +263,13 @@ async function createContactGroup(contact, currentLetter, contactList) {
     return currentLetter;
 }
 
+/**
+ * Adds a group header to the contact list.
+ * 
+ * @param {HTMLElement} contactList - The contact list container.
+ * 
+ * @param {string} letter - The letter for the group header.
+ */
 function addGroupHeader(contactList, letter) {
     contactList.innerHTML += `<div>
         <div class="container-letter">${letter}</div>
@@ -187,6 +277,13 @@ function addGroupHeader(contactList, letter) {
     </div>`;
 }
 
+/**
+ * Adds a contact to the corresponding group.
+ * 
+ * @param {Object} contact - The contact object.
+ * 
+ * @param {string} letter - The group identifier.
+ */
 async function addContactToGroup(contact, letter) {
     let groupContainer = document.getElementById(`group-${letter}`);
     let isFirst = groupContainer.children.length === 0;
@@ -195,6 +292,13 @@ async function addContactToGroup(contact, letter) {
     document.getElementById(`doppelInitials-${contact.name}`).innerText = findInitials(contact.name);
 }
 
+/**
+ * Gets initials from a name.
+ * 
+ * @param {string} contactName - The full name.
+ * 
+ * @returns {string} The initials.
+ */
 function findInitials(contactName) {
     let name = contactName.split(' ');
     let initials = '';
@@ -204,6 +308,11 @@ function findInitials(contactName) {
     return initials
 }
 
+/**
+ * Toggles contact selection.
+ * 
+ * @param {HTMLElement} element - Clicked contact element.
+ */
 function selectContact(element) {
     let isSelected = element.classList.contains('select-contact');
     document.querySelectorAll('.container-contact').forEach(contact => {
@@ -220,6 +329,11 @@ function selectContact(element) {
     }
 }
 
+/**
+ * Updates and displays more contact information.
+ * 
+ * @param {string} contactName - The name of the contact.
+ */
 async function moreContactInformation(contactName) {
     document.getElementById(`${contactName}`).innerText = contactName;
     let initials = findInitials(contactName);
@@ -236,28 +350,70 @@ async function moreContactInformation(contactName) {
     }
 }
 
+/**
+ * Edits a contact overlay.
+ * 
+ * @param {string} contactKey - The key of the contact.
+ */
 function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
     refOverlay.innerHTML = getEditContactTemplate(contactKey);
+    toggleOverlay(refOverlay);
+    let contact = allContacts.find(c => c.key === contactKey);
+    if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
+    fillContactForm(contact);
+    refOverlay.dataset.contactKey = contactKey;
+}
+
+/**
+ * Toggles the overlay visibility and handles click outside to close.
+ * 
+ * @param {HTMLElement} refOverlay - The overlay element.
+ */
+function toggleOverlay(refOverlay) {
     refOverlay.classList.toggle('d-none');
     let container = refOverlay.querySelector('.new-Contect-Container');
     setTimeout(() => container.style.transform = 'translateX(0)', 10);
     if (!refOverlay.dataset.listenerAdded) {
         refOverlay.dataset.listenerAdded = "true";
-        refOverlay.onclick = (e) => { if (e.target === refOverlay) { container.style.transform = 'translateX(100%)'; 
-        setTimeout(() => refOverlay.classList.toggle('d-none'), 500); } };
+        refOverlay.onclick = (e) => { 
+            if (e.target === refOverlay) closeOverlay(refOverlay, container); 
+        };
     }
-    let contact = allContacts.find(c => c.key === contactKey);
-    if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
+}
+
+/**
+ * Closes the overlay.
+ * 
+ * @param {HTMLElement} refOverlay - The overlay element.
+ * 
+ * @param {HTMLElement} container - The container to animate.
+ */
+function closeOverlay(refOverlay, container) {
+    container.style.transform = 'translateX(100%)';
+    setTimeout(() => refOverlay.classList.toggle('d-none'), 500);
+}
+
+/**
+ * Fills the contact form with given contact data.
+ * 
+ * @param {Object} contact - The contact data.
+ */
+function fillContactForm(contact) {
     document.getElementById('editName').value = contact.name || "";
     document.getElementById('editEmail').value = contact.email || "";
     document.getElementById('editPhone').value = contact.phone || "";
-    let initials = findInitials(contact.name);
-    document.getElementById('editUserInitialsText').innerText = initials;
+    document.getElementById('editUserInitialsText').innerText = findInitials(contact.name);
     document.getElementById('editUserInitials').className = `edit-contact-initcolor ${contact.color}`;
-    refOverlay.dataset.contactKey = contactKey;
 }
 
+/**
+ * Edits a contact and updates the contact list.
+ * 
+ * @param {Event} event - The event object.
+ * 
+ * @param {HTMLFormElement} form - The form containing contact data.
+ */
 async function editContact(event, form) {
     event.preventDefault();
     let userId = localStorage.getItem("userId");
@@ -277,6 +433,13 @@ async function editContact(event, form) {
     editContactOverlay();
 }
 
+/**
+ * Updates the contact template.
+ * 
+ * @param {string} contactKey - Contact identifier.
+ * 
+ * @param {Object} updatedContact - Updated contact data.
+ */
 async function updateContactTemplate(contactKey, updatedContact) {
     let contactElement = document.querySelector(`#contact-${contactKey}`);
     if (contactElement) {
@@ -286,6 +449,15 @@ async function updateContactTemplate(contactKey, updatedContact) {
     }
 }
 
+/**
+ * Updates data at the specified path.
+ * 
+ * @param {string} key - The key for the data.
+ * 
+ * @param {Object} data - The data to store.
+ * 
+ * @param {string} path - The user path.
+ */
 async function putData(key, data, path) {
     let response = await fetch(`${BASE_URL}users/${path}/allContacts/${key}.json`, {
         method: "PUT",
@@ -299,6 +471,11 @@ async function putData(key, data, path) {
     return responseToJson;
 }
 
+/**
+ * Deletes a contact by key.
+ * 
+ * @param {string} key - Contact key.
+ */
 async function deleteContact(key) {
     let userId = localStorage.getItem("userId");
     if (!key) {

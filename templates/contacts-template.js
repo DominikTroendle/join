@@ -133,7 +133,7 @@ function getEditContactTemplate(key) {
                             </div>
                         </div>
                         <div class="contact-button-container">
-                            <button class="cancel-btn" onclick="deleteContact('${key}'); ";>Delete</button>
+                            <button class="cancel-btn" type="submit" onclick="deleteContact('${key}')";>Delete</button>
                             <button class="save-btn" type="submit">Save<img src="assets/icons/check.svg" alt=""></button>
                         </div>
                     </form>
