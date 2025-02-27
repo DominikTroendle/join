@@ -33,8 +33,6 @@ async function loadSmallInitials() {
  * Loads user contacts.
  * 
  * @param {string} path - The user path.
- * 
- * @returns {Promise<Object>} The user contacts data.
  */
 async function loadAllUserContacts(path) {
     let response = await fetch(`${BASE_URL}users/${path}.json`)
@@ -43,8 +41,6 @@ async function loadAllUserContacts(path) {
 
 /**
  * Loads background colors from a CSS file.
- * 
- * @returns {Promise<Array<{name: string, color: string}>>} Parsed colors.
  */
 async function loadColors() {
     let responseColors = await fetch("styles/colors.css");
@@ -124,8 +120,6 @@ function resetContactForm() {
  * @param {Event} event - The event object.
  * 
  * @param {HTMLFormElement} form - The form containing user data.
- * 
- * @returns {Promise<boolean>} False after execution.
  */
 async function addUserToContactList(event, form) {
     event.preventDefault();
@@ -152,8 +146,6 @@ async function addUserToContactList(event, form) {
  * @param {HTMLFormElement} form - The form element.
  * 
  * @param {string} color - The contact color.
- * 
- * @returns {Promise<Object>} The contact data.
  */
 async function createContact(form, color) {
     return {
@@ -166,8 +158,6 @@ async function createContact(form, color) {
 
 /**
  * Returns a random background color.
- * 
- * @returns {Promise<string>} A random background color or default.
  */
 async function randomBgColor() {
     if (bgColors.length === 0) return "#F6F7F8";
@@ -197,8 +187,6 @@ function highlightNewContact(contact) {
  * @param {string} path - The API endpoint.
  * 
  * @param {Object} data - The data to send.
- * 
- * @returns {Promise<Object>} The response JSON.
  */
 async function sendData(path, data) {
     let response = await fetch(`${BASE_URL}users/${path}.json`,{
@@ -250,8 +238,6 @@ async function loadContactList() {
  * @param {string} currentLetter - The current letter.
  * 
  * @param {Array} contactList - The contact list.
- * 
- * @returns {Promise<string>} The updated current letter.
  */
 async function createContactGroup(contact, currentLetter, contactList) {
     let firstLetter = contact.name.charAt(0).toUpperCase();
@@ -296,8 +282,6 @@ async function addContactToGroup(contact, letter) {
  * Gets initials from a name.
  * 
  * @param {string} contactName - The full name.
- * 
- * @returns {string} The initials.
  */
 function findInitials(contactName) {
     let name = contactName.split(' ');
