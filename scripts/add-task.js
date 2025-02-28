@@ -46,9 +46,6 @@ let task = {};
 
 let unvalidInputs = [];
 
-/**
- * loads initial functions
- */
 async function init() {
     let contactsObj = await getContacts();
     loadContactInfo(contactsObj);
@@ -56,10 +53,6 @@ async function init() {
     loadSmallInitials();
 }
 
-/**
- * Selects a priority button
- * @param {string} prio - name of the selected priority by onclick
- */
 function selectPrioButton(prio) {  
     let button = document.getElementById(`${prio}`);
     let svg = document.getElementById(`svg-${prio}`);
@@ -73,13 +66,6 @@ function selectPrioButton(prio) {
     }
 }
 
-/**
- * toggles classes to show button as selected or deselected
- * @param {boolean} boolean - determines whether button is selected or deselected
- * @param {string} button - reference of the button-element
- * @param {string} svg - reference of the svg-element
- * @param {string} prio - name of the selected priority
- */
 function toggleButtonClasses(boolean, button, svg, prio) {
     if (boolean) {
         button.classList.remove(`${prio}`);
@@ -94,9 +80,6 @@ function toggleButtonClasses(boolean, button, svg, prio) {
     }
 }
 
-/**
- * removes classes from all buttons to deselect them
- */
 function clearPrioButtons() {
     let prios = ["urgent", "medium", "low"];
     for (let i = 0; i < prios.length; i++) {
@@ -109,9 +92,6 @@ function clearPrioButtons() {
     }
 }
 
-/**
- * toggles the assigned-to dropdown
- */
 function toggleAssignOptions() {
     let container = document.getElementById('dropdown-assign');
     let containerDropdown = document.getElementById('container-dropdown');
@@ -128,11 +108,6 @@ function toggleAssignOptions() {
     }
 }
 
-/**
- * changes src of dropdown arrow img
- * @param {boolean} boolean - determines whether the dropdown is opened or closed onclick
- * @param {string} dropdown - reference of the dropdown element
- */
 function changeDropdownArrow(boolean, dropdown) {
     let dropwdownArrow = document.getElementById(`arrow-dropdown-${dropdown}`);
     if (boolean) {
@@ -142,18 +117,12 @@ function changeDropdownArrow(boolean, dropdown) {
     }
 }
 
-/**
- * toggles the input focus
- */
 function toggleInputFocus() {
     if (!document.getElementById('dropdown-assign').classList.contains('d-none')) {
         document.getElementById('assigned-to').focus();
     }
 }
 
-/**
- * toggles the category dropdown
- */
 function toggleCategoryOptions() {
     let container = document.getElementById('dropdown-category');
     container.classList.toggle('d-none');
@@ -165,26 +134,15 @@ function toggleCategoryOptions() {
     }
 }
 
-/**
- * prevents triggering of the HTML event
- * @param {*} event - the elements HTML event
- */
 function preventDefault(event) {
     event.preventDefault();
 }
 
-/**
- * shows the selected dropdown option in the input field
- * @param {string} category - value of the selected dropdown option
- */
 function displayCategory(category) {
     document.getElementById('category').value = category;
     closeDropdown();
 }
 
-/**
- * closes all dropdown menus
- */
 function closeDropdown() {
     document.getElementById('dropdown-assign').classList.add('d-none');
     document.getElementById('dropdown-category').classList.add('d-none');
@@ -196,18 +154,10 @@ function closeDropdown() {
     changeDropdownArrow(false, 'category');
 }
 
-/**
- * prevents propagation of the HTML event
- * @param {*} event -  the elements HTML event
- */
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
-/**
- * renders the dropdown options of the assigned-to dropdown
- * @param {string} array - array which contains the contacts to be rendered
- */
 function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
@@ -219,21 +169,18 @@ function renderAssignOptions(array) {
     checkForScrollableContainer(dropDown);
 }
 
-function checkForScrollableContainer() {
-    if (contacts.length < 5) {
-        dropDown.style.width = "440px";
+function checkForScrollableContainer(scrollContainer) {
+    if ((contacts.length < 5) && (scrollContainer.id == "dropwdon-assign")) {
+        scrollContainer.style.width = "440px";
         let selectOptionsArray = Array.from(document.getElementsByClassName('container-custom-select-option'));
         selectOptionsArray.forEach(element => {
             element.classList.remove('select-option-with-scrollbar');
         });
+    } else if ((subtasksCount >= 3) && (scrollContainer.id = "container-subtasks")) {
+        scrollContainer.style.width = "200px";
     }
 }
 
-/**
- * renders all contacts as options into the specified dropdown
- * @param {string} array - array which contains the contacts to be rendered
- * @param {string} dropDown - determines the dropdown menu
- */
 function renderDefaultContacts(array, dropDown) {
     for (let i = 0; i < array.length; i++) {
         let contactName = array[i].name;
@@ -241,11 +188,7 @@ function renderDefaultContacts(array, dropDown) {
         renderContactAsDefault(dropDown, contactName, color);
     }
 }
- /**
-  * checks for selected contacts in an array
-  * @param {*} array - array which contains the contacts to be rendered
-  * @param {*} dropDown - determines the dropdown menu
-  */
+
 function checkForSelectedContacts(array, dropDown) {
     for (let i = 0; i < array.length; i++) {
         let contactName = array[i].name;
@@ -258,12 +201,6 @@ function checkForSelectedContacts(array, dropDown) {
     }
 }
 
-/**
- * renders a single contact as selected dropdown option
- * @param {*} dropDown - determines the dropdown menu
- * @param {*} contactName - name of the selected contact
- * @param {*} color - color of the selected contact
- */
 function renderContactAsSelected(dropDown, contactName, color) {
     renderContactAsDefault(dropDown, contactName, color);
     let contactDiv = document.getElementById(`container-${contactName}`);
@@ -271,12 +208,6 @@ function renderContactAsSelected(dropDown, contactName, color) {
     toggleSelection(true, contactDiv, icon);
 }
 
-/**
- * renders a single contact as default dropdown option
- * @param {*} dropDown - determines the dropdown menu
- * @param {*} contactName - name of the contact
- * @param {*} color - color of the contact
- */
 function renderContactAsDefault(dropDown, contactName, color) {
     dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
     document.getElementById(`${contactName}`).innerText = contactName;
@@ -284,22 +215,12 @@ function renderContactAsDefault(dropDown, contactName, color) {
     document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
 }
 
-/**
- * checks if the contact exists in an array
- * @param {*} contactName - name of the contact
- * @returns - true if contact exists in array, otherwise false
- */
 function isInSelectedContacts(contactName) {
     let arr = [];
     selectedContacts.forEach(contact => arr.push(contact.name));
     return arr.includes(contactName);
 }
 
-/**
- * returns initials of a contact name
- * @param {*} contactName - name of the contact 
- * @returns initials of the contact
- */
 function getInitials(contactName) {
     let names = contactName.split(' ');
     let initials = "";
@@ -309,11 +230,6 @@ function getInitials(contactName) {
     return initials;
 }
 
-/**
- * selects the clicked dropdown option
- * @param {*} name - name of the contact
- * @param {*} color - color of the contact
- */
 function selectContact(name, color) {
     let contactDiv = document.getElementById(`container-${name}`);
     let icon = document.getElementById(`icon-${name}`);
@@ -327,12 +243,6 @@ function selectContact(name, color) {
     displaySelectedContacts();
 }
 
-/**
- * toggles selection of dropdown option onclick
- * @param {*} boolean - determines whether option is selected or deselected
- * @param {*} contactDiv - reference of the dropdown option
- * @param {*} icon - icon of the dropdown menu
- */
 function toggleSelection(boolean, contactDiv, icon) {
     if (boolean) {
         contactDiv.classList.add('selected');
@@ -349,18 +259,12 @@ function toggleSelection(boolean, contactDiv, icon) {
     }
 }
 
-/**
- * filters contacts
- */
 function filterContacts() {
     let searchValue = document.getElementById('assigned-to').value.toLowerCase();
     let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
     renderAssignOptions(filteredContacts);
 }
 
-/**
- * displays selected contacts in separate container below dropwdown
- */
 function displaySelectedContacts() {
     let container = document.getElementById('container-assigned-contacts');
     container.innerHTML = "";
@@ -372,12 +276,6 @@ function displaySelectedContacts() {
     }
 }
 
-/**
- * adds to or removes items from array
- * @param {*} boolean - determines whether item should be added or removed
- * @param {*} contactName - name of the contact
- * @param {*} contactColor - color of the contact
- */
 function updateSelectedContacts(boolean, contactName, contactColor) {
     let obj = {name: contactName, color: contactColor};
     if (boolean) {
@@ -388,18 +286,10 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     }
 }
 
-/**
- * checks if dropdown option is selected
- * @param {*} contactDiv - referencte of the dropdown option
- * @returns - true if option is selected
- */
 function isContactSelected(contactDiv) {
     return contactDiv.classList.contains('selected');
 }
 
-/**
- * clears all input fields
- */
 function clearInputs() {
     removeError();
     subtasksCount = 0;
@@ -415,10 +305,6 @@ function clearInputs() {
     renderAssignOptions(contacts);
 }
 
-/**
- * switches button of the input
- * @param {*} boolean - determines which button should be shown
- */
 function changeInputButton(boolean) {
     if (boolean) {
         document.getElementById('button-add').classList.add('d-none');
@@ -429,10 +315,6 @@ function changeInputButton(boolean) {
     }
 }
 
-/**
- * processes if subtask should be saved or aborted
- * @param {*} boolean - determines whether the task should be saved or aborted
- */
 function processSubtask(boolean) {
     let input = document.getElementById('subtasks');
     let invalidRef = document.getElementById('invalid-subtask');
@@ -447,11 +329,6 @@ function processSubtask(boolean) {
     }
 }
 
-/**
- * shows edit options of subtask
- * @param {*} id - id of the subtask
- * @param {*} boolean - determines whether edit options should be shown or hidden
- */
 function showEditOptions(id, boolean) {
     if (boolean) {
         document.getElementById(`icons-subtask-${id}`).classList.remove('d-none');
@@ -460,21 +337,16 @@ function showEditOptions(id, boolean) {
     }
 }
 
-/**
- * adds subtask to a container
- */
 function addSubtask() {
     let input = document.getElementById('subtasks');
+    let containerSubtasks = document.getElementById('container-subtasks');
     subtasksCount++;
-    document.getElementById('container-subtasks').innerHTML += returnSubtaskHTML(subtasksCount);
+    containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
     document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
     subtasks.push(input.value);
+    checkForScrollableContainer(containerSubtasks)
 }
 
-/**
- * deletes subtask from container
- * @param {*} id - id of the subtask
- */
 function deleteSubtask(id) {
     let subtask = document.getElementById(`subtask-${id}`);
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
@@ -484,10 +356,6 @@ function deleteSubtask(id) {
     subtasksCount--;
 }
 
-/**
- * opens edition menu for subtask
- * @param {*} id - id of the subtask
- */
 function editSubtask(id) {
     let child = document.getElementById(`container-subtask-${id}`);
     document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
@@ -498,19 +366,10 @@ function editSubtask(id) {
     }
 }
 
-/**
- * checks for last child in subtask container
- * @param {*} child - reference of the subtask
- * @returns - true if it is the last child
- */
 function isLastChild(child) {
     return (child === child.parentNode.children[child.parentNode.children.length-1]) 
 }
 
-/**
- * saves edited subtask
- * @param {*} id - id of the subtask
- */
 function saveEditedSubtask(id) {
     let input = document.getElementById(`input-subtask-${id}`);
     let element = document.getElementById(`container-subtask-${id}`);
@@ -524,9 +383,6 @@ function saveEditedSubtask(id) {
     }
 }
 
-/**
- * creates task to be shown on the board or throws error if inputs are unvalid
- */
 function createTask() {
     removeError();
     let valid = validateInputs();
@@ -544,10 +400,6 @@ function createTask() {
     }
 }
 
-/**
- * validates input fields
- * @returns - true if all inputs are filled with value
- */
 function validateInputs() {
     let valid = true;
     let inputs = ["title", "due-date", "category"];
@@ -562,10 +414,6 @@ function validateInputs() {
     return valid;
 }
 
-/**
- * tests date for valid format
- * @returns - true if date format is valid
- */
 function testDate() {
     let value = document.getElementById('due-date').value;
     let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
@@ -579,18 +427,12 @@ function testDate() {
            dateObj.getDate() === day;
 }
 
-/**
- * shows error messages on unvalid inputs
- */
 function throwError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('grey');
     });
 }
 
-/**
- * removes error message on valid inputs
- */
 function removeError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.add('grey');
@@ -599,9 +441,6 @@ function removeError() {
     document.getElementById('invalid-subtask').classList.add('grey');
 }
 
-/**
- * saves task as object
- */
 function saveTask() {
     // task.taskId = 3;
     task.taskType = document.getElementById('category').value;
@@ -617,11 +456,6 @@ function saveTask() {
     task = {};
 }
 
-/**
- * hands over the object to be saved on firebase
- * @param {*} path - path of firebase save location
- * @param {*} task - task to be saved
- */
 async function saveToFirebase(path, task) {
     if (userId == "guest") {
         path = "guest/tasks/" + path;
@@ -632,12 +466,6 @@ async function saveToFirebase(path, task) {
     }
 }
 
-/**
- * posts data to firebase
- * @param {*} path - specifies save location
- * @param {*} data - data to be saved
- * @returns - saved object in case of success, else error 
- */
 async function postData(path="", data={}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -649,12 +477,6 @@ async function postData(path="", data={}) {
     return response;
 }
 
-/**
- * loads contacts from database
- * @param {*} path - path of the data to be loaded
- * @param {*} data - data to be loaded
- * @returns - retrieved data in case of success, else error
- */
 async function getContacts(path="") {
     userId = localStorage.getItem('userId');
     if (userId !== "guest") {
@@ -670,10 +492,6 @@ async function getContacts(path="") {
     }
 }
 
-/**
- * saves relevant contact info in local contacts array
- * @param {object} contactsObj - JSON with contacts retrieved from database 
- */
 function loadContactInfo(contactsObj) {
     let keys = Object.keys(contactsObj.allContacts);
     for (let index = 0; index < keys.length; index++) {
@@ -686,10 +504,6 @@ function loadContactInfo(contactsObj) {
     }
 }
 
-/**
- * loads and displays the initials of the signed-in user
- * @returns - forwards to login page if no user is signed-in
- */
 async function loadSmallInitials() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
