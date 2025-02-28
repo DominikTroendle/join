@@ -295,16 +295,12 @@
     padding-top: 48px;
 }
 
-.box-shadow {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .container-custom-select-options::-webkit-scrollbar {
     width: 7px;
 }
 
 .container-custom-select-options::-webkit-scrollbar-button:vertical:increment,
-.container-custom-select-options::-webkit-scrollbar-button:vertical:decrement{
+.container-custom-select-options::-webkit-scrollbar-button:vertical:decrement {
     background-repeat: no-repeat;
     background-size: 10px;
     background-position: center;
@@ -327,6 +323,10 @@
 
 .container-custom-select-options::-webkit-scrollbar-track {
     border-radius: 10px;
+}
+
+.box-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .container-custom-select-option {
@@ -396,6 +396,11 @@ hr {
 
 #prio {
     height: 48px;
+}
+
+#label-subtasks {
+    display: flex;
+    gap: 20px;
 }
 
 #subtasks {
@@ -504,10 +509,40 @@ input:focus {
 }
 
 .container-subtask {
+    height: 29px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 15px;
+    border-radius: 10px;
+}
+
+#container-subtasks::-webkit-scrollbar {
+    width: 7px;
+}
+
+#container-subtasks::-webkit-scrollbar-button:vertical:increment,
+#container-subtasks::-webkit-scrollbar-button:vertical:decrement {
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: center;
+}
+
+#container-subtasks::-webkit-scrollbar-button:vertical:increment {
+    background-image: url(../assets/icons/scrollbar-button-bottom.svg);
+}
+
+#container-subtasks::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url(../assets/icons/scrollbar-button-top.svg);
+}
+
+#container-subtasks::-webkit-scrollbar-thumb {
+    background-color: #A8A8A8;
+    border-radius: 5px;
+    border-radius: 10px;
+}
+
+#container-subtasks::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
@@ -519,6 +554,9 @@ input:focus {
 .subtask-text {
     display: flex;
     gap: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
 }
 
 .subtask-icons {
@@ -653,6 +691,13 @@ input:focus {
 
     to {
         top: 50%;
+    }
+}
+
+@media screen and not (-webkit-min-device-pixel-ratio:0) {
+    .container-custom-select-options {
+        scrollbar-width: thin;
+        scrollbar-color: #A8A8A8;
     }
 }
 

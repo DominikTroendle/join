@@ -216,6 +216,10 @@ function renderAssignOptions(array) {
     } else {
         checkForSelectedContacts(array, dropDown);
     }
+    checkForScrollableContainer(dropDown);
+}
+
+function checkForScrollableContainer() {
     if (contacts.length < 5) {
         dropDown.style.width = "440px";
         let selectOptionsArray = Array.from(document.getElementsByClassName('container-custom-select-option'));
@@ -430,11 +434,16 @@ function changeInputButton(boolean) {
  * @param {*} boolean - determines whether the task should be saved or aborted
  */
 function processSubtask(boolean) {
-    if (boolean) {
+    let input = document.getElementById('subtasks');
+    let invalidRef = document.getElementById('invalid-subtask');
+    invalidRef.classList.add('grey');
+    if (boolean && (input.value != "")) {
         addSubtask();
-        document.getElementById('subtasks').value = "";
+        input.value = "";
+    } else if (!boolean && (input.value != "")) {
+        input.value = "";
     } else {
-        document.getElementById('subtasks').value = "";
+        invalidRef.classList.remove('grey');
     }
 }
 
@@ -460,8 +469,6 @@ function addSubtask() {
     document.getElementById('container-subtasks').innerHTML += returnSubtaskHTML(subtasksCount);
     document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
     subtasks.push(input.value);
-
-    console.log(subtasks);
 }
 
 /**
@@ -470,15 +477,11 @@ function addSubtask() {
  */
 function deleteSubtask(id) {
     let subtask = document.getElementById(`subtask-${id}`);
-    console.log(subtask.value);
-    
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
     let index = subtasks.indexOf(subtask.value);
     subtasks.splice(index, 1);
     subtaskContainer.remove();
     subtasksCount--;
-
-    console.log(subtasks);
 }
 
 /**
@@ -593,6 +596,7 @@ function removeError() {
         document.getElementById(`required-${element}`).classList.add('grey');
     });
     document.getElementById('invalid-date').classList.add('grey');
+    document.getElementById('invalid-subtask').classList.add('grey');
 }
 
 /**
@@ -642,7 +646,6 @@ async function postData(path="", data={}) {
         },
         body: JSON.stringify(data)
     });
-    console.log(response);
     return response;
 }
 
@@ -690,7 +693,6 @@ function loadContactInfo(contactsObj) {
 async function loadSmallInitials() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
-        console.log("Kein eingeloggter User gefunden!");
         return window.location.href = "index.html?";
     }
     let dataPath = userId === "guest" ? "guest.json" : `${userId}.json`;

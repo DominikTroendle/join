@@ -169,7 +169,10 @@
                             <p id="required-category" class="required grey">This field is required</p>
                         </div>
                         <div class="container-input-label">
-                            <label for="subtasks" class="label-add-task">Subtasks</label placeholder="Add new subtask">
+                            <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
+                                Subtasks
+                                <p id="invalid-subtask" class="required grey">Enter at least one character to save subtask!</p>
+                            </label>
                             <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
                                 <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask">
                                 <button id="button-add" class="button-add" type="button">
