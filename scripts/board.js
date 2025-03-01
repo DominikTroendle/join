@@ -53,6 +53,7 @@ let oldCategory;
 let oldCategoryName;
 let newCategory;
 let currentCardId;
+let currentTaskData = {};
 
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
@@ -80,8 +81,10 @@ function moveTo(event, dragFieldId, dragFieldArray) {
 function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
-
-    deleteInDatabase(localStorage.getItem("userId"), )
+    let newCategoryName = event.currentTarget.getAttribute("data-category");
+    findObjectInArrayAndSaveData(oldArray);
+    writeInDatabase(currentCardId, newCategoryName);
+    deleteInDatabase(localStorage.getItem("userId", oldCategoryName, currentCardId))
 
     // let index = oldArray.findIndex(element => element.id == cardId);
     // newArray.push(oldArray.splice(index, 1)[0]);
@@ -96,6 +99,19 @@ function allowDrop2(event, dragFieldArray) {
 
 function saveCurrentCardId(event) {
     currentCardId = event.currentTarget.id;
+}
+
+function findObjectInArrayAndSaveData(array) {
+    taskObject = array.find(element => element.id == currentCardId);
+    currentTaskData = {
+        taskType: taskObject.taskType,
+        taskTitle: taskObject.taskTitle,
+        taskDescription: taskObject.taskDescription,
+        taskPriority: taskObject.taskPriority,
+        numberOfSubtasks: taskCardObject.numberOfSubtasks,
+        numberOfCompletedSubtasks: taskObject.numberOfCompletedSubtasks,
+        assignedContacts: taskObject.assignedContacts
+    }
 }
 
 function renderSmallCard(dragFieldId, dragFieldArray) {
@@ -201,15 +217,7 @@ async function writeInDatabase(userKey, category) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            taskType: "Test1",
-            taskTitle: "Test1",
-            taskDescription: "Test1",
-            taskPriority: "urgent",
-            numberOfSubtasks: 2,
-            numberOfCompletedSubtasks: 1,
-            assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
-        })
+        body: JSON.stringify(currentTaskData)
     });
     if (response.ok) {
         let result = await response.json();
