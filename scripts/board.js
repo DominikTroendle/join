@@ -85,6 +85,9 @@ function allowDrop2(event, dragFieldArray) {
     findObjectInArrayAndSaveData(oldArray);
     writeInDatabase(currentCardId, newCategoryName);
     deleteInDatabase(localStorage.getItem("userId", oldCategoryName, currentCardId))
+    clearAllArray();
+    init();
+
 
     // let index = oldArray.findIndex(element => element.id == cardId);
     // newArray.push(oldArray.splice(index, 1)[0]);
@@ -101,14 +104,21 @@ function saveCurrentCardId(event) {
     currentCardId = event.currentTarget.id;
 }
 
+function clearAllArray() {
+    toDoArray = [];
+    inProgressArray = [];
+    awaitFeedbackArray = [];
+    doneArray = [];
+}
+
 function findObjectInArrayAndSaveData(array) {
-    taskObject = array.find(element => element.id == currentCardId);
+    let taskObject = array.find(element => element.id == currentCardId);
     currentTaskData = {
         taskType: taskObject.taskType,
         taskTitle: taskObject.taskTitle,
         taskDescription: taskObject.taskDescription,
         taskPriority: taskObject.taskPriority,
-        numberOfSubtasks: taskCardObject.numberOfSubtasks,
+        numberOfSubtasks: taskObject.numberOfSubtasks,
         numberOfCompletedSubtasks: taskObject.numberOfCompletedSubtasks,
         assignedContacts: taskObject.assignedContacts
     }
