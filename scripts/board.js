@@ -162,10 +162,10 @@ function renderContentBigTaskCardEdit() {
 }
 
 function init() {
-    readFromDatabase("guest", "todos", toDoArray, "to-do-drag-field");
-    readFromDatabase("guest", "inProgress", inProgressArray, "in-progress-drag-field");
-    readFromDatabase("guest", "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
-    readFromDatabase("guest", "done", doneArray, "done-drag-field");
+    readFromDatabase(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field");
+    readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
+    readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
+    readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
