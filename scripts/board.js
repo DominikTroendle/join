@@ -196,12 +196,12 @@ async function writeInDatabase(userKey, category) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-            taskType: "Technical Task",
-            taskTitle: "CSS Architecture Planning",
-            taskDescription: "Define CSS naming conventions and structure...",
+            taskType: "Test1",
+            taskTitle: "Test1",
+            taskDescription: "Test1",
             taskPriority: "urgent",
-            numberOfSubtasks: 6,
-            numberOfCompletedSubtasks: 2,
+            numberOfSubtasks: 2,
+            numberOfCompletedSubtasks: 1,
             assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
         })
     });
@@ -215,6 +215,13 @@ async function writeInDatabase(userKey, category) {
 
 function changeTaskCategoryinDatabase(event) {
     taskCardId = event.currentTarget.id;
-    taskCardObject = oldArray;
-    console.log(oldCategory);
+    taskCardObject = toDoArray.find(element => element.id == taskCardId);
 }
+
+async function deleteInDatabase(userKey, category, firebaseId) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}/${firebaseId}.json`, {
+        method: "DELETE"
+    })
+}
+// deleteInDatabase("guest", "todos", "-OKI5XX-vqVoTVgPyuDP");
+// writeInDatabase("guest", "todos");
