@@ -52,7 +52,7 @@ let newArray = [];
 let oldCategory;
 let oldCategoryName;
 let newCategory;
-let cardId;
+let currentCardId;
 
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
@@ -81,15 +81,21 @@ function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
 
-    let index = oldArray.findIndex(element => element.id == cardId);
-    newArray.push(oldArray.splice(index, 1)[0]);
-    if (oldArray.length !== 0) {
-        renderSmallCard(oldCategory, oldArray);
-    } else {
-        document.getElementById(oldCategory).innerHTML = noCardTemplate(oldCategoryName);
-    }
+    deleteInDatabase(localStorage.getItem("userId"), )
 
-    renderSmallCard(newCategory, newArray);
+    // let index = oldArray.findIndex(element => element.id == cardId);
+    // newArray.push(oldArray.splice(index, 1)[0]);
+    // if (oldArray.length !== 0) {
+    //     renderSmallCard(oldCategory, oldArray);
+    // } else {
+    //     document.getElementById(oldCategory).innerHTML = noCardTemplate(oldCategoryName);
+    // }
+
+    // renderSmallCard(newCategory, newArray);
+}
+
+function saveCurrentCardId(event) {
+    currentCardId = event.currentTarget.id;
 }
 
 function renderSmallCard(dragFieldId, dragFieldArray) {
