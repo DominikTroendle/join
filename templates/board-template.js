@@ -22,7 +22,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
     let subtaskHtml = "";
     let scaleFillCalculate;
 
-    if (numberOfSubtasks != 0) {
+    if (numberOfSubtasks != 0 && numberOfCompletedSubtasks != 0) {
         scaleFillCalculate = (100 / numberOfSubtasks) * numberOfCompletedSubtasks;
         subtaskHtml = `<div class="user-story__scale-text-box">
                     <div class="user-story__subtask-scale-box">

@@ -97,7 +97,7 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].taskTitle, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
         }
     }
 }
@@ -106,19 +106,6 @@ function changeDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);
     currentDragCard.classList.add("drag-start-transform");
 }
-
-// function createBorderCardForDragEntered(event) {
-//     document.getElementById(event.currentTarget.id).innerHTML += cardBorderdragEnterTemplate();
-// }
-
-// function createBorderCardForDragEntered(event) {
-//     const target = document.getElementById(event.currentTarget.id);
-
-//     // Prüfe, ob die card-border-box schon existiert
-//     if (!target.querySelector("#card-border-box")) {
-//         target.innerHTML += cardBorderdragEnterTemplate();
-//     }
-// }
 
 let originDragField = null; // Speichert das ursprüngliche Drag-Feld
 
@@ -163,9 +150,9 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
 
 function renderContentBigTaskCard(event) {
     let smallTaskCardId = event.currentTarget.id;
-    let objectFromCurrentSmallTaskCard = toDoArray.find(element => element.taskTitle == smallTaskCardId);
+    let objectFromCurrentSmallTaskCard = toDoArray.find(element => element.id == smallTaskCardId);
     let bigTaskCard = document.getElementById("big-task-card__box");
-    bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts);
+    bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts);
 }
 
 function renderContentBigTaskCardEdit() {
@@ -188,8 +175,15 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
             throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
         }
         let data = await result.json();
-        let dataArray = data ? Object.values(data) : [];
-        dataArray.forEach(element => categoryArray.push(element));
+
+        if (data) {
+            Object.entries(data).forEach(([firebaseKey, value]) => {
+                value.id = firebaseKey;
+                categoryArray.push(value);
+            });
+        }
+        // let dataArray = data ? Object.values(data) : [];
+        // dataArray.forEach(element => categoryArray.push(element));
         renderSmallCard(dragFieldId, categoryArray);
     } catch (error) {
         console.error("Fehler beim Laden der Daten:", error);
@@ -216,4 +210,10 @@ async function writeInDatabase(userKey, category) {
     } else {
         console.error("Fehler beim Speichern:", response.statusText);
     }
+}
+
+function changeTaskCategoryinDatabase(event) {
+    taskCardId = event.currentTarget.id;
+    taskCardObject = oldArray;
+    console.log(oldCategory);
 }
