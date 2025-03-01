@@ -78,17 +78,28 @@ function moveTo(event, dragFieldId, dragFieldArray) {
     event.dataTransfer.setDragImage(img, 0, 0);
 }
 
-function allowDrop2(event, dragFieldArray) {
+async function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
     let newCategoryName = event.currentTarget.getAttribute("data-category");
     findObjectInArrayAndSaveData(oldArray);
-    writeInDatabase(currentCardId, newCategoryName);
-    deleteInDatabase(localStorage.getItem("userId", oldCategoryName, currentCardId))
+    await writeInDatabase(localStorage.getItem("userId"), newCategoryName, currentTaskData);
+    await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
     clearAllArray();
-    init();
 
 
+
+    await Promise.all([
+        readFromDatabase2(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field"),
+        readFromDatabase2(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field"),
+        readFromDatabase2(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field"),
+        readFromDatabase2(localStorage.getItem("userId"), "done", doneArray, "done-drag-field")
+    ]);
+
+    renderSmallCard("to-do-drag-field", toDoArray);
+    renderSmallCard("in-progress-drag-field", inProgressArray);
+    renderSmallCard("await-feedback-drag-field", awaitFeedbackArray);
+    renderSmallCard("done-drag-field", doneArray);
     // let index = oldArray.findIndex(element => element.id == cardId);
     // newArray.push(oldArray.splice(index, 1)[0]);
     // if (oldArray.length !== 0) {
@@ -208,7 +219,7 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
             throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
         }
         let data = await result.json();
-
+        categoryArray.length = 0;
         if (data) {
             Object.entries(data).forEach(([firebaseKey, value]) => {
                 value.id = firebaseKey;
@@ -217,17 +228,45 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         }
         // let dataArray = data ? Object.values(data) : [];
         // dataArray.forEach(element => categoryArray.push(element));
+
         renderSmallCard(dragFieldId, categoryArray);
+
+
     } catch (error) {
         console.error("Fehler beim Laden der Daten:", error);
     }
 }
 
-async function writeInDatabase(userKey, category) {
+async function readFromDatabase2(userKey, category, categoryArray, dragFieldId) {
+    try {
+        let result = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`);
+        if (!result.ok) {
+            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
+        }
+        let data = await result.json();
+        categoryArray.length = 0;
+        if (data) {
+            Object.entries(data).forEach(([firebaseKey, value]) => {
+                value.id = firebaseKey;
+                categoryArray.push(value);
+            });
+        }
+        // let dataArray = data ? Object.values(data) : [];
+        // dataArray.forEach(element => categoryArray.push(element));
+
+        // renderSmallCard(dragFieldId, categoryArray);
+
+
+    } catch (error) {
+        console.error("Fehler beim Laden der Daten:", error);
+    }
+}
+
+async function writeInDatabase(userKey, category, data) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(currentTaskData)
+        body: JSON.stringify(data)
     });
     if (response.ok) {
         let result = await response.json();
