@@ -83,17 +83,17 @@ async function allowDrop2(event, dragFieldArray) {
     newArray = dragFieldArray;
     let newCategoryName = event.currentTarget.getAttribute("data-category");
     findObjectInArrayAndSaveData(oldArray);
-    await writeInDatabase(localStorage.getItem("userId"), newCategoryName, currentTaskData);
+    await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId);
     await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
-    clearAllArray();
+    // clearAllArray();
 
 
 
     await Promise.all([
-        readFromDatabase2(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field"),
-        readFromDatabase2(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field"),
-        readFromDatabase2(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field"),
-        readFromDatabase2(localStorage.getItem("userId"), "done", doneArray, "done-drag-field")
+        readFromDatabase(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field"),
+        readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field"),
+        readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field"),
+        readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field")
     ]);
 
     renderSmallCard("to-do-drag-field", toDoArray);
@@ -209,6 +209,7 @@ function init() {
     readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
+
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
@@ -230,31 +231,6 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         // dataArray.forEach(element => categoryArray.push(element));
 
         renderSmallCard(dragFieldId, categoryArray);
-
-
-    } catch (error) {
-        console.error("Fehler beim Laden der Daten:", error);
-    }
-}
-
-async function readFromDatabase2(userKey, category, categoryArray, dragFieldId) {
-    try {
-        let result = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`);
-        if (!result.ok) {
-            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
-        }
-        let data = await result.json();
-        categoryArray.length = 0;
-        if (data) {
-            Object.entries(data).forEach(([firebaseKey, value]) => {
-                value.id = firebaseKey;
-                categoryArray.push(value);
-            });
-        }
-        // let dataArray = data ? Object.values(data) : [];
-        // dataArray.forEach(element => categoryArray.push(element));
-
-        // renderSmallCard(dragFieldId, categoryArray);
 
 
     } catch (error) {
@@ -286,5 +262,15 @@ async function deleteInDatabase(userKey, category, firebaseId) {
         method: "DELETE"
     })
 }
-// deleteInDatabase("guest", "todos", "-OKI5XX-vqVoTVgPyuDP");
-// writeInDatabase("guest", "todos");
+
+async function putDataInDatabase(userKey, category, cardId, data) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}/${cardId}.json`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+        console.error("error when saving:", response.statusText);
+    }
+}
+
