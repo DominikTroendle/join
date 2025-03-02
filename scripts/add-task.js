@@ -416,6 +416,7 @@ function createTask() {
             window.location.href = 'board.html';
         }, "900");
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
+        throwError();
         document.getElementById('invalid-date').classList.remove('grey');
     } else {
         throwError();
@@ -428,7 +429,7 @@ function validateInputs() {
     unvalidInputs = [];
     for (let i = 0; i < inputs.length; i++) {
         let inputValue = document.getElementById(`${inputs[i]}`).value;
-        if (inputValue == "") {
+        if (inputValue == "" || ((inputs[i] == "due-date") && !testDate())) {
             valid = false;
             unvalidInputs.push(inputs[i]);
         }
@@ -450,14 +451,25 @@ function testDate() {
 }
 
 function throwError() {
+    console.log(unvalidInputs);
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('grey');
+        if (element == "category") {
+            document.getElementById('container-input-category').classList.add('input-unvalid')
+        } else {
+            document.getElementById(`${element}`).classList.add('input-unvalid');
+        };
     });
 }
 
 function removeError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.add('grey');
+        if (element == "category") {
+            document.getElementById('container-input-category').classList.remove('input-unvalid')
+        } else {
+            document.getElementById(`${element}`).classList.remove('input-unvalid');
+        };
     });
     document.getElementById('invalid-date').classList.add('grey');
     document.getElementById('invalid-subtask').classList.add('grey');
