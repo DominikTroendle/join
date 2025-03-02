@@ -132,9 +132,14 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
     }
 }
 
-function changeDragRotation(event) {
+function addDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);
     currentDragCard.classList.add("drag-start-transform");
+}
+
+function removeDragRotation(event) {
+    let currentDragCard = document.getElementById(event.currentTarget.id);
+    currentDragCard.classList.remove("drag-start-transform");
 }
 
 let originDragField = null; // Speichert das ursprüngliche Drag-Feld
@@ -192,7 +197,7 @@ function renderContentBigTaskCardEdit() {
 }
 
 function init() {
-    clearAllArray();
+    // clearAllArray();
     readFromDatabase(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");

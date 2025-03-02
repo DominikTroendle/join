@@ -39,7 +39,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         assignedContactsHtml += `<span class="user-story__name ${backgroundColors[index]}">${initials[index]}</span>`
     }
 
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); changeDragRotation(event); saveCurrentCardId(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
+    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event)" ondragend="removeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
