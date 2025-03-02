@@ -96,7 +96,6 @@ async function allowDrop2(event, dragFieldArray) {
 
     await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId, currentTaskData);
     await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
-    // clearAllArray();
 }
 
 function saveCurrentCardId(event) {
@@ -147,13 +146,13 @@ function onDragStart(event) {
 
 function createBorderCardForDragEntered(event) {
     const target = document.getElementById(event.currentTarget.id);
-
+    let currentCard = document.getElementById(currentCardId);
     // Falls es das Ursprungsfeld ist, keine Umrandung hinzufügen
     if (target === originDragField) return;
 
     // Prüfen, ob die Umrandung schon existiert
     if (!target.querySelector("#card-border-box")) {
-        target.innerHTML += cardBorderdragEnterTemplate();
+        target.innerHTML += cardBorderdragEnterTemplate(currentCard.offsetHeight);
     }
 }
 
@@ -193,11 +192,11 @@ function renderContentBigTaskCardEdit() {
 }
 
 function init() {
+    clearAllArray();
     readFromDatabase(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
-
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
@@ -215,18 +214,13 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
                 categoryArray.push(value);
             });
         }
-        // let dataArray = data ? Object.values(data) : [];
-        // dataArray.forEach(element => categoryArray.push(element));
-
         renderSmallCard(dragFieldId, categoryArray);
-
-
     } catch (error) {
-        console.error("Fehler beim Laden der Daten:", error);
+        console.error("error loading the data:", error);
     }
 }
 
-async function writeInDatabase(userKey, category, data) {
+async function postDataInDatabase(userKey, category, data) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

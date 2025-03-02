@@ -61,8 +61,8 @@ function noCardTemplate(category) {
             </div>`;
 }
 
-function cardBorderdragEnterTemplate() {
-    return `<div class="card-border-box" id="card-border-box">
+function cardBorderdragEnterTemplate(cardHeight) {
+    return `<div class="card-border-box" id="card-border-box" style="height: ${cardHeight}px">
             </div>`;
 }
 
