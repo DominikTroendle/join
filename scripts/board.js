@@ -83,32 +83,20 @@ async function allowDrop2(event, dragFieldArray) {
     newArray = dragFieldArray;
     let newCategoryName = event.currentTarget.getAttribute("data-category");
     findObjectInArrayAndSaveData(oldArray);
-    await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId);
+
+    let index = oldArray.findIndex(element => element.id == currentCardId);
+    newArray.push(oldArray.splice(index, 1)[0]);
+    if (oldArray.length !== 0) {
+        renderSmallCard(oldCategory, oldArray);
+    } else {
+        document.getElementById(oldCategory).innerHTML = noCardTemplate(oldCategoryName);
+    }
+
+    renderSmallCard(newCategory, newArray);
+
+    await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId, currentTaskData);
     await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
     // clearAllArray();
-
-
-
-    await Promise.all([
-        readFromDatabase(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field"),
-        readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field"),
-        readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field"),
-        readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field")
-    ]);
-
-    renderSmallCard("to-do-drag-field", toDoArray);
-    renderSmallCard("in-progress-drag-field", inProgressArray);
-    renderSmallCard("await-feedback-drag-field", awaitFeedbackArray);
-    renderSmallCard("done-drag-field", doneArray);
-    // let index = oldArray.findIndex(element => element.id == cardId);
-    // newArray.push(oldArray.splice(index, 1)[0]);
-    // if (oldArray.length !== 0) {
-    //     renderSmallCard(oldCategory, oldArray);
-    // } else {
-    //     document.getElementById(oldCategory).innerHTML = noCardTemplate(oldCategoryName);
-    // }
-
-    // renderSmallCard(newCategory, newArray);
 }
 
 function saveCurrentCardId(event) {
@@ -273,4 +261,3 @@ async function putDataInDatabase(userKey, category, cardId, data) {
         console.error("error when saving:", response.statusText);
     }
 }
-
