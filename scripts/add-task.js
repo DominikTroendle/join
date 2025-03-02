@@ -169,15 +169,35 @@ function renderAssignOptions(array) {
     checkForScrollableContainer(dropDown);
 }
 
-function checkForScrollableContainer(scrollContainer) {
-    if ((contacts.length < 5) && (scrollContainer.id == "dropwdon-assign")) {
-        scrollContainer.style.width = "440px";
+function checkForScrollableContainer(container) {
+    if (((contacts.length < 6) && (container.id == "dropdown-assign")) || ((subtasksCount <= 2) && (container.id == "container-subtasks"))) {
+        containerScrollable(container);
+    } else if ((subtasksCount >= 2) && (container.id == "container-subtasks")) {
+        containerNotScrollable(container);
+    }
+}
+
+function containerScrollable(container) {
+    if (container.id == "dropdown-assign") {
+        container.style.width = "440px";
         let selectOptionsArray = Array.from(document.getElementsByClassName('container-custom-select-option'));
         selectOptionsArray.forEach(element => {
             element.classList.remove('select-option-with-scrollbar');
         });
-    } else if ((subtasksCount >= 3) && (scrollContainer.id = "container-subtasks")) {
-        scrollContainer.style.width = "200px";
+    } else if (container.id == "container-subtasks") {
+        let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
+        subtaskContainers.forEach(element => {
+            element.classList.remove('subtask-scroll-margin');
+        })
+    }
+}
+
+function containerNotScrollable(container) {
+    if (container.id = "container-subtasks") {
+        let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
+        subtaskContainers.forEach(element => {
+            element.classList.add('subtask-scroll-margin');
+        })
     }
 }
 
@@ -344,16 +364,18 @@ function addSubtask() {
     containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
     document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
     subtasks.push(input.value);
-    checkForScrollableContainer(containerSubtasks)
+    checkForScrollableContainer(containerSubtasks);
 }
 
 function deleteSubtask(id) {
     let subtask = document.getElementById(`subtask-${id}`);
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
+    let containerSubtasks = document.getElementById('container-subtasks');
     let index = subtasks.indexOf(subtask.value);
     subtasks.splice(index, 1);
     subtaskContainer.remove();
     subtasksCount--;
+    checkForScrollableContainer(containerSubtasks);
 }
 
 function editSubtask(id) {
@@ -377,7 +399,7 @@ function saveEditedSubtask(id) {
     document.getElementById(`edit-subtask-${id}`).classList.add('d-none');
     document.getElementById(`subtask-${id}`).innerText = input.value;
     document.getElementById(`input-subtask-${id}`).value = "";
-    toggleEditOptions(id);
+    showEditOptions(id, false)
     if (element.classList.contains('padding-top')) {
         element.classList.remove('padding-top');
     }

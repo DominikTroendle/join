@@ -517,6 +517,10 @@ input:focus {
     border-radius: 10px;
 }
 
+.subtask-scroll-margin {
+    margin-right: 8px;
+}
+
 #container-subtasks::-webkit-scrollbar {
     width: 7px;
 }
@@ -704,5 +708,11 @@ input:focus {
 @media only screen and (max-height: 800px) {
     #main {
         padding-top: 20px;
+    }
+}
+
+@media only screen and (max-width: 1500px) {
+    #form-add-task {
+        flex-direction: column;
     }
 }
