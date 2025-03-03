@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     background-color: #f4f4f4;
     overflow: hidden;
@@ -13,6 +14,7 @@ body {
         transform: translateY(100vh);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -80,6 +82,7 @@ body {
         left: 50%;
         transform: translate(-20%, -20%) scale(1);
     }
+
     100% {
         top: 20px;
         left: 20px;
@@ -91,17 +94,18 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
 }
 
-.login-container{
+.login-container {
     margin-bottom: 100px;
     z-index: 1000;
 }
 
-.register-link{
+.register-link {
     opacity: 0;
     transition: opacity 1s ease-in-out;
     animation: fadeIn 1s ease-in-out 0.275s forwards;
@@ -114,7 +118,7 @@ body {
     padding-right: 40px;
 }
 
-.register-link a{
+.register-link a {
     padding: 8px;
     border-radius: 5px;
 
@@ -122,12 +126,12 @@ body {
     color: white;
 }
 
-.register-link a:hover{
+.register-link a:hover {
     background-color: #29ABE2;
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.user-login-container{
+.user-login-container {
     width: 100%;
 
     display: flex;
@@ -137,11 +141,11 @@ body {
     background-color: #f4f4f4;
 }
 
-.user-login{
+.user-login {
     height: 449px;
     width: 652px;
     margin-top: 80px;
-    padding: 50px;
+    padding: 20px 50px 0 50px;
 
     background-color: white;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
@@ -157,11 +161,11 @@ body {
     animation: fadeIn 1s ease-in-out 0.275s forwards;
 }
 
-.login h1{
+.login h1 {
     font-size: 61px;
 }
 
-.blue-line{
+.blue-line {
     margin-left: 140px;
     margin-top: 10px;
     margin-bottom: 12px;
@@ -170,7 +174,7 @@ body {
     background-color: #29ABE2;
 }
 
-.login form{
+.login form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,26 +189,28 @@ body {
 
 .input-container input {
     width: 422px;
-    padding: 10px 40px 10px 10px;
+    padding: 10px 40px 10px 20px;
     border: 1px solid #D1D1D1;
-    border-radius: 5px;
+    border-radius: 10px;
     margin-top: 15px;
+    font-size: 20px;
+    font-weight: 400;
     outline: none;
 }
 
 .input-icon {
     position: absolute;
-    right: 16px; 
+    right: 16px;
     width: 20px;
     height: 20px;
     margin-top: 15px;
 }
 
-.login input::placeholder{
+.login input::placeholder {
     color: rgba(128, 128, 128, 0.356);
 }
 
-.login input:focus{
+.login input:focus {
     border: 1px solid #29ABE2;
     transition: all 175ms ease-in-out;
 }
@@ -214,43 +220,50 @@ body {
     margin-top: 2px;
 }
 
-.error-massage{
+.error-massage {
     display: none;
     font-size: 9px;
     color: red;
     margin-right: 80px;
 }
 
-.login-buttons{
+.login-buttons {
     margin-top: 35px;
 }
 
-.login-buttons button[type=submit]{
+.login-buttons button[type=submit] {
+    height: 48px;
+    width: 110px;
     padding: 8px 20px;
     border-radius: 8px;
+    font-size: 21px;
+    font-weight: 700;
     background-color: black;
     color: white;
 }
 
-.login-buttons button[type=submit]:hover{
+.login-buttons button[type=submit]:hover {
     transition: 175ms ease-in-out;
     background-color: #29ABE2;
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
     transform: scale(1.02);
 }
 
-.login-buttons button[type=button]{
+.login-buttons button[type=button] {
+    height: 48px;
+    width: 177px;
     padding: 8px 20px;
     margin-left: 20px;
     border-radius: 8px;
-
+    font-size: 21px;
+    font-weight: 700;
     transition: 175px ease-in-out;
     background-color: white;
     border: 1px solid black;
-    
+
 }
 
-.login-buttons button[type=button]:hover{
+.login-buttons button[type=button]:hover {
     border: 1px solid #29ABE2;
     color: #29ABE2;
 
@@ -259,7 +272,7 @@ body {
     transform: scale(1.01);
 }
 
-.legal-information{
+.legal-information {
     opacity: 0;
     transition: opacity 1s ease-in-out;
     animation: fadeIn 1s ease-in-out 0.275s forwards;
@@ -272,113 +285,137 @@ body {
     font-size: 12px;
 }
 
-.legal-information a:hover{
+.legal-information a:hover {
     color: #29ABE2;
     transition: 75ms ease-in-out;
     transform: scale(1.03);
     font-weight: 500;
 }
 
-.mobile-overlay{
-    display: none;
-    position: fixed;
+.mobile-overlay {
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100%;
-    background-color: black;
-    animation: opacityNone 1s ease-in-out forwards;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1;
+    opacity: 1;
+    animation: moveNoneOverlay 3.5s cubic-bezier(0.98, -2.55, 0.77, 16);
 }
 
-.mobile-white-logo{
+.mobile-overlay.fade-out{
+    opacity: 0;
+}
+
+.resposive-logo {
     display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-30%, -30%);
-    width: 100px;
+    width: 101px;
     height: 122px;
 }
 
-@media(max-width: 680px){
-    .logo{
+.resposive-logo-color {
+    fill: red;
+}
+
+@media(max-width: 680px) {
+    .mobile-overlay{
+        position: absolute;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .resposive-logo {
+        position: absolute;
+        display: block;
+        left: 45%;
+        top: 40%;
         width: 64px;
         height: 78px;
-        animation: moveLogoIn 1s ease-in-out forwards;
+        z-index: 2;
     }
 
-    .mobile-white-logo{
-        display: flex;
-        animation: moveLogo 1s ease-in-out forwards;
+    .resposive-logo-color {
+        fill: rgb(253, 253, 253);
+
     }
 
-    .mobile-overlay{
-        display: flex;
+    .logo {
+        display: none;
+
+    }
+
+    .animation-overlay-logo {
+        animation: moveLogo 1s ease-in forwards;
+    }
+
+    .animation-change-logo-color {
+        animation: chanceColor 1s ease-in forwards;
+    }
+
+    @keyframes moveNoneOverlay{
+        from{
+            opacity: 1;
+        }
+
+        to{
+            opacity: 0;
+        }
     }
 
     @keyframes moveLogo {
         0% {
-            top: 50%;
-            left: 50%;
-            transform: translate(-30%, -30%) scale(1);
+            top: 40%;
+            left: 45%;
+            transform: translate(-50, -50) scale(1);
         }
-        50%{
-            opacity: 0;
-        }
+
         100% {
-            top: 20px;
-            left: 20px;
-            transform: translate(0, 0) scale(0.5);
-            opacity: 0;
+            top: 37px;
+            left: 38px;
+            transform: translate(0px, 0px) scale(0.64);
         }
     }
 
-    @keyframes opacityNone {
-        100%{
-            opacity: 0;
-        }
-        0%{
-            opacity: 1;
-        }
-    }
-
-    @keyframes moveLogoIn {
+    @keyframes chanceColor {
         0% {
-            top: 50%;
-            left: 50%;
-            transform: translate(-10%, -10%) scale(1);
-            opacity: 0;
+            fill: #ffffff;
         }
-        25%{
-            opacity: 0.5;
-        }
-        50%{
-            opacity: 1;
-        }
+
         100% {
-            top: 0px;
-            left: 10px;
-            transform: translate(0, 0) scale(0.5);
-            opacity: 1;
+            fill: #2a3647;
         }
     }
 
-    .user-login{
+    .register-link {
+        position: absolute;
+        opacity: 0;
+        transition: none;
+        animation: fadeIn 1s ease-in-out 2s forwards;
+
+        display: flex;
+        margin-left: 30%;
+        gap: 30px;
+
+        margin-top: 620px;
+    }
+
+    .user-login {
         width: 100%;
         margin-left: 15px;
         margin-right: 15px;
     }
 }
 
-@media(max-width: 550px ){
-    .register-link{
+@media(max-width: 550px) {
+    .register-link {
         position: absolute;
         opacity: 0;
         transition: none;
-        animation: fadeIn 1s ease-in-out 0.275s forwards;
-    
+        animation: fadeIn 1s ease-in-out 2s forwards;
+
         display: flex;
         margin-left: 30%;
         gap: 30px;
-    
+
         margin-top: 620px;
     }
 
@@ -386,20 +423,20 @@ body {
         margin-bottom: 40px;
     }
 
-    .register-link a:hover{
+    .register-link a:hover {
         background-color: black;
         box-shadow: none;
     }
 
-    .blue-line{
+    .blue-line {
         margin-left: 96px;
     }
 
-    .input-container input{
+    .input-container input {
         width: 330px;
     }
 
-    .login-buttons{
+    .login-buttons {
         margin-top: 0px;
         display: flex;
         flex-direction: column;
@@ -408,7 +445,7 @@ body {
         gap: 21px;
     }
 
-    .login-buttons button[type=submit]{
+    .login-buttons button[type=submit] {
         width: 180px;
         height: 51px;
         padding: 8px 20px;
@@ -419,7 +456,7 @@ body {
         font-size: 16px;
     }
 
-    .login-buttons button[type=submit]:hover{
+    .login-buttons button[type=submit]:hover {
         background-color: black;
         color: white;
         box-shadow: none;
@@ -427,22 +464,22 @@ body {
         cursor: pointer;
     }
 
-    .login-buttons button[type=button]{
+    .login-buttons button[type=button] {
         width: 180px;
         height: 51px;
         padding: 8px 20px;
         margin-left: 0px;
         border-radius: 8px;
-    
+
         transition: 175px ease-in-out;
         background-color: white;
         border: 1px solid black;
         font-weight: 700;
         font-size: 16px;
-        
+
     }
 
-    .login-buttons button[type=button]:hover{
+    .login-buttons button[type=button]:hover {
         background-color: none;
         color: initial;
         border: 1px solid black;
@@ -451,67 +488,81 @@ body {
         cursor: pointer;
     }
 
-    .legal-information{
+    .legal-information {
         opacity: 0;
         transition: opacity 1s ease-in-out;
         animation: fadeIn 1s ease-in-out 0.275s forwards;
-    
+
         display: flex;
         justify-content: center;
         gap: 50px;
-    
+
         margin-top: 100px;
         font-size: 12px;
     }
 }
 
-@media(max-width: 450px){
+@media(max-width: 450px) {
     .login-container {
-        margin-bottom: 40px;
+        margin-bottom: 64px;
     }
 
-    .user-login{
+    .user-login {
         width: 300px;
     }
 
-    .blue-line{
+    .blue-line {
         margin-left: 50px;
     }
 
-    .input-container input{
+    .input-container input {
         width: 240px;
     }
 
-    .register-link{
-    
+    .register-link {
+
         margin-left: 23%;
         gap: 35px;
-    
+
         margin-top: 620px;
         padding-right: 40px;
     }
 }
 
-@media(max-width: 375px){
+@media(max-width: 375px) {
     .login-container {
-        margin-bottom: 10px;
+        margin-bottom: 0px;
     }
 
-    .register-link{
+    .register-link {
         margin-left: 18%;
         margin-top: 580px;
     }
 
-    .legal-information{
+    .legal-information {
         opacity: 0;
         transition: opacity 1s ease-in-out;
         animation: fadeIn 1s ease-in-out 0.275s forwards;
-    
+
         display: flex;
         justify-content: center;
         gap: 25px;
-    
+
         margin-top: 100px;
         font-size: 12px;
+    }
+
+    @keyframes moveLogo {
+        0% {
+            top: 25%;
+            left: 25%;
+            transform: translate(-50, -50) scale(1);
+        }
+
+        100% {
+            top: 0px;
+            left: 0px;
+            transform: translate(0px, 0px) scale(0.64);
+        }
     }
 }

@@ -17,6 +17,9 @@ if (msg) {
     }, 2000);
 }
 
+function init() {
+    responseMobileColorChance()
+}
 
 async function UserLogin() {
     let emailInput = document.getElementById('email');
@@ -32,7 +35,7 @@ async function UserLogin() {
     if (userId) {
         localStorage.setItem("userId", userId);
         window.location.href = 'summary.html?';
-    }else{
+    } else {
         emailInput.style.border = "1px solid red";
         passwordInput.style.border = "1px solid red";
         document.getElementById('notCorrectValue').style.display = ("block")
@@ -65,4 +68,27 @@ function togglePasswordVisibility() {
         icon.src = "assets/img/visibility_off.png";
         isPasswordVisible = false;
     }
+}
+
+
+function responseMobileColorChance() {
+    setTimeout(() => {
+        let overlay = document.getElementById('mobileOverlay');
+        let resposiveLogo = document.getElementById('resposiveLogo');
+        let logoPath1 = document.getElementById('moveLogo1');
+        let logoPath2 = document.getElementById('moveLogo2');
+        let logoPath3 = document.getElementById('moveLogo3');
+        let logoPath4 = document.getElementById('moveLogo4');
+        let logoPath5 = document.getElementById('moveLogo5');
+        overlay.classList.add('mobile-overlay');
+        resposiveLogo.classList.add('animation-overlay-logo');
+        logoPath1.classList.add('animation-change-logo-color');
+        logoPath2.classList.add('animation-change-logo-color');
+        logoPath3.classList.add('animation-change-logo-color');
+        logoPath4.classList.add('animation-change-logo-color');
+        logoPath5.classList.add('animation-change-logo-color');
+        setTimeout(() => {
+            overlay.classList.remove('mobile-overlay');
+        }, 500); 
+    }, 1000);
 }
