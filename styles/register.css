@@ -23,19 +23,19 @@ body{
 }
 
 .user-register{
-    height: 450px;
-    width: 430px;
-
+    height: 630px;
+    width: 598px;
+    margin-top: 80px;
     background-color: white;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
-    border-radius: 16px;
+    border-radius: 30px;
 }
 
 .Sign-up{
     display: flex;
     margin-top: 40px;
     margin-left: 20px;
-    gap: 80px;
+    gap: 160px;
 }
 
 .left-btn img{
@@ -55,10 +55,14 @@ h1{
 
 .blue-line{
     margin: 8px;
-    margin-left: 165px;
+    margin-left: 245px;
     height: 2px;
-    width: 130px;
+    width: 120px;
     background-color: #29ABE2;
+}
+
+form{
+    margin-top: 16px;
 }
 
 .register-input {
@@ -68,12 +72,19 @@ h1{
 }
 
 .register-input input{
-    width: 280px;
-    padding: 10px 40px 10px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 15px;
+    width: 422px;
+    height: 48px;
+    padding: 10px 60px 10px 25px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    margin-top: 25px;
     outline: none;
+}
+
+.register-input input::placeholder{
+    color: #D1D1D1;
+    font-weight: 400;
+    font-size: 20px;
 }
 
 .input-container {
@@ -84,10 +95,10 @@ h1{
 
 .input-icon {
     position: absolute;
-    right: 10px; 
+    right: 20px; 
     width: 20px;
     height: 20px;
-    margin-top: 15px;
+    margin-top: 25px;
 }
 
 .user-register input:focus{
@@ -97,14 +108,14 @@ h1{
 
 .no-value-content {
     height: 20px;
-    margin-top: 2px;
+    margin-top: 3px;
 }
 
 .error-massage{
     display: none;
     font-size: 9px;
     color: red;
-    margin-right: 90px;
+    margin-right: 220px;
 }
 
 .checkbox-privacy-policy-container {
@@ -114,13 +125,15 @@ h1{
     justify-content: center;
 
     font-size: 13px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .checkbox-privacy-policy-container input[type="checkbox"] {
     appearance: none;
-    margin-right: 8px;
-    width: 14px;
-    height: 14px;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
     border: 2px solid black;
     border-radius: 3px;
     position: relative;
@@ -136,11 +149,11 @@ h1{
 
 .checkbox-privacy-policy-container input[type="checkbox"]:checked::before {
     content: "✔";
-    font-size: 12px;
+    font-size: 16px;
     color: black;
     position: absolute;
-    top: -4px;
-    left: 5px;
+    top: -6px;
+    left: 7px;
     width: 7.5px;
     height: 10px;
     display: flex;
@@ -155,9 +168,17 @@ h1{
     gap: 3px;
 }
 
+.privacy-policy p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.2px;
+    color: #A8A8A8;
+}
+
 .privacy-policy a{
     color: #29ABE2;
     transform-origin: top left;
+    font-size: 16px;
 }
 
 .privacy-policy a:hover{
@@ -172,14 +193,17 @@ h1{
 }
 
 .register-button button{
+    height: 55px;
+    width: 126px;
     margin-top: 20px;
     padding: 8px 20px;
     border-radius: 8px;
 
     background-color: black;
     color: white;
-    font-weight: 600;
-    font-size: 18px;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 25.2px;
     
 }
 
