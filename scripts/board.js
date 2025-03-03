@@ -55,6 +55,8 @@ let newCategory;
 let currentCardId;
 let currentTaskData = {};
 
+let isBorderActive = false
+
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
     imgId.src = imgSource;
@@ -82,6 +84,10 @@ async function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
     let newCategoryName = event.currentTarget.getAttribute("data-category");
+
+    if (oldCategory === newCategory) {
+        return;
+    }
     findObjectInArrayAndSaveData(oldArray);
 
     let index = oldArray.findIndex(element => element.id == currentCardId);
@@ -94,8 +100,10 @@ async function allowDrop2(event, dragFieldArray) {
 
     renderSmallCard(newCategory, newArray);
 
-    await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId, currentTaskData);
-    await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId, currentTaskData);
+    if (putResponse.ok) {
+        await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
+    }
 }
 
 function saveCurrentCardId(event) {
@@ -146,10 +154,11 @@ let originDragField = null; // Speichert das ursprüngliche Drag-Feld
 
 function onDragStart(event) {
     originDragField = event.currentTarget.closest(".drag-field"); // Speichert das ursprüngliche Feld
-    document.body.style.cursor = "grabbing";
+    // document.body.style.cursor = "grabbing";
 }
 
 function createBorderCardForDragEntered(event) {
+
     const target = document.getElementById(event.currentTarget.id);
     let currentCard = document.getElementById(currentCardId);
     // Falls es das Ursprungsfeld ist, keine Umrandung hinzufügen
@@ -159,6 +168,18 @@ function createBorderCardForDragEntered(event) {
     if (!target.querySelector("#card-border-box")) {
         target.innerHTML += cardBorderdragEnterTemplate(currentCard.offsetHeight);
     }
+}
+
+function removeBorderCard(event) {
+    // if (isBorderActive) {
+    //     const target = event.currentTarget;
+
+    //     const borderBox = target.querySelector("#card-border-box");
+    //     if (borderBox) {
+    //         borderBox.remove();  // Element entfernen
+    //         isBorderActive = false;
+    //     }
+    // }
 }
 
 function toggleDnoneBigTaskCard() {
@@ -259,4 +280,16 @@ async function putDataInDatabase(userKey, category, cardId, data) {
     if (!response.ok) {
         console.error("error when saving:", response.statusText);
     }
+    return response;
 }
+
+let data = {
+    taskType: "Technical Task",
+    taskTitle: "CSS Architecture Planning",
+    taskDescription: "Define CSS naming conventions and structure...",
+    taskPriority: "urgent",
+    numberOfSubtasks: 6,
+    numberOfCompletedSubtasks: 2,
+    assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
+}
+// postDataInDatabase("guest", "todos", data);
