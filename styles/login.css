@@ -73,7 +73,7 @@ body {
     transform: translate(-30%, -30%);
     width: 150px;
     height: auto;
-    animation: moveLogo 1s ease-in-out forwards;
+    animation: moveLogo 1.8s ease-in-out forwards;
 }
 
 @keyframes moveLogo {
@@ -158,7 +158,7 @@ body {
 
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    animation: fadeIn 1s ease-in-out 0.275s forwards;
+    animation: fadeIn 1s ease-in-out 1.8s forwards;
 }
 
 .login h1 {
@@ -275,7 +275,7 @@ body {
 .legal-information {
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    animation: fadeIn 1s ease-in-out 0.275s forwards;
+    animation: fadeIn 1s ease-in-out 1.8s forwards;
 
     display: flex;
     justify-content: center;
@@ -504,7 +504,7 @@ body {
 
 @media(max-width: 450px) {
     .login-container {
-        margin-bottom: 64px;
+        margin-bottom: 80px;
     }
 
     .user-login {
@@ -522,16 +522,16 @@ body {
     .register-link {
 
         margin-left: 23%;
-        gap: 35px;
+        gap: 40px;
 
-        margin-top: 620px;
+        margin-top: 650px;
         padding-right: 40px;
     }
 }
 
 @media(max-width: 375px) {
     .login-container {
-        margin-bottom: 0px;
+        margin-bottom: 20px;
     }
 
     .register-link {
@@ -542,20 +542,20 @@ body {
     .legal-information {
         opacity: 0;
         transition: opacity 1s ease-in-out;
-        animation: fadeIn 1s ease-in-out 0.275s forwards;
+        animation: fadeIn 1s ease-in-out 1.8s forwards;
 
         display: flex;
         justify-content: center;
         gap: 25px;
 
-        margin-top: 100px;
+        margin-top: 88px;
         font-size: 12px;
     }
 
     @keyframes moveLogo {
         0% {
-            top: 25%;
-            left: 25%;
+            top: 40%;
+            left: 45%;
             transform: translate(-50, -50) scale(1);
         }
 
