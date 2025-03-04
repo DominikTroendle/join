@@ -88,7 +88,7 @@ async function allowDrop2(event, dragFieldArray) {
     if (oldCategory === newCategory) {
         return;
     }
-    findObjectInArrayAndSaveData(oldArray);
+    findObjectInArrayAndSaveData(oldArray, newCategoryName);
 
     let index = oldArray.findIndex(element => element.id == currentCardId);
 
@@ -101,15 +101,10 @@ async function allowDrop2(event, dragFieldArray) {
 
     renderSmallCard(newCategory, newArray);
 
-    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId, currentTaskData);
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData);
     if (!putResponse.ok) {
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
-    }
-
-    let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
-    if (!deleteResponse.ok) {
-        console.error("Fehler beim Löschen des alten Tasks:", deleteResponse.statusText);
     }
 }
 
@@ -124,9 +119,10 @@ function clearAllArray() {
     doneArray = [];
 }
 
-function findObjectInArrayAndSaveData(array) {
+function findObjectInArrayAndSaveData(array, newCategoryName) {
     let taskObject = array.find(element => element.id == currentCardId);
     currentTaskData = {
+        category: newCategoryName,
         taskType: taskObject.taskType,
         taskTitle: taskObject.taskTitle,
         taskDescription: taskObject.taskDescription,
@@ -244,10 +240,10 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         if (data) {
             Object.entries(data).forEach(([firebaseKey, value]) => {
                 console.log
-                if (value.category === category){
-                value.id = firebaseKey;
-                categoryArray.push(value);
-            }
+                if (value.category === category) {
+                    value.id = firebaseKey;
+                    categoryArray.push(value);
+                }
             });
         }
         renderSmallCard(dragFieldId, categoryArray);
@@ -283,10 +279,10 @@ async function deleteInDatabase(userKey, category, firebaseId) {
 }
 
 async function putDataInDatabase(userKey, cardId, data) {
-    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}/category.json`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data.category)
     });
     if (!response.ok) {
         console.error("error when saving:", response.statusText);
