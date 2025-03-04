@@ -91,6 +91,7 @@ async function allowDrop2(event, dragFieldArray) {
     findObjectInArrayAndSaveData(oldArray);
 
     let index = oldArray.findIndex(element => element.id == currentCardId);
+
     newArray.push(oldArray.splice(index, 1)[0]);
     if (oldArray.length !== 0) {
         renderSmallCard(oldCategory, oldArray);
@@ -101,8 +102,14 @@ async function allowDrop2(event, dragFieldArray) {
     renderSmallCard(newCategory, newArray);
 
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), newCategoryName, currentCardId, currentTaskData);
-    if (putResponse.ok) {
-        await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
+    if (!putResponse.ok) {
+        console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
+        return; // Falls PUT fehlschlägt, nicht weitermachen!
+    }
+
+    let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), oldCategoryName, currentCardId);
+    if (!deleteResponse.ok) {
+        console.error("Fehler beim Löschen des alten Tasks:", deleteResponse.statusText);
     }
 }
 
@@ -246,8 +253,8 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
     }
 }
 
-async function postDataInDatabase(userKey, category, data) {
-    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`, {
+async function postDataInDatabase(userKey, data) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/.json`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -269,6 +276,7 @@ async function deleteInDatabase(userKey, category, firebaseId) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}/${firebaseId}.json`, {
         method: "DELETE"
     })
+    return response
 }
 
 async function putDataInDatabase(userKey, category, cardId, data) {
@@ -284,12 +292,12 @@ async function putDataInDatabase(userKey, category, cardId, data) {
 }
 
 let data = {
-    taskType: "Technical Task",
-    taskTitle: "CSS Architecture Planning",
-    taskDescription: "Define CSS naming conventions and structure...",
-    taskPriority: "urgent",
-    numberOfSubtasks: 6,
-    numberOfCompletedSubtasks: 2,
+    taskType: "User Story",
+    taskTitle: "Kochwelt Page & Recipe Recommender",
+    taskDescription: "Build start page with recipe recommendation...",
+    taskPriority: "medium",
+    numberOfSubtasks: 2,
+    numberOfCompletedSubtasks: 1,
     assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
 }
 // postDataInDatabase("guest", "todos", data);
