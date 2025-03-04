@@ -485,7 +485,13 @@ function saveTask() {
     task.numberOfSubtasks = subtasksCount;
     task.numberOfCompletedSubtasks = 0;
     // task.taskSubtasks = subtasks;
-    task.assignedContacts = selectedContacts;
+    if (selectedContacts.length == 0) {
+        task.assignedContacts = {"":""};
+    } else {
+        task.assignedContacts = selectedContacts;
+    }
+    console.log(task);
+    
     saveToFirebase("todos", task);
     task = {};
 }
@@ -526,7 +532,7 @@ async function getContacts(path="") {
     }
 }
 
-function loadContactInfo(contactsObj) {
+async function loadContactInfo(contactsObj) {
     let keys = Object.keys(contactsObj.allContacts);
     for (let index = 0; index < keys.length; index++) {
         let key = keys[index];
@@ -536,6 +542,7 @@ function loadContactInfo(contactsObj) {
         };
         contacts.push(contactObj);
     }
+    await getLoggedInUser();
 }
 
 async function loadSmallInitials() {
@@ -547,4 +554,13 @@ async function loadSmallInitials() {
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
     document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.user) || "G";
+}
+
+async function getLoggedInUser() {
+    if (userId !== "guest") {
+        let userDatas = await fetch(BASE_URL + `${userId}/userDatas` + ".json");
+        let userDatasJson = await userDatas.json();
+        let userObj = {name: userDatasJson.user, color: "white"};
+        contacts.push(userObj);
+    }
 }
