@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>join Register</title>
-    <link
-      rel="icon"
-      href="assets/img/join-logo.svg"
-      type="image/gif"
-      sizes="16x16"
-    />
+    <link rel="icon" href="assets/img/join-logo.svg" type="image/gif" sizes="16x16" />
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/register.css" />
-  </head>
-  <body onload="init()">
+</head>
+
+<body onload="init()">
     <img src="assets/img/join-logo.png" alt="Logo" class="logo" />
     <div class="user-register-container">
         <div class="user-register">
-            <div class="Sign-up">
-                <button class="left-btn"><img src="assets/img/arrow-left-line.png" alt="" onclick="backToLogin()"></button>
-                <h1>Sign up</h1>
+            <div class="Sign-up-text-container">
+                <button class="left-btn"><img src="assets/img/arrow-left-line.png" alt=""
+                        onclick="backToLogin()"></button>
+                <div class="text-sign-up">
+                    <h1>Sign up</h1>
+                    <div class="blue-line"></div>
+                </div>
             </div>
-            <div class="blue-line"></div>
             <form onsubmit="return addUserToRegister(event, this);">
                 <div class="register-input">
                     <div class="input-container">
@@ -35,22 +35,21 @@
                     </div>
                     <div class="input-container">
                         <input type="password" id="password" placeholder="Password" required
-                        onfocus="changePasswordIcon(true)" 
-                        onblur="changePasswordIcon(false)"/>
+                            onfocus="changePasswordIcon(true)" onblur="changePasswordIcon(false)" />
                         <img id="passwordIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon">
                     </div>
                     <div class="input-container">
                         <input type="password" id="controllPassword" placeholder="Password" required
-                        onfocus="changeConrollPasswordIcon(true)" 
-                        onblur="changeConrollPasswordIcon(false)"/>
-                        <img id="passwordControllIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon" onclick="togglePasswordVisibility()">
+                            onfocus="changeConrollPasswordIcon(true)" onblur="changeConrollPasswordIcon(false)" />
+                        <img id="passwordControllIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon"
+                            onclick="togglePasswordVisibility()">
                     </div>
                     <div class="no-value-content">
                         <p id="notCorrectValue" class="error-massage">Your passwords don't match. Please try again.</p>
                     </div>
                 </div>
                 <div class="checkbox-privacy-policy-container">
-                        <input type="checkbox" id="checkbox">  
+                    <input type="checkbox" id="checkbox">
                     <div class="privacy-policy">
                         <p>I accept the</p>
                         <a href="privacy-policy.html" target="_blank">Privacy policy</a>
@@ -65,8 +64,9 @@
     </div>
     <div class="legal-information">
         <a href="privacy-policy.html" target="_blank">Privacy Policy</a>
-        <a href="">Legal notice</a>
+        <a href="legal-notice.html" target="_blank">Legal notice</a>
     </div>
     <script src="scripts/register.js"></script>
-  </body>
+</body>
+
 </html>

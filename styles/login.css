@@ -71,22 +71,24 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-30%, -30%);
-    width: 150px;
-    height: auto;
+    width: 274px;
+    height: 345px;
     animation: moveLogo 1.8s ease-in-out forwards;
 }
 
 @keyframes moveLogo {
     0% {
-        top: 50%;
-        left: 50%;
+        top: 40%;
+        left: 45%;
         transform: translate(-20%, -20%) scale(1);
     }
 
     100% {
-        top: 20px;
-        left: 20px;
-        transform: translate(0, 0) scale(0.5);
+        height: 121px;
+        width: 100px;
+        top: 80px;
+        left: 77px;
+        transform: translate(0, 0) scale(1);
     }
 }
 
@@ -101,7 +103,6 @@ body {
 }
 
 .login-container {
-    margin-bottom: 100px;
     z-index: 1000;
 }
 
@@ -112,16 +113,24 @@ body {
 
     display: flex;
     justify-content: end;
-    gap: 30px;
+    gap: 35px;
 
-    margin-top: 65px;
+    margin-top: 76px;
     padding-right: 40px;
 }
 
+.register-link h7{
+    font-size: 20px;
+    font-weight: 400;
+}
+
 .register-link a {
+    width: 91px;
+    height: 49px;
     padding: 8px;
     border-radius: 5px;
-
+    font-size: 16px;
+    font-weight: 700;
     background-color: black;
     color: white;
 }
@@ -144,7 +153,7 @@ body {
 .user-login {
     height: 449px;
     width: 652px;
-    margin-top: 80px;
+    margin-top: 167.5px;
     padding: 20px 50px 0 50px;
 
     background-color: white;
@@ -276,20 +285,19 @@ body {
     opacity: 0;
     transition: opacity 1s ease-in-out;
     animation: fadeIn 1s ease-in-out 1.8s forwards;
-
     display: flex;
     justify-content: center;
-    gap: 50px;
-
-    margin-top: 190px;
-    font-size: 12px;
+    gap: 24px;
+    margin-top: 200px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .legal-information a:hover {
     color: #29ABE2;
     transition: 75ms ease-in-out;
     transform: scale(1.03);
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .mobile-overlay {
@@ -328,19 +336,17 @@ body {
         display: block;
         left: 45%;
         top: 40%;
-        width: 64px;
-        height: 78px;
+        width: 100px;
+        height: 122px;
         z-index: 2;
     }
 
     .resposive-logo-color {
         fill: rgb(253, 253, 253);
-
     }
 
     .logo {
         display: none;
-
     }
 
     .animation-overlay-logo {
@@ -369,9 +375,11 @@ body {
         }
 
         100% {
-            top: 37px;
-            left: 38px;
-            transform: translate(0px, 0px) scale(0.64);
+            width: 64px;
+            height: 78px;
+            top: 38px;
+            left: 37px;
+            transform: translate(0px, 0px) scale(1);
         }
     }
 
@@ -395,32 +403,7 @@ body {
         margin-left: 30%;
         gap: 30px;
 
-        margin-top: 620px;
-    }
-
-    .user-login {
-        width: 100%;
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-}
-
-@media(max-width: 550px) {
-    .register-link {
-        position: absolute;
-        opacity: 0;
-        transition: none;
-        animation: fadeIn 1s ease-in-out 2s forwards;
-
-        display: flex;
-        margin-left: 30%;
-        gap: 30px;
-
-        margin-top: 620px;
-    }
-
-    .login-container {
-        margin-bottom: 40px;
+        margin-top: 778px;
     }
 
     .register-link a:hover {
@@ -429,11 +412,16 @@ body {
     }
 
     .blue-line {
-        margin-left: 96px;
+        margin-left: 160px;
+        width: 100px;
     }
 
-    .input-container input {
-        width: 330px;
+    .user-login {
+        width: 100%;
+        height: 475px;
+        margin-top: 205.5px;
+        margin-left: 15px;
+        margin-right: 15px;
     }
 
     .login-buttons {
@@ -489,80 +477,88 @@ body {
     }
 
     .legal-information {
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-        animation: fadeIn 1s ease-in-out 0.275s forwards;
+        margin-top: 236px;
+    }
 
-        display: flex;
-        justify-content: center;
-        gap: 50px;
-
-        margin-top: 100px;
-        font-size: 12px;
+    .legal-information a:hover {
+        color: black;
+        transition: none;
+        transform: none;
+        font-weight: 400;
     }
 }
 
-@media(max-width: 450px) {
-    .login-container {
-        margin-bottom: 80px;
+@media(max-width: 550px) {
+    .resposive-logo {
+        left: 40%;
+        top: 40%;
     }
-
-    .user-login {
-        width: 300px;
-    }
-
-    .blue-line {
-        margin-left: 50px;
-    }
-
-    .input-container input {
-        width: 240px;
-    }
-
-    .register-link {
-
-        margin-left: 23%;
-        gap: 40px;
-
-        margin-top: 650px;
-        padding-right: 40px;
-    }
-}
-
-@media(max-width: 375px) {
-    .login-container {
-        margin-bottom: 20px;
-    }
-
-    .register-link {
-        margin-left: 18%;
-        margin-top: 580px;
-    }
-
-    .legal-information {
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-        animation: fadeIn 1s ease-in-out 1.8s forwards;
-
-        display: flex;
-        justify-content: center;
-        gap: 25px;
-
-        margin-top: 88px;
-        font-size: 12px;
-    }
-
     @keyframes moveLogo {
         0% {
             top: 40%;
-            left: 45%;
+            left: 40%;
             transform: translate(-50, -50) scale(1);
         }
 
         100% {
-            top: 0px;
-            left: 0px;
-            transform: translate(0px, 0px) scale(0.64);
+            width: 64px;
+            height: 78px;
+            top: 38px;
+            left: 37px;
+            transform: translate(0px, 0px) scale(1);
         }
+    }
+
+    .register-link {
+        position: absolute;
+        opacity: 0;
+        transition: none;
+        animation: fadeIn 1s ease-in-out 2s forwards;
+
+        display: flex;
+        margin-left: 30%;
+        gap: 30px;
+
+        margin-top: 778px;
+    }
+
+    .blue-line {
+        margin-left: 116px;
+        width: 100px;
+    }
+
+    .input-container input {
+        width: 330px;
+    }
+}
+
+@media(max-width: 490px) {
+    .register-link {
+
+        margin-left: 21%;
+    }
+}
+
+@media(max-width: 450px){
+    .user-login {
+        padding: 20px 0 0 0;
+    }
+}
+
+@media(max-width: 400px){
+    .blue-line {
+        margin-left: 86px;
+        width: 100px;
+    }
+
+    .input-container input {
+        width: 270px;
+    }
+}
+
+@media(max-width: 375px) {
+    .register-link {
+
+        margin-left: 8%;
     }
 }

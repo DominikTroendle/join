@@ -5,37 +5,33 @@ body{
 
 .logo {
     position: absolute;
-    top: 66px;
-    left: 58px;
-    width: 74px;
-    height: 91px;
+    top: 80px;
+    left: 77px;
+    width: 100px;
+    height: 121px;
 }
 
 .user-register-container{
-    width: 100%;
-    height: 90vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: #f4f4f4;
 }
 
 .user-register{
     height: 630px;
     width: 598px;
-    margin-top: 80px;
+    margin-top: 197px;
     background-color: white;
     box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
 }
 
-.Sign-up{
+.Sign-up-text-container{
     display: flex;
     margin-top: 40px;
     margin-left: 20px;
-    gap: 160px;
+    gap: 25%;
 }
 
 .left-btn img{
@@ -49,15 +45,19 @@ body{
     transform: scale(1.1);
 }
 
+.text-sign-up{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 h1{
-    font-size: 50px
+    font-size: 61px
 }
 
 .blue-line{
     margin: 8px;
-    margin-left: 245px;
     height: 2px;
-    width: 120px;
+    width: 140px;
     background-color: #29ABE2;
 }
 
@@ -74,7 +74,7 @@ form{
 .register-input input{
     width: 422px;
     height: 48px;
-    padding: 10px 60px 10px 25px;
+    padding: 16px 60px 10px 25px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     margin-top: 25px;
@@ -125,8 +125,8 @@ form{
     justify-content: center;
 
     font-size: 13px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .checkbox-privacy-policy-container input[type="checkbox"] {
@@ -198,13 +198,11 @@ form{
     margin-top: 20px;
     padding: 8px 20px;
     border-radius: 8px;
-
     background-color: black;
     color: white;
     font-weight: 700;
     font-size: 21px;
     line-height: 25.2px;
-    
 }
 
 .register-button button:hover{
@@ -215,18 +213,183 @@ form{
 }
 
 .legal-information{
-
-
     display: flex;
     justify-content: center;
-    gap: 50px;
-
-    font-size: 12px;
+    margin-top: 90px;
+    gap: 24px;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 .legal-information a:hover{
     color: #29ABE2;
     transition: 75ms ease-in-out;
     transform: scale(1.03);
-    font-weight: 500;
+    font-weight: 400;
 }
+
+@media(max-width: 1000px){
+    .user-register{
+        margin-top: 225px;
+    }
+
+    .legal-information{
+        margin-top: 62px;
+    }
+}
+
+@media(max-width: 680px){
+    .logo {
+        position: absolute;
+        top: 37px;
+        left: 38px;
+        width: 64px;
+        height: 78px;
+    }
+
+    .user-register{
+        height: 595px;
+        width: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 165.5px;
+    }
+
+    .left-btn img:hover{
+        background-color: transparent;
+        transform: scale(1);
+    }
+
+    .Sign-up-text-container{
+        gap: calc(25% - 30px);
+    }
+
+    .blue-line{
+        width: 108px;
+        height: 3px;
+    }
+
+    .register-input input {
+        margin-top: 20px;
+    }
+
+    .checkbox-privacy-policy-container {
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    .privacy-policy a:hover{
+        transform: scale(1);
+        text-decoration: none;
+        text-underline-offset: 3px;
+    }
+
+    .register-button button{
+        margin-top: 0px;
+    }
+
+    .register-button button:hover{
+        box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.2);
+        background-color: black;
+        transform: scale(1);
+        transition: none;
+    }
+
+    .legal-information{
+        margin-top: 156px;
+    }
+
+    .legal-information a:hover{
+        color: black;
+        transition: none;
+        transform: scale(1);
+        font-weight: 400;
+    }
+}
+
+@media(max-width: 550px){
+    .logo {
+        top: 37px;
+        left: 38px;
+        width: 64px;
+        height: 78px;
+    }
+
+    .user-register{
+        height: 595px;
+        margin-top: 165.5px;
+    }
+}
+
+@media(max-width: 480px){
+    .register-input input {
+        width: 364px;
+    }
+}
+
+@media(max-width: 420px){
+    .Sign-up-text-container {
+        gap: calc(18% - 30px);
+    }
+
+    .register-input input {
+        width: 324px;
+    }
+}
+
+@media(max-width: 370px){
+    .Sign-up-text-container {
+        gap: calc(14% - 30px);
+    }
+
+    .register-input input {
+        width: 264px;
+    }
+}
+
+/* @media(max-width: 500px){
+    .Sign-up-text-container{
+        gap: 16%;
+    }
+
+    .register-input input{
+        width: 364px;
+    }
+}
+
+@media(max-width: 420px){
+    .Sign-up-text-container{
+        gap: 10%;
+    }
+
+    .register-input input{
+        width: auto;
+    }
+}
+
+@media(max-width: 375px){
+    .logo {
+        position: absolute;
+        top: 17px;
+        left: 18px;
+        width: 34px;
+        height: 42px;
+    }
+
+    .user-register{
+        height: 550px;
+        margin-top: 100px;
+    }
+
+    .Sign-up-text-container{
+        gap: 4%;
+    }
+
+    form{
+        margin-top: 0;
+    }
+
+    .register-input input {
+        margin-top: 15px;
+    }
+} */
