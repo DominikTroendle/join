@@ -233,9 +233,9 @@ function init() {
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
-async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
+async function readFromDatabase(userKey, categoryArray, dragFieldId) {
     try {
-        let result = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}.json`);
+        let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
         if (!result.ok) {
             throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
         }
