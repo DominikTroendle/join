@@ -51,9 +51,7 @@ async function addUserToRegister(event, form) {
     let response = await sendData("/users", {});
     if (response && response.name) {
         let userId = response.name;
-        let task = { "awaitFeedback": "", "done": "", "inProgress": "", "toDos": "" };
         await putData(`/users/${userId}/userDatas`, newUser);
-        await putData(`/users/${userId}/tasks`, task);
         name.value = '';
         email.value = '';
         password.value = '';
