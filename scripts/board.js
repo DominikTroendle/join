@@ -93,6 +93,8 @@ async function allowDrop2(event, dragFieldArray) {
     let index = oldArray.findIndex(element => element.id == currentCardId);
 
     newArray.push(oldArray.splice(index, 1)[0]);
+    let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
+    taskCardObjectinNewArray.category = newCategoryName;
     if (oldArray.length !== 0) {
         renderSmallCard(oldCategory, oldArray);
     } else {
