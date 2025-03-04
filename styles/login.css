@@ -398,11 +398,9 @@ body {
         opacity: 0;
         transition: none;
         animation: fadeIn 1s ease-in-out 2s forwards;
-
         display: flex;
         margin-left: 30%;
         gap: 30px;
-
         margin-top: 778px;
     }
 
@@ -534,7 +532,6 @@ body {
 
 @media(max-width: 490px) {
     .register-link {
-
         margin-left: 21%;
     }
 }
@@ -543,9 +540,17 @@ body {
     .user-login {
         padding: 20px 0 0 0;
     }
+
+    .legal-information {
+        margin-top: 186px;
+    }
 }
 
 @media(max-width: 400px){
+    .register-link {
+        margin-top: 728px;
+    }
+
     .blue-line {
         margin-left: 86px;
         width: 100px;
@@ -554,11 +559,38 @@ body {
     .input-container input {
         width: 270px;
     }
+
+    .register-link {
+        margin-left: 17%;
+    }
+
+    .legal-information {
+        margin-top: 126px;
+    }
 }
 
 @media(max-width: 375px) {
     .register-link {
+        margin-left: 12%;
+    }
+}
 
+@media(max-width: 360px){
+    .user-login {
+        margin-top: 135.5px;
+    }
+
+    .register-link {
+        margin-top: 648px;
+    }
+
+    .legal-information {
+        margin-top: 86px;
+    }
+}
+
+@media(max-width: 340px){
+    .register-link {
         margin-left: 8%;
     }
 }

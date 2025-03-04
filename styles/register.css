@@ -308,13 +308,6 @@ form{
 }
 
 @media(max-width: 550px){
-    .logo {
-        top: 37px;
-        left: 38px;
-        width: 64px;
-        height: 78px;
-    }
-
     .user-register{
         height: 595px;
         margin-top: 165.5px;
@@ -325,6 +318,10 @@ form{
     .register-input input {
         width: 364px;
     }
+
+    .legal-information{
+        margin-top: 106px;
+    }
 }
 
 @media(max-width: 420px){
@@ -334,6 +331,16 @@ form{
 
     .register-input input {
         width: 324px;
+    }
+
+    .legal-information{
+        margin-top: 106px;
+    }
+}
+
+@media(max-width: 400px){
+    .legal-information{
+        margin-top: 40px;
     }
 }
 
@@ -346,50 +353,3 @@ form{
         width: 264px;
     }
 }
-
-/* @media(max-width: 500px){
-    .Sign-up-text-container{
-        gap: 16%;
-    }
-
-    .register-input input{
-        width: 364px;
-    }
-}
-
-@media(max-width: 420px){
-    .Sign-up-text-container{
-        gap: 10%;
-    }
-
-    .register-input input{
-        width: auto;
-    }
-}
-
-@media(max-width: 375px){
-    .logo {
-        position: absolute;
-        top: 17px;
-        left: 18px;
-        width: 34px;
-        height: 42px;
-    }
-
-    .user-register{
-        height: 550px;
-        margin-top: 100px;
-    }
-
-    .Sign-up-text-container{
-        gap: 4%;
-    }
-
-    form{
-        margin-top: 0;
-    }
-
-    .register-input input {
-        margin-top: 15px;
-    }
-} */
