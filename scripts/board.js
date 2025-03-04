@@ -226,14 +226,14 @@ function renderContentBigTaskCardEdit() {
 
 function init() {
     // clearAllArray();
-    readFromDatabase(localStorage.getItem("userId"), "todos", toDoArray, "to-do-drag-field");
+    readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
-async function readFromDatabase(userKey, categoryArray, dragFieldId) {
+async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
         if (!result.ok) {
@@ -243,8 +243,11 @@ async function readFromDatabase(userKey, categoryArray, dragFieldId) {
         categoryArray.length = 0;
         if (data) {
             Object.entries(data).forEach(([firebaseKey, value]) => {
+                console.log
+                if (value.category === category){
                 value.id = firebaseKey;
                 categoryArray.push(value);
+            }
             });
         }
         renderSmallCard(dragFieldId, categoryArray);
@@ -292,12 +295,13 @@ async function putDataInDatabase(userKey, cardId, data) {
 }
 
 let data = {
-    taskType: "User Story",
-    taskTitle: "Kochwelt Page & Recipe Recommender",
-    taskDescription: "Build start page with recipe recommendation...",
-    taskPriority: "medium",
-    numberOfSubtasks: 2,
-    numberOfCompletedSubtasks: 1,
+    category: "toDos",
+    taskType: "Technical Task",
+    taskTitle: "CSS Architecture Planning",
+    taskDescription: "Define CSS naming conventions and structure...",
+    taskPriority: "urgent",
+    numberOfSubtasks: 6,
+    numberOfCompletedSubtasks: 2,
     assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
 }
-// postDataInDatabase("guest", "todos", data);
+// postDataInDatabase("guest", data);
