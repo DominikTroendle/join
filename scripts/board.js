@@ -279,8 +279,8 @@ async function deleteInDatabase(userKey, category, firebaseId) {
     return response
 }
 
-async function putDataInDatabase(userKey, category, cardId, data) {
-    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}/${cardId}.json`, {
+async function putDataInDatabase(userKey, cardId, data) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
