@@ -299,18 +299,36 @@ function findInitials(contactName) {
  */
 function selectContact(element) {
     let isSelected = element.classList.contains('select-contact');
+    let moreInfoContainer = document.getElementById('moreInformationContact');
+    let overlay = document.querySelector('.more-information-container');
+
     document.querySelectorAll('.container-contact').forEach(contact => {
         contact.classList.remove('select-contact');
         contact.style.color = "black";
     });
+
     if (isSelected) {
-        document.getElementById('moreInformationContact').style.transform = 'translateX(100%)';
-        setTimeout(() => document.getElementById('moreInformationContact').innerHTML = '', 500);
+        moreInfoContainer.style.transform = 'translateX(100%)';
+        setTimeout(() => moreInfoContainer.innerHTML = '', 500);
+        closeContactMobilButton();
     } else {
         element.classList.add('select-contact');
         element.style.color = "white";
         moreContactInformation(element.querySelector('.contact-preview-name').innerText);
+        
+        // Prüfen, ob die Breite ≤ 428px ist
+        if (window.innerWidth <= 428) {
+            overlay.classList.add('mobile-overlay'); // Overlay anzeigen
+        }
     }
+}
+
+function closeContactMobilButton() {
+    document.querySelector('.more-information-container').classList.remove('mobile-overlay');
+    document.querySelectorAll('.container-contact').forEach(contact => {
+        contact.classList.remove('select-contact');
+        contact.style.color = "black";
+    });
 }
 
 /**
@@ -327,12 +345,24 @@ async function moreContactInformation(contactName) {
         let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
-        contactInfoContainer.style.transition = 'transform 0.5s ease-out';
-        setTimeout(() => {
-            contactInfoContainer.style.transform = 'translateX(0)';
-        }, 10);
+        if (window.innerWidth > 428) {
+            contactInfoContainer.style.transition = 'transform 0.5s ease-out';
+            setTimeout(() => {
+                contactInfoContainer.style.transform = 'translateX(0)';
+            }, 10);
+        } else {
+            contactInfoContainer.style.transition = 'none';
+            setTimeout(() => {
+                contactInfoContainer.style.transform = 'none';
+            }, 10);
+        }
     }
 }
+
+function mobileUserInformation() {
+    document.getElementById('mobileInformationenContact').classList.toggle('information-mobile-container')
+}
+
 
 /**
  * Edits a contact overlay.

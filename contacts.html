@@ -18,6 +18,7 @@
         <div class="content">
             <header>
                 <nav>
+                    <img class="mobile-logo" src="assets/img/join-logo.png" alt="">
                     <span class="text-nav">Kanban Project Management Tool</span>
                     <div class="button-box">
                         <a href="help.html" class="help-button">
@@ -73,16 +74,7 @@
                         notice</a>
                 </div>
             </div>
-
-            <section id="contact-details">
-                <div id="contact-headline">
-                    <h1>Contacts</h1>
-                    <img src="./assets/icons/vector.svg" alt="icon-line">
-                    <span>Better with a team</span>
-                </div>
-                    <div id="moreInformationContact"></div>
-            </section>
-            
+                
             <div id="contactlist-container">
                 <section id="container-contacts">
                     <button onclick="addNewContectOverlay()">Add new contact
@@ -92,8 +84,21 @@
                 <div class="contacs-box-container">
                     <div id="contactList" class="contactList"></div>
                 </div>
-
             </div> 
+
+            <div class="more-information-container">
+                <div class="headline-container">
+                    <div class="contact-headline">
+                        <h1>Contacts</h1>
+                        <img class="desktope-line" src="./assets/icons/vector.svg" alt="icon-line">
+                        <span>Better with a team</span>
+                        <img class="mobile-img-line" src="./assets/img/Vector 5.svg" alt="mobile-line">
+                    </div>
+                    <img class="back-to-contactlist-btn" src="assets/img/arrow-left-line.png" alt="" onclick="closeContactMobilButton()">
+                </div>
+                <div id="moreInformationContact"></div>
+            </div>
+
             <div id="newContectOverlay" class="contact-overlay d-none"></div>
             <div id="editContactOverlay" class="contact-overlay d-none"></div>
             
@@ -106,7 +111,7 @@
 
     <script src="./templates/contacts-template.js"></script>
     <script src="./scripts/contacts.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
 
