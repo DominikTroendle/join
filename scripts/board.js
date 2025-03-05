@@ -209,9 +209,18 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
     hook.classList.toggle("d-none");
 }
 
+const arrays = {
+    toDoArray: toDoArray,
+    inProgressArray: inProgressArray,
+    awaitFeedbackArray: awaitFeedbackArray,
+    doneArray: doneArray
+};
+
 function renderContentBigTaskCard(event) {
     let smallTaskCardId = event.currentTarget.id;
-    let objectFromCurrentSmallTaskCard = toDoArray.find(element => element.id == smallTaskCardId);
+    let currentArrayName = event.currentTarget.closest(".drag-field").dataset.array;
+    let currentArray = arrays[currentArrayName];
+    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == smallTaskCardId);
 
     let bigTaskCard = document.getElementById("big-task-card__box");
     bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts);
