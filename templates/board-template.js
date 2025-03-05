@@ -17,7 +17,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         }
     ];
 
-    let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
+    let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src || "";
 
     let subtaskHtml = "";
     let scaleFillCalculate;

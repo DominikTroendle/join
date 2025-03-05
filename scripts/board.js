@@ -224,6 +224,7 @@ function renderContentBigTaskCardEdit() {
 
 function init() {
     // clearAllArray();
+    
     readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
@@ -244,6 +245,10 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
                 console.log
                 if (value.category === category) {
                     value.id = firebaseKey;
+
+                    if (!value.assignedContacts) {
+                        value.assignedContacts = [];
+                    }
                     categoryArray.push(value);
                 }
             });
