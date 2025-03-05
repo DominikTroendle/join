@@ -477,6 +477,7 @@ function removeError() {
 
 function saveTask() {
     // task.taskId = 3;
+    task.category = "toDos";
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
@@ -485,23 +486,17 @@ function saveTask() {
     task.numberOfSubtasks = subtasksCount;
     task.numberOfCompletedSubtasks = 0;
     // task.taskSubtasks = subtasks;
-    if (selectedContacts.length == 0) {
-        task.assignedContacts = {"":""};
-    } else {
-        task.assignedContacts = selectedContacts;
-    }
-    console.log(task);
-    
-    saveToFirebase("todos", task);
+    task.assignedContacts = selectedContacts;
+    saveToFirebase("tasks/", task);
     task = {};
 }
 
 async function saveToFirebase(path, task) {
     if (userId == "guest") {
-        path = "guest/tasks/" + path;
+        path = "guest/" + path;
         await postData(path, task);
     } else {
-        path = `${userId}/tasks/` + path;
+        path = `${userId}/` + path;
         await postData(path, task)
     }
 }
