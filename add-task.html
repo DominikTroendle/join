@@ -88,11 +88,40 @@
                             <input id="title" class="input" type="text" name="title" placeholder="Enter a title">
                             <p id="required-title" class="required grey">This field is required</p>
                         </div>
-                        <div class="container-input-label">
+                        <div id="container-description" class="container-input-label">
                             <label for="description" class="label-add-task">
                                 Description
                             </label>
                             <textarea id="description" class="input" name="description" placeholder="Enter a Description"></textarea>
+                        </div>
+                        <div class="container-input-label">
+                            <label for="due-date" class="label-add-task flex">
+                                Due date
+                                <span class="asterisk">&#42;</span>
+                                <p id="invalid-date" class="required grey">Invalid date!</p>
+                            </label>
+                            <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
+                            <p id="required-due-date" class="required grey">This field is required</p>
+                        </div>
+                    </div>
+                    <hr id="separator">
+                    <div id="form-right">
+                        <div id="container-prioritys" class="container-input-label">
+                            <label for="buttons-prio" class="label-add-task">Priority</label>
+                            <div id="buttons-prio">
+                                <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
+                                    Urgent
+                                    <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
+                                </button>
+                                <button id="medium" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('medium')">
+                                    Medium
+                                    <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium">
+                                </button>
+                                <button id="low" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">
+                                    Low
+                                    <img id="svg-low" src="assets/icons/low.svg" alt="icon-low">
+                                </button>
+                            </div>
                         </div>
                         <div class="container-input-label custom-select">
                             <label for="assigned-to" class="label-add-task">
@@ -108,35 +137,6 @@
                                 <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
                             </div>
                             <div id="container-assigned-contacts"></div>
-                        </div>
-                    </div>
-                    <hr id="separator">
-                    <div id="form-right">
-                        <div class="container-input-label">
-                            <label for="due-date" class="label-add-task flex">
-                                Due date
-                                <span class="asterisk">&#42;</span>
-                                <p id="invalid-date" class="required grey">Invalid date!</p>
-                            </label>
-                            <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
-                            <p id="required-due-date" class="required grey">This field is required</p>
-                        </div>
-                        <div class="container-input-label">
-                            <label for="buttons-prio" class="label-add-task">Prio</label>
-                            <div id="buttons-prio">
-                                <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
-                                    Urgent
-                                    <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
-                                </button>
-                                <button id="medium" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('medium')">
-                                    Medium
-                                    <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium">
-                                </button>
-                                <button id="low" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">
-                                    Low
-                                    <img id="svg-low" src="assets/icons/low.svg" alt="icon-low">
-                                </button>
-                            </div>
                         </div>
                         <div class="container-input-label">
                             <label for="category" class="label-add-task flex">

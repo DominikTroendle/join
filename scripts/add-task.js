@@ -357,14 +357,27 @@ function showEditOptions(id, boolean) {
     }
 }
 
+const subtasksInput = document.getElementById('subtasks');
+subtasksInput.addEventListener('keydown', (event) => {
+    if (event.key === "Enter") {
+        addSubtask();
+        subtasksInput.value = "";
+    }
+})
+
 function addSubtask() {
     let input = document.getElementById('subtasks');
     let containerSubtasks = document.getElementById('container-subtasks');
-    subtasksCount++;
-    containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
-    document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
-    subtasks.push(input.value);
-    checkForScrollableContainer(containerSubtasks);
+    if (input.value !== "") {
+        document.getElementById('invalid-subtask').classList.add('grey');
+        subtasksCount++;
+        containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
+        document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
+        subtasks.push(input.value);
+        checkForScrollableContainer(containerSubtasks);
+    } else {
+        document.getElementById('invalid-subtask').classList.remove('grey');
+    }
 }
 
 function deleteSubtask(id) {
