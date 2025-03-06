@@ -76,8 +76,9 @@
             </div>
                 
             <div id="contactlist-container">
-                <section id="container-contacts">
-                    <button onclick="addNewContectOverlay()">Add new contact
+                <section id="container-contacts-button">
+                    <button onclick="addNewContectOverlay()">
+                        <p>Add new contact</p>
                         <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
                     </button>
                 </section>
@@ -97,6 +98,9 @@
                     <img class="back-to-contactlist-btn" src="assets/img/arrow-left-line.png" alt="" onclick="closeContactMobilButton()">
                 </div>
                 <div id="moreInformationContact"></div>
+                <div class="mobile-procressing-area-button" onclick="procressingClickMenu()">
+                    <button><img src="assets/img/more_vert.svg" alt=""></button>
+                </div>
             </div>
 
             <div id="newContectOverlay" class="contact-overlay d-none"></div>

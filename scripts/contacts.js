@@ -359,10 +359,6 @@ async function moreContactInformation(contactName) {
     }
 }
 
-function mobileUserInformation() {
-    document.getElementById('mobileInformationenContact').classList.toggle('information-mobile-container')
-}
-
 
 /**
  * Edits a contact overlay.
@@ -509,5 +505,30 @@ async function deleteContact(key) {
         document.getElementById('moreInformationContact').innerHTML = '';
     } catch (error) {
         console.error("Fehler beim Löschen:", error);
+    }
+}
+
+function procressingClickMenu() {
+    let overlay = document.getElementById('mobile-procressing-area-overlay');
+    let menuBox = document.querySelector('.menu-box');
+    let headerBox = document.querySelector('.small-menu-button');
+
+    overlay.classList.toggle('active');
+    menuBox.classList.toggle('inactive');
+    headerBox.classList.toggle('inactive');
+}
+
+function closeOverlay(event) {
+    // Überprüfen, ob der Klick außerhalb des Menüs war
+    let overlay = document.querySelector('.procressing-mobile-menu-container');
+    let menuBox = document.querySelector('.menu-box');
+    let headerBox = document.querySelector('.small-menu-button');
+    
+    // Wenn der Klick nicht innerhalb des Menüs war, Overlay schließen
+    if (!overlay.contains(event.target)) {
+        let overlay = document.getElementById('mobile-procressing-area-overlay');
+        overlay.classList.remove('active');
+        menuBox.classList.remove('inactive');
+        headerBox.classList.remove('inactive');
     }
 }

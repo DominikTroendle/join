@@ -208,6 +208,10 @@ nav {
     font-weight: 700;
 }
 
+.small-menu-button.inactive{
+    pointer-events: none;
+}
+
 .small-menu-button:hover {
     background-color: rgba(12, 46, 98, 0.12);
 }
@@ -339,7 +343,7 @@ li{
         display: none;
     }
 
-    .help-img {
+    .help-button {
         display: none;
     }
 
