@@ -370,13 +370,14 @@ function addSubtask() {
     let containerSubtasks = document.getElementById('container-subtasks');
     if (input.value !== "") {
         document.getElementById('invalid-subtask').classList.add('grey');
+        document.getElementById('container-input-subtask').classList.remove('input-unvalid');
         subtasksCount++;
         containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
         document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
         subtasks.push(input.value);
         checkForScrollableContainer(containerSubtasks);
     } else {
-        document.getElementById('invalid-subtask').classList.remove('grey');
+        throwSubtaskError();
     }
 }
 
@@ -473,6 +474,11 @@ function throwError() {
             document.getElementById(`${element}`).classList.add('input-unvalid');
         };
     });
+}
+
+function throwSubtaskError() {
+    document.getElementById('invalid-subtask').classList.remove('grey');
+    document.getElementById('container-input-subtask').classList.add('input-unvalid');
 }
 
 function removeError() {
