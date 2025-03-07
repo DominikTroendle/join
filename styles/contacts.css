@@ -626,7 +626,11 @@ button .close-icon:hover path{
 }
 
 .mobile-procressing-area-overlay{
-    display: no;
+    display: none;
+}
+
+.procress-mobile-view{
+    display: none;
 }
 
 @media(max-width: 428px){
@@ -682,6 +686,14 @@ button .close-icon:hover path{
 
     section{
         width: 352px;
+    }
+
+    .container-contact:hover {
+        background-color: transparent;
+    }
+
+    .container-contact.select-contact {
+        background-color: transparent;
     }
 
     .contact-overlay {
@@ -749,6 +761,10 @@ button .close-icon:hover path{
         gap: 70px;
     }
 
+    .procress-mobile-view{
+        display: flex;
+    }
+
     .close-btn {
         position: absolute;
         padding: 5px;
@@ -772,11 +788,11 @@ button .close-icon:hover path{
     .new-user-image {
         position: absolute;
         margin-left: 0px;
-        top: 302px;
+        top: 295px;
     }
 
     form{
-        margin-top: 80px;
+        margin-top: 93px;
     }
 
     .input-container {
@@ -791,11 +807,43 @@ button .close-icon:hover path{
         width: 364px;
     }
 
+    .input-area input{
+        height: 41px;
+    }
+
+    .create-btn {
+        height: 51px;
+        width: 202px;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .create-btn:hover{
+        background-color: #2A3647;
+        box-shadow: none;
+    }
+
     .cancel-btn {
         display: none;
     }
 
+    .edit-contact-initcolor {
+        position: absolute;
+        margin-left: 0;
+        top: 295px;
+    }
 
+    .mobile-container{
+        gap: 24px;
+    }
+
+    .mobile-delete-view{
+        display: flex;
+    }
+
+    .contact-button-container {
+        margin-top: 0;
+    }
 
 
 
@@ -909,8 +957,8 @@ button .close-icon:hover path{
         width: 100%;
         top: 0;
         left: 0;
-        background-color: rosybrown;
-        z-index: 3;
+        background-color: transparent;
+        z-index: 1;
     }
 
     .mobile-procressing-area-overlay.active{
@@ -937,7 +985,7 @@ button .close-icon:hover path{
         width: 100px;
         background-color: #FFFFFF;
         border-radius: 30px 30px 0 30px;
-        margin-top: 670px;
+        margin-top: 750px;
         margin-left: 320px;
         animation: slidProcressMenu 0.2s ease-in;
     }

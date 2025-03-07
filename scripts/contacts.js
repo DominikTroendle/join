@@ -532,3 +532,13 @@ function closeOverlay(event) {
         headerBox.classList.remove('inactive');
     }
 }
+
+function toggleButtonColor(button) {
+    if (window.innerWidth === 428) {
+        if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
+            button.style.backgroundColor = '#29abe2'; // Neue Farbe (z. B. Rot)
+        } else {
+            button.style.backgroundColor = '#2A3647'; // Originalfarbe (Blau)
+        }
+    }
+}
