@@ -845,6 +845,16 @@ button .close-icon:hover path{
         margin-top: 0;
     }
 
+    .save-btn:hover{
+        background-color: black;
+        box-shadow: none;
+    }
+
+    .cancel-btn:hover{
+        color: black;
+        border: solid 1px black;
+        transform: scale(1);
+    }
 
 
 
@@ -1005,8 +1015,37 @@ button .close-icon:hover path{
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .procressing-area-button-mobile-position{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: start;
         padding: 10px;
         gap: 8px;
+    }
+
+    .procressing-area-edit-button-mobile{
+        display: flex;
+        padding: 8px 20px 8px 10px;
+        gap: 8px;
+        color: black;
+        font-size: 16px;
+    }
+
+    .procressing-area-delete-button-mobile{
+        display: flex;
+        padding: 5px 0px 0px 10px;
+        gap: 8px;
+        color: black;
+        font-size: 16px;
+    }
+
+    .procressing-area-button-mobile-backgroundcolor{
+        background-color: #cccccc4b;
+        border-radius: 5px;
     }
 }

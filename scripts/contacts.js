@@ -503,6 +503,7 @@ async function deleteContact(key) {
         allContacts = allContacts.filter(contact => contact.key !== key);
         loadContactList();
         document.getElementById('moreInformationContact').innerHTML = '';
+        document.querySelector('.more-information-container').classList.remove('mobile-overlay')
     } catch (error) {
         console.error("Fehler beim Löschen:", error);
     }
@@ -519,12 +520,10 @@ function procressingClickMenu() {
 }
 
 function closeOverlay(event) {
-    // Überprüfen, ob der Klick außerhalb des Menüs war
     let overlay = document.querySelector('.procressing-mobile-menu-container');
     let menuBox = document.querySelector('.menu-box');
     let headerBox = document.querySelector('.small-menu-button');
     
-    // Wenn der Klick nicht innerhalb des Menüs war, Overlay schließen
     if (!overlay.contains(event.target)) {
         let overlay = document.getElementById('mobile-procressing-area-overlay');
         overlay.classList.remove('active');
@@ -533,12 +532,22 @@ function closeOverlay(event) {
     }
 }
 
-function toggleButtonColor(button) {
+function toggleButtonBackgroundcolor(button) {
     if (window.innerWidth === 428) {
         if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
-            button.style.backgroundColor = '#29abe2'; // Neue Farbe (z. B. Rot)
+            button.style.backgroundColor = '#29abe2';
         } else {
-            button.style.backgroundColor = '#2A3647'; // Originalfarbe (Blau)
+            button.style.backgroundColor = '#2A3647';
         }
     }
+}
+
+function toggleButtonColor(button) {
+    if (window.innerWidth === 428) {
+        if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
+            button.style.color = '#29abe2';
+        }
+    }
+    button = document.querySelector('.procressing-area-edit-button-mobile');
+    button.classList.add('procressing-area-button-mobile-backgroundcolor');
 }
