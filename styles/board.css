@@ -715,11 +715,35 @@ h1 {
     height: 176px;
 }
 
+.big-task-card__div-scroll {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+.big-task-card__div-scroll::-webkit-scrollbar{
+    width: 8px;
+}
+
+.big-task-card__div-scroll::-webkit-scrollbar-track{
+    background: white;
+}
+
+.big-task-card__div-scroll::-webkit-scrollbar-thumb{
+    background: grey;
+    border-radius: 10px;
+    
+}
+
+.big-task-card__div-scroll::-webkit-scrollbar-thumb:hover{
+    background: rgb(180, 180, 180);
+    cursor: pointer;
+}
+
 .big-task-card__initials-name-box {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 445px;
+    width: width 100%;
     height: 56px;
     border-radius: 10px;
     padding: 7px 16px;

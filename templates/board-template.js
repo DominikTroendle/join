@@ -120,6 +120,9 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         }
     }
 
+    let scrollClass;
+    assignedContacts.length > 3 ? scrollClass = `big-task-card__div-scroll` : "";
+
     return `    <div class="big-task-card__task-type-text-button-box">
                     <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
                         <span class="big-task-card__task-type-text">${taskType}</span>
@@ -147,7 +150,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                     <div class="big-task-card__assigned-to-text-box">
                         <span class="big-task-card__assigned-to-text">Assigned To:</span>
                     </div>
-                    <div class="big-task-card__assigned-to-names-box">
+                    <div class="big-task-card__assigned-to-names-box ${scrollClass}">
                         ${assignedContactsHtml}
                     </div>
                 </div>
