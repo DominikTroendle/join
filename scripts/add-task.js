@@ -92,6 +92,12 @@ function clearPrioButtons() {
     }
 }
 
+function selectDefaultPrioButton() {
+    let button = document.getElementById('medium');
+    button.classList.add('medium');
+    button.classList.add('white');
+}
+
 function toggleAssignOptions() {
     let container = document.getElementById('dropdown-assign');
     let containerDropdown = document.getElementById('container-dropdown');
@@ -316,6 +322,7 @@ function clearInputs() {
     document.getElementById('container-subtasks').innerHTML = "";
     document.getElementById('container-assigned-contacts').innerHTML = "";
     clearPrioButtons();
+    selectDefaultPrioButton();
     let inputs = ["title", "description", "due-date", "subtasks"];
     for (let i = 0; i <inputs.length; i++) {
         document.getElementById(`${inputs[i]}`).value = "";
@@ -459,9 +466,31 @@ function testDate() {
     }
     let day = +date[1], month = +date[2], year = +date[3];
     let dateObj = new Date(`${year}-${month}-${day}`);
-    return dateObj.getFullYear() === year &&
-           (dateObj.getMonth() + 1) === month &&
-           dateObj.getDate() === day;
+    if (!correctDateFormat(dateObj, day, month, year)) {
+        return false;
+    } else if (isPastDate(dateObj)) {
+        document.getElementById('invalid-date').innerText = "Due date can`t be in the past!";
+        return false;
+    }
+    return true;
+}
+
+function correctDateFormat(dateObj, day, month, year) {
+    let validDate = dateObj.getFullYear() === year &&
+                    (dateObj.getMonth() + 1) === month &&
+                    dateObj.getDate() === day;
+    if (!validDate) {
+        return false;
+    }
+    return true;
+}
+
+function isPastDate(dateObj) {
+    let today = new Date();
+    if (dateObj < today) {
+        return true;
+    }
+    return false;
 }
 
 function throwError() {
