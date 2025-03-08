@@ -75,23 +75,31 @@ function cardBorderdragEnterTemplate(cardHeight) {
 function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
     let taskTypeCssClass = taskType == "User Story" ? `big-task-card__category-box-user-story`
         : `big-task-card__category-box-technical-task`;
-
+    console.log(taskPriority);
     const priorityMapping = [
         {
             priority: "low",
-            src: "assets/icons/low.svg"
+            src: "assets/icons/low.svg",
+            priorityText: "Low"
         },
         {
             priority: "medium",
-            src: "assets/icons/medium.svg"
+            src: "assets/icons/medium.svg",
+            priorityText: "Medium"
         },
         {
             priority: "urgent",
-            src: "assets/icons/urgent.svg"
+            src: "assets/icons/urgent.svg",
+            priorityText: "Urgent"
         }
     ];
 
-    let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
+    let taskPriorityImgSrc = "";
+    let taskPriorityText = "";
+    if (taskPriority) {
+        taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
+        taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText;
+    }
 
     return `    <div class="big-task-card__task-type-text-button-box">
                     <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
@@ -112,7 +120,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 <div class="big-task-card__priority-box">
                     <span class="big-task-card__priority-text">Priority:</span>
                     <div class="big-task-card__priority-text-img-box">
-                        <span class="big-task-card__priority-text">Medium</span>
+                        <span class="big-task-card__priority-text">${taskPriorityText}</span>
                         <img class="big-task-card__priority-img" src=${taskPriorityImgSrc} alt="">
                     </div>
                 </div>
