@@ -72,7 +72,7 @@ function cardBorderdragEnterTemplate(cardHeight) {
             </div>`;
 }
 
-function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDuoDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
+function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDuoDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasks) {
     let taskTypeCssClass = taskType == "User Story" ? `big-task-card__category-box-user-story`
         : `big-task-card__category-box-technical-task`;
 
@@ -106,22 +106,59 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         duoDate = taskDuoDate;
     }
 
+    let scrollClassAssignedContacts = "";
     let assignedContactsHtml = "";
     if (assignedContacts) {
         let initials = assignedContacts.map(element => element.name.slice(0, 1) + element.name.slice(element.name.indexOf(" ") + 1, element.name.indexOf(" ") + 2) || "");
         let backgroundColors = assignedContacts.map(element => element.color);
         let names = assignedContacts.map(element => element.name);
-        
+
         for (let index = 0; index < initials.length; index++) {
             assignedContactsHtml += `<div class="big-task-card__initials-name-box">
                                         <span class="big-task-card__initials ${backgroundColors[index]}">${initials[index]}</span>
                                         <span class="big-task-card__name">${names[index]}</span>
                                      </div>`
         }
+        assignedContacts.length > 3 ? scrollClassAssignedContacts = `big-task-card__div-scroll` : "";
     }
 
-    let scrollClass;
-    assignedContacts.length > 3 ? scrollClass = `big-task-card__div-scroll` : "";
+    let scrollClassSubtasks = "";
+    let subtasksHtml = "";
+    if (subtasks) {
+        let allSubtasks = subtasks.map(element => element.subtask);
+        let allSubtasksChecked = subtasks.map(element => element.checked);
+        for (let index = 0; index < allSubtasks.length; index++) {
+            let rectangleOpen;
+            let rectangleClose;
+            let hook;
+            if (allSubtasksChecked[index] === "true") {
+                rectangleOpen = ``;
+                rectangleClose = `d-none`;
+                hook = ``;
+            } else {
+                rectangleOpen = `d-none`;
+                rectangleClose = ``;
+                hook = `d-none`;
+            }
+            subtasksHtml += `<div class="big-task-card__subtasks-check-text-box">
+                            <svg class="big-task-card__checkbox"
+                                onclick="toggleDnoneCheckbox('rectangle-open-checkbox${index}', 'rectangle-close-checkbox${index}', 'hook-checkbox${index}')"
+                                width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                <path class="${rectangleOpen}" id="rectangle-open-checkbox${index}"
+                                    d="M20.6821 11.3967V17.3967C20.6821 19.0536 19.339 20.3967 17.6821 20.3967H7.68213C6.02527 20.3967 4.68213 19.0536 4.68213 17.3967V7.39673C4.68213 5.73987 6.02527 4.39673 7.68213 4.39673H15.6821"
+                                    stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
+                                <path class="${rectangleClose}" id="rectangle-close-checkbox${index}"
+                                    d="M7.68213 4.39673H17.6821C19.339 4.39673 20.6821 5.73987 20.6821 7.39673V17.3967C20.6821 19.0536 19.339 20.3967 17.6821 20.3967H7.68213C6.02527 20.3967 4.68213 19.0536 4.68213 17.3967V7.39673C4.68213 5.73987 6.02527 4.39673 7.68213 4.39673Z"
+                                    stroke="#2A3647" stroke-width="2" stroke-linecap="round" fill="none" />
+                                <path class="${hook}" id="hook-checkbox${index}"
+                                    d="M8.68213 12.3967L12.6821 16.3967L20.6821 4.89673" stroke="#2A3647"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <span class="big-task-card__subtasks-text">${allSubtasks[index]}</span>
+                        </div>`
+        }
+        subtasks.length > 2 ? scrollClassSubtasks = `big-task-card__div-scroll` : "";
+    }
 
     return `    <div class="big-task-card__task-type-text-button-box">
                     <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
@@ -150,7 +187,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                     <div class="big-task-card__assigned-to-text-box">
                         <span class="big-task-card__assigned-to-text">Assigned To:</span>
                     </div>
-                    <div class="big-task-card__assigned-to-names-box ${scrollClass}">
+                    <div class="big-task-card__assigned-to-names-box ${scrollClassAssignedContacts}">
                         ${assignedContactsHtml}
                     </div>
                 </div>
@@ -158,39 +195,8 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                     <div class="big-task-card__subtasks-title-box">
                         <span class="big-task-card__subtasks-title">Subtasks</span>
                     </div>
-                    <div class="big-task-card__all-subtasks-box">
-                        <div class="big-task-card__subtasks-check-text-box">
-                            <svg class="big-task-card__checkbox"
-                                onclick="toggleDnoneCheckbox('rectangle-open-checkbox1', 'rectangle-close-checkbox1', 'hook-checkbox1')"
-                                width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                <path class="d-none" id="rectangle-open-checkbox1"
-                                    d="M20.6821 11.3967V17.3967C20.6821 19.0536 19.339 20.3967 17.6821 20.3967H7.68213C6.02527 20.3967 4.68213 19.0536 4.68213 17.3967V7.39673C4.68213 5.73987 6.02527 4.39673 7.68213 4.39673H15.6821"
-                                    stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                                <path class="" id="rectangle-close-checkbox1"
-                                    d="M7.68213 4.39673H17.6821C19.339 4.39673 20.6821 5.73987 20.6821 7.39673V17.3967C20.6821 19.0536 19.339 20.3967 17.6821 20.3967H7.68213C6.02527 20.3967 4.68213 19.0536 4.68213 17.3967V7.39673C4.68213 5.73987 6.02527 4.39673 7.68213 4.39673Z"
-                                    stroke="#2A3647" stroke-width="2" stroke-linecap="round" fill="none" />
-                                <path class="d-none" id="hook-checkbox1"
-                                    d="M8.68213 12.3967L12.6821 16.3967L20.6821 4.89673" stroke="#2A3647"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <span class="big-task-card__subtasks-text">Implement Recipe Recommendation</span>
-                        </div>
-                        <div class="big-task-card__subtasks-check-text-box">
-                            <svg class="big-task-card__checkbox"
-                                onclick="toggleDnoneCheckbox('rectangle-open-checkbox2', 'rectangle-close-checkbox2', 'hook-checkbox2')"
-                                width="25" height="25" viewBox="0 0 25 25" fill="none">
-                                <path class="d-none" id="rectangle-open-checkbox2"
-                                    d="M20.6821 11.3967V17.3967C20.6821 19.0536 19.339 20.3967 17.6821 20.3967H7.68213C6.02527 20.3967 4.68213 19.0536 4.68213 17.3967V7.39673C4.68213 5.73987 6.02527 4.39673 7.68213 4.39673H15.6821"
-                                    stroke="#2A3647" stroke-width="2" stroke-linecap="round" />
-                                <path class="" id="rectangle-close-checkbox2"
-                                    d="M7.68213 4.39673H17.6821C19.339 4.39673 20.6821 5.73987 20.6821 7.39673V17.3967C20.6821 19.0536 19.339 20.3967 17.6821 20.3967H7.68213C6.02527 20.3967 4.68213 19.0536 4.68213 17.3967V7.39673C4.68213 5.73987 6.02527 4.39673 7.68213 4.39673Z"
-                                    stroke="#2A3647" stroke-width="2" stroke-linecap="round" fill="none" />
-                                <path class="d-none" id="hook-checkbox2"
-                                    d="M8.68213 12.3967L12.6821 16.3967L20.6821 4.89673" stroke="#2A3647"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                            <span class="big-task-card__subtasks-text">Start Page Layout</span>
-                        </div>
+                    <div class="big-task-card__all-subtasks-box ${scrollClassSubtasks}">
+                        ${subtasksHtml}
                     </div>
                 </div>
                 <div class="big-task-card__button-box">

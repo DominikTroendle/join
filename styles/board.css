@@ -716,7 +716,7 @@ h1 {
 }
 
 .big-task-card__div-scroll {
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: thin;
 }
 
@@ -811,7 +811,7 @@ h1 {
 
 .big-task-card__all-subtasks-box {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
