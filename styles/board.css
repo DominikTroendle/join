@@ -666,7 +666,7 @@ h1 {
 
 .big-task-card__priority-text-img-box {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 139px;
     height: 32px;
@@ -676,8 +676,8 @@ h1 {
 }
 
 .big-task-card__priority-img {
-    width: 17px;
-    height: 6.33px
+    /* width: 17px; */
+    /* height: 6.33px */
 }
 
 .big-task-card__assigned-to-box {
