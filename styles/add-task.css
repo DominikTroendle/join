@@ -88,6 +88,10 @@
     line-height: 19px;
 }
 
+#asterisk-due-date {
+    align-self: flex-start;
+}
+
 .input {
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -255,6 +259,7 @@
     display: flex;
     gap: 8px;
     margin-top: 8px;
+    min-height: 4px;
 }
 
 .custom-select {
@@ -402,6 +407,11 @@ hr {
     background-repeat: no-repeat;
     background-size: 24px;
     background-position: top 12px left 403px;
+}
+
+#label-due-date {
+    display: flex;
+    align-items: center;
 }
 
 #prio {
@@ -746,5 +756,26 @@ input:focus {
 
     #separator {
         width: 440px;
+    }
+}
+
+@media only screen and (max-width: 428px) {
+    body {
+        display: block;
+        max-height: 100vw;
+    }
+
+    #main {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #container-form {
+        width: 100vw;
+        padding: 0;
     }
 }

@@ -465,7 +465,6 @@ function testDate() {
 }
 
 function throwError() {
-    console.log(unvalidInputs);
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('grey');
         if (element == "category") {
@@ -495,16 +494,15 @@ function removeError() {
 }
 
 function saveTask() {
-    // task.taskId = 3;
     task.category = "toDos";
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
     task.taskPriority = selectedPriority;
-    // task.taskDate = document.getElementById('due-date').value;
     task.numberOfSubtasks = subtasksCount;
     task.numberOfCompletedSubtasks = 0;
     // task.taskSubtasks = subtasks;
+    // task.taskDate = document.getElementById('due-date').value;
     task.assignedContacts = selectedContacts;
     saveToFirebase("tasks/", task);
     task = {};
