@@ -72,33 +72,52 @@ function cardBorderdragEnterTemplate(cardHeight) {
             </div>`;
 }
 
-function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
+function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDuoDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
     let taskTypeCssClass = taskType == "User Story" ? `big-task-card__category-box-user-story`
         : `big-task-card__category-box-technical-task`;
-    console.log(taskPriority);
+
     const priorityMapping = [
         {
             priority: "low",
-            src: "assets/icons/low.svg",
+            img: `<img class="big-task-card__priority-img" src= "assets/icons/low.svg" alt="">`,
             priorityText: "Low"
         },
         {
             priority: "medium",
-            src: "assets/icons/medium.svg",
+            img: `<img class="big-task-card__priority-img" src= "assets/icons/medium.svg" alt="">`,
             priorityText: "Medium"
         },
         {
             priority: "urgent",
-            src: "assets/icons/urgent.svg",
+            img: `<img class="big-task-card__priority-img" src= "assets/icons/urgent.svg" alt="">`,
             priorityText: "Urgent"
         }
     ];
 
-    let taskPriorityImgSrc = "";
+    let taskPriorityImg = "";
     let taskPriorityText = "";
     if (taskPriority) {
-        taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src;
+        taskPriorityImg = priorityMapping.find(element => element.priority == taskPriority)?.img;
         taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText;
+    }
+
+    let duoDate = "";
+    if (taskDuoDate) {
+        duoDate = taskDuoDate;
+    }
+
+    let assignedContactsHtml = "";
+    if (assignedContacts) {
+        let initials = assignedContacts.map(element => element.name.slice(0, 1) + element.name.slice(element.name.indexOf(" ") + 1, element.name.indexOf(" ") + 2) || "");
+        let backgroundColors = assignedContacts.map(element => element.color);
+        let names = assignedContacts.map(element => element.name);
+        
+        for (let index = 0; index < initials.length; index++) {
+            assignedContactsHtml += `<div class="big-task-card__initials-name-box">
+                                        <span class="big-task-card__initials ${backgroundColors[index]}">${initials[index]}</span>
+                                        <span class="big-task-card__name">${names[index]}</span>
+                                     </div>`
+        }
     }
 
     return `    <div class="big-task-card__task-type-text-button-box">
@@ -115,13 +134,13 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 </div>
                 <div class="big-task-card__due-date-box">
                     <span class="big-task-card__due-date-text">Due date:</span>
-                    <span class="big-task-card__due-date-text">10/05/2023</span>
+                    <span class="big-task-card__due-date-text">${duoDate}</span>
                 </div>
                 <div class="big-task-card__priority-box">
                     <span class="big-task-card__priority-text">Priority:</span>
                     <div class="big-task-card__priority-text-img-box">
                         <span class="big-task-card__priority-text">${taskPriorityText}</span>
-                        <img class="big-task-card__priority-img" src=${taskPriorityImgSrc} alt="">
+                        ${taskPriorityImg}
                     </div>
                 </div>
                 <div class="big-task-card__assigned-to-box">
@@ -129,18 +148,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                         <span class="big-task-card__assigned-to-text">Assigned To:</span>
                     </div>
                     <div class="big-task-card__assigned-to-names-box">
-                        <div class="big-task-card__initials-name-box">
-                            <span class="big-task-card__initials bg-color-1">EM</span>
-                            <span class="big-task-card__name">Emmanuel Mauer</span>
-                        </div>
-                        <div class="big-task-card__initials-name-box">
-                            <span class="big-task-card__initials bg-color-2">MB</span>
-                            <span class="big-task-card__name">Marcel Bauer</span>
-                        </div>
-                        <div class="big-task-card__initials-name-box">
-                            <span class="big-task-card__initials bg-color-3">AM</span>
-                            <span class="big-task-card__name">Anton Mayer</span>
-                        </div>
+                        ${assignedContactsHtml}
                     </div>
                 </div>
                 <div class="big-task-card__subtasks-box">
