@@ -342,6 +342,20 @@ async function changeNumberOfCompletedSubtasks() {
     }
 }
 
+async function deleteCurrentTask() {
+    let indexFromCurrentTask = currentArray.findIndex(element => element.id === currentTaskCardId);
+    if (indexFromCurrentTask !== -1) {
+        currentArray.splice(indexFromCurrentTask, 1);
+    }
+    renderSmallCard(currentDragFieldId, currentArray);
+    addClassSlideBack();
+    let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), currentTaskCardId);
+    if (!deleteResponse.ok) {
+        console.error("error when saving:", putResponse.statusText);
+        return;
+    }
+}
+
 let data = {
     category: "toDos",
     taskType: "Technical Task",

@@ -202,7 +202,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                         ${subtasksHtml}
                     </div>
                 </div>
-                <div class="big-task-card__button-box">
+                <div class="big-task-card__button-box" onclick="deleteCurrentTask()">
                     <button class="big-task-card__button">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
