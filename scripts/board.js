@@ -314,11 +314,25 @@ async function putDataInDatabase(userKey, cardId, data, extendedPath) {
 async function changeCheckedSubtask(event) {
     let oldSubtaskChecked = event.currentTarget.getAttribute("data-checked");
     let newSubtaskChecked = oldSubtaskChecked === "true" ? "false" : "true";
-    let index = event.currentTarget.id;
+    let index = event.currentTarget.getAttribute("data-index");
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
+    let currentCheckbox = document.getElementById(`big-task-card__checkbox${index}`);
     objectFromCurrentSmallTaskCard.subtasks[index].checked = newSubtaskChecked;
-    renderSmallCard(currentDragFieldId, currentArray);
+    currentCheckbox.dataset.checked = newSubtaskChecked;
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, newSubtaskChecked, `subtasks/${index}/checked`);
+    if (!putResponse.ok) {
+        console.error("error when saving:", putResponse.statusText);
+        return;
+    }
+    changeNumberOfCompletedSubtasks();
+}
+
+async function changeNumberOfCompletedSubtasks() {
+    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
+    let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.filter(element => element.checked === "true").length;
+    objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
+    renderSmallCard(currentDragFieldId, currentArray);
     if (!putResponse.ok) {
         console.error("error when saving:", putResponse.statusText);
         return;

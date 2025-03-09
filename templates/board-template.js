@@ -144,7 +144,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 checked = "false";
             }
             subtasksHtml += `<div class="big-task-card__subtasks-check-text-box">
-                            <svg class="big-task-card__checkbox" id="${index}" data-checked="${checked}"
+                            <svg class="big-task-card__checkbox" id="big-task-card__checkbox${index}" data-checked="${checked}" data-index="${index}"
                                 onclick="toggleDnoneCheckbox('rectangle-open-checkbox${index}', 'rectangle-close-checkbox${index}', 'hook-checkbox${index}'); changeCheckedSubtask(event)"
                                 width="25" height="25" viewBox="0 0 25 25" fill="none">
                                 <path class="${rectangleOpen}" id="rectangle-open-checkbox${index}"
