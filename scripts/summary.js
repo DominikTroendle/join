@@ -82,9 +82,9 @@ function loadNumberOfTasksinHtmlElements(allLoadTasks) {
 }
 
 function loadNumberOfPriorityTasks(allLoadTasks) {
-    let numberOfUrgentTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "urgent").length : 0;
-    let numberOfMediumTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "medium").length : 0;
-    let numberOfLowTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "low").length : 0;
+    let numberOfUrgentTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "urgent" && element.category !== "done").length : 0;
+    let numberOfMediumTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "medium" && element.category !== "done").length : 0;
+    let numberOfLowTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "low" && element.category !== "done").length : 0;
     if (numberOfUrgentTasks !== 0) {
         document.getElementById("number-of-priority-tasks").innerHTML = numberOfUrgentTasks;
         document.getElementById("priority-text").innerHTML = "Urgent";
@@ -107,8 +107,9 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
 }
 
 function loadUpcomingDeadline(allLoadTasks, priority) {
-    let tasksWithCurrentPriority = allLoadTasks.filter(element => element.taskPriority === priority);
+    let tasksWithCurrentPriority = allLoadTasks.filter(element => element.taskPriority === priority && element.category !== "done");
     let datesOfUpcomingDeadlines = tasksWithCurrentPriority.map(element => element.taskDuoDate);
+    console.log(tasksWithCurrentPriority);
     const currentDate = new Date();
     let pastDeadlines = [];
     let futureDeadlines = [];
