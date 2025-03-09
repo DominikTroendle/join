@@ -109,7 +109,6 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
 function loadUpcomingDeadline(allLoadTasks, priority) {
     let tasksWithCurrentPriority = allLoadTasks.filter(element => element.taskPriority === priority && element.category !== "done");
     let datesOfUpcomingDeadlines = tasksWithCurrentPriority.map(element => element.taskDuoDate);
-    console.log(tasksWithCurrentPriority);
     const currentDate = new Date();
     let pastDeadlines = [];
     let futureDeadlines = [];
