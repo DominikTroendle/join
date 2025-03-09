@@ -66,6 +66,7 @@ async function readFromDatabase() {
                 allLoadTasks.push(value);
             });
             loadNumberOfTasksinHtmlElements(allLoadTasks);
+            loadNumberOfPriorityTasks(allLoadTasks);
         }
     } catch (error) {
         console.error("error loading the data:", error);
@@ -78,4 +79,26 @@ function loadNumberOfTasksinHtmlElements(allLoadTasks) {
     document.getElementById("number-of-tasks-in-awaiting-feedback").innerHTML = allLoadTasks.filter(element => element.category === "awaitFeedback").length;
     document.getElementById("number-of-tasks-in-done").innerHTML = allLoadTasks.filter(element => element.category === "done").length;
     document.getElementById("number-of-all-tasks").innerHTML = allLoadTasks.length;
+}
+
+function loadNumberOfPriorityTasks(allLoadTasks) {
+    let numberOfUrgentTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "urgent").length : 0;
+    let numberOfMediumTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "medium").length : 0;
+    let numberOfLowTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "low").length : 0;
+    if (numberOfUrgentTasks !== 0) {
+        document.getElementById("number-of-priority-tasks").innerHTML = numberOfUrgentTasks;
+        document.getElementById("priority-text").innerHTML = "Urgent";
+        document.getElementById("priority-img").src = "assets/icons/urgent-summary.png";
+        return;
+    }else if (numberOfMediumTasks !== 0) {
+        document.getElementById("number-of-priority-tasks").innerHTML = numberOfMediumTasks;
+        document.getElementById("priority-text").innerHTML = "Medium";
+        document.getElementById("priority-img").src = "assets/icons/Frame 59(4).png";
+        return;
+    }else if (numberOfLowTasks !== 0) {
+        document.getElementById("number-of-priority-tasks").innerHTML = numberOfLowTasks;
+        document.getElementById("priority-text").innerHTML = "Low";
+        document.getElementById("priority-img").src = "assets/icons/low-summary.svg";
+        return;
+    }
 }
