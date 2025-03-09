@@ -1,8 +1,5 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 
-
-
-
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
     imgId.src = imgSource;
@@ -50,3 +47,29 @@ function currentTime(userId) {
     }
     document.getElementById('currentGreeting').innerHTML = greeting;
 }
+
+// async function readFromDatabase(userKey) {
+//     try {
+//         let allLoadTasks = [];
+//         let result = await fetch(`${BASE_URL}users/${userKey}/tasks.json`);
+//         if (!result.ok) {
+//             throw new Error(`error when loading the data: ${result.statusText}`);
+//         }
+//         let data = await result.json();
+//         if (data) {
+//             Object.entries(data).forEach(([firebaseKey, value]) => {
+//                 value.id = firebaseKey;
+//                 if (!value.assignedContacts) {
+//                     value.assignedContacts = [];
+//                 }
+//                 allLoadTasks.push(value);
+//             });
+
+//         }
+//     } catch (error) {
+//         console.error("error loading the data:", error);
+//     }
+
+// }
+
+// readFromDatabase(localStorage.getItem("userId"));

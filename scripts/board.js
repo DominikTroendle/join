@@ -256,7 +256,6 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         categoryArray.length = 0;
         if (data) {
             Object.entries(data).forEach(([firebaseKey, value]) => {
-                console.log
                 if (value.category === category) {
                     value.id = firebaseKey;
 

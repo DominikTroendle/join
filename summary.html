@@ -28,7 +28,7 @@
                 <div class="account-submenu-container">
                   <ul>
                       <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                      <li><a href="legal-notice.html">Lecal Notic</a></li>
+                      <li><a href="legal-notice.html">Legal Notice</a></li>
                       <li><a href="index.html">Log out</a></li>
                   </ul>
                 </div>
@@ -85,7 +85,7 @@
                             onmouseup="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"><img id="to-do-img"
                                 class="button-img" src="assets/icons/Frame 59.png" alt="">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top">1</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-to-do">1</span>
                                 <span class="text-small-button-top">To-do</span>
                             </div>
                         </button>
@@ -96,7 +96,7 @@
                             onmouseup="changeImgSource('done-img', 'assets/icons/Group 7.png')"><img id="done-img"
                                 class="button-img" src="assets/icons/Frame 59(1).png" alt="">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top">1</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-done">1</span>
                                 <span class="text-small-button-top">Done</span>
                             </div>
                         </button>
@@ -120,19 +120,19 @@
                     <div class="button-bottom-box">
                         <button class="button-bottom transform-origin-center-left">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top">5</span>
+                                <span class="text-big-button-top" id="number-of-all-tasks">5</span>
                                 <span class="text-small-button-top">Tasks in Board</span>
                             </div>
                         </button>
                         <button class="button-bottom">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top">2</span>
-                                <span class="text-small-button-top">Tasks in Progres</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-progress">2</span>
+                                <span class="text-small-button-top">Tasks in Progress</span>
                             </div>
                         </button>
                         <button class="button-bottom transform-origin-center-right">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top">2</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-awaiting-feedback">2</span>
                                 <span class="text-small-button-top">Awaiting Feedback</span>
                             </div>
                         </button>
