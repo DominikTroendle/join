@@ -89,16 +89,57 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
         document.getElementById("number-of-priority-tasks").innerHTML = numberOfUrgentTasks;
         document.getElementById("priority-text").innerHTML = "Urgent";
         document.getElementById("priority-img").src = "assets/icons/urgent-summary.png";
+        loadUpcomingDeadline(allLoadTasks, "urgent")
         return;
-    }else if (numberOfMediumTasks !== 0) {
+    } else if (numberOfMediumTasks !== 0) {
         document.getElementById("number-of-priority-tasks").innerHTML = numberOfMediumTasks;
         document.getElementById("priority-text").innerHTML = "Medium";
         document.getElementById("priority-img").src = "assets/icons/Frame 59(4).png";
+        loadUpcomingDeadline(allLoadTasks, "medium")
         return;
-    }else if (numberOfLowTasks !== 0) {
+    } else if (numberOfLowTasks !== 0) {
         document.getElementById("number-of-priority-tasks").innerHTML = numberOfLowTasks;
         document.getElementById("priority-text").innerHTML = "Low";
         document.getElementById("priority-img").src = "assets/icons/low-summary.svg";
+        loadUpcomingDeadline(allLoadTasks, "low")
         return;
     }
 }
+
+function loadUpcomingDeadline(allLoadTasks, priority) {
+    let tasksWithCurrentPriority = allLoadTasks.filter(element => element.taskPriority === priority);
+    let datesOfUpcomingDeadlines = tasksWithCurrentPriority.map(element => element.taskDuoDate);
+    const currentDate = new Date();
+    let pastDeadlines = [];
+    let futureDeadlines = [];
+    for (let dateString of datesOfUpcomingDeadlines) {
+        let taskDate = new Date(dateString.split("/").reverse().join("-"));
+        if (taskDate < currentDate) {
+            pastDeadlines.push(taskDate);
+        } else {
+            futureDeadlines.push(taskDate);
+        }
+    }
+    let closestDeadline = null;
+    if (pastDeadlines.length > 0) {
+        closestDeadline = pastDeadlines.reduce((closest, current) => {
+            return (current > closest && current < currentDate) ? current : closest;
+        });
+        let deadlineText = document.getElementById("deadline-text");
+        deadlineText.innerHTML = "Expired Deadline";
+        deadlineText.style.color = "#FF8190";
+        deadlineText.style.fontWeight = "bold";
+    }
+    if (!closestDeadline && futureDeadlines.length > 0) {
+        closestDeadline = futureDeadlines.reduce((closest, current) => {
+            return (current < closest) ? current : closest;
+        });
+        let deadlineText = document.getElementById("deadline-text");
+        deadlineText.innerHTML = "Upcoming Deadline";
+    }
+    if (closestDeadline) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("currentDate").innerHTML = closestDeadline.toLocaleDateString('en-US', options);
+    }
+}
+
