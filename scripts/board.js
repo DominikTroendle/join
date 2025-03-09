@@ -292,10 +292,13 @@ function changeTaskCategoryinDatabase(event) {
     taskCardObject = toDoArray.find(element => element.id == taskCardId);
 }
 
-async function deleteInDatabase(userKey, category, firebaseId) {
-    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${category}/${firebaseId}.json`, {
+async function deleteInDatabase(userKey, cardId) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
         method: "DELETE"
     })
+    if (!response.ok) {
+        console.error("error when saving:", response.statusText);
+    }
     return response
 }
 
