@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/summary.css">
 </head>
 
-<body onload="addClassSelectedMenuButton('summary-menu-button'); init(); readFromDatabase()">
+<body onload="readFromDatabase(); addClassSelectedMenuButton('summary-menu-button'); init()">
     <div class="all-content">
         <div class="content">
             <header>
@@ -78,30 +78,30 @@
             <div class="button-name-box">
                 <div class="all-button-box">
                     <div class="button-top-box">
-                        <button class="button-top transform-origin-left"
+                        <a href="board.html" class="button-top transform-origin-left"
                             onmouseover="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"
                             onmouseleave="changeImgSource('to-do-img', 'assets/icons/Frame 59.png')"
                             onmousedown="changeImgSource('to-do-img', 'assets/icons/Frame 59.png')"
                             onmouseup="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"><img id="to-do-img"
                                 class="button-img" src="assets/icons/Frame 59.png" alt="">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top" id="number-of-tasks-in-to-do">1</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-to-do"></span>
                                 <span class="text-small-button-top">To-do</span>
                             </div>
-                        </button>
-                        <button class="button-top transform-origin-right"
+                        </a>
+                        <a href="board.html" class="button-top transform-origin-right"
                             onmouseover="changeImgSource('done-img', 'assets/icons/Group 7.png')"
                             onmouseleave="changeImgSource('done-img', 'assets/icons/Frame 59(1).png')"
                             onmousedown="changeImgSource('done-img', 'assets/icons/Frame 59(1).png')"
                             onmouseup="changeImgSource('done-img', 'assets/icons/Group 7.png')"><img id="done-img"
                                 class="button-img" src="assets/icons/Frame 59(1).png" alt="">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top" id="number-of-tasks-in-done">1</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-done"></span>
                                 <span class="text-small-button-top">Done</span>
                             </div>
-                        </button>
+                        </a>
                     </div>
-                    <button class="button-middle transform-origin-left">
+                    <a href="board.html" class="button-middle transform-origin-left">
                         <div class="button-middle-img-text-box">
                             <div class="button-middle-inside-box">
                                 <img src="assets/icons/Frame 59(4).png" alt="">
@@ -116,26 +116,26 @@
                                 <span class="text-small-button-middle">Upcoming Deadline</span>
                             </div>
                         </div>
-                    </button>
+                    </a>
                     <div class="button-bottom-box">
-                        <button class="button-bottom transform-origin-center-left">
+                        <a href="board.html" class="button-bottom transform-origin-center-left">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top" id="number-of-all-tasks">5</span>
+                                <span class="text-big-button-top" id="number-of-all-tasks"></span>
                                 <span class="text-small-button-top">Tasks in Board</span>
                             </div>
-                        </button>
-                        <button class="button-bottom">
+                        </a>
+                        <a href="board.html" class="button-bottom">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top" id="number-of-tasks-in-progress">2</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-progress"></span>
                                 <span class="text-small-button-top">Tasks in Progress</span>
                             </div>
-                        </button>
-                        <button class="button-bottom transform-origin-center-right">
+                        </a>
+                        <a href="board.html" class="button-bottom transform-origin-center-right">
                             <div class="text-big-button-top-box">
-                                <span class="text-big-button-top" id="number-of-tasks-in-awaiting-feedback">2</span>
+                                <span class="text-big-button-top" id="number-of-tasks-in-awaiting-feedback"></span>
                                 <span class="text-small-button-top">Awaiting Feedback</span>
                             </div>
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="name-box">
