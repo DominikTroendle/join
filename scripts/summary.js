@@ -48,8 +48,9 @@ function currentTime(userId) {
     document.getElementById('currentGreeting').innerHTML = greeting;
 }
 
-async function readFromDatabase(userKey) {
+async function readFromDatabase() {
     try {
+        let userKey = localStorage.getItem("userId");
         let allLoadTasks = [];
         let result = await fetch(`${BASE_URL}users/${userKey}/tasks.json`);
         if (!result.ok) {
@@ -64,8 +65,17 @@ async function readFromDatabase(userKey) {
                 }
                 allLoadTasks.push(value);
             });
+            loadNumberOfTasksinHtmlElements(allLoadTasks);
         }
     } catch (error) {
         console.error("error loading the data:", error);
     }
+}
+
+function loadNumberOfTasksinHtmlElements(allLoadTasks) {
+    document.getElementById("number-of-tasks-in-to-do").innerHTML = allLoadTasks.filter(element => element.category === "toDos").length;
+    document.getElementById("number-of-tasks-in-progress").innerHTML = allLoadTasks.filter(element => element.category === "inProgress").length;
+    document.getElementById("number-of-tasks-in-awaiting-feedback").innerHTML = allLoadTasks.filter(element => element.category === "awaitFeedback").length;
+    document.getElementById("number-of-tasks-in-done").innerHTML = allLoadTasks.filter(element => element.category === "done").length;
+    document.getElementById("number-of-all-tasks").innerHTML = allLoadTasks.length;
 }
