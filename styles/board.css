@@ -622,7 +622,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     width: 445px;
-    height: 24px;
+    /* height: 24px; */
 }
 
 .big-task-card__task-description-text {
@@ -673,11 +673,6 @@ h1 {
     padding: 4px 18px;
     gap: 10px;
     border-radius: 10px;
-}
-
-.big-task-card__priority-img {
-    /* width: 17px; */
-    /* height: 6.33px */
 }
 
 .big-task-card__assigned-to-box {

@@ -54,6 +54,10 @@ let oldCategoryName;
 let newCategory;
 let currentCardId;
 let currentTaskData = {};
+let currentTaskCardId;
+let currentArrayName;
+let currentArray = [];
+let currentDragFieldId;
 
 let isBorderActive = false
 
@@ -103,7 +107,7 @@ async function allowDrop2(event, dragFieldArray) {
 
     renderSmallCard(newCategory, newArray);
 
-    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData);
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
     if (!putResponse.ok) {
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
@@ -217,10 +221,11 @@ const arrays = {
 };
 
 function renderContentBigTaskCard(event) {
-    let smallTaskCardId = event.currentTarget.id;
-    let currentArrayName = event.currentTarget.closest(".drag-field").dataset.array;
-    let currentArray = arrays[currentArrayName];
-    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == smallTaskCardId);
+    currentTaskCardId = event.currentTarget.id;
+    currentArrayName = event.currentTarget.closest(".drag-field").dataset.array;
+    currentArray = arrays[currentArrayName];
+    currentDragFieldId = event.currentTarget.closest(".drag-field").id;
+    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
 
     let bigTaskCard = document.getElementById("big-task-card__box");
     bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDuoDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
@@ -294,16 +299,30 @@ async function deleteInDatabase(userKey, category, firebaseId) {
     return response
 }
 
-async function putDataInDatabase(userKey, cardId, data) {
-    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}/category.json`, {
+async function putDataInDatabase(userKey, cardId, data, extendedPath) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}/${extendedPath}.json`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data.category)
+        body: JSON.stringify(data)
     });
     if (!response.ok) {
         console.error("error when saving:", response.statusText);
     }
     return response;
+}
+
+async function changeCheckedSubtask(event) {
+    let oldSubtaskChecked = event.currentTarget.getAttribute("data-checked");
+    let newSubtaskChecked = oldSubtaskChecked === "true" ? "false" : "true";
+    let index = event.currentTarget.id;
+    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
+    objectFromCurrentSmallTaskCard.subtasks[index].checked = newSubtaskChecked;
+    renderSmallCard(currentDragFieldId, currentArray);
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, newSubtaskChecked, `subtasks/${index}/checked`);
+    if (!putResponse.ok) {
+        console.error("error when saving:", putResponse.statusText);
+        return;
+    }
 }
 
 let data = {
