@@ -62,7 +62,7 @@ async function addUserToRegister(event, form) {
     let email = form.querySelector('#email');
     let password = form.querySelector('#password');
     let newUser = {
-        "name" : name.value,
+        "name" : name.value +  " (You)",
         "email" : email.value,
         "password" : password.value,
         "color" : color,

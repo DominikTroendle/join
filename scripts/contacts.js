@@ -284,10 +284,10 @@ async function addContactToGroup(contact, letter) {
  * @param {string} contactName - The full name.
  */
 function findInitials(contactName) {
-    let name = contactName.split(' ');
+    let name = contactName.trim().split(' ').filter(n => n);
     let initials = '';
-    for (let i = 0; i < name.length; i++) {
-        initials += name[i].substring(0, 1).toUpperCase();
+    for (let i = 0; i < Math.min(name.length, 2); i++) {
+        initials += name[i].charAt(0).toUpperCase();
     }
     return initials
 }
