@@ -1,7 +1,12 @@
+function sessionSorage() {
+    sessionStorage.setItem("currentPage", window.location.pathname);
+}
+
 function addClassSelectedMenuButton(id) {
     let currentMenuButton = document.getElementById(id);
     currentMenuButton.classList.add("menu-button-selected");
     saveMenuId(id)
+    sessionSorage()
 }
 
 function addClassSelectedMenuBottomButton(id) {

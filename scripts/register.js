@@ -3,6 +3,7 @@ let isPasswordVisible = false;
 
 async function init() {
     await loadAllUserData();
+    sessionSorage()
 }
 
 async function loadAllUserData(path) {
@@ -80,7 +81,7 @@ async function UserRegister() {
     } 
     if (password.value !== conrollPassword.value) {
         conrollPassword.style.border = "1px solid red";
-        conrollPassword.style.boxShadow = "0px 0px 4px 1px red"
+        conrollPassword.style.border = "solid 2px red"
         document.getElementById('notCorrectValue').style.display = "flex";
         isValid = false;
     } else {
@@ -128,5 +129,22 @@ function togglePasswordVisibility() {
         passwordInput.type = "password";
         icon.src = "assets/img/visibility_off.png";
         isPasswordVisible = false;
+    }
+}
+
+function hideLoggendInLinks() {
+    let path = sessionStorage.getItem("currentPage", window.location.pathname);
+    if (path === "/register.html" || path === "/index.html") {
+        const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
+        loggedInLinks.forEach( li => {
+        li.style.display = 'none';
+        document.getElementById('login-button').classList.add('menu-login-button')
+    });
+    }
+    if (path === "/summary.html" || path === "/add-task.html" || path === "/board.html" || path === "/contacts.html") {
+        const loginInLink = Array.from(document.getElementsByClassName('login'));
+        loginInLink.forEach( li => {
+        li.style.display = 'none';
+    });
     }
 }

@@ -7,6 +7,32 @@
     width: calc(100% - 232px);
 }
 
+.login-button-none{
+    display: none;
+}
+
+.menu-login-button{
+    width: 100%;
+    height: 46px;
+    background-color: #2A3647;
+    border: none;
+    color: #CDCDCD;
+    font-size: 16px;
+    font-weight: 400;
+    gap: 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 8px 56px;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 90px;
+}
+
+.menu-login-button:hover {
+    background-color: #2A3D59;
+}
+
 #generator_results{
     margin: 110px 0 0 96px;
 }

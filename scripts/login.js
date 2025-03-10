@@ -19,6 +19,7 @@ if (msg) {
 
 function init() {
     responseMobileColorChance()
+    sessionSorage()
 }
 
 async function UserLogin() {
@@ -69,7 +70,6 @@ function togglePasswordVisibility() {
         isPasswordVisible = false;
     }
 }
-
 
 function responseMobileColorChance() {
     setTimeout(() => {

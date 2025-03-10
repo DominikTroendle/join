@@ -225,6 +225,11 @@
     line-height: 19px;
 }
 
+.contact-info-container{
+    margin-top: 30px;
+    margin-left: 60px;
+}
+
 #moreInformationContact {
     transform: translateX(100%);
     transition: transform 0.5s ease-out;
@@ -371,25 +376,25 @@
     height: 600px;
     border-radius: 30px;
     display: flex;
-    transform: translateX(100%); /* Start außerhalb des Bildschirms rechts */
+    transform: translateX(100%);
     transition: transform 0.5s ease-out;
 }
 
 @keyframes swipeIn {
     from {
-      transform: translateX(100%);  /* Container startet ganz rechts */
+      transform: translateX(100%);
     }
     to {
-      transform: translateX(0);  /* Container endet in der Mitte */
+      transform: translateX(0);
     }
   }
   
   @keyframes swipeOut {
     from {
-      transform: translateX(0);  /* Container beginnt in der Mitte */
+      transform: translateX(0);
     }
     to {
-      transform: translateX(100%);  /* Container geht nach rechts */
+      transform: translateX(100%);
     }
   }
 
@@ -708,6 +713,11 @@ button .close-icon:hover path{
         align-items: center;
         justify-content: center;
         animation: fadeIn 0.5s forwards;
+    }
+
+    .contact-info-container{
+        margin-top: 0;
+        margin-left: 0;
     }
 
     .new-Contect-Container{
