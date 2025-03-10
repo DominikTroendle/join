@@ -197,7 +197,7 @@ function containerScrollable(container) {
         let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
         subtaskContainers.forEach(element => {
             element.classList.remove('subtask-scroll-margin');
-        })
+        });
     }
 }
 
@@ -251,12 +251,12 @@ function isInSelectedContacts(contactName) {
 }
 
 function getInitials(contactName) {
-    let names = contactName.split(' ');
-    let initials = "";
-    for (let i = 0; i < names.length; i++) {
-        initials += names[i].substring(0, 1).toUpperCase();
+    let name = contactName.trim().split(' ').filter(n => n);
+    let initials = '';
+    for (let i = 0; i < Math.min(name.length, 2); i++) {
+        initials += name[i].charAt(0).toUpperCase();
     }
-    return initials;
+    return initials
 }
 
 function selectContact(name, color) {
@@ -309,6 +309,7 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     let obj = {name: contactName, color: contactColor};
     if (boolean) {
         selectedContacts.push(obj);
+        selectedContacts.sort((a, b) => a.name.localeCompare(b.name));
     } else {
         let index = selectedContacts.map(e => e.name).indexOf(obj.name);
         selectedContacts.splice(index, 1);
@@ -589,7 +590,7 @@ async function loadContactInfo(contactsObj) {
         };
         contacts.push(contactObj);
     }
-    // sortContactsAlphabetically();
+    sortContactsAlphabetically();
 }
 
 async function loadSmallInitials() {
@@ -600,11 +601,11 @@ async function loadSmallInitials() {
     let dataPath = userId === "guest" ? "guest.json" : `${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
-    document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.user) || "G";
+    document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.name) || "G";
 }
 
-/* function sortContactsAlphabetically() {
+function sortContactsAlphabetically() {
     let user = contacts.splice(0, 1);
-    
-    // contacts.push(user);
-} */
+    contacts.sort((a, b) => a.name.localeCompare(b.name));
+    contacts = user.concat(contacts);
+}
