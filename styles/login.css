@@ -67,7 +67,7 @@ body {
     visibility: visible;
 }
 
-.desktop-overlay{
+.login-overlay{
     position: absolute;
     height: 100vh;
     width: 100%;
@@ -79,22 +79,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* animation: moveNoneOverlay 3.5s cubic-bezier(0.98, -2.55, 0.77, 16); */
 }
 
-.d-none-desktop-overlay{
-    display: none;
-}
-
-.animation-desktop-overlay-logo{
+/* .animation-desktop-overlay-logo{
     animation: moveDesktopLogo 1s ease-in forwards;
-}
+} */
 
-.d-none-animation-desktop-overlay-logo{
-    animation: none;
-}
 
-@keyframes moveDesktopLogo {
+/* @keyframes moveDesktopLogo {
     0% {
         top: 34%;
         left: 37%;
@@ -108,9 +100,10 @@ body {
         left: 77px;
         transform: translate(0px, 0px) scale(1);
     }
-}
+} */
 
 .desktop-logo{
+    display: none;
     position: absolute;
     height: 334px;
     width: 274px;
@@ -341,6 +334,7 @@ body {
 }
 
 .mobile-overlay {
+    display: none;
     top: 0;
     left: 0;
     height: 100vh;

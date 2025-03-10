@@ -19,7 +19,6 @@ if (msg) {
 }
 
 function init() {
-    desktopAnimationenLogo();
     responseMobileColorChance()
     sessionSorage()
 }
@@ -73,37 +72,21 @@ function togglePasswordVisibility() {
     }
 }
 
-function desktopAnimationenLogo() {
-    if (logoAnimation === "/index.html") {
-        let overlay = document.getElementById('desktopOverlay');
-        let desktopeLogo = document.getElementById('desktopLogo');
-        overlay.classList.add('d-none-desktop-overlay')
-        desktopeLogo.classList.add('d-none-animation-desktop-overlay-logo')
-    }
-    else{
-        setTimeout(() => {
-            let overlay = document.getElementById('desktopOverlay');
-            let desktopeLogo = document.getElementById('desktopLogo');
-            overlay.classList.add('desktop-overlay');
-            desktopeLogo.classList.add('animation-desktop-overlay-logo');
-            setTimeout(() => {
-                overlay.classList.remove('desktop-overlay');
-            }, 500);
-            localStorage.setItem("oneLogoAnimation", window.location.pathname);
-        }, 1000);
-    }
-}
+
+
 
 function responseMobileColorChance() {
+    let overlay = document.getElementById('mobileOverlay');
+    overlay.classList.remove('d-none');
     setTimeout(() => {
-        let overlay = document.getElementById('mobileOverlay');
+        
         let resposiveLogo = document.getElementById('resposiveLogo');
         let logoPath1 = document.getElementById('moveLogo1');
         let logoPath2 = document.getElementById('moveLogo2');
         let logoPath3 = document.getElementById('moveLogo3');
         let logoPath4 = document.getElementById('moveLogo4');
         let logoPath5 = document.getElementById('moveLogo5');
-        overlay.classList.add('mobile-overlay');
+        
         resposiveLogo.classList.add('animation-overlay-logo');
         logoPath1.classList.add('animation-change-logo-color');
         logoPath2.classList.add('animation-change-logo-color');
@@ -111,7 +94,7 @@ function responseMobileColorChance() {
         logoPath4.classList.add('animation-change-logo-color');
         logoPath5.classList.add('animation-change-logo-color');
         setTimeout(() => {
-            overlay.classList.remove('mobile-overlay');
+            overlay.classList.add('d-none');
         }, 500);
     }, 1000);
 }
