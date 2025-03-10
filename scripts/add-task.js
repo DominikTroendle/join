@@ -7,7 +7,7 @@ let contacts = [];
 
 let selectedContacts = [];
 
-let selectedPriority = "";
+let selectedPriority = "medium";
 
 let subtasksCount = 0;
 
