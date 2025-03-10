@@ -1,6 +1,6 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
-
+let currentPage = sessionStorage.setItem("currentPage", window.location.pathname);
 
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
@@ -18,8 +18,23 @@ if (msg) {
 }
 
 function init() {
+    ckeckLoginAnimation()
     responseMobileColorChance()
     sessionSorage()
+}
+
+function ckeckLoginAnimation() {
+    if (window.location.pathname.includes("login.html")) {
+        // Überprüfen, ob die Animation bereits abgespielt wurde (Session speichern)
+        if (!sessionStorage.getItem('logoAnimationPlayed')) {
+            // Wenn nicht, setze die Information und lasse die Animation abspielen
+            sessionStorage.setItem('logoAnimationPlayed', 'true');
+        }
+    }else{
+        let logoAnimation = document.querySelector('.logo');
+        logoAnimation.classList.add('no-animation');
+        
+    }
 }
 
 async function UserLogin() {

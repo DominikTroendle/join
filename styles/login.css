@@ -77,6 +77,10 @@ body {
     animation: moveLogo 1.8s ease-in-out forwards;
 }
 
+.logo.no-animation {
+    display: none;
+}
+
 @keyframes moveLogo {
     0% {
         top: 40%;

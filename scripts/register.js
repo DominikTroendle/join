@@ -1,9 +1,25 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
+let bgColors = [];
 
 async function init() {
+    await loadColors();
     await loadAllUserData();
     sessionSorage()
+}
+
+async function loadColors() {
+    let responseColors = await fetch("styles/colors.css");
+    let responseColorText = await responseColors.text();
+    const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
+    let matches = [...responseColorText.matchAll(regex)];
+    for (let i = 0; i < matches.length; i++) {
+        bgColors.push({
+            name: `.bg-${matches[i][1]}`,
+            color: matches[i][2].trim()
+        });
+    }
+    return bgColors;
 }
 
 async function loadAllUserData(path) {
@@ -37,6 +53,7 @@ async function putData(path="", data={}) {
 
 async function addUserToRegister(event, form) {
     event.preventDefault();
+    color = await randomBgColor();
     let isValid = await UserRegister();
     if (!isValid) {
         return false;
@@ -45,14 +62,17 @@ async function addUserToRegister(event, form) {
     let email = form.querySelector('#email');
     let password = form.querySelector('#password');
     let newUser = {
-        "user" : name.value,
+        "name" : name.value,
         "email" : email.value,
         "password" : password.value,
+        "color" : color,
+        "phone" : " "
     };
     let response = await sendData("/users", {});
     if (response && response.name) {
         let userId = response.name;
         await putData(`/users/${userId}/userDatas`, newUser);
+        await sendData(`/users/${userId}/allContacts`, newUser);
         name.value = '';
         email.value = '';
         password.value = '';
@@ -61,6 +81,12 @@ async function addUserToRegister(event, form) {
         console.error("User registration failed.");
     }
     return false;
+}
+
+async function randomBgColor() {
+    if (bgColors.length === 0) return ".bg-grey";
+    let randomIndex = Math.floor(Math.random() * bgColors.length);
+    return bgColors[randomIndex].name.replace(/^\./, '');
 }
 
 function backToLogin() {

@@ -26,7 +26,7 @@ async function loadSmallInitials() {
     let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
-    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user) || "G";
+    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.name) || "G";
 }
 
 /**

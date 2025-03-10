@@ -2,6 +2,10 @@ function sessionSorage() {
     sessionStorage.setItem("currentPage", window.location.pathname);
 }
 
+function logOut() {
+    localStorage.removeItem("userId", "guest");
+}
+
 function addClassSelectedMenuButton(id) {
     let currentMenuButton = document.getElementById(id);
     currentMenuButton.classList.add("menu-button-selected");
