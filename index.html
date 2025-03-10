@@ -25,49 +25,63 @@
         d="M90.34 118.59V104.76H93.06l2.93 5.7c.75 1.49 1.42 3.02 2 4.59-.15-1.71-.22-3.68-.22-5.87V104.76H100.03V118.59H97.49l-2.97-5.82c-.78-1.53-1.48-3.1-2.1-4.71 0 1.71.12 3.64.12 6.05v4.48H90.34Z" />
     </svg>
   </div>
-  <img class="logo" src="assets/img/join-logo.png" alt="Logo" />
-  <div class="login-container">
-    <div class="register-link">
-      <h7>Not a Join user?</h7>
-      <button><a href="register.html">Sign up</a></button>
-    </div>
+  <div class="desktop-overlay" id="desktopOverlay">
+    <svg class="desktop-logo" id="desktopLogo" viewBox="0 0 101 122" fill="none">
+      <path class="resposive-logo-color" id="moveLogo1" d="M71.67 0H49.51V25.49H71.67V0Z" />
+      <path class="resposive-logo-color" id="moveLogo2"
+        d="M49.51 46.23H71.67V82.18c.1 8.65-2.36 17.14-7.07 24.38-4.65 7.04-13.63 15.41-30.25 15.41-18.1 0-28.65-8.56-34.34-13.25l13.98-17.24c5.56 4.54 10.91 8.28 20.44 8.28 7.23 0 10.11-2.94 11.8-5.51 2.29-3.57 3.48-7.74 3.4-12L49.51 46.23Z" />
+      <path d="M38.21 30.13H16.06V52.39H38.21V30.13Z" fill="#29ABE2" />
+      <path class="resposive-logo-color" id="moveLogo3"
+        d="M83.28 111.52c0 4.74-2.4 7.3-5.76 7.3s-5.56-3.03-5.56-7.06c0-4.02 2.27-7.19 5.75-7.19 3.48 0 5.57 3.13 5.57 6.97ZM74.54 111.71c0 2.86 1.14 4.97 3.1 4.97s3.07-2.22 3.07-5.14c0-2.55-1.02-4.94-3.07-4.94-2.05 0-3.1 2.31-3.1 5.11Z" />
+      <path class="resposive-logo-color" id="moveLogo4" d="M87.68 104.76V118.59H85.22V104.76H87.68Z" />
+      <path class="resposive-logo-color" id="moveLogo5"
+        d="M90.34 118.59V104.76H93.06l2.93 5.7c.75 1.49 1.42 3.02 2 4.59-.15-1.71-.22-3.68-.22-5.87V104.76H100.03V118.59H97.49l-2.97-5.82c-.78-1.53-1.48-3.1-2.1-4.71 0 1.71.12 3.64.12 6.05v4.48H90.34Z" />
+    </svg>
   </div>
-  <div class="user-login-container">
-    <div class="user-login">
-      <div class="login">
-        <h1>Log in</h1>
-        <div class="blue-line"></div>
-        <form onsubmit="UserLogin(); return false">
-          <div class="input-container">
-            <input type="email" id="email" placeholder="Email" required />
-            <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
-          </div>
-          <div class="input-container">
-            <input type="password" id="password" placeholder="Password" required onfocus="changePasswordIcon(true)"
-              onblur="changePasswordIcon(false)" />
-            <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
-              onclick="togglePasswordVisibility()">
-          </div>
-          <div class="no-value-content">
-            <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>
-          </div>
-          <div class="login-buttons">
-            <button type="submit">Log in</button>
-            <button type="button" onclick="loginGuastAccount()">Guast Log in</button>
-          </div>
-        </form>
+    <img class="logo" src="assets/img/join-logo.png" alt="Logo" />
+    <div class="login-container">
+      <div class="register-link">
+        <h7>Not a Join user?</h7>
+        <button><a href="register.html">Sign up</a></button>
       </div>
     </div>
-  </div>
-  <div class="legal-information">
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="legal-notice.html">Legal notice</a>
-  </div>
-  <div id="msgBox" class="overlay-massage">
-    <div class="message-box">
-      <p id="msgText"></p>
+    <div class="user-login-container">
+      <div class="user-login">
+        <div class="login">
+          <h1>Log in</h1>
+          <div class="blue-line"></div>
+          <form onsubmit="UserLogin(); return false">
+            <div class="input-container">
+              <input type="email" id="email" placeholder="Email" required />
+              <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
+            </div>
+            <div class="input-container">
+              <input type="password" id="password" placeholder="Password" required onfocus="changePasswordIcon(true)"
+                onblur="changePasswordIcon(false)" />
+              <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
+                onclick="togglePasswordVisibility()">
+            </div>
+            <div class="no-value-content">
+              <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>
+            </div>
+            <div class="login-buttons">
+              <button type="submit">Log in</button>
+              <button type="button" onclick="loginGuastAccount()">Guast Log in</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="legal-information">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="legal-notice.html">Legal notice</a>
+    </div>
+    <div id="msgBox" class="overlay-massage">
+      <div class="message-box">
+        <p id="msgText"></p>
+      </div>
+    </div>
+
   <script src="scripts/login.js"></script>
   <script src="script.js"></script>
 </body>

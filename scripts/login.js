@@ -1,6 +1,7 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
-let currentPage = sessionStorage.setItem("currentPage", window.location.pathname);
+let logoAnimation = localStorage.getItem("oneLogoAnimation");
+
 
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
@@ -18,23 +19,9 @@ if (msg) {
 }
 
 function init() {
-    ckeckLoginAnimation()
+    desktopAnimationenLogo();
     responseMobileColorChance()
     sessionSorage()
-}
-
-function ckeckLoginAnimation() {
-    if (window.location.pathname.includes("login.html")) {
-        // Überprüfen, ob die Animation bereits abgespielt wurde (Session speichern)
-        if (!sessionStorage.getItem('logoAnimationPlayed')) {
-            // Wenn nicht, setze die Information und lasse die Animation abspielen
-            sessionStorage.setItem('logoAnimationPlayed', 'true');
-        }
-    }else{
-        let logoAnimation = document.querySelector('.logo');
-        logoAnimation.classList.add('no-animation');
-        
-    }
 }
 
 async function UserLogin() {
@@ -86,6 +73,27 @@ function togglePasswordVisibility() {
     }
 }
 
+function desktopAnimationenLogo() {
+    if (logoAnimation === "/index.html") {
+        let overlay = document.getElementById('desktopOverlay');
+        let desktopeLogo = document.getElementById('desktopLogo');
+        overlay.classList.add('d-none-desktop-overlay')
+        desktopeLogo.classList.add('d-none-animation-desktop-overlay-logo')
+    }
+    else{
+        setTimeout(() => {
+            let overlay = document.getElementById('desktopOverlay');
+            let desktopeLogo = document.getElementById('desktopLogo');
+            overlay.classList.add('desktop-overlay');
+            desktopeLogo.classList.add('animation-desktop-overlay-logo');
+            setTimeout(() => {
+                overlay.classList.remove('desktop-overlay');
+            }, 500);
+            localStorage.setItem("oneLogoAnimation", window.location.pathname);
+        }, 1000);
+    }
+}
+
 function responseMobileColorChance() {
     setTimeout(() => {
         let overlay = document.getElementById('mobileOverlay');
@@ -104,6 +112,6 @@ function responseMobileColorChance() {
         logoPath5.classList.add('animation-change-logo-color');
         setTimeout(() => {
             overlay.classList.remove('mobile-overlay');
-        }, 500); 
+        }, 500);
     }, 1000);
 }

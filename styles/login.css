@@ -67,37 +67,73 @@ body {
     visibility: visible;
 }
 
-.logo {
+.desktop-overlay{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-30%, -30%);
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #696868;
+    z-index: 1;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* animation: moveNoneOverlay 3.5s cubic-bezier(0.98, -2.55, 0.77, 16); */
+}
+
+.d-none-desktop-overlay{
+    display: none;
+}
+
+.animation-desktop-overlay-logo{
+    animation: moveDesktopLogo 1s ease-in forwards;
+}
+
+.d-none-animation-desktop-overlay-logo{
+    animation: none;
+}
+
+@keyframes moveDesktopLogo {
+    0% {
+        top: 34%;
+        left: 37%;
+        transform: translate(-50, -50) scale(1);
+    }
+
+    100% {
+        width: 100px;
+        height: 121px;
+        top: 80px;
+        left: 77px;
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.desktop-logo{
+    position: absolute;
+    height: 334px;
     width: 274px;
-    height: 345px;
-    animation: moveLogo 1.8s ease-in-out forwards;
+}
+
+
+
+.logo {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 77px;
+    width: 100px;
+    height: 121px;
 }
 
 .logo.no-animation {
     display: none;
 }
 
-@keyframes moveLogo {
-    0% {
-        top: 40%;
-        left: 45%;
-        transform: translate(-20%, -20%) scale(1);
-    }
 
-    100% {
-        height: 121px;
-        width: 100px;
-        top: 80px;
-        left: 77px;
-        transform: translate(0, 0) scale(1);
-    }
-}
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
     from {
         opacity: 0;
     }
@@ -105,16 +141,16 @@ body {
     to {
         opacity: 1;
     }
-}
+} */
 
-.login-container {
-    z-index: 1000;
+.login-container{
+    z-index: 1;
 }
 
 .register-link {
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    animation: fadeIn 1s ease-in-out 0.275s forwards;
+    opacity: 1;
+    /* transition: opacity 1s ease-in-out;
+    animation: fadeIn 1s ease-in-out 0.275s forwards; */
 
     display: flex;
     justify-content: end;
@@ -170,9 +206,8 @@ body {
     align-items: start;
     text-align: center;
 
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-    animation: fadeIn 1s ease-in-out 1.8s forwards;
+    /* transition: opacity 1s ease-in-out;
+    animation: fadeIn 1s ease-in-out 1.8s forwards; */
 }
 
 .login h1 {
@@ -287,9 +322,9 @@ body {
 }
 
 .legal-information {
-    opacity: 0;
+    /* opacity: 0;
     transition: opacity 1s ease-in-out;
-    animation: fadeIn 1s ease-in-out 1.8s forwards;
+    animation: fadeIn 1s ease-in-out 1.8s forwards; */
     display: flex;
     justify-content: center;
     gap: 24px;
@@ -327,7 +362,7 @@ body {
 }
 
 .resposive-logo-color {
-    fill: red;
+    fill: rgb(0, 0, 0);
 }
 
 @media(max-width: 680px) {

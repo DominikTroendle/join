@@ -18,16 +18,22 @@ async function loadUserData() {
     let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
-    document.getElementById('userName').innerHTML = userData.userDatas.user || "";
-    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.user) || "G"
+    let userNameElement = document.getElementById('userName');
+    let userName = userData.userDatas.name || "";
+    if (userName.toLowerCase() !== "guest") {
+        userNameElement.innerHTML = userName.replace(/\s*\(You\)$/, "");
+    } else {
+        userNameElement.innerHTML = "";
+    }
+    document.getElementById('smallInitials').innerText = findInitials(userData.userDatas.name) || "G"
     currentTime(userId);
 }
 
 function findInitials(contactName) {
-    let name = contactName.split(' ');
+    let name = contactName.trim().split(' ').filter(n => n);
     let initials = '';
-    for (let i = 0; i < name.length; i++) {
-        initials += name[i].substring(0, 1).toUpperCase();
+    for (let i = 0; i < Math.min(name.length, 2); i++) {
+        initials += name[i].charAt(0).toUpperCase();
     }
     return initials
 }
