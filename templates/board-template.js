@@ -72,7 +72,7 @@ function cardBorderdragEnterTemplate(cardHeight) {
             </div>`;
 }
 
-function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDuoDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasks) {
+function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasks) {
     let taskTypeCssClass = taskType == "User Story" ? `big-task-card__category-box-user-story`
         : `big-task-card__category-box-technical-task`;
 
@@ -101,9 +101,9 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText;
     }
 
-    let duoDate = "";
-    if (taskDuoDate) {
-        duoDate = taskDuoDate;
+    let dueDate = "";
+    if (taskDueDate) {
+        dueDate = taskDueDate;
     }
 
     let scrollClassAssignedContacts = "";
@@ -177,7 +177,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 </div>
                 <div class="big-task-card__due-date-box">
                     <span class="big-task-card__due-date-text">Due date:</span>
-                    <span class="big-task-card__due-date-text">${duoDate}</span>
+                    <span class="big-task-card__due-date-text">${dueDate}</span>
                 </div>
                 <div class="big-task-card__priority-box">
                     <span class="big-task-card__priority-text">Priority:</span>

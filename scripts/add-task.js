@@ -7,7 +7,7 @@ let contacts = [];
 
 let selectedContacts = [];
 
-let selectedPriority = "";
+let selectedPriority = "medium";
 
 let subtasksCount = 0;
 
@@ -94,8 +94,11 @@ function clearPrioButtons() {
 
 function selectDefaultPrioButton() {
     let button = document.getElementById('medium');
+    let svg = document.getElementById('svg-medium');
     button.classList.add('medium');
     button.classList.add('white');
+    button.classList.remove('button-prio-hover');
+    svg.classList.add('filter-white');
 }
 
 function toggleAssignOptions() {
@@ -194,7 +197,7 @@ function containerScrollable(container) {
         let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
         subtaskContainers.forEach(element => {
             element.classList.remove('subtask-scroll-margin');
-        })
+        });
     }
 }
 
@@ -248,12 +251,12 @@ function isInSelectedContacts(contactName) {
 }
 
 function getInitials(contactName) {
-    let names = contactName.split(' ');
-    let initials = "";
-    for (let i = 0; i < names.length; i++) {
-        initials += names[i].substring(0, 1).toUpperCase();
+    let name = contactName.trim().split(' ').filter(n => n);
+    let initials = '';
+    for (let i = 0; i < Math.min(name.length, 2); i++) {
+        initials += name[i].charAt(0).toUpperCase();
     }
-    return initials;
+    return initials
 }
 
 function selectContact(name, color) {
@@ -306,6 +309,7 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     let obj = {name: contactName, color: contactColor};
     if (boolean) {
         selectedContacts.push(obj);
+        sortContactsAlphabetically(selectedContacts);
     } else {
         let index = selectedContacts.map(e => e.name).indexOf(obj.name);
         selectedContacts.splice(index, 1);
@@ -375,28 +379,29 @@ subtasksInput.addEventListener('keydown', (event) => {
 function addSubtask() {
     let input = document.getElementById('subtasks');
     let containerSubtasks = document.getElementById('container-subtasks');
+    let subtaskObj = {"checked" : "false"};
     if (input.value !== "") {
         document.getElementById('invalid-subtask').classList.add('grey');
         document.getElementById('container-input-subtask').classList.remove('input-unvalid');
         subtasksCount++;
         containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
         document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
-        subtasks.push(input.value);
+        subtaskObj.subtask = input.value;
+        subtasks.push(subtaskObj);
         checkForScrollableContainer(containerSubtasks);
     } else {
         throwSubtaskError();
     }
+    console.log(subtasks);
 }
 
 function deleteSubtask(id) {
-    let subtask = document.getElementById(`subtask-${id}`);
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
     let containerSubtasks = document.getElementById('container-subtasks');
-    let index = subtasks.indexOf(subtask.value);
-    subtasks.splice(index, 1);
+    subtasks.splice((id-1), 1);
     subtaskContainer.remove();
     subtasksCount--;
-    checkForScrollableContainer(containerSubtasks);
+    checkForScrollableContainer(containerSubtasks);    
 }
 
 function editSubtask(id) {
@@ -419,7 +424,8 @@ function saveEditedSubtask(id) {
     document.getElementById(`details-subtask-${id}`).classList.remove('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.add('d-none');
     document.getElementById(`subtask-${id}`).innerText = input.value;
-    document.getElementById(`input-subtask-${id}`).value = "";
+    subtasks[`${id-1}`].subtask = input.value;
+    input.value = "";
     showEditOptions(id, false)
     if (element.classList.contains('padding-top')) {
         element.classList.remove('padding-top');
@@ -530,8 +536,8 @@ function saveTask() {
     task.taskPriority = selectedPriority;
     task.numberOfSubtasks = subtasksCount;
     task.numberOfCompletedSubtasks = 0;
-    // task.taskSubtasks = subtasks;
-    // task.taskDate = document.getElementById('due-date').value;
+    task.subtasks = subtasks;
+    task.taskDueDate = document.getElementById('due-date').value;
     task.assignedContacts = selectedContacts;
     saveToFirebase("tasks/", task);
     task = {};
@@ -583,7 +589,7 @@ async function loadContactInfo(contactsObj) {
         };
         contacts.push(contactObj);
     }
-    await getLoggedInUser();
+    sortContactsAlphabetically(contacts);
 }
 
 async function loadSmallInitials() {
@@ -594,14 +600,15 @@ async function loadSmallInitials() {
     let dataPath = userId === "guest" ? "guest.json" : `${userId}.json`;
     let response = await fetch(BASE_URL + dataPath);
     let userData = await response.json();
-    document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.user) || "G";
+    document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.name) || "G";
 }
 
-async function getLoggedInUser() {
-    if (userId !== "guest") {
-        let userDatas = await fetch(BASE_URL + `${userId}/userDatas` + ".json");
-        let userDatasJson = await userDatas.json();
-        let userObj = {name: userDatasJson.user, color: "white"};
-        contacts.push(userObj);
+function sortContactsAlphabetically(contactsArray) {
+    let user = contactsArray.splice(0, 1);
+    contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+    if (contactsArray == contacts) {
+        contacts = user.concat(contactsArray);
+    } else if (contactsArray == selectedContacts) {
+        selectedContacts = user.concat(contactsArray);
     }
 }
