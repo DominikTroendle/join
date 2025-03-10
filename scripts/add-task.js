@@ -309,7 +309,7 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     let obj = {name: contactName, color: contactColor};
     if (boolean) {
         selectedContacts.push(obj);
-        selectedContacts.sort((a, b) => a.name.localeCompare(b.name));
+        sortContactsAlphabetically(selectedContacts);
     } else {
         let index = selectedContacts.map(e => e.name).indexOf(obj.name);
         selectedContacts.splice(index, 1);
@@ -396,7 +396,6 @@ function addSubtask() {
 }
 
 function deleteSubtask(id) {
-    let subtask = document.getElementById(`subtask-${id}`);
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
     let containerSubtasks = document.getElementById('container-subtasks');
     subtasks.splice((id-1), 1);
@@ -590,7 +589,7 @@ async function loadContactInfo(contactsObj) {
         };
         contacts.push(contactObj);
     }
-    sortContactsAlphabetically();
+    sortContactsAlphabetically(contacts);
 }
 
 async function loadSmallInitials() {
@@ -604,8 +603,12 @@ async function loadSmallInitials() {
     document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.name) || "G";
 }
 
-function sortContactsAlphabetically() {
-    let user = contacts.splice(0, 1);
-    contacts.sort((a, b) => a.name.localeCompare(b.name));
-    contacts = user.concat(contacts);
+function sortContactsAlphabetically(contactsArray) {
+    let user = contactsArray.splice(0, 1);
+    contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+    if (contactsArray == contacts) {
+        contacts = user.concat(contactsArray);
+    } else if (contactsArray == selectedContacts) {
+        selectedContacts = user.concat(contactsArray);
+    }
 }
