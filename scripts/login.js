@@ -1,6 +1,6 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
-let logoAnimation = localStorage.getItem("oneLogoAnimation");
+let logoAnimation = localStorage.getItem("moveAnimation");
 
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -19,7 +19,7 @@ if (msg) {
 }
 
 function init() {
-    responseMobileColorChance()
+    animationLogo()
     sessionSorage()
 }
 
@@ -72,29 +72,40 @@ function togglePasswordVisibility() {
     }
 }
 
+function backLogin() {
+    window.location.reload = "index.html"
+    let overlay = document.getElementById('loginOverlay');
+    overlay.style.display = "none"
+    let loginLogo = document.getElementById('loginLogo');
+    loginLogo.style.display = "none"
+}
 
 
-
-function responseMobileColorChance() {
-    let overlay = document.getElementById('mobileOverlay');
-    overlay.classList.remove('d-none');
-    setTimeout(() => {
-        
-        let resposiveLogo = document.getElementById('resposiveLogo');
-        let logoPath1 = document.getElementById('moveLogo1');
-        let logoPath2 = document.getElementById('moveLogo2');
-        let logoPath3 = document.getElementById('moveLogo3');
-        let logoPath4 = document.getElementById('moveLogo4');
-        let logoPath5 = document.getElementById('moveLogo5');
-        
-        resposiveLogo.classList.add('animation-overlay-logo');
-        logoPath1.classList.add('animation-change-logo-color');
-        logoPath2.classList.add('animation-change-logo-color');
-        logoPath3.classList.add('animation-change-logo-color');
-        logoPath4.classList.add('animation-change-logo-color');
-        logoPath5.classList.add('animation-change-logo-color');
+function animationLogo(){
+    if (logoAnimation === "false") {
+        backLogin()
+    }else{
         setTimeout(() => {
-            overlay.classList.add('d-none');
-        }, 500);
-    }, 1000);
+            let passivLogo = document.getElementById('passivLogo')
+            let loginLogo = document.getElementById('loginLogo');
+            let overlay = document.getElementById('loginOverlay');
+            let logoPath1 = document.getElementById('moveLogo1');
+            let logoPath2 = document.getElementById('moveLogo2');
+            let logoPath3 = document.getElementById('moveLogo3');
+            let logoPath4 = document.getElementById('moveLogo4');
+            let logoPath5 = document.getElementById('moveLogo5');
+                passivLogo.style.display = "none"
+                loginLogo.style.display = "flex"
+            overlay.classList.add('login-overlay');
+            logoPath1.classList.add('animation-change-logo-color');
+            logoPath2.classList.add('animation-change-logo-color');
+            logoPath3.classList.add('animation-change-logo-color');
+            logoPath4.classList.add('animation-change-logo-color');
+            logoPath5.classList.add('animation-change-logo-color');
+            setTimeout(() => {
+                overlay.classList.remove('login-overlay')
+            }, 1000);
+            localStorage.setItem("moveAnimation", false)
+        }, 200);
+    }
 }
