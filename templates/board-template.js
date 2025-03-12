@@ -218,22 +218,27 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 </div>`;
 }
 
-function bigTaskCardEditTemplate() {
+function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasks) {
+    let dueDate = "";
+    if (taskDueDate) {
+        dueDate = taskDueDate;
+    }
+    
     return `    <div class="big-task-card-edit__task-type-text-button-box">
                     <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">x</button>
                 </div>
                 <div class="big-task-card-edit__scroll-box">
                     <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Title</span>
-                        <input class="big-task-card-edit__input" type="text" placeholder="Enter a Title">
+                        <input class="big-task-card-edit__input" type="text" placeholder="Enter a Title" value="${taskTitle}">
                     </div>
                     <div class="big-task-card-edit__text-textarea-box">
                         <span class="big-task-card-edit__text">Description</span>
-                        <textarea class="big-task-card-edit__textarea" placeholder="Enter a Description"></textarea>
+                        <textarea class="big-task-card-edit__textarea" placeholder="Enter a Description">${taskDescription}</textarea>
                     </div>
                     <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Due date</span>
-                        <input class="big-task-card-edit__input" type="text" placeholder="dd/mm/yyyy">
+                        <input class="big-task-card-edit__input" type="text" placeholder="dd/mm/yyyy" value="${dueDate}">
                     </div>
                     <div class="big-task-card-edit__text-button-box">
                         <span class="big-task-card-edit__text">Priority</span>

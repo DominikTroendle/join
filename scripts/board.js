@@ -233,7 +233,8 @@ function renderContentBigTaskCard(event) {
 
 function renderContentBigTaskCardEdit() {
     let bigTaskCard = document.getElementById("big-task-card__box");
-    bigTaskCard.innerHTML = bigTaskCardEditTemplate();
+    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
+    bigTaskCard.innerHTML = bigTaskCardEditTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
 function init() {
@@ -365,4 +366,4 @@ let data = {
     numberOfCompletedSubtasks: 2,
     assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
 }
- //postDataInDatabase("guest", data);
+//postDataInDatabase("guest", data);
