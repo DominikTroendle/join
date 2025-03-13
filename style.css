@@ -208,6 +208,10 @@ nav {
     font-weight: 700;
 }
 
+.mobile-help{
+    display: none;
+}
+
 .small-menu-button.inactive{
     pointer-events: none;
 }
@@ -354,6 +358,34 @@ li{
 
     .small-menu-button:hover {
         background-color: transparent;
+    }
+
+    .account-submenu-container {
+        height: 204px;
+        width: 150px;
+        top: 60px;
+    }
+
+    .account-submenu-container a {
+        height: 46px;
+        width: 130px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 120%;
+    }
+    
+    .mobile-help{
+        display: flex;
+    }
+
+    .account-submenu-container a:hover{
+        background-color: transparent;
+        border-radius: 8px;
+    }
+
+    .mobile-help:hover{
+        background-color: rgba(64, 6, 236, 0.205);
+        border-radius: 8px;
     }
 
     .menu-button-box {

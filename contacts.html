@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,10 +10,11 @@
     <link rel="stylesheet" href="styles/colors.css">
     <link rel="stylesheet" href="./styles/contacts.css">
     <link rel="stylesheet" href="style.css">
-    
 
-    
+
+
 </head>
+
 <body onload="init(), addClassSelectedMenuButton('contacts-menu-button')">
     <div class="all-content">
         <div class="content">
@@ -30,13 +32,14 @@
             </header>
             <div id="subMenuOverlayContent" class="overlay" onclick="accountClickMenu()">
                 <div class="account-submenu-container">
-                  <ul>
-                      <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                      <li><a href="legal-notice.html">Lecal Notic</a></li>
-                      <li><a href="index.html">Log out</a></li>
-                  </ul>
+                    <ul>
+                        <li class="mobile-help"><a href="help.html">Help</a></li>
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="legal-notice.html">Lecal Notic</a></li>
+                        <li><a href="index.html">Log out</a></li>
+                    </ul>
                 </div>
-              </div>
+            </div>
             <div class="menu-box">
                 <img class="menu-logo" src="assets/img/Capa 2.png" alt="">
                 <div class="menu-button-box">
@@ -68,13 +71,14 @@
                         Contacts</a>
                 </div>
                 <div class="menu-button-bottom-box">
-                    <a href="privacy-policy.html" class="menu-button-bottom" id="privacy-policy-menu-button-bottom">Privacy
+                    <a href="privacy-policy.html" class="menu-button-bottom"
+                        id="privacy-policy-menu-button-bottom">Privacy
                         Policy</a>
                     <a href="legal-notice.html" class="menu-button-bottom" id="legal-notice-menu-button-bottom">Legal
                         notice</a>
                 </div>
             </div>
-                
+
             <div id="contactlist-container">
                 <section id="container-contacts-button">
                     <button onclick="toggleButtonBackgroundcolor(this); addNewContectOverlay()">
@@ -85,7 +89,7 @@
                 <div class="contacs-box-container">
                     <div id="contactList" class="contactList"></div>
                 </div>
-            </div> 
+            </div>
 
             <div class="more-information-container">
                 <div class="headline-container">
@@ -95,7 +99,8 @@
                         <span>Better with a team</span>
                         <img class="mobile-img-line" src="./assets/img/Vector 5.svg" alt="mobile-line">
                     </div>
-                    <img class="back-to-contactlist-btn" src="assets/img/arrow-left-line.png" alt="" onclick="closeContactMobilButton()">
+                    <img class="back-to-contactlist-btn" src="assets/img/arrow-left-line.png" alt=""
+                        onclick="closeContactMobilButton()">
                 </div>
                 <div id="moreInformationContact"></div>
                 <div class="mobile-procressing-area-button" onclick="procressingClickMenu()">
@@ -105,7 +110,7 @@
 
             <div id="newContectOverlay" class="contact-overlay d-none"></div>
             <div id="editContactOverlay" class="contact-overlay d-none"></div>
-            
+
             <div id="succesfully-message-box" class="massage-box d-none">
                 <div class="text-message">
                     <h1>Contact succesfully created</h1>
@@ -113,9 +118,9 @@
             </div>
         </div>
 
-    <script src="./templates/contacts-template.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="script.js" defer></script>
+        <script src="./templates/contacts-template.js"></script>
+        <script src="./scripts/contacts.js"></script>
+        <script src="script.js" defer></script>
 </body>
-</html>
 
+</html>

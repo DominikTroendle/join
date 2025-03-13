@@ -73,3 +73,7 @@ p{
 .bigger-area{
     margin-bottom: 30px;
 }
+
+@media (max-width: 1040px){
+    
+}
