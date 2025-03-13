@@ -312,22 +312,6 @@ body {
     font-weight: 400;
 }
 
-/* .mobile-overlay {
-    display: none;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    z-index: 1;
-    opacity: 1;
-    animation: moveNoneOverlay 3.5s cubic-bezier(0.98, -2.55, 0.77, 16);
-} */
-
-/* .mobile-overlay.fade-out{
-    opacity: 0;
-} */
-
 .resposive-logo {
     display: none;
     width: 101px;
@@ -361,7 +345,7 @@ body {
         top: 40%;
         width: 100px;
         height: 122px;
-        z-index: 2;
+        z-index: 1;
     }
 
     .resposive-logo-color {
@@ -421,7 +405,6 @@ body {
 
     .register-link {
         position: absolute;
-        opacity: 0;
         transition: none;
         animation: fadeIn 1s ease-in-out 2s forwards;
         display: flex;
@@ -535,7 +518,6 @@ body {
 
     .register-link {
         position: absolute;
-        opacity: 0;
         transition: none;
         animation: fadeIn 1s ease-in-out 2s forwards;
 

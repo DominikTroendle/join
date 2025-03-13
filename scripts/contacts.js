@@ -316,9 +316,8 @@ function selectContact(element) {
         element.style.color = "white";
         moreContactInformation(element.querySelector('.contact-preview-name').innerText);
         
-        // Prüfen, ob die Breite ≤ 428px ist
-        if (window.innerWidth <= 428) {
-            overlay.classList.add('mobile-overlay'); // Overlay anzeigen
+        if (window.innerWidth <= 1040) {
+            overlay.classList.add('mobile-overlay');
         }
     }
 }
@@ -345,7 +344,7 @@ async function moreContactInformation(contactName) {
         let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
-        if (window.innerWidth > 428) {
+        if (window.innerWidth >= 1040) {
             contactInfoContainer.style.transition = 'transform 0.5s ease-out';
             setTimeout(() => {
                 contactInfoContainer.style.transform = 'translateX(0)';
@@ -533,7 +532,7 @@ function closeOverlay(event) {
 }
 
 function toggleButtonBackgroundcolor(button) {
-    if (window.innerWidth === 428) {
+    if (window.innerWidth === 1040) {
         if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
             button.style.backgroundColor = '#29abe2';
         } else {
@@ -543,7 +542,7 @@ function toggleButtonBackgroundcolor(button) {
 }
 
 function toggleButtonColor(button) {
-    if (window.innerWidth === 428) {
+    if (window.innerWidth === 1040) {
         if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
             button.style.color = '#29abe2';
         }
