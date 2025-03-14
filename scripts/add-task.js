@@ -304,6 +304,9 @@ function displaySelectedContacts() {
         let initials = getInitials(name);
         container.innerHTML += returnAssignedContactPreviewHTML(initials, color);
     }
+    if (selectedContacts.length > 8) {
+        document.getElementById('container-assigned-contacts').classList.add('padding-bottom-8');
+    }
 }
 
 function updateSelectedContacts(boolean, contactName, contactColor) {
@@ -616,7 +619,7 @@ function sortContactsAlphabetically(contactsArray) {
 
 function checkInputLength(inputField) {
     let input = document.getElementById(`${inputField}`);
-    if ((inputField == "title") && (input.value.length == 49)) {
+    if ((inputField == "title") && (input.value.length == 50)) {
         document.getElementById(`max-char-${inputField}`).classList.remove('grey');
     }
 }

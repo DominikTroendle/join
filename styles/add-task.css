@@ -263,7 +263,11 @@
     gap: 8px;
     margin-top: 8px;
     min-height: 4px;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    max-width: 100%;
 }
 
 .custom-select {
@@ -317,6 +321,10 @@
     width: 7px;
 }
 
+#container-assigned-contacts::-webkit-scrollbar {
+    height: 4px;
+}
+
 .container-custom-select-options::-webkit-scrollbar-button:vertical:increment,
 .container-custom-select-options::-webkit-scrollbar-button:vertical:decrement {
     background-repeat: no-repeat;
@@ -333,13 +341,15 @@
     background-image: url(../assets/icons/scrollbar-button-top.svg);
 }
 
-.container-custom-select-options::-webkit-scrollbar-thumb {
+.container-custom-select-options::-webkit-scrollbar-thumb,
+#container-assigned-contacts::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 5px;
     border-radius: 10px;
 }
 
-.container-custom-select-options::-webkit-scrollbar-track {
+.container-custom-select-options::-webkit-scrollbar-track,
+#container-assigned-contacts::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
@@ -389,6 +399,7 @@
     color: white;
     font-family: Inter;
     font-size: 12px;
+    flex: 0 0 42px;
 }
 
 .name,
@@ -512,6 +523,10 @@ input:focus {
 
 .padding-top {
     padding-top: 30px;
+}
+
+.padding-bottom-8 {
+    padding-bottom: 8px;
 }
 
 .input-edit {
