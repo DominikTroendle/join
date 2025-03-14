@@ -53,7 +53,6 @@ nav {
 .text-content-container{
     position: absolute;
     height: calc(100% - 10%);
-    width: calc(100% - 0.5%);
     top: 96px;
     left: 232px;
     overflow: auto;
@@ -128,8 +127,8 @@ p{
 
     .text-content-container{
         top: 80px;
+        left: 0;
         height: calc(100% - 16.8%);
-        width: calc(100% - 0.5%);
     }
 
     .text-content{
