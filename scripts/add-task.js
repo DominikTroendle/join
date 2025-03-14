@@ -58,7 +58,7 @@ function selectPrioButton(prio) {
     let svg = document.getElementById(`svg-${prio}`);
     if (button.classList.contains(`${prio}`)) {
         toggleButtonClasses(true, button, svg, prio);
-        selectedPriority = "";
+        selectedPriority = "medium";
     } else {
         clearPrioButtons();
         toggleButtonClasses(false, button, svg, prio);
@@ -99,6 +99,7 @@ function selectDefaultPrioButton() {
     button.classList.add('white');
     button.classList.remove('button-prio-hover');
     svg.classList.add('filter-white');
+    // selectedPriority = "medium";
 }
 
 function toggleAssignOptions() {
@@ -610,5 +611,12 @@ function sortContactsAlphabetically(contactsArray) {
         contacts = user.concat(contactsArray);
     } else if (contactsArray == selectedContacts) {
         selectedContacts = user.concat(contactsArray);
+    }
+}
+
+function checkInputLength(inputField) {
+    let input = document.getElementById(`${inputField}`);
+    if ((inputField == "title") && (input.value.length == 49)) {
+        document.getElementById(`max-char-${inputField}`).classList.remove('grey');
     }
 }

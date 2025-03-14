@@ -84,8 +84,9 @@
                             <label for="title" class="label-add-task flex">
                                 Title
                                 <span class="asterisk">&#42;</span>
+                                <p id="max-char-title" class="grey">Reached maximum amount of 50 chars!</p>
                             </label>
-                            <input id="title" class="input" type="text" name="title" placeholder="Enter a title">
+                            <input id="title" class="input" type="text" name="title" placeholder="Enter a title" maxlength="50" onkeyup="checkInputLength('title')">
                             <p id="required-title" class="required grey">This field is required</p>
                         </div>
                         <div id="container-description" class="container-input-label">
