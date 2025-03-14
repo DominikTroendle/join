@@ -55,13 +55,14 @@ nav {
     height: calc(100% - 10%);
     width: calc(100% - 0.5%);
     top: 96px;
+    left: 232px;
     overflow: auto;
     word-wrap: break-word;
 }
 
 .text-content{
-    margin-left: 323px;
     margin-top: 110px;
+    margin-left: 96px;
 }
 
 .text-nav{

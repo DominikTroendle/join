@@ -55,12 +55,13 @@ nav {
     height: calc(100% - 10%);
     width: calc(100% - 0.5%);
     top: 96px;
+    left: 232px;
     overflow: auto;
     word-wrap: break-word;
 }
 
 #generator_results_content{
-    margin-left: 323px;
+    margin-left: 96px;
     margin-top: 110px;
 }
 
