@@ -110,6 +110,15 @@
     color: red;
 }
 
+.required-max-chars {
+    height: 16px;
+    font-size: 12px;
+    line-height: 14px;
+    color: red;
+    padding-left: 20px;
+    align-self: flex-end;
+}
+
 #invalid-date {
     margin-left: 20px;
 }

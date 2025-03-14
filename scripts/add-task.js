@@ -306,6 +306,8 @@ function displaySelectedContacts() {
     }
     if (selectedContacts.length > 8) {
         document.getElementById('container-assigned-contacts').classList.add('padding-bottom-8');
+    } else {
+        document.getElementById('container-assigned-contacts').classList.remove('padding-bottom-8');
     }
 }
 
@@ -621,5 +623,7 @@ function checkInputLength(inputField) {
     let input = document.getElementById(`${inputField}`);
     if ((inputField == "title") && (input.value.length == 50)) {
         document.getElementById(`max-char-${inputField}`).classList.remove('grey');
+    } else {
+        document.getElementById(`max-char-${inputField}`).classList.add('grey');
     }
 }
