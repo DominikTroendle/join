@@ -35,7 +35,7 @@ function toLastClickedMenu() {
     const lastClickedMenu = localStorage.getItem('lastClickedMenu');
     if (lastClickedMenu) {
         let targetUrl;
-            switch(lastClickedMenu) {
+        switch (lastClickedMenu) {
             case 'summary-menu-button':
                 targetUrl = 'summary.html';
                 break;
@@ -47,6 +47,12 @@ function toLastClickedMenu() {
                 break;
             case 'contacts-menu-button':
                 targetUrl = 'contacts.html';
+                break;
+            case 'privacy-policy-menu-button-bottom':
+                targetUrl = 'privacy-policy.html';
+                break;
+            case 'legal-notice-menu-button-bottom':
+                targetUrl = 'legal-notice.html';
                 break;
             default:
                 targetUrl = 'summary.html';
