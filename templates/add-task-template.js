@@ -15,7 +15,7 @@ function returnAssignedContactPreviewHTML(initials, color) {
 function returnSubtaskHTML(id) {
     return `<div id="container-subtask-${id}" class="position-relative">
                 <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
-                    <input id="input-subtask-${id}" class="input-edit" type="text">
+                    <input id="input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                     <div class="flex">
                         <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
                         <hr class="edit-hr">

@@ -558,7 +558,7 @@ input:focus {
 }
 
 .container-subtask {
-    height: 29px;
+    min-height: 29px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -615,6 +615,7 @@ input:focus {
 .subtask-icons {
     display: flex;
     gap: 7px;
+    max-height: 19px;
 }
 
 .subtask-icons img {

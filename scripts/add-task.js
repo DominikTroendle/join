@@ -340,6 +340,8 @@ function clearInputs() {
     document.getElementById('category').value = "";
     selectedContacts = [];
     renderAssignOptions(contacts);
+    document.getElementById('max-char-title').classList.add('d-none');
+    document.getElementById('invalid-date').classList.remove('d-none');
 }
 
 function changeInputButton(boolean) {
@@ -356,6 +358,7 @@ function processSubtask(boolean) {
     let input = document.getElementById('subtasks');
     let invalidRef = document.getElementById('invalid-subtask');
     invalidRef.classList.add('grey');
+    document.getElementById('max-char-subtasks').classList.add('d-none')
     if (boolean && (input.value != "")) {
         addSubtask();
         input.value = "";
@@ -621,9 +624,19 @@ function sortContactsAlphabetically(contactsArray) {
 
 function checkInputLength(inputField) {
     let input = document.getElementById(`${inputField}`);
-    if ((inputField == "title") && (input.value.length == 50)) {
-        document.getElementById(`max-char-${inputField}`).classList.remove('grey');
+    let errorElement = document.getElementById(`max-char-${inputField}`);
+    let inputSettings = {
+        "title": {invalidElement: null},
+        "subtasks": {invalidElement: "invalid-subtask"}
+    }
+    let maxLength = 50;
+    let invalidElement = inputSettings[inputField].invalidElement;
+
+    if (input.value.length == maxLength) {
+        errorElement.classList.remove('grey', 'd-none');
+        if (invalidElement) document.getElementById(invalidElement).classList.add('d-none');
     } else {
-        document.getElementById(`max-char-${inputField}`).classList.add('grey');
+        errorElement.classList.add('grey', 'd-none');
+        if (invalidElement) document.getElementById(invalidElement).classList.remove('d-none');
     }
 }

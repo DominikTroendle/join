@@ -101,7 +101,7 @@
                                 <span class="asterisk" id="asterisk-due-date">&#42;</span>
                                 <p id="invalid-date" class="required grey">Invalid date format (dd/mm/jjjj)!</p>
                             </label>
-                            <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required>
+                            <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required  maxlength="10">
                             <p id="required-due-date" class="required grey">This field is required</p>
                         </div>
                     </div>
@@ -173,9 +173,10 @@
                             <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
                                 Subtasks
                                 <p id="invalid-subtask" class="required grey">Enter at least one character to save subtask!</p>
+                                <p id="max-char-subtasks" class="required-max-chars grey d-none">Reached maximum amount of 50 chars!</p>
                             </label>
                             <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
-                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask">
+                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')">
                                 <button id="button-add" class="button-add" type="button">
                                     <img src="./assets/icons/add.svg" alt="icon-arrow-down">
                                 </button>
