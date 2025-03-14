@@ -755,6 +755,12 @@ input:focus {
     }
 }
 
+@media screen and (-moz-device-pixel-ratio) {
+    #description {
+        background-image: none;
+    }
+}
+
 @media only screen and (max-height: 800px) {
     #main {
         padding-top: 20px;
