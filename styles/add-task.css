@@ -188,7 +188,8 @@
 
 #container-input-assigned,
 #container-input-category,
-#container-input-subtask {
+#container-input-subtask,
+#container-input-due-date {
     border: 1px solid #D1D1D1;
     background-color: white;
     border-radius: 10px;
@@ -210,7 +211,8 @@
 
 #assigned-to,
 #category,
-#subtasks {
+#subtasks,
+#due-date {
     border: none;
     outline: none;
     border-radius: 10px;
@@ -426,10 +428,41 @@ hr {
 #due-date {
     height: 48px;
     padding: 12px 16px;
+}
+
+#date-picker {
+    color: transparent;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+}
+
+#date-picker::-webkit-datetime-edit-year-field,
+#date-picker::-webkit-datetime-edit-month-field,
+#date-picker::-webkit-datetime-edit-week-field,
+#date-picker::-webkit-datetime-edit-day-field {
+    color: transparent;
+}
+
+#date-picker:hover {
+    background-color: #D1D1D1;
+    cursor: pointer;
+}
+
+#date-picker::-webkit-calendar-picker-indicator {
+    width: 30px;
+    height: 30px;
     background-image: url(../assets/icons/calendar.svg);
     background-repeat: no-repeat;
-    background-size: 24px;
-    background-position: top 12px left 403px;
+    background-size: 25px;
+    background-position: center center;
+}
+
+#date-picker::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
 }
 
 #label-due-date {

@@ -101,7 +101,10 @@
                                 <span class="asterisk" id="asterisk-due-date">&#42;</span>
                                 <p id="invalid-date" class="required grey">Invalid date format (dd/mm/jjjj)!</p>
                             </label>
-                            <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required  maxlength="10">
+                            <div id="container-input-due-date">
+                                <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required  maxlength="10">
+                                <input id="date-picker" type="date">
+                            </div>
                             <p id="required-due-date" class="required grey">This field is required</p>
                         </div>
                     </div>
