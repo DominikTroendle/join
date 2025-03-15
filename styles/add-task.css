@@ -431,7 +431,6 @@ hr {
 }
 
 #date-picker {
-    color: transparent;
     width: 30px;
     height: 30px;
     margin-right: 10px;
@@ -791,6 +790,12 @@ input:focus {
 @media screen and (-moz-device-pixel-ratio) {
     #description {
         background-image: none;
+    }
+
+    #date-picker {
+        width: 30px;
+        height: 30px;
+        padding: 5px 8px 5px 5px;
     }
 }
 
