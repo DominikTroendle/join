@@ -639,3 +639,12 @@ function checkInputLength(inputField) {
         if (invalidElement) document.getElementById(invalidElement).classList.remove('d-none');
     }
 }
+
+function putDate() {
+    let datePicker = document.getElementById('date-picker');
+    let input = document.getElementById('due-date');
+    if (datePicker.value) {
+        let [year, month, day] = datePicker.value.split('-');
+        input.value = `${day}/${month}/${year}`;
+    }
+}
