@@ -510,8 +510,8 @@ function isPastDate(dateObj) {
 function throwError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('grey');
-        if (element == "category") {
-            document.getElementById('container-input-category').classList.add('input-unvalid')
+        if (element == "category" || element == "due-date") {
+            document.getElementById(`container-input-${element}`).classList.add('input-unvalid')
         } else {
             document.getElementById(`${element}`).classList.add('input-unvalid');
         };
@@ -526,8 +526,8 @@ function throwSubtaskError() {
 function removeError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.add('grey');
-        if (element == "category") {
-            document.getElementById('container-input-category').classList.remove('input-unvalid')
+        if (element == "category" || element == "due-date") {
+            document.getElementById(`container-input-${element}`).classList.remove('input-unvalid')
         } else {
             document.getElementById(`${element}`).classList.remove('input-unvalid');
         };
@@ -640,7 +640,7 @@ function checkInputLength(inputField) {
     }
 }
 
-function putDate() {
+function putDateToInput() {
     let datePicker = document.getElementById('date-picker');
     let input = document.getElementById('due-date');
     if (datePicker.value) {
