@@ -153,13 +153,13 @@
 }
 
 #title:focus,
-#description:focus,
-#due-date:focus  {
+#description:focus  {
     outline: 1px solid #94D5F0;
 }
 
 #container-input-assigned:focus-within,
-#container-input-category:focus-within {
+#container-input-category:focus-within,
+#container-input-due-date:focus-within {
     border: 1px solid #94D5F0;
 }
 
