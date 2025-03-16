@@ -61,10 +61,12 @@ let currentDragFieldId;
 
 let isBorderActive = false
 
-toDoArraySearch = [];
-inProgressArraySearch = [];
-awaitFeedbackArraySearch = [];
-doneArraySearch = [];
+let toDoArraySearch = [];
+let inProgressArraySearch = [];
+let awaitFeedbackArraySearch = [];
+let doneArraySearch = [];
+
+const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 
 const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
 
@@ -74,6 +76,8 @@ const searchArrays = {
     awaitFeedbackArraySearch: awaitFeedbackArraySearch,
     doneArraySearch: doneArraySearch
 };
+
+const dragFieldIds = ["to-do-drag-field", "in-progress-drag-field", "await-feedback-drag-field", "done-drag-field"];
 
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
@@ -140,10 +144,10 @@ function clearAllArray() {
 }
 
 function clearAllSearchArray() {
-    toDoArraySearch = [];
-    inProgressArraySearch = [];
-    awaitFeedbackArraySearch = [];
-    doneArraySearch = [];
+    toDoArraySearch.length = 0;
+    inProgressArraySearch.length = 0;
+    awaitFeedbackArraySearch.length = 0;
+    doneArraySearch.length = 0;
 }
 
 function findObjectInArrayAndSaveData(array, newCategoryName) {
@@ -394,16 +398,26 @@ async function checkSearchWordAndLoadAllSearchTasks() {
     let searchWord = searchFieldInput.value.trim();
     clearAllSearchArray();
     if (searchWord.length >= 3) {
-        toDoArray.forEach(element => {
-            if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
-                toDoArraySearch.push(element);
-            }
-        });
-        //     loadAndRenderAllSeachResultPokemon(searchResultId, infoButton);
-        // } else {
-        //     searchInfoText.classList.remove("opacity-no-visable");
-    }
-    console.log(toDoArraySearch);
-    renderSmallCard("to-do-drag-field", toDoArraySearch);
+        for (let index = 0; index < arrayNames.length; index++) {
+            let originalArray = arrays[arrayNames[index]];
+            let searchArray = searchArrays[searchArrayNames[index]];
+            let dragField = document.getElementById(dragFieldIds[index]);
+            originalArray.forEach(element => {
+                if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
+                    searchArray.push(element);
+                }
 
+            });
+            if (searchArray.length !== 0) {
+                renderSmallCard(dragFieldIds[index], searchArray);
+            } else {
+                dragField.innerHTML = "";
+            }
+
+            //     loadAndRenderAllSeachResultPokemon(searchResultId, infoButton);
+            // } else {
+            //     searchInfoText.classList.remove("opacity-no-visable");
+        }
+
+    }
 }
