@@ -367,3 +367,22 @@ let data = {
     assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
 }
 //postDataInDatabase("guest", data);
+
+async function checkSearchWordAndLoadAllTaskIds() {
+        let searchFieldInput = document.getElementById("search-field__input");
+        let searchWord = searchFieldInput.value.trim();
+        let searchResultId = [];
+        console.log(searchWord);
+        // endResult = [];
+        // if (searchWord.length >= 3) {
+        //     englishPokemonNames.forEach((element, index) => {
+        //         if (element.toLowerCase().startsWith(searchWord.toLowerCase())) {
+        //             searchResultId.push(index + 1);
+        //         }
+        //     });
+        //     loadAndRenderAllSeachResultPokemon(searchResultId, infoButton);
+        // } else {
+        //     searchInfoText.classList.remove("opacity-no-visable");
+        // }
+
+}
