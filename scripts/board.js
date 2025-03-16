@@ -127,7 +127,7 @@ async function allowDrop2(event, dragFieldArray) {
     if (oldArray.length !== 0) {
         renderSmallCard(oldCategory, oldArray);
     } else {
-        document.getElementById(oldCategory).innerHTML = noCardTemplate(oldCategoryName);
+        document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName]);
     }
 
     renderSmallCard(newCategory, newArray);
@@ -299,7 +299,11 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
                 }
             });
         }
-        renderSmallCard(dragFieldId, categoryArray);
+        if (categoryArray.length !== 0) {
+            renderSmallCard(dragFieldId, categoryArray);
+        } else {
+            document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category]);
+        }
     } catch (error) {
         console.error("error loading the data:", error);
     }
@@ -413,18 +417,12 @@ async function checkSearchWordAndLoadAllSearchTasks() {
                 if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
                     searchArray.push(element);
                 }
-
             });
             if (searchArray.length !== 0) {
                 renderSmallCard(dragFieldIds[index], searchArray);
             } else {
                 dragField.innerHTML = noCardTemplate(categorys[index]);
             }
-
-            //     loadAndRenderAllSeachResultPokemon(searchResultId, infoButton);
-            // } else {
-            //     searchInfoText.classList.remove("opacity-no-visable");
         }
-
     }
 }
