@@ -78,6 +78,13 @@ const searchArrays = {
 };
 
 const dragFieldIds = ["to-do-drag-field", "in-progress-drag-field", "await-feedback-drag-field", "done-drag-field"];
+const categorys = ["To do", "In progress", "Await feedback", "Done"];
+const categorysObject = {
+    toDos: "To do",
+    inProgress: "In progress",
+    awaitFeedback: "Await feedback",
+    done: "Done"
+}
 
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
@@ -411,7 +418,7 @@ async function checkSearchWordAndLoadAllSearchTasks() {
             if (searchArray.length !== 0) {
                 renderSmallCard(dragFieldIds[index], searchArray);
             } else {
-                dragField.innerHTML = "";
+                dragField.innerHTML = noCardTemplate(categorys[index]);
             }
 
             //     loadAndRenderAllSeachResultPokemon(searchResultId, infoButton);
