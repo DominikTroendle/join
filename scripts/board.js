@@ -61,6 +61,20 @@ let currentDragFieldId;
 
 let isBorderActive = false
 
+toDoArraySearch = [];
+inProgressArraySearch = [];
+awaitFeedbackArraySearch = [];
+doneArraySearch = [];
+
+const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
+
+const searchArrays = {
+    toDoArraySearch: toDoArraySearch,
+    inProgressArraySearch: inProgressArraySearch,
+    awaitFeedbackArraySearch: awaitFeedbackArraySearch,
+    doneArraySearch: doneArraySearch
+};
+
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
     imgId.src = imgSource;
@@ -123,6 +137,13 @@ function clearAllArray() {
     inProgressArray = [];
     awaitFeedbackArray = [];
     doneArray = [];
+}
+
+function clearAllSearchArray() {
+    toDoArraySearch = [];
+    inProgressArraySearch = [];
+    awaitFeedbackArraySearch = [];
+    doneArraySearch = [];
 }
 
 function findObjectInArrayAndSaveData(array, newCategoryName) {
@@ -368,21 +389,21 @@ let data = {
 }
 //postDataInDatabase("guest", data);
 
-async function checkSearchWordAndLoadAllTaskIds() {
-        let searchFieldInput = document.getElementById("search-field__input");
-        let searchWord = searchFieldInput.value.trim();
-        let searchResultId = [];
-        console.log(searchWord);
-        // endResult = [];
-        // if (searchWord.length >= 3) {
-        //     englishPokemonNames.forEach((element, index) => {
-        //         if (element.toLowerCase().startsWith(searchWord.toLowerCase())) {
-        //             searchResultId.push(index + 1);
-        //         }
-        //     });
+async function checkSearchWordAndLoadAllSearchTasks() {
+    let searchFieldInput = document.getElementById("search-field__input");
+    let searchWord = searchFieldInput.value.trim();
+    clearAllSearchArray();
+    if (searchWord.length >= 3) {
+        toDoArray.forEach(element => {
+            if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
+                toDoArraySearch.push(element);
+            }
+        });
         //     loadAndRenderAllSeachResultPokemon(searchResultId, infoButton);
         // } else {
         //     searchInfoText.classList.remove("opacity-no-visable");
-        // }
+    }
+    console.log(toDoArraySearch);
+    renderSmallCard("to-do-drag-field", toDoArraySearch);
 
 }
