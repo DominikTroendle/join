@@ -179,7 +179,7 @@
                                 <p id="max-char-subtasks" class="required-max-chars grey d-none">Reached maximum amount of 50 chars!</p>
                             </label>
                             <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
-                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')">
+                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')" onkeydown="isEnterKey(event)">
                                 <button id="button-add" class="button-add" type="button">
                                     <img src="./assets/icons/add.svg" alt="icon-arrow-down">
                                 </button>

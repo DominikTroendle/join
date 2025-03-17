@@ -379,13 +379,13 @@ function showEditOptions(id, boolean) {
     }
 }
 
-const subtasksInput = document.getElementById('subtasks');
-subtasksInput.addEventListener('keydown', (event) => {
+function isEnterKey(event) {
+    subtasksInput = document.getElementById('subtasks')
     if (event.key === "Enter") {
         addSubtask();
         subtasksInput.value = "";
     }
-})
+}
 
 function addSubtask() {
     let input = document.getElementById('subtasks');
