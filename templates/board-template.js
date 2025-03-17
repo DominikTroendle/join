@@ -251,16 +251,64 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     alt=""></button>
                         </div>
                     </div>
-                    <div class="big-task-card-edit__text-input-box">
+                    
+                    
+                    
+                    
+                    <div class="container-input-label custom-select">
+                            <label for="assigned-to" class="label-add-task">
+                                Assigned to
+                            </label>
+                            <div id="container-input-assigned">
+                                <input id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
+                                <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)">
+                                    <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
+                                </button>
+                            </div>
+                            <div id="container-dropdown">
+                                <div id="dropdown-assign2" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
+                            </div>
+                            <div id="container-assigned-contacts"></div>
+                        </div>
+                    <div class="container-input-label">
+                            <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
+                                Subtasks
+                                <p id="invalid-subtask" class="required grey">Enter at least one character to save subtask!</p>
+                                <p id="max-char-subtasks" class="required-max-chars grey d-none">Reached maximum amount of 50 chars!</p>
+                            </label>
+                            <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
+                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')">
+                                <button id="button-add" class="button-add" type="button">
+                                    <img src="./assets/icons/add.svg" alt="icon-arrow-down">
+                                </button>
+                                <div id="container-buttons" class="container-button-confirm d-none">
+                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtask(false)">
+                                        <img src="./assets/icons/close.svg" alt="icon-reject">
+                                    </button>
+                                    <hr>
+                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtask(true)">
+                                        <img src="./assets/icons/check_blue.svg" alt="icon-accept">
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="container-subtasks"></div>
+                        </div>
+                    
+                    
+                    
+                    
+                    
+                    <div class="big-task-card-edit__task-type-text-button-box">
+                        <button class="big-task-card-edit__Ok-button" onclick="renderContentBigTaskCard()">Ok</button>
+                    </div>
+                </div>`;
+}
+
+{/* <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Assigned to</span>
                         <input class="big-task-card-edit__input" type="text" placeholder="Select contacts to assign">
                     </div>
                     <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Subtasks</span>
                         <input class="big-task-card-edit__input" type="text" placeholder="Add new subtask">
-                    </div>
-                    <div class="big-task-card-edit__task-type-text-button-box">
-                        <button class="big-task-card-edit__Ok-button" onclick="renderContentBigTaskCard()">Ok</button>
-                    </div>
-                </div>`;
-}
+                    </div> */}
