@@ -403,7 +403,6 @@ function addSubtask() {
     } else {
         throwSubtaskError();
     }
-    console.log(subtasks);
 }
 
 function deleteSubtask(id) {
