@@ -445,6 +445,12 @@ function openOverlay() {
         .catch(error => {
             console.error("Fehler beim Laden der HTML-Seite:", error);
         });
+    let script = document.createElement("script");
+    script.src = "./scripts/add-task.js";
+    document.body.appendChild(script);
+    let script2 = document.createElement("script");
+    script2.src = "./templates/add-task-template.js";
+    document.body.appendChild(script2);
 }
 
 // Funktion zum Schließen des Overlays

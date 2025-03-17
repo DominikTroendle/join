@@ -1,4 +1,4 @@
-const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
+const BASE_URL_ADDTASK = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
 let userId;
 
@@ -45,12 +45,14 @@ let task = {};
 
 let unvalidInputs = [];
 
-async function init() {
+async function initialize() {
     let contactsObj = await getContacts();
     loadContactInfo(contactsObj);
     renderAssignOptions(contacts);
     loadSmallInitials();
 }
+
+initialize();
 
 function selectPrioButton(prio) {  
     let button = document.getElementById(`${prio}`);
@@ -562,7 +564,7 @@ async function saveToFirebase(path, task) {
 }
 
 async function postData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json", {
+    let response = await fetch(BASE_URL_ADDTASK + path + ".json", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -576,12 +578,12 @@ async function getContacts(path="") {
     userId = localStorage.getItem('userId');
     if (userId !== "guest") {
         path = userId;
-        let response = await fetch(BASE_URL + path + ".json");
+        let response = await fetch(BASE_URL_ADDTASK + path + ".json");
         let responseJson = await response.json();
         return responseJson;
     } else {
         path = "guest";
-        let response = await fetch(BASE_URL + path + ".json");
+        let response = await fetch(BASE_URL_ADDTASK + path + ".json");
         let responseJson = await response.json();
         return responseJson;
     }
@@ -606,7 +608,7 @@ async function loadSmallInitials() {
         return window.location.href = "index.html?";
     }
     let dataPath = userId === "guest" ? "guest.json" : `${userId}.json`;
-    let response = await fetch(BASE_URL + dataPath);
+    let response = await fetch(BASE_URL_ADDTASK + dataPath);
     let userData = await response.json();
     document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.name) || "G";
 }
@@ -624,13 +626,9 @@ function sortContactsAlphabetically(contactsArray) {
 function checkInputLength(inputField) {
     let input = document.getElementById(`${inputField}`);
     let errorElement = document.getElementById(`max-char-${inputField}`);
-    let inputSettings = {
-        "title": {invalidElement: null},
-        "subtasks": {invalidElement: "invalid-subtask"}
-    }
+    let inputSettings = {"title": {invalidElement: null}, "subtasks": {invalidElement: "invalid-subtask"}};
     let maxLength = 50;
     let invalidElement = inputSettings[inputField].invalidElement;
-
     if (input.value.length == maxLength) {
         errorElement.classList.remove('grey', 'd-none');
         if (invalidElement) document.getElementById(invalidElement).classList.add('d-none');
