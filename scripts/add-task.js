@@ -48,7 +48,7 @@ let unvalidInputs = [];
 async function initialize() {
     let contactsObj = await getContacts();
     loadContactInfo(contactsObj);
-    renderAssignOptions(contacts);
+    // renderAssignOptions(contacts);
     loadSmallInitials();
 }
 
@@ -104,6 +104,7 @@ function selectDefaultPrioButton() {
 }
 
 function toggleAssignOptions() {
+    renderAssignOptions(contacts);
     let container = document.getElementById('dropdown-assign');
     let containerDropdown = document.getElementById('container-dropdown');
     let input = document.getElementById('assigned-to');
