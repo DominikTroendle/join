@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/colors.css">
+    <link rel="stylesheet" href="./styles/add-task.css">
+</head>
+<body onload="initialize(), addClassSelectedMenuButton('add-task-menu-button')">
+    <div id="overlay-task-added" class="d-none">
+        <div id="task-added">
+            <span>Task added to board</span>
+            <img class="menu-button-icon" src="./assets/icons/board.svg" alt="icon-board">
+        </div>
+    </div>
+    <section id="main" onclick="closeDropdown(), changeInputButton(false), stopPropagation(event)">
+        <div id="container-form">
+            <div id="form-top">
+                <h1>Add Task</h1>
+                <form id="form-add-task">
+                    <div id="form-left">
+                        <div class="container-input-label">
+                            <label for="title" class="label-add-task flex">
+                                Title
+                                <span class="asterisk">&#42;</span>
+                                <p id="max-char-title" class="required-max-chars grey">Reached maximum amount of 50 chars!</p>
+                            </label>
+                            <input id="title" class="input" type="text" name="title" placeholder="Enter a title" maxlength="50" onkeyup="checkInputLength('title')">
+                            <p id="required-title" class="required grey">This field is required</p>
+                        </div>
+                        <div id="container-description" class="container-input-label">
+                            <label for="description" class="label-add-task">
+                                Description
+                            </label>
+                            <textarea id="description" class="input" name="description" placeholder="Enter a Description"></textarea>
+                        </div>
+                        <div class="container-input-label">
+                            <label for="due-date" class="label-add-task flex" id="label-due-date">
+                                Due date
+                                <span class="asterisk" id="asterisk-due-date">&#42;</span>
+                                <p id="invalid-date" class="required grey">Invalid date format (dd/mm/jjjj)!</p>
+                            </label>
+                            <div id="container-input-due-date">
+                                <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" required  maxlength="10">
+                                <input id="date-picker" type="date" onchange="putDateToInput()">
+                            </div>
+                            <p id="required-due-date" class="required grey">This field is required</p>
+                        </div>
+                    </div>
+                    <hr id="separator">
+                    <div id="form-right">
+                        <div id="container-prioritys" class="container-input-label">
+                            <label for="buttons-prio" class="label-add-task">Priority</label>
+                            <div id="buttons-prio">
+                                <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
+                                    Urgent
+                                    <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
+                                </button>
+                                <button id="medium" class="button-prio medium white" type="button" onclick="selectPrioButton('medium')">
+                                    Medium
+                                    <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium" class="filter-white">
+                                </button>
+                                <button id="low" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">
+                                    Low
+                                    <img id="svg-low" src="assets/icons/low.svg" alt="icon-low">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="container-input-label custom-select">
+                            <label for="assigned-to" class="label-add-task">
+                                Assigned to
+                            </label>
+                            <div id="container-input-assigned">
+                                <input id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
+                                <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)">
+                                    <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
+                                </button>
+                            </div>
+                            <div id="container-dropdown">
+                                <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
+                            </div>
+                            <div id="container-assigned-contacts"></div>
+                        </div>
+                        <div class="container-input-label">
+                            <label for="category" class="label-add-task flex">
+                                Category
+                                <span class="asterisk">&#42;</span>
+                            </label>
+                            <div id="container-input-category">
+                                <input readonly id="category" type="text" name="category" placeholder="Select task category" onclick="toggleCategoryOptions(), stopPropagation(event)">
+                                <button class="button-dropdown" type="button">
+                                    <img id="arrow-dropdown-category" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleCategoryOptions(), stopPropagation(event)">
+                                </button>
+                            </div>
+                            <div class="container-arrow-dropdown" onclick="toggleCategoryOptions(), stopPropagation(event)"></div>
+                            <div id="dropdown-category" class="container-custom-select-options-noscroll d-none">
+                                <div id="technical-task" class="container-custom-select-option" onclick="displayCategory('Technical Task'), stopPropagation(event)">
+                                    <div class="container-bg">
+                                        <div>
+                                            <span class="category">Technical Task</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="user-story" class="container-custom-select-option" onclick="displayCategory('User Story'), stopPropagation(event)">
+                                    <div class="container-bg">
+                                        <div>
+                                            <span class="category">User Story</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="required-category" class="required grey">This field is required</p>
+                        </div>
+                        <div class="container-input-label">
+                            <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
+                                Subtasks
+                                <p id="invalid-subtask" class="required grey">Enter at least one character to save subtask!</p>
+                                <p id="max-char-subtasks" class="required-max-chars grey d-none">Reached maximum amount of 50 chars!</p>
+                            </label>
+                            <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
+                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')">
+                                <button id="button-add" class="button-add" type="button">
+                                    <img src="./assets/icons/add.svg" alt="icon-arrow-down">
+                                </button>
+                                <div id="container-buttons" class="container-button-confirm d-none">
+                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtask(false)">
+                                        <img src="./assets/icons/close.svg" alt="icon-reject">
+                                    </button>
+                                    <hr>
+                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtask(true)">
+                                        <img src="./assets/icons/check_blue.svg" alt="icon-accept">
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="container-subtasks"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="footer-add-task">
+                <p class="flex"><span class="asterisk">&#42;</span>This field is required</p>
+                <div>
+                    <button id="button-clear" onclick="clearInputs()">Clear
+                        <img src=".//assets/icons/cancel.svg" alt="icon-cancel">
+                    </button>
+                    <button id="button-create" onclick="createTask()">Create task
+                        <img src=".//assets/icons/check.svg" alt="icon-check">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="./scripts/add-task.js"></script>
+    <script src="./templates/add-task-template.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
