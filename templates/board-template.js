@@ -266,7 +266,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                 </button>
                             </div>
                             <div id="container-dropdown">
-                                <div id="dropdown-assign2" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
+                                <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
                             </div>
                             <div id="container-assigned-contacts"></div>
                         </div>
