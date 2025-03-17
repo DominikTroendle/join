@@ -427,36 +427,9 @@ async function checkSearchWordAndLoadAllSearchTasks() {
     }
 }
 
-// Funktion zum Öffnen des Overlays und Laden einer externen HTML-Seite
-function openOverlay() {
-    fetch("add-task.html") // Hole die HTML-Seite über die URL
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Fehler beim Laden der Seite');
-            }
-            return response.text(); // Holen des HTML-Inhalts als Text
-        })
-        .then(data => {
-            // Setze den erhaltenen HTML-Inhalt in das Popup
-            document.getElementById("big-task-card__box").innerHTML = data;
-            // Zeige das Overlay an
-            document.getElementById("big-task-card__overlay").classList.remove("d-none");
-        })
-        .catch(error => {
-            console.error("Fehler beim Laden der HTML-Seite:", error);
-        });
-    let script = document.createElement("script");
-    script.src = "./scripts/add-task.js";
-    document.body.appendChild(script);
-    let script2 = document.createElement("script");
-    script2.src = "./templates/add-task-template.js";
-    document.body.appendChild(script2);
-}
-
-// Funktion zum Schließen des Overlays
-function closeOverlay() {
-    // Leere den Inhalt des Popups, wenn es geschlossen wird
-    document.getElementById("popupContent").innerHTML = "";
-    // Verstecke das Overlay
-    document.getElementById("overlay").style.display = "none";
+function renderAddTaskOverlay() {
+    bigTaskCardBox = document.getElementById("big-task-card__box");
+    bigTaskCardOverlay = document.getElementById("big-task-card__overlay");
+    bigTaskCardBox.innerHTML = addTaskTemplate();
+    bigTaskCardOverlay.classList.remove("d-none");
 }

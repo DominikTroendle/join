@@ -7,9 +7,10 @@
     <title>Join</title>
     <link rel="icon" href="assets/img/join-logo.png" type="image/gif" sizes="16x16" />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/add-task.css">
     <link rel="stylesheet" href="styles/board.css" />
     <link rel="stylesheet" href="styles/colors.css">
-    <link rel="stylesheet" href="styles/add-task.css">
+    
 </head>
 
 <body onload="addClassSelectedMenuButton('board-menu-button'); init()">
@@ -85,7 +86,7 @@
                                     class="search-field__img" id="search-field__img" src="assets/icons/search.png"
                                     alt=""></button>
                         </div>
-                        <button class="add-task__button" onclick="openOverlay()">Add task <img class="add-task__img" src="assets/icons/add.png"
+                        <button class="add-task__button" onclick="renderAddTaskOverlay()">Add task <img class="add-task__img" src="assets/icons/add.png"
                                 alt=""></button>
                     </div>
                 </div>

@@ -1002,3 +1002,34 @@ footer {
     width: 100%;
     margin-top: auto;
 }
+
+#main {
+    
+    width: 1116px;
+    display: flex;
+    flex-direction: column;
+    background-color: #F6F7F8;
+    border-radius: 30px;
+    min-height: 100%;
+    margin: 0;
+}
+
+#main h1 {
+    font-size: 61px;
+    line-height: 73.2px;
+    font-weight: 700;
+    margin-bottom: 48px;
+}
+
+#container-form {
+    padding: 64px 74px;
+    width: 100%;
+}
+
+#footer-add-task {
+    width: 100%;
+}
+
+#form-add-task {
+    gap: 48px;
+}
