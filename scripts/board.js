@@ -52,6 +52,7 @@ let newArray = [];
 let oldCategory;
 let oldCategoryName;
 let newCategory;
+let newCategoryName;
 let currentCardId;
 let currentTaskData = {};
 let currentTaskCardId;
@@ -87,6 +88,14 @@ const categorysObject = {
     done: "Done"
 }
 
+const searchArraysBasedOnCategory = {
+    toDos: toDoArraySearch,
+    inProgress: inProgressArraySearch,
+    awaitFeedback: awaitFeedbackArraySearch,
+    done: doneArraySearch
+}
+
+
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
     imgId.src = imgSource;
@@ -113,7 +122,7 @@ function moveTo(event, dragFieldId, dragFieldArray) {
 async function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
-    let newCategoryName = event.currentTarget.getAttribute("data-category");
+    newCategoryName = event.currentTarget.getAttribute("data-category");
 
     if (oldCategory === newCategory) {
         return;
@@ -125,19 +134,39 @@ async function allowDrop2(event, dragFieldArray) {
     newArray.push(oldArray.splice(index, 1)[0]);
     let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
     taskCardObjectinNewArray.category = newCategoryName;
-    if (oldArray.length !== 0) {
-        renderSmallCard(oldCategory, oldArray);
-    } else {
-        document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName]);
-    }
+    if (searchMode === false) {
+        if (oldArray.length !== 0) {
+            renderSmallCard(oldCategory, oldArray);
+        } else {
+            document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName]);
+        }
+        renderSmallCard(newCategory, newArray);
 
-    renderSmallCard(newCategory, newArray);
+    } else {
+        putSearchTaskFromOldArrayinNewArray();
+    }
 
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
     if (!putResponse.ok) {
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
     }
+
+}
+
+function putSearchTaskFromOldArrayinNewArray() {
+    let oldArraySearch = searchArraysBasedOnCategory[oldCategoryName];
+    let newArraySearch = searchArraysBasedOnCategory[newCategoryName];
+    let index = oldArraySearch.findIndex(element => element.id == currentCardId);
+    newArraySearch.push(oldArraySearch.splice(index, 1)[0]);
+    let taskCardObjectinNewArraySearch = newArraySearch.find(element => element.id == currentCardId);
+    taskCardObjectinNewArraySearch.category = newCategoryName;
+    if (oldArraySearch.length !== 0) {
+        renderSmallCard(oldCategory, oldArraySearch);
+    } else {
+        document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName]);
+    }
+    renderSmallCard(newCategory, newArraySearch);
 }
 
 function saveCurrentCardId(event) {
