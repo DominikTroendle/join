@@ -470,8 +470,17 @@ function setSearchModeTrueAndChangeImg() {
     document.getElementById("search-field__close-img").classList.remove("d-none");
 }
 
-function functionsetSearchModeFalseAndChangeImg() {
+function setSearchModeFalseAndChangeImg() {
     searchMode = "false";
     document.getElementById("search-field__img").classList.remove("d-none");
     document.getElementById("search-field__close-img").classList.add("d-none");
+}
+
+function selectionOfWhichFunctionIsUsed() {
+    if(searchMode === "false") {
+        setSearchModeTrueAndChangeImg();
+    } else {
+        setSearchModeFalseAndChangeImg();
+        init();
+    }
 }
