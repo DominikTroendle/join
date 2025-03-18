@@ -65,6 +65,7 @@ let toDoArraySearch = [];
 let inProgressArraySearch = [];
 let awaitFeedbackArraySearch = [];
 let doneArraySearch = [];
+searchMode = false;
 
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 

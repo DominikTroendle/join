@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/add-task.css">
     <link rel="stylesheet" href="styles/board.css" />
     <link rel="stylesheet" href="styles/colors.css">
-    
+
 </head>
 
 <body onload="addClassSelectedMenuButton('board-menu-button'); init()">
@@ -79,15 +79,23 @@
                     <h1>Board</h1>
                     <div class="input-button__box">
                         <div class="search-field__box">
-                            <input class="search-field__input" id="search-field__input" type="text" placeholder="Find Task">
+                            <input class="search-field__input" id="search-field__input" type="text"
+                                placeholder="Find Task">
                             <button class="search-field__button"
                                 onmousedown="changeImgSource('search-field__img', 'assets/icons/Property 1=click.png')"
-                                onmouseup="changeImgSource('search-field__img', 'assets/icons/search.png')" onclick="checkSearchWordAndLoadAllSearchTasks()"><img
-                                    class="search-field__img" id="search-field__img" src="assets/icons/search.png"
-                                    alt=""></button>
+                                onmouseup="changeImgSource('search-field__img', 'assets/icons/search.png')"
+                                onclick="checkSearchWordAndLoadAllSearchTasks(); setSearchModeAndChangeImg()">
+                                <img class="search-field__img" id="search-field__img" src="assets/icons/search.png"
+                                    alt="">
+                                <svg class="search-field__close-img d-none" id="search-field__close-img" width="32" height="33" viewBox="0 0 32 33">
+                                    <rect width="32" height="32" rx="16" class="bg" />
+                                    <path class="icon"
+                                        d="M16 18.366l-4.9 4.9a.85.85 0 01-1.2-1.2l4.9-4.9-4.9-4.9a.85.85 0 111.2-1.2l4.9 4.9 4.9-4.9a.85.85 0 111.2 1.2l-4.9 4.9 4.9 4.9a.85.85 0 11-1.2 1.2l-4.9-4.9z" />
+                                </svg>
+                            </button>
                         </div>
-                        <button class="add-task__button" onclick="renderAddTaskOverlay()">Add task <img class="add-task__img" src="assets/icons/add.png"
-                                alt=""></button>
+                        <button class="add-task__button" onclick="renderAddTaskOverlay()">Add task <img
+                                class="add-task__img" src="assets/icons/add.png" alt=""></button>
                     </div>
                 </div>
                 <div class="tasks-category__box">
@@ -113,11 +121,13 @@
                         ondragover="allowDrop(event)" ondrop="allowDrop2(event, toDoArray)"
                         ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)">
                     </div>
-                    <div class="drag-field" id="in-progress-drag-field" data-category="inProgress" data-array="inProgressArray"
+                    <div class="drag-field" id="in-progress-drag-field" data-category="inProgress"
+                        data-array="inProgressArray"
                         ondragstart="onDragStart(event); moveTo(event, 'in-progress-drag-field', inProgressArray)"
                         ondragover="allowDrop(event)" ondrop="allowDrop2(event, inProgressArray)"
                         ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)"></div>
-                    <div class="drag-field" id="await-feedback-drag-field" data-category="awaitFeedback" data-array="awaitFeedbackArray"
+                    <div class="drag-field" id="await-feedback-drag-field" data-category="awaitFeedback"
+                        data-array="awaitFeedbackArray"
                         ondragstart="onDragStart(event); moveTo(event, 'await-feedback-drag-field', awaitFeedbackArray)"
                         ondragover="allowDrop(event)" ondrop="allowDrop2(event, awaitFeedbackArray)"
                         ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)"></div>

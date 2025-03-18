@@ -129,6 +129,32 @@ h1 {
     background-color: #FFFFFF;
 }
 
+.search-field__close-img {
+    width: 32px;
+    height: 32px;
+}
+
+.search-field__close-img .icon {
+    fill: #2A3647;
+}
+
+.search-field__close-img .bg {
+    fill: #FFFFFF;
+}
+
+.search-field__button:hover .search-field__close-img .bg {
+    fill: #EEEEEE;
+    border-radius: 45px;
+}
+
+.search-field__button:active .search-field__close-img .icon {
+    fill: #FFFFFF;
+}
+
+.search-field__button:active .search-field__close-img .bg {
+    fill: #29ABE2;
+}
+
 .add-task__button {
     display: flex;
     justify-content: center;
