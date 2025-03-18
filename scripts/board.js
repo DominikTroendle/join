@@ -66,7 +66,7 @@ let toDoArraySearch = [];
 let inProgressArraySearch = [];
 let awaitFeedbackArraySearch = [];
 let doneArraySearch = [];
-searchMode = false;
+let searchMode = "false";
 
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 
@@ -134,11 +134,11 @@ async function allowDrop2(event, dragFieldArray) {
     newArray.push(oldArray.splice(index, 1)[0]);
     let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
     taskCardObjectinNewArray.category = newCategoryName;
-    if (searchMode === false) {
+    if (searchMode === "false") {
         if (oldArray.length !== 0) {
             renderSmallCard(oldCategory, oldArray);
         } else {
-            document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName]);
+            document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName], searchMode);
         }
         renderSmallCard(newCategory, newArray);
 
@@ -164,7 +164,7 @@ function putSearchTaskFromOldArrayinNewArray() {
     if (oldArraySearch.length !== 0) {
         renderSmallCard(oldCategory, oldArraySearch);
     } else {
-        document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName]);
+        document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName], searchMode);
     }
     renderSmallCard(newCategory, newArraySearch);
 }
@@ -332,7 +332,7 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         if (categoryArray.length !== 0) {
             renderSmallCard(dragFieldId, categoryArray);
         } else {
-            document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category]);
+            document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category], searchMode);
         }
     } catch (error) {
         console.error("error loading the data:", error);
@@ -451,7 +451,7 @@ async function checkSearchWordAndLoadAllSearchTasks() {
             if (searchArray.length !== 0) {
                 renderSmallCard(dragFieldIds[index], searchArray);
             } else {
-                dragField.innerHTML = noCardTemplate(categorys[index]);
+                dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
             }
         }
     }
@@ -465,7 +465,7 @@ function renderAddTaskOverlay() {
 }
 
 function setSearchModeAndChangeImg() {
-    searchMode = true;
+    searchMode = "true";
     document.getElementById("search-field__img").classList.add("d-none");
     document.getElementById("search-field__close-img").classList.remove("d-none");
 }

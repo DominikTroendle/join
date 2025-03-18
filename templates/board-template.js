@@ -61,9 +61,19 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
             </div>`;
 }
 
-function noCardTemplate(category) {
+function noCardTemplate(category, searchMode) {
+    console.log(searchMode);
+    let noTaskBoxText;
+    if (searchMode === "false") {
+        noTaskBoxText = "No tasks"; 
+        
+    } else {
+        noTaskBoxText = "No Search Tasks";
+    }
+
+
     return `<div class="no-task-box">
-                <span class="no-task-text">No tasks ${category}</span>
+                <span class="no-task-text">${noTaskBoxText} ${category}</span>
             </div>`;
 }
 
