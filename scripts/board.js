@@ -464,8 +464,14 @@ function renderAddTaskOverlay() {
     bigTaskCardOverlay.classList.remove("d-none");
 }
 
-function setSearchModeAndChangeImg() {
+function setSearchModeTrueAndChangeImg() {
     searchMode = "true";
     document.getElementById("search-field__img").classList.add("d-none");
     document.getElementById("search-field__close-img").classList.remove("d-none");
+}
+
+function functionsetSearchModeFalseAndChangeImg() {
+    searchMode = "false";
+    document.getElementById("search-field__img").classList.remove("d-none");
+    document.getElementById("search-field__close-img").classList.add("d-none");
 }
