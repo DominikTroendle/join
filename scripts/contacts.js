@@ -532,7 +532,7 @@ function closeOverlay(event) {
 }
 
 function toggleButtonBackgroundcolor(button) {
-    if (window.innerWidth === 1040) {
+    if (window.innerWidth <= 1040) {
         if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
             button.style.backgroundColor = '#29abe2';
         } else {
@@ -542,7 +542,7 @@ function toggleButtonBackgroundcolor(button) {
 }
 
 function toggleButtonColor(button) {
-    if (window.innerWidth === 1040) {
+    if (window.innerWidth <= 1040) {
         if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
             button.style.color = '#29abe2';
         }

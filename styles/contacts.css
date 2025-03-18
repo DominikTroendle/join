@@ -29,6 +29,10 @@
     overflow: auto;
 }
 
+#contactlist-container.inactive{
+    pointer-events: none;
+}
+
 #contactlist-container{
     scrollbar-color: grey rgb(252, 252, 252);
     scrollbar-width: thin;
@@ -642,6 +646,10 @@ button .close-icon:hover path{
     display: none;
 }
 
+.mobile-procressing-area-button{
+    display: none;
+}
+
 @media(max-width: 1300px){
     .contact-headline{
         display: flex;
@@ -684,6 +692,14 @@ button .close-icon:hover path{
 
     #container-contacts-button {
         left: 18px;
+    }
+
+    .container-contact:hover {
+        background-color: transparent;
+    }
+
+    .container-contact.select-contact {
+        background-color: transparent;
     }
 
     .more-information-container {

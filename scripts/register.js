@@ -167,7 +167,7 @@ function hideLoggendInLinks() {
         document.getElementById('login-button').classList.add('menu-login-button')
     });
     }
-    if (path === "/summary.html" || path === "/add-task.html" || path === "/board.html" || path === "/contacts.html") {
+    if (path === "/summary.html" || path === "/add-task.html" || path === "/board.html" || path === "/contacts.html" || path === "/privacy-policy.html" || path === "/legal-notice.html") {
         const loginInLink = Array.from(document.getElementsByClassName('login'));
         loginInLink.forEach( li => {
         li.style.display = 'none';

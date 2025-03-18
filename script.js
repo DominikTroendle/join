@@ -21,9 +21,25 @@ function addClassSelectedMenuBottomButton(id) {
 function accountClickMenu() {
     let overlay = document.getElementById('subMenuOverlayContent');
     let menuBox = document.querySelector('.menu-box');
+    let supportBox = document.querySelector('.account-submenu-container');
 
-    overlay.classList.toggle('active');
-    menuBox.classList.toggle('inactive');
+    if (overlay.classList.contains('active')) {
+        // Falls das Menü gerade sichtbar ist, erst ausblenden lassen, dann das Overlay schließen
+        supportBox.classList.remove('active');
+
+        setTimeout(() => {
+            overlay.classList.remove('active');
+            menuBox.classList.remove('inactive');
+        }, 150); // Timeout muss zur CSS-Transition-Dauer passen (0.6s)
+    } else {
+        // Falls das Menü nicht sichtbar ist, normal öffnen
+        overlay.classList.add('active');
+        menuBox.classList.add('inactive');
+        
+        setTimeout(() => {
+            supportBox.classList.add('active');
+        }, 10);
+    }
 }
 
 function saveMenuId(menuId) {
