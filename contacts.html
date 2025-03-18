@@ -81,7 +81,7 @@
 
             <div id="contactlist-container">
                 <section id="container-contacts-button">
-                    <button onclick="toggleButtonBackgroundcolor(this); addNewContectOverlay()">
+                    <button onclick="addNewContectOverlay()">
                         <p>Add new contact</p>
                         <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
                     </button>
@@ -89,6 +89,11 @@
                 <div class="contacs-box-container">
                     <div id="contactList" class="contactList"></div>
                 </div>
+            </div>
+            <div class="add-new-button-mobile-container">
+                <button class="add-new-button" onclick="toggleButtonBackgroundcolor(this); addNewContectOverlay()">
+                    <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
+                </button>
             </div>
 
             <div class="more-information-container">

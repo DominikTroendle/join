@@ -14,11 +14,11 @@
     width: calc(100% - 232px);
 }
 
-.content{
+.content {
     width: 100%;
 }
 
-#contactlist-container{
+#contactlist-container {
     position: absolute;
     width: auto;
     height: calc(100vh - 10vh);
@@ -29,46 +29,46 @@
     overflow: auto;
 }
 
-#contactlist-container.inactive{
+#contactlist-container.inactive {
     pointer-events: none;
 }
 
-#contactlist-container{
+#contactlist-container {
     scrollbar-color: grey rgb(252, 252, 252);
     scrollbar-width: thin;
 }
 
-#contactlist-container::-webkit-scrollbar{
+#contactlist-container::-webkit-scrollbar {
     width: 8px;
 }
 
-#contactlist-container::-webkit-scrollbar-track{
+#contactlist-container::-webkit-scrollbar-track {
     background: white;
 }
 
-#contactlist-container::-webkit-scrollbar-thumb{
+#contactlist-container::-webkit-scrollbar-thumb {
     background: grey;
     border-radius: 10px;
-    
+
 }
 
-#contactlist-container::-webkit-scrollbar-thumb:hover{
+#contactlist-container::-webkit-scrollbar-thumb:hover {
     background: rgb(180, 180, 180);
     cursor: pointer;
 }
 
-.contacs-box-container{
+.contacs-box-container {
     max-height: 100%;
     width: 100%;
     padding: 0 50px;
     padding-top: 85px;
 }
 
-#contact-flex-container{
+#contact-flex-container {
     display: flex;
 }
 
-.more-information-container{
+.more-information-container {
     position: fixed;
     top: 96px;
     left: 688px;
@@ -111,10 +111,6 @@
     background-color: #FFFFFF;
 }
 
-#container-contacts-button:nth-child(2) {
-    padding-top: 400px;
-}
-
 #container-contacts-button button {
     top: 28px;
     display: flex;
@@ -134,7 +130,7 @@
     margin: 30px;
 }
 
-#container-contacts button:hover {
+#container-contacts-button button:hover {
     background-color: #29abe2;
     box-shadow: 0 5px 4px rgba(0, 0, 0, 0.3);
 }
@@ -144,7 +140,28 @@
     height: 32px;
 }
 
-.mobile-img-line{
+.add-new-button-mobile-container {
+    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
+    right: 70px;
+    bottom: 160px;
+}
+
+.add-new-button{
+    height: 56px;
+    width: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2A3647;
+    cursor: pointer;
+    border-radius: 46px;
+    box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-img-line {
     display: none;
 }
 
@@ -160,7 +177,7 @@
     margin: 10px 0 5px 0;
 }
 
-.line{
+.line {
     width: 100%;
     height: 2px;
     border: none;
@@ -179,7 +196,7 @@
     margin: 10px 0;
 }
 
-.contactList{
+.contactList {
     padding-bottom: 40px;
 }
 
@@ -229,7 +246,7 @@
     line-height: 19px;
 }
 
-.contact-info-container{
+.contact-info-container {
     margin-top: 30px;
     margin-left: 60px;
 }
@@ -239,23 +256,23 @@
     transition: transform 0.5s ease-out;
 }
 
-.info-name-container{
+.info-name-container {
     display: flex;
     align-items: center;
     gap: 54px;
 }
 
-.procressing-area{
+.procressing-area {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.procressing-area h1{
+.procressing-area h1 {
     font-size: 47px;
 }
 
-.more-info-initials{
+.more-info-initials {
     width: 120px;
     height: 120px;
     border-radius: 50%;
@@ -269,13 +286,13 @@
     line-height: 14px;
 }
 
-.procressing-area-button-container{
+.procressing-area-button-container {
     justify-content: flex-start;
     display: flex;
     gap: 13px;
 }
 
-.procressing-area-button{
+.procressing-area-button {
     display: flex;
     gap: 8px;
     transform-origin: right;
@@ -289,18 +306,18 @@
     transform: scale(1.02);
 }
 
-.procressing-area-button button{
+.procressing-area-button button {
     height: 24px;
     width: 24px;
 }
 
-.procressing-area-button p{
+.procressing-area-button p {
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px
 }
 
-.contact-information{
+.contact-information {
     height: 74px;
     width: 207px;
     margin-top: 32px;
@@ -309,35 +326,35 @@
     justify-content: start;
 }
 
-.contact-information p{
+.contact-information p {
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
 }
 
-.info-box-container{
+.info-box-container {
     display: flex;
     flex-direction: column;
     gap: 22px;
 }
 
-.info-box{
+.info-box {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.info-box p{
+.info-box p {
     font-size: 16px;
     font-weight: 700;
     line-height: 19.2px;
 }
 
-.info-box a{
+.info-box a {
     color: #007CEE;
 }
 
-.contact-overlay{
+.contact-overlay {
     position: absolute;
     height: 100vh;
     width: 100%;
@@ -353,24 +370,26 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
@@ -386,23 +405,25 @@
 
 @keyframes swipeIn {
     from {
-      transform: translateX(100%);
+        transform: translateX(100%);
     }
-    to {
-      transform: translateX(0);
-    }
-  }
-  
-  @keyframes swipeOut {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(100%);
-    }
-  }
 
-.information-content-container{
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes swipeOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.information-content-container {
     width: 460px;
     height: 100%;
     border-radius: 30px 0 0 30px;
@@ -416,23 +437,23 @@
     gap: 16px;
 }
 
-.information-content-container img{
+.information-content-container img {
     width: 55px;
 }
 
-.information-content-container h1{
+.information-content-container h1 {
     font-size: 61px;
     font-weight: 700;
     color: white;
 }
 
-.information-content-container p{
+.information-content-container p {
     font-size: 27px;
     font-weight: 400;
     color: white;
 }
 
-.information-content-container hr{
+.information-content-container hr {
     border: none;
     height: 2px;
     width: 85px;
@@ -440,7 +461,7 @@
 
 }
 
-.add-input-contect-container{
+.add-input-contect-container {
     width: 840px;
     height: 100%;
     border-radius: 0 30px 30px 0;
@@ -451,7 +472,7 @@
     gap: 70px;
 }
 
-.close-btn{
+.close-btn {
     position: absolute;
     padding: 5px;
     margin-left: 670px;
@@ -459,17 +480,17 @@
     transition: 100ms;
 }
 
-.mobile-close-btn{
+.mobile-close-btn {
     display: none;
 }
 
-.close-btn:hover{
+.close-btn:hover {
     background-color: #cccccc52;
     padding: 5px;
     border-radius: 100%;
 }
 
-.new-user-image{
+.new-user-image {
     height: 120px;
     width: 120px;
     border-radius: 70px;
@@ -482,12 +503,12 @@
     align-items: center;
 }
 
-.edit-contact-initialien{
+.edit-contact-initialien {
     font-size: 47px;
     color: #FFFFFF;
 }
 
-.edit-contact-initcolor{
+.edit-contact-initcolor {
     height: 120px;
     width: 120px;
     border-radius: 70px;
@@ -499,14 +520,14 @@
     align-items: center;
 }
 
-.input-container{
+.input-container {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 32px;
 }
 
-.input-area{
+.input-area {
     position: relative;
     display: flex;
     align-items: center;
@@ -522,22 +543,22 @@
     border-radius: 10px;
 }
 
-.input-area img{
+.input-area img {
     position: absolute;
     right: 10px;
 }
 
-.input-area input::placeholder{
+.input-area input::placeholder {
     color: #D1D1D1;
 }
 
-.contact-button-container{
+.contact-button-container {
     display: flex;
     gap: 24px;
     margin-top: 10px;
 }
 
-.cancel-btn{
+.cancel-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -553,22 +574,22 @@
     transition: 100ms;
 }
 
-.cancel-btn p{
+.cancel-btn p {
     font-size: 20px;
     font-weight: 400;
 }
 
-.cancel-btn:hover{
+.cancel-btn:hover {
     color: #29abe2;
     border: solid 2px #29abe2;
     transform: scale(0.99);
 }
 
-button .close-icon:hover path{
+button .close-icon:hover path {
     stroke: #29abe2;
 }
 
-.create-btn{
+.create-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -584,12 +605,12 @@ button .close-icon:hover path{
     transition: 100ms;
 }
 
-.create-btn:hover{
+.create-btn:hover {
     background-color: #29abe2;
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.save-btn{
+.save-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -603,18 +624,18 @@ button .close-icon:hover path{
     transition: 100ms;
 }
 
-.save-btn:hover{
+.save-btn:hover {
     background-color: #29abe2;
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
-.massage-box{
+.massage-box {
     position: absolute;
     bottom: 100px;
     right: 120px;
 }
 
-.text-message{
+.text-message {
     width: 326px;
     height: 74px;
     border-radius: 20px;
@@ -630,28 +651,28 @@ button .close-icon:hover path{
     font-size: 20px;
 }
 
-.back-to-contactlist-btn{
+.back-to-contactlist-btn {
     display: none;
 }
 
-.mobile-procressing-area-overlay{
+.mobile-procressing-area-overlay {
     display: none;
 }
 
-.procress-mobile-view{
+.procress-mobile-view {
     display: none;
 }
 
-.mobile-overlay{
+.mobile-overlay {
     display: none;
 }
 
-.mobile-procressing-area-button{
+.mobile-procressing-area-button {
     display: none;
 }
 
-@media(max-width: 1300px){
-    .contact-headline{
+@media(max-width: 1300px) {
+    .contact-headline {
         display: flex;
         align-items: start;
         flex-direction: column;
@@ -662,16 +683,44 @@ button .close-icon:hover path{
         background: #ffffff;
     }
 
-    .desktope-line{
+    .desktope-line {
         display: none;
     }
 
-    .mobile-img-line{
+    .mobile-img-line {
         display: flex;
     }
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1230px){
+    .new-Contect-Container {
+        width: 1000px;
+        height: 600px;
+    }
+
+    .add-input-contect-container {
+        width: 640px;
+        height: 100%;
+        border-radius: 0 30px 30px 0;
+        background-color: white;
+        gap: 10px;
+    }
+
+    .close-btn {
+        margin-left: 520px;
+    }
+
+    .new-user-image {
+        height: 120px;
+        width: 120px;
+        border-radius: 70px;
+        border: solid 3px white;
+        background-color: #D1D1D1;
+        margin-left: 10px;
+    }
+}
+
+@media(max-width: 1200px) {
     .info-name-container {
         flex-direction: column;
         align-items: start;
@@ -679,7 +728,7 @@ button .close-icon:hover path{
     }
 }
 
-@media(max-width: 1040px){
+@media(max-width: 1040px) {
     #contactlist-container {
         height: calc(100vh - 16.7vh);
         top: 80px;
@@ -711,244 +760,17 @@ button .close-icon:hover path{
     }
 
     #container-contacts-button {
-        height: 0;
-        width: 0;
-        left: 85%;
-        background-color: transparent;
-        margin-top: 680px;
-    }
-
-    #container-contacts-button button {
-        width: 56px;
-        height: 56px;
-        background-color: #2A3647;
-        padding: 12px;
-        border: none;
-        border-radius: 100%;
-        color: white;
-
-    }
-
-    #container-contacts-button p {
         display: none;
     }
 
-    .mobile-overlay {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: start;
-        flex-direction: column;
-        background: #ffffff;
-        z-index: 1;
-    }
-
-    .headline-container{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .contact-headline{
-        display: flex;
-        align-items: start;
-        flex-direction: column;
-        margin: 24px 0 0 60px;
-        gap: 16px;
-        background: #ffffff;
-    }
-    
-    .headline-container .back-to-contactlist-btn{
-        display: flex;
-        width: 32px;
-        height: 32px;
-        margin-right: 16px;
-        margin-bottom: 60px;
-        cursor: pointer;
-    }
-
-    .procressing-area-button-container {
-        display: none;
-    }
-
-    .contact-information {
-        height: 24px;
-        width: 330px;
-        margin-top: 20px;
-        margin-bottom: 22px;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-    }
-
-    .mobile-procressing-area-overlay{
-        display: none;
-        position: fixed;
-        height: 100vh;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background-color: transparent;
-        z-index: 1;
-    }
-
-    .mobile-procressing-area-overlay.active{
-        display: flex;
-    }
-
-    .mobile-procressing-area-button{
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 56px;
-        width: 56px;
-        border-radius: 56px;
-        background-color: #2A3647;
-        box-shadow: 0px 1px 6px 1px #2A3647;
-        cursor: pointer;
-        margin-top: 710px;
-        left: 90%;
-    }
-
-    .procressing-mobile-menu-container{
-        height: 116px;
-        width: 100px;
-        background-color: #FFFFFF;
-        border-radius: 30px 30px 0 30px;
-        margin-top: 750px;
-        margin-left: 320px;
-        animation: slidProcressMenu 0.2s ease-in;
-    }
-
-    @keyframes slidProcressMenu {
-        from {
-            transform: translateX(100%);
-        }
-        to{
-            transform: translateX(0);
-        }
-    }
-    
-    .procressing-mobile-menu{
-        height: 116px;
-        width: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-    }
-
-    .procressing-area-button-mobile-position{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: start;
-        padding: 10px;
-        gap: 8px;
-    }
-
-    .procressing-area-edit-button-mobile{
-        display: flex;
-        padding: 8px 20px 8px 10px;
-        gap: 8px;
-        color: black;
-        font-size: 16px;
-    }
-
-    .procressing-area-delete-button-mobile{
-        display: flex;
-        padding: 5px 0px 0px 10px;
-        gap: 8px;
-        color: black;
-        font-size: 16px;
-    }
-
-    .procressing-area-button-mobile-backgroundcolor{
-        background-color: #cccccc4b;
-        border-radius: 5px;
-    }
-}
-
-@media(max-width: 650px){
-    #container-contacts-button {
-        height: 0;
-        width: 0;
-        left: 80%;
-        background-color: transparent;
-        margin-top: 680px;
-    }
-}
-
-@media(max-width: 460px){
-    #contactlist-container {
-        width: 100%;
-    }
-
-    .contacs-box-container {
-        padding: 0 10px;
-    }
-}
-
-@media(max-width: 428px){
-    #contactlist-container {
-        width: 100%;
-    }
-    #container-contacts-button {
-        height: 0;
-        width: 0;
-        left: 70%;
-        background-color: transparent;
-        margin-top: 680px
-    }
-    
-    #container-contacts-button:nth-child(2) {
-        padding-top: 400px;
-    }
-    
-    #container-contacts-button button {
-        width: 56px;
-        height: 56px;
-        background-color: #2A3647;
-        padding: 12px;
-        border: none;
-        border-radius: 100%;
-        color: white;
-    }
-
-    #container-contacts-button p{
-        display: none;
-    }
-
-    #contact-details {
-        display: none;
-    }
-
-    .line {
-        width: 352px;
-    }
-
-    section{
-        width: 352px;
-    }
-
-    .container-contact:hover {
-        background-color: transparent;
-    }
-
-    .container-contact.select-contact {
-        background-color: transparent;
+    .add-new-button-mobile-container{
+        display: block;
     }
 
     .contact-overlay {
         position: absolute;
         height: 100vh;
-        width: 428px;
+        width: 100%;
         top: 0;
         left: 0;
         background-color: rgba(0, 0, 0, 0.603);
@@ -959,14 +781,9 @@ button .close-icon:hover path{
         animation: fadeIn 0.5s forwards;
     }
 
-    .contact-info-container{
-        margin-top: 0;
-        margin-left: 0;
-    }
-
-    .new-Contect-Container{
+    .new-Contect-Container {
         position: fixed;
-        width: 396px;
+        width: calc(100% - 30px);
         height: 760px;
         border-radius: 30px;
         display: flex;
@@ -988,11 +805,79 @@ button .close-icon:hover path{
         gap: 16px;
     }
 
-    .information-content-container img{
+    .close-btn {
+        right: 15px;
+        top: 15px;
+        padding: 5px;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+
+    .close-btn:hover{
+        background-color: transparent;
+    }
+
+    .desktop-close-btn {
         display: none;
     }
 
-    .information-content-container h1{
+    .mobile-close-btn {
+        display: flex;
+        width: 32px;
+        height: 32px;
+    }
+
+    .new-user-image {
+        position: absolute;
+        margin-left: 0px;
+        top: 295px;
+    }
+
+    form {
+        margin-top: 93px;
+    }
+
+    .input-container {
+        align-items: center;
+        gap: 24px;
+    }
+
+    .input-area {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 364px;
+    }
+
+    .create-btn {
+        height: 51px;
+        width: 202px;
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .create-btn:hover {
+        background-color: #2A3647;
+        box-shadow: none;
+    }
+
+    .cancel-btn {
+        display: none;
+    }
+
+    .contact-button-container {
+        margin-top: 0;
+    }
+
+
+
+
+
+    .information-content-container img {
+        display: none;
+    }
+
+    .information-content-container h1 {
         font-size: 47px;
         font-weight: 700;
         color: white;
@@ -1004,7 +889,7 @@ button .close-icon:hover path{
         color: white;
     }
 
-    .add-input-contect-container{
+    .add-input-contect-container {
         width: 100%;
         height: 408px;
         border-radius: 0 0 30px 30px;
@@ -1015,70 +900,227 @@ button .close-icon:hover path{
         gap: 70px;
     }
 
-    .procress-mobile-view{
+    .mobile-overlay {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: 100%;
         display: flex;
+        align-items: start;
+        flex-direction: column;
+        background: #ffffff;
+        z-index: 1;
     }
 
-    .close-btn {
-        position: absolute;
-        padding: 5px;
-        margin-left: 0px;
-        margin-bottom: 0px;
+    .headline-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
     }
 
-    .desktop-close-btn {
+    .contact-headline {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        margin: 24px 0 0 60px;
+        gap: 16px;
+        background: #ffffff;
+    }
+
+    .headline-container .back-to-contactlist-btn {
+        display: flex;
+        width: 32px;
+        height: 32px;
+        margin-right: 16px;
+        margin-bottom: 60px;
+        cursor: pointer;
+    }
+
+    .procressing-area-button-container {
         display: none;
     }
 
-    .mobile-close-btn{
+    .contact-information {
+        height: 24px;
+        width: 330px;
+        margin-top: 20px;
+        margin-bottom: 22px;
         display: flex;
-        position: absolute;
-        left: 152px;
-        top: -330px;
-        width: 32px;
-        height: 32px;
-    }
-
-    .new-user-image {
-        position: absolute;
-        margin-left: 0px;
-        top: 295px;
-    }
-
-    form{
-        margin-top: 93px;
-    }
-
-    .input-container {
         align-items: center;
+        justify-content: start;
+    }
+
+    .mobile-procressing-area-overlay {
+        display: none;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        z-index: 1;
+    }
+
+    .mobile-procressing-area-overlay.active {
+        display: flex;
+    }
+
+    .mobile-procressing-area-button {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 56px;
+        width: 56px;
+        border-radius: 56px;
+        background-color: #2A3647;
+        box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        right: 14px;
+        bottom: 184px;
+    }
+
+    .procressing-mobile-menu-container {
+        height: 116px;
+        width: 100px;
+        background-color: #FFFFFF;
+        border-radius: 30px 30px 0 30px;
+        margin-top: 750px;
+        margin-left: 320px;
+        animation: slidProcressMenu 0.2s ease-in;
+    }
+
+    @keyframes slidProcressMenu {
+        from {
+            transform: translateX(100%);
+        }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    .procressing-mobile-menu {
+        height: 116px;
+        width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+    }
+
+    .procressing-area-button-mobile-position {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        padding: 10px;
         gap: 8px;
     }
 
-    .input-area {
-        position: relative;
+    .procressing-area-edit-button-mobile {
         display: flex;
-        align-items: center;
-        width: 364px;
+        padding: 8px 20px 8px 10px;
+        gap: 8px;
+        color: black;
+        font-size: 16px;
     }
 
-    .input-area input{
-        height: 41px;
+    .procressing-area-delete-button-mobile {
+        display: flex;
+        padding: 5px 0px 0px 10px;
+        gap: 8px;
+        color: black;
+        font-size: 16px;
     }
 
-    .create-btn {
-        height: 51px;
-        width: 202px;
-        margin-top: 20px;
-        font-size: 20px;
+    .procressing-area-button-mobile-backgroundcolor {
+        background-color: #cccccc4b;
+        border-radius: 5px;
+    }
+}
+
+@media(max-width: 650px) {
+    #container-contacts-button {
+        height: 0;
+        width: 0;
+        left: 80%;
+        background-color: transparent;
+        margin-top: 680px;
+    }
+}
+
+@media(max-width: 460px) {
+    #contactlist-container {
+        width: 100%;
     }
 
-    .create-btn:hover{
+    .contacs-box-container {
+        padding: 0 10px;
+    }
+}
+
+@media(max-width: 428px) {
+    #contactlist-container {
+        width: 100%;
+    }
+
+    #container-contacts-button {
+        height: 0;
+        width: 0;
+        left: 70%;
+        background-color: transparent;
+        margin-top: 680px
+    }
+
+    #container-contacts-button:nth-child(2) {
+        padding-top: 400px;
+    }
+
+    #container-contacts-button button {
+        width: 56px;
+        height: 56px;
         background-color: #2A3647;
-        box-shadow: none;
+        padding: 12px;
+        border: none;
+        border-radius: 100%;
+        color: white;
     }
 
-    .cancel-btn {
+    #container-contacts-button p {
         display: none;
+    }
+
+    #contact-details {
+        display: none;
+    }
+
+    .line {
+        width: 352px;
+    }
+
+    section {
+        width: 352px;
+    }
+
+    .container-contact:hover {
+        background-color: transparent;
+    }
+
+    .container-contact.select-contact {
+        background-color: transparent;
+    }
+
+    .contact-info-container {
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    .procress-mobile-view {
+        display: flex;
     }
 
     .edit-contact-initcolor {
@@ -1087,11 +1129,11 @@ button .close-icon:hover path{
         top: 295px;
     }
 
-    .mobile-container{
+    .mobile-container {
         gap: 24px;
     }
 
-    .mobile-delete-view{
+    .mobile-delete-view {
         display: flex;
     }
 
@@ -1099,12 +1141,12 @@ button .close-icon:hover path{
         margin-top: 0;
     }
 
-    .save-btn:hover{
+    .save-btn:hover {
         background-color: black;
         box-shadow: none;
     }
 
-    .cancel-btn:hover{
+    .cancel-btn:hover {
         color: black;
         border: solid 1px black;
         transform: scale(1);
@@ -1123,14 +1165,14 @@ button .close-icon:hover path{
         z-index: 1;
     }
 
-    .headline-container{
+    .headline-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
     }
 
-    .contact-headline{
+    .contact-headline {
         display: flex;
         align-items: start;
         flex-direction: column;
@@ -1138,8 +1180,8 @@ button .close-icon:hover path{
         gap: 16px;
         background: #ccc;
     }
-    
-    .headline-container .back-to-contactlist-btn{
+
+    .headline-container .back-to-contactlist-btn {
         display: flex;
         width: 32px;
         height: 32px;
@@ -1154,14 +1196,14 @@ button .close-icon:hover path{
         line-height: 56px;
     }
 
-    .desktope-line{
+    .desktope-line {
         display: none;
     }
 
-    .mobile-img-line{
+    .mobile-img-line {
         display: flex;
     }
-    
+
     .contact-headline span {
         font-weight: 400;
         font-size: 20px;
@@ -1176,12 +1218,12 @@ button .close-icon:hover path{
 
     }
 
-    .more-info-initials{
+    .more-info-initials {
         height: 80px;
         width: 80px;
     }
 
-    .more-info-initials p{
+    .more-info-initials p {
         font-size: 27px;
         font-weight: 400;
         line-height: 32px;
@@ -1191,7 +1233,7 @@ button .close-icon:hover path{
         gap: 20px;
     }
 
-    .procressing-area h1{
+    .procressing-area h1 {
         font-size: 36px;
         font-weight: 700;
         line-height: 43px;
@@ -1211,7 +1253,7 @@ button .close-icon:hover path{
         justify-content: start;
     }
 
-    .mobile-procressing-area-overlay{
+    .mobile-procressing-area-overlay {
         display: none;
         position: fixed;
         height: 100vh;
@@ -1222,11 +1264,11 @@ button .close-icon:hover path{
         z-index: 1;
     }
 
-    .mobile-procressing-area-overlay.active{
+    .mobile-procressing-area-overlay.active {
         display: flex;
     }
 
-    .mobile-procressing-area-button{
+    .mobile-procressing-area-button {
         position: absolute;
         display: flex;
         align-items: center;
@@ -1241,7 +1283,7 @@ button .close-icon:hover path{
         left: 340px;
     }
 
-    .procressing-mobile-menu-container{
+    .procressing-mobile-menu-container {
         height: 116px;
         width: 100px;
         background-color: #FFFFFF;
@@ -1250,17 +1292,18 @@ button .close-icon:hover path{
         margin-left: 320px;
         animation: slidProcressMenu 0.2s ease-in;
     }
-    
+
     @keyframes slidProcressMenu {
         from {
             transform: translateX(100%);
         }
-        to{
+
+        to {
             transform: translateX(0);
         }
     }
-    
-    .procressing-mobile-menu{
+
+    .procressing-mobile-menu {
         height: 116px;
         width: 100px;
         display: flex;
@@ -1270,7 +1313,7 @@ button .close-icon:hover path{
         padding: 0;
     }
 
-    .procressing-area-button-mobile-position{
+    .procressing-area-button-mobile-position {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -1279,7 +1322,7 @@ button .close-icon:hover path{
         gap: 8px;
     }
 
-    .procressing-area-edit-button-mobile{
+    .procressing-area-edit-button-mobile {
         display: flex;
         padding: 8px 20px 8px 10px;
         gap: 8px;
@@ -1287,7 +1330,7 @@ button .close-icon:hover path{
         font-size: 16px;
     }
 
-    .procressing-area-delete-button-mobile{
+    .procressing-area-delete-button-mobile {
         display: flex;
         padding: 5px 0px 0px 10px;
         gap: 8px;
@@ -1295,13 +1338,25 @@ button .close-icon:hover path{
         font-size: 16px;
     }
 
-    .procressing-area-button-mobile-backgroundcolor{
+    .procressing-area-button-mobile-backgroundcolor {
         background-color: #cccccc4b;
         border-radius: 5px;
     }
+
+    .information-content-container h1 {
+        font-size: 40px;
+    }
+
+    .information-content-container p {
+        font-size: 16px;
+    }
+
+    .input-area {
+        width: 100%;
+    }
 }
 
-@media(max-width: 375px){
+@media(max-width: 375px) {
     #contactlist-container {
         width: 100%;
     }
@@ -1321,7 +1376,7 @@ button .close-icon:hover path{
     }
 }
 
-@media(max-width: 361px){
+@media(max-width: 361px) {
     #contactlist-container {
         width: 100%;
     }

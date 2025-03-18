@@ -532,21 +532,18 @@ function closeOverlay(event) {
 }
 
 function toggleButtonBackgroundcolor(button) {
-    if (window.innerWidth <= 1040) {
         if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
             button.style.backgroundColor = '#29abe2';
         } else {
             button.style.backgroundColor = '#2A3647';
         }
-    }
+    
 }
 
 function toggleButtonColor(button) {
-    if (window.innerWidth <= 1040) {
         if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
             button.style.color = '#29abe2';
         }
-    }
     button = document.querySelector('.procressing-area-edit-button-mobile');
     button.classList.add('procressing-area-button-mobile-backgroundcolor');
 }
