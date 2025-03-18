@@ -465,19 +465,23 @@ function renderAddTaskOverlay() {
 }
 
 function setSearchModeTrueAndChangeImg() {
-    searchMode = "true";
-    document.getElementById("search-field__img").classList.add("d-none");
-    document.getElementById("search-field__close-img").classList.remove("d-none");
+    let searchFieldInput = document.getElementById("search-field__input").value;
+    if (searchFieldInput !== "" && searchFieldInput.length >= 3) {
+        searchMode = "true";
+        document.getElementById("search-field__img").classList.add("d-none");
+        document.getElementById("search-field__close-img").classList.remove("d-none");
+    }
 }
 
 function setSearchModeFalseAndChangeImg() {
     searchMode = "false";
     document.getElementById("search-field__img").classList.remove("d-none");
     document.getElementById("search-field__close-img").classList.add("d-none");
+    document.getElementById("search-field__input").value = "";
 }
 
 function selectionOfWhichFunctionIsUsed() {
-    if(searchMode === "false") {
+    if (searchMode === "false") {
         setSearchModeTrueAndChangeImg();
     } else {
         setSearchModeFalseAndChangeImg();
