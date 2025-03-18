@@ -433,3 +433,9 @@ function renderAddTaskOverlay() {
     bigTaskCardBox.innerHTML = addTaskTemplate();
     bigTaskCardOverlay.classList.remove("d-none");
 }
+
+function setSearchModeAndChangeImg() {
+    searchMode = true;
+    document.getElementById("search-field__img").classList.add("d-none");
+    document.getElementById("search-field__close-img").classList.remove("d-none");
+}
