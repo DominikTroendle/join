@@ -80,7 +80,7 @@
                     <div class="input-button__box">
                         <div class="search-field__box">
                             <input class="search-field__input" id="search-field__input" type="text"
-                                placeholder="Find Task" onkeyup="setSearchModeTrueAndChangeImg(); checkSearchWordAndLoadAllSearchTasks()">
+                                placeholder="Find Task" onkeyup="setSearchModeTrueAndChangeImg(); checkSearchWordAndLoadAllSearchTasks(); closeSearchModeWhenInputIsEmpty()">
                             <button class="search-field__button"
                                 onmousedown="changeImgSource('search-field__img', 'assets/icons/Property 1=click.png')"
                                 onmouseup="changeImgSource('search-field__img', 'assets/icons/search.png')"
