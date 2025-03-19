@@ -438,21 +438,19 @@ async function checkSearchWordAndLoadAllSearchTasks() {
     let searchFieldInput = document.getElementById("search-field__input");
     let searchWord = searchFieldInput.value.trim();
     clearAllSearchArray();
-    if (searchWord.length >= 3) {
-        for (let index = 0; index < arrayNames.length; index++) {
-            let originalArray = arrays[arrayNames[index]];
-            let searchArray = searchArrays[searchArrayNames[index]];
-            let dragField = document.getElementById(dragFieldIds[index]);
-            originalArray.forEach(element => {
-                if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
-                    searchArray.push(element);
-                }
-            });
-            if (searchArray.length !== 0) {
-                renderSmallCard(dragFieldIds[index], searchArray);
-            } else {
-                dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
+    for (let index = 0; index < arrayNames.length; index++) {
+        let originalArray = arrays[arrayNames[index]];
+        let searchArray = searchArrays[searchArrayNames[index]];
+        let dragField = document.getElementById(dragFieldIds[index]);
+        originalArray.forEach(element => {
+            if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
+                searchArray.push(element);
             }
+        });
+        if (searchArray.length !== 0) {
+            renderSmallCard(dragFieldIds[index], searchArray);
+        } else {
+            dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
         }
     }
 }
@@ -465,11 +463,21 @@ function renderAddTaskOverlay() {
 }
 
 function setSearchModeTrueAndChangeImg() {
+    if (searchMode === "false") {
+        let searchFieldInput = document.getElementById("search-field__input").value;
+        if (searchFieldInput !== "") {
+            searchMode = "true";
+            document.getElementById("search-field__img").classList.add("d-none");
+            document.getElementById("search-field__close-img").classList.remove("d-none");
+        }
+    }
+}
+
+function closeSearchModeWhenInputIsEmpty() {
     let searchFieldInput = document.getElementById("search-field__input").value;
-    if (searchFieldInput !== "" && searchFieldInput.length >= 3) {
-        searchMode = "true";
-        document.getElementById("search-field__img").classList.add("d-none");
-        document.getElementById("search-field__close-img").classList.remove("d-none");
+    if(searchFieldInput === "") {
+        setSearchModeFalseAndChangeImg();
+        init();
     }
 }
 
