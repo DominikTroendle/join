@@ -98,6 +98,11 @@ h1 {
     cursor: pointer;
 }
 
+.search-field__input:focus {
+    border: none;
+    outline: none;
+}
+
 .search-field__input::placeholder {
     color: #D1D1D1;
 }
