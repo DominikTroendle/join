@@ -86,8 +86,8 @@ return`
         </div>
         <div class="add-input-contect-container">
             <div class="close-btn">
-                <button class="desktop-close-btn" onclick="addNewContectOverlay()"><img src="assets/icons/close.svg" alt=""></button>
-                <button class="mobile-close-btn" onclick="addNewContectOverlay()"><img src="assets/img/close-mobile-white.png" alt=""></button>
+                <button class="desktop-close-btn" onclick="closeAddNewContact()"><img src="assets/icons/close.svg" alt=""></button>
+                <button class="mobile-close-btn" onclick="closeAddNewContact()"><img src="assets/img/close-mobile-white.png" alt=""></button>
             </div>
             <div class="new-user-image">
                 <img src="assets/img/person.png" alt="">
@@ -111,7 +111,7 @@ return`
                         </div>
                     </div>
                     <div class="contact-button-container">
-                        <button class="cancel-btn" onclick="addNewContectOverlay(); return false;">Cancel <p>X</p>
+                        <button class="cancel-btn" onclick="closeAddNewContact(); return false;">Cancel <p>X</p>
                         </button>
                         <button class="create-btn" type="submit">Create contact <img src="assets/icons/check.svg" alt=""></button>
                     </div>

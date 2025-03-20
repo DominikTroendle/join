@@ -83,25 +83,52 @@ async function allUserContacts() {
 /**
  * Toggles the new contact overlay.
  */
-function addNewContectOverlay() {
-    let refOverlay = document.getElementById('newContectOverlay');
-    refOverlay.innerHTML = getToCreatANewContactTemplate();
-    refOverlay.classList.toggle('d-none');
-    let container = refOverlay.querySelector('.new-Contect-Container');
+// function addNewContectOverlay() {
+//     let refOverlay = document.getElementById('newContectOverlay');
+//     refOverlay.innerHTML = getToCreatANewContactTemplate();
+//     refOverlay.classList.add('d-none');
+//     let container = refOverlay.querySelector('.new-Contect-Container');
+//     setTimeout(() => {
+//         container.style.transform = 'translateX(0)';
+//     }, 10);
+//     if (!refOverlay.dataset.listenerAdded) {
+//         refOverlay.dataset.listenerAdded = "true";
+//         refOverlay.onclick = function(event) {
+//             if (event.target === refOverlay) {
+//                 container.style.transform = 'translateX(100%)';
+//                 setTimeout(() => {
+//                     refOverlay.classList.add('d-none');
+//                 }, 500);
+//             }
+//         };
+//     }
+// }
+
+function addNewContactOverlay() {
+    let refNewContactTemplateOverlay = document.getElementById('newContactOverlay');
+    refNewContactTemplateOverlay.innerHTML = getToCreatANewContactTemplate();
+    let newContactOverlay = document.querySelector('.contact-overlay');
+    let newContactContainer = document.querySelector('.new-Contect-Container');
+    newContactOverlay.classList.add('active');
     setTimeout(() => {
-        container.style.transform = 'translateX(0)';
-    }, 10);
-    if (!refOverlay.dataset.listenerAdded) {
-        refOverlay.dataset.listenerAdded = "true";
-        refOverlay.onclick = function(event) {
-            if (event.target === refOverlay) {
-                container.style.transform = 'translateX(100%)';
-                setTimeout(() => {
-                    refOverlay.classList.toggle('d-none');
-                }, 500);
-            }
-        };
+        newContactContainer.classList.add('active');
+    }, 10)
+    
+    newContactOverlay.onclick = function(event){
+        if (event.target === newContactOverlay) {
+            newContactOverlay.classList.remove('active');
+            newContactContainer.classList.remove('active');
+        }
     }
+}
+
+function closeAddNewContact() {
+    let newContactOverlay = document.querySelector('.contact-overlay');
+    let newContactContainer = document.querySelector('.new-Contect-Container');
+    newContactContainer.classList.remove('active');
+    setTimeout(() => {
+        newContactOverlay.classList.remove('active');
+    }, 350);
 }
 
 /**
