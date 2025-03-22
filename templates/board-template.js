@@ -240,15 +240,15 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                 <div class="big-task-card-edit__scroll-box">
                     <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Title</span>
-                        <input class="big-task-card-edit__input" type="text" placeholder="Enter a Title" value="${taskTitle}">
+                        <input class="big-task-card-edit__input" id="big-task-card-edit__input-title" type="text" placeholder="Enter a Title" value="${taskTitle}">
                     </div>
                     <div class="big-task-card-edit__text-textarea-box">
                         <span class="big-task-card-edit__text">Description</span>
-                        <textarea class="big-task-card-edit__textarea" placeholder="Enter a Description">${taskDescription}</textarea>
+                        <textarea class="big-task-card-edit__textarea" id="big-task-card-edit__textarea-description" placeholder="Enter a Description">${taskDescription}</textarea>
                     </div>
                     <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Due date</span>
-                        <input class="big-task-card-edit__input" type="text" placeholder="dd/mm/yyyy" value="${dueDate}">
+                        <input class="big-task-card-edit__input" id="big-task-card-edit__input-due-date" type="text" placeholder="dd/mm/yyyy" value="${dueDate}">
                     </div>
                     <div class="big-task-card-edit__text-button-box">
                         <span class="big-task-card-edit__text">Priority</span>
@@ -308,7 +308,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     
                     
                     <div class="big-task-card-edit__task-type-text-button-box">
-                        <button class="big-task-card-edit__Ok-button" onclick="renderContentBigTaskCard()">Ok</button>
+                        <button class="big-task-card-edit__Ok-button" onclick="readFromEdit(); renderContentBigTaskCard()">Ok</button>
                     </div>
                 </div>`;
 }

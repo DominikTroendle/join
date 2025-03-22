@@ -343,13 +343,13 @@ h1 {
 .all-drag-field-box {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 24px;
     padding: 0 64px;
     overflow-y: auto;
     scrollbar-width: none;
     width: 1208px;
-    height: 615px;
+    max-height: 600px;
     /* scrollbar-color: #2A3647 white; */
     /* border-width: 100px; */
 }
@@ -358,6 +358,7 @@ h1 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    align-self: center;
     flex-direction: column;
     width: 270px;
     height: 615px;

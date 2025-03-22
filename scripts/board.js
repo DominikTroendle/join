@@ -475,7 +475,7 @@ function setSearchModeTrueAndChangeImg() {
 
 function closeSearchModeWhenInputIsEmpty() {
     let searchFieldInput = document.getElementById("search-field__input").value;
-    if(searchFieldInput === "") {
+    if (searchFieldInput === "") {
         setSearchModeFalseAndChangeImg();
         init();
     }
@@ -495,4 +495,11 @@ function selectionOfWhichFunctionIsUsed() {
         setSearchModeFalseAndChangeImg();
         init();
     }
+}
+
+function readFromEdit() {
+    console.log("title: " + document.getElementById("big-task-card-edit__input-title").value);
+    console.log("description: " + document.getElementById("big-task-card-edit__textarea-description").value);
+    console.log("description: " + document.getElementById("big-task-card-edit__input-due-date").value);
+
 }
