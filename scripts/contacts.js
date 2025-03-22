@@ -373,11 +373,24 @@ async function moreContactInformation(contactName) {
 function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
     refOverlay.innerHTML = getEditContactTemplate(contactKey);
-    toggleOverlay(refOverlay);
-    let contact = allContacts.find(c => c.key === contactKey);
-    if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
-    fillContactForm(contact);
-    refOverlay.dataset.contactKey = contactKey;
+    let editContactOverlay = document.querySelector('.contact-overlay');
+    let editContactContainer = document.querySelector('.new-Contect-Container');
+    editContactOverlay.classList.add('active');
+    setTimeout(() => {
+        editContactContainer.classList.add('active');
+    }, 10)
+    
+    editContactOverlay.onclick = function(event){
+        if (event.target === editContactOverlay) {
+            editContactOverlay.classList.remove('active');
+            editContactContainer.classList.remove('active');
+        }
+    }
+    // toggleOverlay(refOverlay);
+    // let contact = allContacts.find(c => c.key === contactKey);
+    // if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
+    // fillContactForm(contact);
+    // refOverlay.dataset.contactKey = contactKey;
 }
 
 /**
@@ -385,17 +398,17 @@ function editContactOverlay(contactKey) {
  * 
  * @param {HTMLElement} refOverlay - The overlay element.
  */
-function toggleOverlay(refOverlay) {
-    refOverlay.classList.toggle('d-none');
-    let container = refOverlay.querySelector('.new-Contect-Container');
-    setTimeout(() => container.style.transform = 'translateX(0)', 10);
-    if (!refOverlay.dataset.listenerAdded) {
-        refOverlay.dataset.listenerAdded = "true";
-        refOverlay.onclick = (e) => { 
-            if (e.target === refOverlay) closeOverlay(refOverlay, container); 
-        };
-    }
-}
+// function toggleOverlay(refOverlay) {
+//     refOverlay.classList.toggle('d-none');
+//     let container = refOverlay.querySelector('.new-Contect-Container');
+//     setTimeout(() => container.style.transform = 'translateX(0)', 10);
+//     if (!refOverlay.dataset.listenerAdded) {
+//         refOverlay.dataset.listenerAdded = "true";
+//         refOverlay.onclick = (e) => { 
+//             if (e.target === refOverlay) closeOverlay(refOverlay, container); 
+//         };
+//     }
+// }
 
 /**
  * Closes the overlay.
@@ -526,31 +539,6 @@ function procressingClickMenu() {
         }
     }
 }
-
-
-
-// function procressingClickMenu() {
-//     let overlay = document.querySelector('.mobile-procressing-area-overlay');
-//     let menuBox = document.querySelector('.menu-box');
-//     let headerBox = document.querySelector('.small-menu-button');
-
-//     overlay.classList.add('active');
-//     menuBox.classList.toggle('inactive');
-//     headerBox.classList.toggle('inactive');
-// }
-
-// function closeOverlay(event) {
-//     let overlay = document.querySelector('.procressing-mobile-menu-container');
-//     let menuBox = document.querySelector('.menu-box');
-//     let headerBox = document.querySelector('.small-menu-button');
-    
-//     if (!overlay.contains(event.target)) {
-//         let overlay = document.getElementById('mobile-procressing-area-overlay');
-//         overlay.classList.remove('active');
-//         menuBox.classList.remove('inactive');
-//         headerBox.classList.remove('inactive');
-//     }
-// }
 
 function toggleButtonBackgroundcolor(button) {
         if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
