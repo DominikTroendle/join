@@ -344,7 +344,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 26px;
+    gap: 24px;
     padding: 0 64px;
     overflow-y: auto;
     scrollbar-width: none;
@@ -361,7 +361,8 @@ h1 {
     flex-direction: column;
     width: 270px;
     height: 615px;
-    gap: 16px;
+    padding: 24px 0;
+    gap: 24px;
     /* background-color: rgb(0, 0, 0, 0.2); */
 }
 
