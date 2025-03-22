@@ -123,7 +123,7 @@ return`
 
 function getEditContactTemplate(key) {
     return`
-        <div class="new-Contect-Container">
+        <div class="edit-Contect-Container">
             <div class="information-content-container">
                 <img src="assets/img/Capa 2.png" alt="">
                 <h1>Edit contact</h1>

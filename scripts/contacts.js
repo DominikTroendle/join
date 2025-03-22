@@ -374,8 +374,12 @@ function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
     refOverlay.innerHTML = getEditContactTemplate(contactKey);
     let editContactOverlay = document.querySelector('.contact-overlay');
-    let editContactContainer = document.querySelector('.new-Contect-Container');
+    let editContactContainer = document.querySelector('.edit-Contect-Container');
     editContactOverlay.classList.add('active');
+    let contact = allContacts.find(c => c.key === contactKey);
+    if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
+    fillContactForm(contact);
+    refOverlay.dataset.contactKey = contactKey;
     setTimeout(() => {
         editContactContainer.classList.add('active');
     }, 10)
