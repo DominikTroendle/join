@@ -50,8 +50,8 @@ async function selectMoreContactInformationTemplate(contact, initial) {
                 </div>
             </div>
         </section>
-        <div class="procress-mobile-view">
-            <div id="mobile-procressing-area-overlay" class="mobile-procressing-area-overlay" onclick="closeOverlay(event)">
+        <div class="procress-mobile-view"></div>
+        <div id="mobile-procressing-area-overlay" class="mobile-procressing-area-overlay">
                 <div class="procressing-mobile-menu-container">
                     <div class="procressing-mobile-menu">
                         <div class="procressing-area-button-mobile-position">
@@ -71,7 +71,6 @@ async function selectMoreContactInformationTemplate(contact, initial) {
                     </div>
                 </div>
             </div>
-        </div>
     `;
 }
 

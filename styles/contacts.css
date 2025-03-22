@@ -374,7 +374,6 @@
 .contact-overlay.active{
     visibility: visible;
     opacity: 1;
-    
     position: absolute;
     height: 100vh;
     width: 100%;
@@ -638,10 +637,6 @@ button .close-icon:hover path {
     display: none;
 }
 
-.mobile-procressing-area-overlay {
-    display: none;
-}
-
 .procress-mobile-view {
     display: none;
 }
@@ -751,7 +746,7 @@ button .close-icon:hover path {
     }
 
     .contact-overlay {
-        position: relative;
+        position: absolute;
         height: 100vh;
         width: 100%;
         top: 0;
@@ -764,13 +759,11 @@ button .close-icon:hover path {
         visibility: hidden;
         transform: scale(1);
         transition: opacity 0.5s ease-in-out, transform 8s ease-in-out, visibility 0.6s;
-        
     }
     
     .contact-overlay.active{
         visibility: visible;
         opacity: 1;
-        
         position: absolute;
         height: 100vh;
         width: 100%;
@@ -875,10 +868,6 @@ button .close-icon:hover path {
         margin-top: 0;
     }
 
-
-
-
-
     .information-content-container img {
         display: none;
     }
@@ -959,18 +948,27 @@ button .close-icon:hover path {
     }
 
     .mobile-procressing-area-overlay {
-        display: none;
-        position: fixed;
+        position: absolute;
         height: 100vh;
         width: 100%;
         top: 0;
         left: 0;
-        background-color: transparent;
         z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in-out
+    }
+    
+    .mobile-procressing-area-overlay.active {
+        opacity: 1;
+        visibility: visible;
+        background-color: transparent;
+        transform: translateX(0)
     }
 
-    .mobile-procressing-area-overlay.active {
-        display: flex;
+    .mobile-procressing-area-overlay.close{
+        transform: translateX(100%)
     }
 
     .mobile-procressing-area-button {
@@ -989,23 +987,13 @@ button .close-icon:hover path {
     }
 
     .procressing-mobile-menu-container {
+        position: absolute;
         height: 116px;
-        width: 100px;
-        background-color: #FFFFFF;
+        width: 150px;
+        background-color: white;
         border-radius: 30px 30px 0 30px;
-        margin-top: 750px;
-        margin-left: 320px;
-        animation: slidProcressMenu 0.2s ease-in;
-    }
-
-    @keyframes slidProcressMenu {
-        from {
-            transform: translateX(100%);
-        }
-
-        to {
-            transform: translateX(0);
-        }
+        bottom: 90px;
+        right: 110px;
     }
 
     .procressing-mobile-menu {
@@ -1016,6 +1004,8 @@ button .close-icon:hover path {
         justify-content: center;
         align-items: center;
         padding: 0;
+        border-radius: 20px 20px 0 20px;
+        box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
     }
 
     .procressing-area-button-mobile-position {
@@ -1041,12 +1031,7 @@ button .close-icon:hover path {
         gap: 8px;
         color: black;
         font-size: 16px;
-    }
-
-    .procressing-area-button-mobile-backgroundcolor {
-        background-color: #cccccc4b;
-        border-radius: 5px;
-    }
+    } 
 }
 
 @media(max-width: 650px) {
@@ -1257,96 +1242,6 @@ button .close-icon:hover path {
         display: flex;
         align-items: center;
         justify-content: start;
-    }
-
-    .mobile-procressing-area-overlay {
-        display: none;
-        position: fixed;
-        height: 100vh;
-        width: 100%;
-        top: 0;
-        left: 0;
-        background-color: transparent;
-        z-index: 1;
-    }
-
-    .mobile-procressing-area-overlay.active {
-        display: flex;
-    }
-
-    .mobile-procressing-area-button {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 56px;
-        width: 56px;
-        border-radius: 56px;
-        background-color: #2A3647;
-        box-shadow: 0px 1px 6px 1px #2A3647;
-        cursor: pointer;
-        margin-top: 710px;
-        left: 340px;
-    }
-
-    .procressing-mobile-menu-container {
-        height: 116px;
-        width: 100px;
-        background-color: #FFFFFF;
-        border-radius: 30px 30px 0 30px;
-        margin-top: 750px;
-        margin-left: 320px;
-        animation: slidProcressMenu 0.2s ease-in;
-    }
-
-    @keyframes slidProcressMenu {
-        from {
-            transform: translateX(100%);
-        }
-
-        to {
-            transform: translateX(0);
-        }
-    }
-
-    .procressing-mobile-menu {
-        height: 116px;
-        width: 100px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-    }
-
-    .procressing-area-button-mobile-position {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: start;
-        padding: 10px;
-        gap: 8px;
-    }
-
-    .procressing-area-edit-button-mobile {
-        display: flex;
-        padding: 8px 20px 8px 10px;
-        gap: 8px;
-        color: black;
-        font-size: 16px;
-    }
-
-    .procressing-area-delete-button-mobile {
-        display: flex;
-        padding: 5px 0px 0px 10px;
-        gap: 8px;
-        color: black;
-        font-size: 16px;
-    }
-
-    .procressing-area-button-mobile-backgroundcolor {
-        background-color: #cccccc4b;
-        border-radius: 5px;
     }
 
     .information-content-container h1 {

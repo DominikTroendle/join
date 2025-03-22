@@ -83,27 +83,6 @@ async function allUserContacts() {
 /**
  * Toggles the new contact overlay.
  */
-// function addNewContectOverlay() {
-//     let refOverlay = document.getElementById('newContectOverlay');
-//     refOverlay.innerHTML = getToCreatANewContactTemplate();
-//     refOverlay.classList.add('d-none');
-//     let container = refOverlay.querySelector('.new-Contect-Container');
-//     setTimeout(() => {
-//         container.style.transform = 'translateX(0)';
-//     }, 10);
-//     if (!refOverlay.dataset.listenerAdded) {
-//         refOverlay.dataset.listenerAdded = "true";
-//         refOverlay.onclick = function(event) {
-//             if (event.target === refOverlay) {
-//                 container.style.transform = 'translateX(100%)';
-//                 setTimeout(() => {
-//                     refOverlay.classList.add('d-none');
-//                 }, 500);
-//             }
-//         };
-//     }
-// }
-
 function addNewContactOverlay() {
     let refNewContactTemplateOverlay = document.getElementById('newContactOverlay');
     refNewContactTemplateOverlay.innerHTML = getToCreatANewContactTemplate();
@@ -536,27 +515,40 @@ async function deleteContact(key) {
 }
 
 function procressingClickMenu() {
-    let overlay = document.getElementById('mobile-procressing-area-overlay');
-    let menuBox = document.querySelector('.menu-box');
-    let headerBox = document.querySelector('.small-menu-button');
+    let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
+    procressOverlay.classList.add('active');
 
-    overlay.classList.toggle('active');
-    menuBox.classList.toggle('inactive');
-    headerBox.classList.toggle('inactive');
-}
-
-function closeOverlay(event) {
-    let overlay = document.querySelector('.procressing-mobile-menu-container');
-    let menuBox = document.querySelector('.menu-box');
-    let headerBox = document.querySelector('.small-menu-button');
-    
-    if (!overlay.contains(event.target)) {
-        let overlay = document.getElementById('mobile-procressing-area-overlay');
-        overlay.classList.remove('active');
-        menuBox.classList.remove('inactive');
-        headerBox.classList.remove('inactive');
+    procressOverlay.onclick = function(event){
+        if (event.target === procressOverlay) {
+            procressOverlay.classList.add('close');
+        }
     }
 }
+
+
+
+// function procressingClickMenu() {
+//     let overlay = document.querySelector('.mobile-procressing-area-overlay');
+//     let menuBox = document.querySelector('.menu-box');
+//     let headerBox = document.querySelector('.small-menu-button');
+
+//     overlay.classList.add('active');
+//     menuBox.classList.toggle('inactive');
+//     headerBox.classList.toggle('inactive');
+// }
+
+// function closeOverlay(event) {
+//     let overlay = document.querySelector('.procressing-mobile-menu-container');
+//     let menuBox = document.querySelector('.menu-box');
+//     let headerBox = document.querySelector('.small-menu-button');
+    
+//     if (!overlay.contains(event.target)) {
+//         let overlay = document.getElementById('mobile-procressing-area-overlay');
+//         overlay.classList.remove('active');
+//         menuBox.classList.remove('inactive');
+//         headerBox.classList.remove('inactive');
+//     }
+// }
 
 function toggleButtonBackgroundcolor(button) {
         if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
