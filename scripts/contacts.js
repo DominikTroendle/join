@@ -86,7 +86,7 @@ async function allUserContacts() {
 function addNewContactOverlay() {
     let refNewContactTemplateOverlay = document.getElementById('newContactOverlay');
     refNewContactTemplateOverlay.innerHTML = getToCreatANewContactTemplate();
-    let newContactOverlay = document.querySelector('.contact-overlay');
+    let newContactOverlay = document.querySelector('.new-contact-overlay');
     let newContactContainer = document.querySelector('.new-Contect-Container');
     newContactOverlay.classList.add('active');
     setTimeout(() => {
@@ -102,7 +102,7 @@ function addNewContactOverlay() {
 }
 
 function closeAddNewContact() {
-    let newContactOverlay = document.querySelector('.contact-overlay');
+    let newContactOverlay = document.querySelector('.new-contact-overlay');
     let newContactContainer = document.querySelector('.new-Contect-Container');
     newContactContainer.classList.remove('active');
     setTimeout(() => {
@@ -373,7 +373,7 @@ async function moreContactInformation(contactName) {
 function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
     refOverlay.innerHTML = getEditContactTemplate(contactKey);
-    let editContactOverlay = document.querySelector('.contact-overlay');
+    let editContactOverlay = document.querySelector('.edit-contact-overlay');
     let editContactContainer = document.querySelector('.edit-Contect-Container');
     editContactOverlay.classList.add('active');
     let contact = allContacts.find(c => c.key === contactKey);
@@ -390,29 +390,16 @@ function editContactOverlay(contactKey) {
             editContactContainer.classList.remove('active');
         }
     }
-    // toggleOverlay(refOverlay);
-    // let contact = allContacts.find(c => c.key === contactKey);
-    // if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
-    // fillContactForm(contact);
-    // refOverlay.dataset.contactKey = contactKey;
 }
 
-/**
- * Toggles the overlay visibility and handles click outside to close.
- * 
- * @param {HTMLElement} refOverlay - The overlay element.
- */
-// function toggleOverlay(refOverlay) {
-//     refOverlay.classList.toggle('d-none');
-//     let container = refOverlay.querySelector('.new-Contect-Container');
-//     setTimeout(() => container.style.transform = 'translateX(0)', 10);
-//     if (!refOverlay.dataset.listenerAdded) {
-//         refOverlay.dataset.listenerAdded = "true";
-//         refOverlay.onclick = (e) => { 
-//             if (e.target === refOverlay) closeOverlay(refOverlay, container); 
-//         };
-//     }
-// }
+function closeEditContact() {
+    let newContactOverlay = document.querySelector('.edit-contact-overlay');
+    let newContactContainer = document.querySelector('.edit-Contect-Container');
+    newContactContainer.classList.remove('active');
+    setTimeout(() => {
+        newContactOverlay.classList.remove('active');
+    }, 350);
+}
 
 /**
  * Closes the overlay.

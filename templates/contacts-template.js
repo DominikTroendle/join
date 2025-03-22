@@ -131,8 +131,8 @@ function getEditContactTemplate(key) {
             </div>
             <div class="add-input-contect-container">
                 <div class="close-btn">
-                    <button class="desktop-close-btn" onclick="editContactOverlay('${key}')"><img src="assets/icons/close.svg" alt=""></button>
-                    <button class="mobile-close-btn" onclick="editContactOverlay('${key}')"><img src="assets/img/close-mobile-white.png" alt=""></button>
+                    <button class="desktop-close-btn" onclick="closeEditContact('${key}')"><img src="assets/icons/close.svg" alt=""></button>
+                    <button class="mobile-close-btn" onclick="closeEditContact('${key}')"><img src="assets/img/close-mobile-white.png" alt=""></button>
                 </div>
                 <div class="edit-contact-initcolor" id="editUserInitials">
                     <p class="edit-contact-initialien" id="editUserInitialsText">AB</p>
