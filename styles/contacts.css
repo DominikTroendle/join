@@ -968,7 +968,7 @@ button .close-icon:hover path {
     }
 
     .mobile-procressing-area-overlay.close{
-        transform: translateX(100%)
+        transform: translateX(100%);
     }
 
     .mobile-procressing-area-button {

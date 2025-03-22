@@ -517,10 +517,12 @@ async function deleteContact(key) {
 function procressingClickMenu() {
     let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
     procressOverlay.classList.add('active');
+    procressOverlay.classList.remove('close');
 
     procressOverlay.onclick = function(event){
         if (event.target === procressOverlay) {
             procressOverlay.classList.add('close');
+            procressOverlay.classList.remove('active');
         }
     }
 }
