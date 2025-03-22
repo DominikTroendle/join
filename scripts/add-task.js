@@ -343,7 +343,8 @@ function clearInputs() {
     selectedContacts = [];
     renderAssignOptions(contacts);
     document.getElementById('max-char-title').classList.add('d-none');
-    document.getElementById('invalid-date').classList.remove('d-none');
+    document.getElementById('invalid-date').classList.add('d-none');
+    document.getElementById('container-input-subtask').classList.remove('input-unvalid');
 }
 
 function changeInputButton(boolean) {
@@ -359,7 +360,7 @@ function changeInputButton(boolean) {
 function processSubtask(boolean) {
     let input = document.getElementById('subtasks');
     let invalidRef = document.getElementById('invalid-subtask');
-    invalidRef.classList.add('grey');
+    invalidRef.classList.add('d-none');
     document.getElementById('max-char-subtasks').classList.add('d-none')
     if (boolean && (input.value != "")) {
         addSubtask();
@@ -367,7 +368,7 @@ function processSubtask(boolean) {
     } else if (!boolean && (input.value != "")) {
         input.value = "";
     } else {
-        invalidRef.classList.remove('grey');
+        invalidRef.classList.remove('d-none');
     }
 }
 
@@ -392,7 +393,7 @@ function addSubtask() {
     let containerSubtasks = document.getElementById('container-subtasks');
     let subtaskObj = {"checked" : "false"};
     if (input.value !== "") {
-        document.getElementById('invalid-subtask').classList.add('grey');
+        document.getElementById('invalid-subtask').classList.add('d-none');
         document.getElementById('container-input-subtask').classList.remove('input-unvalid');
         subtasksCount++;
         containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
@@ -454,7 +455,7 @@ function createTask() {
         }, "900");
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
         throwError();
-        document.getElementById('invalid-date').classList.remove('grey');
+        document.getElementById('invalid-date').classList.remove('hidden');
     } else {
         throwError();
     }
@@ -511,7 +512,7 @@ function isPastDate(dateObj) {
 
 function throwError() {
     unvalidInputs.forEach(element => {
-        document.getElementById(`required-${element}`).classList.remove('grey');
+        document.getElementById(`required-${element}`).classList.remove('hidden');
         if (element == "category" || element == "due-date") {
             document.getElementById(`container-input-${element}`).classList.add('input-unvalid')
         } else {
@@ -521,21 +522,21 @@ function throwError() {
 }
 
 function throwSubtaskError() {
-    document.getElementById('invalid-subtask').classList.remove('grey');
+    document.getElementById('invalid-subtask').classList.remove('d-none');
     document.getElementById('container-input-subtask').classList.add('input-unvalid');
 }
 
 function removeError() {
     unvalidInputs.forEach(element => {
-        document.getElementById(`required-${element}`).classList.add('grey');
+        document.getElementById(`required-${element}`).classList.add('hidden');
         if (element == "category" || element == "due-date") {
             document.getElementById(`container-input-${element}`).classList.remove('input-unvalid')
         } else {
             document.getElementById(`${element}`).classList.remove('input-unvalid');
         };
     });
-    document.getElementById('invalid-date').classList.add('grey');
-    document.getElementById('invalid-subtask').classList.add('grey');
+    document.getElementById('invalid-date').classList.add('hidden');
+    document.getElementById('invalid-subtask').classList.add('d-none');
 }
 
 function saveTask() {
@@ -630,11 +631,11 @@ function checkInputLength(inputField) {
     let maxLength = 50;
     let invalidElement = inputSettings[inputField].invalidElement;
     if (input.value.length == maxLength) {
-        errorElement.classList.remove('grey', 'd-none');
+        errorElement.classList.remove('d-none');
         if (invalidElement) document.getElementById(invalidElement).classList.add('d-none');
     } else {
-        errorElement.classList.add('grey', 'd-none');
-        if (invalidElement) document.getElementById(invalidElement).classList.remove('d-none');
+        errorElement.classList.add('d-none');
+        // if (invalidElement) document.getElementById(invalidElement).classList.remove('d-none');
     }
 }
 

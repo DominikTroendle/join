@@ -13,6 +13,10 @@
     display: none !important;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .filter-white {
     filter: invert(100%) sepia(0%) saturate(1%) hue-rotate(294deg) brightness(500%) contrast(101%);
 }
@@ -114,9 +118,8 @@
     height: 16px;
     font-size: 12px;
     line-height: 14px;
+    padding-top: 2px;
     color: red;
-    padding-left: 20px;
-    align-self: flex-end;
 }
 
 #invalid-date {
@@ -849,6 +852,53 @@ input:focus {
 
     #container-form {
         width: 100vw;
+        margin-top: 80px;
+        max-height: calc(100vh - 160px);
         padding: 0;
+        overflow: auto;
+    }
+    
+    #main h1 {
+        margin-top: 48px;
+        margin-left: 16px;
+    }
+
+    #form-add-task {
+        gap: 16px;
+    }
+
+    #form-left,
+    #form-right {
+        width: 100%;
+        align-items: center;
+    }
+
+    #separator {
+        display: none;
+    }
+
+    .container-input-label {
+        width: 396px;
+    }
+
+    #container-dropdown {
+        width: 396px;
+    }
+
+    .container-custom-select-options {
+        width: 396px;
+    }
+
+    #dropdown-category {
+        width: 396px;
+    }
+
+    #buttons-prio {
+        height: 41px;
+    }
+
+    .button-prio {
+        height: 41px;
+        font-size: 16px;
     }
 }
