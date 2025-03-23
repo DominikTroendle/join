@@ -423,14 +423,16 @@ async function deleteCurrentTask() {
 }
 
 let data = {
-    category: "toDos",
-    taskType: "Technical Task",
-    taskTitle: "CSS Architecture Planning",
-    taskDescription: "Define CSS naming conventions and structure...",
-    taskPriority: "urgent",
-    numberOfSubtasks: 6,
-    numberOfCompletedSubtasks: 2,
-    assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
+    category: "",
+    taskType: "",
+    taskTitle: "",
+    taskDescription: "",
+    taskPriority: "",
+    numberOfSubtasks: 0,
+    numberOfCompletedSubtasks: 0,
+    assignedContacts: [],
+    numberOfSubtasks: 0,
+    subtasks: []
 }
 //postDataInDatabase("guest", data);
 
@@ -498,7 +500,36 @@ function selectionOfWhichFunctionIsUsed() {
 }
 
 function readFromEdit() {
-    console.log("title: " + document.getElementById("big-task-card-edit__input-title").value);
+    
     console.log("description: " + document.getElementById("big-task-card-edit__textarea-description").value);
     console.log("description: " + document.getElementById("big-task-card-edit__input-due-date").value);
+
+    data = {
+        category: "",
+        taskType: "",
+        taskTitle: document.getElementById("big-task-card-edit__input-title").value,
+        taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
+        taskPriority: selectedPriority,
+        taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
+        numberOfSubtasks: 0,
+        numberOfCompletedSubtasks: 0,
+        assignedContacts: selectedContacts,
+        numberOfSubtasks: 0,
+        subtasks: subtasks
+    }
+    console.log(data);
+}
+
+
+
+async function editDataInDatabase(userKey, cardId, data) {
+    let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+    if (!response.ok) {
+        console.error("error when saving:", response.statusText);
+    }
+    return response;
 }
