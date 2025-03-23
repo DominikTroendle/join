@@ -902,11 +902,12 @@ h1 {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    width: 460px;
+    width: 470px;
     height: 697px;
     overflow-y: auto;
     scrollbar-width: thin;
     gap: 24px;
+    margin-bottom: 24px;
 }
 
 .big-task-card-edit__text-input-box {
@@ -1073,11 +1074,19 @@ footer {
     flex-wrap: wrap;
 }
 
+#container-input-subtask {
+    width: 445px;
+}
+
 #container-subtasks {
     overflow-y: visible;
     max-height: fit-content;
 }
 
 .container-subtask {
-    width: 440px;
+    width: 445px;
+}
+
+#container-input-assigned {
+    width: 445px;
 }
