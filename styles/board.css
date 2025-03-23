@@ -1020,6 +1020,22 @@ h1 {
     color: #FFFFFF;
 }
 
+.big-task-card-edit__Ok-button:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+}
+
+.big-task-card-edit__Ok-button:active {
+    background-color: #091931;
+    box-shadow: 0 4px 4px 0 rgb(0, 0, 0, 0.25);
+}
+
+.big-task-card-edit__Ok-button-img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+}
+
 
 
 
