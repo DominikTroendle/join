@@ -431,7 +431,6 @@ let data = {
     numberOfSubtasks: 0,
     numberOfCompletedSubtasks: 0,
     assignedContacts: [],
-    numberOfSubtasks: 0,
     subtasks: []
 }
 //postDataInDatabase("guest", data);
@@ -499,28 +498,23 @@ function selectionOfWhichFunctionIsUsed() {
     }
 }
 
-function readFromEdit() {
-    
-    console.log("description: " + document.getElementById("big-task-card-edit__textarea-description").value);
-    console.log("description: " + document.getElementById("big-task-card-edit__input-due-date").value);
-
+function readFromEditAndSaveData() {
+    let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
+    completedSubtasksArray = subtasks.filter(element => element.checked === "true");
     data = {
-        category: "",
-        taskType: "",
+        category: taskCardObject.category,
+        taskType: taskCardObject.taskType,
         taskTitle: document.getElementById("big-task-card-edit__input-title").value,
         taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
         taskPriority: selectedPriority,
         taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
-        numberOfSubtasks: 0,
-        numberOfCompletedSubtasks: 0,
+        numberOfSubtasks: subtasks.length,
+        numberOfCompletedSubtasks: completedSubtasksArray.length,
         assignedContacts: selectedContacts,
-        numberOfSubtasks: 0,
         subtasks: subtasks
     }
-    console.log(data);
+    editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
 }
-
-
 
 async function editDataInDatabase(userKey, cardId, data) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
