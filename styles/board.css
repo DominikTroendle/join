@@ -1090,3 +1090,7 @@ footer {
 #container-input-assigned {
     width: 445px;
 }
+
+#container-prioritys {
+    padding-bottom: 0;
+}
