@@ -236,8 +236,36 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
 
     selectedContacts.length = 0;
     subtasks.length = 0;
+    subtasksCount = 1;
     assignedContacts.forEach(element => selectedContacts.push(element));
     subtasksEdit.forEach(element => subtasks.push(element));
+
+    let subtasksHtml = "";
+    console.log(subtasks);
+    for(let index = 0; index < subtasks.length; index++) {
+        let id = subtasksCount++;
+        subtasksHtml += `<div id="container-subtask-${id}" class="position-relative">
+                <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
+                    <input id="input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
+                    <div class="flex">
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <hr class="edit-hr">
+                        <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtask(${id})">
+                    </div>
+                </div>
+                <div id="details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)" ondblclick="editSubtask(${id})">
+                    <div class="subtask-text" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
+                        <span>&bull;</span>
+                        <span id="subtask-${id}">${subtasks[index].subtask}</span>
+                    </div>
+                    <div id="icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
+                        <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
+                        <hr>
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                    </div>
+                </div>
+            </div>`;
+    }
 
     
     return `    <div class="big-task-card-edit__task-type-text-button-box">
@@ -306,7 +334,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     </button>
                                 </div>
                             </div>
-                            <div id="container-subtasks"></div>
+                            <div id="container-subtasks">${subtasksHtml}</div>
                         </div>
                     
                     
