@@ -748,21 +748,21 @@ h1 {
     scrollbar-width: thin;
 }
 
-.big-task-card__div-scroll::-webkit-scrollbar{
+.big-task-card__div-scroll::-webkit-scrollbar {
     width: 8px;
 }
 
-.big-task-card__div-scroll::-webkit-scrollbar-track{
+.big-task-card__div-scroll::-webkit-scrollbar-track {
     background: white;
 }
 
-.big-task-card__div-scroll::-webkit-scrollbar-thumb{
+.big-task-card__div-scroll::-webkit-scrollbar-thumb {
     background: grey;
     border-radius: 10px;
-    
+
 }
 
-.big-task-card__div-scroll::-webkit-scrollbar-thumb:hover{
+.big-task-card__div-scroll::-webkit-scrollbar-thumb:hover {
     background: rgb(180, 180, 180);
     cursor: pointer;
 }
@@ -870,15 +870,39 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 81px;
+    width: 86px;
     height: 24px;
     gap: 8px;
+}
+
+.big-task-card__button:hover {
+    color: #29abe2;
+    font-weight: 700;
+}
+
+.big-task-card__button:active {
+    color: #2A3647;
 }
 
 .big-task-card__button-img {
     width: 24px;
     height: 24px;
     fill: #2A3647;
+}
+
+.big-task-card__button:hover .big-task-card__button-img {
+    fill: #29abe2;
+}
+
+.big-task-card__button:active .big-task-card__button-img {
+    fill: #2A3647;
+}
+
+.big-task-card__seperator {
+    width: 1px;
+    height: 24px;
+    margin-left: 8px;
+    background-color: #D1D1D1;
 }
 
 .big-task-card-edit__task-type-text-button-box {
@@ -1056,7 +1080,7 @@ footer {
 }
 
 #main {
-    
+
     width: 1116px;
     display: flex;
     flex-direction: column;
