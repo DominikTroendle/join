@@ -498,7 +498,7 @@ function selectionOfWhichFunctionIsUsed() {
     }
 }
 
-function readFromEditAndSaveData() {
+async function readFromEditAndSaveData() {
     let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
     completedSubtasksArray = subtasks.filter(element => element.checked === "true");
     data = {
@@ -513,7 +513,14 @@ function readFromEditAndSaveData() {
         assignedContacts: selectedContacts,
         subtasks: subtasks
     }
-    editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
+    editDataInArray(taskCardObject, data);
+    renderNewContentFromBigTaskCard(taskCardObject)
+    let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
+    if (!editResponse.ok) {
+        console.error("error when saving in the database:", editResponse.statusText);
+        return;
+    }
+    init();
 }
 
 async function editDataInDatabase(userKey, cardId, data) {
@@ -539,4 +546,9 @@ function editDataInArray(taskCardObject, data) {
     taskCardObject.numberOfCompletedSubtasks = data.numberOfCompletedSubtasks;
     taskCardObject.assignedContacts = data.assignedContacts;
     taskCardObject.subtasks = data.subtasks;
+}
+
+function renderNewContentFromBigTaskCard(taskCardObject) {
+    let bigTaskCard = document.getElementById("big-task-card__box");
+    bigTaskCard.innerHTML = bigTaskCardTemplate(taskCardObject.id, taskCardObject.taskType, taskCardObject.taskTitle, taskCardObject.taskDescription, taskCardObject.taskPriority, taskCardObject.taskDueDate, taskCardObject.numberOfSubtasks, taskCardObject.numberOfCompletedSubtasks, taskCardObject.assignedContacts, taskCardObject.subtasks);
 }
