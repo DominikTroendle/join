@@ -219,7 +219,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                                 d="M7.7 21.4c-.55 0-1.02-.2-1.41-.59-.39-.39-.59-.86-.59-1.41V6.4h-.01a1 1 0 0 1 0-2h4V4.4c0-.28.1-.52.29-.71.19-.19.43-.29.71-.29h4c.28 0 .52.1.71.29.19.19.29.43.29.71h4a1 1 0 0 1 0 2h-.41v13c0 .55-.2 1.02-.59 1.41-.39.39-.86.59-1.41.59H7.7ZM7.7 6.4v13h10v-13h-10Zm2 10c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Zm4 0c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Z" />
                         </svg>
                         Delete</button>
-                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit()">
+                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContacts()">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
                                 d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />
@@ -228,12 +228,18 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 </div>`;
 }
 
-function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasks) {
+function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasksEdit) {
     let dueDate = "";
     if (taskDueDate) {
         dueDate = taskDueDate;
     }
 
+    selectedContacts.length = 0;
+    subtasks.length = 0;
+    assignedContacts.forEach(element => selectedContacts.push(element));
+    subtasksEdit.forEach(element => subtasks.push(element));
+
+    
     return `    <div class="big-task-card-edit__task-type-text-button-box">
                     <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">x</button>
                 </div>

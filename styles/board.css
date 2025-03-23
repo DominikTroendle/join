@@ -1066,3 +1066,7 @@ footer {
 #form-add-task {
     gap: 48px;
 }
+
+#container-assigned-contacts {
+    flex-wrap: wrap;
+}

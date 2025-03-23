@@ -501,5 +501,4 @@ function readFromEdit() {
     console.log("title: " + document.getElementById("big-task-card-edit__input-title").value);
     console.log("description: " + document.getElementById("big-task-card-edit__textarea-description").value);
     console.log("description: " + document.getElementById("big-task-card-edit__input-due-date").value);
-
 }
