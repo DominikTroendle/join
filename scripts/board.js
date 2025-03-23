@@ -527,3 +527,16 @@ async function editDataInDatabase(userKey, cardId, data) {
     }
     return response;
 }
+
+function editDataInArray(taskCardObject, data) {
+    taskCardObject.category = data.category;
+    taskCardObject.taskType = data.taskType;
+    taskCardObject.taskTitle = data.taskTitle;
+    taskCardObject.taskDescription = data.taskDescription;
+    taskCardObject.taskPriority = data.taskPriority;
+    taskCardObject.taskDueDate = data.taskDueDate;
+    taskCardObject.numberOfSubtasks = data.numberOfSubtasks;
+    taskCardObject.numberOfCompletedSubtasks = data.numberOfCompletedSubtasks;
+    taskCardObject.assignedContacts = data.assignedContacts;
+    taskCardObject.subtasks = data.subtasks;
+}
