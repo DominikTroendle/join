@@ -266,7 +266,6 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                 </div>
             </div>`;
     }
-
     
     return `    <div class="big-task-card-edit__task-type-text-button-box">
                     <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">x</button>
