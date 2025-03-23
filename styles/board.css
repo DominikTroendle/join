@@ -902,8 +902,10 @@ h1 {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    width: 445px;
+    width: 460px;
     height: 697px;
+    overflow-y: auto;
+    scrollbar-width: thin;
     gap: 24px;
 }
 
@@ -1069,4 +1071,13 @@ footer {
 
 #container-assigned-contacts {
     flex-wrap: wrap;
+}
+
+#container-subtasks {
+    overflow-y: visible;
+    max-height: fit-content;
+}
+
+.container-subtask {
+    width: 440px;
 }

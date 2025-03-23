@@ -352,11 +352,10 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     
                     
                     
-                    
+                    </div>
                     <div class="big-task-card-edit__task-type-text-button-box">
                         <button class="big-task-card-edit__Ok-button" onclick="readFromEditAndSaveData()">Ok</button>
-                    </div>
-                </div>`;
+                    </div>`;
 }
 
 {/* <div class="big-task-card-edit__text-input-box">
