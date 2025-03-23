@@ -65,8 +65,8 @@ function noCardTemplate(category, searchMode) {
     console.log(searchMode);
     let noTaskBoxText;
     if (searchMode === "false") {
-        noTaskBoxText = "No tasks"; 
-        
+        noTaskBoxText = "No tasks";
+
     } else {
         noTaskBoxText = "No Search Tasks";
     }
@@ -115,7 +115,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
     if (taskDueDate) {
         dueDate = taskDueDate;
     }
-
+    sortContactsAlphabetically(assignedContacts);
     let scrollClassAssignedContacts = "";
     let assignedContactsHtml = "";
     if (assignedContacts) {
@@ -237,12 +237,12 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
     selectedContacts.length = 0;
     subtasks.length = 0;
     subtasksCount = 1;
+    sortContactsAlphabetically(assignedContacts);
     assignedContacts.forEach(element => selectedContacts.push(element));
     subtasksEdit.forEach(element => subtasks.push(element));
 
     let subtasksHtml = "";
-    console.log(subtasks);
-    for(let index = 0; index < subtasks.length; index++) {
+    for (let index = 0; index < subtasks.length; index++) {
         let id = subtasksCount++;
         subtasksHtml += `<div id="container-subtask-${id}" class="position-relative">
                 <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
@@ -266,7 +266,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                 </div>
             </div>`;
     }
-    
+
     return `    <div class="big-task-card-edit__task-type-text-button-box">
                     <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">x</button>
                 </div>
