@@ -32,6 +32,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                 </div>`
     }
 
+    assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     let assignedContactsHtml = "";
     let initialsOverSix = "";
     if (assignedContacts) {
@@ -106,16 +107,18 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
 
     let taskPriorityImg = "";
     let taskPriorityText = "";
+    let taskPriorityForEdit = "";
     if (taskPriority) {
         taskPriorityImg = priorityMapping.find(element => element.priority == taskPriority)?.img;
         taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText;
+        taskPriorityForEdit = taskPriority;
     }
 
     let dueDate = "";
     if (taskDueDate) {
         dueDate = taskDueDate;
     }
-    sortContactsAlphabetically(assignedContacts);
+    assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     let scrollClassAssignedContacts = "";
     let assignedContactsHtml = "";
     if (assignedContacts) {
@@ -219,7 +222,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                                 d="M7.7 21.4c-.55 0-1.02-.2-1.41-.59-.39-.39-.59-.86-.59-1.41V6.4h-.01a1 1 0 0 1 0-2h4V4.4c0-.28.1-.52.29-.71.19-.19.43-.29.71-.29h4c.28 0 .52.1.71.29.19.19.29.43.29.71h4a1 1 0 0 1 0 2h-.41v13c0 .55-.2 1.02-.59 1.41-.39.39-.86.59-1.41.59H7.7ZM7.7 6.4v13h10v-13h-10Zm2 10c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Zm4 0c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Z" />
                         </svg>
                         Delete</button>
-                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContacts()">
+                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContacts(); selectPrioButton('${taskPriorityForEdit}')">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
                                 d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />
@@ -237,9 +240,13 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
     selectedContacts.length = 0;
     subtasks.length = 0;
     subtasksCount = 1;
-    sortContactsAlphabetically(assignedContacts);
+
+    assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     assignedContacts.forEach(element => selectedContacts.push(element));
-    subtasksEdit.forEach(element => subtasks.push(element));
+
+    if (subtasksEdit) {
+        subtasksEdit.forEach(element => subtasks.push(element));
+    }
 
     let subtasksHtml = "";
     for (let index = 0; index < subtasks.length; index++) {
@@ -283,20 +290,26 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                         <span class="big-task-card-edit__text">Due date</span>
                         <input class="big-task-card-edit__input" id="big-task-card-edit__input-due-date" type="text" placeholder="dd/mm/yyyy" value="${dueDate}">
                     </div>
-                    <div class="big-task-card-edit__text-button-box">
-                        <span class="big-task-card-edit__text">Priority</span>
-                        <div class="big-task-card-edit__button-box">
-                            <button class="big-task-card-edit__button">Urgent<img src="assets/icons/urgent.svg"
-                                    alt=""></button>
-                            <button class="big-task-card-edit__button">Medium<img src="assets/icons/medium.svg"
-                                    alt=""></button>
-                            <button class="big-task-card-edit__button">Low<img src="assets/icons/low.svg"
-                                    alt=""></button>
+                    
+                    
+                    
+                    <div id="container-prioritys" class="container-input-label">
+                            <label for="buttons-prio" class="label-add-task">Priority</label>
+                            <div id="buttons-prio">
+                                <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
+                                    Urgent
+                                    <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
+                                </button>
+                                <button id="medium" class="button-prio medium white" type="button" onclick="selectPrioButton('medium')">
+                                    Medium
+                                    <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium" class="filter-white">
+                                </button>
+                                <button id="low" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">
+                                    Low
+                                    <img id="svg-low" src="assets/icons/low.svg" alt="icon-low">
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    
-                    
-                    
                     
                     <div class="container-input-label custom-select">
                             <label for="assigned-to" class="label-add-task">
@@ -353,6 +366,18 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     <div class="big-task-card-edit__text-input-box">
                         <span class="big-task-card-edit__text">Subtasks</span>
                         <input class="big-task-card-edit__input" type="text" placeholder="Add new subtask">
+                    </div> */}
+
+{/* <div class="big-task-card-edit__text-button-box">
+                        <span class="big-task-card-edit__text">Priority</span>
+                        <div class="big-task-card-edit__button-box">
+                            <button class="big-task-card-edit__button">Urgent<img src="assets/icons/urgent.svg"
+                                    alt=""></button>
+                            <button class="big-task-card-edit__button">Medium<img src="assets/icons/medium.svg"
+                                    alt=""></button>
+                            <button class="big-task-card-edit__button">Low<img src="assets/icons/low.svg"
+                                    alt=""></button>
+                        </div>
                     </div> */}
 
 function addTaskTemplate() {
