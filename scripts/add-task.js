@@ -617,12 +617,16 @@ async function loadSmallInitials() {
 }
 
 function sortContactsAlphabetically(contactsArray) {
-    let user = contactsArray.splice(0, 1);
-    contactsArray.sort((a, b) => a.name.localeCompare(b.name));
-    if (contactsArray == contacts) {
-        contacts = user.concat(contactsArray);
-    } else if (contactsArray == selectedContacts) {
-        selectedContacts = user.concat(contactsArray);
+    if (userId != "guest") {
+        let user = contactsArray.splice(0, 1);
+        contactsArray.sort((a, b) => a.name.localeCompare(b.name));
+        if (contactsArray == contacts) {
+            contacts = user.concat(contactsArray);
+        } else if (contactsArray == selectedContacts) {
+            selectedContacts = user.concat(contactsArray);
+        }
+    } else {
+        contactsArray.sort((a, b) => a.name.localeCompare(b.name));
     }
 }
 
