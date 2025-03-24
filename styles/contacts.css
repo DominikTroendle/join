@@ -1128,6 +1128,10 @@ button .close-icon:hover path {
         bottom: 184px;
     }
 
+    .mobile-procressing-area-button.active{
+        background-color: #29abe2;
+    }
+
     .procressing-mobile-menu-container {
         position: absolute;
         background-color: white;

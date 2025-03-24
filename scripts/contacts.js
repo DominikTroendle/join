@@ -522,10 +522,12 @@ function procressingClickMenu() {
     let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.small-menu-button');
+    let procressButton = document.querySelector('.mobile-procressing-area-button')
     procressOverlay.classList.add('active');
     procressOverlay.classList.remove('close');
     menuBox.classList.add('inactive');
     supportBox.classList.add('inactive');
+    procressButton.classList.add('active');
 
     procressOverlay.onclick = function(event){
         if (event.target === procressOverlay) {
@@ -533,6 +535,9 @@ function procressingClickMenu() {
             procressOverlay.classList.remove('active');
             menuBox.classList.remove('inactive');
             supportBox.classList.remove('inactive');
+            setTimeout(() => {
+                procressButton.classList.remove('active');
+            }, 1000);
         }
     }
 }
