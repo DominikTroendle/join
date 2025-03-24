@@ -54,16 +54,18 @@ async function initialize() {
 
 initialize();
 
-function selectPrioButton(prio) {  
-    let button = document.getElementById(`${prio}`);
-    let svg = document.getElementById(`svg-${prio}`);
-    if (button.classList.contains(`${prio}`)) {
-        toggleButtonClasses(true, button, svg, prio);
-        selectedPriority = "medium";
-    } else {
-        clearPrioButtons();
-        toggleButtonClasses(false, button, svg, prio);
-        selectedPriority = prio;
+function selectPrioButton(prio) {
+    if (prio != "") {
+        let button = document.getElementById(`${prio}`);
+        let svg = document.getElementById(`svg-${prio}`);
+        if (button.classList.contains(`${prio}`)) {
+            toggleButtonClasses(true, button, svg, prio);
+            selectedPriority = "medium";
+        } else {
+            clearPrioButtons();
+            toggleButtonClasses(false, button, svg, prio);
+            selectedPriority = prio;
+        }
     }
 }
 

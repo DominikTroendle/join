@@ -774,6 +774,10 @@ input:focus {
     animation: slide-in 50ms linear;
 }
 
+#required-mobile {
+    display: none;
+}
+
 @keyframes slide-in {
     from {
         top: 100vh;
@@ -836,6 +840,10 @@ input:focus {
 }
 
 @media only screen and (max-width: 428px) {
+    header {
+        justify-content: space-between;
+    }
+
     body {
         display: block;
         max-height: 100vw;
@@ -857,6 +865,13 @@ input:focus {
         padding: 0;
         overflow: auto;
     }
+
+    #form-top {
+        position: fixed;
+        width: 100%;
+        background-color: #F6F7F8;
+        z-index: 1;
+    }
     
     #main h1 {
         margin-top: 48px;
@@ -865,6 +880,7 @@ input:focus {
 
     #form-add-task {
         gap: 16px;
+        margin-top: 170px;
     }
 
     #form-left,
@@ -900,5 +916,13 @@ input:focus {
     .button-prio {
         height: 41px;
         font-size: 16px;
+    }
+
+    #footer-add-task {
+        display: none;
+    }
+
+    #required-mobile {
+        display: block;
     }
 }
