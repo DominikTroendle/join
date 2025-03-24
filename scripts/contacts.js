@@ -520,13 +520,19 @@ async function deleteContact(key) {
 
 function procressingClickMenu() {
     let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
+    let menuBox = document.querySelector('.menu-box');
+    let supportBox = document.querySelector('.small-menu-button');
     procressOverlay.classList.add('active');
     procressOverlay.classList.remove('close');
+    menuBox.classList.add('inactive');
+    supportBox.classList.add('inactive');
 
     procressOverlay.onclick = function(event){
         if (event.target === procressOverlay) {
             procressOverlay.classList.add('close');
             procressOverlay.classList.remove('active');
+            menuBox.classList.remove('inactive');
+            supportBox.classList.remove('inactive');
         }
     }
 }

@@ -129,7 +129,7 @@ function getEditContactTemplate(key) {
                 <h1>Edit contact</h1>
                 <hr>
             </div>
-            <div class="add-input-contect-container">
+            <div class="edit-add-input-contect-container">
                 <div class="close-btn">
                     <button class="desktop-close-btn" onclick="closeEditContact('${key}')"><img src="assets/icons/close.svg" alt=""></button>
                     <button class="mobile-close-btn" onclick="closeEditContact('${key}')"><img src="assets/img/close-mobile-white.png" alt=""></button>
@@ -156,7 +156,7 @@ function getEditContactTemplate(key) {
                             </div>
                         </div>
                         <div class="contact-button-container">
-                            <button class="cancel-btn mobile-delete-view" type="submit" onclick="deleteContact('${key}')";>Delete</button>
+                            <button class="edit-cancel-btn mobile-delete-view" type="submit" onclick="deleteContact('${key}')";>Delete</button>
                             <button class="save-btn" type="submit">Save<img src="assets/icons/check.svg" alt=""></button>
                         </div>
                     </form>

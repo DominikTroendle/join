@@ -18,6 +18,10 @@
     width: 100%;
 }
 
+.small-menu-button.inactive {
+    pointer-events: none;
+}
+
 #contactlist-container {
     position: absolute;
     width: auto;
@@ -497,7 +501,16 @@
     width: 840px;
     height: 100%;
     border-radius: 0 30px 30px 0;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 70px;
+}
 
+.edit-add-input-contect-container {
+    width: 840px;
+    height: 100%;
+    border-radius: 0 30px 30px 0;
     background-color: white;
     display: flex;
     align-items: center;
@@ -529,7 +542,6 @@
     border: solid 3px white;
     background-color: #D1D1D1;
     margin-left: 80px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -617,6 +629,33 @@
     transform: scale(0.99);
 }
 
+.edit-cancel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 138px;
+    height: 56px;
+    padding: 0 16px;
+    gap: 8px;
+    border-radius: 10px;
+    border: solid 1px black;
+    font-size: 24px;
+    font-weight: 300;
+    transform-origin: left;
+    transition: 100ms;
+}
+
+.edit-cancel-btn p {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.edit-cancel-btn:hover {
+    color: #29abe2;
+    border: solid 2px #29abe2;
+    transform: scale(0.99);
+}
+
 button .close-icon:hover path {
     stroke: #29abe2;
 }
@@ -648,12 +687,14 @@ button .close-icon:hover path {
     justify-content: center;
     height: 57px;
     width: 111px;
+    padding: 16px;
     border-radius: 10px;
     background-color: #2A3647;
     color: white;
-    font-size: 24px;
-    font-weight: 400;
+    font-size: 21px;
+    font-weight: 700;
     transition: 100ms;
+    gap: 4px;
 }
 
 .save-btn:hover {
@@ -726,7 +767,20 @@ button .close-icon:hover path {
         height: 600px;
     }
 
+    .edit-Contect-Container {
+        width: 1000px;
+        height: 600px;
+    }
+
     .add-input-contect-container {
+        width: 640px;
+        height: 100%;
+        border-radius: 0 30px 30px 0;
+        background-color: white;
+        gap: 10px;
+    }
+
+    .edit-add-input-contect-container {
         width: 640px;
         height: 100%;
         border-radius: 0 30px 30px 0;
@@ -738,12 +792,15 @@ button .close-icon:hover path {
         margin-left: 520px;
     }
 
+    .edit-close-btn {
+        margin-left: 520px;
+    }
+
     .new-user-image {
-        height: 120px;
-        width: 120px;
-        border-radius: 70px;
-        border: solid 3px white;
-        background-color: #D1D1D1;
+        margin-left: 10px;
+    }
+
+    .edit-contact-initcolor {
         margin-left: 10px;
     }
 }
@@ -757,6 +814,7 @@ button .close-icon:hover path {
 }
 
 @media(max-width: 1040px) {
+
     #contactlist-container {
         height: calc(100vh - 16.7vh);
         top: 80px;
@@ -841,6 +899,21 @@ button .close-icon:hover path {
         transform: translateY(0);
     }
 
+    .edit-Contect-Container {
+        position: absolute;
+        width: calc(100% - 30px);
+        height: 760px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        transform: translateY(130%);
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .edit-Contect-Container.active{
+        transform: translateY(0);
+    }
+
     .information-content-container {
         width: 100%;
         height: 352px;
@@ -877,6 +950,12 @@ button .close-icon:hover path {
     }
 
     .new-user-image {
+        position: absolute;
+        margin-left: 0px;
+        top: 295px;
+    }
+
+    .edit-contact-initcolor {
         position: absolute;
         margin-left: 0px;
         top: 295px;
@@ -935,6 +1014,17 @@ button .close-icon:hover path {
     }
 
     .add-input-contect-container {
+        width: 100%;
+        height: 408px;
+        border-radius: 0 0 30px 30px;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 70px;
+    }
+
+    .edit-add-input-contect-container {
         width: 100%;
         height: 408px;
         border-radius: 0 0 30px 30px;
@@ -1081,7 +1171,12 @@ button .close-icon:hover path {
         gap: 8px;
         color: black;
         font-size: 16px;
-    } 
+    }
+
+    .procressing-area-button-mobile-backgroundcolor{
+        background-color: #d1d1d13b;
+        border-radius: 10px;
+    }
 }
 
 @media(max-width: 650px) {
@@ -1182,11 +1277,6 @@ button .close-icon:hover path {
         margin-top: 0;
     }
 
-    .save-btn:hover {
-        background-color: black;
-        box-shadow: none;
-    }
-
     .cancel-btn:hover {
         color: black;
         border: solid 1px black;
@@ -1202,7 +1292,7 @@ button .close-icon:hover path {
         display: flex;
         align-items: start;
         flex-direction: column;
-        background: #ccc;
+        background: #ffffff;
         z-index: 1;
     }
 
@@ -1219,7 +1309,7 @@ button .close-icon:hover path {
         flex-direction: column;
         margin: 24px 0 0 16px;
         gap: 16px;
-        background: #ccc;
+        background: #ffffff;
     }
 
     .headline-container .back-to-contactlist-btn {
@@ -1254,9 +1344,8 @@ button .close-icon:hover path {
     #moreInformationContact {
         width: 100%;
         height: 100%;
-        background: #ccc;
+        background: #ffffff;
         padding: 20px;
-
     }
 
     .more-info-initials {
@@ -1303,7 +1392,39 @@ button .close-icon:hover path {
     }
 
     .input-area {
-        width: 100%;
+        width: 250px;
+    }
+
+    .edit-cancel-btn {
+        width: 82px;
+        height: 51px;
+        padding: 18px 10px;
+        transform-origin: none;
+        transition: none;
+    }
+    
+    .edit-cancel-btn p {
+        font-size: 20px;
+        font-weight: 400;
+    }
+    
+    .edit-cancel-btn:hover {
+        color: black;
+        border: solid 1px black;
+        transform: none;
+    }
+
+    .save-btn {
+        height: 51px;
+        width: 99px;
+        font-size: 21px;
+        font-weight: 700;
+        gap: 4px;
+    }
+
+    .save-btn:hover {
+        background-color: #2A3647;
+        box-shadow: none;
     }
 }
 
