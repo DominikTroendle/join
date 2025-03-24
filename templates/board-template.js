@@ -301,7 +301,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     Urgent
                                     <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
                                 </button>
-                                <button id="medium" class="button-prio medium white" type="button" onclick="selectPrioButton('medium')">
+                                <button id="medium" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('medium')">
                                     Medium
                                     <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium" class="filter-white">
                                 </button>
