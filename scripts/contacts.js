@@ -210,8 +210,12 @@ async function sendData(path, data) {
  * Hides the contact overlay and briefly shows a success message.
  */
 function successfullyContact() {
-    let overlay = document.getElementById('newContectOverlay');
-    overlay.classList.add("d-none");
+    let newContactOverlay = document.querySelector('.new-contact-overlay');
+    let newContactContainer = document.querySelector('.new-Contect-Container');
+    let procressButton = document.querySelector('.add-new-button');
+    newContactOverlay.classList.remove('active');
+    newContactContainer.classList.remove('active');
+    procressButton.style.backgroundColor = '#2A3647';
     
     setTimeout(() => {
         let messageBox = document.getElementById('succesfully-message-box');
@@ -495,7 +499,8 @@ async function putData(key, data, path) {
  * 
  * @param {string} key - Contact key.
  */
-async function deleteContact(key) {
+async function deleteContact(key, button) {
+    let procressButton = document.querySelector('.mobile-procressing-area-button')
     let userId = localStorage.getItem("userId");
     if (!key) {
         console.error("Fehler: Kein gültiger Key übergeben!");
@@ -512,10 +517,12 @@ async function deleteContact(key) {
         allContacts = allContacts.filter(contact => contact.key !== key);
         loadContactList();
         document.getElementById('moreInformationContact').innerHTML = '';
-        document.querySelector('.more-information-container').classList.remove('mobile-overlay')
+        document.querySelector('.more-information-container').classList.remove('mobile-overlay');
+        procressButton.style.backgroundColor = '#2A3647'
     } catch (error) {
         console.error("Fehler beim Löschen:", error);
     }
+    toggleButtonBackgroundcolor(button)
 }
 
 function procressingClickMenu(button) {
@@ -544,7 +551,7 @@ function procressingClickMenu(button) {
 }
 
 function toggleButtonBackgroundcolor(button) {
-        if (!button.style.backgroundColor || button.style.backgroundColor === 'rgb(42, 54, 71)') {
+        if (!button.style.backgroundColor || button.style.backgroundColor === '#2A3647') {
             button.style.backgroundColor = '#29abe2';
         } else {
             button.style.backgroundColor = '#2A3647';
