@@ -518,7 +518,7 @@ async function deleteContact(key) {
     }
 }
 
-function procressingClickMenu() {
+function procressingClickMenu(button) {
     let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.small-menu-button');
@@ -537,6 +537,7 @@ function procressingClickMenu() {
             supportBox.classList.remove('inactive');
             setTimeout(() => {
                 procressButton.classList.remove('active');
+                toggleRemoveButtonColor(button)
             }, 1000);
         }
     }
@@ -552,9 +553,18 @@ function toggleButtonBackgroundcolor(button) {
 }
 
 function toggleButtonColor(button) {
-        if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
-            button.style.color = '#29abe2';
-        }
+    if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
+        button.style.color = '#29abe2';
+    } 
     button = document.querySelector('.procressing-area-edit-button-mobile');
     button.classList.add('procressing-area-button-mobile-backgroundcolor');
+}
+
+function toggleRemoveButtonColor(button) {
+    if (!button.style.color || button.style.color === '#29abe2') {
+        button.style.color = 'rgb(42, 54, 71)';
+    } 
+    button = document.querySelector('.procressing-area-edit-button-mobile');
+    button.classList.remove('procressing-area-button-mobile-backgroundcolor');
+    button.style.color = 'rgb(42, 54, 71)';
 }
