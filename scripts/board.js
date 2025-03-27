@@ -228,29 +228,26 @@ function onDragStart(event) {
     // document.body.style.cursor = "grabbing";
 }
 
-function createBorderCardForDragEntered(event) {
-
-    const target = document.getElementById(event.currentTarget.id);
+function createCardBorderBoxForDragEntered(event) {
+    let targetDragField = document.getElementById(event.currentTarget.id);
     let currentCard = document.getElementById(currentCardId);
-    // Falls es das Ursprungsfeld ist, keine Umrandung hinzufügen
-    if (target === originDragField) return;
-
-    // Prüfen, ob die Umrandung schon existiert
-    if (!target.querySelector("#card-border-box")) {
-        target.innerHTML += cardBorderdragEnterTemplate(currentCard.offsetHeight);
+    if (targetDragField === originDragField) {
+        return;
+    }
+    removeCardBorderBox();
+    if (!targetDragField.querySelector("#card-border-box")) {
+        targetDragField.innerHTML += cardBorderdragEnterTemplate(currentCard.offsetHeight);
     }
 }
 
-function removeBorderCard(event) {
-    // if (isBorderActive) {
-    //     const target = event.currentTarget;
-
-    //     const borderBox = target.querySelector("#card-border-box");
-    //     if (borderBox) {
-    //         borderBox.remove();  // Element entfernen
-    //         isBorderActive = false;
-    //     }
-    // }
+function removeCardBorderBox() {
+    dragFieldIds.forEach(element => {
+        let dragField = document.getElementById(element);
+        let cardBorderBox = dragField.querySelector("#card-border-box");
+        if (cardBorderBox) {
+            cardBorderBox.remove();
+        }
+    });
 }
 
 function toggleDnoneBigTaskCard() {

@@ -118,23 +118,23 @@
                 <div class="all-drag-field-box">
                     <div class="drag-field" id="to-do-drag-field" data-category="toDos" data-array="toDoArray"
                         ondragstart="onDragStart(event); moveTo(event, 'to-do-drag-field', toDoArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, toDoArray)"
-                        ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)">
+                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, toDoArray); removeCardBorderBox()"
+                        ondragenter="createCardBorderBoxForDragEntered(event)">
                     </div>
                     <div class="drag-field" id="in-progress-drag-field" data-category="inProgress"
                         data-array="inProgressArray"
                         ondragstart="onDragStart(event); moveTo(event, 'in-progress-drag-field', inProgressArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, inProgressArray)"
-                        ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)"></div>
+                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, inProgressArray); removeCardBorderBox()"
+                        ondragenter="createCardBorderBoxForDragEntered(event)"></div>
                     <div class="drag-field" id="await-feedback-drag-field" data-category="awaitFeedback"
                         data-array="awaitFeedbackArray"
                         ondragstart="onDragStart(event); moveTo(event, 'await-feedback-drag-field', awaitFeedbackArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, awaitFeedbackArray)"
-                        ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)"></div>
+                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, awaitFeedbackArray); removeCardBorderBox()"
+                        ondragenter="createCardBorderBoxForDragEntered(event)"></div>
                     <div class="drag-field" id="done-drag-field" data-category="done" data-array="doneArray"
                         ondragstart="onDragStart(event); moveTo(event, 'done-drag-field', doneArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, doneArray)"
-                        ondragenter="createBorderCardForDragEntered(event)" ondragleave="removeBorderCard(event)">
+                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, doneArray); removeCardBorderBox()"
+                        ondragenter="createCardBorderBoxForDragEntered(event)">
                     </div>
                 </div>
             </div>

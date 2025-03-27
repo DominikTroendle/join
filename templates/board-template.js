@@ -45,7 +45,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         }
     }
 
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event)" ondragend="removeDragRotation(event)" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
+    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event)" ondragend="removeDragRotation(event); removeCardBorderBox()" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
                 <div class="user-story__category-box ${taskTypeCssClass}">
                     <span class="user-story__category-text">${taskType}</span>
                 </div>
@@ -330,8 +330,8 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     <div class="container-input-label">
                             <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
                                 Subtasks
-                                <p id="invalid-subtask" class="required grey">Enter at least one character to save subtask!</p>
-                                <p id="max-char-subtasks" class="required-max-chars grey d-none">Reached maximum amount of 50 chars!</p>
+                                <p id="invalid-subtask" class="required d-none">Enter at least one character to save subtask!</p>
+                                <p id="max-char-subtasks" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                             </label>
                             <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
                                 <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')" onkeydown="isEnterKey(event)">                                <button id="button-add" class="button-add" type="button">
