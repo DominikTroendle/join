@@ -250,6 +250,20 @@ function removeCardBorderBox() {
     });
 }
 
+function disablePointerEventsForAllTasks() {
+    const currentCard = document.getElementById(currentCardId);
+    const tasks = document.querySelectorAll(".user-story__box");
+
+    tasks.forEach(task => {
+        if (task !== currentCard) {
+            task.style.pointerEvents = "none"; 
+        } else {
+            task.style.pointerEvents = "auto";
+        }
+    });
+}
+
+
 function toggleDnoneBigTaskCard() {
     document.getElementById("big-task-card__overlay").classList.toggle("d-none");
 }
