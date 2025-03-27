@@ -250,6 +250,11 @@ function removeCardBorderBox() {
     });
 }
 
+function activatePointerEventsForAllTasks() {
+    const tasks = document.querySelectorAll(".user-story__box");
+    tasks.forEach(task => task.style.pointerEvents = "auto");
+}
+
 function disablePointerEventsForAllTasks() {
     const currentCard = document.getElementById(currentCardId);
     const tasks = document.querySelectorAll(".user-story__box");
