@@ -465,6 +465,10 @@ async function editContact(event, form) {
  */
 async function updateContactTemplate(contactKey, updatedContact) {
     let contactElement = document.querySelector(`#contact-${contactKey}`);
+    let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
+    let menuBox = document.querySelector('.menu-box');
+    let supportBox = document.querySelector('.small-menu-button');
+    let procressButton = document.querySelector('.mobile-procressing-area-button')
     if (contactElement) {
     let contact = allContacts.find(c => c.key === contactKey)
     let initials = findInitials(updatedContact.name);
@@ -474,6 +478,16 @@ async function updateContactTemplate(contactKey, updatedContact) {
         newElement.innerHTML = template;
         contactElement.replaceWith(newElement);
     }
+    if (contactElement) {
+        procressOverlay.classList.add('close');
+            procressOverlay.classList.remove('active');
+            menuBox.classList.remove('inactive');
+            supportBox.classList.remove('inactive');
+            setTimeout(() => {
+                procressButton.classList.remove('active');
+            }, 1000);
+    }
+
 }
 
 /**
