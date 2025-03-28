@@ -814,7 +814,6 @@ button .close-icon:hover path {
 }
 
 @media(max-width: 1040px) {
-
     #contactlist-container {
         height: calc(100vh - 16.7vh);
         top: 80px;
@@ -1180,6 +1179,13 @@ button .close-icon:hover path {
     .procressing-area-button-mobile-backgroundcolor{
         background-color: #d1d1d13b;
         border-radius: 10px;
+    }
+
+    .massage-box {
+        position: absolute;
+        bottom: 100px;
+        right: 120px;
+        z-index: 4;
     }
 }
 

@@ -453,7 +453,7 @@ async function editContact(event, form) {
     if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
     updateContactTemplate(contactKey, updatedContact);
     await loadContactList();
-    editContactOverlay();
+    // editContactOverlay();
 }
 
 /**
@@ -466,9 +466,13 @@ async function editContact(event, form) {
 async function updateContactTemplate(contactKey, updatedContact) {
     let contactElement = document.querySelector(`#contact-${contactKey}`);
     if (contactElement) {
-        let initials = findInitials(updatedContact.name);
-        let template = await selectMoreContactInformationTemplate(updatedContact, initials);
-        contactElement.innerHTML = template;
+    let contact = allContacts.find(c => c.key === contactKey)
+    let initials = findInitials(updatedContact.name);
+    let template = await selectMoreContactInformationTemplate(contact, initials);
+    let newElement = document.createElement("div");
+        newElement.id = `contact-${contactKey}`;
+        newElement.innerHTML = template;
+        contactElement.replaceWith(newElement);
     }
 }
 
@@ -482,6 +486,7 @@ async function updateContactTemplate(contactKey, updatedContact) {
  * @param {string} path - The user path.
  */
 async function putData(key, data, path) {
+    let procressEditContainer = document.querySelector('.edit-contact-overlay');
     let response = await fetch(`${BASE_URL}users/${path}/allContacts/${key}.json`, {
         method: "PUT",
         headers: {
@@ -491,6 +496,9 @@ async function putData(key, data, path) {
     });
 
     let responseToJson = await response.json();
+    if (procressEditContainer) {
+        procressEditContainer.classList.remove('active');
+    }
     return responseToJson;
 }
 
@@ -499,8 +507,9 @@ async function putData(key, data, path) {
  * 
  * @param {string} key - Contact key.
  */
-async function deleteContact(key, button) {
-    let procressButton = document.querySelector('.mobile-procressing-area-button')
+async function deleteContact(key) {
+    let procressEditContainer = document.querySelector('.edit-contact-overlay');
+    let procressButton = document.querySelector('.mobile-procressing-area-button');
     let userId = localStorage.getItem("userId");
     if (!key) {
         console.error("Fehler: Kein gültiger Key übergeben!");
@@ -516,16 +525,18 @@ async function deleteContact(key, button) {
         console.log(`Kontakt mit Key ${key} erfolgreich gelöscht!`);
         allContacts = allContacts.filter(contact => contact.key !== key);
         loadContactList();
+        if (procressEditContainer) {
+            procressEditContainer.classList.remove('active');
+        }
         document.getElementById('moreInformationContact').innerHTML = '';
         document.querySelector('.more-information-container').classList.remove('mobile-overlay');
         procressButton.style.backgroundColor = '#2A3647'
     } catch (error) {
         console.error("Fehler beim Löschen:", error);
     }
-    toggleButtonBackgroundcolor(button)
 }
 
-function procressingClickMenu(button) {
+function procressingClickMenu() {
     let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.small-menu-button');
@@ -544,7 +555,6 @@ function procressingClickMenu(button) {
             supportBox.classList.remove('inactive');
             setTimeout(() => {
                 procressButton.classList.remove('active');
-                toggleRemoveButtonColor(button)
             }, 1000);
         }
     }
