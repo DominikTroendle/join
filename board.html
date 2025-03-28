@@ -80,14 +80,16 @@
                     <div class="input-button__box">
                         <div class="search-field__box">
                             <input class="search-field__input" id="search-field__input" type="text"
-                                placeholder="Find Task" onkeyup="setSearchModeTrueAndChangeImg(); checkSearchWordAndLoadAllSearchTasks(); closeSearchModeWhenInputIsEmpty()">
+                                placeholder="Find Task"
+                                onkeyup="setSearchModeTrueAndChangeImg(); checkSearchWordAndLoadAllSearchTasks(); closeSearchModeWhenInputIsEmpty()">
                             <button class="search-field__button"
                                 onmousedown="changeImgSource('search-field__img', 'assets/icons/Property 1=click.png')"
                                 onmouseup="changeImgSource('search-field__img', 'assets/icons/search.png')"
                                 onclick="selectionOfWhichFunctionIsUsed(); checkSearchWordAndLoadAllSearchTasks()">
                                 <img class="search-field__img" id="search-field__img" src="assets/icons/search.png"
                                     alt="">
-                                <svg class="search-field__close-img d-none" id="search-field__close-img" width="32" height="33" viewBox="0 0 32 33">
+                                <svg class="search-field__close-img d-none" id="search-field__close-img" width="32"
+                                    height="33" viewBox="0 0 32 33">
                                     <rect width="32" height="32" rx="16" class="bg" />
                                     <path class="icon"
                                         d="M16 18.366l-4.9 4.9a.85.85 0 01-1.2-1.2l4.9-4.9-4.9-4.9a.85.85 0 111.2-1.2l4.9 4.9 4.9-4.9a.85.85 0 111.2 1.2l-4.9 4.9 4.9 4.9a.85.85 0 11-1.2 1.2l-4.9-4.9z" />
@@ -118,22 +120,26 @@
                 <div class="all-drag-field-box">
                     <div class="drag-field" id="to-do-drag-field" data-category="toDos" data-array="toDoArray"
                         ondragstart="onDragStart(event); moveTo(event, 'to-do-drag-field', toDoArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, toDoArray); activatePointerEventsForAllTasks(); removeCardBorderBox()"
+                        ondragover="allowDrop(event)"
+                        ondrop="allowDrop2(event, toDoArray); activatePointerEventsForAllTasks(); removeCardBorderBox(); setHeightForDragFields()"
                         ondragenter="createCardBorderBoxForDragEntered(event)">
                     </div>
                     <div class="drag-field" id="in-progress-drag-field" data-category="inProgress"
                         data-array="inProgressArray"
                         ondragstart="onDragStart(event); moveTo(event, 'in-progress-drag-field', inProgressArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, inProgressArray); activatePointerEventsForAllTasks(); removeCardBorderBox()"
+                        ondragover="allowDrop(event)"
+                        ondrop="allowDrop2(event, inProgressArray); activatePointerEventsForAllTasks(); removeCardBorderBox(); setHeightForDragFields()"
                         ondragenter="createCardBorderBoxForDragEntered(event)"></div>
                     <div class="drag-field" id="await-feedback-drag-field" data-category="awaitFeedback"
                         data-array="awaitFeedbackArray"
                         ondragstart="onDragStart(event); moveTo(event, 'await-feedback-drag-field', awaitFeedbackArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, awaitFeedbackArray); activatePointerEventsForAllTasks(); removeCardBorderBox()"
+                        ondragover="allowDrop(event)"
+                        ondrop="allowDrop2(event, awaitFeedbackArray); activatePointerEventsForAllTasks(); removeCardBorderBox(); setHeightForDragFields()"
                         ondragenter="createCardBorderBoxForDragEntered(event)"></div>
                     <div class="drag-field" id="done-drag-field" data-category="done" data-array="doneArray"
                         ondragstart="onDragStart(event); moveTo(event, 'done-drag-field', doneArray)"
-                        ondragover="allowDrop(event)" ondrop="allowDrop2(event, doneArray); activatePointerEventsForAllTasks(); removeCardBorderBox()"
+                        ondragover="allowDrop(event)"
+                        ondrop="allowDrop2(event, doneArray); activatePointerEventsForAllTasks(); removeCardBorderBox(); setHeightForDragFields()"
                         ondragenter="createCardBorderBoxForDragEntered(event)">
                     </div>
                 </div>

@@ -261,7 +261,7 @@ function disablePointerEventsForAllTasks() {
 
     tasks.forEach(task => {
         if (task !== currentCard) {
-            task.style.pointerEvents = "none"; 
+            task.style.pointerEvents = "none";
         } else {
             task.style.pointerEvents = "auto";
         }
@@ -315,13 +315,12 @@ function renderContentBigTaskCardEdit() {
     bigTaskCard.innerHTML = bigTaskCardEditTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
-function init() {
-    // clearAllArray();
-
-    readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
-    readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
-    readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
-    readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
+async function init() {
+    await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
+    setHeightForDragFields()
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
@@ -567,4 +566,16 @@ function editDataInArray(taskCardObject, data) {
 function renderNewContentFromBigTaskCard(taskCardObject) {
     let bigTaskCard = document.getElementById("big-task-card__box");
     bigTaskCard.innerHTML = bigTaskCardTemplate(taskCardObject.id, taskCardObject.taskType, taskCardObject.taskTitle, taskCardObject.taskDescription, taskCardObject.taskPriority, taskCardObject.taskDueDate, taskCardObject.numberOfSubtasks, taskCardObject.numberOfCompletedSubtasks, taskCardObject.assignedContacts, taskCardObject.subtasks);
+}
+
+function setHeightForDragFields() {
+    const dragFields = document.querySelectorAll('.drag-field');
+    let maxHeight = 0;
+    dragFields.forEach(dragField => dragField.style.height = 'auto');
+    dragFields.forEach(dragField => {
+        maxHeight = Math.max(maxHeight, dragField.scrollHeight);
+    });
+    dragFields.forEach(dragField => {
+        dragField.style.height = `${maxHeight}px`;
+    });
 }
