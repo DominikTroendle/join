@@ -348,8 +348,26 @@ h1 {
     padding: 0 64px;
     overflow-y: auto;
     scrollbar-width: thin;
-    width: 1208px;
+    width: 1218px;
     max-height: 600px;
+}
+
+.all-drag-field-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.all-drag-field-box::-webkit-scrollbar-track {
+    background: white;
+}
+
+.all-drag-field-box::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 10px;
+}
+
+.all-drag-field-box::-webkit-scrollbar-thumb:hover {
+    background: rgb(180, 180, 180);
+    cursor: pointer;
 }
 
 .drag-field {
@@ -1131,16 +1149,90 @@ footer {
     padding-bottom: 0;
 }
 
-.task-category-dragfield__box-mobile {
+.title-button__box {
+    display: flex;
+}
+
+.add-task__button-mobile {
     display: none;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    gap: 10px;
+    background-color: #2A3647;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.add-task__button-mobile:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 4px 4px rgb(0, 0, 0, 0.25);
+}
+
+.add-task__button-mobile:active {
+    background-color: #091931;
+    border: 1px solid #2A3647;
+    box-shadow: none;
+}
+
+.task-category__box-mobile {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 244px;
+    height: 24px;
+}
+
+.task-category-dragfield__box {
+    display: flex;
+    width: 252px;
 }
 
 
-@media(max-width: 1200px) {
-    .all-drag-field-box{
+@media(max-width: 428px) {
+    h1 {
+        font-size: 47px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0%;
+    }
+
+    .title-button__box {
+        width: 396px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .add-task__button-mobile {
+        display: flex;
+    }
+
+    .add-task__button {
+        display: none;
+    }
+
+    .no-task-box {
+        width: 100%;
+        margin-right: 16px;
+    }
+
+    .title-input-button__box {
+        margin-top: 128px;
+        margin-left: 16px;
+        margin-right: 16px;
+        gap: 40px;
+    }
+
+    .add-task__button-text {
+        display: none;
+    }
+
+    .all-drag-field-box {
         width: 100%;
         height: 600px;
-        /* max-height: none; */
+        max-height: none;
         flex-direction: column;
         overflow: auto;
         scrollbar-width: none;
@@ -1152,8 +1244,11 @@ footer {
         display: none;
     }
 
-    .task-category-dragfield__box-mobile {
+    .task-category__box-mobile {
         display: flex;
+    }
+
+    .task-category-dragfield__box {
         align-items: flex-start;
         flex-direction: column;
         justify-content: flex-start;
@@ -1170,6 +1265,7 @@ footer {
         min-height: auto;
         overflow-x: scroll;
         scrollbar-width: none;
+        padding: 0;
     }
 
     .tasks-category__box {
