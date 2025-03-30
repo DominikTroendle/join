@@ -576,7 +576,7 @@ h1 {
     width: 525px;
     height: 931px;
     border-radius: 30px;
-    padding: 48px 40px;
+    padding: 48px 30px;
     gap: 24px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.16);
@@ -1517,6 +1517,62 @@ footer {
     }
 
     .big-task-card__subtasks-check-text-box {
+        width: 100%;
+    }
+
+    .big-task-card-edit__task-type-text-button-box {
+        width: 100%;
+    }
+
+    .big-task-card-edit__scroll-box {
+        width: 100%;
+    }
+
+    .big-task-card-edit__text-input-box {
+        width: 100%;
+    }
+
+    .big-task-card-edit__input {
+        width: 100%;
+    }
+
+    .big-task-card-edit__text-textarea-box {
+        width: 100%;
+    }
+
+    .big-task-card-edit__textarea {
+        width: 100%;
+    }
+
+    .container-input-label {
+        width: 100%;
+    }
+
+    .container-input-label {
+        width: 100%;
+    }
+
+    input #assigned-to {
+        width: 100%;
+    }
+
+    #container-input-assigned {
+        width: 100%;
+    }
+
+    #assigned-to {
+        width: 100%;
+    }
+
+    #container-input-subtask {
+        width: 100%;
+    }
+
+    #subtasks {
+        width: 100%;
+    }
+
+    .container-subtask {
         width: 100%;
     }
 }
