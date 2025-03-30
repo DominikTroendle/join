@@ -636,3 +636,23 @@ async function syncAllContactsWithTasks(userKey) {
     });
     await saveTasksToDatabase(userKey, updatedTasks);
 }
+
+async function saveTasksToDatabase(userKey, tasks) {
+    try {
+        let updates = {};
+        tasks.forEach(task => {
+            updates[task.id] = { ...task };
+        });
+
+        await fetch(`${BASE_URL}/users/${userKey}/tasks.json`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(updates)
+        });
+
+        console.log("Tasks erfolgreich aktualisiert.");
+    } catch (error) {
+        console.error("Fehler beim Speichern der Tasks:", error);
+    }
+}
+
