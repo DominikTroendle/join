@@ -19,7 +19,7 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow-x: auto;
     background-color: #F6F7F8;
 }
 
@@ -1230,7 +1230,7 @@ footer {
 
     .all-drag-field-box {
         padding: 0 16px;
-        
+
     }
 }
 
@@ -1239,7 +1239,7 @@ footer {
         justify-content: flex-start;
         width: fit-content;
     }
-    
+
     .all-drag-field-box {
         width: 100%;
         height: 600px;
@@ -1257,6 +1257,7 @@ footer {
 
     .task-category__box-mobile {
         display: flex;
+        height: 32px;
     }
 
     .task-category-dragfield__box {
@@ -1284,6 +1285,60 @@ footer {
         align-items: flex-start;
     }
 
+    .to-do__text {
+        font-size: 27px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0;
+    }
+
+    .to-do__button {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        padding: 3px;
+        gap: 10px;
+        font-size: 24px;
+    }
+
+    .in-progress__text {
+        font-size: 27px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0;
+    }
+
+    .in-progress__button {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        padding: 3px;
+        gap: 10px;
+        font-size: 24px;
+    }
+
+    .await-feedback__text {
+        font-size: 27px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0;
+    }
+
+    .await-feedback__button {
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        padding: 3px;
+        gap: 10px;
+        font-size: 24px;
+    }
+
+    .done__text {
+        font-size: 27px;
+        font-weight: 700;
+        line-height: 120%;
+        letter-spacing: 0;
+    }
 }
 
 @media(max-width: 1040px) {
@@ -1352,10 +1407,10 @@ footer {
         height: 27px;
     }
 
-     .big-task-card__category-box-technical-task {
+    .big-task-card__category-box-technical-task {
         width: 160px;
         height: 27px;
-     }
+    }
 
     .big-task-card__task-type-text {
         font-size: 16px;
@@ -1373,7 +1428,7 @@ footer {
         font-weight: 700;
         line-height: 120%;
         letter-spacing: 0;
-        
+
     }
 
     .big-task-card__task-description-box {
@@ -1465,7 +1520,7 @@ footer {
     }
 }
 
-@media(max-width: 420px) {
+@media(max-width: 415px) {
     .title-button__box {
         width: 310px;
     }
