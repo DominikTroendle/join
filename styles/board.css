@@ -1544,3 +1544,15 @@ footer {
         padding: 32px 12px;
     }
 }
+
+@media(max-height: 850px) {
+    .big-task-card__box {
+        padding: 16px 12px;
+        height: auto;
+        gap: 6px;
+    }
+
+    .big-task-card__title-box {
+        height: auto;
+    }
+}
