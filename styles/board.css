@@ -925,7 +925,7 @@ h1 {
     justify-content: flex-end;
     align-items: center;
     width: 445px;
-    height: 36px;
+    height: 57px;
 }
 
 .big-task-card-edit__task-type-button {
@@ -1394,7 +1394,7 @@ footer {
     .big-task-card__box {
         width: 396px;
         height: 724px;
-        padding: 32px 24px;
+        padding: 32px 16px;
         gap: 14px;
     }
 
@@ -1529,12 +1529,14 @@ footer {
     #assigned-to,
     #container-input-subtask,
     #subtasks,
-    .container-subtask {
+    .container-subtask,
+    #container-dropdown,
+    .container-custom-select-option {
         width: 348px;
     }
 
     .big-task-card-edit__scroll-box {
-        width: 373px;
+        width: 365px;
         height: 688px;
         gap: 16px;
     }
@@ -1552,7 +1554,8 @@ footer {
     #assigned-to,
     .initials,
     #subtasks,
-    #subtasks::placeholder {
+    #subtasks::placeholder,
+    .name {
         font-size: 16px;
         font-weight: 400;
         line-height: 120%;
@@ -1576,6 +1579,10 @@ footer {
         border-radius: 10px;
         padding: 18px 10px;
         gap: 4px;
+    }
+
+    .big-task-card-edit__task-type-text-button-box {
+        height: 61px;
     }
 }
 
