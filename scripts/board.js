@@ -579,3 +579,22 @@ function setHeightForDragFields() {
         dragField.style.height = `${maxHeight}px`;
     });
 }
+let allContacts = [];
+async function readAllContactsFromDatabase(userKey) {
+    try {
+        let result = await fetch(`${BASE_URL}/users/${userKey}/allContacts.json`);
+        if (!result.ok) {
+            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
+        }
+        let data = await result.json();
+        allContacts.length = 0;
+        if (data) {
+            Object.entries(data).forEach(([firebaseKey, value]) => {
+                const { name, color } = value;
+                allContacts.push({ name, color });
+            });
+        }
+    } catch (error) {
+        console.error("error loading the data:", error);
+    }
+}
