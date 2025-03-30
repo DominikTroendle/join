@@ -316,6 +316,7 @@ function renderContentBigTaskCardEdit() {
 }
 
 async function init() {
+    await syncAllContactsWithTasks(localStorage.getItem("userId"));
     await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
@@ -617,4 +618,21 @@ async function readAllTasksFromDatabase(userKey) {
     } catch (error) {
         console.error("error loading the data:", error);
     }
+}
+
+async function syncAllContactsWithTasks(userKey) {
+    await readAllContactsFromDatabase(userKey);
+    await readAllTasksFromDatabase(userKey);
+    let updatedTasks = allTasks.map(task => {
+        if (!task.assignedContacts) return task;
+        task.assignedContacts = task.assignedContacts
+            .map(contact => {
+                let updatedContact = allContacts.find(c => c.name === contact.name);
+                return updatedContact ? updatedContact : null;
+            })
+            .filter(contact => contact !== null);
+
+        return task;
+    });
+    await saveTasksToDatabase(userKey, updatedTasks);
 }
