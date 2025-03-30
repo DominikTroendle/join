@@ -1516,64 +1516,66 @@ footer {
         letter-spacing: 0;
     }
 
-    .big-task-card__subtasks-check-text-box {
-        width: 100%;
-    }
-
-    .big-task-card-edit__task-type-text-button-box {
-        width: 100%;
+    .big-task-card__subtasks-check-text-box,
+    .big-task-card-edit__task-type-text-button-box,
+    .big-task-card-edit__text-input-box,
+    .big-task-card-edit__input,
+    .big-task-card-edit__text-textarea-box,
+    .big-task-card-edit__textarea,
+    .container-input-label,
+    .container-input-label,
+    input #assigned-to,
+    #container-input-assigned,
+    #assigned-to,
+    #container-input-subtask,
+    #subtasks,
+    .container-subtask {
+        width: 348px;
     }
 
     .big-task-card-edit__scroll-box {
-        width: 100%;
+        width: 373px;
+        height: 688px;
+        gap: 16px;
     }
 
     .big-task-card-edit__text-input-box {
-        width: 100%;
+        width: 348px;
     }
 
-    .big-task-card-edit__input {
-        width: 100%;
+
+    .big-task-card-edit__text,
+    .big-task-card-edit__input,
+    .big-task-card-edit__textarea,
+    .label-add-task,
+    .button-prio,
+    #assigned-to,
+    .initials,
+    #subtasks,
+    #subtasks::placeholder {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 120%;
+        letter-spacing: 0;
     }
 
-    .big-task-card-edit__text-textarea-box {
-        width: 100%;
+    .button-prio {
+        width: 104px;
+        height: 41px;
     }
 
-    .big-task-card-edit__textarea {
-        width: 100%;
+    #svg-urgent,
+    #svg-medium,
+    #svg-low {
+        transform: scale(0.8);
     }
 
-    .container-input-label {
-        width: 100%;
-    }
-
-    .container-input-label {
-        width: 100%;
-    }
-
-    input #assigned-to {
-        width: 100%;
-    }
-
-    #container-input-assigned {
-        width: 100%;
-    }
-
-    #assigned-to {
-        width: 100%;
-    }
-
-    #container-input-subtask {
-        width: 100%;
-    }
-
-    #subtasks {
-        width: 100%;
-    }
-
-    .container-subtask {
-        width: 100%;
+    .big-task-card-edit__Ok-button {
+        width: 77px;
+        height: 61px;
+        border-radius: 10px;
+        padding: 18px 10px;
+        gap: 4px;
     }
 }
 
