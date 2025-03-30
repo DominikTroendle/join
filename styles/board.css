@@ -1663,4 +1663,12 @@ footer {
     .big-task-card__title-box {
         height: auto;
     }
+
+    .big-task-card-edit__scroll-box {
+        height: 52vh;
+    }
+
+    .all-drag-field-box {
+        height: 350px;
+    }
 }
