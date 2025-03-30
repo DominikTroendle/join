@@ -1569,7 +1569,8 @@ footer {
 
     #svg-urgent,
     #svg-medium,
-    #svg-low {
+    #svg-low,
+    .initials {
         transform: scale(0.8);
     }
 
@@ -1607,6 +1608,44 @@ footer {
     .big-task-card__box {
         width: 310px;
         padding: 32px 12px;
+    }
+
+    .big-task-card-edit__scroll-box {
+        width: 100%;
+    }
+
+    .big-task-card__subtasks-check-text-box,
+    .big-task-card-edit__task-type-text-button-box,
+    .big-task-card-edit__text-input-box,
+    .big-task-card-edit__input,
+    .big-task-card-edit__text-textarea-box,
+    .big-task-card-edit__textarea,
+    .container-input-label,
+    .container-input-label,
+    input #assigned-to,
+    #container-input-assigned,
+    #assigned-to,
+    #container-input-subtask,
+    #subtasks,
+    .container-subtask,
+    #container-dropdown,
+    .container-custom-select-option {
+        width: 270px;
+    }
+
+    #assigned-to,
+    #subtasks {
+        padding: 12px 6px;
+    }
+
+    #buttons-prio {
+        gap: 6px;
+    }
+
+    #urgent,
+    #medium,
+    #low {
+        padding: 1px 4px;
     }
 }
 
