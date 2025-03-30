@@ -580,6 +580,7 @@ function setHeightForDragFields() {
     });
 }
 let allContacts = [];
+let allTasks = [];
 async function readAllContactsFromDatabase(userKey) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/allContacts.json`);
@@ -592,6 +593,25 @@ async function readAllContactsFromDatabase(userKey) {
             Object.entries(data).forEach(([firebaseKey, value]) => {
                 const { name, color } = value;
                 allContacts.push({ name, color });
+            });
+        }
+    } catch (error) {
+        console.error("error loading the data:", error);
+    }
+}
+
+async function readAllTasksFromDatabase(userKey) {
+    try {
+        let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
+        if (!result.ok) {
+            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
+        }
+        let data = await result.json();
+        allTasks.length = 0;
+        if (data) {
+            Object.entries(data).forEach(([firebaseKey, value]) => {
+                value.id = firebaseKey;
+                allTasks.push(value);
             });
         }
     } catch (error) {
