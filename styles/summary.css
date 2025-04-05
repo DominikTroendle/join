@@ -451,6 +451,12 @@ footer {
         gap: 20px;
     }
 
+    .button-middle-inside-box {
+        width: 108px;
+        height: 73px;
+        gap: 18px;
+    }
+
     #priority-img {
        width: 40px;
        height: 40px;
