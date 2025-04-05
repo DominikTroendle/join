@@ -595,6 +595,19 @@ footer {
         padding: 38px 8px;
     }
 
+    .button-middle-img-text-box {
+        gap: 8px;
+    }
+
+    .button-middle-inside-box {
+        padding-left: 10px;
+        gap: 10px;
+    }
+
+    .date-text-box {
+        padding: 0 8px;
+    }
+
     .button-middle {
         width: 300px;
     }
