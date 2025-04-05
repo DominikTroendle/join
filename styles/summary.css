@@ -391,7 +391,7 @@ footer {
     .title__box {
         margin-left: 32px;
     }
-    
+
     .all-button-box {
         margin-left: 32px;
     }
@@ -406,7 +406,7 @@ footer {
     .title__box {
         margin-left: 16px;
     }
-    
+
     .all-button-box {
         margin-left: 16px;
     }
@@ -429,6 +429,12 @@ footer {
         font-weight: 700;
         line-height: 120%;
         letter-spacing: 0;
+    }
+}
+
+@media (max-width: 1310px) {
+    .name-box {
+        display: none;
     }
 }
 
@@ -564,9 +570,5 @@ footer {
         border-radius: 20px;
         padding: 25px 0;
         gap: 13px;
-    }
-
-    .name-box {
-        display: none;
     }
 }
