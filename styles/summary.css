@@ -397,4 +397,9 @@ footer {
     .content {
         margin-left: 0;
     }
+
+    .all-button-box {
+        width: 396px;
+        height: 384px;
+    }
 }
