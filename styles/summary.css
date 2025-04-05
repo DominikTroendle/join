@@ -416,6 +416,15 @@ footer {
     }
 }
 
+@media (max-width: 1310px) {
+    .daytime-text {
+        font-size: 36px;
+        font-weight: 400;
+        line-height: 120%;
+        letter-spacing: 0;
+    }
+}
+
 @media(max-width: 428px) {
     .title__box {
         margin-top: 128px;
