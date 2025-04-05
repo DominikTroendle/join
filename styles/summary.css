@@ -389,9 +389,13 @@ footer {
 
 @media(max-width: 428px) {
     .title__box {
+        margin-top: 128px;
         margin-left: 0;
+        margin-bottom: 40px;
         padding: 0 16px;
         flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
     }
 
     .title__text-big {
@@ -403,6 +407,9 @@ footer {
 
     .title-separator-text-small__box {
         flex-direction: column-reverse;
+        gap: 16px;
+        height: auto;
+        align-items: flex-start;
     }
 
     .title__separator {
