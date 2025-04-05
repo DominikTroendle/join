@@ -402,6 +402,20 @@ footer {
 
 }
 
+@media (max-width: 1350px) {
+    .title__box {
+        margin-left: 16px;
+    }
+    
+    .all-button-box {
+        margin-left: 16px;
+    }
+
+    .button-name-box {
+        gap: 24px;
+    }
+}
+
 @media(max-width: 428px) {
     .title__box {
         margin-top: 128px;
