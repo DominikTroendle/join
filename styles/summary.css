@@ -450,4 +450,9 @@ footer {
         padding: 28px 0;
         gap: 20px;
     }
+
+    #priority-img {
+       width: 40px;
+       height: 40px;
+    }
 }
