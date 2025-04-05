@@ -76,6 +76,14 @@ body {
     line-height: 73.2px;
 }
 
+.title-separator-text-small__box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 73px;
+    gap: 30px;
+}
+
 .title__separator {
     width: 3px;
     height: 59px;
@@ -383,8 +391,9 @@ footer {
     .title__box {
         margin-left: 0;
         padding: 0 16px;
+        flex-direction: column;
     }
-    
+
     .title__text-big {
         font-size: 47px;
         font-weight: 700;
@@ -414,8 +423,8 @@ footer {
     .button-top-box {
         width: 396px;
         height: 110px;
-    }   
-    
+    }
+
     .button-top {
         width: 186px;
         height: 110px;
@@ -461,8 +470,8 @@ footer {
     }
 
     #priority-img {
-       width: 40px;
-       height: 40px;
+        width: 40px;
+        height: 40px;
     }
 
     .separator-button-middle {
@@ -483,7 +492,7 @@ footer {
         letter-spacing: 0;
     }
 
-    .button-bottom-box{
+    .button-bottom-box {
         width: 396px;
         height: 116px;
     }
