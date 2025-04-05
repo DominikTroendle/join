@@ -401,6 +401,10 @@ footer {
         letter-spacing: 0;
     }
 
+    .title-separator-text-small__box {
+        flex-direction: column-reverse;
+    }
+
     .title__text-small {
         font-size: 20px;
         font-weight: 400;
