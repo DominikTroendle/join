@@ -387,6 +387,12 @@ footer {
     margin-top: auto;
 }
 
+@media(max-width: 1440px) {
+    .button-name-box {
+        gap: 40px;
+    }
+}
+
 @media(max-width: 428px) {
     .title__box {
         margin-top: 128px;
