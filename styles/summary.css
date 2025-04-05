@@ -471,4 +471,11 @@ footer {
         line-height: 120%;
         letter-spacing: 0;
     }
+
+    .text-small-button-middle {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 120%;
+        letter-spacing: 0;
+    }
 }
