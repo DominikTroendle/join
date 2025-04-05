@@ -520,4 +520,8 @@ footer {
         padding: 25px 0;
         gap: 13px;
     }
+
+    .name-box {
+        display: none;
+    }
 }
