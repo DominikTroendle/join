@@ -482,4 +482,9 @@ footer {
         line-height: 120%;
         letter-spacing: 0;
     }
+
+    .button-bottom-box{
+        width: 396px;
+        height: 116px;
+    }
 }
