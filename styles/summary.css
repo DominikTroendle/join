@@ -487,4 +487,12 @@ footer {
         width: 396px;
         height: 116px;
     }
+
+    .button-bottom {
+        width: 116px;
+        height: 116px;
+        border-radius: 20px;
+        padding: 25px 0;
+        gap: 13px;
+    }
 }
