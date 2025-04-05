@@ -402,4 +402,9 @@ footer {
         width: 396px;
         height: 384px;
     }
+
+    .button-top-box {
+        width: 396px;
+        height: 110px;
+    }    
 }
