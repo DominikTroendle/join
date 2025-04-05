@@ -432,13 +432,7 @@ footer {
     }
 }
 
-@media (max-width: 1310px) {
-    .name-box {
-        display: none;
-    }
-}
-
-@media(max-width: 428px) {
+@media (max-width: 1040px) {
     .title__box {
         margin-top: 128px;
         margin-left: 0;
@@ -473,6 +467,10 @@ footer {
         font-weight: 400;
         line-height: 120%;
         letter-spacing: 0;
+    }
+
+    .name-box {
+        display: none;
     }
 
     .content {
@@ -570,5 +568,25 @@ footer {
         border-radius: 20px;
         padding: 25px 0;
         gap: 13px;
+    }
+}
+
+@media(max-width: 415px) {
+    .title__box {
+        padding: 0 6px;
+    }
+
+    .all-button-box {
+        padding: 0 6px;
+    }
+    
+    .button-top-box {
+        gap: 16px;
+        justify-content: flex-start;
+    }
+
+    .button-top {
+        width: 146px;
+        padding: 38px 8px;
     }
 }
