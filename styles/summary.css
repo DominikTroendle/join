@@ -380,6 +380,11 @@ footer {
 }
 
 @media(max-width: 428px) {
+    .title__box {
+        margin-left: 0;
+        padding: 0 16px;
+    }
+    
     .title__text-big {
         font-size: 47px;
         font-weight: 700;
@@ -402,6 +407,8 @@ footer {
     .all-button-box {
         width: 396px;
         height: 384px;
+        padding: 0 16px;
+        margin-left: 0;
     }
 
     .button-top-box {
@@ -414,6 +421,7 @@ footer {
         height: 110px;
         padding: 38px 19px;
         gap: 10px;
+        border-radius: 20px;
     }
 
     .button-img {
@@ -433,5 +441,13 @@ footer {
         font-weight: 400;
         line-height: 120%;
         letter-spacing: 0%;
+    }
+
+    .button-middle {
+        width: 396px;
+        height: 110px;
+        border-radius: 20px;
+        padding: 28px 0;
+        gap: 20px;
     }
 }
