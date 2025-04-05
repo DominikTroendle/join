@@ -433,6 +433,11 @@ footer {
 }
 
 @media (max-width: 1040px) {
+    .small-menu-button {
+        width: 40px;
+        height: 40px;
+    }
+    
     .title__box {
         margin-top: 128px;
         margin-left: 0;
@@ -586,7 +591,20 @@ footer {
     }
 
     .button-top {
-        width: 146px;
+        width: 142px;
         padding: 38px 8px;
+    }
+
+    .button-middle {
+        width: 300px;
+    }
+
+    .button-bottom-box {
+        justify-content: flex-start;
+        gap: 16px;
+    }
+
+    .button-bottom {
+        width: 89px;
     }
 }
