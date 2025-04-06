@@ -570,6 +570,9 @@ function renderNewContentFromBigTaskCard(taskCardObject) {
 }
 
 function setHeightForDragFields() {
+    if (window.innerWidth < 1040) {
+        return;
+    }
     const dragFields = document.querySelectorAll('.drag-field');
     let maxHeight = 0;
     dragFields.forEach(dragField => dragField.style.height = 'auto');

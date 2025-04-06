@@ -1191,8 +1191,6 @@ footer {
     width: 252px;
 }
 
-
-
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
@@ -1217,7 +1215,6 @@ footer {
     .task-category__box-mobile {
         width: 396px;
     }
-
 }
 
 @media (max-width: 1350px) {
@@ -1238,7 +1235,7 @@ footer {
 @media (max-width: 1310px) {
     .title-input-button__box {
         justify-content: flex-start;
-        width: fit-content;
+        width: auto;
     }
 
     .all-drag-field-box {
@@ -1354,6 +1351,18 @@ footer {
         letter-spacing: 0%;
     }
 
+    .task-category-dragfield__box {
+        gap: 16px;
+    }
+
+    .all-drag-field-box {
+        gap: 26px;
+    }
+
+    .drag-field {
+        align-items: flex-start;
+    }
+
     .title-button__box {
         width: 396px;
         justify-content: space-between;
@@ -1377,6 +1386,7 @@ footer {
         margin-top: 128px;
         margin-left: 16px;
         margin-right: 16px;
+        margin-bottom: 24px;
         gap: 40px;
     }
 
