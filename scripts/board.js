@@ -660,4 +660,3 @@ async function saveTasksToDatabase(userKey, tasks) {
         console.error("Fehler beim Speichern der Tasks:", error);
     }
 }
-
