@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="styles/summary.css">
 </head>
 
-<body onload="readFromDatabase(); addClassSelectedMenuButton('summary-menu-button'); init()">
+<body onload="readFromDatabase(); addClassSelectedMenuButton('summary-menu-button'); init(); greetingAnimation()">
     <div class="all-content">
         <div class="content">
             <header>
@@ -72,7 +72,7 @@
                         notice</a>
                 </div>
             </div>
-            <div class="title__box">
+            <div class="title__box" id="title__box">
                 <h1 class="title__text-big">Join 360</h1>
                 <div class="title-separator-text-small__box">
                     <span class="title__separator"></span>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="button-name-box">
-                <div class="all-button-box">
+                <div class="all-button-box" id="all-button-box">
                     <div class="button-top-box">
                         <a href="board.html" class="button-top transform-origin-left"
                             onmouseover="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"
@@ -142,7 +142,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="name-box">
+                <div class="name-box" id="name-box">
                     <span class="daytime-text" id="currentGreeting"></span>
                     <span class="name-text" id="userName"></span>
                 </div>

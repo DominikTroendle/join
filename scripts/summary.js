@@ -118,8 +118,8 @@ function loadUpcomingDeadline(allLoadTasks, priority) {
     const currentDate = new Date();
     let pastDeadlines = [];
     let futureDeadlines = [];
-    if (datesOfUpcomingDeadlines ) {
-        
+    if (datesOfUpcomingDeadlines) {
+
         for (let dateString of datesOfUpcomingDeadlines) {
             if (!dateString) continue;
             let taskDate = new Date(dateString.split("/").reverse().join("-"));
@@ -153,3 +153,24 @@ function loadUpcomingDeadline(allLoadTasks, priority) {
     }
 }
 
+function greetingAnimation() {
+    let valueAnimation = sessionStorage.getItem("valueAnimation");
+    if (valueAnimation === "stop") {
+        return;
+    }
+    if (window.innerWidth < 1040) {
+        document.getElementById("name-box").style.display = "flex";
+        document.getElementById("title__box").style.opacity = 0;
+        document.getElementById("all-button-box").style.opacity = 0;
+        setTimeout(() => {
+            document.getElementById("name-box").classList.add("animation-fade-out");
+            document.getElementById("title__box").classList.add("animation-fade-in");
+            document.getElementById("all-button-box").classList.add("animation-fade-in");
+            setTimeout(() => {
+                document.getElementById("name-box").style.display = "none";
+                sessionStorage.setItem("valueAnimation", "stop");
+            }, 200);
+
+        }, 2000);
+    }
+}
