@@ -1247,6 +1247,7 @@ footer {
         scrollbar-width: none;
         padding: 0;
         justify-content: flex-start;
+        gap: 26px;
     }
 
     .tasks-category__box {
@@ -1264,11 +1265,13 @@ footer {
         justify-content: flex-start;
         padding-left: 16px;
         width: 100%;
+        gap: 16px;
     }
 
     .drag-field {
         flex-direction: row;
         justify-content: flex-start;
+        align-items: flex-start;
         /* margin-bottom: 40px; */
         width: 100%;
         /* height: 211px; */
@@ -1276,6 +1279,7 @@ footer {
         overflow-x: scroll;
         scrollbar-width: none;
         padding: 0;
+        gap: 16px;
     }
 
     .tasks-category__box {
@@ -1349,18 +1353,6 @@ footer {
         font-weight: 700;
         line-height: 120%;
         letter-spacing: 0%;
-    }
-
-    .task-category-dragfield__box {
-        gap: 16px;
-    }
-
-    .all-drag-field-box {
-        gap: 26px;
-    }
-
-    .drag-field {
-        align-items: flex-start;
     }
 
     .title-button__box {
