@@ -570,10 +570,11 @@ function renderNewContentFromBigTaskCard(taskCardObject) {
 }
 
 function setHeightForDragFields() {
-    if (window.innerWidth < 1040) {
+    const dragFields = document.querySelectorAll('.drag-field');
+    if (window.innerWidth < 1310) {
+        dragFields.forEach(dragField => dragField.style.height = 'auto');
         return;
     }
-    const dragFields = document.querySelectorAll('.drag-field');
     let maxHeight = 0;
     dragFields.forEach(dragField => dragField.style.height = 'auto');
     dragFields.forEach(dragField => {
@@ -583,6 +584,7 @@ function setHeightForDragFields() {
         dragField.style.height = `${maxHeight}px`;
     });
 }
+window.addEventListener("resize", setHeightForDragFields);
 let allContacts = [];
 let allTasks = [];
 async function readAllContactsFromDatabase(userKey) {
