@@ -809,11 +809,23 @@ input:focus {
 
 @media only screen and (max-height: 800px) {
     #main {
-        padding-top: 20px;
+        /* padding-top: 20px; */
     }
 }
 
 @media only screen and (max-width: 1500px) {
+    #main {
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+    }
+
+    #container-form {
+        width: 100%;
+        overflow: auto;
+        padding-top: 0;
+    }
+
     #form-add-task {
         flex-direction: column;
     }
@@ -836,6 +848,152 @@ input:focus {
 
     #separator {
         width: 440px;
+    }
+
+    #form-top {
+        position: fixed;
+        width: 50%;
+        background-color: #F6F7F8;
+        z-index: 1;
+        align-self: flex-start;
+        /* margin-left: calc(50% - 228px); */
+        height: 200px;
+        /* padding-top: 80px; */
+    }
+
+    #form-add-task {
+        margin-top: 85px;
+        gap: 16px;
+    }
+
+    #separator {
+        display: none;
+    }
+
+    #required-mobile {
+        display: block;
+        align-self: flex-start;
+        margin-left: calc(50% - 220px);
+    }
+
+    #footer-add-task {
+        width: 440px;
+        align-items: flex-start;
+        margin-top: 16px;
+        margin-bottom: 80px;
+    }
+
+    #footer-add-task p {
+        display: none;
+    }
+
+    #clear-create-buttons {
+        height: 81px;
+        /* width: 100%; */
+        background-color: #F6F7F8;
+        position: fixed;
+        bottom: 81px;
+        z-index: 4;
+        justify-content: flex-end;
+        gap: 32px;
+    }
+
+    #clear-create-buttons button {
+        height: 56px;
+    }
+
+    #container-subtasks {
+        min-height: 60px;
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+    body {
+        display: block;
+        max-height: 100vw;
+    }
+
+    #main {
+        margin-left: 0;
+        width: 100vw;
+        height: 100vh;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #container-form {
+        width: 100%;
+        margin: 80px 0;
+        overflow: auto;
+        align-items: center;
+        padding: 0;
+    }
+
+    #form-top {
+        position: fixed;
+        width: 50%;
+        background-color: #F6F7F8;
+        z-index: 1;
+        align-self: flex-start;
+        margin-left: calc(50% - 228px);
+        height: 200px;
+        padding-top: 80px;
+    }
+
+    #form-add-task {
+        margin-top: 85px;
+        gap: 16px;
+    }
+
+    #separator {
+        display: none;
+    }
+
+    #required-mobile {
+        display: block;
+        align-self: flex-start;
+        margin-left: calc(50% - 220px);
+    }
+
+    #footer-add-task {
+        width: 440px;
+        align-items: flex-start;
+        margin-top: 16px;
+        margin-bottom: 80px;
+    }
+
+    #footer-add-task p {
+        display: none;
+    }
+
+    #clear-create-buttons {
+        height: 81px;
+        width: 440px;
+        background-color: #F6F7F8;
+        position: fixed;
+        bottom: 81px;
+        z-index: 4;
+        justify-content: flex-end;
+        gap: 32px;
+        padding-top: 10px;
+    }
+
+    #clear-create-buttons button {
+        height: 56px;
+    }
+
+    #button-create {
+        font-size: 21px;
+        font-weight: 500;
+    }
+
+    #button-clear {
+        width: 110px;
+    }
+
+    #container-subtasks {
+        min-height: 60px;
     }
 }
 
@@ -860,9 +1018,8 @@ input:focus {
 
     #container-form {
         width: 100vw;
-        margin-top: 80px;
-        max-height: calc(100vh - 160px);
-        padding: 0;
+        margin: 80px 0;
+        padding: 0 20px;
         overflow: auto;
     }
 
@@ -875,7 +1032,6 @@ input:focus {
     
     #main h1 {
         margin-top: 48px;
-        margin-left: 16px;
     }
 
     #form-add-task {
@@ -894,15 +1050,17 @@ input:focus {
     }
 
     .container-input-label {
-        width: 396px;
+        width: 100%;
     }
 
     #container-dropdown {
-        width: 396px;
+        /* width: 396px; */
+        width: 100%;
     }
 
     .container-custom-select-options {
-        width: 396px;
+        /* width: 396px; */
+        width: 100%;
     }
 
     #dropdown-category {
@@ -918,11 +1076,52 @@ input:focus {
         font-size: 16px;
     }
 
+    #required-mobile {
+        display: block;
+    }
+
     #footer-add-task {
+        width: 100%;
+        align-items: flex-start;
+        margin-top: 16px;
+        margin-bottom: 80px;
+    }
+
+    #footer-add-task p {
         display: none;
     }
 
-    #required-mobile {
-        display: block;
+    #clear-create-buttons {
+        height: 81px;
+        width: calc(100% - 40px);
+        background-color: #F6F7F8;
+        position: fixed;
+        bottom: 81px;
+        z-index: 4;
+        justify-content: flex-end;
+        gap: 32px;
+    }
+
+    #clear-create-buttons button {
+        height: 56px;
+    }
+
+    #container-subtasks {
+        min-height: 60px;
+    }
+}
+
+@media only screen and (max-width: 395px) {
+    #container-input-assigned {
+        /* width: calc(100% - 35px); */
+        width: 100%;
+    }
+
+    #assigned-to {
+        width: 100%;
+    }
+
+    .button-dropdown {
+        padding-inline: 0;
     }
 }
