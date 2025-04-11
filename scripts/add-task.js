@@ -14,41 +14,11 @@ let subtasks = [];
 
 let task = {};
 
-// default taskObj construction
-/* task = {
-    id: 1,
-    taskDescription: "",
-    taskTitle: "",
-    taskType: "User Story",
-    taskDate: "",
-    taskPriority: "",
-    taskSubtasks:
-    [
-        {
-            subtask1: "",
-            done: false
-        },
-        {
-            subtask2: "",
-            done: false
-        }
-    ],
-    taskAssigned:
-    [
-        {
-            name: "David Müller",
-            initials:  "",
-            color: ""
-        }
-    ]
-}; */
-
 let unvalidInputs = [];
 
 async function initialize() {
     let contactsObj = await getContacts();
     loadContactInfo(contactsObj);
-    // renderAssignOptions(contacts);
     loadSmallInitials();
 }
 
@@ -641,7 +611,6 @@ function checkInputLength(inputField) {
         if (invalidElement) document.getElementById(invalidElement).classList.add('d-none');
     } else {
         errorElement.classList.add('d-none');
-        // if (invalidElement) document.getElementById(invalidElement).classList.remove('d-none');
     }
 }
 
