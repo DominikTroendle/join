@@ -681,7 +681,7 @@ input:focus {
     line-height: 24px;
 }
 
-#footer-add-task div {
+#clear-create-buttons {
     display: flex;
     gap: 16px;
 }
@@ -861,7 +861,8 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
-    .container-custom-select-options {
+    .container-custom-select-options,
+    .container-custom-select-options-noscroll {
         width: 400px;
     }
 
@@ -874,7 +875,8 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
-    .container-custom-select-options {
+    .container-custom-select-options,
+    .container-custom-select-options-noscroll {
         width: 380px;
     }
 
@@ -887,7 +889,8 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
-    .container-custom-select-options {
+    .container-custom-select-options,
+    .container-custom-select-options-noscroll {
         width: 370px;
     }
 
@@ -897,62 +900,104 @@ input:focus {
 }
 
 @media only screen and (max-width: 1040px) {
+    #main {
+        margin-left: 0;
+        width: 100vw;
+        align-items: center;
+    }
+
+    #container-form {
+        width: 806px;
+        align-items: center;
+        padding: 80px 0;
+    }
+
+    #form-top {
+        padding-top: 56px;
+    }
+
+    #form-top h1 {
+        margin-bottom: 0;
+    }
+
+    #form-add-task {
+        gap: 32px;
+    }
+
+    #footer-add-task {
+        width: 806px;
+        margin: 7px 0;
+    }
+}
+
+@media only screen and (max-width: 865px) {
+    #form-add-task {
+        gap: 16px;
+    }
+
+    #footer-add-task {
+        width: 774px;
+    }
+}
+
+@media only screen and (max-width: 810px) {
     body {
         display: block;
         max-height: 100vw;
     }
 
     #main {
-        margin-left: 0;
-        width: 100vw;
         height: 100vh;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
     }
 
     #container-form {
-        width: 100%;
-        margin: 80px 0;
-        overflow: auto;
-        align-items: center;
-        padding: 0;
+        width: 440px;
+        max-height: 100vh;
     }
 
     #form-top {
-        /* position: fixed; */
-        /* width: 442px; */
-        /* background-color: #F6F7F8; */
-        /* z-index: 1; */
-        /* margin-left: calc((100vw - 442px) / 2); */
-        /* height: 200px; */
-        /* padding-top: 80px; */
-    }
-
-    #form-top h1 {
-        padding-left: 2px;
+        align-self: flex-start;
+        margin-bottom: 32px;
     }
 
     #form-add-task {
-        margin-top: 85px;
-        gap: 16px;
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    #form-add-task::-webkit-scrollbar {
+        display: none;
+    }
+
+    #form-add-task {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    #form-left,
+    #form-right {
+        width: 440px;
     }
 
     #separator {
         display: none;
     }
 
+    #container-dropdown,
+    .container-custom-select-options,
+    .container-custom-select-options-noscroll {
+        width: 440px;
+    }
+
     #required-mobile {
         display: block;
         align-self: flex-start;
-        margin-left: calc(50% - 220px);
     }
 
     #footer-add-task {
-        width: 440px;
-        align-items: flex-start;
-        margin-top: 16px;
-        margin-bottom: 80px;
+        width: 100%;
+        justify-self: flex-end;
+        align-self: flex-end;
     }
 
     #footer-add-task p {
@@ -960,87 +1005,27 @@ input:focus {
     }
 
     #clear-create-buttons {
-        height: 81px;
-        width: 440px;
-        background-color: #F6F7F8;
-        position: fixed;
-        bottom: 81px;
-        z-index: 4;
+        width: 100%;
         justify-content: flex-end;
         gap: 32px;
-        padding-top: 10px;
     }
 
     #clear-create-buttons button {
         height: 56px;
     }
-
-    #button-create {
-        font-size: 21px;
-        font-weight: 500;
-    }
-
-    #button-clear {
-        width: 110px;
-    }
-
-    #container-subtasks {
-        min-height: 60px;
-    }
 }
 
 @media only screen and (max-width: 465px) {
-    header {
-        justify-content: space-between;
-    }
-
-    body {
-        display: block;
-        max-height: 100vw;
-    }
-
-    #main {
-        margin: 0;
-        width: 100vw;
-        height: 100vh;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-    }
-
     #container-form {
-        width: 100vw;
-        margin: 80px 0;
-        padding: 0 20px;
-        overflow: auto;
-    }
-
-    #form-top {
-        width: 100%;
-        margin: 0;
-    }
-
-    #form-top h1 {
-        padding: 0;
+        width: 400px;
     }
 
     #form-add-task {
-        gap: 16px;
-        margin-top: 170px;
         width: 100%;
     }
 
     #form-left,
     #form-right {
-        width: 100%;
-        align-items: center;
-    }
-
-    #separator {
-        display: none;
-    }
-
-    .container-input-label {
         width: 100%;
     }
 
@@ -1053,10 +1038,6 @@ input:focus {
         width: 100%;
     }
 
-    #dropdown-category {
-        width: 396px;
-    }
-
     #buttons-prio {
         height: 41px;
     }
@@ -1065,59 +1046,46 @@ input:focus {
         height: 41px;
         font-size: 16px;
     }
+}
 
-    #required-mobile {
-        display: block;
-        margin-left: 0;
-    }
-
-    #footer-add-task {
-        width: 100%;
-        align-items: flex-start;
-        margin-top: 16px;
-        margin-bottom: 80px;
-    }
-
-    #footer-add-task p {
-        display: none;
-    }
-
-    #clear-create-buttons {
-        height: 81px;
-        width: calc(100% - 40px);
-        background-color: #F6F7F8;
-        position: fixed;
-        bottom: 81px;
-        z-index: 4;
-        justify-content: flex-end;
-        gap: 32px;
-    }
-
-    #clear-create-buttons button {
-        height: 56px;
-    }
-
-    #container-subtasks {
-        min-height: 60px;
+@media only screen and (max-width: 428px) {
+    #container-form {
+        width: 380px;
     }
 }
 
-@media only screen and (max-width: 395px) {
-    /* #container-input-due-date {
-        width: 100%;
-    } */
-
-    #container-input-assigned,
-    #container-input-category {
-        width: 100%;
+@media only screen and (max-width: 400px) {
+    #container-form {
+        width: 360px;
     }
 
-    #assigned-to,
-    #category {
-        width: 100%;
+    #clear-create-buttons {
+        gap: 16px;
     }
 
-    .button-dropdown {
-        padding-inline: 0;
+    #clear-create-buttons button {
+        height: 50px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    #container-form {
+        width: 340px;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    #container-form {
+        width: 320px;
+    }
+}
+
+@media only screen and (max-width: 340px) {
+    #container-form {
+        width: 300px;
+    }
+
+    #assigned-to {
+        padding-right: 10px;
     }
 }

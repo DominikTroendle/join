@@ -97,7 +97,7 @@
                             Assigned to
                         </label>
                         <div id="container-input-assigned">
-                            <input id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
+                            <input id="assigned-to" type="text" name="assigned-to" placeholder="Select contacts to assign" size="10" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
                             <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)">
                                 <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
                             </button>
@@ -113,7 +113,7 @@
                             <span class="asterisk">&#42;</span>
                         </label>
                         <div id="container-input-category">
-                            <input readonly id="category" type="text" name="category" placeholder="Select task category" onclick="toggleCategoryOptions(), stopPropagation(event)">
+                            <input readonly id="category" type="text" name="category" placeholder="Select task category" size="10" onclick="toggleCategoryOptions(), stopPropagation(event)">
                             <button class="button-dropdown" type="button">
                                 <img id="arrow-dropdown-category" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down" onclick="toggleCategoryOptions(), stopPropagation(event)">
                             </button>
@@ -160,9 +160,9 @@
                         </div>
                         <div id="container-subtasks"></div>
                     </div>
+                    <p id="required-mobile"><span class="asterisk">&#42;</span>This field is required</p>
                 </div>
             </form>
-            <p id="required-mobile"><span class="asterisk">&#42;</span>This field is required</p>
             <div id="footer-add-task">
                 <p class="flex"><span class="asterisk">&#42;</span>This field is required</p>
                 <div id="clear-create-buttons">
