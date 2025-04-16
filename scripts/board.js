@@ -660,3 +660,21 @@ async function saveTasksToDatabase(userKey, tasks) {
         console.error("Fehler beim Speichern der Tasks:", error);
     }
 }
+
+function openMobileMoveMenu(event) {
+    let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
+    let userStoryBox = currentCardClicked.querySelector(".user-story__box");
+    let currentMoveMenu = currentCardClicked.querySelector(".menu-container");
+    event.stopPropagation();
+    userStoryBox.style.pointerEvents = "none";
+    currentMoveMenu.style.display = "flex";
+    addAnimationClassToTaskContent(currentCardClicked);
+    const label = currentCardClicked.querySelector('.button-label');
+    setTimeout(() => {
+        label.classList.add('fade-out');
+        setTimeout(() => {
+            label.textContent = 'Close';
+            label.classList.remove('fade-out');
+        }, 300);
+    }, 2000);
+}
