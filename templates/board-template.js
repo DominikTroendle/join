@@ -47,8 +47,20 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
 
     return `<div class="user-story__all-content-box">
                 <div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event); disablePointerEventsForAllTasks()" ondragend="removeDragRotation(event); activatePointerEventsForAllTasks(); removeCardBorderBox()" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
-                    <div class="user-story__category-box ${taskTypeCssClass}">
-                        <span class="user-story__category-text">${taskType}</span>
+                    <div class="user-story__category-mobile-button-box">
+                        <div class="user-story__category-box ${taskTypeCssClass}">
+                            <span class="user-story__category-text">${taskType}</span>
+                        </div>
+                        <button class="user-story__mobile-button" onclick="openMobileMoveMenu(event)">
+                            <svg viewBox="0 0 60 45">
+                                <rect x="0" y="0" width="55" height="45" rx="10" ry="10" fill="#ECEFF4" stroke="#D8DEE9" stroke-width="2" />
+                                <circle cx="22" cy="22.5" r="16" fill="#4C566A" />
+                                <text x="22" y="26.5" text-anchor="middle" fill="white" font-size="8.4" font-family="sans-serif"
+                                font-weight="bold">MOVE</text>
+                                <path class="arrow up" d="M44 6.5 L40 13.5 L42 13.5 L42 19.5 L47 19.5 L47 13.5 L49 13.5 Z" fill="#4C566A" />
+                                <path class="arrow down" d="M44 38.5 L40 31.5 L42 31.5 L42 25.5 L47 25.5 L47 31.5 L49 31.5 Z" fill="#4C566A" />
+                            </svg>
+                        </button>
                     </div>
                     <span class="user-story__title">${taskTitle}</span>
                     <span class="user-story__discription">${taskDescription}</span>
