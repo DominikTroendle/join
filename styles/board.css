@@ -1197,6 +1197,17 @@ footer {
     width: 100%;
 }
 
+.user-story__mobile-button {
+    display: none;
+    width: 60px;
+    height: 45px;
+    background: none;
+    border: none;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
@@ -1285,7 +1296,7 @@ footer {
         overflow-x: scroll;
         scrollbar-width: none;
         padding: 16px 0;
-        padding-left: 6px; 
+        padding-left: 6px;
         gap: 16px;
     }
 
@@ -1354,7 +1365,7 @@ footer {
     .all-drag-field-box {
         height: 520px;
     }
-    
+
     h1 {
         font-size: 47px;
         font-weight: 700;
