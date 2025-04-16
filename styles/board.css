@@ -1213,6 +1213,28 @@ footer {
     height: 100%;
 }
 
+.user-story__mobile-button .arrow {
+    animation: floatUpAndDown 1.6s ease-in-out infinite;
+    transform-origin: center;
+}
+
+.user-story__mobile-button .arrow.up {
+    animation-delay: 0s;
+}
+
+.user-story__mobile-button .arrow.down {
+    animation-delay: 0.8s;
+}
+
+@keyframes floatUpAndDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2.5px);
+    }
+  }
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
