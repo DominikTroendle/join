@@ -1246,6 +1246,12 @@ footer {
     bottom: 0;
 }
 
+.user-story__mobile-move-menu svg {
+    width: 175px;
+    height: 175px;
+    z-index: 1;
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
