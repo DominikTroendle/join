@@ -680,7 +680,7 @@ function openMobileMoveMenu(event) {
 }
 
 function addAnimationClassToTaskContent(currentUserStoryBox) {
-    setTimeout(() => { 
+    setTimeout(() => {
         currentUserStoryBox.classList.add("blur-out");
     }, 200);
 }
@@ -689,4 +689,43 @@ function removeAnimationClassToTaskContent(currentUserStoryBox) {
     setTimeout(() => {
         currentUserStoryBox.classList.remove("blur-out");
     }, 1600);
+}
+
+function animationReverse(event) {
+    let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
+    let currentUserStoryBox = currentCardClicked.querySelector(".user-story__box");
+    let currentMoveMenu = currentCardClicked.querySelector(".user-story__mobile-move-menu");
+    let currentCenterButtonText = currentCardClicked.querySelector('.user-story__mobile-move-menu__center-button-text');
+    currentCardClicked.querySelectorAll(".currentMoveMenu").forEach((element, index) => element.classList.remove(`delay-${index + 1}-open`, "open"));
+    currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment-text").forEach((element, index) => element.classList.add(`delay-${index + 1}-close`, "close"));
+    currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment").forEach((element, index) => element.classList.remove(`delay-${index + 1}-open`, "open"));
+    currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment").forEach((element, index) => element.classList.add(`delay-${index + 1}-close`, "close"));
+    currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.remove("open");
+    currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.add("close");
+    fadeOutCenterButtonText(currentCenterButtonText);
+    removeAnimationClassToTaskContent(currentUserStoryBox);
+    resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, currentMoveMenu);
+}
+
+function fadeOutCenterButtonText(currentCenterButtonText) {
+    setTimeout(() => {
+        currentCenterButtonText.classList.add('fade-out');
+        setTimeout(() => {
+            currentCenterButtonText.textContent = 'Move to';
+            currentCenterButtonText.classList.remove('fade-out');
+        }, 300);
+    }, 100);
+}
+
+function resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, currentMoveMenu) {
+    setTimeout(() => {
+        currentUserStoryBox.style.pointerEvents = "auto";
+        currentMoveMenu.style.display = "none";
+        currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment-text").forEach((element, index) => element.classList.remove(`delay-${index + 1}-close`, "close"));
+        currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment-text").forEach((element, index) => element.classList.add(`delay-${index + 1}-open`, "open"));
+        currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment").forEach((element, index) => element.classList.remove(`delay-${index + 1}-close`, "close"));
+        currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment").forEach((element, index) => element.classList.add(`delay-${index + 1}-open`, "open"));
+        currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.remove("close");
+        currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.add("open");
+    }, 1800);
 }
