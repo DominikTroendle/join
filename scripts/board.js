@@ -663,25 +663,30 @@ async function saveTasksToDatabase(userKey, tasks) {
 
 function openMobileMoveMenu(event) {
     let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
-    let userStoryBox = currentCardClicked.querySelector(".user-story__box");
-    let currentMoveMenu = currentCardClicked.querySelector(".menu-container");
+    let currentUserStoryBox = currentCardClicked.querySelector(".user-story__box");
+    let currentMoveMenu = currentCardClicked.querySelector(".user-story__mobile-move-menu");
+    let currentCenterButtonText = currentCardClicked.querySelector('.user-story__mobile-move-menu__center-button-text');
     event.stopPropagation();
-    userStoryBox.style.pointerEvents = "none";
+    currentUserStoryBox.style.pointerEvents = "none";
     currentMoveMenu.style.display = "flex";
-    addAnimationClassToTaskContent(userStoryBox);
-    const label = currentCardClicked.querySelector('.button-label');
+    addAnimationClassToTaskContent(currentUserStoryBox);
     setTimeout(() => {
-        label.classList.add('fade-out');
+        currentCenterButtonText.classList.add('fade-out');
         setTimeout(() => {
-            label.textContent = 'Close';
-            label.classList.remove('fade-out');
+            currentCenterButtonText.textContent = 'Close';
+            currentCenterButtonText.classList.remove('fade-out');
         }, 300);
     }, 2000);
 }
 
-function addAnimationClassToTaskContent(userStoryBox) {
-    userStoryBox.classList.add("task-content");
+function addAnimationClassToTaskContent(currentUserStoryBox) {
     setTimeout(() => { 
-    userStoryBox.classList.add("blur-out");
+        currentUserStoryBox.classList.add("blur-out");
     }, 200);
+}
+
+function removeAnimationClassToTaskContent(currentUserStoryBox) {
+    setTimeout(() => {
+        currentUserStoryBox.classList.remove("blur-out");
+    }, 1600);
 }

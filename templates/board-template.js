@@ -93,7 +93,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                             <textPath href="#midArc1" startOffset="50%" text-anchor="middle">To Do</textPath>
                         </text>
                         <text class="user-story__mobile-move-menu__segment-text open delay-2-open" fill="#ECEFF4" font-size="20" font-weight="bold">
-                            textPath href="#midArc2" startOffset="50%" text-anchor="middle">In Progress</textPath>
+                            <textPath href="#midArc2" startOffset="50%" text-anchor="middle">In Progress</textPath>
                         </text>
                         <text class="user-story__mobile-move-menu__segment-text open delay-3-open" fill="#ECEFF4" font-size="20" font-weight="bold">
                             <textPath href="#midArc3" startOffset="50%" text-anchor="middle">A. Feedback</textPath>
