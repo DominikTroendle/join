@@ -1267,38 +1267,116 @@ footer {
     text-align: center;
     z-index: 1;
     color: #ECEFF4;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px gold;
     opacity: 0;
     transform: scale(0.5); 
     cursor: pointer;
   }
 
-  .segment {
-    opacity: 0;
-    transform: scale(0.8);
-    transform-origin: center;
-    cursor: pointer;
-  }
-
-  .segment .open {
-    animation: fadeInSegment 0.4s ease-out forwards;
-  }
-
-  .segment .close {
-    opacity: 1;
-    transform: scale(1);
-    animation: fadeOutSegment 0.4s ease-out forwards;
-  }
-  
   .user-story__mobile-move-menu__center-button .open {
-    animation: fadeInCenter 0.2s ease-out forwards, glow 1.2s ease-in-out 2;
+    animation: fadeInCenterButton 0.2s ease-out forwards, glowOpen 1.2s ease-in-out 2;
     animation-delay: 0.2s;
   }
 
   .user-story__mobile-move-menu__center-button .close {
     opacity: 1;
     transform: scale(1);
-    animation: glow2 0.7s ease-in-out 2 0s, fadeOutCenter 0.2s ease-out forwards 1.4s;
+    animation: glowClose 0.7s ease-in-out 2 0s, fadeOutCenterButton 0.2s ease-out forwards 1.4s;
+  }
+
+  @keyframes fadeInCenterButton {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOutCenterButton {
+    to {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  @keyframes glowOpen {
+    0%, 100% {
+      box-shadow: 0 0 5px gold;
+    }
+    50% {
+      box-shadow: 0 0 15px gold;
+    }
+  }
+
+  @keyframes glowClose {
+    0%, 100% {
+      box-shadow: 0 0 5px orangered;
+    }
+    50% {
+      box-shadow: 0 0 15px orangered;
+    }
+  }
+
+  .user-story__mobile-move-menu__segment {
+    opacity: 0;
+    transform: scale(0.8);
+    transform-origin: center;
+    cursor: pointer;
+  }
+
+  .user-story__mobile-move-menu__segment .open {
+    animation: fadeInSegment 0.4s ease-out forwards;
+  }
+
+  .user-story__mobile-move-menu__segment .close {
+    opacity: 1;
+    transform: scale(1);
+    animation: fadeOutSegment 0.4s ease-out forwards;
+  }
+  
+  .segment .delay-1-open {
+    animation-delay: 0.35s;
+  }
+
+  .segment .delay-2-open {
+    animation-delay: 0.5s;
+  }
+
+  .segment .delay-3-open {
+    animation-delay: 0.65s;
+  }
+
+  .segment .delay-4-open {
+    animation-delay: 0.8s;
+  }
+
+  .segment .delay-1-close {
+    animation-delay: 0.8s;
+  }
+
+  .segment .delay-2-close {
+    animation-delay: 0.65s;
+  }
+
+  .segment .delay-3-close {
+    animation-delay: 0.5s;
+  }
+
+  .segment .delay-4-close {
+    animation-delay: 0.35s;
+  }
+  
+  @keyframes fadeInSegment {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeOutSegment {
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
   }
 
 @media(max-width: 1450px) {
