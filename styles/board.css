@@ -1191,6 +1191,12 @@ footer {
     width: 252px;
 }
 
+.user-story__category-mobile-button-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
