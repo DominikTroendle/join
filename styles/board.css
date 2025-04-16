@@ -1235,6 +1235,17 @@ footer {
     }
   }
 
+.user-story__mobile-move-menu {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;

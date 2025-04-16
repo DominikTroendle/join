@@ -25,84 +25,52 @@
         d="M90.34 118.59V104.76H93.06l2.93 5.7c.75 1.49 1.42 3.02 2 4.59-.15-1.71-.22-3.68-.22-5.87V104.76H100.03V118.59H97.49l-2.97-5.82c-.78-1.53-1.48-3.1-2.1-4.71 0 1.71.12 3.64.12 6.05v4.48H90.34Z" />
     </svg>
   </div>
-  <img id="passivLogo" class="logo" src="assets/img/join-logo.png" alt="Logo" />
-  <div class="login-container">
-    <div class="register-link">
-      <h7>Not a Join user?</h7>
-      <button><a href="register.html">Sign up</a></button>
-    </div>
-  </div>
-  <div class="user-login-container">
-    <div class="user-login">
-      <div class="login">
-        <h1>Log in</h1>
-        <div class="blue-line"></div>
-        <form onsubmit="UserLogin(); return false">
-          <div class="input-container">
-            <input type="email" id="email" placeholder="Email" required />
-            <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
-          </div>
-          <div class="input-container">
-            <input type="password" id="password" placeholder="Password" required onfocus="changePasswordIcon(true)"
-              onblur="changePasswordIcon(false)" />
-            <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
-              onclick="togglePasswordVisibility()">
-          </div>
-          <div class="no-value-content">
-            <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>
-          </div>
-          <div class="login-buttons">
-            <button type="submit">Log in</button>
-            <button type="button" onclick="loginGuastAccount()">Guast Log in</button>
-          </div>
-        </form>
+    <img id="passivLogo" class="logo" src="assets/img/join-logo.png" alt="Logo" />
+    <div class="login-container">
+      <div class="register-link">
+        <h7>Not a Join user?</h7>
+        <button><a href="register.html">Sign up</a></button>
       </div>
     </div>
-  </div>
-  <div class="legal-information">
-    <a href="privacy-policy.html">Privacy Policy</a>
-    <a href="legal-notice.html">Legal notice</a>
-  </div>
-  <div id="msgBox" class="overlay-massage">
-    <div class="message-box">
-      <p id="msgText"></p>
+    <div class="user-login-container">
+      <div class="user-login">
+        <div class="login">
+          <h1>Log in</h1>
+          <div class="blue-line"></div>
+          <form onsubmit="UserLogin(); return false">
+            <div class="input-container">
+              <input type="email" id="email" placeholder="Email" required />
+              <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
+            </div>
+            <div class="input-container">
+              <input type="password" id="password" placeholder="Password" required onfocus="changePasswordIcon(true)"
+                onblur="changePasswordIcon(false)" />
+              <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
+                onclick="togglePasswordVisibility()">
+            </div>
+            <div class="no-value-content">
+              <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>
+            </div>
+            <div class="login-buttons">
+              <button type="submit">Log in</button>
+              <button type="button" onclick="loginGuastAccount()">Guast Log in</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
+    <div class="legal-information">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="legal-notice.html">Legal notice</a>
+    </div>
+    <div id="msgBox" class="overlay-massage">
+      <div class="message-box">
+        <p id="msgText"></p>
+      </div>
+    </div>
 
   <script src="scripts/login.js"></script>
   <script src="script.js"></script>
 </body>
 
 </html>
-
-
-
-<div class="user-story__mobile-move-menu">
-  <svg viewBox="28 28 244 244">
-    <path d="M150,150 L159,28 A122,122 0 0,1 265,140 L150,150 Z" fill="#5E81AC"
-      class="segment segment-open delay-1-open" onclick="alert('To Do')" />
-    <path d="M150,150 L267,159 A122,122 0 0,1 159,267 L150,150 Z" fill="#4C6E91"
-      class="segment segment-open delay-2-open" onclick="alert('In Progress')" />
-    <path d="M150,150 L140,267 A122,122 0 0,1 33,159 L150,150 Z" fill="#7A9BAE"
-      class="segment segment-open delay-3-open" onclick="alert('Await Feedback')" />
-    <path d="M150,150 L33,140 A122,122 0 0,1 140,28 L150,150 Z" fill="#6F8FAF" class="segment segment-open delay-4-open"
-      onclick="alert('Done')" />
-    <defs>
-      <path id="midArc1" d="M150,70 A75,75 0 0,1 237,150" />
-      <path id="midArc2" d="M150,237 A68,68 0 0,0 237,150" />
-      <path id="midArc3" d="M63,150 A68,68 0 0,0 150,237" />
-      <path id="midArc4" d="M63,150 A75,75 0 0,1 150,70" />
-    </defs><text class="segment-label segment-label-open delay-1-open" fill="#ECEFF4" font-size="20" font-weight="bold">
-      <textPath href="#midArc1" startOffset="50%" text-anchor="middle">To Do</textPath>
-    </text><text class="segment-label segment-label-open delay-2-open" fill="#ECEFF4" font-size="20" font-weight="bold">
-      <textPath href="#midArc2" startOffset="50%" text-anchor="middle">In Progress</textPath>
-    </text><text class="segment-label segment-label-open delay-3-open" fill="#ECEFF4" font-size="20" font-weight="bold">
-      <textPath href="#midArc3" startOffset="50%" text-anchor="middle">A. Feedback</textPath>
-    </text><text class="segment-label segment-label-open delay-4-open" fill="#ECEFF4" font-size="20" font-weight="bold">
-      <textPath href="#midArc4" startOffset="50%" text-anchor="middle">Done</textPath>
-    </text>
-  </svg>
-  <div class="user-story__mobile-move-menu__center-button center-button-open" onclick="animationReverse(event)"><span
-      class="user-story__mobile-move-menu__center-button-text">Move
-      to</span></div>
-</div>
