@@ -76,32 +76,33 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                 <div class="user-story__mobile-move-menu">
                     <svg viewBox="28 28 244 244">
                         <path d="M150,150 L159,28 A122,122 0 0,1 265,140 L150,150 Z" fill="#5E81AC"
-                        class="segment segment-open delay-1-open" onclick="alert('To Do')" />
+                        class="user-story__mobile-move-menu__segment open delay-1-open" onclick="alert('To Do')" />
                         <path d="M150,150 L267,159 A122,122 0 0,1 159,267 L150,150 Z" fill="#4C6E91"
-                        class="segment segment-open delay-2-open" onclick="alert('In Progress')" />
+                        class="user-story__mobile-move-menu__segment open delay-2-open" onclick="alert('In Progress')" />
                         <path d="M150,150 L140,267 A122,122 0 0,1 33,159 L150,150 Z" fill="#7A9BAE"
-                        class="segment segment-open delay-3-open" onclick="alert('Await Feedback')" />
-                        <path d="M150,150 L33,140 A122,122 0 0,1 140,28 L150,150 Z" fill="#6F8FAF" class="segment segment-open delay-4-open" onclick="alert('Done')" />
+                        class="user-story__mobile-move-menu__segment open delay-3-open" onclick="alert('Await Feedback')" />
+                        <path d="M150,150 L33,140 A122,122 0 0,1 140,28 L150,150 Z" fill="#6F8FAF" 
+                        class="user-story__mobile-move-menu__segment open delay-4-open" onclick="alert('Done')" />
                         <defs>
                             <path id="midArc1" d="M150,70 A75,75 0 0,1 237,150" />
                             <path id="midArc2" d="M150,237 A68,68 0 0,0 237,150" />
                             <path id="midArc3" d="M63,150 A68,68 0 0,0 150,237" />
                             <path id="midArc4" d="M63,150 A75,75 0 0,1 150,70" />
                         </defs>
-                        <text class="segment-label segment-label-open delay-1-open" fill="#ECEFF4" font-size="20" font-weight="bold">
+                        <text class="user-story__mobile-move-menu__segment-text open delay-1-open" fill="#ECEFF4" font-size="20" font-weight="bold">
                             <textPath href="#midArc1" startOffset="50%" text-anchor="middle">To Do</textPath>
                         </text>
-                        <text class="segment-label segment-label-open delay-2-open" fill="#ECEFF4" font-size="20" font-weight="bold">
+                        <text class="user-story__mobile-move-menu__segment-text open delay-2-open" fill="#ECEFF4" font-size="20" font-weight="bold">
                             textPath href="#midArc2" startOffset="50%" text-anchor="middle">In Progress</textPath>
                         </text>
-                        <text class="segment-label segment-label-open delay-3-open" fill="#ECEFF4" font-size="20" font-weight="bold">
+                        <text class="user-story__mobile-move-menu__segment-text open delay-3-open" fill="#ECEFF4" font-size="20" font-weight="bold">
                             <textPath href="#midArc3" startOffset="50%" text-anchor="middle">A. Feedback</textPath>
                         </text>
-                        <text class="segment-label segment-label-open delay-4-open" fill="#ECEFF4" font-size="20" font-weight="bold">
+                        <text class="user-story__mobile-move-menu__segment-text open delay-4-open" fill="#ECEFF4" font-size="20" font-weight="bold">
                             <textPath href="#midArc4" startOffset="50%" text-anchor="middle">Done</textPath>
                         </text>
                     </svg>
-                    <div class="user-story__mobile-move-menu__center-button center-button-open" onclick="animationReverse(event)"><span
+                    <div class="user-story__mobile-move-menu__center-button open" onclick="animationReverse(event)"><span
                         class="user-story__mobile-move-menu__center-button-text">Move to</span>
                     </div>
                 </div>
