@@ -45,19 +45,21 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         }
     }
 
-    return `<div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event); disablePointerEventsForAllTasks()" ondragend="removeDragRotation(event); activatePointerEventsForAllTasks(); removeCardBorderBox()" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
-                <div class="user-story__category-box ${taskTypeCssClass}">
-                    <span class="user-story__category-text">${taskType}</span>
-                </div>
-                <span class="user-story__title">${taskTitle}</span>
-                <span class="user-story__discription">${taskDescription}</span>
-                ${subtaskHtml}
-                <div class="user-story__name-priority-box">
-                    <div class="user-story__name-box">
-                        ${assignedContactsHtml}
-                        <span class="initials-over-six">${initialsOverSix}</span>
+    return `<div class="user-story__all-content-box">
+                <div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event); disablePointerEventsForAllTasks()" ondragend="removeDragRotation(event); activatePointerEventsForAllTasks(); removeCardBorderBox()" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
+                    <div class="user-story__category-box ${taskTypeCssClass}">
+                        <span class="user-story__category-text">${taskType}</span>
                     </div>
-                    <img class="user-story__img" src="${taskPriorityImgSrc}" alt="">
+                    <span class="user-story__title">${taskTitle}</span>
+                    <span class="user-story__discription">${taskDescription}</span>
+                    ${subtaskHtml}
+                    <div class="user-story__name-priority-box">
+                        <div class="user-story__name-box">
+                            ${assignedContactsHtml}
+                            <span class="initials-over-six">${initialsOverSix}</span>
+                        </div>
+                        <img class="user-story__img" src="${taskPriorityImgSrc}" alt="">
+                    </div>
                 </div>
             </div>`;
 }
