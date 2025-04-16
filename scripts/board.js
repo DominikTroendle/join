@@ -668,7 +668,7 @@ function openMobileMoveMenu(event) {
     event.stopPropagation();
     userStoryBox.style.pointerEvents = "none";
     currentMoveMenu.style.display = "flex";
-    addAnimationClassToTaskContent(currentCardClicked);
+    addAnimationClassToTaskContent(userStoryBox);
     const label = currentCardClicked.querySelector('.button-label');
     setTimeout(() => {
         label.classList.add('fade-out');
@@ -677,4 +677,11 @@ function openMobileMoveMenu(event) {
             label.classList.remove('fade-out');
         }, 300);
     }, 2000);
+}
+
+function addAnimationClassToTaskContent(userStoryBox) {
+    userStoryBox.classList.add("task-content");
+    setTimeout(() => { 
+    userStoryBox.classList.add("blur-out");
+    }, 200);
 }
