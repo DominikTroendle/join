@@ -59,6 +59,10 @@
     padding: 80px 0 64px 110px;
 }
 
+#form-top {
+    margin-bottom: 30px;
+}
+
 #form-add-task {
     display: flex;
     gap: 80px;
@@ -542,7 +546,7 @@ input:focus {
 
 #container-subtasks {
     margin-top: 8px;
-    min-height: 30px;
+    min-height: 60px;
     max-height: 60px;
     overflow-y: auto;
 }
@@ -807,9 +811,62 @@ input:focus {
     }
 }
 
-@media only screen and (max-height: 800px) {
-    #main {
+@media only screen and (min-width: 1040px) and (max-height: 950px) {
+    #form-top {
+        margin-bottom: 0;
+    }
+}
+
+@media only screen and (min-width: 1040px) and (max-height: 920px) {
+    #container-form {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+}
+
+@media only screen and (min-width: 1040px) and (max-height: 880px) {
+    #container-form {
         padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+@media only screen and (min-width: 1040px) and (max-height: 815px) {
+    #container-form {
+        max-height: calc(100vh - 100px);
+    }
+
+    #form-add-task {
+        max-height: 494px;
+        overflow: auto;
+    }
+
+    #footer-add-task {
+        padding-top: 10px;
+    }
+}
+
+@media only screen and (max-width: 1040px) and (max-height: 890px) {
+    #form-top {
+        padding-top: 30px !important;
+    }
+}
+
+@media only screen and (max-width: 1040px) and (max-height: 860px) {
+    #container-form {
+        max-height: calc(100vh - 160px);
+    }
+
+    #form-add-task {
+        max-height: 494px;
+        overflow: auto;
+    }
+}
+
+@media only screen and (max-width: 1040px) and (max-height: 800px) {
+    #form-top {
+        padding-top: 15px !important;
+        margin-bottom: 15px !important;
     }
 }
 
@@ -846,6 +903,7 @@ input:focus {
 @media only screen and (max-width: 1250px) {
     #container-form {
         padding-left: 16px;
+        width: calc(100vw - 232px);
     }
 
     #form-add-task {
@@ -909,11 +967,13 @@ input:focus {
     #container-form {
         width: 806px;
         align-items: center;
-        padding: 80px 0;
+        padding: 0;
+        margin: 80px 0;
     }
 
     #form-top {
         padding-top: 56px;
+        align-self: flex-start;
     }
 
     #form-top h1 {
@@ -935,6 +995,7 @@ input:focus {
         gap: 16px;
     }
 
+    #container-form,
     #footer-add-task {
         width: 774px;
     }
@@ -952,7 +1013,7 @@ input:focus {
 
     #container-form {
         width: 440px;
-        max-height: 100vh;
+        max-height: calc(100vh - 160px);
     }
 
     #form-top {
@@ -998,6 +1059,8 @@ input:focus {
         width: 100%;
         justify-self: flex-end;
         align-self: flex-end;
+        /* position: fixed; */
+        /* bottom: 80px; */
     }
 
     #footer-add-task p {
