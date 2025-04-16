@@ -1252,6 +1252,25 @@ footer {
     z-index: 1;
 }
 
+.user-story__mobile-move-menu__center-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #3B4252;
+    border: 8px solid #D8DEE9;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    z-index: 1;
+    color: #ECEFF4;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
