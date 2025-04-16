@@ -1208,6 +1208,11 @@ footer {
     cursor: pointer;
 }
 
+.user-story__mobile-button svg {
+    width: 100%;
+    height: 100%;
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
