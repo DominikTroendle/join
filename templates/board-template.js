@@ -76,13 +76,13 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                 <div class="user-story__mobile-move-menu">
                     <svg viewBox="28 28 244 244">
                         <path d="M150,150 L159,28 A122,122 0 0,1 265,140 L150,150 Z" fill="#5E81AC"
-                        class="user-story__mobile-move-menu__segment open delay-1-open" onclick="alert('To Do')" />
+                        class="user-story__mobile-move-menu__segment open delay-1-open" onclick="moveTaskCardMobile(event, 'to-do-drag-field', toDoArray, 'toDos')" />
                         <path d="M150,150 L267,159 A122,122 0 0,1 159,267 L150,150 Z" fill="#4C6E91"
-                        class="user-story__mobile-move-menu__segment open delay-2-open" onclick="alert('In Progress')" />
+                        class="user-story__mobile-move-menu__segment open delay-2-open" onclick="moveTaskCardMobile(event, 'in-progress-drag-field', inProgressArray, 'inProgress')" />
                         <path d="M150,150 L140,267 A122,122 0 0,1 33,159 L150,150 Z" fill="#7A9BAE"
-                        class="user-story__mobile-move-menu__segment open delay-3-open" onclick="alert('Await Feedback')" />
+                        class="user-story__mobile-move-menu__segment open delay-3-open" onclick="moveTaskCardMobile(event, 'await-feedback-drag-field', awaitFeedbackArray, 'awaitFeedback')" />
                         <path d="M150,150 L33,140 A122,122 0 0,1 140,28 L150,150 Z" fill="#6F8FAF" 
-                        class="user-story__mobile-move-menu__segment open delay-4-open" onclick="alert('Done')" />
+                        class="user-story__mobile-move-menu__segment open delay-4-open" onclick="moveTaskCardMobile(event, 'done-drag-field', doneArray, 'done')" />
                         <defs>
                             <path id="midArc1" d="M150,70 A75,75 0 0,1 237,150" />
                             <path id="midArc2" d="M150,237 A68,68 0 0,0 237,150" />

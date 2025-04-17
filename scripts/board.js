@@ -729,3 +729,44 @@ function resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, cu
         currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.add("open");
     }, 1800);
 }
+
+async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveCategoryName) {
+    let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
+    let oldDragField = event.currentTarget.closest(".drag-field");
+    cardId = currentCardClicked.querySelector(".user-story__box").id;
+    currentCardId = currentCardClicked.querySelector(".user-story__box").id;
+    oldCategoryName = oldDragField.getAttribute("data-category");
+    oldArray = arrays[oldDragField.getAttribute("data-array")];
+    oldCategory = oldDragField.id; 
+    newCategory = newMoveCategory;
+    newArray = newMoveArray;
+    newCategoryName = newMoveCategoryName;
+
+    if (oldCategory === newCategory) {
+        return;
+    }
+    findObjectInArrayAndSaveData(oldArray, newCategoryName);
+
+    let index = oldArray.findIndex(element => element.id == currentCardId);
+
+    newArray.push(oldArray.splice(index, 1)[0]);
+    let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
+    taskCardObjectinNewArray.category = newCategoryName;
+    if (searchMode === "false") {
+        if (oldArray.length !== 0) {
+            renderSmallCard(oldCategory, oldArray);
+        } else {
+            document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName], searchMode);
+        }
+        renderSmallCard(newCategory, newArray);
+
+    } else {
+        putSearchTaskFromOldArrayinNewArray();
+    }
+
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
+    if (!putResponse.ok) {
+        console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
+        return; // Falls PUT fehlschlägt, nicht weitermachen!
+    }
+}
