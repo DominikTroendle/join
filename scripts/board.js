@@ -737,7 +737,7 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
     currentCardId = currentCardClicked.querySelector(".user-story__box").id;
     oldCategoryName = oldDragField.getAttribute("data-category");
     oldArray = arrays[oldDragField.getAttribute("data-array")];
-    oldCategory = oldDragField.id; 
+    oldCategory = oldDragField.id;
     newCategory = newMoveCategory;
     newArray = newMoveArray;
     newCategoryName = newMoveCategoryName;
@@ -769,4 +769,5 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
     }
+    document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
