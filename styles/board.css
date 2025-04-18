@@ -1583,8 +1583,7 @@ footer {
         min-height: auto;
         overflow-x: scroll;
         scrollbar-width: none;
-        padding: 16px 0;
-        padding-left: 6px;
+        padding: 16px 16px;
         gap: 16px;
     }
 
