@@ -2080,17 +2080,17 @@ footer {
 
       @keyframes glowingBorder {
         0% {
-            border: 2px solid orangered;
+            /* border: 1px solid orangered; */
             box-shadow: 0 0 50px orangered;
         }
     
         50% {
-            border: 2px solid lightgreen;
+            /* border: 1px solid lightgreen; */
             box-shadow: 0 0 50px lightgreen;
         }
     
         100% {
-            border: 2px solid lightgreen;
+            /* border: 1px solid lightgreen; */
             box-shadow: 0 0 50px lightgreen;
         }
     }
