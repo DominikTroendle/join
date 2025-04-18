@@ -446,14 +446,20 @@ body {
         height: 40px;
     }
 
+    .all-title-box {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
     .title__box {
         margin-top: 48px;
         margin-left: 0;
         margin-bottom: 40px;
-        padding: 0 16px;
         flex-direction: column;
         gap: 8px;
         align-items: flex-start;
+        width: 396px;
     }
 
     .title__text-big {
@@ -497,17 +503,22 @@ body {
         width: 100%
     }
 
+    .button-name-box {
+        width: 100%;
+    }
+
     .all-button-box {
-        width: 396px;
+        width: 100%;
         height: auto;
-        padding: 0 16px;
         margin-left: 0;
         gap: 18px;
+        align-items: center;
     }
 
     .button-top-box {
         width: 396px;
         height: 110px;
+        margin-bottom: 18px;
     }
 
     .button-top {
@@ -645,12 +656,7 @@ body {
 
 @media(max-width: 420px) {
     .title__box {
-        padding: 0 6px;
-    }
-
-    .all-button-box {
-        padding: 0 6px;
-        width: 100%;
+        width: 300px;
     }
 
     .button-top-box {
