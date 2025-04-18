@@ -697,3 +697,31 @@ body {
         width: 89px;
     }
 }
+
+@media(max-height: 850px) {
+    .title__box {
+        margin-top: 6px;
+        margin-bottom: 24px;
+    }
+
+    .button-top-box {
+        margin-bottom: 0;
+    }
+
+    .all-button-box {
+        gap: 12px;
+    }
+
+    .button-top {
+        height: 100px;
+        box-shadow: 0 0 2px 0 rgb(0, 0, 0, 0.1);
+    }
+
+    .button-middle {
+        height: 100px;
+    }
+
+    .button-bottom {
+        height: 106px;
+    }
+}
