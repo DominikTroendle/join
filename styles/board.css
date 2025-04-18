@@ -1651,7 +1651,7 @@ footer {
 
 @media(max-width: 1040px) {
     .all-drag-field-box {
-        height: calc(100dvh - 376px);
+        height: calc(100dvh - 380px);
     }
 
     h1 {
