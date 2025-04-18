@@ -1939,21 +1939,18 @@ footer {
 }
 
 @media(max-width: 415px) {
-    .title-button__box {
-        width: 310px;
-    }
-
     .title-input-button__box {
         margin-left: 6px;
         margin-right: 6px;
+        padding-right: 12px;
+    }
+
+    .search-field__button {
+        padding-left: 10px;
     }
 
     .task-category-dragfield__box {
-        padding-left: 6px;
-    }
-
-    .task-category__box-mobile {
-        width: 310px;
+        padding: 0 6px;
     }
 
     .big-task-card__box {
