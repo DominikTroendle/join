@@ -1568,7 +1568,7 @@ footer {
         align-items: flex-start;
         flex-direction: column;
         justify-content: flex-start;
-        padding-left: 16px;
+        padding: 0 16px;
         width: 100%;
         gap: 16px;
     }
@@ -1583,7 +1583,7 @@ footer {
         min-height: auto;
         overflow-x: scroll;
         scrollbar-width: none;
-        padding: 16px 16px;
+        padding: 16px 0;
         gap: 16px;
     }
 
