@@ -1562,6 +1562,7 @@ footer {
     .task-category__box-mobile {
         display: flex;
         height: 32px;
+        width: 100%;
     }
 
     .task-category-dragfield__box {
@@ -1661,7 +1662,7 @@ footer {
     }
 
     .title-button__box {
-        width: 396px;
+        width: 100%;
         justify-content: space-between;
         align-items: center;
     }
@@ -1683,8 +1684,10 @@ footer {
         margin-top: 48px;
         margin-left: 16px;
         margin-right: 16px;
+        padding-right: 32px;
         margin-bottom: 24px;
         gap: 40px;
+        width: 100%;
     }
 
     .add-task__button-text {
