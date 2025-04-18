@@ -1492,6 +1492,10 @@ footer {
     display: none;
 }
 
+.overlay-landscape-spinner {
+    display: none;
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
@@ -2000,3 +2004,94 @@ footer {
         height: 52vh;
     }
 }
+
+@media only screen 
+  and (orientation: landscape) 
+  and (max-width: 1040px) 
+  and (pointer: coarse) {
+    .overlay-landscape-spinner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: black;
+        z-index: 5;
+    }
+    .loader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 92px;
+        height: 180px;
+        border-radius: 8px;
+        transform: translateY(-30px);
+        background-color: whitesmoke;
+        background-image:
+          radial-gradient(ellipse at center, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 4%,rgba(81,81,81,1) 14%,rgba(44,44,44,1) 26%,rgba(2,2,2,1) 53%,rgba(2,2,2,1) 65%,rgba(2,2,2,0) 66%),
+          linear-gradient( grey, grey);
+          background-repeat: no-repeat;
+          background-size: 10px 10px , 84px 162px;
+          background-position: center 2px, 4px 8px;
+          transform: rotate(270deg);
+          animation: rotateToPortrait 2s ease-in-out infinite, glowingBorder 2s ease-in-out infinite;
+      }
+
+      .loader2 {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+        position: relative;
+        border: 3px solid;
+        border-color:#de3500 #0000 #fff #0000;
+        border-radius: 50%;
+        box-sizing: border-box;
+        animation: 3s rotate linear infinite;
+     }
+     .loader2:before , .loader2:after{
+        content: '';
+        top: 0;
+        left: 0;
+        position: absolute;
+        border: 10px solid transparent;
+        border-bottom-color:#fff;
+        transform: translate(-10px, 19px) rotate(-35deg);
+      }
+     .loader2:after {
+        border-color: #de3500 #0000 #0000 #0000 ;
+        transform: translate(32px, 3px) rotate(-35deg);
+      }
+       @keyframes rotate {
+        100%{    transform: rotate(360deg)}
+      }
+
+      @keyframes rotateToPortrait {
+        0% {
+          transform: rotate(270deg);
+        }
+        50%, 100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes glowingBorder {
+        0% {
+            border: 2px solid orangered;
+            box-shadow: 0 0 50px orangered;
+        }
+    
+        50% {
+            border: 2px solid lightgreen;
+            box-shadow: 0 0 50px lightgreen;
+        }
+    
+        100% {
+            border: 2px solid lightgreen;
+            box-shadow: 0 0 50px lightgreen;
+        }
+    }
+  }
