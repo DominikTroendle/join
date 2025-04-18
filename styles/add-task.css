@@ -870,7 +870,7 @@ input:focus {
     }
 }
 
-@media only screen and (min-width: 1920px) {
+/* @media only screen and (min-width: 1920px) {
     body {
         width: 100vw;
         height: 100vh;
@@ -902,7 +902,7 @@ input:focus {
     #container-form {
         width: calc(100% - 342px);
     }
-}
+} */
 
 @media only screen and (max-width: 1500px) {
 
@@ -1093,8 +1093,6 @@ input:focus {
         width: 100%;
         justify-self: flex-end;
         align-self: flex-end;
-        /* position: fixed; */
-        /* bottom: 80px; */
     }
 
     #footer-add-task p {
