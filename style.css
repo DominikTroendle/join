@@ -297,6 +297,16 @@ li{
     display: none;
 }
 
+@media only screen and (min-width: 1920px) {
+    header {
+        justify-content: flex-start;
+    }
+
+    nav {
+        width: 1688px;
+    }
+}
+
 @media(max-width: 1040px){
     .menu-box {
         width: 100%;

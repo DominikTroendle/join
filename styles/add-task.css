@@ -870,40 +870,6 @@ input:focus {
     }
 }
 
-/* @media only screen and (min-width: 1920px) {
-    body {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(to right,#2A3647 0% 50%,#F6F7F8 50% 100%);
-    }
-
-    #main {
-        width: calc(1920px - 232px);
-        height: 100vh;
-    }
-
-    .menu-box {
-        position: absolute;
-        left: calc((100vw - 1920px) / 2);
-        top: 0;
-    }
-
-    header {
-        width: calc(1688px + ((100vw - 1920px) / 2));
-        justify-content: flex-start;
-    }
-
-    nav {
-        width: 1688px;
-    }
-
-    #container-form {
-        width: calc(100% - 342px);
-    }
-} */
-
 @media only screen and (max-width: 1500px) {
 
     #container-form {
