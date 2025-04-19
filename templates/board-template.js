@@ -21,12 +21,14 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
 
     let subtaskHtml = "";
     let scaleFillCalculate;
+    let scaleColor;
 
     if (numberOfSubtasks != 0 && numberOfCompletedSubtasks != 0) {
         scaleFillCalculate = (100 / numberOfSubtasks) * numberOfCompletedSubtasks;
+        scaleColor = numberOfSubtasks === numberOfCompletedSubtasks ? `background-color: lightgreen` : "";
         subtaskHtml = `<div class="user-story__scale-text-box">
                     <div class="user-story__subtask-scale-box">
-                        <div class="user-story__subtask-scale-fill" style="width: ${scaleFillCalculate}%"></div>
+                        <div class="user-story__subtask-scale-fill" style="width: ${scaleFillCalculate}%; ${scaleColor}"></div>
                     </div>
                     <span class="user-story__subtask-text">${numberOfCompletedSubtasks}/${numberOfSubtasks} Subtasks</span>
                 </div>`
