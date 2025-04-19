@@ -643,6 +643,11 @@ async function syncAllContactsWithTasks(userKey) {
 }
 
 async function saveTasksToDatabase(userKey, tasks) {
+    if (!Array.isArray(tasks) || tasks.length === 0) {
+        console.warn("Es wurden keine Tasks zum Speichern übergeben Vorgang abgebrochen.");
+        return;
+    }
+
     try {
         let updates = {};
         tasks.forEach(task => {
@@ -773,8 +778,8 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
         document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById(currentCardId).classList.add('highlight-flash');
     }, 300);
-    
-  setTimeout(() => {
-    document.getElementById(currentCardId).classList.remove('highlight-flash');
-  }, 3300);
+
+    setTimeout(() => {
+        document.getElementById(currentCardId).classList.remove('highlight-flash');
+    }, 3300);
 }
