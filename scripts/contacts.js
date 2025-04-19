@@ -324,7 +324,7 @@ function selectContact(element) {
     } else {
         element.classList.add('select-contact');
         element.style.color = "white";
-        moreContactInformation(element.querySelector('.contact-preview-name').innerText);
+        moreContactInformation(element.querySelector('.contact-preview-name').id);
         
         if (window.innerWidth <= 1040) {
             overlay.classList.add('mobile-overlay');
