@@ -243,6 +243,14 @@ h1 {
     color: #2A3647;
 }
 
+.to-do__button:hover svg path {
+    stroke: #29ABE2;
+}
+
+.to-do__button:active svg path {
+    stroke: #2A3647;
+}
+
 .in-progress__box {
     display: flex;
     justify-content: space-between;
@@ -284,6 +292,14 @@ h1 {
     color: #2A3647;
 }
 
+.in-progress__button:hover svg path {
+    stroke: #29ABE2;
+}
+
+.in-progress__button:active svg path {
+    stroke: #2A3647;
+}
+
 .await-feedback__box {
     display: flex;
     justify-content: space-between;
@@ -323,6 +339,14 @@ h1 {
 .await-feedback__button:active {
     border: 2px solid #2A3647;
     color: #2A3647;
+}
+
+.await-feedback__button:hover svg path {
+    stroke: #29ABE2;
+}
+
+.await-feedback__button:active svg path{
+    stroke: #2A3647;
 }
 
 .done__box {
