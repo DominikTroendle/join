@@ -796,3 +796,22 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
         document.getElementById(currentCardId).classList.remove('highlight-flash');
     }, 3300);
 }
+
+function createTaskOverlay() {
+    removeError();
+    let valid = validateInputs();
+    let validDateFormat = testDate();
+    if (valid && validDateFormat) {
+        saveTask();
+        document.getElementById('overlay-task-added').classList.remove('d-none');
+        setTimeout(() => {
+            init();
+            document.getElementById('overlay-task-added').classList.add('d-none');
+        }, "900");
+    } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
+        throwError();
+        document.getElementById('invalid-date').classList.remove('hidden');
+    } else {
+        throwError();
+    }
+}
