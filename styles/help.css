@@ -30,8 +30,7 @@ nav {
 }
 
 .text-content{
-    margin-left: 96px;
-    margin-top: 110px;
+    margin: 110px 96px 64px 96px;
 }
 
 .text-back-arrow-container{
@@ -98,6 +97,12 @@ d, a{
     margin-top: 50px;
 }
 
+@media (min-width: 2026px) {
+    .text-content {
+        width: 1592px;
+    }
+}
+
 @media (max-width: 1040px){
     nav {
         padding: 16px;
@@ -114,8 +119,7 @@ d, a{
     }
 
     .text-content{
-        margin-left: 16px;
-        margin-top: 48px;
+        margin: 48px 26px 48px 16px;
     }
 
     .left-btn img:hover{

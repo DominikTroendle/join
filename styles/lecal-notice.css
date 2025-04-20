@@ -115,9 +115,8 @@ p{
     cursor: pointer;
 }
 
-@media (min-width: 2016px) {
+@media (min-width: 2026px) {
     .text-content {
-        margin-right: 0;
         width: 1592px;
     }
 }
