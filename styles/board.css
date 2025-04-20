@@ -1586,6 +1586,21 @@ footer {
     display: none;
 }
 
+#task-added {
+    animation: slide-in 50ms linear;
+}
+
+
+@keyframes slide-in {
+    from {
+        top: 100vh;
+    }
+
+    to {
+        top: 50%;
+    }
+}
+
 @media(max-width: 1450px) {
     .title-input-button__box {
         width: 1056px;
