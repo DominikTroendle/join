@@ -60,8 +60,7 @@ nav {
 }
 
 #generator_results_content{
-    margin-left: 96px;
-    margin-top: 110px;
+    margin: 110px 96px 64px 96px;
 }
 
 .text-nav{
@@ -119,6 +118,18 @@ p{
     cursor: pointer;
 }
 
+@media (min-width: 1920px) {
+    #generator_results {
+        height: calc(100dvh - 96px);
+    }
+}
+
+@media (min-width: 2026px) {
+    #generator_results_content {
+        width: 1592px;
+    }
+}
+
 @media (max-width: 1040px){
     nav {
         padding: 16px;
@@ -135,7 +146,6 @@ p{
     }
 
     #generator_results_content{
-        margin-left: 16px;
-        margin-top: 48px;
+        margin: 48px 16px;
     }
 }

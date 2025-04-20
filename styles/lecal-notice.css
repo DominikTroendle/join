@@ -60,8 +60,7 @@ nav {
 }
 
 .text-content{
-    margin-top: 110px;
-    margin-left: 96px;
+    margin: 110px 96px 64px 96px;
 }
 
 .text-nav{
@@ -116,6 +115,13 @@ p{
     cursor: pointer;
 }
 
+@media (min-width: 2016px) {
+    .text-content {
+        margin-right: 0;
+        width: 1592px;
+    }
+}
+
 @media (max-width: 1040px){
     nav {
         padding: 16px;
@@ -132,7 +138,6 @@ p{
     }
 
     .text-content{
-        margin-left: 16px;
-        margin-top: 48px;
+        margin: 48px 16px;
     }
 }
