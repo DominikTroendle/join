@@ -803,7 +803,7 @@ function createTaskOverlay() {
     let titleInput = document.getElementById("title");
     let descriptionInput = document.getElementById("description");
     if (valid && validDateFormat) {
-        saveTask();
+        saveTaskOverlay()
         document.getElementById('overlay-task-added').classList.remove('d-none');
         setTimeout(() => {
             document.getElementById("add-task__overlay").classList.add("fade-out");
@@ -837,6 +837,26 @@ function createTaskOverlay() {
     } else {
         throwError();
     }
+}
+let categoryFromClickedButton = "";
+function saveCategoryFromClickedButton(event) {
+    categoryFromClickedButton = event.currentTarget.getAttribute("data-category");
+}
+
+function saveTaskOverlay() {
+    if(!categoryFromClickedButton)return;
+    task.category = categoryFromClickedButton;
+    task.taskType = document.getElementById('category').value;
+    task.taskTitle = document.getElementById('title').value;
+    task.taskDescription = document.getElementById('description').value;
+    task.taskPriority = selectedPriority;
+    task.numberOfSubtasks = subtasksCount;
+    task.numberOfCompletedSubtasks = 0;
+    task.subtasks = subtasks;
+    task.taskDueDate = document.getElementById('due-date').value;
+    task.assignedContacts = selectedContacts;
+    saveToFirebase("tasks/", task);
+    task = {};
 }
 
 function fadeOutBigTaskCard() {

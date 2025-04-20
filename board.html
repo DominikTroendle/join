@@ -103,7 +103,7 @@
                                 </svg>
                             </button>
                         </div>
-                        <button class="add-task__button" onclick="renderAddTaskOverlay()">Add task <img
+                        <button class="add-task__button" data-category="toDos" onclick="renderAddTaskOverlay(); saveCategoryFromClickedButton(event)">Add task <img
                                 class="add-task__img" src="assets/icons/add.png" alt="">
                         </button>
                     </div>
@@ -111,21 +111,21 @@
                 <div class="tasks-category__box">
                     <div class="to-do__box">
                         <span class="to-do__text">To do</span>
-                        <button class="to-do__button"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button class="to-do__button" data-category="toDos" onclick="renderAddTaskOverlay(); saveCategoryFromClickedButton(event)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             </svg></button>
                     </div>
                     <div class="in-progress__box">
                         <span class="in-progress__text">In progress</span>
-                        <button class="in-progress__button"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button class="in-progress__button" data-category="inProgress" onclick="renderAddTaskOverlay(); saveCategoryFromClickedButton(event)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             </svg></button>
                     </div>
                     <div class="await-feedback__box">
                         <span class="await-feedback__text">Await feedback</span>
-                        <button class="await-feedback__button"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button class="await-feedback__button" data-category="awaitFeedback" onclick="renderAddTaskOverlay(); saveCategoryFromClickedButton(event)"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 1.5V16.5" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             <path d="M16.5 9.1416L1.5 9.1416" stroke="#2A3647" stroke-width="2" stroke-linecap="round"/>
                             </svg></button>
