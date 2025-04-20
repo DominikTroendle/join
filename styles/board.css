@@ -2208,6 +2208,10 @@ footer {
         width: 260px;
     }
 
+    #label-subtasks {
+        height: 38px;
+    }
+
     #subtasks {
         width: 200px;
     }
