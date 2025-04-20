@@ -631,11 +631,20 @@ h1 {
 }
 
 .add-task__close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 32px;
     height: 32px;
-    border-radius: 56px;
-    color: #2A3647;
-    font-size: 24px;
+}
+
+.add-task__close-button:hover {
+    background-color: #EEEEEE;
+    border-radius: 45px;
+}
+
+.add-task__close-button:active {
+    background-color: #FFFFFF;
 }
 
 .big-task-card__box {
@@ -713,11 +722,20 @@ h1 {
 }
 
 .big-task-card__task-type-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 32px;
     height: 32px;
-    border-radius: 56px;
-    color: #2A3647;
-    font-size: 24px;
+}
+
+.big-task-card__task-type-button:hover {
+    background-color: #EEEEEE;
+    border-radius: 45px;
+}
+
+.big-task-card__task-type-button:active {
+    background-color: #FFFFFF;
 }
 
 .big-task-card__title-box {
@@ -999,11 +1017,20 @@ h1 {
 }
 
 .big-task-card-edit__task-type-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 32px;
     height: 32px;
-    border-radius: 56px;
-    color: #2A3647;
-    font-size: 24px;
+}
+
+.big-task-card-edit__task-type-button:hover {
+    background-color: #EEEEEE;
+    border-radius: 45px;
+}
+
+.big-task-card-edit__task-type-button:active {
+    background-color: #FFFFFF;
 }
 
 .big-task-card-edit__scroll-box {
