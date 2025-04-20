@@ -658,13 +658,10 @@ h1 {
     }
 }
 
-.add-task__close-button-box {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    padding-right: 36px;
-    padding-top: 24px;
+#form-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
 }
 
 .add-task__close-button {
@@ -1242,14 +1239,15 @@ footer {
 }
 
 #main {
-
     width: 1116px;
+    height: 870px;
+    min-height: auto;
     display: flex;
     flex-direction: column;
-    background-color: #F6F7F8;
+    background-color: #FFFFFF;
     border-radius: 30px;
-    min-height: 100%;
     margin: 0;
+    box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.1);
 }
 
 #main h1 {
