@@ -345,7 +345,7 @@ h1 {
     stroke: #29ABE2;
 }
 
-.await-feedback__button:active svg path{
+.await-feedback__button:active svg path {
     stroke: #2A3647;
 }
 
@@ -629,6 +629,7 @@ h1 {
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -659,9 +660,9 @@ h1 {
 }
 
 #form-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .add-task__close-button {
@@ -728,6 +729,7 @@ h1 {
     0% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -1804,6 +1806,48 @@ footer {
         line-height: 120%;
         letter-spacing: 0;
     }
+
+    #main {
+        width: 100%;
+    }
+
+    #container-form {
+        padding: 64px 48px;
+    }
+
+    #form-add-task {
+        gap: 48px;
+    }
+}
+
+@media(max-width: 1187px) {
+    #container-input-assigned {
+        width: 400px;
+    }
+
+    #container-input-subtask {
+        width: 400px;
+    }
+}
+
+@media(max-width: 1100px) {
+    #container-input-assigned {
+        width: 380px;
+    }
+
+    #container-input-subtask {
+        width: 380px;
+    }
+}
+
+@media(max-width: 1060px) {
+    #container-input-assigned {
+        width: 370px;
+    }
+
+    #container-input-subtask {
+        width: 370px;
+    }
 }
 
 @media(max-width: 1040px) {
@@ -2092,6 +2136,10 @@ footer {
     .account-submenu-container {
         top: 80px;
     }
+
+    .add-task__overlay {
+        display: none;
+    }
 }
 
 @media(max-width: 415px) {
@@ -2173,11 +2221,8 @@ footer {
     }
 }
 
-@media only screen 
-  and (orientation: landscape) 
-  and (max-width: 1040px) 
-  and (pointer: coarse) {
-    .overlay-landscape-spinner{
+@media only screen and (orientation: landscape) and (max-width: 1040px) and (pointer: coarse) {
+    .overlay-landscape-spinner {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -2189,6 +2234,7 @@ footer {
         background-color: black;
         z-index: 5;
     }
+
     .loader {
         display: flex;
         justify-content: center;
@@ -2200,66 +2246,74 @@ footer {
         transform: translateY(-30px);
         background-color: whitesmoke;
         background-image:
-          radial-gradient(ellipse at center, rgba(0,0,0,1) 0%,rgba(0,0,0,1) 4%,rgba(81,81,81,1) 14%,rgba(44,44,44,1) 26%,rgba(2,2,2,1) 53%,rgba(2,2,2,1) 65%,rgba(2,2,2,0) 66%),
-          linear-gradient( grey, grey);
-          background-repeat: no-repeat;
-          background-size: 10px 10px , 84px 162px;
-          background-position: center 2px, 4px 8px;
-          transform: rotate(270deg);
-          animation: rotateToPortrait 2s ease-in-out infinite, glowingBorder 2s ease-in-out infinite;
-      }
+            radial-gradient(ellipse at center, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 4%, rgba(81, 81, 81, 1) 14%, rgba(44, 44, 44, 1) 26%, rgba(2, 2, 2, 1) 53%, rgba(2, 2, 2, 1) 65%, rgba(2, 2, 2, 0) 66%),
+            linear-gradient(grey, grey);
+        background-repeat: no-repeat;
+        background-size: 10px 10px, 84px 162px;
+        background-position: center 2px, 4px 8px;
+        transform: rotate(270deg);
+        animation: rotateToPortrait 2s ease-in-out infinite, glowingBorder 2s ease-in-out infinite;
+    }
 
-      .loader2 {
+    .loader2 {
         width: 48px;
         height: 48px;
         display: inline-block;
         position: relative;
         border: 3px solid;
-        border-color:#de3500 #0000 #fff #0000;
+        border-color: #de3500 #0000 #fff #0000;
         border-radius: 50%;
         box-sizing: border-box;
         animation: 3s rotate linear infinite;
-     }
-     .loader2:before , .loader2:after{
+    }
+
+    .loader2:before,
+    .loader2:after {
         content: '';
         top: 0;
         left: 0;
         position: absolute;
         border: 10px solid transparent;
-        border-bottom-color:#fff;
+        border-bottom-color: #fff;
         transform: translate(-10px, 19px) rotate(-35deg);
-      }
-     .loader2:after {
-        border-color: #de3500 #0000 #0000 #0000 ;
+    }
+
+    .loader2:after {
+        border-color: #de3500 #0000 #0000 #0000;
         transform: translate(32px, 3px) rotate(-35deg);
-      }
-       @keyframes rotate {
-        100%{    transform: rotate(360deg)}
-      }
+    }
 
-      @keyframes rotateToPortrait {
+    @keyframes rotate {
+        100% {
+            transform: rotate(360deg)
+        }
+    }
+
+    @keyframes rotateToPortrait {
         0% {
-          transform: rotate(270deg);
+            transform: rotate(270deg);
         }
-        50%, 100% {
-          transform: rotate(360deg);
-        }
-      }
 
-      @keyframes glowingBorder {
+        50%,
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes glowingBorder {
         0% {
             /* border: 1px solid orangered; */
             box-shadow: 0 0 50px orangered;
         }
-    
+
         50% {
             /* border: 1px solid lightgreen; */
             box-shadow: 0 0 50px lightgreen;
         }
-    
+
         100% {
             /* border: 1px solid lightgreen; */
             box-shadow: 0 0 50px lightgreen;
         }
     }
-  }
+}
