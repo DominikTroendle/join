@@ -1016,7 +1016,7 @@ input:focus {
 @media only screen and (max-width: 810px) {
     body {
         display: block;
-        max-height: 100vw;
+        max-height: 100dvh;
     }
 
     #main {
@@ -1025,7 +1025,7 @@ input:focus {
 
     #container-form {
         width: 440px;
-        max-height: calc(100dvh - 160px);
+        max-height: calc(100dvh - 164px);
     }
 
     #form-top {
