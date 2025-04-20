@@ -806,7 +806,12 @@ function createTaskOverlay() {
         document.getElementById('overlay-task-added').classList.remove('d-none');
         setTimeout(() => {
             init();
+            document.getElementById("add-task__overlay").classList.add("fade-out");
             document.getElementById('overlay-task-added').classList.add('d-none');
+            setTimeout(() => {
+                document.getElementById("add-task__overlay").classList.remove("fade-out");
+                document.getElementById('add-task__overlay').classList.toggle('d-none');
+            }, "120");
         }, "900");
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
         throwError();

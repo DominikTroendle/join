@@ -621,6 +621,19 @@ h1 {
     animation: slide-in 120ms ease-in-out forwards;
 }
 
+.add-task__overlay.fade-out {
+    animation: fadeOutAddTaskBox 120ms ease-in-out forwards;
+}
+
+@keyframes fadeOutAddTaskBox {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .add-task__close-button-box {
     display: flex;
     justify-content: flex-end;
