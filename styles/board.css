@@ -1280,17 +1280,17 @@ footer {
     width: 445px;
 }
 
-#container-subtasks {
-    overflow-y: visible;
-    max-height: fit-content;
+.big-task-card-edit__container-subtasks {
+    overflow-y: visible !important;
+    max-height: fit-content !important;
 }
 
 .container-subtask {
-    width: 445px;
+    width: 425px;
 }
 
 #container-input-assigned {
-    width: 445px;
+    width: 425px;
 }
 
 #container-prioritys {
@@ -1828,6 +1828,10 @@ footer {
     #container-input-subtask {
         width: 400px;
     }
+
+    .container-subtask {
+        width: 385px;
+    }
 }
 
 @media(max-width: 1100px) {
@@ -1838,6 +1842,10 @@ footer {
     #container-input-subtask {
         width: 380px;
     }
+
+    .container-subtask {
+        width: 365px;
+    }
 }
 
 @media(max-width: 1060px) {
@@ -1847,6 +1855,10 @@ footer {
 
     #container-input-subtask {
         width: 370px;
+    }
+
+    .container-subtask {
+        width: 355px;
     }
 }
 

@@ -412,7 +412,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     </button>
                                 </div>
                             </div>
-                            <div id="container-subtasks">${subtasksHtml}</div>
+                            <div id="container-subtasks" class="big-task-card-edit__container-subtasks">${subtasksHtml}</div>
                         </div>
                     
                     
