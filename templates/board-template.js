@@ -65,7 +65,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                         </button>
                     </div>
                     <span class="user-story__title">${taskTitle}</span>
-                    <span class="user-story__discription">${taskDescription}</span>
+                    <span class="user-story__description">${taskDescription}</span>
                     ${subtaskHtml}
                     <div class="user-story__name-priority-box">
                         <div class="user-story__name-box">
@@ -273,7 +273,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                     </div>
                 </div>
                 <div class="big-task-card__button-box">
-                    <button class="big-task-card__button" onclick="deleteCurrentTask(); setHeightForDragFields()">
+                    <button class="big-task-card__button" onclick="deleteCurrentTask(); fadeOutBigTaskCard(); setHeightForDragFields()">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
                                 d="M7.7 21.4c-.55 0-1.02-.2-1.41-.59-.39-.39-.59-.86-.59-1.41V6.4h-.01a1 1 0 0 1 0-2h4V4.4c0-.28.1-.52.29-.71.19-.19.43-.29.71-.29h4c.28 0 .52.1.71.29.19.19.29.43.29.71h4a1 1 0 0 1 0 2h-.41v13c0 .55-.2 1.02-.59 1.41-.39.39-.86.59-1.41.59H7.7ZM7.7 6.4v13h10v-13h-10Zm2 10c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Zm4 0c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Z" />

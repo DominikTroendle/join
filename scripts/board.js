@@ -430,7 +430,6 @@ async function deleteCurrentTask() {
         currentArray.splice(indexFromCurrentTask, 1);
     }
     renderSmallCard(currentDragFieldId, currentArray);
-    addClassSlideBack();
     let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), currentTaskCardId);
     if (!deleteResponse.ok) {
         console.error("error when saving:", putResponse.statusText);
@@ -801,22 +800,48 @@ function createTaskOverlay() {
     removeError();
     let valid = validateInputs();
     let validDateFormat = testDate();
+    let titleInput = document.getElementById("title");
+    let descriptionInput = document.getElementById("description");
     if (valid && validDateFormat) {
         saveTask();
         document.getElementById('overlay-task-added').classList.remove('d-none');
         setTimeout(() => {
-            init();
             document.getElementById("add-task__overlay").classList.add("fade-out");
-            document.getElementById('overlay-task-added').classList.add('d-none');
+            init();
             setTimeout(() => {
+                document.getElementById('overlay-task-added').classList.add('d-none');
+                let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
+                let findNewCreateTask = allUserStoryTitle.find(element => {
+                    let userStoryBox = element.closest(".user-story__box");
+                    let description = userStoryBox.querySelector(".user-story__description");
+                    return (
+                        element.innerText.trim() === titleInput.value.trim() && description?.innerText.trim() === descriptionInput.value.trim()
+                    )
+                });
+                if (findNewCreateTask) {
+                    let currentNewCreateTaskId = findNewCreateTask.closest(".user-story__box").id;
+                    document.getElementById(currentNewCreateTaskId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    document.getElementById(currentNewCreateTaskId).classList.add('highlight-flash');
+                    setTimeout(() => {
+                        document.getElementById(currentNewCreateTaskId).classList.remove('highlight-flash');
+                    }, 3300);
+                }
                 document.getElementById("add-task__overlay").classList.remove("fade-out");
                 document.getElementById('add-task__overlay').classList.toggle('d-none');
-            }, "120");
-        }, "900");
+            }, 500);
+        }, 900);
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
         throwError();
         document.getElementById('invalid-date').classList.remove('hidden');
     } else {
         throwError();
     }
+}
+
+function fadeOutBigTaskCard() {
+    document.getElementById("big-task-card__overlay").classList.add("fade-out");
+    setTimeout(() => {
+        document.getElementById("big-task-card__overlay").classList.remove("fade-out");
+        document.getElementById('big-task-card__overlay').classList.toggle('d-none');
+    }, "120");
 }

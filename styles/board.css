@@ -467,7 +467,7 @@ h1 {
     color: #2A3647;
 }
 
-.user-story__discription {
+.user-story__description {
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
@@ -622,7 +622,7 @@ h1 {
 }
 
 .add-task__overlay.fade-out {
-    animation: fadeOutAddTaskBox 120ms ease-in-out forwards;
+    animation: fadeOutAddTaskBox 500ms ease-in-out forwards;
 }
 
 @keyframes fadeOutAddTaskBox {
@@ -699,6 +699,10 @@ h1 {
     animation: slide-in-big-task-card 120ms ease-in-out forwards;
 }
 
+.big-task-card__overlay.fade-out {
+    animation: fade-out-big-task-card 120ms ease-in-out forwards;
+}
+
 @keyframes slide-in-big-task-card {
     0% {
         transform: translateX(65vw);
@@ -720,6 +724,15 @@ h1 {
 
     100% {
         transform: translateX(65vw);
+    }
+}
+
+@keyframes fade-out-big-task-card {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }
 
@@ -1623,12 +1636,16 @@ footer {
     display: none;
 }
 
+#overlay-task-added {
+    width: 100%;
+}
+
 #task-added {
-    animation: slide-in 50ms linear;
+    animation: slide-in-task-added 50ms linear;
 }
 
 
-@keyframes slide-in {
+@keyframes slide-in-task-added {
     from {
         top: 100vh;
     }
