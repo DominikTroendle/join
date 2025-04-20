@@ -305,6 +305,10 @@ li{
     nav {
         width: 1688px;
     }
+
+    .account-submenu-container {
+        left: calc(1920px - 158px);
+    }
 }
 
 @media(max-width: 1040px){
