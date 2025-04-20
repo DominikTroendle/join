@@ -228,6 +228,12 @@ form{
     font-weight: 400;
 }
 
+@media (min-width: 1920px) {
+    .logo {
+        left: calc(((100vw - 1920px) / 2 ) + 77px);
+    }
+}
+
 @media(max-width: 1000px){
     .user-register{
         margin-top: 225px;
