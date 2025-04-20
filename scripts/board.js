@@ -473,10 +473,23 @@ async function checkSearchWordAndLoadAllSearchTasks() {
 }
 
 function renderAddTaskOverlay() {
-    bigTaskCardBox = document.getElementById("big-task-card__box");
-    bigTaskCardOverlay = document.getElementById("big-task-card__overlay");
-    bigTaskCardBox.innerHTML = addTaskTemplate();
-    bigTaskCardOverlay.classList.remove("d-none");
+    let addTaskOverlay = document.getElementById("add-task__overlay");
+    let addTaskBox = document.getElementById("add-task__box");
+    addTaskBox.innerHTML = addTaskTemplate();
+    addTaskOverlay.classList.remove("d-none");
+}
+
+function addTaskBoxAddClassSlideBack() {
+    document.getElementById("add-task__box").classList.add("slide-back")
+    setTimeout(() => {
+        toggleDnoneAddTaskOverlay()
+        document.getElementById("add-task__box").classList.remove("slide-back")
+        clearTimeout();
+    }, 120);
+}
+
+function toggleDnoneAddTaskOverlay() {
+    document.getElementById("add-task__overlay").classList.toggle("d-none");
 }
 
 function setSearchModeTrueAndChangeImg() {

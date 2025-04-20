@@ -431,6 +431,9 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
 
 function addTaskTemplate() {
     return `<section id="main" onclick="closeDropdown(), changeInputButton(false), stopPropagation(event)">
+        <div class="add-task__close-button-box">
+    <button class="add-task__close-button" onclick="addTaskBoxAddClassSlideBack()">x</button>
+    </div>
         <div id="container-form">
             <div id="form-top">
                 <h1>Add Task</h1>
