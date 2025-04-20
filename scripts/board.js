@@ -808,7 +808,7 @@ function createTaskOverlay() {
         setTimeout(() => {
             document.getElementById("add-task__overlay").classList.add("fade-out");
             init();
-            clearSelectedContacts();
+            clearSelectedContactsAndSubtasks();
             setTimeout(() => {
                 document.getElementById('overlay-task-added').classList.add('d-none');
                 let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
@@ -867,6 +867,7 @@ function fadeOutBigTaskCard() {
     }, "120");
 }
 
-function clearSelectedContacts() {
+function clearSelectedContactsAndSubtasks() {
     selectedContacts.length = 0;
+    subtasks.length = 0;
 }
