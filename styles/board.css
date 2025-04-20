@@ -618,7 +618,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    animation: slide-in 120ms ease-in-out forwards;
+    animation: slide-in-add-task-box 120ms ease-in-out forwards;
 }
 
 .add-task__overlay.fade-out {
@@ -631,6 +631,30 @@ h1 {
     }
     100% {
         opacity: 0;
+    }
+}
+
+@keyframes slide-in-add-task-box {
+    0% {
+        transform: translateX(65vw);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.add-task__box.slide-back {
+    animation: slide-out-add-task-box 120ms ease-in-out forwards;
+}
+
+@keyframes slide-out-add-task-box {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(65vw);
     }
 }
 
@@ -672,10 +696,10 @@ h1 {
     gap: 24px;
     background-color: #FFFFFF;
     box-shadow: 0 0 4px 0 rgb(0, 0, 0, 0.16);
-    animation: slide-in 120ms ease-in-out forwards;
+    animation: slide-in-big-task-card 120ms ease-in-out forwards;
 }
 
-@keyframes slide-in {
+@keyframes slide-in-big-task-card {
     0% {
         transform: translateX(65vw);
     }
@@ -685,11 +709,11 @@ h1 {
     }
 }
 
-.slide-back {
-    animation: slide-out 120ms ease-in-out forwards;
+.big-task-card__box.slide-back {
+    animation: slide-out-big-task-card 120ms ease-in-out forwards;
 }
 
-@keyframes slide-out {
+@keyframes slide-out-big-task-card {
     0% {
         transform: translateX(0);
     }
