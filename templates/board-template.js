@@ -344,19 +344,32 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
 </button>
                 </div>
                 <div class="big-task-card-edit__scroll-box">
-                    <div class="big-task-card-edit__text-input-box">
-                        <span class="big-task-card-edit__text">Title</span>
-                        <input class="big-task-card-edit__input" id="big-task-card-edit__input-title" type="text" placeholder="Enter a Title" value="${taskTitle}">
+                    <div class="container-input-label big-task-card-edit__text-input-box">
+                        <label for="title" class="label-add-task flex class="big-task-card-edit__text">
+                            Title
+                            <span class="asterisk">&#42;</span>
+                            <p id="max-char-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
+                        </label>
+                        <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLength('title')">
+                        <p id="required-title" class="required hidden">This field is required</p>
                     </div>
+
                     <div class="big-task-card-edit__text-textarea-box">
                         <span class="big-task-card-edit__text">Description</span>
                         <textarea class="big-task-card-edit__textarea" id="big-task-card-edit__textarea-description" placeholder="Enter a Description">${taskDescription}</textarea>
                     </div>
-                    <div class="big-task-card-edit__text-input-box">
-                        <span class="big-task-card-edit__text">Due date</span>
-                        <input class="big-task-card-edit__input" id="big-task-card-edit__input-due-date" type="text" placeholder="dd/mm/yyyy" value="${dueDate}">
+                    <div class="container-input-label big-task-card-edit__text-input-box">
+                        <label for="due-date" class="label-add-task flex big-task-card-edit__text" id="label-due-date">
+                            Due date
+                            <span class="asterisk" id="asterisk-due-date">&#42;</span>
+                            <p id="invalid-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
+                        </label>
+                        <div id="container-input-due-date">
+                            <input id="big-task-card-edit__input-due-date" class="big-task-card-edit__input big-task-card-edit__input-due-date input" type="text" name="due-date" placeholder="dd/mm/yyyy" value="${dueDate}" size="10" required  maxlength="10">
+                            <input id="date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit()">
+                        </div>
+                        <p id="required-due-date" class="required hidden">This field is required</p>
                     </div>
-                    
                     
                     
                     <div id="container-prioritys" class="container-input-label">

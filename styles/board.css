@@ -1127,6 +1127,18 @@ h1 {
     cursor: pointer;
 }
 
+.big-task-card-edit__input-due-date {
+    border: none;
+}
+
+.big-task-card-edit__input-due-date:focus {
+    border: none;
+}
+
+#container-input-due-date {
+    width: 100%;
+}
+
 .big-task-card-edit__text-textarea-box {
     display: flex;
     justify-content: flex-start;
@@ -1276,20 +1288,12 @@ footer {
     flex-wrap: wrap;
 }
 
-#container-input-subtask {
-    width: 445px;
-}
-
 .big-task-card-edit__container-subtasks {
     overflow-y: visible !important;
     max-height: fit-content !important;
 }
 
 .container-subtask {
-    width: 425px;
-}
-
-#container-input-assigned {
     width: 425px;
 }
 
@@ -2196,9 +2200,16 @@ footer {
     #container-input-subtask,
     #subtasks,
     .container-subtask,
-    #container-dropdown,
-    .container-custom-select-option {
+    #container-dropdown {
         width: 270px;
+    }
+
+    .container-custom-select-option {
+        width: 260px;
+    }
+
+    #subtasks {
+        width: 200px;
     }
 
     #assigned-to,

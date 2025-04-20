@@ -871,3 +871,12 @@ function clearSelectedContactsAndSubtasks() {
     selectedContacts.length = 0;
     subtasks.length = 0;
 }
+
+function putDateToInputForBigTaskCardEdit() {
+    let datePicker = document.getElementById('date-picker');
+    let input = document.getElementById('big-task-card-edit__input-due-date');
+    if (datePicker.value) {
+        let [year, month, day] = datePicker.value.split('-');
+        input.value = `${day}/${month}/${year}`;
+    }
+}
