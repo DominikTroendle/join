@@ -808,6 +808,7 @@ function createTaskOverlay() {
         setTimeout(() => {
             document.getElementById("add-task__overlay").classList.add("fade-out");
             init();
+            clearSelectedContacts();
             setTimeout(() => {
                 document.getElementById('overlay-task-added').classList.add('d-none');
                 let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
@@ -844,4 +845,8 @@ function fadeOutBigTaskCard() {
         document.getElementById("big-task-card__overlay").classList.remove("fade-out");
         document.getElementById('big-task-card__overlay').classList.toggle('d-none');
     }, "120");
+}
+
+function clearSelectedContacts() {
+    selectedContacts.length = 0;
 }
