@@ -317,7 +317,8 @@
     position: relative;
 }
 
-#container-dropdown {
+#container-dropdown,
+.big-task-card-edit__assigned-to-dropdown {
     position: absolute;
     top: 32px;
     z-index: 3;
@@ -953,6 +954,7 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 400px;
@@ -968,6 +970,7 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 380px;
@@ -983,6 +986,7 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 370px;
@@ -1093,6 +1097,7 @@ input:focus {
     }
 
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 440px;
@@ -1154,7 +1159,8 @@ input:focus {
     line-height: 20px;
     }
 
-    #container-dropdown {
+    #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown {
         min-height: 40px;
     }
 
@@ -1175,7 +1181,8 @@ input:focus {
         width: 100%;
     }
 
-    #container-dropdown {
+    #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown {
         width: 100%;
     }
 

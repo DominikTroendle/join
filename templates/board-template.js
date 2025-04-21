@@ -385,7 +385,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                         </div>
                     
                     <div class="container-input-label custom-select">
-                            <label for="assigned-to" class="label-add-task">
+                            <label for="big-task-card-edit__assigned-to-input" class="label-add-task">
                                 Assigned to
                             </label>
                             <div id="big-task-card-edit__assigned-to-box" class="big-task-card-edit__assigned-to-box">
@@ -394,7 +394,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
                                 </button>
                             </div>
-                            <div id="container-dropdown">
+                            <div id="big-task-card-edit__assigned-to-dropdown">
                                 <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
                             </div>
                             <div id="container-assigned-contacts"></div>
