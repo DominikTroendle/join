@@ -172,6 +172,7 @@
 }
 
 #container-input-assigned:focus-within,
+.big-task-card-edit__assigned-to-box:focus-within,
 #container-input-category:focus-within,
 #container-input-due-date:focus-within,
 .big-task-card-edit__input-due-date-box:focus-within,
@@ -204,6 +205,7 @@
 }
 
 #container-input-assigned,
+.big-task-card-edit__assigned-to-box,
 #container-input-category,
 #container-input-subtask,
 #container-input-due-date,
@@ -215,7 +217,8 @@
     align-items: center;
 }
 
-#container-input-assigned {
+#container-input-assigned,
+.big-task-card-edit__assigned-to-box {
     z-index: 4;
 }
 
@@ -223,7 +226,8 @@
     z-index: 2;
 }
 
-#container-input-assigned:hover {
+#container-input-assigned:hover,
+.big-task-card-edit__assigned-to-box:hover {
     cursor: pointer;
 }
 
@@ -285,7 +289,8 @@
     height: 20px;
 }
 
-#container-input-assigned img {
+#container-input-assigned img,
+.big-task-card-edit__assigned-to-box img {
     width: 10px;
     padding-top: 2px;
     padding-right: 1px;
@@ -307,7 +312,8 @@
     position: relative;
 }
 
-#container-input-assigned {
+#container-input-assigned,
+.big-task-card-edit__assigned-to-box {
     position: relative;
 }
 

@@ -388,7 +388,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                             <label for="assigned-to" class="label-add-task">
                                 Assigned to
                             </label>
-                            <div id="container-input-assigned">
+                            <div id="big-task-card-edit__assigned-to-box" class="big-task-card-edit__assigned-to-box">
                                 <input id="big-task-card-edit__assigned-to-input" class="big-task-card-edit__assigned-to-input assigned-to__input" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
                                 <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)">
                                     <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
