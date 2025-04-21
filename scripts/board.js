@@ -954,7 +954,7 @@ function removeErrorForBigTaskCardEdit() {
     unvalidInputsBigTaskCardEdit.forEach(element => {
         document.getElementById(`required-${element}`).classList.add('hidden');
         if (element == "category" || element == "big-task-card-edit__input-due-date") {
-            document.getElementById(`${element}box`).classList.remove('input-unvalid')
+            document.getElementById(`${element}-box`).classList.remove('input-unvalid')
         } else {
             document.getElementById(`${element}`).classList.remove('input-unvalid');
         };

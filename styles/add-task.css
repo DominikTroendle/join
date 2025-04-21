@@ -318,7 +318,8 @@
 }
 
 #container-description,
-#container-prioritys {
+#container-prioritys,
+.big-task-card-edit__prioritys-box {
     padding-bottom: 16px;
 }
 
