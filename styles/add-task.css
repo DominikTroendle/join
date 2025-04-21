@@ -512,14 +512,14 @@ hr {
 }
 
 #buttons-prio,
-.big-task-card-edit__prioritys-box {
+.big-task-card-edit__prioritys-button-box {
     height: 56px;
     display: flex;
     gap: 16px;
 }
 
 #buttons-prio img,
-.big-task-card-edit__prioritys-box img {
+.big-task-card-edit__prioritys-button-box img {
     width: 20px;
 }
 
@@ -1172,7 +1172,7 @@ input:focus {
     }
 
     #buttons-prio,
-    .big-task-card-edit__prioritys-box {
+    .big-task-card-edit__prioritys-button-box {
         height: 41px;
     }
 
