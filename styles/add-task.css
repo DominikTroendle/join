@@ -145,6 +145,7 @@
 #due-date,
 .big-task-card-edit__input-due-date,
 #assigned-to,
+.big-task-card-edit__assigned-to-input,
 #category,
 #subtasks {
     font-family: Inter;
@@ -195,6 +196,7 @@
 }
 
 #assigned-to,
+.big-task-card-edit__assigned-to-input,
 #category {
     height: 48px;
     padding: 12px 21px 11px 21px;
@@ -226,6 +228,7 @@
 }
 
 #assigned-to,
+.big-task-card-edit__assigned-to-input,
 #category,
 #subtasks,
 #due-date,
@@ -237,11 +240,13 @@
 }
 
 #assigned-to:hover,
+.big-task-card-edit__assigned-to-input:hover,
 #category:hover {
     cursor: pointer;
 }
 
 #assigned-to::placeholder,
+.big-task-card-edit__assigned-to-input::placeholder,
 #category::placeholder {
     color: black;
 }
@@ -1122,6 +1127,7 @@ input:focus {
     #due-date,
     #subtasks,
     #assigned-to,
+    .big-task-card-edit__assigned-to-input,
     #category {
         height: 40px;
         padding: 0px 21px;
@@ -1136,6 +1142,7 @@ input:focus {
     #due-date::placeholder,
     #subtasks::placeholder,
     #assigned-to::placeholder,
+    .big-task-card-edit__assigned-to-input::placeholder,
     #category::placeholder {
     font-size: 16px;
     line-height: 20px;
@@ -1223,7 +1230,8 @@ input:focus {
         width: 300px;
     }
 
-    #assigned-to {
+    #assigned-to,
+    .big-task-card-edit__assigned-to-input {
         padding-right: 10px;
     }
 }
