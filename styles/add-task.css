@@ -139,6 +139,7 @@
 #title,
 #description,
 #due-date,
+.big-task-card-edit__input-due-date,
 #assigned-to,
 #category,
 #subtasks {
@@ -151,6 +152,7 @@
 #title::placeholder,
 #description::placeholder,
 #due-date::placeholder,
+.big-task-card-edit__input-due-date::placeholder,
 #subtasks::placeholder {
     color: #D1D1D1;
     font-family: Inter;
@@ -167,6 +169,7 @@
 #container-input-assigned:focus-within,
 #container-input-category:focus-within,
 #container-input-due-date:focus-within,
+.big-task-card-edit__input-due-date-box:focus-within,
 #container-input-subtask:focus-within {
     border: 1px solid #94D5F0;
 }
@@ -197,7 +200,8 @@
 #container-input-assigned,
 #container-input-category,
 #container-input-subtask,
-#container-input-due-date {
+#container-input-due-date,
+.big-task-card-edit__input-due-date-box {
     border: 1px solid #D1D1D1;
     background-color: white;
     border-radius: 10px;
@@ -220,7 +224,8 @@
 #assigned-to,
 #category,
 #subtasks,
-#due-date {
+#due-date,
+.big-task-card-edit__input-due-date {
     border: none;
     outline: none;
     border-radius: 10px;
@@ -433,12 +438,14 @@ hr {
     border: 1px solid #D1D1D1;
 }
 
-#due-date {
+#due-date, 
+.big-task-card-edit__input-due-date {
     height: 48px;
     padding: 12px 16px;
 }
 
-#date-picker {
+#date-picker,
+.big-task-card-edit__input-date-picker {
     width: 30px;
     height: 30px;
     margin-right: 10px;
@@ -448,18 +455,24 @@ hr {
 }
 
 #date-picker::-webkit-datetime-edit-year-field,
+.big-task-card-edit__input-date-picker::-webkit-datetime-edit-year-field,
 #date-picker::-webkit-datetime-edit-month-field,
+.big-task-card-edit__input-date-picker::-webkit-datetime-edit-month-field,
 #date-picker::-webkit-datetime-edit-week-field,
-#date-picker::-webkit-datetime-edit-day-field {
+.big-task-card-edit__input-date-picker::-webkit-datetime-edit-week-field,
+#date-picker::-webkit-datetime-edit-day-field,
+.big-task-card-edit__input-date-picker::-webkit-datetime-edit-day-field {
     color: transparent;
 }
 
-#date-picker:hover {
+#date-picker:hover,
+.big-task-card-edit__input-date-picker:hover {
     background-color: #D1D1D1;
     cursor: pointer;
 }
 
-#date-picker::-webkit-calendar-picker-indicator {
+#date-picker::-webkit-calendar-picker-indicator,
+.big-task-card-edit__input-date-picker::-webkit-calendar-picker-indicator {
     width: 30px;
     height: 30px;
     background-image: url(../assets/icons/calendar.svg);
@@ -468,7 +481,8 @@ hr {
     background-position: center center;
 }
 
-#date-picker::-webkit-calendar-picker-indicator:hover {
+#date-picker::-webkit-calendar-picker-indicator:hover,
+.big-task-card-edit__input-date-picker::-webkit-calendar-picker-indicator:hover {
     cursor: pointer;
 }
 
@@ -804,7 +818,8 @@ input:focus {
         background-image: none;
     }
 
-    #date-picker {
+    #date-picker,
+    .big-task-card-edit__input-date-picker {
         width: 30px;
         height: 30px;
         padding: 5px 8px 5px 5px;
@@ -916,6 +931,7 @@ input:focus {
 }
 
 @media only screen and (max-width: 1185px) {
+
     #form-left,
     #form-right,
     #container-dropdown,
@@ -930,6 +946,7 @@ input:focus {
 }
 
 @media only screen and (max-width: 1100px) {
+
     #form-left,
     #form-right,
     #container-dropdown,
@@ -944,6 +961,7 @@ input:focus {
 }
 
 @media only screen and (max-width: 1060px) {
+
     #form-left,
     #form-right,
     #container-dropdown,

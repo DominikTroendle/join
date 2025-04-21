@@ -1135,7 +1135,11 @@ h1 {
     border: none;
 }
 
-#container-input-due-date {
+.big-task-card-edit__input-date-picker:focus {
+    border: none;
+}
+
+.big-task-card-edit__input-due-date-box {
     width: 100%;
 }
 

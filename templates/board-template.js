@@ -229,15 +229,12 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                     <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
                         <span class="big-task-card__task-type-text">${taskType}</span>
                     </div>
-                    <button class="big-task-card__task-type-button" onclick="addClassSlideBack()"><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0_75592_9957" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-<rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
-</mask>
-<g mask="url(#mask0_75592_9957)">
-<path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
-</g>
-</svg>
-</button>
+                    <button class="big-task-card__task-type-button" onclick="addClassSlideBack()">
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
+                            <rect x="0.144531" width="24" height="24" fill="none"/>
+                            <path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
+                        </svg>
+                    </button>
                 </div>
                 <div class="big-task-card__title-box">
                     <span class="big-task-card__title">${taskTitle}</span>
@@ -333,25 +330,22 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
     }
 
     return `    <div class="big-task-card-edit__task-type-text-button-box">
-                    <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()"><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0_75592_9957" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-<rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
-</mask>
-<g mask="url(#mask0_75592_9957)">
-<path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
-</g>
-</svg>
-</button>
+                    <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">
+                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
+                            <rect x="0.144531" width="24" height="24" fill="none"/>
+                            <path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
+                        </svg>
+                    </button>
                 </div>
                 <div class="big-task-card-edit__scroll-box">
                     <div class="container-input-label big-task-card-edit__text-input-box">
-                        <label for="title" class="label-add-task flex class="big-task-card-edit__text">
+                        <label for="big-task-card-edit__input-title" class="label-add-task flex class="big-task-card-edit__text">
                             Title
                             <span class="asterisk">&#42;</span>
-                            <p id="max-char-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
+                            <p id="max-char-big-task-card-edit__input-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                         </label>
-                        <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLength('title')">
-                        <p id="required-title" class="required hidden">This field is required</p>
+                        <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__input-title')">
+                        <p id="required-big-task-card-edit__input-title" class="required hidden">This field is required</p>
                     </div>
 
                     <div class="big-task-card-edit__text-textarea-box">
@@ -359,16 +353,16 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                         <textarea class="big-task-card-edit__textarea" id="big-task-card-edit__textarea-description" placeholder="Enter a Description">${taskDescription}</textarea>
                     </div>
                     <div class="container-input-label big-task-card-edit__text-input-box">
-                        <label for="due-date" class="label-add-task flex big-task-card-edit__text" id="label-due-date">
+                        <label for="big-task-card-edit__input-due-date" class="label-add-task flex big-task-card-edit__text" id="label-due-date">
                             Due date
                             <span class="asterisk" id="asterisk-due-date">&#42;</span>
-                            <p id="invalid-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
+                            <p id="invalid-date-big-task-card-edit__input-due-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
                         </label>
-                        <div id="container-input-due-date">
+                        <div id="big-task-card-edit__input-due-date-box" class="big-task-card-edit__input-due-date-box">
                             <input id="big-task-card-edit__input-due-date" class="big-task-card-edit__input big-task-card-edit__input-due-date input" type="text" name="due-date" placeholder="dd/mm/yyyy" value="${dueDate}" size="10" required  maxlength="10">
-                            <input id="date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit()">
+                            <input id="big-task-card-edit__input-date-picker" class="big-task-card-edit__input-date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit()">
                         </div>
-                        <p id="required-due-date" class="required hidden">This field is required</p>
+                        <p id="required-big-task-card-edit__input-due-date" class="required hidden">This field is required</p>
                     </div>
                     
                     
@@ -464,15 +458,12 @@ function addTaskTemplate() {
         <div id="container-form">
             <div id="form-top">
                 <h1>Add Task</h1>
-                <button class="add-task__close-button" onclick="addTaskBoxAddClassSlideBack(); clearSelectedContactsAndSubtasks();"><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<mask id="mask0_75592_9957" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="25" height="24">
-<rect x="0.144531" width="24" height="24" fill="#D9D9D9"/>
-</mask>
-<g mask="url(#mask0_75592_9957)">
-<path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
-</g>
-</svg>
-</button>
+                <button class="add-task__close-button" onclick="addTaskBoxAddClassSlideBack(); clearSelectedContactsAndSubtasks();">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="0.185" width="30.72" height="30.72" fill="none"/>
+                        <path d="M15.552 17.867L9.29 24.13C9.058 24.362 8.763 24.48 8.405 24.48C8.047 24.48 7.752 24.362 7.52 24.13C7.288 23.898 7.17 23.603 7.17 23.245C7.17 22.887 7.288 22.592 7.52 22.36L13.782 16.098L7.52 9.837C7.288 9.604 7.17 9.31 7.17 8.952C7.17 8.594 7.288 8.299 7.52 8.067C7.752 7.835 8.047 7.717 8.405 7.717C8.763 7.717 9.058 7.835 9.29 8.067L15.552 14.328L21.813 8.067C22.045 7.835 22.34 7.717 22.698 7.717C23.056 7.717 23.351 7.835 23.583 8.067C23.815 8.299 23.933 8.594 23.933 8.952C23.933 9.31 23.815 9.604 23.583 9.837L17.321 16.098L23.583 22.36C23.815 22.592 23.933 22.887 23.933 23.245C23.933 23.603 23.815 23.898 23.583 24.13C23.351 24.362 23.056 24.48 22.698 24.48C22.34 24.48 22.045 24.362 21.813 24.13L15.552 17.867Z" fill="#2A3647"/>
+                    </svg>
+                </button>
             </div>
             <form id="form-add-task">
                 <div id="form-left">
