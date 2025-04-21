@@ -1301,7 +1301,8 @@ footer {
     width: 425px;
 }
 
-#container-prioritys {
+#container-prioritys,
+.big-task-card-edit__prioritys-box {
     padding-bottom: 0;
 }
 
@@ -2225,13 +2226,17 @@ footer {
         padding: 12px 6px;
     }
 
-    #buttons-prio {
+    #buttons-prio,
+    .big-task-card-edit__prioritys-button-box {
         gap: 6px;
     }
 
     #urgent,
     #medium,
-    #low {
+    #low,
+    #big-task-card-edit__urgent-button,
+    #big-task-card-edit__medium-button,
+    .big-task-card-edit__low-button{
         padding: 1px 4px;
     }
 }

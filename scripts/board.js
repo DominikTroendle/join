@@ -962,3 +962,32 @@ function removeErrorForBigTaskCardEdit() {
     document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.add('hidden');
     document.getElementById('invalid-subtask').classList.add('d-none');
 }
+
+function selectPrioButtonForBigTaskCardEdit(prio) {
+    let priority = prio === "big-task-card-edit__urgent-button" ? "urgent" : prio === "big-task-card-edit__medium-button" ? "medium" : "low";
+    if (prio != "") {
+        let button = document.getElementById(`${prio}`);
+        let svg = document.getElementById(`svg-${prio}`);
+        if (button.classList.contains(priority)) {
+            toggleButtonClasses(true, button, svg, priority);
+            selectedPriority = "medium";
+        } else {
+            clearPrioButtonsForBigTaskCardEdit();
+            toggleButtonClasses(false, button, svg, priority);
+            selectedPriority = priority;
+        }
+    }
+}
+
+function clearPrioButtonsForBigTaskCardEdit() {
+    let prios = ["urgent", "medium", "low"];
+    let prioButtons = ["big-task-card-edit__urgent-button", "big-task-card-edit__medium-button", "big-task-card-edit__low-button"];
+    for (let i = 0; i < prios.length; i++) {
+        let button = document.getElementById(`${prioButtons[i]}`);
+        let svg = document.getElementById(`svg-${prioButtons[i]}`);
+        button.classList.remove(`${prios[i]}`);
+        button.classList.remove('white');
+        button.classList.add('button-prio-hover');
+        svg.classList.remove('filter-white');
+    }
+}

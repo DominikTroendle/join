@@ -277,7 +277,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                         </svg>
                         Delete</button>
                     <span class="big-task-card__seperator"></span>
-                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContacts(); selectPrioButton('${taskPriorityForEdit}')">
+                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContacts(); selectPrioButtonForBigTaskCardEdit('big-task-card-edit__${taskPriorityForEdit}-button')">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
                                 d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />
@@ -369,17 +369,17 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     <div id="big-task-card-edit__prioritys-box" class="big-task-card-edit__prioritys-box container-input-label">
                             <label for="big-task-card-edit__prioritys-button-box" class="label-add-task">Priority</label>
                             <div id="big-task-card-edit__prioritys-button-box" class="big-task-card-edit__prioritys-button-box">
-                                <button id="big-task-card-edit__urgent-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
+                                <button id="big-task-card-edit__urgent-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__urgent-button')">
                                     Urgent
-                                    <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
+                                    <img id="svg-big-task-card-edit__urgent-button" src="assets/icons/urgent.svg" alt="icon-urgent">
                                 </button>
-                                <button id="big-task-card-edit__medium-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('medium')">
+                                <button id="big-task-card-edit__medium-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__medium-button')">
                                     Medium
-                                    <img id="svg-medium" src="assets/icons/medium.svg" alt="icon-medium" class="filter-white">
+                                    <img id="svg-big-task-card-edit__medium-button" src="assets/icons/medium.svg" alt="icon-medium" class="filter-white">
                                 </button>
-                                <button id="big-task-card-edit__low-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('low')">
+                                <button id="big-task-card-edit__low-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__low-button')">
                                     Low
-                                    <img id="svg-low" src="assets/icons/low.svg" alt="icon-low">
+                                    <img id="svg-big-task-card-edit__low-button" src="assets/icons/low.svg" alt="icon-low">
                                 </button>
                             </div>
                         </div>
