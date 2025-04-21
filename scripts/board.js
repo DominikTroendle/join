@@ -841,11 +841,11 @@ function createTaskOverlay() {
                 document.getElementById('add-task__overlay').classList.toggle('d-none');
             }, 500);
         }, 900);
-    } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
-        throwErrorForBigTaskCardEdit();
-        document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
+    } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
+        throwError();
+        document.getElementById('invalid-date').classList.remove('hidden');
     } else {
-        throwErrorForBigTaskCardEdit();
+        throwError();
     }
 }
 let categoryFromClickedButton = "";
