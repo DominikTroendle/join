@@ -531,34 +531,34 @@ async function readFromEditAndSaveData() {
     let valid = validateInputsForBigTaskCardEdit();
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
-    let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
-    completedSubtasksArray = subtasks.filter(element => element.checked === "true");
-    data = {
-        category: taskCardObject.category,
-        taskType: taskCardObject.taskType,
-        taskTitle: document.getElementById("big-task-card-edit__input-title").value,
-        taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
-        taskPriority: selectedPriority,
-        taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
-        numberOfSubtasks: subtasks.length,
-        numberOfCompletedSubtasks: completedSubtasksArray.length,
-        assignedContacts: selectedContacts,
-        subtasks: subtasks
+        let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
+        completedSubtasksArray = subtasks.filter(element => element.checked === "true");
+        data = {
+            category: taskCardObject.category,
+            taskType: taskCardObject.taskType,
+            taskTitle: document.getElementById("big-task-card-edit__input-title").value,
+            taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
+            taskPriority: selectedPriority,
+            taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
+            numberOfSubtasks: subtasks.length,
+            numberOfCompletedSubtasks: completedSubtasksArray.length,
+            assignedContacts: selectedContacts,
+            subtasks: subtasks
+        }
+        editDataInArray(taskCardObject, data);
+        renderNewContentFromBigTaskCard(taskCardObject)
+        let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
+        if (!editResponse.ok) {
+            console.error("error when saving in the database:", editResponse.statusText);
+            return;
+        }
+        init();
+    } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
+        throwErrorForBigTaskCardEdit();
+        document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
+    } else {
+        throwErrorForBigTaskCardEdit();
     }
-    editDataInArray(taskCardObject, data);
-    renderNewContentFromBigTaskCard(taskCardObject)
-    let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
-    if (!editResponse.ok) {
-        console.error("error when saving in the database:", editResponse.statusText);
-        return;
-    }
-    init();
-} else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
-    throwErrorForBigTaskCardEdit();
-    document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
-} else {
-    throwErrorForBigTaskCardEdit();
-}
 }
 
 async function editDataInDatabase(userKey, cardId, data) {
@@ -854,7 +854,7 @@ function saveCategoryFromClickedButton(event) {
 }
 
 function saveTaskOverlay() {
-    if(!categoryFromClickedButton)return;
+    if (!categoryFromClickedButton) return;
     task.category = categoryFromClickedButton;
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
@@ -928,7 +928,7 @@ function checkInputLengthForBigTaskCardEdit(inputField) {
     let inputSetting = inputField === "big-task-card-edit__input-title" ? 'title' : 'subtasks';
     let input = document.getElementById(`${inputField}`);
     let errorElement = document.getElementById(`max-char-${inputField}`);
-    let inputSettings = {"title": {invalidElement: null}, "subtasks": {invalidElement: "invalid-subtask"}};
+    let inputSettings = { "title": { invalidElement: null }, "subtasks": { invalidElement: "invalid-subtask" } };
     let maxLength = 50;
     let invalidElement = inputSettings[inputSetting].invalidElement;
     if (input.value.length == maxLength) {
@@ -964,8 +964,8 @@ function removeErrorForBigTaskCardEdit() {
 }
 
 function selectPrioButtonForBigTaskCardEdit(prio) {
-    let priority = prio === "big-task-card-edit__urgent-button" ? "urgent" : prio === "big-task-card-edit__medium-button" ? "medium" : "low";
-    if (prio != "") {
+    if (prio !== "") {
+        let priority = prio === "big-task-card-edit__urgent-button" ? "urgent" : prio === "big-task-card-edit__medium-button" ? "medium" : "low";
         let button = document.getElementById(`${prio}`);
         let svg = document.getElementById(`svg-${prio}`);
         if (button.classList.contains(priority)) {
@@ -990,4 +990,76 @@ function clearPrioButtonsForBigTaskCardEdit() {
         button.classList.add('button-prio-hover');
         svg.classList.remove('filter-white');
     }
+}
+
+function toggleAssignOptionsForBigTaskCardEdit() {
+    renderAssignOptionsForBigTaskCardEdit(contacts);
+    let container = document.getElementById('big-task-card-edit__dropdown-assign');
+    let containerDropdown = document.getElementById('big-task-card-edit__assigned-to-dropdown');
+    let input = document.getElementById('big-task-card-edit__assigned-to-input');
+    container.classList.toggle('d-none');
+    containerDropdown.classList.toggle('box-shadow');
+    renderAssignOptionsForBigTaskCardEdit(contacts);
+    if (input.placeholder == "Select contacts to assign") {
+        input.placeholder = "";
+        changeDropdownArrowForBigTaskCardEdit(true, 'assigned');
+    } else if (input.placeholder == "") {
+        input.placeholder = "Select contacts to assign";
+        changeDropdownArrowForBigTaskCardEdit(false, 'assigned');
+    }
+}
+
+function renderAssignOptionsForBigTaskCardEdit(array) {
+    let dropDown = document.getElementById('big-task-card-edit__dropdown-assign');
+    dropDown.innerHTML = "";
+    if (selectedContacts.length == 0) {
+        renderDefaultContacts(array, dropDown);
+    } else {
+        checkForSelectedContacts(array, dropDown);
+    }
+    checkForScrollableContainer(dropDown);
+}
+
+function displaySelectedContactsForBigTaskCard() {
+    let container = document.getElementById('big-task-card-edit__assigned-contacts-box');
+    container.innerHTML = "";
+    for (let i = 0; i < selectedContacts.length; i++) {
+        let name = selectedContacts[i].name;
+        let color = selectedContacts[i].color;
+        let initials = getInitials(name);
+        container.innerHTML += returnAssignedContactPreviewHTML(initials, color);
+    }
+    if (selectedContacts.length > 8) {
+        document.getElementById('big-task-card-edit__assigned-contacts-box').classList.add('padding-bottom-8');
+    } else {
+        document.getElementById('big-task-card-edit__assigned-contacts-box').classList.remove('padding-bottom-8');
+    }
+}
+
+function changeDropdownArrowForBigTaskCardEdit(boolean, dropdown) {
+    let dropwdownArrow = document.getElementById(`big-task-card-edit__arrow-dropdown-${dropdown}`);
+    if (boolean) {
+        dropwdownArrow.src = "./assets/icons/arrow_drop_down_mirrored.svg";
+    } else {
+        dropwdownArrow.src = "./assets/icons/arrow_drop_down.svg";
+    }
+}
+
+function toggleInputFocusForBigTaskCardEdit() {
+    if (!document.getElementById('big-task-card-edit__dropdown-assign').classList.contains('d-none')) {
+        document.getElementById('big-task-card-edit__assigned-to-input').focus();
+    }
+}
+
+function selectContactForBigTaskCardEdit(name, color) {
+    let contactDiv = document.getElementById(`container-${name}`);
+    let icon = document.getElementById(`icon-${name}`);
+    if (!isContactSelected(contactDiv)) {
+        toggleSelection(true, contactDiv, icon);
+        updateSelectedContacts(true, name, color);
+    } else {
+        toggleSelection(false, contactDiv, icon);
+        updateSelectedContacts(false, name, color);
+    }
+    displaySelectedContactsForBigTaskCard();
 }

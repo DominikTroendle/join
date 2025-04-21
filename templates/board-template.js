@@ -160,7 +160,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
     if (taskPriority) {
         taskPriorityImg = priorityMapping.find(element => element.priority == taskPriority)?.img;
         taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText;
-        taskPriorityForEdit = taskPriority;
+        taskPriorityForEdit = taskPriority === "big-task-card-edit__medium-button" ? "" : `big-task-card-edit__${taskPriority}-button`
     }
 
     let dueDate = "";
@@ -277,7 +277,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                         </svg>
                         Delete</button>
                     <span class="big-task-card__seperator"></span>
-                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContacts(); selectPrioButtonForBigTaskCardEdit('big-task-card-edit__${taskPriorityForEdit}-button')">
+                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); displaySelectedContactsForBigTaskCard(); selectPrioButtonForBigTaskCardEdit('${taskPriorityForEdit}')">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
                                 d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />
@@ -389,9 +389,9 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                 Assigned to
                             </label>
                             <div id="big-task-card-edit__assigned-to-box" class="big-task-card-edit__assigned-to-box">
-                                <input id="big-task-card-edit__assigned-to-input" class="big-task-card-edit__assigned-to-input assigned-to__input" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptions(), stopPropagation(event)" onkeyup="filterContacts()">
-                                <button class="button-dropdown" type="button" onclick="toggleAssignOptions(), toggleInputFocus(), stopPropagation(event)">
-                                    <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
+                                <input id="big-task-card-edit__assigned-to-input" class="big-task-card-edit__assigned-to-input assigned-to__input" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptionsForBigTaskCardEdit(), stopPropagation(event)" onkeyup="filterContacts()">
+                                <button class="button-dropdown" type="button" onclick="toggleAssignOptionsForBigTaskCardEdit(), toggleInputFocusForBigTaskCardEdit(), stopPropagation(event)">
+                                    <img id="big-task-card-edit__arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
                                 </button>
                             </div>
                             <div id="big-task-card-edit__assigned-to-dropdown" class="big-task-card-edit__assigned-to-dropdown">
