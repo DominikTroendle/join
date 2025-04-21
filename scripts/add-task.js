@@ -337,7 +337,7 @@ function processSubtask(boolean) {
     if (boolean && (input.value != "")) {
         addSubtask();
         input.value = "";
-    } else if (!boolean && (input.value != "")) {
+    } else if (!boolean && (input.value != "" || input.value == "")) {
         input.value = "";
     } else {
         invalidRef.classList.remove('d-none');

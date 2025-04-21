@@ -126,6 +126,10 @@
     color: red;
 }
 
+#max-char-title {
+    padding-left: 10px;
+}
+
 #invalid-date {
     margin-left: 20px;
 }
