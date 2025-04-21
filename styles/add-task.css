@@ -165,7 +165,10 @@
     line-height: 24px;
 }
 
-#title:focus,
+#title:focus {
+    outline: none;
+}
+
 #description:focus {
     outline: 1px solid #94D5F0;
 }
@@ -668,6 +671,10 @@ input:focus {
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
+}
+
+.subtask-text-span {
+    text-wrap: wrap;
 }
 
 .subtask-icons {

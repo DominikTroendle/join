@@ -25,7 +25,7 @@ function returnSubtaskHTML(id) {
                 <div id="details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)" ondblclick="editSubtask(${id})">
                     <div class="subtask-text" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
                         <span>&bull;</span>
-                        <span id="subtask-${id}"></span>
+                        <span id="subtask-${id}" class="subtask-text-span"></span>
                     </div>
                     <div id="icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
                         <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
@@ -49,7 +49,7 @@ function returnSubtaskMobileHTML (id) {
                 <div id="details-subtask-${id}" class="container-subtask subtask-scroll-margin">
                     <div class="subtask-text">
                         <span>&bull;</span>
-                        <span id="subtask-${id}"></span>
+                        <span id="subtask-${id}" class="subtask-text-span"></span>
                     </div>
                     <div id="icons-subtask-${id}" class="subtask-icons">
                         <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
