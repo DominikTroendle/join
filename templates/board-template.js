@@ -366,9 +366,9 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     </div>
                     
                     
-                    <div id="container-prioritys" class="container-input-label">
-                            <label for="buttons-prio" class="label-add-task">Priority</label>
-                            <div id="buttons-prio">
+                    <div id="big-task-card-edit__prioritys-box" class="big-task-card-edit__prioritys-box container-input-label">
+                            <label for="big-task-card-edit__prioritys-button-box" class="label-add-task">Priority</label>
+                            <div id="big-task-card-edit__prioritys-button-box" class="big-task-card-edit__prioritys-button-box">
                                 <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
                                     Urgent
                                     <img id="svg-urgent" src="assets/icons/urgent.svg" alt="icon-urgent">
