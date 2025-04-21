@@ -121,12 +121,7 @@ p{
 @media (min-width: 1920px) {
     #generator_results {
         height: calc(100dvh - 96px);
-    }
-}
-
-@media (min-width: 2026px) {
-    #generator_results_content {
-        width: 1592px;
+        width: calc(1920px - 232px);
     }
 }
 
