@@ -115,11 +115,18 @@ p{
     cursor: pointer;
 }
 
-@media (min-width: 2026px) {
+@media (min-width: 1920px) {
+    .text-content-container {
+        height: calc(100dvh - 96px);
+        width: calc(1920px - 232px);
+    }
+}
+
+/* @media (min-width: 2026px) {
     .text-content {
         width: 1592px;
     }
-}
+} */
 
 @media (max-width: 1040px){
     nav {

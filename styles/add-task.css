@@ -1117,10 +1117,21 @@ input:focus {
     #assigned-to,
     #category {
         height: 40px;
+        padding: 0px 21px;
     }
 
     #description {
         min-height: 80px;
+    }
+
+    #title::placeholder,
+    #description::placeholder,
+    #due-date::placeholder,
+    #subtasks::placeholder,
+    #assigned-to::placeholder,
+    #category::placeholder {
+    font-size: 16px;
+    line-height: 20px;
     }
 
     #container-dropdown {

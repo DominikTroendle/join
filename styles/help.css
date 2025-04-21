@@ -50,7 +50,7 @@ nav {
     position: fixed;
     width: 32px;
     height: 32px;
-    right: 80px;
+    right: 70px;
     cursor: pointer;
     transform-origin: right;
 }
@@ -97,9 +97,22 @@ d, a{
     margin-top: 50px;
 }
 
-@media (min-width: 2026px) {
-    .text-content {
-        width: 1592px;
+@media (min-width: 1920px) {
+    header {
+        justify-content: flex-start;
+    }
+
+    nav {
+        width: 1920px;
+    }
+
+    .text-content-container {
+        height: calc(100% - 96px);
+        width: calc(1920px - 232px);
+    }
+
+    .left-btn img {
+        right: calc(100vw - 1920px + 70px);
     }
 }
 
@@ -120,6 +133,15 @@ d, a{
 
     .text-content{
         margin: 48px 26px 48px 16px;
+    }
+
+    .left-btn {
+        position: relative;
+    }
+
+    .left-btn img {
+        position: relative;
+        right: 0;
     }
 
     .left-btn img:hover{
