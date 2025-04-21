@@ -394,10 +394,10 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     <img id="arrow-dropdown-assigned" src="./assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
                                 </button>
                             </div>
-                            <div id="big-task-card-edit__assigned-to-dropdown">
-                                <div id="dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
+                            <div id="big-task-card-edit__assigned-to-dropdown" class="big-task-card-edit__assigned-to-dropdown">
+                                <div id="big-task-card-edit__dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
                             </div>
-                            <div id="container-assigned-contacts"></div>
+                            <div id="big-task-card-edit__assigned-contacts-box" class="big-task-card-edit__assigned-contacts-box"></div>
                         </div>
                     <div class="container-input-label">
                             <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">

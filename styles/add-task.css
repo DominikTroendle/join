@@ -296,7 +296,8 @@
     padding-right: 1px;
 }
 
-#container-assigned-contacts {
+#container-assigned-contacts,
+.big-task-card-edit__assigned-contacts-box {
     display: flex;
     gap: 8px;
     margin-top: 8px;
@@ -362,7 +363,8 @@
     width: 7px;
 }
 
-#container-assigned-contacts::-webkit-scrollbar {
+#container-assigned-contacts::-webkit-scrollbar,
+.big-task-card-edit__assigned-contacts-box::-webkit-scrollbar {
     height: 4px;
 }
 
@@ -383,14 +385,16 @@
 }
 
 .container-custom-select-options::-webkit-scrollbar-thumb,
-#container-assigned-contacts::-webkit-scrollbar-thumb {
+#container-assigned-contacts::-webkit-scrollbar-thumb,
+.big-task-card-edit__assigned-contacts-box::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 5px;
     border-radius: 10px;
 }
 
 .container-custom-select-options::-webkit-scrollbar-track,
-#container-assigned-contacts::-webkit-scrollbar-track {
+#container-assigned-contacts::-webkit-scrollbar-track,
+.big-task-card-edit__assigned-contacts-box::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
