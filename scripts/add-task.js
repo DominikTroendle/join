@@ -368,13 +368,21 @@ function addSubtask() {
         document.getElementById('invalid-subtask').classList.add('d-none');
         document.getElementById('container-input-subtask').classList.remove('input-unvalid');
         subtasksCount++;
-        containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
+        determineSubtaskStyle(containerSubtasks, subtasksCount);
         document.getElementById(`subtask-${subtasksCount}`).innerText = input.value;
         subtaskObj.subtask = input.value;
         subtasks.push(subtaskObj);
         checkForScrollableContainer(containerSubtasks);
     } else {
         throwSubtaskError();
+    }
+}
+
+function determineSubtaskStyle(containerSubtasks, subtasksCount) {
+    if (window.innerWidth <= 1040) {
+        containerSubtasks.innerHTML += returnSubtaskMobileHTML(subtasksCount);
+    } else {
+        containerSubtasks.innerHTML += returnSubtaskHTML(subtasksCount);
     }
 }
 
@@ -409,7 +417,7 @@ function saveEditedSubtask(id) {
     document.getElementById(`subtask-${id}`).innerText = input.value;
     subtasks[`${id-1}`].subtask = input.value;
     input.value = "";
-    showEditOptions(id, false)
+    if (window.innerWidth > 1040) {showEditOptions(id, false);}
     if (element.classList.contains('padding-top')) {
         element.classList.remove('padding-top');
     }

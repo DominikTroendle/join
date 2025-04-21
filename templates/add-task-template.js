@@ -35,3 +35,27 @@ function returnSubtaskHTML(id) {
                 </div>
             </div>`;
 }
+
+function returnSubtaskMobileHTML (id) {
+    return `<div id="container-subtask-${id}" class="position-relative">
+                <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
+                    <input id="input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
+                    <div class="flex">
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <hr class="edit-hr">
+                        <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtask(${id})">
+                    </div>
+                </div>
+                <div id="details-subtask-${id}" class="container-subtask subtask-scroll-margin">
+                    <div class="subtask-text">
+                        <span>&bull;</span>
+                        <span id="subtask-${id}"></span>
+                    </div>
+                    <div id="icons-subtask-${id}" class="subtask-icons">
+                        <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
+                        <hr>
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                    </div>
+                </div>
+            </div>`;
+}
