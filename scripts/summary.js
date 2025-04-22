@@ -58,6 +58,10 @@ async function readFromDatabase() {
     try {
         let userKey = localStorage.getItem("userId");
         let allLoadTasks = [];
+        loadNumberOfTasksinHtmlElements(allLoadTasks);
+        loadNumberOfPriorityTasks(allLoadTasks);
+        document.getElementById("currentDate").innerHTML = "None";
+        document.getElementById("deadline-text").innerHTML = "Upcoming Deadline";
         let result = await fetch(`${BASE_URL}users/${userKey}/tasks.json`);
         if (!result.ok) {
             throw new Error(`error when loading the data: ${result.statusText}`);
@@ -96,6 +100,7 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
         document.getElementById("priority-text").innerHTML = "Urgent";
         document.getElementById("priority-img").src = "assets/icons/urgent-summary.png";
         loadUpcomingDeadline(allLoadTasks, "urgent")
+        console.log(numberOfUrgentTasks);
         return;
     } else if (numberOfMediumTasks !== 0) {
         document.getElementById("number-of-priority-tasks").innerHTML = numberOfMediumTasks;
@@ -109,6 +114,11 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
         document.getElementById("priority-img").src = "assets/icons/low-summary.svg";
         loadUpcomingDeadline(allLoadTasks, "low")
         return;
+    }else {
+        let numberOfPriorityTasks = document.getElementById("number-of-priority-tasks");
+        numberOfPriorityTasks.innerHTML = "&#x1F3C1";
+        document.getElementById("priority-text").innerHTML = "finished";
+        document.getElementById("priority-img").src = "assets/icons/all-ready-summary.svg";
     }
 }
 
@@ -118,6 +128,7 @@ function loadUpcomingDeadline(allLoadTasks, priority) {
     const currentDate = new Date();
     let pastDeadlines = [];
     let futureDeadlines = [];
+
     if (datesOfUpcomingDeadlines) {
 
         for (let dateString of datesOfUpcomingDeadlines) {
@@ -150,7 +161,7 @@ function loadUpcomingDeadline(allLoadTasks, priority) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById("currentDate").innerHTML = closestDeadline.toLocaleDateString('en-US', options);
         }
-    }
+    } 
 }
 
 function greetingAnimation() {
