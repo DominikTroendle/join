@@ -158,23 +158,6 @@ function togglePasswordVisibility() {
     }
 }
 
-/* function hideLoggendInLinks() {
-    let path = sessionStorage.getItem("currentPage", window.location.pathname);
-    if (path === "/register.html" || path === "/index.html") {
-        const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
-        loggedInLinks.forEach( li => {
-        li.style.display = 'none';
-        document.getElementById('login-button').classList.add('menu-login-button')
-    });
-    }
-    if (path === "/summary.html" || path === "/add-task.html" || path === "/board.html" || path === "/contacts.html" || path === "/privacy-policy.html" || path === "/legal-notice.html") {
-        const loginInLink = Array.from(document.getElementsByClassName('login'));
-        loginInLink.forEach( li => {
-        li.style.display = 'none';
-    });
-    }
-} */
-
 function hideLoggendInLinks() {
     let status = sessionStorage.getItem("loginStatus");
     if (status === "undefined") {
@@ -189,5 +172,13 @@ function hideLoggendInLinks() {
         loginInLink.forEach( li => {
         li.style.display = 'none';
     });
+    }
+}
+
+function correctLoginStatus() {
+    let loginStatus;
+    if (document.getElementById('login-button').style.display === "none") {loginStatus = "loggedIn"};
+    if (loginStatus === "loggedIn") {
+        sessionStorage.setItem("loginStatus", loginStatus);
     }
 }
