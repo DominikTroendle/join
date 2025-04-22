@@ -147,7 +147,8 @@
 #assigned-to,
 .big-task-card-edit__assigned-to-input,
 #category,
-#subtasks {
+#subtasks,
+.big-task-card-edit__subtask-input {
     font-family: Inter;
     font-weight: 400;
     font-size: 20px;
@@ -158,7 +159,8 @@
 #description::placeholder,
 #due-date::placeholder,
 .big-task-card-edit__input-due-date::placeholder,
-#subtasks::placeholder {
+#subtasks::placeholder,
+.big-task-card-edit__subtask-input::placeholder {
     color: #D1D1D1;
     font-family: Inter;
     font-weight: 400;
@@ -179,7 +181,8 @@
 #container-input-category:focus-within,
 #container-input-due-date:focus-within,
 .big-task-card-edit__input-due-date-box:focus-within,
-#container-input-subtask:focus-within {
+#container-input-subtask:focus-within,
+.big-task-card-edit__subtask-box:focus-within {
     border: 1px solid #94D5F0;
 }
 
@@ -211,6 +214,7 @@
 .big-task-card-edit__assigned-to-box,
 #container-input-category,
 #container-input-subtask,
+.big-task-card-edit__subtask-box,
 #container-input-due-date,
 .big-task-card-edit__input-due-date-box {
     border: 1px solid #D1D1D1;
@@ -238,6 +242,7 @@
 .big-task-card-edit__assigned-to-input,
 #category,
 #subtasks,
+.big-task-card-edit__subtask-input,
 #due-date,
 .big-task-card-edit__input-due-date {
     border: none;
@@ -525,7 +530,8 @@ hr {
     gap: 20px;
 }
 
-#subtasks {
+#subtasks,
+.big-task-card-edit__subtask-input {
     height: 48px;
     padding: 12px 16px;
 }
@@ -584,7 +590,8 @@ input:focus {
     position: relative;
 }
 
-#container-subtasks {
+#container-subtasks,
+.big-task-card-edit__subtasks-box {
     margin-top: 8px;
     min-height: 60px;
     max-height: 60px;
@@ -650,32 +657,39 @@ input:focus {
     margin-right: 8px;
 }
 
-#container-subtasks::-webkit-scrollbar {
+#container-subtasks::-webkit-scrollbar,
+.big-task-card-edit__subtasks-box::-webkit-scrollbar {
     width: 7px;
 }
 
 #container-subtasks::-webkit-scrollbar-button:vertical:increment,
-#container-subtasks::-webkit-scrollbar-button:vertical:decrement {
+.big-task-card-edit__subtasks-box::-webkit-scrollbar-button:vertical:increment,
+#container-subtasks::-webkit-scrollbar-button:vertical:decrement,
+.big-task-card-edit__subtasks-box::-webkit-scrollbar-button:vertical:decrement {
     background-repeat: no-repeat;
     background-size: 10px;
     background-position: center;
 }
 
-#container-subtasks::-webkit-scrollbar-button:vertical:increment {
+#container-subtasks::-webkit-scrollbar-button:vertical:increment,
+.big-task-card-edit__subtasks-box::-webkit-scrollbar-button:vertical:increment {
     background-image: url(../assets/icons/scrollbar-button-bottom.svg);
 }
 
-#container-subtasks::-webkit-scrollbar-button:vertical:decrement {
+#container-subtasks::-webkit-scrollbar-button:vertical:decrement,
+.big-task-card-edit__subtasks-box::-webkit-scrollbar-button:vertical:decrement {
     background-image: url(../assets/icons/scrollbar-button-top.svg);
 }
 
-#container-subtasks::-webkit-scrollbar-thumb {
+#container-subtasks::-webkit-scrollbar-thumb,
+.big-task-card-edit__subtasks-box::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 5px;
     border-radius: 10px;
 }
 
-#container-subtasks::-webkit-scrollbar-track {
+#container-subtasks::-webkit-scrollbar-track,
+.big-task-card-edit__subtasks-box::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
@@ -1148,6 +1162,7 @@ input:focus {
     #title,
     #due-date,
     #subtasks,
+    .big-task-card-edit__subtask-input,
     #assigned-to,
     .big-task-card-edit__assigned-to-input,
     #category {
@@ -1163,6 +1178,7 @@ input:focus {
     #description::placeholder,
     #due-date::placeholder,
     #subtasks::placeholder,
+    .big-task-card-edit__subtask-input::placeholder,
     #assigned-to::placeholder,
     .big-task-card-edit__assigned-to-input::placeholder,
     #category::placeholder {

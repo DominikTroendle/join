@@ -402,14 +402,15 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     <div class="container-input-label">
                             <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
                                 Subtasks
-                                <p id="invalid-subtask" class="required d-none">Enter at least one character to save subtask!</p>
-                                <p id="max-char-subtasks" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
+                                <p id="invalid-subtask-big-task-card-edit__subtask-input" class="required d-none">Enter at least one character to save subtask!</p>
+                                <p id="max-char-subtasks-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                             </label>
-                            <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
-                                <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')" onkeydown="isEnterKey(event)">                                <button id="button-add" class="button-add" type="button">
-                                    <img src="./assets/icons/add.svg" alt="icon-arrow-down">
+                            <div id="big-task-card-edit__subtask-box" class="big-task-card-edit__subtask-box" onclick="changeInputButton(true), stopPropagation(event)">
+                                <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')" onkeydown="isEnterKey(event)">                                <button id="button-add" class="button-add" type="button">
+                                 <button id="button-add" class="button-add" type="button">
+                                <img src="./assets/icons/add.svg" alt="icon-arrow-down">
                                 </button>
-                                <div id="container-buttons" class="container-button-confirm d-none">
+                                <div id="big-task-card-edit__subtask-buttons-box" class="big-task-card-edit__subtask-buttons-box container-button-confirm d-none">
                                     <button type="button" class="button-add button-accept-reject" onclick="processSubtask(false)">
                                         <img src="./assets/icons/close.svg" alt="icon-reject">
                                     </button>
@@ -419,7 +420,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                     </button>
                                 </div>
                             </div>
-                            <div id="container-subtasks" class="big-task-card-edit__container-subtasks">${subtasksHtml}</div>
+                            <div id="big-task-card-edit__subtasks-box" class="big-task-card-edit__subtasks-box big-task-card-edit__container-subtasks">${subtasksHtml}</div>
                         </div>
                     
                     

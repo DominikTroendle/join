@@ -1836,7 +1836,8 @@ footer {
         width: 400px;
     }
 
-    #container-input-subtask {
+    #container-input-subtask,
+    .big-task-card-edit__subtask-box {
         width: 400px;
     }
 
@@ -1851,7 +1852,8 @@ footer {
         width: 380px;
     }
 
-    #container-input-subtask {
+    #container-input-subtask,
+    .big-task-card-edit__subtask-box {
         width: 380px;
     }
 
@@ -1866,7 +1868,8 @@ footer {
         width: 370px;
     }
 
-    #container-input-subtask {
+    #container-input-subtask,
+    .big-task-card-edit__subtask-box {
         width: 370px;
     }
 
@@ -2077,7 +2080,9 @@ footer {
     #assigned-to,
     .big-task-card-edit__assigned-to-input,
     #container-input-subtask,
+    .big-task-card-edit__subtask-box,
     #subtasks,
+    .big-task-card-edit__subtask-input,
     .container-subtask,
     #container-dropdown,
     .big-task-card-edit__assigned-to-dropdown,
@@ -2106,6 +2111,8 @@ footer {
     .initials,
     #subtasks,
     #subtasks::placeholder,
+    .big-task-card-edit__subtask-input,
+    .big-task-card-edit__subtask-input::placeholder,
     .name {
         font-size: 16px;
         font-weight: 400;
@@ -2211,7 +2218,9 @@ footer {
     #assigned-to,
     .big-task-card-edit__assigned-to-input,
     #container-input-subtask,
+    .big-task-card-edit__subtask-box,
     #subtasks,
+    .big-task-card-edit__subtask-input,
     .container-subtask,
     #container-dropdown,
     .big-task-card-edit__assigned-to-dropdown {
@@ -2226,13 +2235,15 @@ footer {
         height: 38px;
     }
 
-    #subtasks {
+    #subtasks,
+    .big-task-card-edit__subtask-input {
         width: 200px;
     }
 
     #assigned-to,
     .big-task-card-edit__assigned-to-input,
-    #subtasks {
+    #subtasks,
+    .big-task-card-edit__subtask-input {
         padding: 12px 6px;
     }
 
