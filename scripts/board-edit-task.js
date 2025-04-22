@@ -1,6 +1,8 @@
 let contactsBigTaskCardEdit = [];
 let selectedContactsBigTaskCardEdit = [];
 let unvalidInputsBigTaskCardEdit = [];
+let subtasksCountBigTaskCardEdit = 0;
+let subtasksBigTaskCardEdit = [];
 const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
 async function loadAllContacts() {
@@ -77,7 +79,7 @@ function renderAssignOptionsForBigTaskCardEdit(array) {
     } else {
         checkForSelectedContactsForBigTaskCard(array, dropDown);
     }
-    checkForScrollableContainer(dropDown);
+    checkForScrollableContainerForBigTaskCardEdit(dropDown);
 }
 
 function renderDefaultContactsForBigTaskCardEdit(array, dropDown) {
@@ -180,10 +182,10 @@ function testDateForBigTaskCardEdit() {
 }
 
 function checkInputLengthForBigTaskCardEdit(inputField) {
-    let inputSetting = inputField === "big-task-card-edit__input-title" ? 'title' : 'subtasks';
+    let inputSetting = inputField === "big-task-card-edit__input-title" ? 'title' : 'subtask';
     let input = document.getElementById(`${inputField}`);
     let errorElement = document.getElementById(`max-char-${inputField}`);
-    let inputSettings = { "title": { invalidElement: null }, "subtasks": { invalidElement: "invalid-subtask" } };
+    let inputSettings = { "title": { invalidElement: null }, "subtask": { invalidElement: "invalid-subtask-big-task-card-edit__subtask-input" } };
     let maxLength = 50;
     let invalidElement = inputSettings[inputSetting].invalidElement;
     if (input.value.length == maxLength) {
@@ -191,6 +193,128 @@ function checkInputLengthForBigTaskCardEdit(inputField) {
         if (invalidElement) document.getElementById(invalidElement).classList.add('d-none');
     } else {
         errorElement.classList.add('d-none');
+    }
+}
+
+function isEnterKeyForBigTaskCard(event) {
+    subtasksInput = document.getElementById('big-task-card-edit__subtask-input')
+    if (event.key === "Enter") {
+        addSubtaskForBigTaskCardEdit();
+        subtasksInput.value = "";
+    }
+}
+
+function addSubtaskForBigTaskCardEdit() {
+    let input = document.getElementById('big-task-card-edit__subtask-input');
+    let containerSubtasks = document.getElementById('big-task-card-edit__subtasks-box');
+    let subtaskObj = {"checked" : "false"};
+    if (input.value !== "") {
+        document.getElementById('invalid-subtask-big-task-card-edit__subtask-input').classList.add('d-none');
+        document.getElementById('big-task-card-edit__subtask-box').classList.remove('input-unvalid');
+        subtasksCountBigTaskCardEdit++;
+        determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCountBigTaskCardEdit);
+        document.getElementById(`big-task-card-edit__subtask-${subtasksCountBigTaskCardEdit}`).innerText = input.value;
+        subtaskObj.subtask = input.value;
+        subtasksBigTaskCardEdit.push(subtaskObj);
+        checkForScrollableContainerForBigTaskCardEdit(containerSubtasks);
+    } else {
+        throwSubtaskError();
+    }
+}
+
+function saveEditedSubtaskForBigTaskCard(id) {
+    let input = document.getElementById(`big-task-card-edit__input-subtask-${id}`);
+    let element = document.getElementById(`big-task-card-edit__container-subtask-${id}`);
+    document.getElementById(`big-task-card-edit__details-subtask-${id}`).classList.remove('d-none');
+    document.getElementById(`big-task-card-edit__edit-subtask-${id}`).classList.add('d-none');
+    document.getElementById(`big-task-card-edit__subtask-${id}`).innerText = input.value;
+    subtasksBigTaskCardEdit[`${id-1}`].subtask = input.value;
+    input.value = "";
+    if (window.innerWidth > 1040) {showEditOptionsForBigTaskCardEdit(id, false);}
+    if (element.classList.contains('padding-top')) {
+        element.classList.remove('padding-top');
+    }
+}
+
+function editSubtaskForBigTaskCard(id) {
+    let child = document.getElementById(`big-task-card-edit__container-subtask-${id}`);
+    document.getElementById(`big-task-card-edit__input-subtask-${id}`).value = document.getElementById(`big-task-card-edit__subtask-${id}`).innerText;
+    document.getElementById(`big-task-card-edit__details-subtask-${id}`).classList.add('d-none');
+    document.getElementById(`big-task-card-edit__edit-subtask-${id}`).classList.remove('d-none');
+    if (isLastChild(child)) {
+        child.classList.add('padding-top');
+    }
+}
+
+function deleteSubtaskForBigTaskCardEdit(id) {
+    let subtaskContainer = document.getElementById(`big-task-card-edit__container-subtask-${id}`);
+    let containerSubtasks = document.getElementById('big-task-card-edit__subtasks-box');
+    subtasksBigTaskCardEdit.splice((id-1), 1);
+    subtaskContainer.remove();
+    subtasksCountBigTaskCardEdit--;
+    checkForScrollableContainerForBigTaskCardEdit(containerSubtasks);    
+}
+
+function showEditOptionsForBigTaskCardEdit(id, boolean) {
+    if (boolean) {
+        document.getElementById(`big-task-card-edit__icons-subtask-${id}`).classList.remove('d-none');
+    } else {
+        document.getElementById(`big-task-card-edit__icons-subtask-${id}`).classList.add('d-none');
+    }
+}
+
+function determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCount) {
+    if (window.innerWidth <= 1040) {
+        containerSubtasks.innerHTML += returnSubtaskHTMLForBigTaskCardEdit(subtasksCount);
+    } else {
+        containerSubtasks.innerHTML += returnSubtaskMobileHTMLForBigTaskCardEdit(subtasksCount);
+    }
+}
+
+function checkForScrollableContainerForBigTaskCardEdit(container) {
+    if (((contacts.length < 6) && (container.id == "big-task-card-edit__dropdown-assign")) || ((subtasksCount <= 2) && (container.id == "big-task-card-edit__subtasks-box"))) {
+        containerScrollableForBigTaskCardEdit(container);
+    } else if ((subtasksCount >= 2) && (container.id == "big-task-card-edit__subtasks-box")) {
+        containerNotScrollableForBigTaskCardEdit(container);
+    }
+}
+
+function containerNotScrollableForBigTaskCardEdit(container) {
+    if (container.id = "big-task-card-edit__subtasks-box") {
+        let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
+        subtaskContainers.forEach(element => {
+            element.classList.add('subtask-scroll-margin');
+        })
+    }
+}
+
+function containerScrollableForBigTaskCardEdit(container) {
+    if (container.id == "big-task-card-edit__dropdown-assign") {
+        container.style.width = "440px";
+        let selectOptionsArray = Array.from(document.getElementsByClassName('container-custom-select-option'));
+        selectOptionsArray.forEach(element => {
+            element.classList.remove('select-option-with-scrollbar');
+        });
+    } else if (container.id == "big-task-card-edit__subtasks-box") {
+        let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
+        subtaskContainers.forEach(element => {
+            element.classList.remove('subtask-scroll-margin');
+        });
+    }
+}
+
+function processSubtaskForBigTaskCardEdit(boolean) {
+    let input = document.getElementById('big-task-card-edit__subtask-input');
+    let invalidRef = document.getElementById('invalid-subtask-big-task-card-edit__subtask-input');
+    invalidRef.classList.add('d-none');
+    document.getElementById('max-char-big-task-card-edit__subtask-input').classList.add('d-none')
+    if (boolean && (input.value != "")) {
+        addSubtaskForBigTaskCardEdit();
+        input.value = "";
+    } else if (!boolean && (input.value != "" || input.value == "")) {
+        input.value = "";
+    } else {
+        invalidRef.classList.remove('d-none');
     }
 }
 
@@ -215,7 +339,7 @@ function removeErrorForBigTaskCardEdit() {
         };
     });
     document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.add('hidden');
-    document.getElementById('invalid-subtask').classList.add('d-none');
+    document.getElementById('invalid-subtask-big-task-card-edit__subtask-input').classList.add('d-none');
 }
 
 function selectPrioButtonForBigTaskCardEdit(prio) {
@@ -292,3 +416,14 @@ function updateSelectedContactsForBigTaskCard(boolean, contactName, contactColor
         selectedContactsBigTaskCardEdit.splice(index, 1);
     }
 }
+
+function changeInputButtonForBigTaskCardEdit(boolean) {
+    if (boolean) {
+        document.getElementById('big-task-card-edit__subtask-button-add').classList.add('d-none');
+        document.getElementById('big-task-card-edit__subtask-buttons-box').classList.remove('d-none');
+    } else {
+        document.getElementById('big-task-card-edit__subtask-button-add').classList.remove('d-none');
+        document.getElementById('big-task-card-edit__subtask-buttons-box').classList.add('d-none');
+    }
+}
+

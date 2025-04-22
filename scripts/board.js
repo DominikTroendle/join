@@ -532,7 +532,7 @@ async function readFromEditAndSaveData() {
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
         let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
-        completedSubtasksArray = subtasks.filter(element => element.checked === "true");
+        completedSubtasksArray = subtasksBigTaskCardEdit.filter(element => element.checked === "true");
         data = {
             category: taskCardObject.category,
             taskType: taskCardObject.taskType,
@@ -540,10 +540,10 @@ async function readFromEditAndSaveData() {
             taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
             taskPriority: selectedPriority,
             taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
-            numberOfSubtasks: subtasks.length,
+            numberOfSubtasks: subtasksBigTaskCardEdit.length,
             numberOfCompletedSubtasks: completedSubtasksArray.length,
             assignedContacts: selectedContactsBigTaskCardEdit,
-            subtasks: subtasks
+            subtasks: subtasksBigTaskCardEdit
         }
         editDataInArray(taskCardObject, data);
         renderNewContentFromBigTaskCard(taskCardObject)

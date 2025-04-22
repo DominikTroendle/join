@@ -293,37 +293,37 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
     }
 
     selectedContactsBigTaskCardEdit.length = 0;
-    subtasks.length = 0;
-    subtasksCount = 1;
+    subtasksBigTaskCardEdit.length = 0;
+    subtasksCountBigTaskCardEdit = 1;
 
     assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     assignedContacts.forEach(element => selectedContactsBigTaskCardEdit.push(element));
 
     if (subtasksEdit) {
-        subtasksEdit.forEach(element => subtasks.push(element));
+        subtasksEdit.forEach(element => subtasksBigTaskCardEdit.push(element));
     }
 
     let subtasksHtml = "";
-    for (let index = 0; index < subtasks.length; index++) {
-        let id = subtasksCount++;
-        subtasksHtml += `<div id="container-subtask-${id}" class="position-relative">
-                <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
-                    <input id="input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
+    for (let index = 0; index < subtasksBigTaskCardEdit.length; index++) {
+        let id = subtasksCountBigTaskCardEdit++;
+        subtasksHtml += `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
+                <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
+                    <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                     <div class="flex">
-                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
                         <hr class="edit-hr">
-                        <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtask(${id})">
+                        <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
                     </div>
                 </div>
-                <div id="details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)" ondblclick="editSubtask(${id})">
-                    <div class="subtask-text" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
+                <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)" ondblclick="editSubtaskForBigTaskCard(${id})">
+                    <div class="subtask-text" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
                         <span>&bull;</span>
-                        <span id="subtask-${id}">${subtasks[index].subtask}</span>
+                        <span id="big-task-card-edit__subtask-${id}">${subtasksBigTaskCardEdit[index].subtask}</span>
                     </div>
-                    <div id="icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
-                        <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
+                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                        <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
                         <hr>
-                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
                     </div>
                 </div>
             </div>`;
@@ -400,22 +400,22 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                             <div id="big-task-card-edit__assigned-contacts-box" class="big-task-card-edit__assigned-contacts-box"></div>
                         </div>
                     <div class="container-input-label">
-                            <label id="label-subtasks" for="subtasks" class="label-add-task" placeholder="Add new subtask">
+                            <label id="label-subtasks" for="big-task-card-edit__input-subtask" class="label-add-task" placeholder="Add new subtask">
                                 Subtasks
                                 <p id="invalid-subtask-big-task-card-edit__subtask-input" class="required d-none">Enter at least one character to save subtask!</p>
-                                <p id="max-char-subtasks-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
+                                <p id="max-char-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                             </label>
-                            <div id="big-task-card-edit__subtask-box" class="big-task-card-edit__subtask-box" onclick="changeInputButton(true), stopPropagation(event)">
-                                <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLength('subtasks')" onkeydown="isEnterKey(event)">                                <button id="button-add" class="button-add" type="button">
-                                 <button id="button-add" class="button-add" type="button">
+                            <div id="big-task-card-edit__subtask-box" class="big-task-card-edit__subtask-box" onclick="changeInputButtonForBigTaskCardEdit(true), stopPropagation(event)">
+                                <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__subtask-input')" onkeydown="isEnterKeyForBigTaskCard(event)">                         
+                                 <button id="big-task-card-edit__subtask-button-add" class="button-add" type="button">
                                 <img src="./assets/icons/add.svg" alt="icon-arrow-down">
                                 </button>
                                 <div id="big-task-card-edit__subtask-buttons-box" class="big-task-card-edit__subtask-buttons-box container-button-confirm d-none">
-                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtask(false)">
+                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtaskForBigTaskCardEdit(false)">
                                         <img src="./assets/icons/close.svg" alt="icon-reject">
                                     </button>
                                     <hr>
-                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtask(true)">
+                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtaskForBigTaskCardEdit(true)">
                                         <img src="./assets/icons/check_blue.svg" alt="icon-accept">
                                     </button>
                                 </div>
@@ -607,4 +607,52 @@ function addTaskTemplate() {
     </div>
     </div>
 `
+}
+
+function returnSubtaskHTMLForBigTaskCardEdit(id) {
+    return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
+                <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
+                    <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
+                    <div class="flex">
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                        <hr class="edit-hr">
+                        <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
+                    </div>
+                </div>
+                <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)" ondblclick="editSubtaskForBigTaskCard(${id})">
+                    <div class="subtask-text" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                        <span>&bull;</span>
+                        <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span"></span>
+                    </div>
+                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                        <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
+                        <hr>
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                    </div>
+                </div>
+            </div>`;
+}
+
+function returnSubtaskMobileHTMLForBigTaskCardEdit (id) {
+    return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
+                <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
+                    <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
+                    <div class="flex">
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                        <hr class="edit-hr">
+                        <img class="check-blue" src="./assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
+                    </div>
+                </div>
+                <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask subtask-scroll-margin">
+                    <div class="subtask-text">
+                        <span>&bull;</span>
+                        <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span"></span>
+                    </div>
+                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons">
+                        <img src="./assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
+                        <hr>
+                        <img src="./assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                    </div>
+                </div>
+            </div>`;
 }
