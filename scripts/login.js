@@ -36,6 +36,7 @@ async function UserLogin() {
 
     if (userId) {
         localStorage.setItem("userId", userId);
+        sessionSorage("loggedIn");
         window.location.href = 'summary.html?';
     } else {
         emailInput.style.border = "1px solid red";

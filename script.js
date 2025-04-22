@@ -1,16 +1,17 @@
-function sessionSorage() {
+function sessionSorage(status) {
     sessionStorage.setItem("currentPage", window.location.pathname);
+    sessionStorage.setItem("loginStatus", status);
 }
 
 function logOut() {
     localStorage.removeItem("userId", "guest");
 }
 
-function addClassSelectedMenuButton(id) {
+function addClassSelectedMenuButton(id, status) {
     let currentMenuButton = document.getElementById(id);
     currentMenuButton.classList.add("menu-button-selected");
     saveMenuId(id)
-    sessionSorage()
+    sessionSorage(status);
 }
 
 function addClassSelectedMenuBottomButton(id) {
