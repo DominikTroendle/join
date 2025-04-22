@@ -105,7 +105,7 @@ return`
                     </div>
                     <div class="input-container">
                         <div class="input-area">
-                            <input type="tel" placeholder="Phone" id="phone" required>
+                            <input type="number" placeholder="Phone" id="phone" required>
                             <img src="assets/img/call.png" alt="">
                         </div>
                     </div>
@@ -151,7 +151,7 @@ function getEditContactTemplate(key) {
                         </div>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="tel" placeholder="Phone" id="editPhone" required>
+                                <input type="number" placeholder="Phone" id="editPhone" required>
                                 <img src="assets/img/call.png" alt="">
                             </div>
                         </div>
