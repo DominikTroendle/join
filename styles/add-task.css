@@ -145,6 +145,7 @@
 #due-date,
 .big-task-card-edit__input-due-date,
 #assigned-to,
+.big-task-card-edit__assigned-to-input,
 #category,
 #subtasks {
     font-family: Inter;
@@ -174,6 +175,7 @@
 }
 
 #container-input-assigned:focus-within,
+.big-task-card-edit__assigned-to-box:focus-within,
 #container-input-category:focus-within,
 #container-input-due-date:focus-within,
 .big-task-card-edit__input-due-date-box:focus-within,
@@ -198,6 +200,7 @@
 }
 
 #assigned-to,
+.big-task-card-edit__assigned-to-input,
 #category {
     height: 48px;
     padding: 12px 21px 11px 21px;
@@ -205,6 +208,7 @@
 }
 
 #container-input-assigned,
+.big-task-card-edit__assigned-to-box,
 #container-input-category,
 #container-input-subtask,
 #container-input-due-date,
@@ -216,7 +220,8 @@
     align-items: center;
 }
 
-#container-input-assigned {
+#container-input-assigned,
+.big-task-card-edit__assigned-to-box {
     z-index: 4;
 }
 
@@ -224,11 +229,13 @@
     z-index: 2;
 }
 
-#container-input-assigned:hover {
+#container-input-assigned:hover,
+.big-task-card-edit__assigned-to-box:hover {
     cursor: pointer;
 }
 
 #assigned-to,
+.big-task-card-edit__assigned-to-input,
 #category,
 #subtasks,
 #due-date,
@@ -240,11 +247,13 @@
 }
 
 #assigned-to:hover,
+.big-task-card-edit__assigned-to-input:hover,
 #category:hover {
     cursor: pointer;
 }
 
 #assigned-to::placeholder,
+.big-task-card-edit__assigned-to-input::placeholder,
 #category::placeholder {
     color: black;
 }
@@ -283,13 +292,15 @@
     height: 20px;
 }
 
-#container-input-assigned img {
+#container-input-assigned img,
+.big-task-card-edit__assigned-to-box img {
     width: 10px;
     padding-top: 2px;
     padding-right: 1px;
 }
 
-#container-assigned-contacts {
+#container-assigned-contacts,
+.big-task-card-edit__assigned-contacts-box {
     display: flex;
     gap: 8px;
     margin-top: 8px;
@@ -305,11 +316,13 @@
     position: relative;
 }
 
-#container-input-assigned {
+#container-input-assigned,
+.big-task-card-edit__assigned-to-box {
     position: relative;
 }
 
-#container-dropdown {
+#container-dropdown,
+.big-task-card-edit__assigned-to-dropdown {
     position: absolute;
     top: 32px;
     z-index: 3;
@@ -353,7 +366,8 @@
     width: 7px;
 }
 
-#container-assigned-contacts::-webkit-scrollbar {
+#container-assigned-contacts::-webkit-scrollbar,
+.big-task-card-edit__assigned-contacts-box::-webkit-scrollbar {
     height: 4px;
 }
 
@@ -374,14 +388,16 @@
 }
 
 .container-custom-select-options::-webkit-scrollbar-thumb,
-#container-assigned-contacts::-webkit-scrollbar-thumb {
+#container-assigned-contacts::-webkit-scrollbar-thumb,
+.big-task-card-edit__assigned-contacts-box::-webkit-scrollbar-thumb {
     background-color: #A8A8A8;
     border-radius: 5px;
     border-radius: 10px;
 }
 
 .container-custom-select-options::-webkit-scrollbar-track,
-#container-assigned-contacts::-webkit-scrollbar-track {
+#container-assigned-contacts::-webkit-scrollbar-track,
+.big-task-card-edit__assigned-contacts-box::-webkit-scrollbar-track {
     border-radius: 10px;
 }
 
@@ -515,14 +531,14 @@ hr {
 }
 
 #buttons-prio,
-.big-task-card-edit__prioritys-box {
+.big-task-card-edit__prioritys-button-box {
     height: 56px;
     display: flex;
     gap: 16px;
 }
 
 #buttons-prio img,
-.big-task-card-edit__prioritys-box img {
+.big-task-card-edit__prioritys-button-box img {
     width: 20px;
 }
 
@@ -949,6 +965,7 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 400px;
@@ -964,6 +981,7 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 380px;
@@ -979,6 +997,7 @@ input:focus {
     #form-left,
     #form-right,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 370px;
@@ -1089,6 +1108,7 @@ input:focus {
     }
 
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 440px;
@@ -1129,6 +1149,7 @@ input:focus {
     #due-date,
     #subtasks,
     #assigned-to,
+    .big-task-card-edit__assigned-to-input,
     #category {
         height: 40px;
         padding: 0px 21px;
@@ -1143,12 +1164,14 @@ input:focus {
     #due-date::placeholder,
     #subtasks::placeholder,
     #assigned-to::placeholder,
+    .big-task-card-edit__assigned-to-input::placeholder,
     #category::placeholder {
     font-size: 16px;
     line-height: 20px;
     }
 
-    #container-dropdown {
+    #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown {
         min-height: 40px;
     }
 
@@ -1169,7 +1192,8 @@ input:focus {
         width: 100%;
     }
 
-    #container-dropdown {
+    #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown {
         width: 100%;
     }
 
@@ -1179,7 +1203,7 @@ input:focus {
     }
 
     #buttons-prio,
-    .big-task-card-edit__prioritys-box {
+    .big-task-card-edit__prioritys-button-box {
         height: 41px;
     }
 
@@ -1230,7 +1254,8 @@ input:focus {
         width: 300px;
     }
 
-    #assigned-to {
+    #assigned-to,
+    .big-task-card-edit__assigned-to-input {
         padding-right: 10px;
     }
 }

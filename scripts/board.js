@@ -531,34 +531,34 @@ async function readFromEditAndSaveData() {
     let valid = validateInputsForBigTaskCardEdit();
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
-    let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
-    completedSubtasksArray = subtasks.filter(element => element.checked === "true");
-    data = {
-        category: taskCardObject.category,
-        taskType: taskCardObject.taskType,
-        taskTitle: document.getElementById("big-task-card-edit__input-title").value,
-        taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
-        taskPriority: selectedPriority,
-        taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
-        numberOfSubtasks: subtasks.length,
-        numberOfCompletedSubtasks: completedSubtasksArray.length,
-        assignedContacts: selectedContacts,
-        subtasks: subtasks
+        let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
+        completedSubtasksArray = subtasks.filter(element => element.checked === "true");
+        data = {
+            category: taskCardObject.category,
+            taskType: taskCardObject.taskType,
+            taskTitle: document.getElementById("big-task-card-edit__input-title").value,
+            taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
+            taskPriority: selectedPriority,
+            taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
+            numberOfSubtasks: subtasks.length,
+            numberOfCompletedSubtasks: completedSubtasksArray.length,
+            assignedContacts: selectedContactsBigTaskCardEdit,
+            subtasks: subtasks
+        }
+        editDataInArray(taskCardObject, data);
+        renderNewContentFromBigTaskCard(taskCardObject)
+        let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
+        if (!editResponse.ok) {
+            console.error("error when saving in the database:", editResponse.statusText);
+            return;
+        }
+        init();
+    } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
+        throwErrorForBigTaskCardEdit();
+        document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
+    } else {
+        throwErrorForBigTaskCardEdit();
     }
-    editDataInArray(taskCardObject, data);
-    renderNewContentFromBigTaskCard(taskCardObject)
-    let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
-    if (!editResponse.ok) {
-        console.error("error when saving in the database:", editResponse.statusText);
-        return;
-    }
-    init();
-} else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
-    throwErrorForBigTaskCardEdit();
-    document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
-} else {
-    throwErrorForBigTaskCardEdit();
-}
 }
 
 async function editDataInDatabase(userKey, cardId, data) {
@@ -854,7 +854,7 @@ function saveCategoryFromClickedButton(event) {
 }
 
 function saveTaskOverlay() {
-    if(!categoryFromClickedButton)return;
+    if (!categoryFromClickedButton) return;
     task.category = categoryFromClickedButton;
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
@@ -880,85 +880,4 @@ function fadeOutBigTaskCard() {
 function clearSelectedContactsAndSubtasks() {
     selectedContacts.length = 0;
     subtasks.length = 0;
-}
-
-function putDateToInputForBigTaskCardEdit() {
-    let datePicker = document.getElementById('big-task-card-edit__input-date-picker');
-    let input = document.getElementById('big-task-card-edit__input-due-date');
-    if (datePicker.value) {
-        let [year, month, day] = datePicker.value.split('-');
-        input.value = `${day}/${month}/${year}`;
-    }
-}
-
-let unvalidInputsBigTaskCardEdit = [];
-
-function validateInputsForBigTaskCardEdit() {
-    let valid = true;
-    let inputs = ["big-task-card-edit__input-title", "big-task-card-edit__input-due-date"];
-    unvalidInputsBigTaskCardEdit = [];
-    for (let i = 0; i < inputs.length; i++) {
-        let inputValue = document.getElementById(`${inputs[i]}`).value;
-        if (inputValue == "" || ((inputs[i] == "big-task-card-edit__input-due-date") && !testDateForBigTaskCardEdit())) {
-            valid = false;
-            unvalidInputsBigTaskCardEdit.push(inputs[i]);
-        }
-    }
-    return valid;
-}
-
-function testDateForBigTaskCardEdit() {
-    let value = document.getElementById('big-task-card-edit__input-due-date').value;
-    let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-    if (date === null) {
-        return false;
-    }
-    let day = +date[1], month = +date[2], year = +date[3];
-    let dateObj = new Date(`${year}-${month}-${day}`);
-    if (!correctDateFormat(dateObj, day, month, year)) {
-        return false;
-    } else if (isPastDate(dateObj)) {
-        document.getElementById('invalid-date-big-task-card-edit__input-due-date').innerText = "Due date can`t be in the past!";
-        return false;
-    }
-    return true;
-}
-
-function checkInputLengthForBigTaskCardEdit(inputField) {
-    let inputSetting = inputField === "big-task-card-edit__input-title" ? 'title' : 'subtasks';
-    let input = document.getElementById(`${inputField}`);
-    let errorElement = document.getElementById(`max-char-${inputField}`);
-    let inputSettings = {"title": {invalidElement: null}, "subtasks": {invalidElement: "invalid-subtask"}};
-    let maxLength = 50;
-    let invalidElement = inputSettings[inputSetting].invalidElement;
-    if (input.value.length == maxLength) {
-        errorElement.classList.remove('d-none');
-        if (invalidElement) document.getElementById(invalidElement).classList.add('d-none');
-    } else {
-        errorElement.classList.add('d-none');
-    }
-}
-
-function throwErrorForBigTaskCardEdit() {
-    unvalidInputsBigTaskCardEdit.forEach(element => {
-        document.getElementById(`required-${element}`).classList.remove('hidden');
-        if (element == "category" || element == "big-task-card-edit__input-due-date") {
-            document.getElementById(`${element}-box`).classList.add('input-unvalid')
-        } else {
-            document.getElementById(`${element}`).classList.add('input-unvalid');
-        };
-    });
-}
-
-function removeErrorForBigTaskCardEdit() {
-    unvalidInputsBigTaskCardEdit.forEach(element => {
-        document.getElementById(`required-${element}`).classList.add('hidden');
-        if (element == "category" || element == "big-task-card-edit__input-due-date") {
-            document.getElementById(`${element}-box`).classList.remove('input-unvalid')
-        } else {
-            document.getElementById(`${element}`).classList.remove('input-unvalid');
-        };
-    });
-    document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.add('hidden');
-    document.getElementById('invalid-subtask').classList.add('d-none');
 }

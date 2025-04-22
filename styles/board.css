@@ -1288,7 +1288,8 @@ footer {
     gap: 48px;
 }
 
-#container-assigned-contacts {
+#container-assigned-contacts,
+.big-task-card-edit__assigned-contacts-box {
     flex-wrap: wrap;
 }
 
@@ -1301,7 +1302,8 @@ footer {
     width: 425px;
 }
 
-#container-prioritys {
+#container-prioritys,
+.big-task-card-edit__prioritys-box {
     padding-bottom: 0;
 }
 
@@ -1829,7 +1831,8 @@ footer {
 }
 
 @media(max-width: 1187px) {
-    #container-input-assigned {
+    #container-input-assigned,
+    .big-task-card-edit__assigned-to-box {
         width: 400px;
     }
 
@@ -1843,7 +1846,8 @@ footer {
 }
 
 @media(max-width: 1100px) {
-    #container-input-assigned {
+    #container-input-assigned,
+    .big-task-card-edit__assigned-to-box {
         width: 380px;
     }
 
@@ -1857,7 +1861,8 @@ footer {
 }
 
 @media(max-width: 1060px) {
-    #container-input-assigned {
+    #container-input-assigned,
+    .big-task-card-edit__assigned-to-box {
         width: 370px;
     }
 
@@ -2066,14 +2071,16 @@ footer {
     .big-task-card-edit__text-textarea-box,
     .big-task-card-edit__textarea,
     .container-input-label,
-    .container-input-label,
     input #assigned-to,
     #container-input-assigned,
+    .big-task-card-edit__assigned-to-box,
     #assigned-to,
+    .big-task-card-edit__assigned-to-input,
     #container-input-subtask,
     #subtasks,
     .container-subtask,
     #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown,
     .container-custom-select-option {
         width: 348px;
     }
@@ -2095,6 +2102,7 @@ footer {
     .label-add-task,
     .button-prio,
     #assigned-to,
+    .big-task-card-edit__assigned-to-input,
     .initials,
     #subtasks,
     #subtasks::placeholder,
@@ -2197,14 +2205,16 @@ footer {
     .big-task-card-edit__text-textarea-box,
     .big-task-card-edit__textarea,
     .container-input-label,
-    .container-input-label,
     input #assigned-to,
     #container-input-assigned,
+    .big-task-card-edit__assigned-to-box,
     #assigned-to,
+    .big-task-card-edit__assigned-to-input,
     #container-input-subtask,
     #subtasks,
     .container-subtask,
-    #container-dropdown {
+    #container-dropdown,
+    .big-task-card-edit__assigned-to-dropdown {
         width: 270px;
     }
 
@@ -2221,17 +2231,22 @@ footer {
     }
 
     #assigned-to,
+    .big-task-card-edit__assigned-to-input,
     #subtasks {
         padding: 12px 6px;
     }
 
-    #buttons-prio {
+    #buttons-prio,
+    .big-task-card-edit__prioritys-button-box {
         gap: 6px;
     }
 
     #urgent,
     #medium,
-    #low {
+    #low,
+    #big-task-card-edit__urgent-button,
+    #big-task-card-edit__medium-button,
+    .big-task-card-edit__low-button{
         padding: 1px 4px;
     }
 }
