@@ -1,6 +1,8 @@
 body{
     background-color: #f4f4f4;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .logo {
@@ -234,6 +236,12 @@ form{
     }
 }
 
+@media (min-width: 1020px){
+    .user-register {
+        margin-top: 197px;
+    }
+}
+
 @media(max-width: 1000px){
     .user-register{
         margin-top: 225px;
@@ -315,8 +323,28 @@ form{
 
 @media(max-width: 550px){
     .user-register{
-        height: 595px;
-        margin-top: 165.5px;
+        height: auto;
+        margin-top: 130px;
+    }
+
+    .Sign-up-text-container {
+        margin-top: 10px;
+    }
+
+    form {
+        margin-top: 0;
+    }
+
+    .register-input input {
+        margin-top: 15px;
+    }
+    
+    .register-button {
+     padding: 10px;
+    }
+
+    .legal-information {
+        margin-top: 40px;
     }
 }
 
@@ -347,6 +375,34 @@ form{
 @media(max-width: 400px){
     .legal-information{
         margin-top: 40px;
+    }
+}
+
+@media(max-width: 375px){
+    .user-register {
+        height: auto;
+        margin-top: 125px;
+    }
+
+    .Sign-up-text-container {
+        margin-top: 10px;
+    }
+
+    form {
+        margin-top: 0px;
+    }
+
+    .register-input input {
+        margin-top: 10px;
+    }
+
+    .checkbox-privacy-policy-container {
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+
+    .register-button {
+        padding: 10px 0;
     }
 }
 

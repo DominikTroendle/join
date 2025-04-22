@@ -7,6 +7,8 @@
 body {
     background-color: #f4f4f4;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 @keyframes slideUp {
@@ -159,9 +161,12 @@ body {
     box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+.login{
+    z-index: 1;
+}
+
 .user-login-container {
     width: 100%;
-
     display: flex;
     align-items: start;
     justify-content: center;
@@ -337,6 +342,26 @@ body {
     }
 }
 
+@media(max-width: 1280px){
+    .user-login{
+        margin-top: 100px;
+    }
+
+    .legal-information {
+        margin-top: 100px;
+    }
+}
+
+@media(max-width: 1030px){
+    body{
+        height: auto;
+    }
+
+    .register-link {
+        margin-top: 0px;
+    }
+}
+
 @media(max-width: 680px) {
     .login-overlay{
         position: absolute;
@@ -421,11 +446,16 @@ body {
     .register-link {
         position: absolute;
         transition: none;
+        margin-top: 0;
+        padding-right: 0;
         animation: fadeIn 1s ease-in-out 2s forwards;
         display: flex;
-        margin-left: 30%;
+        align-items: end;
+        justify-content: center;
         gap: 30px;
-        margin-top: 778px;
+        height: 90%;
+        width: 100%;
+        
     }
 
     .register-link a:hover {
@@ -537,10 +567,12 @@ body {
         animation: fadeIn 1s ease-in-out 2s forwards;
 
         display: flex;
-        margin-left: 30%;
         gap: 30px;
 
-        margin-top: 778px;
+    }
+
+    .user-login{
+        margin-top: 120px;
     }
 
     .blue-line {
@@ -556,11 +588,15 @@ body {
         margin-top: 140px;
         margin-right: 115px;
     }
+
+    .legal-information {
+        margin-top: 90px;
+    }
 }
 
 @media(max-width: 490px) {
     .register-link {
-        margin-left: 21%;
+        height: 85%;
     }
 
     .no-value-content {
@@ -570,6 +606,10 @@ body {
 }
 
 @media(max-width: 450px){
+    .register-link {
+        height: 80%;
+    }
+
     .user-login {
         padding: 20px 0 0 0;
     }
@@ -580,10 +620,6 @@ body {
 }
 
 @media(max-width: 400px){
-    .register-link {
-        margin-top: 728px;
-    }
-
     .blue-line {
         margin-left: 86px;
         width: 100px;
@@ -594,7 +630,7 @@ body {
     }
 
     .register-link {
-        margin-left: 17%;
+        height: 80%;
     }
 
     .legal-information {
@@ -602,9 +638,31 @@ body {
     }
 }
 
-@media(max-width: 375px) {
+@media(max-width: 390px){
     .register-link {
-        margin-left: 12%;
+        height: 80%;
+    }
+}
+
+@media(max-width: 375px){
+    .user-login{
+        margin-top: 120px;
+    }
+    
+    .user-login{
+        height: auto;
+    }
+    
+    .user-login{
+        padding-bottom: 16px;
+    }
+    
+    .register-link {
+        height: 90%;
+    }
+    
+    .legal-information {
+        margin-top:72px;
     }
 }
 
@@ -614,7 +672,7 @@ body {
     }
 
     .register-link {
-        margin-top: 648px;
+        height: 85%;
     }
 
     .legal-information {
@@ -622,8 +680,8 @@ body {
     }
 }
 
-@media(max-width: 340px){
+@media(max-width: 345px){
     .register-link {
-        margin-left: 8%;
+        height: 70%;
     }
 }
