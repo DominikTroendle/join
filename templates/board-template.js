@@ -609,6 +609,16 @@ function addTaskTemplate() {
 `
 }
 
+function returnAssignedContactHTMLForBigTaskCardEdit(name, color) {
+    return `<div id="edit-container-${name}" class="container-custom-select-option select-option-with-scrollbar" onclick="selectContactForBigTaskCardEdit('${name}','${color}'), stopPropagation(event)">
+                <div class="flex-align gap-15">
+                    <span id="edit-initials-${name}" class="initials"></span>
+                    <span id="edit-${name}" class="name"></span>
+                </div>
+                <img id="edit-icon-${name}" src="./assets/icons/unchecked.svg" alt="icon-unchecked">
+            </div>`;
+}
+
 function returnSubtaskHTMLForBigTaskCardEdit(id) {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">

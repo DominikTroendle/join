@@ -3,6 +3,7 @@ let selectedContactsBigTaskCardEdit = [];
 let unvalidInputsBigTaskCardEdit = [];
 let subtasksCountBigTaskCardEdit = 0;
 let subtasksBigTaskCardEdit = [];
+let selectedPriorityBigTaskCardEdit = "medium";
 const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
 async function loadAllContacts() {
@@ -120,16 +121,6 @@ function renderContactAsDefaultForBigTaskCardEdit(dropDown, contactName, color) 
     document.getElementById(`edit-${contactName}`).innerText = contactName;
     document.getElementById(`edit-initials-${contactName}`).innerText = getInitials(contactName);
     document.getElementById(`edit-initials-${contactName}`).classList.add(`${color}`);
-}
-
-function returnAssignedContactHTMLForBigTaskCardEdit(name, color) {
-    return `<div id="edit-container-${name}" class="container-custom-select-option select-option-with-scrollbar" onclick="selectContactForBigTaskCardEdit('${name}','${color}'), stopPropagation(event)">
-                <div class="flex-align gap-15">
-                    <span id="edit-initials-${name}" class="initials"></span>
-                    <span id="edit-${name}" class="name"></span>
-                </div>
-                <img id="edit-icon-${name}" src="./assets/icons/unchecked.svg" alt="icon-unchecked">
-            </div>`;
 }
 
 function changeDropdownArrowForBigTaskCardEdit(boolean, dropdown) {
@@ -349,11 +340,11 @@ function selectPrioButtonForBigTaskCardEdit(prio) {
         let svg = document.getElementById(`svg-${prio}`);
         if (button.classList.contains(priority)) {
             toggleButtonClasses(true, button, svg, priority);
-            selectedPriority = "medium";
+            selectedPriorityBigTaskCardEdit = "medium";
         } else {
             clearPrioButtonsForBigTaskCardEdit();
             toggleButtonClasses(false, button, svg, priority);
-            selectedPriority = priority;
+            selectedPriorityBigTaskCardEdit = priority;
         }
     }
 }

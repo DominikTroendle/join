@@ -538,7 +538,7 @@ async function readFromEditAndSaveData() {
             taskType: taskCardObject.taskType,
             taskTitle: document.getElementById("big-task-card-edit__input-title").value,
             taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
-            taskPriority: selectedPriority,
+            taskPriority: selectedPriorityBigTaskCardEdit,
             taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
             numberOfSubtasks: subtasksBigTaskCardEdit.length,
             numberOfCompletedSubtasks: completedSubtasksArray.length,
