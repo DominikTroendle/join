@@ -128,14 +128,15 @@ body {
 }
 
 .login-container{
-    z-index: 1;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
 .register-link {
     display: flex;
     justify-content: end;
     gap: 35px;
-
     margin-top: 76px;
     padding-right: 40px;
 }
@@ -356,10 +357,6 @@ body {
     body{
         height: auto;
     }
-
-    .register-link {
-        margin-top: 0px;
-    }
 }
 
 @media(max-width: 680px) {
@@ -443,19 +440,14 @@ body {
         }
     }
 
-    .register-link {
-        position: absolute;
-        transition: none;
-        margin-top: 0;
-        padding-right: 0;
-        animation: fadeIn 1s ease-in-out 2s forwards;
+    .login-container{
         display: flex;
-        align-items: end;
         justify-content: center;
-        gap: 30px;
-        height: 90%;
-        width: 100%;
-        
+        top: 1050px;
+    }
+
+    .register-link{
+        padding-right: 0;
     }
 
     .register-link a:hover {
@@ -561,14 +553,8 @@ body {
         }
     }
 
-    .register-link {
-        position: absolute;
-        transition: none;
-        animation: fadeIn 1s ease-in-out 2s forwards;
-
-        display: flex;
-        gap: 30px;
-
+    .login-container{
+        top: 560px;
     }
 
     .user-login{
@@ -595,8 +581,8 @@ body {
 }
 
 @media(max-width: 490px) {
-    .register-link {
-        height: 85%;
+    .login-container{
+        top: 625px;
     }
 
     .no-value-content {
@@ -606,8 +592,8 @@ body {
 }
 
 @media(max-width: 450px){
-    .register-link {
-        height: 80%;
+    .login-container{
+        top: 625px;
     }
 
     .user-login {
@@ -629,8 +615,8 @@ body {
         width: 270px;
     }
 
-    .register-link {
-        height: 80%;
+    .login-container{
+        top: 625px;
     }
 
     .legal-information {
@@ -639,8 +625,8 @@ body {
 }
 
 @media(max-width: 390px){
-    .register-link {
-        height: 80%;
+    .login-container{
+        top: 625px;
     }
 }
 
@@ -657,8 +643,8 @@ body {
         padding-bottom: 16px;
     }
     
-    .register-link {
-        height: 90%;
+    .login-container{
+        top: 520px;
     }
     
     .legal-information {
@@ -671,8 +657,8 @@ body {
         margin-top: 135.5px;
     }
 
-    .register-link {
-        height: 85%;
+    .login-container{
+        top: 560px;
     }
 
     .legal-information {
@@ -681,7 +667,7 @@ body {
 }
 
 @media(max-width: 345px){
-    .register-link {
-        height: 70%;
+    .login-container{
+        top: 625px;
     }
 }
