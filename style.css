@@ -78,7 +78,7 @@ body {
 }
 
 .menu-button-selected {
-    background-color: #091931;
+    background-color: #091931 !important;
     color: #FFFFFF;
     pointer-events: none;
     cursor: default;
@@ -457,10 +457,16 @@ li{
     .menu-button-bottom-box_mobile {
         padding: 0;
         flex-direction: row;
+        justify-content: flex-end;
+        padding-right: 20px;
+        gap: 10px;
     }
 
     .menu-button-bottom-box_mobile a {
-        height: 35px;
+        height: 80px;
+        width: 130px;
+        padding: 0 10px;
+        justify-content: center;
     }
 
     .menu-box_mobile {
