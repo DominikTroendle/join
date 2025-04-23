@@ -43,7 +43,7 @@ nav {
     padding: 8px 56px;
     text-decoration: none;
     cursor: pointer;
-    margin-bottom: 90px;
+    margin-bottom: 9px;
 }
 
 .menu-login-button:hover {
@@ -137,10 +137,10 @@ p{
     #generator_results{
         top: 80px;
         left: 0;
-        height: calc(100% - 16.8%);
+        height: calc(100dvh - 160px);
     }
 
     #generator_results_content{
-        margin: 48px 16px;
+        margin: 48px 16px 128px 16px;
     }
 }

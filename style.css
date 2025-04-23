@@ -453,6 +453,19 @@ li{
         width: 24px;
         height: 24px;
     }
+
+    .menu-button-bottom-box_mobile {
+        padding: 0;
+        flex-direction: row;
+    }
+
+    .menu-button-bottom-box_mobile a {
+        height: 35px;
+    }
+
+    .menu-box_mobile {
+        flex-direction: row;
+    }
 }
 
 @media(max-width: 428px){

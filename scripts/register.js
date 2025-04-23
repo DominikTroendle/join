@@ -160,12 +160,19 @@ function togglePasswordVisibility() {
 
 function hideLoggendInLinks() {
     let status = sessionStorage.getItem("loginStatus");
-    if (status === "undefined") {
+    if (status === "undefined" && window.innerWidth > 1040) {
         const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
         loggedInLinks.forEach( li => {
         li.style.display = 'none';
         document.getElementById('login-button').classList.add('menu-login-button')
-    });
+        });
+    } else if (status === "undefined" && window.innerWidth < 1040) {
+        const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
+        loggedInLinks.forEach( li => {
+        li.style.display = 'none';
+        document.getElementById('login-button').classList.add('menu-login-button');
+        });
+        document.getElementById('menu-button-bottom-box').style.display = "flex";
     }
     if (status ===  "loggedIn") {
         const loginInLink = Array.from(document.getElementsByClassName('login'));
