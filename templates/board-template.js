@@ -329,7 +329,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
             </div>`;
     }
 
-    return `    <div class="big-task-card-edit__task-type-text-button-box">
+    return `    <div class="big-task-card-edit__task-type-text-button-box edit">
                     <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
                             <rect x="0.144531" width="24" height="24" fill="none"/>
