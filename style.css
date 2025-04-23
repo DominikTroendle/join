@@ -474,6 +474,12 @@ li{
     }
 }
 
+@media (max-width: 480px) {
+    .menu-button-bottom-box_mobile {
+        gap: 4px;
+    }
+}
+
 @media(max-width: 428px){
     .menu-box {
         width: 100%;
@@ -579,5 +585,21 @@ li{
     .menu-button-icon {
         width: 24px;
         height: 24px;
+    }
+
+    .menu-button-bottom-box_mobile a {
+        font-size: 14px;
+        width: 110px;
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 360px) {
+    .menu-button-box {
+        padding: 0 8px;
+    }
+
+    .menu-button-bottom-box_mobile {
+        padding-right: 8px;
     }
 }

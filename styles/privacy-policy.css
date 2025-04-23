@@ -43,7 +43,6 @@ nav {
     padding: 8px 56px;
     text-decoration: none;
     cursor: pointer;
-    margin-bottom: 9px;
 }
 
 .menu-login-button:hover {
@@ -142,5 +141,21 @@ p{
 
     #generator_results_content{
         margin: 48px 16px;
+    }
+
+    .menu-login-button {
+        padding: 8px 0;
+    }
+}
+
+@media (max-width: 428px) {
+    .menu-login-button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .menu-login-button {
+        gap: 4px;
     }
 }
