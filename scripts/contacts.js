@@ -157,9 +157,22 @@ async function createContact(form, color) {
     return {
         name: form.querySelector('#name').value,
         email: form.querySelector('#email').value,
-        phone: form.querySelector('#phone').value,
+        phone: formatPhone(form.querySelector('#phone').value),
         color: color
     };
+}
+
+function cleanPhoneNumber(phone) {
+    let digits = phone.replace(/\D/g, '');
+    if (digits.startsWith('0')) digits = '49' + digits.slice(1);
+    return digits.startsWith('49') ? '+' + digits : '+' + digits;
+}
+
+function formatPhone(phone) {
+    const cleaned = cleanPhoneNumber(phone);
+    const country = cleaned.slice(0, 3);
+    const groups = cleaned.slice(3).match(/.{1,3}/g)?.join(' ') || '';
+    return `${country} ${groups}`.trim();
 }
 
 /**

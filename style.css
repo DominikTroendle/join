@@ -376,7 +376,7 @@ li{
         background-color: transparent;
     }
 
-    /* .account-submenu-container {
+    .account-submenu-container {
         position: fixed;
         z-index: 1;
         height: 204px;
@@ -397,21 +397,21 @@ li{
         line-height: 120%;
         display: block;
         transition: 0.3;
-    } */
+    }
 
-    /* .account-submenu-container.active {
+    .account-submenu-container.active {
         opacity: 1;
         right: 10px;
-    } */
+    }
 
     .mobile-help {
         display: flex;
     }
 
-    /* .account-submenu-container a:hover{
+    .account-submenu-container a:hover{
         background-color: transparent;
         border-radius: 8px;
-    } */
+    }
 
     .mobile-menu-overlay {
         position: absolute;

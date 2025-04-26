@@ -39,7 +39,10 @@ function accountClickMenu() {
 }
 
 function openSideNav() {
-    document.getElementById("sideNav").style.width = "300px";
+    setTimeout(() => {
+        document.getElementById("sideNav").style.width = "300px";
+    }, 200)
+    
     document.getElementById("mobileMenuOverlay").style.display = "flex"
 }
 
