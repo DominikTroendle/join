@@ -38,6 +38,16 @@ function accountClickMenu() {
     }
 }
 
+function openSideNav() {
+    document.getElementById("sideNav").style.width = "300px";
+    document.getElementById("mobileMenuOverlay").style.display = "flex"
+}
+
+function closeSideNav() {
+    document.getElementById("sideNav").style.width = "0px";
+    document.getElementById("mobileMenuOverlay").style.display = "none"
+}
+
 function saveMenuId(menuId) {
     localStorage.setItem('lastClickedMenu', menuId);
     console.log('Gespeicherte Menü-ID: ' + menuId);
