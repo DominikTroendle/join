@@ -787,12 +787,24 @@ h1 {
     background-color: #FFFFFF;
 }
 
+.big-task-card__scroll-box {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 96px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    gap: 24px;
+}
+
 .big-task-card__title-box {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     width: 445px;
-    height: 219px;
+    /* height: 219px; */
 }
 
 .big-task-card__title {
@@ -807,6 +819,7 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     width: 445px;
+    flex-wrap: wrap;
     /* height: 24px; */
 }
 

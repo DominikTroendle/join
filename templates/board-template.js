@@ -236,37 +236,39 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                         </svg>
                     </button>
                 </div>
-                <div class="big-task-card__title-box">
-                    <span class="big-task-card__title">${taskTitle}</span>
-                </div>
-                <div class="big-task-card__task-description-box">
-                    <span class="big-task-card__task-description-text">${taskDescription}</span>
-                </div>
-                <div class="big-task-card__due-date-box">
-                    <span class="big-task-card__due-date-text">Due date:</span>
-                    <span class="big-task-card__due-date-text">${dueDate}</span>
-                </div>
-                <div class="big-task-card__priority-box">
-                    <span class="big-task-card__priority-text">Priority:</span>
-                    <div class="big-task-card__priority-text-img-box">
-                        <span class="big-task-card__priority-text">${taskPriorityText}</span>
-                        ${taskPriorityImg}
+                <div class="big-task-card__scroll-box">
+                    <div class="big-task-card__title-box">
+                        <span class="big-task-card__title">${taskTitle}</span>
                     </div>
-                </div>
-                <div class="big-task-card__assigned-to-box">
-                    <div class="big-task-card__assigned-to-text-box">
-                        <span class="big-task-card__assigned-to-text">Assigned To:</span>
+                    <div class="big-task-card__task-description-box">
+                        <span class="big-task-card__task-description-text">${taskDescription}</span>
                     </div>
-                    <div class="big-task-card__assigned-to-names-box ${scrollClassAssignedContacts}">
-                        ${assignedContactsHtml}
+                    <div class="big-task-card__due-date-box">
+                        <span class="big-task-card__due-date-text">Due date:</span>
+                        <span class="big-task-card__due-date-text">${dueDate}</span>
                     </div>
-                </div>
-                <div class="big-task-card__subtasks-box">
-                    <div class="big-task-card__subtasks-title-box">
-                        <span class="big-task-card__subtasks-title">Subtasks</span>
+                    <div class="big-task-card__priority-box">
+                        <span class="big-task-card__priority-text">Priority:</span>
+                        <div class="big-task-card__priority-text-img-box">
+                            <span class="big-task-card__priority-text">${taskPriorityText}</span>
+                            ${taskPriorityImg}
+                        </div>
                     </div>
-                    <div class="big-task-card__all-subtasks-box ${scrollClassSubtasks}">
-                        ${subtasksHtml}
+                    <div class="big-task-card__assigned-to-box">
+                        <div class="big-task-card__assigned-to-text-box">
+                            <span class="big-task-card__assigned-to-text">Assigned To:</span>
+                        </div>
+                        <div class="big-task-card__assigned-to-names-box ${scrollClassAssignedContacts}">
+                            ${assignedContactsHtml}
+                        </div>
+                    </div>
+                    <div class="big-task-card__subtasks-box">
+                        <div class="big-task-card__subtasks-title-box">
+                            <span class="big-task-card__subtasks-title">Subtasks</span>
+                        </div>
+                        <div class="big-task-card__all-subtasks-box ${scrollClassSubtasks}">
+                            ${subtasksHtml}
+                        </div>
                     </div>
                 </div>
                 <div class="big-task-card__button-box">
