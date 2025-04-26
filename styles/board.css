@@ -1466,7 +1466,7 @@ footer {
 }
 
 .user-story__mobile-move-menu__center-button.open {
-    animation: fadeInCenterButton 0.2s ease-out forwards, glowOpen 1.2s ease-in-out 2;
+    animation: fadeInCenterButton 0.2s ease-out forwards, glowOpen 0.7s ease-in-out 2;
     animation-delay: 0.2s;
 }
 
@@ -2172,10 +2172,6 @@ footer {
         gap: 4px;
     }
 
-    .big-task-card-edit__task-type-text-button-box {
-        height: 61px;
-    }
-
     .user-story__mobile-button {
         display: flex;
     }
@@ -2305,16 +2301,18 @@ footer {
 @media(max-height: 850px) {
     .big-task-card__box {
         padding: 16px 12px;
-        height: auto;
+        height: calc(100dvh - 48px);
         gap: 6px;
     }
 
     .big-task-card__title-box {
-        height: auto;
+        word-break: break-all;
+        overflow-y: scroll;
+ 
     }
 
     .big-task-card-edit__scroll-box {
-        height: 52vh;
+        height: calc(100% - 149px)
     }
 }
 

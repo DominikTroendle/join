@@ -206,7 +206,8 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
         let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
-            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, dragFieldArray[index].taskDescription, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
+            let description = shortenText(dragFieldArray[index].taskDescription, 50);
+            dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, description, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
         }
     }
 }
@@ -561,6 +562,20 @@ async function readFromEditAndSaveData() {
     }
 }
 
+function shortenText(text, maxChars) {
+    let newText = "";
+    let words = text.split(" ");
+    for (let index = 0; index < words.length; index++) {
+
+        if ((newText + " " + words[index]).trim().length > maxChars) {
+            break;
+        }
+        newText += words[index] + " ";
+    }
+    newText = newText.trim();
+    return newText.length < text.trim().length ? newText + "..." : newText;
+}
+
 async function editDataInDatabase(userKey, cardId, data) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
         method: "PUT",
@@ -696,14 +711,16 @@ function openMobileMoveMenu(event) {
     event.stopPropagation();
     currentUserStoryBox.style.pointerEvents = "none";
     currentMoveMenu.style.display = "flex";
+    currentMoveMenu.style.pointerEvents = "none";
     addAnimationClassToTaskContent(currentUserStoryBox);
     setTimeout(() => {
         currentCenterButtonText.classList.add('fade-out');
         setTimeout(() => {
             currentCenterButtonText.textContent = 'Close';
             currentCenterButtonText.classList.remove('fade-out');
+            currentMoveMenu.style.pointerEvents = "auto";
         }, 300);
-    }, 2000);
+    }, 1200);
 }
 
 function addAnimationClassToTaskContent(currentUserStoryBox) {
