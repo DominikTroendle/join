@@ -1008,8 +1008,10 @@ h1 {
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
-    height: 68px;
+    /* height: 68px; */
     gap: 4px;
+    overflow-y: visible !important;
+    max-height: fit-content !important;
 }
 
 .big-task-card__subtasks-check-text-box {
