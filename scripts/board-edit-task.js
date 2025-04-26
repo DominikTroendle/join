@@ -418,3 +418,9 @@ function changeInputButtonForBigTaskCardEdit(boolean) {
     }
 }
 
+function filterContactsForBigTaskCardEdit() {
+    let searchValue = document.getElementById('big-task-card-edit__assigned-to-input').value.toLowerCase();
+    let filteredContacts = contactsBigTaskCardEdit.filter(contact => contact.name.toLowerCase().includes(searchValue));
+    renderAssignOptionsForBigTaskCardEdit(filteredContacts);
+}
+
