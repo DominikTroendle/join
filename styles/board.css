@@ -2004,6 +2004,11 @@ footer {
         letter-spacing: 0;
     }
 
+    .big-task-card__scroll-box {
+        gap: 14px;
+        height: calc(100% - 70px);
+    }
+
     .big-task-card__title-box {
         width: 100%;
     }
