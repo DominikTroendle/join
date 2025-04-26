@@ -2323,10 +2323,9 @@ footer {
         gap: 6px;
     }
 
-    .big-task-card__title-box {
-        word-break: break-all;
-        overflow-y: scroll;
- 
+    .big-task-card__scroll-box {
+        gap: 6px;
+        height: calc(100% - 46px);
     }
 
     .big-task-card-edit__scroll-box {
