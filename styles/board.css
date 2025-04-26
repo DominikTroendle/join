@@ -2148,6 +2148,10 @@ footer {
         letter-spacing: 0;
     }
 
+    .big-task-card-edit__prioritys-button-box {
+        height: 41px;
+    }
+
     .button-prio {
         width: 104px;
         height: 41px;
@@ -2255,8 +2259,16 @@ footer {
         width: 270px;
     }
 
+    .container-custom-select-options {
+        width: 270px;
+    }
+
     .container-custom-select-option {
         width: 260px;
+    }
+
+    .big-task-card-edit__assigned-to-input {
+        width: 218px;
     }
 
     #label-subtasks {
@@ -2265,7 +2277,7 @@ footer {
 
     #subtasks,
     .big-task-card-edit__subtask-input {
-        width: 200px;
+        width: 215px;
     }
 
     #assigned-to,
