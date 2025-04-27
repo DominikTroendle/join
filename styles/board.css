@@ -373,7 +373,7 @@ h1 {
     overflow-y: auto;
     scrollbar-width: thin;
     width: 1218px;
-    height: calc(100dvh - 336px);
+    height: calc(100dvh - 337px);
 }
 
 .all-drag-field-box::-webkit-scrollbar {
@@ -400,7 +400,7 @@ h1 {
     align-items: center;
     flex-direction: column;
     width: 270px;
-    min-height: calc(100dvh - 350px);
+    min-height: calc(100dvh - 337px);
     padding: 24px 0;
     gap: 24px;
 }
@@ -1753,7 +1753,7 @@ footer {
     }
 }
 
-@media (max-width: 1310px) {
+@media (max-width: 1370px) {
     .title-input-button__box {
         justify-content: flex-start;
         width: auto;
@@ -1761,7 +1761,7 @@ footer {
 
     .all-drag-field-box {
         width: 100%;
-        height: calc(100dvh - 300px);
+        height: calc(100dvh - 301px);
         max-height: none;
         flex-direction: column;
         overflow: auto;
