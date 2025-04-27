@@ -317,12 +317,13 @@ function renderContentBigTaskCardEdit() {
 }
 
 async function init() {
+    setSearchModeFalseAndChangeImg();
     await syncAllContactsWithTasks(localStorage.getItem("userId"));
     await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
-    setHeightForDragFields()
+    setHeightForDragFields();
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
@@ -553,7 +554,7 @@ async function readFromEditAndSaveData() {
             console.error("error when saving in the database:", editResponse.statusText);
             return;
         }
-        init();
+        searchMode === "true" ? checkSearchWordAndLoadAllSearchTasks() : init();
     } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
         throwErrorForBigTaskCardEdit();
         document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
