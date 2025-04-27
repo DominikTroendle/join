@@ -415,11 +415,12 @@ async function changeCheckedSubtask(event) {
 }
 
 async function changeNumberOfCompletedSubtasks() {
-    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
+    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray; 
+    let objectFromCurrentSmallTaskCard = selectedArray.find(element => element.id == currentTaskCardId);
     let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.filter(element => element.checked === "true").length;
     objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
-    renderSmallCard(currentDragFieldId, currentArray);
+    renderSmallCard(currentDragFieldId, selectedArray);
     if (!putResponse.ok) {
         console.error("error when saving:", putResponse.statusText);
         return;
@@ -428,7 +429,8 @@ async function changeNumberOfCompletedSubtasks() {
 
 async function checkAllSubtasksOfTask(category) {
     if (category === "done-drag-field") {
-        let objectFromCurrentSmallTaskCard = doneArray.find(element => element.id == currentCardId);
+        let currentDoneArray = searchMode === "true" ? doneArraySearch : doneArray
+        let objectFromCurrentSmallTaskCard = currentDoneArray.find(element => element.id == currentCardId);
         if (!objectFromCurrentSmallTaskCard) {
             return;
         }
@@ -442,7 +444,7 @@ async function checkAllSubtasksOfTask(category) {
                 return;
             }
         }
-        renderSmallCard("done-drag-field", doneArray);
+        renderSmallCard("done-drag-field", currentDoneArray);
         let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
             if (!putResponse2.ok) {
                 console.error("error when saving:", putResponse2.statusText);
@@ -490,6 +492,18 @@ async function checkSearchWordAndLoadAllSearchTasks() {
                 searchArray.push(element);
             }
         });
+        if (searchArray.length !== 0) {
+            renderSmallCard(dragFieldIds[index], searchArray);
+        } else {
+            dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
+        }
+    }
+}
+
+async function loadAllSearchTasks() {
+    for (let index = 0; index < arrayNames.length; index++) {
+        let searchArray = searchArrays[searchArrayNames[index]];
+        let dragField = document.getElementById(dragFieldIds[index]);
         if (searchArray.length !== 0) {
             renderSmallCard(dragFieldIds[index], searchArray);
         } else {
@@ -579,7 +593,7 @@ async function readFromEditAndSaveData() {
             console.error("error when saving in the database:", editResponse.statusText);
             return;
         }
-        searchMode === "true" ? checkSearchWordAndLoadAllSearchTasks() : init();
+        searchMode === "true" ? loadAllSearchTasks() : init();
     } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
         throwErrorForBigTaskCardEdit();
         document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
