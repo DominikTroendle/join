@@ -158,8 +158,8 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
     let taskPriorityText = "";
     let taskPriorityForEdit = "";
     if (taskPriority) {
-        taskPriorityImg = priorityMapping.find(element => element.priority == taskPriority)?.img;
-        taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText;
+        taskPriorityImg = priorityMapping.find(element => element.priority == taskPriority)?.img || "";
+        taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText || "";
         taskPriorityForEdit = taskPriority === "big-task-card-edit__medium-button" ? "" : `big-task-card-edit__${taskPriority}-button`
     }
 
