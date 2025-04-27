@@ -151,7 +151,7 @@ async function allowDrop2(event, dragFieldArray) {
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
     }
-
+    checkAllSubtasksOfTask(newCategory);
 }
 
 function putSearchTaskFromOldArrayinNewArray() {
@@ -417,12 +417,37 @@ async function changeCheckedSubtask(event) {
 async function changeNumberOfCompletedSubtasks() {
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
     let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.filter(element => element.checked === "true").length;
-    objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted
+    objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
     renderSmallCard(currentDragFieldId, currentArray);
     if (!putResponse.ok) {
         console.error("error when saving:", putResponse.statusText);
         return;
+    }
+}
+
+async function checkAllSubtasksOfTask(category) {
+    if (category === "done-drag-field") {
+        let objectFromCurrentSmallTaskCard = doneArray.find(element => element.id == currentCardId);
+        if (!objectFromCurrentSmallTaskCard) {
+            return;
+        }
+        let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
+        objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
+        for (let index = 0; index < objectFromCurrentSmallTaskCard.subtasks.length; index++) {
+            objectFromCurrentSmallTaskCard.subtasks[index].checked = "true";
+            let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, objectFromCurrentSmallTaskCard.subtasks[index].checked, `subtasks/${index}/checked`);
+            if (!putResponse.ok) {
+                console.error("error when saving:", putResponse.statusText);
+                return;
+            }
+        }
+        renderSmallCard("done-drag-field", doneArray);
+        let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
+            if (!putResponse2.ok) {
+                console.error("error when saving:", putResponse2.statusText);
+                return;
+            }
     }
 }
 
