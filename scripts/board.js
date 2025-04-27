@@ -311,8 +311,9 @@ function renderContentBigTaskCard(event) {
 }
 
 function renderContentBigTaskCardEdit() {
+    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
     let bigTaskCard = document.getElementById("big-task-card__box");
-    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
+    let objectFromCurrentSmallTaskCard = selectedArray.find(element => element.id == currentTaskCardId);
     bigTaskCard.innerHTML = bigTaskCardEditTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
@@ -569,10 +570,12 @@ function selectionOfWhichFunctionIsUsed() {
 
 async function readFromEditAndSaveData() {
     removeErrorForBigTaskCardEdit();
+    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
+    console.log(currentArrayName);
     let valid = validateInputsForBigTaskCardEdit();
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
-        let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
+        let taskCardObject = selectedArray.find(element => element.id === currentTaskCardId);
         completedSubtasksArray = subtasksBigTaskCardEdit.filter(element => element.checked === "true");
         data = {
             category: taskCardObject.category,
@@ -853,6 +856,7 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
     }
+    checkAllSubtasksOfTask(newCategory);
     setTimeout(() => {
         document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById(currentCardId).classList.add('highlight-flash');
