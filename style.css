@@ -250,11 +250,11 @@ button {
     z-index: 2;
 }
 
-/* .overlay.active {
+.overlay.active {
     display: flex;
-} */
+}
 
-/* .account-submenu-container{
+.account-submenu-container{
     position: absolute;
     height: 150px;
     width: 158px;
@@ -292,7 +292,7 @@ li{
 .account-submenu-container a:hover{
     background-color: rgba(64, 6, 236, 0.205);
     border-radius: 8px;
-} */
+}
 
 .d-none {
     display: none;
@@ -317,7 +317,7 @@ li{
         width: 100%;
         height: 80px;
         padding: 0;
-        position: absolute;
+        position: fixed;
         top: auto;
         bottom: 0;
         left: 0;
@@ -381,12 +381,8 @@ li{
         z-index: 1;
         height: 204px;
         width: 150px;
-        top: 0;
-        right: 0;
-        background-color: #091931;
-        overflow-x: hidden;
-        transition: 0,5;
-        padding-top: 80px;
+        top: 60px;
+        transition: right 0.6s ease-in-out, opacity 0.6s ease-in-out;
     }
 
     .account-submenu-container a {
