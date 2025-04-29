@@ -533,6 +533,9 @@ body {
 }
 
 @media(max-width: 550px) {
+    body{
+        min-height: 0;
+    }
     .resposive-logo {
         left: 40%;
         top: 40%;
@@ -557,6 +560,13 @@ body {
         top: 560px;
     }
 
+    .user-login-container{
+        position: absolute;
+        height: 100%;
+        top: 20px;
+        z-index: -1;
+    }
+
     .user-login{
         margin-top: 120px;
     }
@@ -576,13 +586,13 @@ body {
     }
 
     .legal-information {
-        margin-top: 90px;
+        margin-top: 700px;
     }
 }
 
 @media(max-width: 490px) {
     .login-container{
-        top: 625px;
+        top: 570px;
     }
 
     .no-value-content {
@@ -592,16 +602,8 @@ body {
 }
 
 @media(max-width: 450px){
-    .login-container{
-        top: 625px;
-    }
-
     .user-login {
         padding: 20px 0 0 0;
-    }
-
-    .legal-information {
-        margin-top: 186px;
     }
 }
 
@@ -614,27 +616,9 @@ body {
     .input-container input {
         width: 270px;
     }
-
-    .login-container{
-        top: 625px;
-    }
-
-    .legal-information {
-        margin-top: 126px;
-    }
-}
-
-@media(max-width: 390px){
-    .login-container{
-        top: 625px;
-    }
 }
 
 @media(max-width: 375px){
-    .user-login{
-        margin-top: 120px;
-    }
-    
     .user-login{
         height: auto;
     }
@@ -648,26 +632,12 @@ body {
     }
     
     .legal-information {
-        margin-top:72px;
+        margin-top: 650px;
     }
 }
 
 @media(max-width: 360px){
-    .user-login {
-        margin-top: 135.5px;
-    }
-
-    .login-container{
-        top: 560px;
-    }
-
     .legal-information {
-        margin-top: 86px;
-    }
-}
-
-@media(max-width: 345px){
-    .login-container{
-        top: 625px;
+        margin-top: 650px;
     }
 }
