@@ -520,7 +520,11 @@ function removeError() {
 }
 
 function saveTask() {
-    task.category = "toDos";
+    if(window.innerWidth <= 1040) {
+        task.category = getTaskCategory();
+    } else {
+        task.category = "toDos";
+    }
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
@@ -532,6 +536,14 @@ function saveTask() {
     task.assignedContacts = selectedContacts;
     saveToFirebase("tasks/", task);
     task = {};
+}
+
+function getTaskCategory() {
+    if (sessionStorage.getItem("taskCategory") === "toDo" || sessionStorage.getItem("taskCategory") == null) {
+        return "toDos";
+    } else {
+        return sessionStorage.getItem("taskCategory");
+    }
 }
 
 async function saveToFirebase(path, task) {
