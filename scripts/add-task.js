@@ -25,17 +25,15 @@ async function initialize() {
 initialize();
 
 function selectPrioButton(prio) {
-    if (prio != "") {
-        let button = document.getElementById(`${prio}`);
-        let svg = document.getElementById(`svg-${prio}`);
-        if (button.classList.contains(`${prio}`)) {
-            toggleButtonClasses(true, button, svg, prio);
-            selectedPriority = "medium";
-        } else {
-            clearPrioButtons();
-            toggleButtonClasses(false, button, svg, prio);
-            selectedPriority = prio;
-        }
+    let button = document.getElementById(`${prio}`);
+    let svg = document.getElementById(`svg-${prio}`);
+    if (button.classList.contains(`${prio}`)) {
+        toggleButtonClasses(true, button, svg, prio);
+        selectedPriority = "";
+    } else {
+        clearPrioButtons();
+        toggleButtonClasses(false, button, svg, prio);
+        selectedPriority = prio;
     }
 }
 
@@ -72,7 +70,6 @@ function selectDefaultPrioButton() {
     button.classList.add('white');
     button.classList.remove('button-prio-hover');
     svg.classList.add('filter-white');
-    // selectedPriority = "medium";
 }
 
 function toggleAssignOptions() {

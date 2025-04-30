@@ -377,7 +377,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                                 </button>
                                 <button id="big-task-card-edit__medium-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__medium-button')">
                                     Medium
-                                    <img id="svg-big-task-card-edit__medium-button" src="assets/icons/medium.svg" alt="icon-medium" class="filter-white">
+                                    <img id="svg-big-task-card-edit__medium-button" src="assets/icons/medium.svg" alt="icon-medium">
                                 </button>
                                 <button id="big-task-card-edit__low-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__low-button')">
                                     Low
