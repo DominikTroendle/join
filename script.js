@@ -44,6 +44,7 @@ function openSideNav() {
     }, 200)
     
     document.getElementById("mobileMenuOverlay").style.display = "flex"
+    document.getElementById("sideNav").style.width = "0";
 }
 
 function closeSideNav() {

@@ -325,6 +325,7 @@ async function init() {
     await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
     setHeightForDragFields();
+    removeSessionStorageTaskCategory()
 }
 
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
@@ -940,4 +941,12 @@ function fadeOutBigTaskCard() {
 function clearSelectedContactsAndSubtasks() {
     selectedContacts.length = 0;
     subtasks.length = 0;
+}
+
+function removeSessionStorageTaskCategory() {
+    sessionStorage.removeItem("taskCategory");
+}
+
+function setSessionStorageTaskCategory(category) {
+    sessionStorage.setItem("taskCategory", category);
 }

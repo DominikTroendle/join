@@ -340,7 +340,7 @@ function selectPrioButtonForBigTaskCardEdit(prio) {
         let svg = document.getElementById(`svg-${prio}`);
         if (button.classList.contains(priority)) {
             toggleButtonClasses(true, button, svg, priority);
-            selectedPriorityBigTaskCardEdit = "medium";
+            selectedPriorityBigTaskCardEdit = "";
         } else {
             clearPrioButtonsForBigTaskCardEdit();
             toggleButtonClasses(false, button, svg, priority);

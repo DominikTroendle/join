@@ -25,17 +25,15 @@ async function initialize() {
 initialize();
 
 function selectPrioButton(prio) {
-    if (prio != "") {
-        let button = document.getElementById(`${prio}`);
-        let svg = document.getElementById(`svg-${prio}`);
-        if (button.classList.contains(`${prio}`)) {
-            toggleButtonClasses(true, button, svg, prio);
-            selectedPriority = "medium";
-        } else {
-            clearPrioButtons();
-            toggleButtonClasses(false, button, svg, prio);
-            selectedPriority = prio;
-        }
+    let button = document.getElementById(`${prio}`);
+    let svg = document.getElementById(`svg-${prio}`);
+    if (button.classList.contains(`${prio}`)) {
+        toggleButtonClasses(true, button, svg, prio);
+        selectedPriority = "";
+    } else {
+        clearPrioButtons();
+        toggleButtonClasses(false, button, svg, prio);
+        selectedPriority = prio;
     }
 }
 
@@ -72,7 +70,6 @@ function selectDefaultPrioButton() {
     button.classList.add('white');
     button.classList.remove('button-prio-hover');
     svg.classList.add('filter-white');
-    // selectedPriority = "medium";
 }
 
 function toggleAssignOptions() {
@@ -520,7 +517,11 @@ function removeError() {
 }
 
 function saveTask() {
-    task.category = "toDos";
+    if(window.innerWidth <= 1040) {
+        task.category = getTaskCategory();
+    } else {
+        task.category = "toDos";
+    }
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
@@ -532,6 +533,14 @@ function saveTask() {
     task.assignedContacts = selectedContacts;
     saveToFirebase("tasks/", task);
     task = {};
+}
+
+function getTaskCategory() {
+    if (sessionStorage.getItem("taskCategory") === "toDo" || sessionStorage.getItem("taskCategory") == null) {
+        return "toDos";
+    } else {
+        return sessionStorage.getItem("taskCategory");
+    }
 }
 
 async function saveToFirebase(path, task) {
