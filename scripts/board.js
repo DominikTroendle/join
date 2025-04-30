@@ -302,7 +302,7 @@ const arrays = {
 function renderContentBigTaskCard(event) {
     currentTaskCardId = event.currentTarget.id;
     currentArrayName = event.currentTarget.closest(".drag-field").dataset.array;
-    currentArray = arrays[currentArrayName];
+    currentArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : arrays[currentArrayName];
     currentDragFieldId = event.currentTarget.closest(".drag-field").id;
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
 
@@ -571,7 +571,6 @@ function selectionOfWhichFunctionIsUsed() {
 async function readFromEditAndSaveData() {
     removeErrorForBigTaskCardEdit();
     let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
-    console.log(currentArrayName);
     let valid = validateInputsForBigTaskCardEdit();
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
