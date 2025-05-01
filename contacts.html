@@ -26,10 +26,19 @@
                         <a href="help.html" class="help-button">
                             <img class="help-img" src="assets/img/Property 1=Default.png">
                         </a>
-                        <button onclick="openSideNav()" class="small-menu-button" id="smallInitials">G</button>
+                        <button onclick="accountClickMenu()" id="smallInitials" class="small-menu-button"></button>
                     </div>
                 </nav>
             </header>
+            <div id="subMenuOverlayContent" class="overlay" onclick="accountClickMenu()">
+                <div class="account-submenu-container">
+                  <ul>
+                      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                      <li><a href="legal-notice.html">Legal Notice</a></li>
+                      <li><a href="index.html">Log out</a></li>
+                  </ul>
+                </div>
+            </div>
             <!-- <div class="overlay">
                 <div id="sideNav" class="account-submenu-container">
                     <ul>
