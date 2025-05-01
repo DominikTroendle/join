@@ -10,7 +10,6 @@ async function loadAllContacts() {
     contactsBigTaskCardEdit.length = 0;
     let contactsObj = await getContacts2();
     loadContactInfo2(contactsObj);
-    console.log(contactsBigTaskCardEdit);
 }
 
 async function getContacts2(path="") {

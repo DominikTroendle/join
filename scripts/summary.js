@@ -100,7 +100,6 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
         document.getElementById("priority-text").innerHTML = "Urgent";
         document.getElementById("priority-img").src = "assets/icons/urgent-summary.png";
         loadUpcomingDeadline(allLoadTasks, "urgent")
-        console.log(numberOfUrgentTasks);
         return;
     } else if (numberOfMediumTasks !== 0) {
         document.getElementById("number-of-priority-tasks").innerHTML = numberOfMediumTasks;

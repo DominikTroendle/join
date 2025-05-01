@@ -366,7 +366,6 @@ async function postDataInDatabase(userKey, data) {
     });
     if (response.ok) {
         let result = await response.json();
-        console.log("Daten erfolgreich gespeichert:", result);
     } else {
         console.error("Fehler beim Speichern:", response.statusText);
     }
@@ -726,8 +725,6 @@ async function saveTasksToDatabase(userKey, tasks) {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(updates)
         });
-
-        console.log("Tasks erfolgreich aktualisiert.");
     } catch (error) {
         console.error("Fehler beim Speichern der Tasks:", error);
     }
