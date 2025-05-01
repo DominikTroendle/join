@@ -302,7 +302,7 @@ const arrays = {
 function renderContentBigTaskCard(event) {
     currentTaskCardId = event.currentTarget.id;
     currentArrayName = event.currentTarget.closest(".drag-field").dataset.array;
-    currentArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : arrays[currentArrayName];
+    currentArray = arrays[currentArrayName];
     currentDragFieldId = event.currentTarget.closest(".drag-field").id;
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
 
@@ -311,9 +311,8 @@ function renderContentBigTaskCard(event) {
 }
 
 function renderContentBigTaskCardEdit() {
-    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
     let bigTaskCard = document.getElementById("big-task-card__box");
-    let objectFromCurrentSmallTaskCard = selectedArray.find(element => element.id == currentTaskCardId);
+    let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
     bigTaskCard.innerHTML = bigTaskCardEditTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
@@ -349,7 +348,7 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
                 }
             });
         }
-        if (categoryArray.length !== 0) {
+        if (categoryArray.length !== 0 && searchMode === "false") {
             renderSmallCard(dragFieldId, categoryArray);
         } else {
             document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category], searchMode);
@@ -417,7 +416,7 @@ async function changeCheckedSubtask(event) {
 }
 
 async function changeNumberOfCompletedSubtasks() {
-    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray; 
+    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
     let objectFromCurrentSmallTaskCard = selectedArray.find(element => element.id == currentTaskCardId);
     let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.filter(element => element.checked === "true").length;
     objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
@@ -448,10 +447,10 @@ async function checkAllSubtasksOfTask(category) {
         }
         renderSmallCard("done-drag-field", currentDoneArray);
         let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
-            if (!putResponse2.ok) {
-                console.error("error when saving:", putResponse2.statusText);
-                return;
-            }
+        if (!putResponse2.ok) {
+            console.error("error when saving:", putResponse2.statusText);
+            return;
+        }
     }
 }
 
@@ -500,18 +499,7 @@ async function checkSearchWordAndLoadAllSearchTasks() {
             dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
         }
     }
-}
-
-async function loadAllSearchTasks() {
-    for (let index = 0; index < arrayNames.length; index++) {
-        let searchArray = searchArrays[searchArrayNames[index]];
-        let dragField = document.getElementById(dragFieldIds[index]);
-        if (searchArray.length !== 0) {
-            renderSmallCard(dragFieldIds[index], searchArray);
-        } else {
-            dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
-        }
-    }
+    setHeightForDragFields();
 }
 
 function renderAddTaskOverlay() {
@@ -571,11 +559,10 @@ function selectionOfWhichFunctionIsUsed() {
 
 async function readFromEditAndSaveData() {
     removeErrorForBigTaskCardEdit();
-    let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
     let valid = validateInputsForBigTaskCardEdit();
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
-        let taskCardObject = selectedArray.find(element => element.id === currentTaskCardId);
+        let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
         completedSubtasksArray = subtasksBigTaskCardEdit.filter(element => element.checked === "true");
         data = {
             category: taskCardObject.category,
@@ -596,7 +583,7 @@ async function readFromEditAndSaveData() {
             console.error("error when saving in the database:", editResponse.statusText);
             return;
         }
-        searchMode === "true" ? loadAllSearchTasks() : init();
+        searchMode === "true" ? loadAllDataFromDatabaseAndRenderSearchTasks() : init();
     } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
         throwErrorForBigTaskCardEdit();
         document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
@@ -949,4 +936,12 @@ function removeSessionStorageTaskCategory() {
 
 function setSessionStorageTaskCategory(category) {
     sessionStorage.setItem("taskCategory", category);
+}
+
+async function loadAllDataFromDatabaseAndRenderSearchTasks() {
+    await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
+    checkSearchWordAndLoadAllSearchTasks();
 }
