@@ -381,8 +381,9 @@ li{
         z-index: 1;
         height: 204px;
         width: 150px;
-        top: 60px;
-        transition: right 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        top: 80px;
+        right: -180px;
+        transition: right 0.3s ease-in-out, opacity 0.6s ease-in-out;
     }
 
     .account-submenu-container a {
