@@ -1,8 +1,8 @@
 let contactsBigTaskCardEdit = [];
 let selectedContactsBigTaskCardEdit = [];
 let unvalidInputsBigTaskCardEdit = [];
-let subtasksCountBigTaskCardEdit = 0;
 let subtasksBigTaskCardEdit = [];
+let subtasksCountBigTaskCardEdit = subtasksBigTaskCardEdit.length;
 let selectedPriorityBigTaskCardEdit = "medium";
 const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
@@ -202,7 +202,7 @@ function addSubtaskForBigTaskCardEdit() {
     if (input.value !== "") {
         document.getElementById('invalid-subtask-big-task-card-edit__subtask-input').classList.add('d-none');
         document.getElementById('big-task-card-edit__subtask-box').classList.remove('input-unvalid');
-        subtasksCountBigTaskCardEdit++;
+        // subtasksCountBigTaskCardEdit = subtasksBigTaskCardEdit === 0 ? 1 : subtasksBigTaskCardEdit.length + 1;
         determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCountBigTaskCardEdit);
         document.getElementById(`big-task-card-edit__subtask-${subtasksCountBigTaskCardEdit}`).innerText = input.value;
         subtaskObj.subtask = input.value;
