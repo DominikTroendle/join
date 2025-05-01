@@ -741,6 +741,50 @@ button .close-icon:hover path {
     display: none;
 }
 
+@media (max-width: 1040px) and (max-height: 810px) {
+    .new-Contect-Container {
+        height: 660px !important;
+    }
+
+    .information-content-container {
+        height: 302px !important;
+    }
+
+    .add-input-contect-container {
+        height: 358px !important;
+    }
+
+    form {
+        margin-top: 65px !important;
+    }
+
+    .new-user-image {
+        top: calc((358px / 2) + 60px) !important;
+    }
+
+    .input-container {
+        gap: 20px !important;
+    }
+
+    .create-btn {
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width: 1040px) and (max-height: 700px) {
+    .new-Contect-Container {
+        height: 610px !important;
+    }
+
+    .information-content-container {
+        height: 252px !important;
+    }
+
+    .new-user-image {
+        top: calc((252px / 2) + 60px) !important;
+    }
+}
+
 @media(max-width: 1300px) {
     .contact-headline {
         display: flex;
