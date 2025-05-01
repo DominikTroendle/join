@@ -742,7 +742,8 @@ button .close-icon:hover path {
 }
 
 @media (max-width: 1040px) and (max-height: 810px) {
-    .new-Contect-Container {
+    .new-Contect-Container,
+    .edit-Contect-Container {
         height: 660px !important;
     }
 
@@ -750,7 +751,8 @@ button .close-icon:hover path {
         height: 302px !important;
     }
 
-    .add-input-contect-container {
+    .add-input-contect-container,
+    .edit-add-input-contect-container {
         height: 358px !important;
     }
 
@@ -758,7 +760,8 @@ button .close-icon:hover path {
         margin-top: 65px !important;
     }
 
-    .new-user-image {
+    .new-user-image,
+    .edit-contact-initcolor {
         top: calc((358px / 2) + 60px) !important;
     }
 
@@ -772,7 +775,8 @@ button .close-icon:hover path {
 }
 
 @media (max-width: 1040px) and (max-height: 700px) {
-    .new-Contect-Container {
+    .new-Contect-Container,
+    .edit-Contect-Container {
         height: 610px !important;
     }
 
@@ -780,8 +784,22 @@ button .close-icon:hover path {
         height: 252px !important;
     }
 
-    .new-user-image {
+    .new-user-image,
+    .edit-contact-initcolor {
         top: calc((252px / 2) + 60px) !important;
+    }
+}
+
+@media (max-width: 460px) and (max-height: 700px) {
+    .edit-contact-initcolor,
+    .new-user-image {
+        width: 90px;
+        height: 90px;
+        top: calc((358px / 2) + 25px) !important;
+    }
+
+    .edit-contact-initialien {
+        font-size: 38px;
     }
 }
 
