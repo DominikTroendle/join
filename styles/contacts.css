@@ -25,7 +25,7 @@
 #contactlist-container {
     position: absolute;
     width: auto;
-    height: calc(100vh - 10vh);
+    height: calc(100dvh - 96px);
     top: 96px;
     width: 456px;
     box-shadow: 0px 7px 6px 2px rgba(0, 0, 0, 0.11);
@@ -815,8 +815,12 @@ button .close-icon:hover path {
 }
 
 @media(max-width: 1040px) {
+    .contactList {
+        padding-bottom: 20px;
+    }
+
     #contactlist-container {
-        height: calc(100vh - 16.7vh);
+        height: calc(100dvh - 160px);
         top: 80px;
         left: 0;
     }
