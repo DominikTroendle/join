@@ -1358,6 +1358,11 @@ footer {
     width: 445px;
 }
 
+.subtask-text {
+    word-break: normal;
+    overflow-wrap: anywhere;
+}
+
 .container-custom-select-options {
     width: 445px;
 }
@@ -2142,7 +2147,7 @@ footer {
     .container-custom-select-options {
         width: 345px;
     }
-    
+
     .container-custom-select-option {
         width: 330px;
     }
@@ -2319,7 +2324,7 @@ footer {
     #low,
     #big-task-card-edit__urgent-button,
     #big-task-card-edit__medium-button,
-    .big-task-card-edit__low-button{
+    .big-task-card-edit__low-button {
         padding: 1px 4px;
     }
 }
