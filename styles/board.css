@@ -1825,7 +1825,7 @@ footer {
         min-height: auto;
         overflow-x: scroll;
         scrollbar-width: none;
-        padding: 16px 0;
+        padding: 16px 5px;
         gap: 16px;
     }
 
@@ -2170,7 +2170,6 @@ footer {
         width: 348px;
     }
 
-
     .big-task-card-edit__text,
     .big-task-card-edit__input,
     .big-task-card-edit__textarea,
@@ -2341,7 +2340,6 @@ footer {
     .big-task-card__box {
         padding: 16px 12px;
         height: calc(100dvh - 48px);
-        gap: 6px;
     }
 
     .big-task-card__scroll-box {
@@ -2351,6 +2349,12 @@ footer {
 
     .big-task-card-edit__scroll-box {
         height: calc(100% - 149px)
+    }
+}
+
+@media (min-width: 1040px) and (pointer: coarse) and (hover: none) {
+    .user-story__mobile-button {
+        display: flex;
     }
 }
 
