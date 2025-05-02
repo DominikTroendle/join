@@ -734,7 +734,10 @@ function openMobileMoveMenu(event) {
     let currentUserStoryBox = currentCardClicked.querySelector(".user-story__box");
     let currentMoveMenu = currentCardClicked.querySelector(".user-story__mobile-move-menu");
     let currentCenterButtonText = currentCardClicked.querySelector('.user-story__mobile-move-menu__center-button-text');
+    let currentCategoryName = currentCardClicked.closest(".drag-field").getAttribute("data-category");
     event.stopPropagation();
+    currentMoveMenu.querySelector(`.${currentCategoryName}`).style.fill = "#D08770";
+    currentMoveMenu.querySelector(`.${currentCategoryName}`).style.pointerEvents = "none";
     currentUserStoryBox.style.pointerEvents = "none";
     currentMoveMenu.style.display = "flex";
     currentMoveMenu.style.pointerEvents = "none";
