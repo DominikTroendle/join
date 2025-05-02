@@ -680,7 +680,7 @@ body {
 
     .button-middle-inside-box {
         padding-left: 10px;
-        gap: 10px;
+        gap: 0;
     }
 
     .date-text-box {
