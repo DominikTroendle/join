@@ -182,7 +182,8 @@
 #container-input-due-date:focus-within,
 .big-task-card-edit__input-due-date-box:focus-within,
 #container-input-subtask:focus-within,
-.big-task-card-edit__subtask-box:focus-within {
+.big-task-card-edit__subtask-box:focus-within,
+.big-task-card-edit__textarea:focus-within {
     border: 1px solid #94D5F0;
 }
 
