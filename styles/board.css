@@ -465,6 +465,8 @@ h1 {
     font-weight: 700;
     line-height: 19.2px;
     color: #2A3647;
+    word-break: normal;
+    overflow-wrap: anywhere;
 }
 
 .user-story__description {
@@ -804,6 +806,8 @@ h1 {
     justify-content: flex-start;
     align-items: center;
     width: 445px;
+    word-break: normal;
+    overflow-wrap: anywhere;
     /* height: 219px; */
 }
 
@@ -820,6 +824,8 @@ h1 {
     align-items: center;
     width: 445px;
     flex-wrap: wrap;
+    word-break: normal;
+    overflow-wrap: anywhere;
     /* height: 24px; */
 }
 
@@ -1035,6 +1041,8 @@ h1 {
 .big-task-card__subtasks-text {
     align-self: center;
     padding-bottom: 2px;
+    word-break: normal;
+    overflow-wrap: anywhere;
 }
 
 .big-task-card__button-box {
