@@ -1017,11 +1017,24 @@ h1 {
 .big-task-card__subtasks-check-text-box {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     width: 344px;
-    height: 32px;
+    /* height: 32px; */
     padding: 6px 16px;
     gap: 16px;
+}
+
+.big-task-card__checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 25px;
+    min-width: 25px;
+}
+
+.big-task-card__subtasks-text {
+    align-self: center;
+    padding-bottom: 2px;
 }
 
 .big-task-card__button-box {
