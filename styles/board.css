@@ -422,11 +422,7 @@ h1 {
     opacity: 1;
     filter: blur(0);
     transition: opacity 0.8s ease, filter 0.8s ease;
-    cursor: grab;
-}
-
-.user-story__box:active {
-    cursor: grabbing;
+    cursor: pointer;
 }
 
 .drag-start-transform {
@@ -2003,7 +1999,6 @@ footer {
         width: 396px;
         height: 724px;
         padding: 32px 16px;
-        gap: 14px;
     }
 
     .big-task-card__task-type-text-button-box {
@@ -2343,7 +2338,6 @@ footer {
     }
 
     .big-task-card__scroll-box {
-        gap: 6px;
         height: calc(100% - 46px);
     }
 

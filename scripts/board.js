@@ -226,7 +226,6 @@ let originDragField = null; // Speichert das ursprüngliche Drag-Feld
 
 function onDragStart(event) {
     originDragField = event.currentTarget.closest(".drag-field"); // Speichert das ursprüngliche Feld
-    // document.body.style.cursor = "grabbing";
 }
 
 function createCardBorderBoxForDragEntered(event) {
