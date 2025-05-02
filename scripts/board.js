@@ -840,6 +840,7 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
         console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
         return; // Falls PUT fehlschlägt, nicht weitermachen!
     }
+    checkAllSubtasksOfTask(newCategory);
     setTimeout(() => {
         document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById(currentCardId).classList.add('highlight-flash');
@@ -847,7 +848,6 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
 
     setTimeout(() => {
         document.getElementById(currentCardId).classList.remove('highlight-flash');
-        checkAllSubtasksOfTask(newCategory);
     }, 3300);
 }
 
