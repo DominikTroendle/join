@@ -735,7 +735,9 @@ function openMobileMoveMenu(event) {
     let currentMoveMenu = currentCardClicked.querySelector(".user-story__mobile-move-menu");
     let currentCenterButtonText = currentCardClicked.querySelector('.user-story__mobile-move-menu__center-button-text');
     let currentCategoryName = currentCardClicked.closest(".drag-field").getAttribute("data-category");
+    let currentCenterButton = currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button");
     event.stopPropagation();
+    closeOtherMoveMenus(currentCenterButton)
     currentMoveMenu.querySelector(`.${currentCategoryName}`).style.fill = "#D08770";
     currentMoveMenu.querySelector(`.${currentCategoryName}`).style.pointerEvents = "none";
     currentUserStoryBox.style.pointerEvents = "none";
@@ -780,6 +782,15 @@ function animationReverse(event) {
     resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, currentMoveMenu);
 }
 
+function closeOtherMoveMenus(currentCenterButton) {
+    const allButtons = document.querySelectorAll(".user-story__mobile-move-menu__center-button.open");
+    allButtons.forEach(button => {
+      if (button !== currentCenterButton) {
+        animationReverse({ currentTarget: button });
+      }
+    });
+  }
+  
 function fadeOutCenterButtonText(currentCenterButtonText) {
     setTimeout(() => {
         currentCenterButtonText.classList.add('fade-out');
