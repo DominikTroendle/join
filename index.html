@@ -9,7 +9,7 @@
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="styles/login.css" />
-  
+
 </head>
 
 <body onload="init()">
@@ -26,50 +26,52 @@
         d="M90.34 118.59V104.76H93.06l2.93 5.7c.75 1.49 1.42 3.02 2 4.59-.15-1.71-.22-3.68-.22-5.87V104.76H100.03V118.59H97.49l-2.97-5.82c-.78-1.53-1.48-3.1-2.1-4.71 0 1.71.12 3.64.12 6.05v4.48H90.34Z" />
     </svg>
   </div>
-    <img id="passivLogo" class="logo" src="assets/img/join-logo.png" alt="Logo" />
-    <div class="login-container">
-      <div class="register-link">
-        <h7>Not a Join user?</h7>
-        <button><a href="register.html">Sign up</a></button>
+  <img id="passivLogo" class="logo" src="assets/img/join-logo.png" alt="Logo" />
+  <div class="login-container">
+    <div class="register-link">
+      <h7>Not a Join user?</h7>
+      <button><a href="register.html">Sign up</a></button>
+    </div>
+  </div>
+  <div class="user-login-container">
+    <div class="user-login">
+      <div class="login">
+        <h1>Log in</h1>
+        <div class="blue-line"></div>
+        <form onsubmit="UserLogin(); return false">
+          <div class="input-container">
+            <input type="email" id="email" placeholder="Email" required />
+            <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
+          </div>
+          <div class="input-container">
+            <input type="password" id="password" placeholder="Password" required onfocus="changePasswordIcon(true)"
+              onblur="changePasswordIcon(false)" />
+            <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
+              onclick="togglePasswordVisibility()">
+          </div>
+          <div class="no-value-content">
+            <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>
+          </div>
+          <div class="login-buttons">
+            <button type="submit">Log in</button>
+            <button type="button" onclick="loginGuastAccount()">Guest Log in</button>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="user-login-container">
-      <div class="user-login">
-        <div class="login">
-          <h1>Log in</h1>
-          <div class="blue-line"></div>
-          <form onsubmit="UserLogin(); return false">
-            <div class="input-container">
-              <input type="email" id="email" placeholder="Email" required />
-              <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
-            </div>
-            <div class="input-container">
-              <input type="password" id="password" placeholder="Password" required onfocus="changePasswordIcon(true)"
-                onblur="changePasswordIcon(false)" />
-              <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
-                onclick="togglePasswordVisibility()">
-            </div>
-            <div class="no-value-content">
-              <p id="notCorrectValue" class="error-massage">Check your email and password. Please try again.</p>
-            </div>
-            <div class="login-buttons">
-              <button type="submit">Log in</button>
-              <button type="button" onclick="loginGuastAccount()">Guest Log in</button>
-            </div>
-          </form>
-        </div>
-      </div>
+  </div>
+  <div class="legal-information">
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="legal-notice.html">Legal Notice</a>
+  </div>
+  <div id="msgBox" class="overlay-massage">
+    <div class="message-box">
+      <p id="msgText"></p>
     </div>
-    <div class="legal-information">
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="legal-notice.html">Legal Notice</a>
-    </div>
-    <div id="msgBox" class="overlay-massage">
-      <div class="message-box">
-        <p id="msgText"></p>
-      </div>
-    </div>
-
+  </div>
+  <div class="overlay-landscape-spinner">
+    <span class="loader"><span class="loader2"></span></span>
+  </div>
   <script src="scripts/login.js"></script>
   <script src="script.js"></script>
 </body>
