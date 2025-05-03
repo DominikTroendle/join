@@ -20,7 +20,9 @@ let toDoArraySearch = [];
 let inProgressArraySearch = [];
 let awaitFeedbackArraySearch = [];
 let doneArraySearch = [];
+let originDragField = null;
 let searchMode = "false";
+const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
 const searchArrays = {
@@ -78,6 +80,7 @@ async function allowDrop2(event, dragFieldArray) {
     newArray = dragFieldArray;
     newCategoryName = event.currentTarget.getAttribute("data-category");
     if (oldCategory === newCategory) return;
+    findObjectInArrayAndSaveData(oldArray, newCategoryName);
     moveTaskToNewCategory();
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
     if (!putResponse.ok) {
@@ -88,7 +91,6 @@ async function allowDrop2(event, dragFieldArray) {
 }
 
 function moveTaskToNewCategory() {
-    findObjectInArrayAndSaveData(oldArray, newCategoryName);
     let index = oldArray.findIndex(element => element.id == currentCardId);
     newArray.push(oldArray.splice(index, 1)[0]);
     let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
@@ -126,13 +128,6 @@ function putSearchTaskFromOldArrayinNewArray() {
 
 function saveCurrentCardId(event) {
     currentCardId = event.currentTarget.id;
-}
-
-function clearAllArray() {
-    toDoArray = [];
-    inProgressArray = [];
-    awaitFeedbackArray = [];
-    doneArray = [];
 }
 
 function clearAllSearchArray() {
@@ -177,10 +172,8 @@ function removeDragRotation(event) {
     currentDragCard.classList.remove("drag-start-transform");
 }
 
-let originDragField = null; // Speichert das ursprüngliche Drag-Feld
-
 function onDragStart(event) {
-    originDragField = event.currentTarget.closest(".drag-field"); // Speichert das ursprüngliche Feld
+    originDragField = event.currentTarget.closest(".drag-field"); 
 }
 
 function createCardBorderBoxForDragEntered(event) {
@@ -213,7 +206,6 @@ function activatePointerEventsForAllTasks() {
 function disablePointerEventsForAllTasks(event) {
     const currentCard = event.currentTarget.closest(".user-story__all-content-box");
     const tasks = document.querySelectorAll(".user-story__all-content-box");
-
     tasks.forEach(task => {
         if (task !== currentCard) {
             task.style.pointerEvents = "none";
@@ -222,7 +214,6 @@ function disablePointerEventsForAllTasks(event) {
         }
     });
 }
-
 
 function toggleDnoneBigTaskCard() {
     document.getElementById("big-task-card__overlay").classList.toggle("d-none");
@@ -252,7 +243,6 @@ function renderContentBigTaskCard(event) {
     currentArray = arrays[currentArrayName];
     currentDragFieldId = event.currentTarget.closest(".drag-field").id;
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
-
     let bigTaskCard = document.getElementById("big-task-card__box");
     bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
@@ -274,7 +264,6 @@ async function init() {
     removeSessionStorageTaskCategory()
 }
 
-const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
 async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
