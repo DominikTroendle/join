@@ -359,11 +359,25 @@ function removeCardBorderBox() {
     });
 }
 
+/**
+ * Activates pointer events for all task elements by setting their `pointer-events` CSS property to "auto".
+ * This allows tasks to be interactive again (e.g., clickable, draggable).
+ *
+ * @returns {void} This function does not return any value.
+ */
 function activatePointerEventsForAllTasks() {
     const tasks = document.querySelectorAll(".user-story__all-content-box");
     tasks.forEach(task => task.style.pointerEvents = "auto");
 }
 
+/**
+ * Disables pointer events for all task elements except for the one that triggered the event.
+ * This function allows the task that triggered the event to remain interactive while disabling interactions 
+ * with the other tasks (making them non-clickable or non-draggable).
+ *
+ * @param {Event} event - The event triggered when a task is interacted with, typically a click or drag event.
+ * @returns {void} This function does not return any value.
+ */
 function disablePointerEventsForAllTasks(event) {
     const currentCard = event.currentTarget.closest(".user-story__all-content-box");
     const tasks = document.querySelectorAll(".user-story__all-content-box");
@@ -376,10 +390,22 @@ function disablePointerEventsForAllTasks(event) {
     });
 }
 
+/**
+ * Toggles the visibility of the "big task card" overlay by adding or removing the "d-none" class.
+ * This function is typically used to show or hide the large task card overlay.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function toggleDnoneBigTaskCard() {
     document.getElementById("big-task-card__overlay").classList.toggle("d-none");
 }
 
+/**
+ * Adds a sliding effect to the "big task card" box by adding the "slide-back" class,
+ * waits for a brief moment, and then hides the big task card overlay and removes the sliding effect.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function addClassSlideBack() {
     document.getElementById("big-task-card__box").classList.add("slide-back")
     setTimeout(() => {
@@ -389,6 +415,15 @@ function addClassSlideBack() {
     }, 120);
 }
 
+/**
+ * Toggles the visibility of three elements (a rectangle, a close rectangle, and a hook) 
+ * by adding or removing the "d-none" class. This is typically used to show or hide UI elements.
+ *
+ * @param {string} idRectangleOpen - The ID of the rectangle element that should be shown or hidden.
+ * @param {string} idRectangleClose - The ID of the rectangle element (close) that should be shown or hidden.
+ * @param {string} idHook - The ID of the hook element that should be shown or hidden.
+ * @returns {void} This function does not return any value.
+ */
 function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
     let rectangleOpen = document.getElementById(idRectangleOpen);
     let rectangleClose = document.getElementById(idRectangleClose);
@@ -398,6 +433,14 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
     hook.classList.toggle("d-none");
 }
 
+/**
+ * Renders the content for the "big task card" based on the selected small task card.
+ * This function is triggered when a small task card is clicked, and it displays the details of that task 
+ * in the "big task card" overlay.
+ *
+ * @param {MouseEvent} event - The event triggered when a small task card is clicked.
+ * @returns {void} This function does not return any value.
+ */
 function renderContentBigTaskCard(event) {
     currentTaskCardId = event.currentTarget.id;
     currentArrayName = event.currentTarget.closest(".drag-field").dataset.array;
@@ -408,12 +451,29 @@ function renderContentBigTaskCard(event) {
     bigTaskCard.innerHTML = bigTaskCardTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
+/**
+ * Renders the content for the "big task card" in edit mode based on the selected small task card.
+ * This function displays the details of the task in an editable format within the "big task card" overlay.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function renderContentBigTaskCardEdit() {
     let bigTaskCard = document.getElementById("big-task-card__box");
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
     bigTaskCard.innerHTML = bigTaskCardEditTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
+/**
+ * Fetches task data from the database for a specific user and category, then processes and renders the data 
+ * into the corresponding task array and UI category.
+ *
+ * @async
+ * @param {string} userKey - The unique identifier of the user whose tasks are being retrieved.
+ * @param {string} category - The category of tasks to be retrieved (e.g., "toDos", "inProgress").
+ * @param {Array} categoryArray - The array where the tasks of the specified category will be stored.
+ * @param {string} dragFieldId - The ID of the drag field where the tasks will be rendered.
+ * @returns {Promise<void>} Resolves when the tasks have been successfully fetched, processed, and rendered.
+ */
 async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
@@ -429,6 +489,16 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
     }
 }
 
+/**
+ * Collects tasks from the provided data that match the specified category 
+ * and stores them in the provided category array.
+ * Each task is enhanced with an `id` and default empty array for `assignedContacts` if not present.
+ *
+ * @param {Object} data - The data object containing task information, where each key is a unique task identifier.
+ * @param {string} category - The category to filter tasks by (e.g., "toDo", "inProgress").
+ * @param {Array} categoryArray - The array to store the filtered tasks of the specified category.
+ * @returns {void} This function does not return any value. It modifies the `categoryArray` directly.
+ */
 function collectTasksByCategory(data, category, categoryArray) {
     if (data) {
         Object.entries(data).forEach(([firebaseKey, value]) => {
@@ -443,6 +513,15 @@ function collectTasksByCategory(data, category, categoryArray) {
     }
 }
 
+/**
+ * Renders the content for a specific category based on the provided category array.
+ * If there are tasks in the category, it renders the small cards; otherwise, it displays a "no cards" message.
+ *
+ * @param {string} category - The category to render (e.g., "toDo", "inProgress").
+ * @param {Array} categoryArray - The array containing tasks for the specified category.
+ * @param {string} dragFieldId - The ID of the drag field where the tasks should be rendered.
+ * @returns {void} This function does not return any value. It directly modifies the UI by rendering the category content.
+ */
 function renderCategoryContent(category, categoryArray, dragFieldId) {
     if (categoryArray.length !== 0 && searchMode === "false") {
         renderSmallCard(dragFieldId, categoryArray);
@@ -451,6 +530,15 @@ function renderCategoryContent(category, categoryArray, dragFieldId) {
     }
 }
 
+/**
+ * Sends a POST request to save task data to the database for a specific user.
+ * This function sends the provided task data to the server and logs an error if the request fails.
+ *
+ * @async
+ * @param {string} userKey - The unique identifier for the user to whom the task data belongs.
+ * @param {Object} data - The task data to be saved to the database.
+ * @returns {Promise<void>} Resolves when the data has been successfully posted or logs an error if the request fails.
+ */
 async function postDataInDatabase(userKey, data) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/.json`, {
         method: "POST",
@@ -462,11 +550,28 @@ async function postDataInDatabase(userKey, data) {
     }
 }
 
+/**
+ * Changes the category of a task by finding the task object based on the task card's ID.
+ * This function retrieves the task object from the `toDoArray` based on the task card's ID.
+ *
+ * @param {Event} event - The event triggered by the action on the task card.
+ * @returns {void} This function does not return any value. It modifies the task data by retrieving the task object.
+ */
 function changeTaskCategoryinDatabase(event) {
     taskCardId = event.currentTarget.id;
     taskCardObject = toDoArray.find(element => element.id == taskCardId);
 }
 
+/**
+ * Sends a DELETE request to remove a task from the database for a specific user.
+ * This function deletes a task from the database using the provided `cardId` and `userKey`.
+ * If the request fails, it logs an error to the console.
+ *
+ * @async
+ * @param {string} userKey - The unique identifier for the user whose task is being deleted.
+ * @param {string} cardId - The ID of the task card to be deleted.
+ * @returns {Promise<Response>} The response from the DELETE request.
+ */
 async function deleteInDatabase(userKey, cardId) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
         method: "DELETE"
@@ -477,6 +582,17 @@ async function deleteInDatabase(userKey, cardId) {
     return response
 }
 
+/**
+ * Sends a PUT request to update the task data in the database for a specific user and task.
+ * This function updates the specified task using the provided data and updates a specific field (extendedPath).
+ *
+ * @async
+ * @param {string} userKey - The unique identifier for the user whose task is being updated.
+ * @param {string} cardId - The ID of the task card to be updated.
+ * @param {Object} data - The data to be updated in the task.
+ * @param {string} extendedPath - The specific path to the field that needs to be updated (e.g., "category", "taskTitle").
+ * @returns {Promise<Response>} The response from the PUT request.
+ */
 async function putDataInDatabase(userKey, cardId, data, extendedPath) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}/${extendedPath}.json`, {
         method: "PUT",
@@ -489,6 +605,15 @@ async function putDataInDatabase(userKey, cardId, data, extendedPath) {
     return response;
 }
 
+/**
+ * Toggles the checked state of a subtask and updates the task's subtasks in the database.
+ * This function changes the checked state of a subtask when a checkbox is clicked, updates the task's data in the database,
+ * and updates the number of completed subtasks.
+ *
+ * @async
+ * @param {Event} event - The event triggered by clicking the checkbox of the subtask.
+ * @returns {Promise<void>} Resolves when the subtask's checked state has been updated in the database and the task is refreshed.
+ */
 async function changeCheckedSubtask(event) {
     let oldSubtaskChecked = event.currentTarget.getAttribute("data-checked");
     let newSubtaskChecked = oldSubtaskChecked === "true" ? "false" : "true";
@@ -505,6 +630,14 @@ async function changeCheckedSubtask(event) {
     changeNumberOfCompletedSubtasks();
 }
 
+/**
+ * Updates the number of completed subtasks for the current task and saves the change to the database.
+ * This function calculates the number of completed subtasks, updates the task object,
+ * and sends the updated value to the database. It also re-renders the small card for the task.
+ *
+ * @async
+ * @returns {Promise<void>} Resolves when the number of completed subtasks is updated in the database and the UI is refreshed.
+ */
 async function changeNumberOfCompletedSubtasks() {
     let selectedArray = searchMode === "true" ? searchArrays[currentArrayName + "Search"] : currentArray;
     let objectFromCurrentSmallTaskCard = selectedArray.find(element => element.id == currentTaskCardId);
