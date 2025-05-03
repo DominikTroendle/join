@@ -1061,6 +1061,7 @@ input:focus {
 
     .menu-box {
         position: relative;
+        margin-top: auto;
     }
 
     header {
@@ -1218,6 +1219,7 @@ input:focus {
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 100%;
+        margin-top: 42px;
     }
 
     #buttons-prio,
@@ -1228,6 +1230,11 @@ input:focus {
     .button-prio {
         height: 41px;
         font-size: 16px;
+    }
+
+    .name {
+        font-size: 16px;
+        line-height: 20px;
     }
 }
 
@@ -1264,6 +1271,10 @@ input:focus {
 @media only screen and (max-width: 360px) {
     #container-form {
         width: 320px;
+    }
+
+    .container-custom-select-option {
+        padding: 0 12px;
     }
 }
 
