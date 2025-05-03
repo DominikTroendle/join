@@ -877,7 +877,7 @@ button .close-icon:hover path {
     }
 }
 
-@media(max-width: 1040px) {
+@media(max-width: 1040px) {    
     .contactList {
         padding-bottom: 20px;
     }

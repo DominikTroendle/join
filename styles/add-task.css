@@ -1102,6 +1102,7 @@ input:focus {
     #form-add-task {
         flex-direction: column;
         overflow: auto;
+        padding: 0 2px;
     }
 
     #form-add-task::-webkit-scrollbar {
