@@ -1,48 +1,4 @@
 let currentDraggedElement;
-let toDoArray2 = [
-    {
-        id: 1,
-        taskType: "User Story",
-        taskTitle: "Kochwelt Page & Recipe Recommender",
-        taskDescription: "Build start page with recipe recommendation...",
-        taskPriority: "medium",
-        numberOfSubtasks: 2,
-        numberOfCompletedSubtasks: 1,
-        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
-    },
-    {
-        id: 2,
-        taskType: "Technical Task",
-        taskTitle: "HTML Base Template Creation",
-        taskDescription: "Create reusable HTML base templates...",
-        taskPriority: "low",
-        numberOfSubtasks: 1,
-        numberOfCompletedSubtasks: 0,
-        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
-    }
-];
-let inProgressArray2 = [
-    {
-        id: 3,
-        taskType: "User Story",
-        taskTitle: "Daily Kochwelt Recipe",
-        taskDescription: "Implement daily recipe and portion calculator...",
-        taskPriority: "medium",
-        numberOfSubtasks: 4,
-        numberOfCompletedSubtasks: 2,
-        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
-    },
-    {
-        id: 4,
-        taskType: "Technical Task",
-        taskTitle: "CSS Architecture Planning",
-        taskDescription: "Define CSS naming conventions and structure...",
-        taskPriority: "urgent",
-        numberOfSubtasks: 6,
-        numberOfCompletedSubtasks: 2,
-        assignedContacts: [{ name: "Anton Meyer", color: "bg-purple" }, { name: "Emil Mandolf", color: "bg-rose" }, { name: "Moritz Buchholz", color: "bg-darkyellow" }]
-    }
-];
 let toDoArray = [];
 let inProgressArray = [];
 let awaitFeedbackArray = [];
@@ -59,26 +15,20 @@ let currentTaskCardId;
 let currentArrayName;
 let currentArray = [];
 let currentDragFieldId;
-
 let isBorderActive = false
-
 let toDoArraySearch = [];
 let inProgressArraySearch = [];
 let awaitFeedbackArraySearch = [];
 let doneArraySearch = [];
 let searchMode = "false";
-
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
-
 const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
-
 const searchArrays = {
     toDoArraySearch: toDoArraySearch,
     inProgressArraySearch: inProgressArraySearch,
     awaitFeedbackArraySearch: awaitFeedbackArraySearch,
     doneArraySearch: doneArraySearch
 };
-
 const dragFieldIds = ["to-do-drag-field", "in-progress-drag-field", "await-feedback-drag-field", "done-drag-field"];
 const categorys = ["To do", "In progress", "Await feedback", "Done"];
 const categorysObject = {
@@ -87,14 +37,18 @@ const categorysObject = {
     awaitFeedback: "Await feedback",
     done: "Done"
 }
-
 const searchArraysBasedOnCategory = {
     toDos: toDoArraySearch,
     inProgress: inProgressArraySearch,
     awaitFeedback: awaitFeedbackArraySearch,
     done: doneArraySearch
 }
-
+const arrays = {
+    toDoArray: toDoArray,
+    inProgressArray: inProgressArray,
+    awaitFeedbackArray: awaitFeedbackArray,
+    doneArray: doneArray
+};
 
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
@@ -114,8 +68,8 @@ function moveTo(event, dragFieldId, dragFieldArray) {
     oldCategory = dragFieldId;
     oldCategoryName = event.currentTarget.getAttribute("data-category")
     oldArray = dragFieldArray;
-    const img = new Image();  // Leeres Bild erstellen
-    img.src = '';             // Keine sichtbare Quelle
+    const img = new Image();
+    img.src = '';
     event.dataTransfer.setDragImage(img, 0, 0);
 }
 
@@ -123,17 +77,26 @@ async function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
     newCategoryName = event.currentTarget.getAttribute("data-category");
-
-    if (oldCategory === newCategory) {
+    if (oldCategory === newCategory) return;
+    moveTaskToNewCategory();
+    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
+    if (!putResponse.ok) {
+        console.error("Error when saving the new task:", putResponse.statusText);
         return;
     }
+    checkAllSubtasksOfTask(newCategory);
+}
+
+function moveTaskToNewCategory() {
     findObjectInArrayAndSaveData(oldArray, newCategoryName);
-
     let index = oldArray.findIndex(element => element.id == currentCardId);
-
     newArray.push(oldArray.splice(index, 1)[0]);
     let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
     taskCardObjectinNewArray.category = newCategoryName;
+    updateUIAfterTaskMove();
+}
+
+function updateUIAfterTaskMove() {
     if (searchMode === "false") {
         if (oldArray.length !== 0) {
             renderSmallCard(oldCategory, oldArray);
@@ -141,17 +104,9 @@ async function allowDrop2(event, dragFieldArray) {
             document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName], searchMode);
         }
         renderSmallCard(newCategory, newArray);
-
     } else {
         putSearchTaskFromOldArrayinNewArray();
     }
-
-    let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
-    if (!putResponse.ok) {
-        console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
-        return; // Falls PUT fehlschlägt, nicht weitermachen!
-    }
-    checkAllSubtasksOfTask(newCategory);
 }
 
 function putSearchTaskFromOldArrayinNewArray() {
@@ -290,13 +245,6 @@ function toggleDnoneCheckbox(idRectangleOpen, idRectangleClose, idHook) {
     rectangleClose.classList.toggle("d-none");
     hook.classList.toggle("d-none");
 }
-
-const arrays = {
-    toDoArray: toDoArray,
-    inProgressArray: inProgressArray,
-    awaitFeedbackArray: awaitFeedbackArray,
-    doneArray: doneArray
-};
 
 function renderContentBigTaskCard(event) {
     currentTaskCardId = event.currentTarget.id;
