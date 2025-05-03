@@ -280,7 +280,7 @@ function containerNotScrollableForBigTaskCardEdit(container) {
 
 function containerScrollableForBigTaskCardEdit(container) {
     if (container.id == "big-task-card-edit__dropdown-assign") {
-        container.style.width = "440px";
+        // container.style.width = "440px";
         let selectOptionsArray = Array.from(document.getElementsByClassName('container-custom-select-option'));
         selectOptionsArray.forEach(element => {
             element.classList.remove('select-option-with-scrollbar');

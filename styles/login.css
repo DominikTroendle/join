@@ -561,10 +561,11 @@ body {
     }
 
     .user-login-container{
-        position: absolute;
-        height: 100%;
+        /* position: absolute; */
+        /* height: 100%; */
         top: 20px;
-        z-index: -1;
+        /* z-index: -1; */
+        padding-top: 24px;
     }
 
     .user-login{
