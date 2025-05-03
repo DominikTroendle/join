@@ -22,6 +22,17 @@ let awaitFeedbackArraySearch = [];
 let doneArraySearch = [];
 let originDragField = null;
 let searchMode = "false";
+let data = {
+    category: "",
+    taskType: "",
+    taskTitle: "",
+    taskDescription: "",
+    taskPriority: "",
+    numberOfSubtasks: 0,
+    numberOfCompletedSubtasks: 0,
+    assignedContacts: [],
+    subtasks: []
+}
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
@@ -52,6 +63,18 @@ const arrays = {
     doneArray: doneArray
 };
 
+/**
+ * Initializes the task board by resetting UI elements, synchronizing contacts with tasks,
+ * and loading task data from the database into their respective arrays and drag-and-drop fields.
+ * It also sets the height for drag fields and clears the session storage task category.
+ *
+ * This function performs asynchronous operations, including reading task data from the database
+ * and synchronizing contacts with tasks. It ensures that the UI is updated and prepared for
+ * user interaction.
+ *
+ * @async
+ * @returns {Promise<void>} Resolves when all asynchronous operations (such as loading tasks and synchronizing contacts) are complete.
+ */
 async function init() {
     setSearchModeFalseAndChangeImg();
     await syncAllContactsWithTasks(localStorage.getItem("userId"));
@@ -63,19 +86,51 @@ async function init() {
     removeSessionStorageTaskCategory()
 }
 
+/**
+ * Changes the `src` attribute of an image element with the specified ID.
+ *
+ * @param {string} id - The ID of the image element whose source should be changed.
+ * @param {string} imgSource - The new source URL to set for the image.
+ */
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
     imgId.src = imgSource;
 }
 
+/**
+ * Sets the element being dragged to the given ID.
+ * 
+ * This function is used to track the currently dragged element by storing its ID
+ * in the `currentDraggedElement` variable.
+ * 
+ * @param {string} id - The ID of the element that is being dragged.
+ */
 function startDragging(id) {
     currentDraggedElement = id;
 }
 
+/**
+ * Prevents the default behavior of the drop event.
+ * 
+ * This function is used to allow an element to accept a dropped item by preventing
+ * the default handling of the drop event.
+ * 
+ * @param {Event} ev - The drop event triggered during the drag-and-drop operation.
+ */
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
+/**
+ * Handles the movement of a draggable element by capturing the event data and setting up
+ * the necessary variables for the drag operation. It also customizes the drag image during the drag process.
+ *
+ * @param {DragEvent} event - The drag event that contains data about the drag operation.
+ * @param {string} dragFieldId - The ID of the drag field from which the element is being moved.
+ * @param {Array} dragFieldArray - The array representing the items within the drag field.
+ * 
+ * @returns {void} This function does not return any value.
+ */
 function moveTo(event, dragFieldId, dragFieldArray) {
     cardId = event.currentTarget.id;
     oldCategory = dragFieldId;
@@ -86,6 +141,17 @@ function moveTo(event, dragFieldId, dragFieldArray) {
     event.dataTransfer.setDragImage(img, 0, 0);
 }
 
+/**
+ * Handles the drop event during a drag-and-drop operation, updating the task's category
+ * and synchronizing the changes with the database. It also updates the UI by moving the task 
+ * to the new category and checking related subtasks.
+ *
+ * @async
+ * @param {DragEvent} event - The drag event that triggers the drop operation.
+ * @param {Array} dragFieldArray - The array representing the items in the drag field.
+ * @returns {Promise<void>} Resolves when the task is successfully moved to the new category 
+ * and the data is updated in the database.
+ */
 async function allowDrop2(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
@@ -101,6 +167,12 @@ async function allowDrop2(event, dragFieldArray) {
     checkAllSubtasksOfTask(newCategory);
 }
 
+/**
+ * Moves a task card from one category (array) to another and updates its category.
+ * This function also triggers a UI update after the task is moved.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function moveTaskToNewCategory() {
     let index = oldArray.findIndex(element => element.id == currentCardId);
     newArray.push(oldArray.splice(index, 1)[0]);
@@ -109,6 +181,13 @@ function moveTaskToNewCategory() {
     updateUIAfterTaskMove();
 }
 
+/**
+ * Updates the UI after a task has been moved to a new category.
+ * This function re-renders the task cards in both the old and new categories,
+ * or updates the search results if search mode is enabled.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function updateUIAfterTaskMove() {
     if (searchMode === "false") {
         if (oldArray.length !== 0) {
@@ -122,6 +201,12 @@ function updateUIAfterTaskMove() {
     }
 }
 
+/**
+ * Moves a search task card from one search category array to another and updates its category.
+ * This function re-renders the search results for both the old and new categories after the task is moved.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function putSearchTaskFromOldArrayinNewArray() {
     let oldArraySearch = searchArraysBasedOnCategory[oldCategoryName];
     let newArraySearch = searchArraysBasedOnCategory[newCategoryName];
@@ -137,10 +222,23 @@ function putSearchTaskFromOldArrayinNewArray() {
     renderSmallCard(newCategory, newArraySearch);
 }
 
+/**
+ * Saves the ID of the currently clicked or interacted card.
+ * This function is typically used to capture the ID of a task card during an event (e.g., a click).
+ *
+ * @param {Event} event - The event triggered by interacting with the card (e.g., click event).
+ * @returns {void} This function does not return any value.
+ */
 function saveCurrentCardId(event) {
     currentCardId = event.currentTarget.id;
 }
 
+/**
+ * Clears all search arrays by setting their lengths to 0, effectively removing all items.
+ * This function is used to reset search-related arrays for tasks, clearing any stored search results.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function clearAllSearchArray() {
     toDoArraySearch.length = 0;
     inProgressArraySearch.length = 0;
@@ -148,6 +246,14 @@ function clearAllSearchArray() {
     doneArraySearch.length = 0;
 }
 
+/**
+ * Finds a task object in the given array by its ID and saves its data to the `currentTaskData` object.
+ * This function is used to capture the details of the task being moved or edited and store them for later use.
+ *
+ * @param {Array} array - The array in which to search for the task object.
+ * @param {string} newCategoryName - The new category name to be assigned to the task.
+ * @returns {void} This function does not return any value.
+ */
 function findObjectInArrayAndSaveData(array, newCategoryName) {
     let taskObject = array.find(element => element.id == currentCardId);
     currentTaskData = {
@@ -162,6 +268,15 @@ function findObjectInArrayAndSaveData(array, newCategoryName) {
     }
 }
 
+/**
+ * Renders small task cards inside the specified drag field by generating HTML content 
+ * for each task in the given array and inserting it into the corresponding field.
+ * If the array is empty, no cards are rendered.
+ *
+ * @param {string} dragFieldId - The ID of the drag field where the task cards should be rendered.
+ * @param {Array} dragFieldArray - The array of tasks to be rendered as small cards.
+ * @returns {void} This function does not return any value.
+ */
 function renderSmallCard(dragFieldId, dragFieldArray) {
     if (dragFieldArray.length != 0) {
         let dragField = document.getElementById(dragFieldId);
@@ -173,20 +288,49 @@ function renderSmallCard(dragFieldId, dragFieldArray) {
     }
 }
 
+/**
+ * Adds a CSS class to the currently dragged card to apply a rotation or transformation effect during drag.
+ * This function is triggered when the drag operation starts.
+ *
+ * @param {DragEvent} event - The drag event triggered when an element is being dragged.
+ * @returns {void} This function does not return any value.
+ */
 function addDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);
     currentDragCard.classList.add("drag-start-transform");
 }
 
+/**
+ * Removes the CSS class that applies the rotation or transformation effect from the currently dragged card.
+ * This function is triggered when the drag operation ends or the drag effect needs to be removed.
+ *
+ * @param {DragEvent} event - The drag event triggered when an element is being dropped or when drag ends.
+ * @returns {void} This function does not return any value.
+ */
 function removeDragRotation(event) {
     let currentDragCard = document.getElementById(event.currentTarget.id);
     currentDragCard.classList.remove("drag-start-transform");
 }
 
+/**
+ * Stores the closest parent drag field element when a drag operation starts.
+ * This function is triggered when the drag event is initiated, capturing the origin field for later use.
+ *
+ * @param {DragEvent} event - The drag event triggered when an element starts being dragged.
+ * @returns {void} This function does not return any value.
+ */
 function onDragStart(event) {
     originDragField = event.currentTarget.closest(".drag-field");
 }
 
+/**
+ * Creates a border box around the target drag field when a card is dragged into it.
+ * This function is triggered when a drag enters a new field, displaying a visual border around the target area.
+ * If the target field is the same as the origin field, no border box is created.
+ *
+ * @param {DragEvent} event - The drag event triggered when a card is dragged into a new drag field.
+ * @returns {void} This function does not return any value.
+ */
 function createCardBorderBoxForDragEntered(event) {
     let targetDragField = document.getElementById(event.currentTarget.id);
     let currentCard = document.getElementById(currentCardId);
@@ -199,6 +343,12 @@ function createCardBorderBoxForDragEntered(event) {
     }
 }
 
+/**
+ * Removes the border box from all drag fields.
+ * This function is triggered to clear any visual border box that was added when a card entered a drag field.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function removeCardBorderBox() {
     dragFieldIds.forEach(element => {
         let dragField = document.getElementById(element);
@@ -372,9 +522,7 @@ async function checkAllSubtasksOfTask(category) {
     if (category === "done-drag-field") {
         let currentDoneArray = searchMode === "true" ? doneArraySearch : doneArray
         let objectFromCurrentSmallTaskCard = currentDoneArray.find(element => element.id == currentCardId);
-        if (!objectFromCurrentSmallTaskCard) {
-            return;
-        }
+        if (!objectFromCurrentSmallTaskCard) return;
         completeAllSubtasks(objectFromCurrentSmallTaskCard)
         renderSmallCard("done-drag-field", currentDoneArray);
         let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
@@ -410,19 +558,6 @@ async function deleteCurrentTask() {
         return;
     }
 }
-
-let data = {
-    category: "",
-    taskType: "",
-    taskTitle: "",
-    taskDescription: "",
-    taskPriority: "",
-    numberOfSubtasks: 0,
-    numberOfCompletedSubtasks: 0,
-    assignedContacts: [],
-    subtasks: []
-}
-//postDataInDatabase("guest", data);
 
 async function checkSearchWordAndLoadAllSearchTasks() {
     let searchFieldInput = document.getElementById("search-field__input");
