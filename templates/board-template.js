@@ -1,3 +1,30 @@
+/**
+ * Generates a small card template for displaying a task.
+ * 
+ * This template is used to create a visually formatted card for displaying task details, including 
+ * task type, title, description, priority, subtasks, and assigned contacts. It also includes a move 
+ * menu for task management on mobile.
+ * 
+ * @function smallCardTemplate
+ * @param {string} id - The unique identifier for the task card.
+ * @param {string} taskType - The type of the task (e.g., "User Story", "Technical Task").
+ * @param {string} taskTitle - The title of the task.
+ * @param {string} taskDescription - The description of the task.
+ * @param {string} taskPriority - The priority of the task (e.g., "low", "medium", "urgent").
+ * @param {number} numberOfSubtasks - The total number of subtasks associated with the task.
+ * @param {number} numberOfCompletedSubtasks - The number of completed subtasks.
+ * @param {Array<Object>} assignedContacts - An array of contacts assigned to the task, each object containing the contact's name and color.
+ * 
+ * @returns {string} The HTML string for the task card template.
+ *
+ * @description
+ * This function dynamically creates an HTML template for a task card by:
+ * 1. Determining the appropriate CSS class for the task type.
+ * 2. Mapping the task priority to an image source.
+ * 3. Generating HTML for subtasks progress, if applicable.
+ * 4. Creating a list of assigned contacts with initials and background colors.
+ * 5. Returning the complete HTML string for rendering the task card.
+ */
 function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
     let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
         : `user-story__category-box-technical-task`;
@@ -111,6 +138,26 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
             </div>`;
 }
 
+/**
+ * Generates a template for displaying a "No tasks" message.
+ * 
+ * This function creates a template for a message that informs the user when no tasks are available 
+ * to display. It can be used in scenarios where no tasks exist in a particular category or when no 
+ * tasks match the search criteria.
+ * 
+ * @function noCardTemplate
+ * @param {string} category - The category of tasks, such as "To Do", "In Progress", etc.
+ * @param {string} searchMode - The search mode indicator, which determines the message content. 
+ *                              If "false", the message will indicate no tasks. If any other value, 
+ *                              it will indicate no tasks found in the search.
+ * 
+ * @returns {string} The HTML string for displaying the "No tasks" message.
+ *
+ * @description
+ * This function generates a simple HTML template that displays a message depending on the `searchMode`. 
+ * It will show "No tasks" if `searchMode` is `"false"` and "No Search Tasks" if `searchMode` is any other value. 
+ * It appends the `category` string to the message to make it more specific to the context (e.g., "No tasks In Progress").
+ */
 function noCardTemplate(category, searchMode) {
     let noTaskBoxText;
     if (searchMode === "false") {
@@ -126,6 +173,21 @@ function noCardTemplate(category, searchMode) {
             </div>`;
 }
 
+/**
+ * Generates an HTML template for a draggable card border.
+ * 
+ * This function creates a template for displaying a border box element during a drag-and-drop action. 
+ * The border box's height is dynamically set based on the provided `cardHeight` parameter.
+ * 
+ * @function cardBorderdragEnterTemplate
+ * @param {number} cardHeight - The height of the card border box to be generated, typically in pixels.
+ * 
+ * @returns {string} The HTML string for the card border box with the specified height.
+ * 
+ * @description
+ * This function generates an HTML `<div>` element with a specific height for a draggable card border. 
+ * The border box's height is set dynamically through inline CSS using the `cardHeight` value.
+ */
 function cardBorderdragEnterTemplate(cardHeight) {
     return `<div class="card-border-box" id="card-border-box" style="height: ${cardHeight}px">
             </div>`;
@@ -287,6 +349,38 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                 </div>`;
 }
 
+
+/**
+ * Generates an HTML template for a big task card with detailed information.
+ * 
+ * This function creates a comprehensive template for a big task card, displaying various details 
+ * including task type, title, description, priority, due date, assigned contacts, and subtasks. 
+ * The template is dynamic, with content adjusting based on the input parameters.
+ * 
+ * @function bigTaskCardTemplate
+ * @param {string} id - The unique identifier for the task.
+ * @param {string} taskType - The type of the task, e.g., "User Story" or "Technical Task".
+ * @param {string} taskTitle - The title of the task.
+ * @param {string} taskDescription - A detailed description of the task.
+ * @param {string} taskPriority - The priority of the task, such as "low", "medium", or "urgent".
+ * @param {string} taskDueDate - The due date for the task.
+ * @param {number} numberOfSubtasks - The number of subtasks associated with the task.
+ * @param {number} numberOfCompletedSubtasks - The number of subtasks that are completed.
+ * @param {Array} assignedContacts - An array of objects representing the contacts assigned to the task, each object containing a `name` and `color`.
+ * @param {Array} subtasks - An array of objects representing subtasks, each with a `subtask` and `checked` field.
+ * 
+ * @returns {string} The HTML string for the big task card with the provided task details.
+ * 
+ * @description
+ * This function generates an HTML string representing a detailed task card with various sections 
+ * like task type, title, description, due date, priority, assigned contacts, and subtasks. The task card 
+ * allows users to edit or delete tasks and includes dynamic behavior for task subtasks and contacts.
+ * 
+ * - The task priority is represented by an icon and a text label.
+ * - The subtasks section includes checkboxes to mark each subtask as complete or not.
+ * - The assigned contacts are displayed as initials with corresponding background colors.
+ * - The task card includes buttons for deleting and editing the task.
+ */
 function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasksEdit) {
     let dueDate = "";
     if (taskDueDate) {
@@ -433,27 +527,13 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     </div>`;
 }
 
-{/* <div class="big-task-card-edit__text-input-box">
-                        <span class="big-task-card-edit__text">Assigned to</span>
-                        <input class="big-task-card-edit__input" type="text" placeholder="Select contacts to assign">
-                    </div>
-                    <div class="big-task-card-edit__text-input-box">
-                        <span class="big-task-card-edit__text">Subtasks</span>
-                        <input class="big-task-card-edit__input" type="text" placeholder="Add new subtask">
-                    </div> */}
-
-{/* <div class="big-task-card-edit__text-button-box">
-                        <span class="big-task-card-edit__text">Priority</span>
-                        <div class="big-task-card-edit__button-box">
-                            <button class="big-task-card-edit__button">Urgent<img src="assets/icons/urgent.svg"
-                                    alt=""></button>
-                            <button class="big-task-card-edit__button">Medium<img src="assets/icons/medium.svg"
-                                    alt=""></button>
-                            <button class="big-task-card-edit__button">Low<img src="assets/icons/low.svg"
-                                    alt=""></button>
-                        </div>
-                    </div> */}
-
+/**
+ * Generates the HTML template for the "Add Task" form, including sections for the task title, description, due date, priority, assigned contacts, category, subtasks, and action buttons.
+ * The function returns the generated HTML string that can be used to dynamically render the task form on the page.
+ * The form includes validation for required fields, maximum character length, and various interaction features such as dropdowns and date pickers.
+ * 
+ * @returns {string} The HTML string representing the structure of the "Add Task" form.
+ */
 function addTaskTemplate() {
     return `<div class="all-content">
     <section id="main" onclick="closeDropdown(), changeInputButton(false), stopPropagation(event)">
@@ -610,6 +690,21 @@ function addTaskTemplate() {
 `
 }
 
+/**
+ * Generates the HTML structure for displaying an assigned contact in the "Big Task Card Edit" view.
+ * This HTML includes the contact's initials, name, and an unchecked icon, along with a click handler
+ * that allows the user to select the contact. The contact's name and color are dynamically included
+ * in the HTML structure.
+ *
+ * @param {string} name - The name of the contact to be displayed.
+ * @param {string} color - The color associated with the contact, which may be used for customization.
+ * 
+ * @returns {string} - The HTML structure for the assigned contact element.
+ *
+ * @example
+ * const contactHTML = returnAssignedContactHTMLForBigTaskCardEdit("John Doe", "blue");
+ * document.getElementById("assigned-contact-container").innerHTML = contactHTML;
+ */
 function returnAssignedContactHTMLForBigTaskCardEdit(name, color) {
     return `<div id="edit-container-${name}" class="container-custom-select-option select-option-with-scrollbar" onclick="selectContactForBigTaskCardEdit('${name}','${color}'), stopPropagation(event)">
                 <div class="flex-align gap-15">
@@ -620,6 +715,21 @@ function returnAssignedContactHTMLForBigTaskCardEdit(name, color) {
             </div>`;
 }
 
+/**
+ * Generates the HTML structure for displaying a subtask in the "Big Task Card Edit" view.
+ * This includes the subtask's details, the ability to edit or delete the subtask, and visual options 
+ * that appear on hover. The subtask can be edited or removed, with corresponding buttons for those actions.
+ * The ID of the subtask is dynamically included in the HTML structure to ensure each subtask is unique.
+ *
+ * @param {number} id - The unique identifier for the subtask to be displayed. This ID is used to create unique 
+ *                      element IDs and to reference the specific subtask for editing or deletion.
+ * 
+ * @returns {string} - The HTML structure for the subtask element.
+ *
+ * @example
+ * const subtaskHTML = returnSubtaskHTMLForBigTaskCardEdit(1);
+ * document.getElementById("subtasks-container").innerHTML = subtaskHTML;
+ */
 function returnSubtaskHTMLForBigTaskCardEdit(id) {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
@@ -644,6 +754,23 @@ function returnSubtaskHTMLForBigTaskCardEdit(id) {
             </div>`;
 }
 
+/**
+ * Generates the HTML structure for displaying a subtask in the "Big Task Card Edit" view 
+ * specifically optimized for mobile view. This includes the subtask's details, 
+ * the ability to edit or delete the subtask, and the visual options that appear for 
+ * editing or deleting the subtask. The subtask ID is dynamically included to ensure 
+ * the HTML elements are uniquely identifiable.
+ *
+ * @param {number} id - The unique identifier for the subtask to be displayed. This ID is used 
+ *                      to create unique element IDs and to reference the specific subtask for 
+ *                      editing or deletion actions.
+ * 
+ * @returns {string} - The HTML structure for the subtask element, formatted for mobile view.
+ *
+ * @example
+ * const subtaskMobileHTML = returnSubtaskMobileHTMLForBigTaskCardEdit(1);
+ * document.getElementById("subtasks-container-mobile").innerHTML = subtaskMobileHTML;
+ */
 function returnSubtaskMobileHTMLForBigTaskCardEdit (id) {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
