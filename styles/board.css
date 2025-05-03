@@ -1439,6 +1439,22 @@ footer {
     height: 100%;
 }
 
+.user-story__mobile-button:active svg rect {
+    fill: #4C566A;
+}
+
+.user-story__mobile-button:active svg path {
+    fill: #ECEFF4;
+}
+
+.user-story__mobile-button:active svg circle {
+    fill: #ECEFF4;
+}
+
+.user-story__mobile-button:active svg text {
+    fill: #4C566A;
+}
+
 .user-story__mobile-button .arrow {
     animation: floatUpAndDown 1.6s ease-in-out infinite;
     transform-origin: center;
