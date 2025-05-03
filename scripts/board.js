@@ -202,10 +202,11 @@ function updateUIAfterTaskMove() {
 }
 
 /**
- * Moves a search task card from one search category array to another and updates its category.
- * This function re-renders the search results for both the old and new categories after the task is moved.
+ * Moves a task card from one search category array to another and updates its category property.
+ * After moving the task, this function updates the UI by re-rendering both the old and new category areas.
  *
- * @returns {void} This function does not return any value.
+ * @function
+ * @returns {void} This function does not return a value.
  */
 function putSearchTaskFromOldArrayinNewArray() {
     let oldArraySearch = searchArraysBasedOnCategory[oldCategoryName];
@@ -651,6 +652,15 @@ async function changeNumberOfCompletedSubtasks() {
     }
 }
 
+/**
+ * Checks and marks all subtasks as completed if the task is moved to the "done" category.
+ * Updates the UI and saves the number of completed subtasks to the database.
+ *
+ * @async
+ * @function
+ * @param {string} category - The ID of the category (drag field) to which the task has been moved.
+ * @returns {Promise<void>} Resolves when the subtasks are updated and changes are saved to the database.
+ */
 async function checkAllSubtasksOfTask(category) {
     if (category === "done-drag-field") {
         let currentDoneArray = searchMode === "true" ? doneArraySearch : doneArray
@@ -666,6 +676,15 @@ async function checkAllSubtasksOfTask(category) {
     }
 }
 
+/**
+ * Marks all subtasks of the given task object as completed and updates the database accordingly.
+ * Also updates the number of completed subtasks in the task object.
+ *
+ * @async
+ * @function
+ * @param {Object} objectFromCurrentSmallTaskCard - The task object whose subtasks should be marked as completed.
+ * @returns {Promise<void>} Resolves when all subtasks are marked as completed and saved to the database.
+ */
 async function completeAllSubtasks(objectFromCurrentSmallTaskCard) {
     let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
     objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
@@ -679,6 +698,14 @@ async function completeAllSubtasks(objectFromCurrentSmallTaskCard) {
     }
 }
 
+/**
+ * Deletes the currently selected task from the UI and the database.
+ * Removes the task from the local array, re-renders the UI, and sends a DELETE request to the database.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} Resolves when the task is successfully deleted or logs an error if it fails.
+ */
 async function deleteCurrentTask() {
     let indexFromCurrentTask = currentArray.findIndex(element => element.id === currentTaskCardId);
     if (indexFromCurrentTask !== -1) {
@@ -714,6 +741,13 @@ async function checkSearchWordAndLoadAllSearchTasks() {
     setHeightForDragFields();
 }
 
+/**
+ * Renders and displays the "Add Task" overlay.
+ * This function injects the HTML template for the task form into the overlay box
+ * and makes the overlay visible by removing the "d-none" class.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function renderAddTaskOverlay() {
     let addTaskOverlay = document.getElementById("add-task__overlay");
     let addTaskBox = document.getElementById("add-task__box");
@@ -721,6 +755,13 @@ function renderAddTaskOverlay() {
     addTaskOverlay.classList.remove("d-none");
 }
 
+/**
+ * Adds a slide-back animation to the add-task box and hides the overlay after the animation.
+ * The function triggers a CSS animation by adding the `slide-back` class, waits for 120ms,
+ * then toggles the visibility of the overlay and removes the animation class.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function addTaskBoxAddClassSlideBack() {
     document.getElementById("add-task__box").classList.add("slide-back")
     setTimeout(() => {
@@ -730,10 +771,23 @@ function addTaskBoxAddClassSlideBack() {
     }, 120);
 }
 
+/**
+ * Toggles the visibility of the add-task overlay by adding or removing the `d-none` class.
+ * This function is typically used to show or hide the overlay for creating a new task.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function toggleDnoneAddTaskOverlay() {
     document.getElementById("add-task__overlay").classList.toggle("d-none");
 }
 
+/**
+ * Toggles the search mode to "true" and updates the UI to reflect the search state.
+ * If the search field is not empty, it switches the `searchMode` to "true",
+ * hides the search icon, and displays the close icon in the search field.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function setSearchModeTrueAndChangeImg() {
     if (searchMode === "false") {
         let searchFieldInput = document.getElementById("search-field__input").value;
@@ -745,6 +799,13 @@ function setSearchModeTrueAndChangeImg() {
     }
 }
 
+/**
+ * Closes the search mode when the search field is empty.
+ * If the search field is cleared, it sets the `searchMode` to "false", 
+ * updates the UI to reflect the changes, and re-initializes the application state.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function closeSearchModeWhenInputIsEmpty() {
     let searchFieldInput = document.getElementById("search-field__input").value;
     if (searchFieldInput === "") {
@@ -753,6 +814,13 @@ function closeSearchModeWhenInputIsEmpty() {
     }
 }
 
+/**
+ * Disables the search mode by setting `searchMode` to "false", 
+ * updates the UI to show the search icon and hide the close icon, 
+ * and clears the input field.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function setSearchModeFalseAndChangeImg() {
     searchMode = "false";
     document.getElementById("search-field__img").classList.remove("d-none");
@@ -760,6 +828,13 @@ function setSearchModeFalseAndChangeImg() {
     document.getElementById("search-field__input").value = "";
 }
 
+/**
+ * Toggles between search mode states. If search mode is currently disabled, 
+ * it enables it by calling `setSearchModeTrueAndChangeImg`. 
+ * If search mode is enabled, it disables it and reinitializes the app by calling `setSearchModeFalseAndChangeImg` and `init`.
+ *
+ * @returns {void} This function does not return a value.
+ */
 function selectionOfWhichFunctionIsUsed() {
     if (searchMode === "false") {
         setSearchModeTrueAndChangeImg();
@@ -804,11 +879,18 @@ async function readFromEditAndSaveData() {
     }
 }
 
+/**
+ * Shortens a given text to a maximum number of characters by trimming it to the nearest word 
+ * and appending an ellipsis ("...") if the text exceeds the specified length.
+ * 
+ * @param {string} text - The text that needs to be shortened.
+ * @param {number} maxChars - The maximum number of characters allowed for the shortened text.
+ * @returns {string} A shortened version of the text, possibly with an ellipsis, if it exceeds the specified length.
+ */
 function shortenText(text, maxChars) {
     let newText = "";
     let words = text.split(" ");
     for (let index = 0; index < words.length; index++) {
-
         if ((newText + " " + words[index]).trim().length > maxChars) {
             break;
         }
@@ -818,6 +900,15 @@ function shortenText(text, maxChars) {
     return newText.length < text.trim().length ? newText + "..." : newText;
 }
 
+/**
+ * Edits the data of a specific task in the database by sending a PUT request to the server.
+ * 
+ * @param {string} userKey - The unique identifier of the user whose task data is being edited.
+ * @param {string} cardId - The unique identifier of the task being edited.
+ * @param {Object} data - The data to update for the specified task.
+ * @returns {Promise<Response>} A promise that resolves to the response of the PUT request.
+ * @throws {Error} If the request fails, an error is logged to the console.
+ */
 async function editDataInDatabase(userKey, cardId, data) {
     let response = await fetch(`${BASE_URL}/users/${userKey}/tasks/${cardId}.json`, {
         method: "PUT",
@@ -830,6 +921,24 @@ async function editDataInDatabase(userKey, cardId, data) {
     return response;
 }
 
+/**
+ * Edits the properties of a task object in an array by updating its values with new data.
+ * 
+ * @param {Object} taskCardObject - The task object whose data is being edited.
+ * @param {Object} data - The new data to update the task object with. This includes various task attributes.
+ * @param {string} data.category - The category of the task.
+ * @param {string} data.taskType - The type of the task.
+ * @param {string} data.taskTitle - The title of the task.
+ * @param {string} data.taskDescription - The description of the task.
+ * @param {string} data.taskPriority - The priority level of the task.
+ * @param {string} data.taskDueDate - The due date of the task.
+ * @param {number} data.numberOfSubtasks - The total number of subtasks associated with the task.
+ * @param {number} data.numberOfCompletedSubtasks - The number of completed subtasks associated with the task.
+ * @param {Array} data.assignedContacts - An array of contacts assigned to the task.
+ * @param {Array} data.subtasks - An array representing the subtasks of the task.
+ * 
+ * @returns {void} This function does not return any value. It directly modifies the provided `taskCardObject`.
+ */
 function editDataInArray(taskCardObject, data) {
     taskCardObject.category = data.category;
     taskCardObject.taskType = data.taskType;
@@ -843,6 +952,24 @@ function editDataInArray(taskCardObject, data) {
     taskCardObject.subtasks = data.subtasks;
 }
 
+/**
+ * Renders the content of the big task card with updated information from the provided task card object.
+ * This function replaces the existing content of the big task card with the new content based on the given task data.
+ * 
+ * @param {Object} taskCardObject - The task object containing the updated data to render in the big task card.
+ * @param {string} taskCardObject.id - The unique identifier for the task.
+ * @param {string} taskCardObject.taskType - The type of the task.
+ * @param {string} taskCardObject.taskTitle - The title of the task.
+ * @param {string} taskCardObject.taskDescription - The description of the task.
+ * @param {string} taskCardObject.taskPriority - The priority of the task.
+ * @param {string} taskCardObject.taskDueDate - The due date of the task.
+ * @param {number} taskCardObject.numberOfSubtasks - The number of subtasks associated with the task.
+ * @param {number} taskCardObject.numberOfCompletedSubtasks - The number of completed subtasks associated with the task.
+ * @param {Array} taskCardObject.assignedContacts - An array of contacts assigned to the task.
+ * @param {Array} taskCardObject.subtasks - An array representing the subtasks associated with the task.
+ * 
+ * @returns {void} This function does not return any value. It directly updates the DOM with the new task content.
+ */
 function renderNewContentFromBigTaskCard(taskCardObject) {
     let bigTaskCard = document.getElementById("big-task-card__box");
     bigTaskCard.innerHTML = bigTaskCardTemplate(taskCardObject.id, taskCardObject.taskType, taskCardObject.taskTitle, taskCardObject.taskDescription, taskCardObject.taskPriority, taskCardObject.taskDueDate, taskCardObject.numberOfSubtasks, taskCardObject.numberOfCompletedSubtasks, taskCardObject.assignedContacts, taskCardObject.subtasks);
@@ -968,12 +1095,28 @@ function openMobileMoveMenu(event) {
     }, 1200);
 }
 
+/**
+ * Adds an animation class to the given task content after a slight delay.
+ * This function applies a `blur-out` animation to the task content box after a 200ms timeout.
+ *
+ * @param {HTMLElement} currentUserStoryBox - The DOM element representing the task content box to which the animation will be applied.
+ * 
+ * @returns {void} This function does not return any value. It modifies the DOM element by adding an animation class.
+ */
 function addAnimationClassToTaskContent(currentUserStoryBox) {
     setTimeout(() => {
         currentUserStoryBox.classList.add("blur-out");
     }, 200);
 }
 
+/**
+ * Removes the animation class from the given task content after a delay.
+ * This function removes the `blur-out` animation class from the task content box after a 1600ms timeout.
+ *
+ * @param {HTMLElement} currentUserStoryBox - The DOM element representing the task content box from which the animation class will be removed.
+ * 
+ * @returns {void} This function does not return any value. It modifies the DOM element by removing an animation class.
+ */
 function removeAnimationClassToTaskContent(currentUserStoryBox) {
     setTimeout(() => {
         currentUserStoryBox.classList.remove("blur-out");
@@ -996,6 +1139,14 @@ function animationReverse(event) {
     resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, currentMoveMenu);
 }
 
+/**
+ * Closes all open move menus except the one clicked.
+ * This function checks for all open move menu buttons and closes them (reverses the animation) unless they are the current clicked button.
+ * 
+ * @param {HTMLElement} currentCenterButton - The button element that was clicked, which will remain open.
+ * 
+ * @returns {void} This function does not return any value. It modifies the state of the DOM elements by reversing the animation on other buttons.
+ */
 function closeOtherMoveMenus(currentCenterButton) {
     const allButtons = document.querySelectorAll(".user-story__mobile-move-menu__center-button.open");
     allButtons.forEach(button => {
@@ -1005,6 +1156,15 @@ function closeOtherMoveMenus(currentCenterButton) {
     });
 }
 
+/**
+ * Fades out the text content of a button and changes it to a new value.
+ * The function applies a fade-out animation to the button text, waits for the animation to complete, 
+ * and then changes the text content to 'Move to' before removing the fade-out animation.
+ *
+ * @param {HTMLElement} currentCenterButtonText - The text element of the button whose text will be faded out and changed.
+ * 
+ * @returns {void} This function does not return any value. It modifies the text content and applies/removes CSS classes to the DOM element.
+ */
 function fadeOutCenterButtonText(currentCenterButtonText) {
     setTimeout(() => {
         currentCenterButtonText.classList.add('fade-out');
@@ -1015,6 +1175,18 @@ function fadeOutCenterButtonText(currentCenterButtonText) {
     }, 100);
 }
 
+/**
+ * Resets the CSS classes and visual state of the move menu for a given task card.
+ * This function modifies various elements within the task card, removing specific animation classes,
+ * and restoring them to their initial "open" state after a set timeout.
+ * 
+ * @param {HTMLElement} currentCardClicked - The task card that was clicked, containing the move menu.
+ * @param {HTMLElement} currentUserStoryBox - The user story box that holds the task card and move menu.
+ * @param {HTMLElement} currentMoveMenu - The move menu element that is being reset.
+ * 
+ * @returns {void} This function does not return any value. It modifies the DOM elements by adding/removing CSS classes
+ * and changing the display styles of the elements.
+ */
 function resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, currentMoveMenu) {
     setTimeout(() => {
         currentUserStoryBox.style.pointerEvents = "auto";
@@ -1141,6 +1313,14 @@ function saveTaskOverlay() {
     task = {};
 }
 
+/**
+ * Fades out the overlay of the big task card and hides it after the animation.
+ * This function adds a "fade-out" class to the big task card overlay, and after a short delay, removes the class
+ * and toggles the visibility of the overlay by adding/removing the "d-none" class.
+ * 
+ * @returns {void} This function does not return any value. It modifies the DOM by adding/removing CSS classes
+ * and toggling the visibility of the big task card overlay.
+ */
 function fadeOutBigTaskCard() {
     document.getElementById("big-task-card__overlay").classList.add("fade-out");
     setTimeout(() => {
@@ -1149,19 +1329,52 @@ function fadeOutBigTaskCard() {
     }, "120");
 }
 
+/**
+ * Clears the selected contacts and subtasks by resetting the arrays.
+ * This function empties the `selectedContacts` and `subtasks` arrays, effectively clearing any selections
+ * of contacts and subtasks made by the user.
+ * 
+ * @returns {void} This function does not return any value. It modifies the `selectedContacts` and `subtasks` arrays.
+ */
 function clearSelectedContactsAndSubtasks() {
     selectedContacts.length = 0;
     subtasks.length = 0;
 }
 
+/**
+ * Removes the "taskCategory" item from the sessionStorage.
+ * This function deletes the "taskCategory" value stored in the sessionStorage, 
+ * effectively removing any stored information about the task's category for the current session.
+ * 
+ * @returns {void} This function does not return any value. It modifies the sessionStorage.
+ */
 function removeSessionStorageTaskCategory() {
     sessionStorage.removeItem("taskCategory");
 }
 
+/**
+ * Sets the "taskCategory" item in the sessionStorage.
+ * This function stores the provided category as the "taskCategory" in the sessionStorage,
+ * allowing the category information to persist for the duration of the session.
+ * 
+ * @param {string} category - The category to be stored in the sessionStorage as "taskCategory".
+ * 
+ * @returns {void} This function does not return any value. It modifies the sessionStorage.
+ */
 function setSessionStorageTaskCategory(category) {
     sessionStorage.setItem("taskCategory", category);
 }
 
+/**
+ * Loads data from the database for various task categories and renders the search tasks.
+ * This function fetches task data for the categories "toDos", "inProgress", "awaitFeedback", 
+ * and "done" from the database, and then updates the corresponding arrays and drag fields.
+ * After loading the data, it triggers the process of checking and loading the search tasks.
+ * 
+ * @async
+ * @returns {Promise<void>} This function is asynchronous and does not return any value.
+ * It modifies global arrays and updates the UI by rendering the search tasks.
+ */
 async function loadAllDataFromDatabaseAndRenderSearchTasks() {
     await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
