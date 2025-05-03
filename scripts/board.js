@@ -1266,6 +1266,14 @@ async function updateAllTasksInDatabase(userKey, tasks, updates) {
     });
 }
 
+/**
+ * Opens a mobile move menu with animation when a user story card is clicked.
+ * It also ensures that other move menus are closed and updates the visual state of the current menu.
+ * 
+ * @function openMobileMoveMenu
+ * @param {Event} event - The event triggered by clicking on the move menu button.
+ * @returns {void}
+ */
 function openMobileMoveMenu(event) {
     let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
     let currentUserStoryBox = currentCardClicked.querySelector(".user-story__box");
@@ -1277,6 +1285,20 @@ function openMobileMoveMenu(event) {
     closeOtherMoveMenus(currentCenterButton)
     currentMoveMenu.querySelector(`.${currentCategoryName}`).style.fill = "#D08770";
     currentMoveMenu.querySelector(`.${currentCategoryName}`).style.pointerEvents = "none";
+    openMoveMenuWithAnimation(currentUserStoryBox, currentMoveMenu, currentCenterButtonText);
+}
+
+/**
+ * Opens the move menu with an animation and disables interactions with the user story box while the menu is open.
+ * It also updates the center button text from "Move to" to "Close" and animates the text fade-out and fade-in effects.
+ *
+ * @function openMoveMenuWithAnimation
+ * @param {HTMLElement} currentUserStoryBox - The DOM element representing the user story box that is currently being interacted with.
+ * @param {HTMLElement} currentMoveMenu - The DOM element representing the move menu that will be shown.
+ * @param {HTMLElement} currentCenterButtonText - The DOM element representing the center button's text, which will change during the animation.
+ * @returns {void}
+ */
+function openMoveMenuWithAnimation(currentUserStoryBox, currentMoveMenu, currentCenterButtonText) {
     currentUserStoryBox.style.pointerEvents = "none";
     currentMoveMenu.style.display = "flex";
     currentMoveMenu.style.pointerEvents = "none";
@@ -1319,6 +1341,18 @@ function removeAnimationClassToTaskContent(currentUserStoryBox) {
     }, 1600);
 }
 
+/**
+ * Reverses the animation of the mobile move menu by resetting the CSS classes and closing the menu.
+ * 
+ * This function is triggered by an event, typically when a user interacts with the move menu or
+ * clicks the close button. It updates the CSS classes of various elements within the mobile move
+ * menu to reverse the opening animation, and it also triggers the closing of the move menu with a
+ * smooth animation.
+ *
+ * @function animationReverse
+ * @param {Event} event - The event triggered by the user interaction (e.g., clicking a button or element).
+ * @returns {void} - No value is returned, but it manipulates DOM elements to close the mobile move menu and reverse the animation.
+ */
 function animationReverse(event) {
     let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
     let currentUserStoryBox = currentCardClicked.querySelector(".user-story__box");
@@ -1330,6 +1364,24 @@ function animationReverse(event) {
     currentCardClicked.querySelectorAll(".user-story__mobile-move-menu__segment").forEach((element, index) => element.classList.add(`delay-${index + 1}-close`, "close"));
     currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.remove("open");
     currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button").classList.add("close");
+    closeMoveMenuWithAnimation(currentCardClicked, currentCenterButtonText, currentUserStoryBox, currentMoveMenu);
+}
+
+/**
+ * Closes the mobile move menu with animation by updating CSS classes and triggering visual transitions.
+ * 
+ * This function is responsible for smoothly closing the move menu by reversing any animation effects applied
+ * during the opening of the menu. It does this by fading out the center button text, removing animation classes
+ * from the task content, and resetting all CSS classes for the move menu elements.
+ *
+ * @function closeMoveMenuWithAnimation
+ * @param {HTMLElement} currentCardClicked - The DOM element representing the card that was clicked, containing the mobile move menu.
+ * @param {HTMLElement} currentCenterButtonText - The DOM element representing the text within the center button of the move menu.
+ * @param {HTMLElement} currentUserStoryBox - The DOM element representing the user story box to be animated.
+ * @param {HTMLElement} currentMoveMenu - The DOM element representing the move menu that is being closed.
+ * @returns {void} - No value is returned, but the function performs DOM manipulations to close the move menu and reverse animations.
+ */
+function closeMoveMenuWithAnimation(currentCardClicked, currentCenterButtonText, currentUserStoryBox, currentMoveMenu) {
     fadeOutCenterButtonText(currentCenterButtonText);
     removeAnimationClassToTaskContent(currentUserStoryBox);
     resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, currentMoveMenu);
@@ -1396,6 +1448,20 @@ function resetAllClassesFromMoveMenu(currentCardClicked, currentUserStoryBox, cu
     }, 1800);
 }
 
+/**
+ * Handles moving a task card to a new category when triggered from a mobile interface.
+ * 
+ * This function identifies the current card and its associated DOM and data properties,
+ * checks if the category has changed, and if so, moves the task to the new category.
+ * 
+ * @async
+ * @function moveTaskCardMobile
+ * @param {Event} event - The click event triggered from the mobile move menu.
+ * @param {string} newMoveCategory - The ID of the new category the task will be moved to.
+ * @param {Array} newMoveArray - The array representing the task list of the new category.
+ * @param {string} newMoveCategoryName - The name of the new category.
+ * @returns {Promise<void>} - Resolves after the move operation is completed or returns early if no move is needed.
+ */
 async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveCategoryName) {
     let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
     let oldDragField = event.currentTarget.closest(".drag-field");
@@ -1407,17 +1473,41 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
     newCategory = newMoveCategory;
     newArray = newMoveArray;
     newCategoryName = newMoveCategoryName;
+    if (oldCategory === newCategory) return;
+    moveTaskToCategory();
+}
 
-    if (oldCategory === newCategory) {
-        return;
-    }
+/**
+ * Moves a task object from the old category array to the new one and updates its category property.
+ * 
+ * This function modifies the global task arrays by transferring a task to the new category's array,
+ * updates its `category` property accordingly, and triggers a UI re-render.
+ * 
+ * @function moveTaskToCategory
+ * @returns {void}
+ */
+function moveTaskToCategory() {
     findObjectInArrayAndSaveData(oldArray, newCategoryName);
-
     let index = oldArray.findIndex(element => element.id == currentCardId);
-
     newArray.push(oldArray.splice(index, 1)[0]);
     let taskCardObjectinNewArray = newArray.find(element => element.id == currentCardId);
     taskCardObjectinNewArray.category = newCategoryName;
+    updateCategoryRender();
+}
+
+/**
+ * Updates the UI rendering after a task has been moved between categories.
+ * 
+ * Depending on whether the app is in search mode, this function either:
+ * - Renders updated task cards in the old and new categories,
+ * - Or calls a separate function to handle the update during a search.
+ * 
+ * Also triggers a database update for the moved task's category.
+ * 
+ * @function updateCategoryRender
+ * @returns {void}
+ */
+function updateCategoryRender() {
     if (searchMode === "false") {
         if (oldArray.length !== 0) {
             renderSmallCard(oldCategory, oldArray);
@@ -1425,22 +1515,47 @@ async function moveTaskCardMobile(event, newMoveCategory, newMoveArray, newMoveC
             document.getElementById(oldCategory).innerHTML = noCardTemplate(categorysObject[oldCategoryName], searchMode);
         }
         renderSmallCard(newCategory, newArray);
-
     } else {
         putSearchTaskFromOldArrayinNewArray();
     }
+    updateTaskCategoryInDatabase();
+}
 
+/**
+ * Updates the task's category in the database and performs follow-up actions.
+ * 
+ * Sends a PUT request to update the task's category based on the current user ID and task ID.
+ * If the update is successful, it verifies all subtasks for the new category and visually highlights the moved task card.
+ * 
+ * @async
+ * @function updateTaskCategoryInDatabase
+ * @returns {Promise<void>} - Resolves when all operations are complete.
+ * @throws {Error} Logs an error to the console if the database update fails.
+ */
+async function updateTaskCategoryInDatabase() {
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, currentTaskData.category, "category");
     if (!putResponse.ok) {
-        console.error("Fehler beim Speichern des neuen Tasks:", putResponse.statusText);
-        return; // Falls PUT fehlschlägt, nicht weitermachen!
+        console.error("Error when saving the new task:", putResponse.statusText);
+        return;
     }
     await checkAllSubtasksOfTask(newCategory);
+    highlightTaskCardWithAnimation();
+}
+
+/**
+ * Scrolls the task card into view and applies a temporary highlight animation.
+ * 
+ * This function ensures the moved or updated task card is brought into the user's viewport 
+ * with a smooth scroll and briefly highlights it using a CSS class for visual feedback.
+ * 
+ * @function highlightTaskCardWithAnimation
+ * @returns {void}
+ */
+function highlightTaskCardWithAnimation() {
     setTimeout(() => {
         document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById(currentCardId).classList.add('highlight-flash');
     }, 300);
-
     setTimeout(() => {
         document.getElementById(currentCardId).classList.remove('highlight-flash');
     }, 3300);
@@ -1489,6 +1604,17 @@ function createTaskOverlay() {
     }
 }
 
+/**
+ * Saves the category of the button that was clicked.
+ * 
+ * This function is triggered by a click event on a button, and it extracts the value of the `data-category` attribute
+ * from the clicked button and saves it to the `categoryFromClickedButton` variable. This allows the program to remember
+ * the category associated with the clicked button for further use.
+ * 
+ * @function saveCategoryFromClickedButton
+ * @param {Event} event - The event object representing the click event on the button.
+ * @returns {void} - No value is returned, but the category is stored in the global variable `categoryFromClickedButton`.
+ */
 function saveCategoryFromClickedButton(event) {
     categoryFromClickedButton = event.currentTarget.getAttribute("data-category");
 }
