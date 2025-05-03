@@ -1516,6 +1516,12 @@ footer {
     opacity: 0;
     transform: scale(0.5);
     cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.1s
+}
+
+.user-story__mobile-move-menu__center-button:active {
+    background-color: #81A1C1;            
+    box-shadow: 0 0 8px #81A1C1;
 }
 
 .user-story__mobile-move-menu__center-button.open {
