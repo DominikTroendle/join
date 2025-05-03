@@ -33,6 +33,8 @@ let data = {
     assignedContacts: [],
     subtasks: []
 }
+let allContacts = [];
+let allTasks = [];
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
@@ -1052,6 +1054,13 @@ function renderNewContentFromBigTaskCard(taskCardObject) {
     bigTaskCard.innerHTML = bigTaskCardTemplate(taskCardObject.id, taskCardObject.taskType, taskCardObject.taskTitle, taskCardObject.taskDescription, taskCardObject.taskPriority, taskCardObject.taskDueDate, taskCardObject.numberOfSubtasks, taskCardObject.numberOfCompletedSubtasks, taskCardObject.assignedContacts, taskCardObject.subtasks);
 }
 
+/**
+ * Adjusts the height of elements with the class `.drag-field` based on the window size.
+ * If the window width is less than 1310px, the height of the drag fields is set to "auto".
+ * If the window width is greater than or equal to 1310px, the height of all drag fields is set to the height of the tallest drag field.
+ *
+ * @returns {void} This function does not return any value.
+ */
 function setHeightForDragFields() {
     const dragFields = document.querySelectorAll('.drag-field');
     if (window.innerWidth < 1310) {
@@ -1067,9 +1076,15 @@ function setHeightForDragFields() {
         dragField.style.height = `${maxHeight}px`;
     });
 }
+
+/**
+ * Adds an event listener to the window that triggers the `setHeightForDragFields` function whenever the window is resized.
+ * This function ensures that the height of the drag fields is adjusted accordingly when the window size changes.
+ *
+ * @returns {void} This function does not return any value.
+ */
 window.addEventListener("resize", setHeightForDragFields);
-let allContacts = [];
-let allTasks = [];
+
 async function readAllContactsFromDatabase(userKey) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/allContacts.json`);
