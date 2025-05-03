@@ -52,6 +52,17 @@ const arrays = {
     doneArray: doneArray
 };
 
+async function init() {
+    setSearchModeFalseAndChangeImg();
+    await syncAllContactsWithTasks(localStorage.getItem("userId"));
+    await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
+    await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
+    setHeightForDragFields();
+    removeSessionStorageTaskCategory()
+}
+
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)
     imgId.src = imgSource;
@@ -253,44 +264,40 @@ function renderContentBigTaskCardEdit() {
     bigTaskCard.innerHTML = bigTaskCardEditTemplate(objectFromCurrentSmallTaskCard.id, objectFromCurrentSmallTaskCard.taskType, objectFromCurrentSmallTaskCard.taskTitle, objectFromCurrentSmallTaskCard.taskDescription, objectFromCurrentSmallTaskCard.taskPriority, objectFromCurrentSmallTaskCard.taskDueDate, objectFromCurrentSmallTaskCard.numberOfSubtasks, objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks, objectFromCurrentSmallTaskCard.assignedContacts, objectFromCurrentSmallTaskCard.subtasks);
 }
 
-async function init() {
-    setSearchModeFalseAndChangeImg();
-    await syncAllContactsWithTasks(localStorage.getItem("userId"));
-    await readFromDatabase(localStorage.getItem("userId"), "toDos", toDoArray, "to-do-drag-field");
-    await readFromDatabase(localStorage.getItem("userId"), "inProgress", inProgressArray, "in-progress-drag-field");
-    await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
-    await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
-    setHeightForDragFields();
-    removeSessionStorageTaskCategory()
-}
-
 async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
         if (!result.ok) {
-            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
+            throw new Error(`Error when retrieving the data: ${result.statusText}`);
         }
-        let data = await result.json();
+        collectTasksByCategory(result, category, categoryArray);
         categoryArray.length = 0;
-        if (data) {
-            Object.entries(data).forEach(([firebaseKey, value]) => {
-                if (value.category === category) {
-                    value.id = firebaseKey;
-
-                    if (!value.assignedContacts) {
-                        value.assignedContacts = [];
-                    }
-                    categoryArray.push(value);
-                }
-            });
-        }
-        if (categoryArray.length !== 0 && searchMode === "false") {
-            renderSmallCard(dragFieldId, categoryArray);
-        } else {
-            document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category], searchMode);
-        }
+        renderCategoryContent(category, categoryArray, dragFieldId)
     } catch (error) {
         console.error("error loading the data:", error);
+    }
+}
+
+async function collectTasksByCategory(result, category, categoryArray) {
+    let data = await result.json();
+    if (data) {
+        Object.entries(data).forEach(([firebaseKey, value]) => {
+            if (value.category === category) {
+                value.id = firebaseKey;
+                if (!value.assignedContacts) {
+                    value.assignedContacts = [];
+                }
+                categoryArray.push(value);
+            }
+        });
+    }
+}
+
+function renderCategoryContent(category, categoryArray, dragFieldId) {
+    if (categoryArray.length !== 0 && searchMode === "false") {
+        renderSmallCard(dragFieldId, categoryArray);
+    } else {
+        document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category], searchMode);
     }
 }
 
