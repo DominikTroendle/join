@@ -184,7 +184,7 @@ function removeDragRotation(event) {
 }
 
 function onDragStart(event) {
-    originDragField = event.currentTarget.closest(".drag-field"); 
+    originDragField = event.currentTarget.closest(".drag-field");
 }
 
 function createCardBorderBoxForDragEntered(event) {
@@ -270,16 +270,16 @@ async function readFromDatabase(userKey, category, categoryArray, dragFieldId) {
         if (!result.ok) {
             throw new Error(`Error when retrieving the data: ${result.statusText}`);
         }
-        collectTasksByCategory(result, category, categoryArray);
+        let data = await result.json();
         categoryArray.length = 0;
+        collectTasksByCategory(data, category, categoryArray);
         renderCategoryContent(category, categoryArray, dragFieldId)
     } catch (error) {
         console.error("error loading the data:", error);
     }
 }
 
-async function collectTasksByCategory(result, category, categoryArray) {
-    let data = await result.json();
+function collectTasksByCategory(data, category, categoryArray) {
     if (data) {
         Object.entries(data).forEach(([firebaseKey, value]) => {
             if (value.category === category) {
@@ -307,10 +307,8 @@ async function postDataInDatabase(userKey, data) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
-    if (response.ok) {
-        let result = await response.json();
-    } else {
-        console.error("Fehler beim Speichern:", response.statusText);
+    if (!response.ok) {
+        console.error("Error when saving:", response.statusText);
     }
 }
 
@@ -377,20 +375,24 @@ async function checkAllSubtasksOfTask(category) {
         if (!objectFromCurrentSmallTaskCard) {
             return;
         }
-        let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
-        objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
-        for (let index = 0; index < objectFromCurrentSmallTaskCard.subtasks.length; index++) {
-            objectFromCurrentSmallTaskCard.subtasks[index].checked = "true";
-            let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, objectFromCurrentSmallTaskCard.subtasks[index].checked, `subtasks/${index}/checked`);
-            if (!putResponse.ok) {
-                console.error("error when saving:", putResponse.statusText);
-                return;
-            }
-        }
+        completeAllSubtasks(objectFromCurrentSmallTaskCard)
         renderSmallCard("done-drag-field", currentDoneArray);
         let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
         if (!putResponse2.ok) {
             console.error("error when saving:", putResponse2.statusText);
+            return;
+        }
+    }
+}
+
+async function completeAllSubtasks(objectFromCurrentSmallTaskCard) {
+    let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
+    objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
+    for (let index = 0; index < objectFromCurrentSmallTaskCard.subtasks.length; index++) {
+        objectFromCurrentSmallTaskCard.subtasks[index].checked = "true";
+        let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, objectFromCurrentSmallTaskCard.subtasks[index].checked, `subtasks/${index}/checked`);
+        if (!putResponse.ok) {
+            console.error("error when saving:", putResponse.statusText);
             return;
         }
     }
@@ -729,12 +731,12 @@ function animationReverse(event) {
 function closeOtherMoveMenus(currentCenterButton) {
     const allButtons = document.querySelectorAll(".user-story__mobile-move-menu__center-button.open");
     allButtons.forEach(button => {
-      if (button !== currentCenterButton) {
-        animationReverse({ currentTarget: button });
-      }
+        if (button !== currentCenterButton) {
+            animationReverse({ currentTarget: button });
+        }
     });
-  }
-  
+}
+
 function fadeOutCenterButtonText(currentCenterButtonText) {
     setTimeout(() => {
         currentCenterButtonText.classList.add('fade-out');
