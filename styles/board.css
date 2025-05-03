@@ -1916,6 +1916,10 @@ footer {
     #form-add-task {
         gap: 48px;
     }
+
+    .no-task-box {
+        width: 100%;
+    }
 }
 
 @media(max-width: 1185px) {
@@ -1987,11 +1991,6 @@ footer {
     .search-field__box {
         width: 100%;
         justify-content: space-between;
-    }
-
-    .no-task-box {
-        width: 100%;
-        margin-right: 16px;
     }
 
     .title-input-button__box {

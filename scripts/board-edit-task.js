@@ -41,7 +41,7 @@ async function loadContactInfo2(contactsObj) {
 }
 
 function sortContactsAlphabetically2(contactsArray) {
-    if (userId != "guest") {
+    if (userId != "guest" && contactsArray.length > 1) {
         let user = contactsArray.splice(0, 1);
         contactsArray.sort((a, b) => a.name.localeCompare(b.name));
         if (contactsArray == contacts) {
