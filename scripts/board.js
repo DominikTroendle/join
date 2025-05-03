@@ -656,40 +656,36 @@ async function changeNumberOfCompletedSubtasks() {
 }
 
 /**
- * Checks and marks all subtasks as completed if the task is moved to the "done" category.
- * Updates the UI and saves the number of completed subtasks to the database.
+ * Checks if the task is in the "done" category and marks all subtasks as completed.
+ * Then updates the number of completed subtasks in the database and re-renders the "done" category.
  *
  * @async
- * @function
- * @param {string} category - The ID of the category (drag field) to which the task has been moved.
- * @returns {Promise<void>} Resolves when the subtasks are updated and changes are saved to the database.
+ * @function checkAllSubtasksOfTask
+ * @param {string} category - The category identifier to check if it's the "done" column.
  */
 async function checkAllSubtasksOfTask(category) {
     if (category === "done-drag-field") {
         let currentDoneArray = searchMode === "true" ? doneArraySearch : doneArray
         let objectFromCurrentSmallTaskCard = currentDoneArray.find(element => element.id == currentCardId);
         if (!objectFromCurrentSmallTaskCard) return;
-        completeAllSubtasks(objectFromCurrentSmallTaskCard)
+        let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
+        completeAllSubtasks(objectFromCurrentSmallTaskCard, newNumberOfSubtasksCompleted);
         renderSmallCard("done-drag-field", currentDoneArray);
-        let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
-        if (!putResponse2.ok) {
-            console.error("error when saving:", putResponse2.statusText);
-            return;
-        }
+        updateNumberOfCompletedSubtasksInDatabase(newNumberOfSubtasksCompleted);
     }
 }
 
 /**
- * Marks all subtasks of the given task object as completed and updates the database accordingly.
- * Also updates the number of completed subtasks in the task object.
+ * Marks all subtasks of a given task object as completed and updates their status in the database.
  *
  * @async
- * @function
- * @param {Object} objectFromCurrentSmallTaskCard - The task object whose subtasks should be marked as completed.
- * @returns {Promise<void>} Resolves when all subtasks are marked as completed and saved to the database.
+ * @function completeAllSubtasks
+ * @param {Object} objectFromCurrentSmallTaskCard - The task object containing the subtasks to be completed.
+ * @param {number} newNumberOfSubtasksCompleted - The total number of subtasks to be marked as completed.
+ * @returns {Promise<void>} - Resolves when all subtasks have been updated, or exits early if an error occurs.
+ * @throws {Error} Logs an error if saving a subtask status fails.
  */
-async function completeAllSubtasks(objectFromCurrentSmallTaskCard) {
-    let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
+async function completeAllSubtasks(objectFromCurrentSmallTaskCard, newNumberOfSubtasksCompleted) {
     objectFromCurrentSmallTaskCard.numberOfCompletedSubtasks = newNumberOfSubtasksCompleted;
     for (let index = 0; index < objectFromCurrentSmallTaskCard.subtasks.length; index++) {
         objectFromCurrentSmallTaskCard.subtasks[index].checked = "true";
@@ -698,6 +694,23 @@ async function completeAllSubtasks(objectFromCurrentSmallTaskCard) {
             console.error("error when saving:", putResponse.statusText);
             return;
         }
+    }
+}
+
+/**
+ * Updates the number of completed subtasks for the current task in the database.
+ *
+ * @async
+ * @function updateNumberOfCompletedSubtasksInDatabase
+ * @param {number} newNumberOfSubtasksCompleted - The updated count of completed subtasks to be saved.
+ * @returns {Promise<void>} - Resolves when the update is successful, or logs an error if the update fails.
+ * @throws {Error} Logs an error if the PUT request to the database fails.
+ */
+async function updateNumberOfCompletedSubtasksInDatabase(newNumberOfSubtasksCompleted) {
+    let putResponse2 = await putDataInDatabase(localStorage.getItem("userId"), currentCardId, newNumberOfSubtasksCompleted, "numberOfCompletedSubtasks");
+    if (!putResponse2.ok) {
+        console.error("error when saving:", putResponse2.statusText);
+        return;
     }
 }
 
@@ -1561,47 +1574,131 @@ function highlightTaskCardWithAnimation() {
     }, 3300);
 }
 
+/**
+ * Initializes the task overlay creation process. Validates input fields and the date format, then proceeds to save the task 
+ * if all validations are successful. Displays relevant feedback messages if validation fails.
+ * 
+ * @function createTaskOverlay
+ * @returns {void} This function does not return any value.
+ * @throws {Error} Throws an error if the date format is invalid or other input errors occur.
+ */
 function createTaskOverlay() {
     removeError();
     let valid = validateInputs();
     let validDateFormat = testDate();
     let titleInput = document.getElementById("title");
     let descriptionInput = document.getElementById("description");
+    validateAndSaveTask(valid, validDateFormat, titleInput, descriptionInput);
+}
+
+/**
+ * Validates the task input and date format, and then saves the task if all validations pass. 
+ * If validation fails, it triggers error handling and shows relevant feedback.
+ *
+ * @function validateAndSaveTask
+ * @param {boolean} valid - A boolean indicating whether the input fields are valid.
+ * @param {boolean} validDateFormat - A boolean indicating whether the date format is valid.
+ * @param {HTMLInputElement} titleInput - The input element for the task title.
+ * @param {HTMLInputElement} descriptionInput - The input element for the task description.
+ * @returns {void} This function does not return any value.
+ * @throws {Error} If validation fails, an error will be thrown and feedback will be displayed.
+ */
+function validateAndSaveTask(valid, validDateFormat, titleInput, descriptionInput) {
     if (valid && validDateFormat) {
-        saveTaskOverlay()
-        document.getElementById('overlay-task-added').classList.remove('d-none');
-        setTimeout(() => {
-            document.getElementById("add-task__overlay").classList.add("fade-out");
-            init();
-            clearSelectedContactsAndSubtasks();
-            setTimeout(() => {
-                document.getElementById('overlay-task-added').classList.add('d-none');
-                let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
-                let findNewCreateTask = allUserStoryTitle.find(element => {
-                    let userStoryBox = element.closest(".user-story__box");
-                    let description = userStoryBox.querySelector(".user-story__description");
-                    return (
-                        element.innerText.trim() === titleInput.value.trim() && description?.innerText.trim() === descriptionInput.value.trim()
-                    )
-                });
-                if (findNewCreateTask) {
-                    let currentNewCreateTaskId = findNewCreateTask.closest(".user-story__box").id;
-                    document.getElementById(currentNewCreateTaskId).scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    document.getElementById(currentNewCreateTaskId).classList.add('highlight-flash');
-                    setTimeout(() => {
-                        document.getElementById(currentNewCreateTaskId).classList.remove('highlight-flash');
-                    }, 3300);
-                }
-                document.getElementById("add-task__overlay").classList.remove("fade-out");
-                document.getElementById('add-task__overlay').classList.toggle('d-none');
-            }, 500);
-        }, 900);
+        handleTaskOverlayAfterSave(titleInput, descriptionInput);
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
         throwError();
         document.getElementById('invalid-date').classList.remove('hidden');
     } else {
         throwError();
     }
+}
+
+/**
+ * Handles the task overlay display and animation after a task is saved. 
+ * It hides the overlay, resets certain elements, and highlights the newly created task.
+ *
+ * @function handleTaskOverlayAfterSave
+ * @param {HTMLInputElement} titleInput - The input element containing the task title.
+ * @param {HTMLInputElement} descriptionInput - The input element containing the task description.
+ * @returns {void} This function does not return any value.
+ * 
+ * @description
+ * This function performs the following steps after saving a task:
+ * 1. Hides the error overlay and shows a task-added confirmation.
+ * 2. Animates the "add-task" overlay fade-out effect.
+ * 3. Initializes certain UI elements and clears selected contacts and subtasks.
+ * 4. Finds and highlights the newly created task based on the title and description inputs.
+ */
+function handleTaskOverlayAfterSave(titleInput, descriptionInput) {
+    saveTaskOverlay();
+    document.getElementById('overlay-task-added').classList.remove('d-none');
+    setTimeout(() => {
+        document.getElementById("add-task__overlay").classList.add("fade-out");
+        init();
+        clearSelectedContactsAndSubtasks();
+        setTimeout(() => {
+            findAndHighlightNewlyCreatedTask(titleInput, descriptionInput);
+        }, 500);
+    }, 900);
+}
+
+/**
+ * Finds the newly created task based on the provided title and description,
+ * then highlights and scrolls to it.
+ *
+ * @function findAndHighlightNewlyCreatedTask
+ * @param {HTMLInputElement} titleInput - The input element containing the task title.
+ * @param {HTMLInputElement} descriptionInput - The input element containing the task description.
+ * @returns {void} This function does not return any value.
+ * 
+ * @description
+ * This function performs the following steps:
+ * 1. Hides the "task-added" overlay once the task is saved.
+ * 2. Searches for the task in the DOM by comparing the title and description values.
+ * 3. Highlights and scrolls to the newly created task if found.
+ */
+function findAndHighlightNewlyCreatedTask(titleInput, descriptionInput) {
+    document.getElementById('overlay-task-added').classList.add('d-none');
+    let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
+    let findNewCreateTask = allUserStoryTitle.find(element => {
+        let userStoryBox = element.closest(".user-story__box");
+        let description = userStoryBox.querySelector(".user-story__description");
+        return (
+            element.innerText.trim() === titleInput.value.trim() && description?.innerText.trim() === descriptionInput.value.trim()
+        )
+    });
+    highlightAndScrollToNewTask(findNewCreateTask);
+}
+
+/**
+ * Highlights and scrolls to the newly created task in the DOM.
+ * 
+ * If the task is found, it will be scrolled into view, and a highlight animation will be applied.
+ * After the animation, the highlight class will be removed. Additionally, the task overlay will be hidden.
+ *
+ * @function highlightAndScrollToNewTask
+ * @param {HTMLElement} findNewCreateTask - The task element that was newly created and needs to be highlighted.
+ * @returns {void} This function does not return any value.
+ *
+ * @description
+ * This function performs the following steps:
+ * 1. Checks if the new task element is found.
+ * 2. Scrolls to the task and applies a 'highlight-flash' class for visual emphasis.
+ * 3. Removes the 'highlight-flash' class after 3.3 seconds.
+ * 4. Hides the task overlay by toggling the visibility of the overlay.
+ */
+function highlightAndScrollToNewTask(findNewCreateTask) {
+    if (findNewCreateTask) {
+        let currentNewCreateTaskId = findNewCreateTask.closest(".user-story__box").id;
+        document.getElementById(currentNewCreateTaskId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById(currentNewCreateTaskId).classList.add('highlight-flash');
+        setTimeout(() => {
+            document.getElementById(currentNewCreateTaskId).classList.remove('highlight-flash');
+        }, 3300);
+    }
+    document.getElementById("add-task__overlay").classList.remove("fade-out");
+    document.getElementById('add-task__overlay').classList.toggle('d-none');
 }
 
 /**
