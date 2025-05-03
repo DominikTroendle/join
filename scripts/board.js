@@ -719,6 +719,15 @@ async function deleteCurrentTask() {
     }
 }
 
+/**
+ * Checks the search word input and loads the corresponding search results for all task categories.
+ * Clears previous search arrays, then searches through each task array to find matches with the search word.
+ * It renders the search results in the appropriate drag fields and adjusts the height for the drag fields.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>} This function does not return any value, it operates asynchronously.
+ */
 async function checkSearchWordAndLoadAllSearchTasks() {
     let searchFieldInput = document.getElementById("search-field__input");
     let searchWord = searchFieldInput.value.trim();
@@ -727,18 +736,33 @@ async function checkSearchWordAndLoadAllSearchTasks() {
         let originalArray = arrays[arrayNames[index]];
         let searchArray = searchArrays[searchArrayNames[index]];
         let dragField = document.getElementById(dragFieldIds[index]);
-        originalArray.forEach(element => {
-            if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
-                searchArray.push(element);
-            }
-        });
-        if (searchArray.length !== 0) {
-            renderSmallCard(dragFieldIds[index], searchArray);
-        } else {
-            dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
-        }
+        searchTasksinArray(searchWord, originalArray, searchArray, dragField);
     }
     setHeightForDragFields();
+}
+
+/**
+ * Searches for tasks in the provided array that match the search word in either their title or description.
+ * If a match is found, the task is added to the search results array. It then renders the search results in the provided drag field.
+ * If no matching tasks are found, it displays a "no card" message in the drag field.
+ *
+ * @param {string} searchWord - The word to search for in task titles or descriptions.
+ * @param {Array} originalArray - The array of tasks to search through.
+ * @param {Array} searchArray - The array to store tasks that match the search criteria.
+ * @param {HTMLElement} dragField - The DOM element where the search results will be rendered.
+ * @returns {void} This function does not return any value, it modifies the search array and DOM directly.
+ */
+function searchTasksinArray(searchWord, originalArray, searchArray, dragField) {
+    originalArray.forEach(element => {
+        if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
+            searchArray.push(element);
+        }
+    });
+    if (searchArray.length !== 0) {
+        renderSmallCard(dragFieldIds[index], searchArray);
+    } else {
+        dragField.innerHTML = noCardTemplate(categorys[index], searchMode);
+    }
 }
 
 /**
@@ -844,38 +868,91 @@ function selectionOfWhichFunctionIsUsed() {
     }
 }
 
+/**
+ * Reads data from the task edit form, validates the inputs, and if valid, updates the task data and re-renders the task card.
+ * If any input is invalid, an error message is displayed.
+ * 
+ * The function performs the following steps:
+ * 1. Removes any existing error messages related to the task edit form.
+ * 2. Validates the input values for the task's details (title, description, etc.).
+ * 3. Validates the due date format.
+ * 4. If both validations pass, it updates the task and renders the updated task card.
+ * 5. If the date format is invalid and the due date is not empty, it displays an error message related to the due date.
+ * 6. If the general validation fails, it displays a general error message.
+ * 
+ * @returns {Promise<void>} A promise that resolves once the task update and rendering are completed, or rejects if validation fails.
+ */
 async function readFromEditAndSaveData() {
     removeErrorForBigTaskCardEdit();
     let valid = validateInputsForBigTaskCardEdit();
     let validDateFormat = testDateForBigTaskCardEdit();
     if (valid && validDateFormat) {
-        let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
-        completedSubtasksArray = subtasksBigTaskCardEdit.filter(element => element.checked === "true");
-        data = {
-            category: taskCardObject.category,
-            taskType: taskCardObject.taskType,
-            taskTitle: document.getElementById("big-task-card-edit__input-title").value,
-            taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
-            taskPriority: selectedPriorityBigTaskCardEdit,
-            taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
-            numberOfSubtasks: subtasksBigTaskCardEdit.length,
-            numberOfCompletedSubtasks: completedSubtasksArray.length,
-            assignedContacts: selectedContactsBigTaskCardEdit,
-            subtasks: subtasksBigTaskCardEdit
-        }
-        editDataInArray(taskCardObject, data);
-        renderNewContentFromBigTaskCard(taskCardObject)
-        let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
-        if (!editResponse.ok) {
-            console.error("error when saving in the database:", editResponse.statusText);
-            return;
-        }
-        searchMode === "true" ? loadAllDataFromDatabaseAndRenderSearchTasks() : init();
+        updateTaskAndRender()
     } else if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
         throwErrorForBigTaskCardEdit();
         document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
     } else {
         throwErrorForBigTaskCardEdit();
+    }
+}
+
+/**
+ * Updates the task data based on the current task card, renders the updated content, and saves the changes to the database.
+ * The function performs the following actions:
+ * 1. Finds the task card object from the current array based on the task ID.
+ * 2. Filters and stores the completed subtasks.
+ * 3. Prepares the task data for update.
+ * 4. Edits the task data in the array with the new values.
+ * 5. Renders the updated content of the task card.
+ * 6. Sends the updated task data to the database using a PUT request.
+ * 7. If the database update is successful, it reloads the tasks (if search mode is enabled) or initializes the page.
+ * 8. If the database update fails, an error is logged.
+ *
+ * @returns {Promise<void>} A promise that resolves after the task update and rendering are completed, or rejects if the update to the database fails.
+ */
+async function updateTaskAndRender() {
+    let taskCardObject = currentArray.find(element => element.id === currentTaskCardId);
+    completedSubtasksArray = subtasksBigTaskCardEdit.filter(element => element.checked === "true");
+    prepareTaskDataForUpdate(taskCardObject);
+    editDataInArray(taskCardObject, data);
+    renderNewContentFromBigTaskCard(taskCardObject)
+    let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
+    if (!editResponse.ok) {
+        console.error("error when saving in the database:", editResponse.statusText);
+        return;
+    }
+    searchMode === "true" ? loadAllDataFromDatabaseAndRenderSearchTasks() : init();
+}
+
+/**
+ * Prepares the data for updating a task by collecting the current values from the task card and the input fields.
+ * This function creates an object `data` with the task's updated information, including the category, task type, title,
+ * description, priority, due date, subtasks, and assigned contacts.
+ *
+ * @param {Object} taskCardObject - The task card object containing the existing task data to be updated.
+ * @param {string} taskCardObject.category - The category of the task.
+ * @param {string} taskCardObject.taskType - The type of the task.
+ * @param {string} taskCardObject.taskTitle - The title of the task.
+ * @param {string} taskCardObject.taskDescription - The description of the task.
+ * @param {string} taskCardObject.taskPriority - The priority of the task.
+ * @param {string} taskCardObject.taskDueDate - The due date of the task.
+ * @param {Array} taskCardObject.subtasks - The subtasks associated with the task.
+ * @param {Array} taskCardObject.assignedContacts - The contacts assigned to the task.
+ * 
+ * @returns {void} This function does not return any value, but it updates the `data` object with the task's updated information.
+ */
+function prepareTaskDataForUpdate(taskCardObject) {
+    data = {
+        category: taskCardObject.category,
+        taskType: taskCardObject.taskType,
+        taskTitle: document.getElementById("big-task-card-edit__input-title").value,
+        taskDescription: document.getElementById("big-task-card-edit__textarea-description").value,
+        taskPriority: selectedPriorityBigTaskCardEdit,
+        taskDueDate: document.getElementById("big-task-card-edit__input-due-date").value,
+        numberOfSubtasks: subtasksBigTaskCardEdit.length,
+        numberOfCompletedSubtasks: completedSubtasksArray.length,
+        assignedContacts: selectedContactsBigTaskCardEdit,
+        subtasks: subtasksBigTaskCardEdit
     }
 }
 
