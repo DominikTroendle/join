@@ -35,6 +35,7 @@ let data = {
 }
 let allContacts = [];
 let allTasks = [];
+let categoryFromClickedButton = "";
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app";
 const arrayNames = ["toDoArray", "inProgressArray", "awaitFeedbackArray", "doneArray"];
 const searchArrayNames = ["toDoArraySearch", "inProgressArraySearch", "awaitFeedbackArraySearch", "doneArraySearch"];
@@ -1055,11 +1056,11 @@ function renderNewContentFromBigTaskCard(taskCardObject) {
 }
 
 /**
- * Adjusts the height of elements with the class `.drag-field` based on the window size.
- * If the window width is less than 1310px, the height of the drag fields is set to "auto".
- * If the window width is greater than or equal to 1310px, the height of all drag fields is set to the height of the tallest drag field.
+ * Sets the height of all drag field elements.
+ * If the viewport width is below 1310px, all drag fields are set to auto height.
+ * Otherwise, all drag fields are adjusted to match the height of the tallest one.
  *
- * @returns {void} This function does not return any value.
+ * @returns {void} This function does not return a value.
  */
 function setHeightForDragFields() {
     const dragFields = document.querySelectorAll('.drag-field');
@@ -1067,6 +1068,18 @@ function setHeightForDragFields() {
         dragFields.forEach(dragField => dragField.style.height = 'auto');
         return;
     }
+    equalizeDragFieldHeights(dragFields)
+}
+
+/**
+ * Sets all given drag field elements to the height of the tallest one.
+ * First resets all heights to auto to calculate actual scrollHeight,
+ * then applies the maximum height found to all fields.
+ *
+ * @param {NodeListOf<HTMLElement>} dragFields - A list of drag field elements whose heights should be equalized.
+ * @returns {void} This function does not return a value.
+ */
+function equalizeDragFieldHeights(dragFields) {
     let maxHeight = 0;
     dragFields.forEach(dragField => dragField.style.height = 'auto');
     dragFields.forEach(dragField => {
@@ -1078,13 +1091,14 @@ function setHeightForDragFields() {
 }
 
 /**
- * Adds an event listener to the window that triggers the `setHeightForDragFields` function whenever the window is resized.
- * This function ensures that the height of the drag fields is adjusted accordingly when the window size changes.
+ * Fetches all contact data for a given user from the database and populates the global `allContacts` array.
+ * If the request fails or data is invalid, an error is logged to the console.
  *
- * @returns {void} This function does not return any value.
+ * @async
+ * @function readAllContactsFromDatabase
+ * @param {string} userKey - The unique key identifying the user in the database.
+ * @returns {Promise<void>} This function does not return a value.
  */
-window.addEventListener("resize", setHeightForDragFields);
-
 async function readAllContactsFromDatabase(userKey) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/allContacts.json`);
@@ -1093,17 +1107,37 @@ async function readAllContactsFromDatabase(userKey) {
         }
         let data = await result.json();
         allContacts.length = 0;
-        if (data) {
-            Object.entries(data).forEach(([firebaseKey, value]) => {
-                const { name, color } = value;
-                allContacts.push({ name, color });
-            });
-        }
+        extractContactsFromData(data);
     } catch (error) {
         console.error("error loading the data:", error);
     }
 }
 
+/**
+ * Extracts contact information from the provided data object and adds it to the global `allContacts` array.
+ *
+ * @function extractContactsFromData
+ * @param {Object} data - The contact data object retrieved from the database.
+ * @param {Object} data[firebaseKey] - An object representing a contact with properties `name` and `color`.
+ */
+function extractContactsFromData(data) {
+    if (data) {
+        Object.entries(data).forEach(([firebaseKey, value]) => {
+            const { name, color } = value;
+            allContacts.push({ name, color });
+        });
+    }
+}
+
+/**
+ * Loads all tasks of a user from the database and stores them in the global `allTasks` array.
+ * 
+ * @async
+ * @function readAllTasksFromDatabase
+ * @param {string} userKey - The unique user ID used to fetch tasks from the database.
+ * @returns {Promise<void>} - Returns nothing, but handles task loading asynchronously.
+ * @throws {Error} If the data could not be fetched successfully.
+ */
 async function readAllTasksFromDatabase(userKey) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
@@ -1112,20 +1146,62 @@ async function readAllTasksFromDatabase(userKey) {
         }
         let data = await result.json();
         allTasks.length = 0;
-        if (data) {
-            Object.entries(data).forEach(([firebaseKey, value]) => {
-                value.id = firebaseKey;
-                allTasks.push(value);
-            });
-        }
+        extractTasksFromData(data);
     } catch (error) {
         console.error("error loading the data:", error);
     }
 }
 
+/**
+ * Extracts tasks from the provided data and adds them to the global `allTasks` array.
+ * Each task is assigned a unique `id` based on its Firebase key.
+ * 
+ * @function extractTasksFromData
+ * @param {Object} data - The data object containing task information from Firebase.
+ * @returns {void} This function does not return any value. It updates the global `allTasks` array.
+ */
+function extractTasksFromData(data) {
+    if (data) {
+        Object.entries(data).forEach(([firebaseKey, value]) => {
+            value.id = firebaseKey;
+            allTasks.push(value);
+        });
+    }
+}
+
+/**
+ * Synchronizes all contacts with tasks for a specific user by loading the data from the database and updating assigned contacts in tasks.
+ * 
+ * This function performs three steps:
+ * 1. Loads all contacts from the database.
+ * 2. Loads all tasks from the database.
+ * 3. Updates the assigned contacts in each task based on the loaded contacts.
+ *
+ * @async
+ * @function syncAllContactsWithTasks
+ * @param {string} userKey - The unique user ID to fetch contacts and tasks from the database.
+ * @returns {Promise<void>} - This function does not return any value but performs the synchronization asynchronously.
+ * @throws {Error} If any of the data retrieval operations fail.
+ */
 async function syncAllContactsWithTasks(userKey) {
     await readAllContactsFromDatabase(userKey);
     await readAllTasksFromDatabase(userKey);
+    updateAssignedContactsInTasks(userKey);
+}
+
+/**
+ * Updates the assigned contacts in all tasks by matching the contacts' names with the existing contacts data.
+ * The function iterates over all tasks and updates the `assignedContacts` field by replacing contact names 
+ * with the corresponding contact objects from the `allContacts` array. 
+ * After the update, the tasks are saved back to the database.
+ * 
+ * @async
+ * @function updateAssignedContactsInTasks
+ * @param {string} userKey - The unique user ID used to identify the tasks and save the updated data to the database.
+ * @returns {Promise<void>} - This function does not return any value but performs the update operation asynchronously.
+ * @throws {Error} If the tasks cannot be saved back to the database.
+ */
+async function updateAssignedContactsInTasks(userKey) {
     let updatedTasks = allTasks.map(task => {
         if (!task.assignedContacts) return task;
         task.assignedContacts = task.assignedContacts
@@ -1134,32 +1210,60 @@ async function syncAllContactsWithTasks(userKey) {
                 return updatedContact ? updatedContact : null;
             })
             .filter(contact => contact !== null);
-
         return task;
     });
     await saveTasksToDatabase(userKey, updatedTasks);
 }
 
+/**
+ * Saves the provided tasks to the database for a specific user.
+ * 
+ * This function first checks if the provided tasks are an array and if it contains any tasks. 
+ * If valid tasks are provided, it proceeds to update all tasks in the database.
+ * 
+ * @async
+ * @function saveTasksToDatabase
+ * @param {string} userKey - The unique identifier for the user whose tasks will be saved.
+ * @param {Array} tasks - The array of tasks that need to be saved to the database.
+ * @throws {Error} If an error occurs while saving the tasks to the database.
+ * @returns {Promise<void>} - This function returns nothing but performs the task-saving process asynchronously.
+ */
 async function saveTasksToDatabase(userKey, tasks) {
     if (!Array.isArray(tasks) || tasks.length === 0) {
         console.warn("Es wurden keine Tasks zum Speichern übergeben Vorgang abgebrochen.");
         return;
     }
-
     try {
         let updates = {};
-        tasks.forEach(task => {
-            updates[task.id] = { ...task };
-        });
-
-        await fetch(`${BASE_URL}/users/${userKey}/tasks.json`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(updates)
-        });
+        updateAllTasksInDatabase(userKey, tasks, updates)
     } catch (error) {
         console.error("Fehler beim Speichern der Tasks:", error);
     }
+}
+
+/**
+ * Updates all tasks in the database for a specific user.
+ * 
+ * This function iterates over the provided tasks and creates an update object for each task, 
+ * then sends a PUT request to update the tasks in the database.
+ * 
+ * @async
+ * @function updateAllTasksInDatabase
+ * @param {string} userKey - The unique identifier for the user whose tasks will be updated.
+ * @param {Array} tasks - The array of tasks to be updated in the database.
+ * @param {Object} updates - An object that will hold the updated task data.
+ * @throws {Error} If an error occurs while updating the tasks in the database.
+ * @returns {Promise<void>} - This function returns nothing but performs the task updating process asynchronously.
+ */
+async function updateAllTasksInDatabase(userKey, tasks, updates) {
+    tasks.forEach(task => {
+        updates[task.id] = { ...task };
+    });
+    await fetch(`${BASE_URL}/users/${userKey}/tasks.json`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updates)
+    });
 }
 
 function openMobileMoveMenu(event) {
@@ -1384,7 +1488,7 @@ function createTaskOverlay() {
         throwError();
     }
 }
-let categoryFromClickedButton = "";
+
 function saveCategoryFromClickedButton(event) {
     categoryFromClickedButton = event.currentTarget.getAttribute("data-category");
 }
@@ -1474,3 +1578,11 @@ async function loadAllDataFromDatabaseAndRenderSearchTasks() {
     await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
     checkSearchWordAndLoadAllSearchTasks();
 }
+
+/**
+ * Adds an event listener to the window that triggers the `setHeightForDragFields` function whenever the window is resized.
+ * This function ensures that the height of the drag fields is adjusted accordingly when the window size changes.
+ *
+ * @returns {void} This function does not return any value.
+ */
+window.addEventListener("resize", setHeightForDragFields);
