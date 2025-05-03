@@ -197,13 +197,13 @@
                 </div>
             </div>
         </div>
-        <div class="big-task-card__overlay d-none" id="big-task-card__overlay">
-            <div class="big-task-card__box" id="big-task-card__box">
+        <div class="big-task-card__overlay d-none" id="big-task-card__overlay" onclick="event.stopPropagation(); addClassSlideBack()">
+            <div class="big-task-card__box" id="big-task-card__box" onclick="event.stopPropagation()">
 
             </div>
         </div>
-        <div class="add-task__overlay d-none" id="add-task__overlay">
-            <div class="add-task__box" id="add-task__box">
+        <div class="add-task__overlay d-none" id="add-task__overlay" onclick="event.stopPropagation(); addTaskBoxAddClassSlideBack()">
+            <div class="add-task__box" id="add-task__box" onclick="event.stopPropagation()">
 
             </div>
         </div>
