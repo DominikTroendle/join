@@ -16,6 +16,9 @@ let task = {};
 
 let unvalidInputs = [];
 
+/**
+ * Initializes different functions on page load
+ */
 async function initialize() {
     let contactsObj = await getContacts();
     loadContactInfo(contactsObj);
@@ -24,6 +27,10 @@ async function initialize() {
 
 initialize();
 
+/**
+ * Selects or deselects the clicked button
+ * @param {String} prio - name of the selected priority button
+ */
 function selectPrioButton(prio) {
     let button = document.getElementById(`${prio}`);
     let svg = document.getElementById(`svg-${prio}`);
@@ -37,6 +44,13 @@ function selectPrioButton(prio) {
     }
 }
 
+/**
+ * Toggles different classes on clicked button and svg
+ * @param {Boolean} boolean - boolean to define whether the classes should be added (true) or removed (false)
+ * @param {HTMLElement} button - button element whose classes should be change
+ * @param {HTMLElement} svg - svg element whose classes should be changed
+ * @param {String} prio - name of the selected priority
+ */
 function toggleButtonClasses(boolean, button, svg, prio) {
     if (boolean) {
         button.classList.remove(`${prio}`);
@@ -51,6 +65,9 @@ function toggleButtonClasses(boolean, button, svg, prio) {
     }
 }
 
+/**
+ * Removes all classes from priority buttons to restore default state
+ */
 function clearPrioButtons() {
     let prios = ["urgent", "medium", "low"];
     for (let i = 0; i < prios.length; i++) {
@@ -63,6 +80,9 @@ function clearPrioButtons() {
     }
 }
 
+/**
+ * Selects default (medium) priority button
+ */
 function selectDefaultPrioButton() {
     let button = document.getElementById('medium');
     let svg = document.getElementById('svg-medium');
@@ -72,6 +92,9 @@ function selectDefaultPrioButton() {
     svg.classList.add('filter-white');
 }
 
+/**
+ * Toggles the custom dropdown menu with ID "dropdown-assigned" on click and toggles the inputs placeholder to be hidden (if dropdown is opened) or shown (if dropdown is closed)
+ */
 function toggleAssignOptions() {
     renderAssignOptions(contacts);
     let container = document.getElementById('dropdown-assign');
@@ -89,6 +112,11 @@ function toggleAssignOptions() {
     }
 }
 
+/**
+ * Changes the image source of the dropdown menu arrow
+ * @param {Boolean} boolean - boolean to determine which image source should be used
+ * @param {String} dropdown - name of the dropdown menu whose image source should be changed
+ */
 function changeDropdownArrow(boolean, dropdown) {
     let dropwdownArrow = document.getElementById(`arrow-dropdown-${dropdown}`);
     if (boolean) {
@@ -98,12 +126,18 @@ function changeDropdownArrow(boolean, dropdown) {
     }
 }
 
+/**
+ * Toggles focus on the input element with ID "assigned-to"
+ */
 function toggleInputFocus() {
     if (!document.getElementById('dropdown-assign').classList.contains('d-none')) {
         document.getElementById('assigned-to').focus();
     }
 }
 
+/**
+ * Toggles the custom dropdown menu with ID "dropdown-category" on click and determines whether the dropdow arrow should be changed (if dropwodn is closed)
+ */
 function toggleCategoryOptions() {
     let container = document.getElementById('dropdown-category');
     container.classList.toggle('d-none');
@@ -115,15 +149,26 @@ function toggleCategoryOptions() {
     }
 }
 
+/**
+ * Prevents the default behavior of the given event
+ * @param {Event} event - event object whose default action should be prevented
+ */
 function preventDefault(event) {
     event.preventDefault();
 }
 
+/**
+ * Changes the value of the input with ID "category" to the passed category
+ * @param {String} category - name of the selected category
+ */
 function displayCategory(category) {
     document.getElementById('category').value = category;
     closeDropdown();
 }
 
+/**
+ * Closes all dropdown menus and changes the dropdown arrows back to their default state
+ */
 function closeDropdown() {
     document.getElementById('dropdown-assign').classList.add('d-none');
     document.getElementById('dropdown-category').classList.add('d-none');
@@ -135,10 +180,18 @@ function closeDropdown() {
     changeDropdownArrow(false, 'category');
 }
 
+/**
+ * Stops the propagation of the given event, preventing it from bubbling up the DOM tree
+ * @param {Event} event - event object whose prpgataion sould be stopped
+ */
 function stopPropagation(event) {
     event.stopPropagation();
 }
 
+/**
+ * Renders the select options of the dropdown menu with ID "dropdown-assigned" based on whether there are alöready selected options or not
+ * @param {Array} array - array of the select options to be rendered
+ */
 function renderAssignOptions(array) {
     let dropDown = document.getElementById('dropdown-assign');
     dropDown.innerHTML = "";
@@ -150,6 +203,11 @@ function renderAssignOptions(array) {
     checkForScrollableContainer(dropDown);
 }
 
+/**
+ * Checks whether the given container should be scrollable based on the number of contacts or subtasks to be rendered
+ * Applies the appropriate scroll behavior by calling helper functions
+ * @param {HTMLElement} container - div element to apply scroll behaviour to
+ */
 function checkForScrollableContainer(container) {
     if (((contacts.length < 6) && (container.id == "dropdown-assign")) || ((subtasksCount <= 2) && (container.id == "container-subtasks"))) {
         containerScrollable(container);
@@ -158,6 +216,10 @@ function checkForScrollableContainer(container) {
     }
 }
 
+/**
+ * Applies different styles to the given container to adjust its width and remove scroll-related margin classes
+ * @param {HTMLElement} container - div element to add classes to
+ */
 function containerScrollable(container) {
     if (container.id == "dropdown-assign") {
         container.style.width = "440px";
@@ -173,6 +235,10 @@ function containerScrollable(container) {
     }
 }
 
+/**
+ * Applies scroll-related margin classes to the given container
+ * @param {HTMLElement} container - div element to add classes to
+ */
 function containerNotScrollable(container) {
     if (container.id = "container-subtasks") {
         let subtaskContainers = Array.from(document.getElementsByClassName('container-subtask'));
@@ -182,6 +248,11 @@ function containerNotScrollable(container) {
     }
 }
 
+/**
+ * Renders contacts from a given array to the given dropdown element
+ * @param {Array} array - array whose contacts are rendered
+ * @param {HTMLElement} dropDown - dropdown element in which contacts are rendered
+ */
 function renderDefaultContacts(array, dropDown) {
     for (let i = 0; i < array.length; i++) {
         let contactName = array[i].name;
@@ -190,6 +261,11 @@ function renderDefaultContacts(array, dropDown) {
     }
 }
 
+/**
+ * Iterates over the given array and updates their display in the dropdown based on whether each contact is curretly selected
+ * @param {Array} array - array of contacts to check
+ * @param {HTMLElement} dropDown - dropdown element in which contacts are rendered
+ */
 function checkForSelectedContacts(array, dropDown) {
     for (let i = 0; i < array.length; i++) {
         let contactName = array[i].name;
@@ -202,6 +278,12 @@ function checkForSelectedContacts(array, dropDown) {
     }
 }
 
+/**
+ * Renders the given contact info (contactName and color) as selected to the given dropdown
+ * @param {HTMLElement} dropDown - dropdown element in which contacts are rendered
+ * @param {String} contactName - name of the contact to be rendered
+ * @param {String} color - name of the color that is assigned to the contact
+ */
 function renderContactAsSelected(dropDown, contactName, color) {
     renderContactAsDefault(dropDown, contactName, color);
     let contactDiv = document.getElementById(`container-${contactName}`);
@@ -209,6 +291,12 @@ function renderContactAsSelected(dropDown, contactName, color) {
     toggleSelection(true, contactDiv, icon);
 }
 
+/**
+ * Renders the given contact info (contactName and color) as default to the given dropdown
+ * @param {HTMLElement} dropDown - dropdown element in which contacts are rendered
+ * @param {String} contactName - name of the contact to be rendered
+ * @param {String} color - name of the color that is assigned to the contact
+ */
 function renderContactAsDefault(dropDown, contactName, color) {
     dropDown.innerHTML += returnAssignedContactHTML(contactName, color);
     document.getElementById(`${contactName}`).innerText = contactName;
@@ -216,12 +304,22 @@ function renderContactAsDefault(dropDown, contactName, color) {
     document.getElementById(`initials-${contactName}`).classList.add(`${color}`);
 }
 
+/**
+ * Checks if the given contact is in the array of selected contacts
+ * @param {String} contactName - name of the contact to check
+ * @returns {Boolean} - true if the contact is in the array, otherwise false
+ */
 function isInSelectedContacts(contactName) {
     let arr = [];
     selectedContacts.forEach(contact => arr.push(contact.name));
     return arr.includes(contactName);
 }
 
+/**
+ * Generates initials from a contacts full name
+ * @param {*} contactName - name of the contact to generate initials from
+ * @returns {string} - returns generated initials
+ */
 function getInitials(contactName) {
     let name = contactName.trim().split(' ').filter(n => n);
     let initials = '';
@@ -231,6 +329,11 @@ function getInitials(contactName) {
     return initials
 }
 
+/**
+ * Toggles selection of the given contact, updates the selected contacts and displays all selected contacts
+ * @param {String} name - name of the contact being selected
+ * @param {String} color - assigned color of the contact
+ */
 function selectContact(name, color) {
     let contactDiv = document.getElementById(`container-${name}`);
     let icon = document.getElementById(`icon-${name}`);
