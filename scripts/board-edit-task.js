@@ -11,7 +11,7 @@ const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebased
  * 
  * This function clears the existing `contactsBigTaskCardEdit` array, retrieves the updated
  * contact list using `getContactsForBigTaskCardEdit()`, and then processes the retrieved contacts through
- * `loadContactInfoInfoForBigTaskCardEdit()` for rendering or further use in the UI (e.g., in the Big Task Card Edit view).
+ * `loadContactInfoForBigTaskCardEdit()` for rendering or further use in the UI (e.g., in the Big Task Card Edit view).
  * 
  * @async
  * @function
@@ -24,7 +24,7 @@ const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebased
 async function loadAllContacts() {
     contactsBigTaskCardEdit.length = 0;
     let contactsObj = await getContactsForBigTaskCardEdit();
-    loadContactInfoInfoForBigTaskCardEdit(contactsObj);
+    loadContactInfoForBigTaskCardEdit(contactsObj);
 }
 
 /**
@@ -75,7 +75,7 @@ async function getContactsForBigTaskCardEdit(path = "") {
  * 
  * @example
  * const contactData = await getContactsForBigTaskCardEdit();
- * await loadContactInfoInfoForBigTaskCardEdit(contactData);
+ * await loadContactInfoForBigTaskCardEdit(contactData);
  */
 async function loadContactInfoForBigTaskCardEdit(contactsObj) {
     let keys = Object.keys(contactsObj.allContacts);
