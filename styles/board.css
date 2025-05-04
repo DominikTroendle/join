@@ -1361,7 +1361,7 @@ footer {
 }
 
 .container-subtask {
-    width: 445px;
+    width: 425px;
 }
 
 .subtask-text {
@@ -1370,9 +1370,13 @@ footer {
 }
 
 .container-custom-select-options {
-    width: 445px;
+    width: 440px;
 }
 
+.container-custom-select-option {
+    width: 425px;
+    max-width: 425px;
+}
 #container-prioritys,
 .big-task-card-edit__prioritys-box {
     padding-bottom: 0;
@@ -1922,39 +1926,42 @@ footer {
     }
 }
 
-@media(max-width: 1185px) {
-    .container-custom-select-options {
-        width: 445px;
-    }
-}
-
 @media(max-width: 1187px) {
-    #container-input-assigned {
+    #container-input-assigned,
+    #container-input-subtask,
+    .container-custom-select-options {
         width: 400px;
     }
 
-    #container-input-subtask {
-        width: 400px;
+    .container-subtask,
+    .container-custom-select-option {
+        width: 385px;
     }
 }
 
 @media(max-width: 1100px) {
-    #container-input-assigned {
+    #container-input-assigned,
+    #container-input-subtask,
+    .container-custom-select-options {
         width: 380px;
     }
 
-    #container-input-subtask {
-        width: 380px;
+    .container-subtask,
+    .container-custom-select-option {
+        width: 365px;
     }
 }
 
 @media(max-width: 1060px) {
-    #container-input-assigned {
+    #container-input-assigned,
+    #container-input-subtask,
+    .container-custom-select-options {
         width: 370px;
     }
 
-    #container-input-subtask {
-        width: 370px;
+    .container-subtask,
+    .container-custom-select-option {
+        width: 355px;
     }
 }
 
