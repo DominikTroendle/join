@@ -384,7 +384,7 @@ function testDateForBigTaskCardEdit() {
     }
     let day = +date[1], month = +date[2], year = +date[3];
     let dateObj = new Date(`${year}-${month}-${day}`);
-    validateDueDateForBigTaskCardEdit(day, month, year, dateObj);
+    return validateDueDateForBigTaskCardEdit(dateObj, day, month, year);
 }
 
 /**
@@ -397,7 +397,7 @@ function testDateForBigTaskCardEdit() {
  * @param {Date} dateObj - The Date object representing the due date.
  * @returns {boolean} Returns `true` if the due date is valid, otherwise `false`.
  */
-function validateDueDateForBigTaskCardEdit(day, month, year, dateObj) {
+function validateDueDateForBigTaskCardEdit(dateObj, day, month, year) {
     if (!correctDateFormat(dateObj, day, month, year)) {
         return false;
     } else if (isPastDate(dateObj)) {
