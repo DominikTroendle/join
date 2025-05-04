@@ -1362,9 +1362,6 @@ footer {
 
 .container-subtask {
     width: 425px;
-}
-
-.subtask-text {
     word-break: normal;
     overflow-wrap: anywhere;
 }
