@@ -10,8 +10,8 @@ function addNewContactOverlay() {
     setTimeout(() => {
         newContactContainer.classList.add('active');
     }, 10)
-    
-    newContactOverlay.onclick = function(event){
+
+    newContactOverlay.onclick = function (event) {
         if (event.target === newContactOverlay) {
             newContactOverlay.classList.remove('active');
             newContactContainer.classList.remove('active');
@@ -19,6 +19,9 @@ function addNewContactOverlay() {
     }
 }
 
+/**
+ * Closes the "add new contact" overlay with a fade-out effect.
+ */
 function closeAddNewContact() {
     let newContactOverlay = document.querySelector('.new-contact-overlay');
     let newContactContainer = document.querySelector('.new-Contect-Container');
@@ -64,6 +67,15 @@ async function addUserToContactList(event, form) {
     return false;
 }
 
+/**
+ * Creates a contact object from form input values.
+ * 
+ * @param {HTMLFormElement} form - The form containing contact inputs.
+ * 
+ * @param {string} color - The contact's assigned color.
+ * 
+ * @returns {Promise<Object>} The contact object.
+ */
 async function createContact(form, color) {
     return {
         name: form.querySelector('#name').value,
@@ -89,12 +101,26 @@ async function createContact(form, color) {
     };
 }
 
+/**
+ * Formats a phone number to international format with +49 prefix.
+ * 
+ * @param {string} phone - Input phone number.
+ * 
+ * @returns {string} Formatted phone number.
+ */
 function cleanPhoneNumber(phone) {
     let digits = phone.replace(/\D/g, '');
     if (digits.startsWith('0')) digits = '49' + digits.slice(1);
     return digits.startsWith('49') ? '+' + digits : '+' + digits;
 }
 
+/**
+ * Formats a phone number by separating the country code and grouping the rest.
+ * 
+ * @param {string} phone - Raw phone number input.
+ * 
+ * @returns {string} Formatted phone number.
+ */
 function formatPhone(phone) {
     const cleaned = cleanPhoneNumber(phone);
     const country = cleaned.slice(0, 3);
@@ -129,8 +155,8 @@ function editContactOverlay(contactKey) {
     setTimeout(() => {
         editContactContainer.classList.add('active');
     }, 10)
-    
-    editContactOverlay.onclick = function(event){
+
+    editContactOverlay.onclick = function (event) {
         if (event.target === editContactOverlay) {
             editContactOverlay.classList.remove('active');
             editContactContainer.classList.remove('active');
@@ -138,6 +164,9 @@ function editContactOverlay(contactKey) {
     }
 }
 
+/**
+ * Closes the edit contact overlay with a fade-out effect.
+ */
 function closeEditContact() {
     let newContactOverlay = document.querySelector('.edit-contact-overlay');
     let newContactContainer = document.querySelector('.edit-Contect-Container');
@@ -194,6 +223,13 @@ async function editContact(event, form) {
     await loadContactList();
 }
 
+/**
+ * Normalizes a phone number by removing non-digits and converting leading 0 to country code 49.
+ * 
+ * @param {string} phone - The phone number to normalize.
+ * 
+ * @returns {string} Normalized phone number.
+ */
 function clearVievEditNumber(phone) {
     let digits = phone.replace(/\D/g, '');
     if (digits.startsWith('0')) digits = '49' + digits.slice(1);
@@ -216,12 +252,26 @@ async function createEditContact(form, color) {
     };
 }
 
+/**
+ * Formats a phone number to international format starting with +49.
+ * 
+ * @param {string} phone - Input phone number.
+ * 
+ * @returns {string} Formatted phone number.
+ */
 function cleanPhoneNumber(phone) {
     let digits = phone.replace(/\D/g, '');
     if (digits.startsWith('0')) digits = '49' + digits.slice(1);
     return digits.startsWith('49') ? '+' + digits : '+' + digits;
 }
 
+/**
+ * Formats a phone number by grouping digits after the country code.
+ * 
+ * @param {string} phone - Raw phone number input.
+ * 
+ * @returns {string} Formatted phone number.
+ */
 function formatPhone(phone) {
     const cleaned = cleanPhoneNumber(phone);
     const country = cleaned.slice(0, 3);
@@ -229,51 +279,82 @@ function formatPhone(phone) {
     return `${country} ${groups}`.trim();
 }
 
+/**
+ * Handles click events for the mobile processing menu, toggling visibility of UI elements.
+ */
 function procressingClickMenu() {
     let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.small-menu-button');
-    let procressButton = document.querySelector('.mobile-procressing-area-button')
+    let procressButton = document.querySelector('.mobile-procressing-area-button');
     procressOverlay.classList.add('active');
     procressOverlay.classList.remove('close');
     menuBox.classList.add('inactive');
     supportBox.classList.add('inactive');
     procressButton.classList.add('active');
-
-    procressOverlay.onclick = function(event){
+    procressOverlay.onclick = (event) => {
         if (event.target === procressOverlay) {
-            procressOverlay.classList.add('close');
-            procressOverlay.classList.remove('active');
-            menuBox.classList.remove('inactive');
-            supportBox.classList.remove('inactive');
-            setTimeout(() => {
-                procressButton.classList.remove('active');
-            }, 1000);
+            handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton);
         }
+    };
+}
+
+/**
+ * Handles click event to toggle overlay and menu visibility.
+ * 
+ * @param {HTMLElement} procressOverlay - The overlay element.
+ * 
+ * @param {HTMLElement} menuBox - The menu box element.
+ * 
+ * @param {HTMLElement} supportBox - The support box element.
+ * 
+ * @param {HTMLElement} procressButton - The process button element.
+ */
+function handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton) {
+    procressOverlay.classList.add('close');
+    procressOverlay.classList.remove('active');
+    menuBox.classList.remove('inactive');
+    supportBox.classList.remove('inactive');
+    setTimeout(() => {
+        procressButton.classList.remove('active');
+    }, 1000);
+}
+
+/**
+ * Toggles the background color of a button between two colors.
+ * 
+ * @param {HTMLButtonElement} button - The button element to toggle.
+ */
+function toggleButtonBackgroundcolor(button) {
+    if (!button.style.backgroundColor || button.style.backgroundColor === '#2A3647') {
+        button.style.backgroundColor = '#29abe2';
+    } else {
+        button.style.backgroundColor = '#2A3647';
     }
 }
 
-function toggleButtonBackgroundcolor(button) {
-        if (!button.style.backgroundColor || button.style.backgroundColor === '#2A3647') {
-            button.style.backgroundColor = '#29abe2';
-        } else {
-            button.style.backgroundColor = '#2A3647';
-        }
-    
-}
-
+/**
+ * Toggles the color of a button and updates its background.
+ * 
+ * @param {HTMLElement} button - The button element to modify.
+ */
 function toggleButtonColor(button) {
     if (!button.style.color || button.style.color === 'rgb(42, 54, 71)') {
         button.style.color = '#29abe2';
-    } 
+    }
     button = document.querySelector('.procressing-area-edit-button-mobile');
     button.classList.add('procressing-area-button-mobile-backgroundcolor');
 }
 
+/**
+ * Toggles the color of the remove button and updates the mobile edit button style.
+ * 
+ * @param {HTMLElement} button - The button element to toggle the color of.
+ */
 function toggleRemoveButtonColor(button) {
     if (!button.style.color || button.style.color === '#29abe2') {
         button.style.color = 'rgb(42, 54, 71)';
-    } 
+    }
     button = document.querySelector('.procressing-area-edit-button-mobile');
     button.classList.remove('procressing-area-button-mobile-backgroundcolor');
     button.style.color = 'rgb(42, 54, 71)';

@@ -16,7 +16,6 @@ html {
 
 body {
     scroll-behavior: smooth;
-    min-height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;

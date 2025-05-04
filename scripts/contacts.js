@@ -241,6 +241,9 @@ function selectContact(element) {
     }
 }
 
+/**
+ * Closes mobile contact overlay and resets contact styles.
+ */
 function closeContactMobilButton() {
     document.querySelector('.more-information-container').classList.remove('mobile-overlay');
     document.querySelectorAll('.container-contact').forEach(contact => {
@@ -278,36 +281,48 @@ async function moreContactInformation(contactName) {
 }
 
 /**
- * Updates the contact template.
+ * Updates a contact template in the DOM with new information.
  * 
- * @param {string} contactKey - Contact identifier.
+ * @param {string} contactKey - The unique identifier for the contact.
  * 
- * @param {Object} updatedContact - Updated contact data.
+ * @param {Object} updatedContact - The updated contact information.
+ * 
+ * @returns {Promise<void>} - A promise that resolves when the update is complete.
  */
 async function updateContactTemplate(contactKey, updatedContact) {
     let contactElement = document.querySelector(`#contact-${contactKey}`);
-    let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
-    let menuBox = document.querySelector('.menu-box');
-    let supportBox = document.querySelector('.small-menu-button');
-    let procressButton = document.querySelector('.mobile-procressing-area-button')
     if (contactElement) {
-    let contact = allContacts.find(c => c.key === contactKey)
-    let initials = findInitials(updatedContact.name);
-    let template = await selectMoreContactInformationTemplate(contact, initials);
-    let newElement = document.createElement("div");
+        let contact = allContacts.find(c => c.key === contactKey);
+        let initials = findInitials(updatedContact.name);
+        let template = await selectMoreContactInformationTemplate(contact, initials);
+        let newElement = document.createElement("div");
         newElement.id = `contact-${contactKey}`;
         newElement.innerHTML = template;
         contactElement.replaceWith(newElement);
     }
     if (contactElement) {
-        procressOverlay.classList.add('close');
-            procressOverlay.classList.remove('active');
-            menuBox.classList.remove('inactive');
-            supportBox.classList.remove('inactive');
-            setTimeout(() => {
-                procressButton.classList.remove('active');
-            }, 1000);
+        resetUiElements(); // Ruft die ausgelagerte Funktion auf
     }
+}
+
+/**
+ * Resets UI elements by updating their class lists.
+ * 
+ * Hides processing overlay, enables menu and support boxes, and deactivates the process button after a delay.
+ */
+function resetUiElements() {
+    let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
+    let menuBox = document.querySelector('.menu-box');
+    let supportBox = document.querySelector('.small-menu-button');
+    let procressButton = document.querySelector('.mobile-procressing-area-button');
+
+    procressOverlay.classList.add('close');
+    procressOverlay.classList.remove('active');
+    menuBox.classList.remove('inactive');
+    supportBox.classList.remove('inactive');
+    setTimeout(() => {
+        procressButton.classList.remove('active');
+    }, 1000);
 }
 
 /**
@@ -345,18 +360,12 @@ async function deleteContact(key) {
     let procressEditContainer = document.querySelector('.edit-contact-overlay');
     let procressButton = document.querySelector('.mobile-procressing-area-button');
     let userId = localStorage.getItem("userId");
-    if (!key) {
-        console.error("Fehler: Kein gültiger Key übergeben!");
-        return;
-    }
+    if (!key) { return;}
     try {
         let response = await fetch(`${BASE_URL}/users/${userId}/allContacts/${key}.json`, {
             method: "DELETE",
         });
-        if (!response.ok) {
-            throw new Error(`Löschen fehlgeschlagen: ${response.status}`);
-        }
-        console.log(`Kontakt mit Key ${key} erfolgreich gelöscht!`);
+        if (!response.ok) {}
         allContacts = allContacts.filter(contact => contact.key !== key);
         loadContactList();
         if (procressEditContainer) {
@@ -365,7 +374,5 @@ async function deleteContact(key) {
         document.getElementById('moreInformationContact').innerHTML = '';
         document.querySelector('.more-information-container').classList.remove('mobile-overlay');
         procressButton.style.backgroundColor = '#2A3647'
-    } catch (error) {
-        console.error("Fehler beim Löschen:", error);
-    }
+    } catch (error) {}
 }
