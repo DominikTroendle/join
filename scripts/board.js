@@ -155,7 +155,7 @@ function moveTo(event, dragFieldId, dragFieldArray) {
  * @returns {Promise<void>} Resolves when the task is successfully moved to the new category 
  * and the data is updated in the database.
  */
-async function allowDrop2(event, dragFieldArray) {
+async function processTaskDrop(event, dragFieldArray) {
     newCategory = event.currentTarget.id;
     newArray = dragFieldArray;
     newCategoryName = event.currentTarget.getAttribute("data-category");
@@ -610,13 +610,14 @@ async function putDataInDatabase(userKey, cardId, data, extendedPath) {
 }
 
 /**
- * Toggles the checked state of a subtask and updates the task's subtasks in the database.
- * This function changes the checked state of a subtask when a checkbox is clicked, updates the task's data in the database,
- * and updates the number of completed subtasks.
- *
+ * Handles the toggling of a subtask's checked state when a checkbox is clicked.
+ * 
+ * Retrieves the current state and index of the subtask from the event target,
+ * toggles its value, updates the corresponding task object and checkbox element,
+ * and delegates the update logic to `updateSubtaskCheckedStatus`.
+ * 
  * @async
- * @param {Event} event - The event triggered by clicking the checkbox of the subtask.
- * @returns {Promise<void>} Resolves when the subtask's checked state has been updated in the database and the task is refreshed.
+ * @param {Event} event - The click event triggered on the subtask checkbox element.
  */
 async function changeCheckedSubtask(event) {
     let oldSubtaskChecked = event.currentTarget.getAttribute("data-checked");
@@ -624,6 +625,23 @@ async function changeCheckedSubtask(event) {
     let index = event.currentTarget.getAttribute("data-index");
     let objectFromCurrentSmallTaskCard = currentArray.find(element => element.id == currentTaskCardId);
     let currentCheckbox = document.getElementById(`big-task-card__checkbox${index}`);
+    updateSubtaskCheckedStatus(newSubtaskChecked, index, objectFromCurrentSmallTaskCard, currentCheckbox);
+}
+
+/**
+ * Updates the checked state of a specific subtask both in the data model and in the UI,
+ * then persists the change to the database.
+ * 
+ * If the update is successful, it triggers a UI update to reflect the number of completed subtasks.
+ * If the database update fails, an error message is logged to the console.
+ * 
+ * @async
+ * @param {string} newSubtaskChecked - The new checked status ("true" or "false") for the subtask.
+ * @param {number} index - The index of the subtask within the task's subtasks array.
+ * @param {Object} objectFromCurrentSmallTaskCard - The task object that contains the subtask.
+ * @param {HTMLElement} currentCheckbox - The checkbox element in the DOM representing the subtask.
+ */
+async function updateSubtaskCheckedStatus(newSubtaskChecked, index, objectFromCurrentSmallTaskCard, currentCheckbox) {
     objectFromCurrentSmallTaskCard.subtasks[index].checked = newSubtaskChecked;
     currentCheckbox.dataset.checked = newSubtaskChecked;
     let putResponse = await putDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, newSubtaskChecked, `subtasks/${index}/checked`);
@@ -1243,14 +1261,14 @@ async function updateAssignedContactsInTasks(userKey) {
  */
 async function saveTasksToDatabase(userKey, tasks) {
     if (!Array.isArray(tasks) || tasks.length === 0) {
-        console.warn("Es wurden keine Tasks zum Speichern übergeben Vorgang abgebrochen.");
+        console.warn("No tasks were transferred for saving Process cancelled.");
         return;
     }
     try {
         let updates = {};
         updateAllTasksInDatabase(userKey, tasks, updates)
     } catch (error) {
-        console.error("Fehler beim Speichern der Tasks:", error);
+        console.error("Error when saving the tasks:", error);
     }
 }
 
@@ -1716,6 +1734,13 @@ function saveCategoryFromClickedButton(event) {
     categoryFromClickedButton = event.currentTarget.getAttribute("data-category");
 }
 
+/**
+ * Collects task data from the task overlay input fields and prepares the task object.
+ * 
+ * If no category is selected (`categoryFromClickedButton` is falsy), the function returns early.
+ * Otherwise, it assigns all relevant task properties from user input and global variables.
+ * The function finishes by delegating additional property setup to `buildTaskFromOverlayInputs()`.
+ */
 function saveTaskOverlay() {
     if (!categoryFromClickedButton) return;
     task.category = categoryFromClickedButton;
@@ -1728,6 +1753,17 @@ function saveTaskOverlay() {
     task.subtasks = subtasks;
     task.taskDueDate = document.getElementById('due-date').value;
     task.assignedContacts = selectedContacts;
+    buildTaskFromOverlayInputs();
+}
+
+/**
+ * Saves the prepared task object to Firebase and resets the task variable.
+ * 
+ * This function assumes that the global `task` object has already been populated
+ * with all necessary fields. After saving, it clears the `task` object to prepare
+ * for potential future use.
+ */
+function buildTaskFromOverlayInputs() {
     saveToFirebase("tasks/", task);
     task = {};
 }

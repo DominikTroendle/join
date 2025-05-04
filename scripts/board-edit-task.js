@@ -10,8 +10,8 @@ const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebased
  * Asynchronously loads all contacts and updates the `contactsBigTaskCardEdit` array.
  * 
  * This function clears the existing `contactsBigTaskCardEdit` array, retrieves the updated
- * contact list using `getContacts2()`, and then processes the retrieved contacts through
- * `loadContactInfo2()` for rendering or further use in the UI (e.g., in the Big Task Card Edit view).
+ * contact list using `getContactsForBigTaskCardEdit()`, and then processes the retrieved contacts through
+ * `loadContactInfoInfoForBigTaskCardEdit()` for rendering or further use in the UI (e.g., in the Big Task Card Edit view).
  * 
  * @async
  * @function
@@ -23,8 +23,8 @@ const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebased
  */
 async function loadAllContacts() {
     contactsBigTaskCardEdit.length = 0;
-    let contactsObj = await getContacts2();
-    loadContactInfo2(contactsObj);
+    let contactsObj = await getContactsForBigTaskCardEdit();
+    loadContactInfoInfoForBigTaskCardEdit(contactsObj);
 }
 
 /**
@@ -41,9 +41,9 @@ async function loadAllContacts() {
  * @returns {Promise<Object>} A promise that resolves to the contact data as a JavaScript object.
  * 
  * @example
- * const contacts = await getContacts2();
+ * const contacts = await getContactsForBigTaskCardEdit();
  */
-async function getContacts2(path = "") {
+async function getContactsForBigTaskCardEdit(path = "") {
     userId = localStorage.getItem('userId');
     if (userId !== "guest") {
         path = userId;
@@ -64,7 +64,7 @@ async function getContacts2(path = "") {
  * 
  * Iterates over the keys in `contactsObj.allContacts`, extracts the `name` and `color` 
  * of each contact, and pushes them as simplified objects into the global array. 
- * Finally, it calls `sortContactsAlphabetically2` to sort the array.
+ * Finally, it calls `sortContactsAlphabeticallyForBigTaskCardEdit` to sort the array.
  * 
  * @async
  * @function
@@ -74,10 +74,10 @@ async function getContacts2(path = "") {
  * @returns {void}
  * 
  * @example
- * const contactData = await getContacts2();
- * await loadContactInfo2(contactData);
+ * const contactData = await getContactsForBigTaskCardEdit();
+ * await loadContactInfoInfoForBigTaskCardEdit(contactData);
  */
-async function loadContactInfo2(contactsObj) {
+async function loadContactInfoForBigTaskCardEdit(contactsObj) {
     let keys = Object.keys(contactsObj.allContacts);
     for (let index = 0; index < keys.length; index++) {
         let key = keys[index];
@@ -87,7 +87,7 @@ async function loadContactInfo2(contactsObj) {
         };
         contactsBigTaskCardEdit.push(contactObj);
     }
-    sortContactsAlphabetically2(contactsBigTaskCardEdit);
+    sortContactsAlphabeticallyForBigTaskCardEdit(contactsBigTaskCardEdit);
 }
 
 /**
@@ -104,9 +104,9 @@ async function loadContactInfo2(contactsObj) {
  * @returns {void}
  * 
  * @example
- * sortContactsAlphabetically2(contactsBigTaskCardEdit);
+ * sortContactsAlphabeticallyForBigTaskCardEdit(contactsBigTaskCardEdit);
  */
-function sortContactsAlphabetically2(contactsArray) {
+function sortContactsAlphabeticallyForBigTaskCardEdit(contactsArray) {
     if (userId != "guest" && contactsArray.length > 1) {
         let user = contactsArray.splice(0, 1);
         contactsArray.sort((a, b) => a.name.localeCompare(b.name));
@@ -882,7 +882,7 @@ function updateSelectedContactsForBigTaskCard(boolean, contactName, contactColor
     let obj = { name: contactName, color: contactColor };
     if (boolean) {
         selectedContactsBigTaskCardEdit.push(obj);
-        sortContactsAlphabetically2(selectedContactsBigTaskCardEdit);
+        sortContactsAlphabeticallyForBigTaskCardEdit(selectedContactsBigTaskCardEdit);
     } else {
         let index = selectedContactsBigTaskCardEdit.map(e => e.name).indexOf(obj.name);
         selectedContactsBigTaskCardEdit.splice(index, 1);
