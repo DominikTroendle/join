@@ -448,6 +448,7 @@ body {
 
     .register-link{
         padding-right: 0;
+        margin-top: 0;
     }
 
     .register-link a:hover {
@@ -557,14 +558,11 @@ body {
     }
 
     .login-container{
-        top: 560px;
+        top: 635px;
     }
 
     .user-login-container{
-        /* position: absolute; */
-        /* height: 100%; */
         top: 20px;
-        /* z-index: -1; */
         padding-top: 24px;
     }
 
@@ -587,13 +585,13 @@ body {
     }
 
     .legal-information {
-        margin-top: 700px;
+        margin-top: 70px;
     }
 }
 
 @media(max-width: 490px) {
     .login-container{
-        top: 570px;
+        top: 640px;
     }
 
     .no-value-content {
@@ -629,16 +627,16 @@ body {
     }
     
     .login-container{
-        top: 520px;
+        top: 600px;
     }
     
     .legal-information {
-        margin-top: 650px;
+        margin-top: 50px;
     }
 }
 
 @media(max-width: 360px){
     .legal-information {
-        margin-top: 650px;
+        margin-top: 50px;
     }
 }
