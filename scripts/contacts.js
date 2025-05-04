@@ -394,7 +394,7 @@ function editContactOverlay(contactKey) {
     let editContactContainer = document.querySelector('.edit-Contect-Container');
     editContactOverlay.classList.add('active');
     let contact = allContacts.find(c => c.key === contactKey);
-    if (!contact) return console.error("Fehler: Kontakt nicht gefunden!");
+    if (!contact) return;
     fillContactForm(contact);
     refOverlay.dataset.contactKey = contactKey;
     setTimeout(() => {
@@ -454,19 +454,44 @@ async function editContact(event, form) {
     event.preventDefault();
     let userId = localStorage.getItem("userId");
     let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
-    if (!contactKey) return console.error("Fehler: Kein gültiger Kontakt-Key gefunden!");
-    let updatedContact = {
-        name: form.querySelector('#editName').value,
-        email: form.querySelector('#editEmail').value,
-        phone: form.querySelector('#editPhone').value,
-        color: await randomBgColor()
-    };
+    if (!contactKey) return;
+    let updatedContact = await createContact(form, await randomBgColor());
+    updatedContact.name = form.querySelector('#editName').value;
+    updatedContact.email = form.querySelector('#editEmail').value;
     await putData(contactKey, updatedContact, userId);
     let contactIndex = allContacts.findIndex(c => c.key === contactKey);
     if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
     updateContactTemplate(contactKey, updatedContact);
     await loadContactList();
-    // editContactOverlay();
+}
+
+/**
+ * Creates a contact object.
+ * 
+ * @param {HTMLFormElement} form - The form element.
+ * 
+ * @param {string} color - The contact color.
+ */
+async function createContact(form, color) {
+    return {
+        name: form.querySelector('#editName').value,
+        email: form.querySelector('#editEmail').value,
+        phone: formatPhone(form.querySelector('#editPhone').value),
+        color: color
+    };
+}
+
+function cleanPhoneNumber(phone) {
+    let digits = phone.replace(/\D/g, '');
+    if (digits.startsWith('0')) digits = '49' + digits.slice(1);
+    return digits.startsWith('49') ? '+' + digits : '+' + digits;
+}
+
+function formatPhone(phone) {
+    const cleaned = cleanPhoneNumber(phone);
+    const country = cleaned.slice(0, 3);
+    const groups = cleaned.slice(3).match(/.{1,3}/g)?.join(' ') || '';
+    return `${country} ${groups}`.trim();
 }
 
 /**

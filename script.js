@@ -54,7 +54,6 @@ function closeSideNav() {
 
 function saveMenuId(menuId) {
     localStorage.setItem('lastClickedMenu', menuId);
-    console.log('Gespeicherte Menü-ID: ' + menuId);
 }
 
 function toLastClickedMenu() {
