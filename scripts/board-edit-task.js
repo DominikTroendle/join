@@ -369,12 +369,12 @@ function validateInputsForBigTaskCardEdit() {
 }
 
 /**
- * Validates the due date input for the Big Task Card Edit form.
+ * Validates the due date input from the big task card edit form.
  * 
- * The function checks if the input value matches the required date format (DD/MM/YYYY).
- * If the format is correct, it checks if the date is valid and whether it is not a past date.
+ * The function expects a date in the format "dd/mm/yyyy" from the input field,
+ * parses it into a JavaScript `Date` object, and passes it to a validator.
  * 
- * @returns {boolean} Returns false if the date format is invalid or if the date is in the past.
+ * @returns {boolean} - Returns `true` if the date is valid and not in the past, otherwise `false`.
  */
 function testDateForBigTaskCardEdit() {
     let value = document.getElementById('big-task-card-edit__input-due-date').value;
@@ -388,14 +388,16 @@ function testDateForBigTaskCardEdit() {
 }
 
 /**
- * Validates the due date for the Big Task Card Edit form.
- * 
- * This function checks if the given date is in the correct format and whether it is not a past date.
- * If the date is invalid or in the past, an appropriate error message is displayed.
- * 
- * @param {number} day - The day of the due date.
- * @param {Date} dateObj - The Date object representing the due date.
- * @returns {boolean} Returns `true` if the due date is valid, otherwise `false`.
+ * Validates the correctness and logical validity of a given due date.
+ *
+ * Checks whether the provided date corresponds to a valid calendar date and is not in the past.
+ * If the date is invalid or in the past, displays an error message in the UI.
+ *
+ * @param {Date} dateObj - The Date object created from the input.
+ * @param {number} day - The day portion extracted from the input string.
+ * @param {number} month - The month portion extracted from the input string (1-based).
+ * @param {number} year - The year portion extracted from the input string.
+ * @returns {boolean} - Returns `true` if the date is valid and not in the past, otherwise `false`.
  */
 function validateDueDateForBigTaskCardEdit(dateObj, day, month, year) {
     if (!correctDateFormat(dateObj, day, month, year)) {
