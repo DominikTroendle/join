@@ -770,23 +770,23 @@ async function checkSearchWordAndLoadAllSearchTasks() {
         let originalArray = arrays[arrayNames[index]];
         let searchArray = searchArrays[searchArrayNames[index]];
         let dragField = document.getElementById(dragFieldIds[index]);
-        searchTasksinArray(searchWord, originalArray, searchArray, dragField);
+        searchTasksinArray(searchWord, index, originalArray, searchArray, dragField);
     }
     setHeightForDragFields();
 }
 
 /**
- * Searches for tasks in the provided array that match the search word in either their title or description.
- * If a match is found, the task is added to the search results array. It then renders the search results in the provided drag field.
- * If no matching tasks are found, it displays a "no card" message in the drag field.
+ * Searches for tasks in an array based on a search term and updates the display with the matching tasks.
+ * It checks if the task title or description includes the search term and adds matching tasks to the `searchArray`.
+ * If any matching tasks are found, it renders them using `renderSmallCard`. Otherwise, it displays a message indicating no results.
  *
- * @param {string} searchWord - The word to search for in task titles or descriptions.
- * @param {Array} originalArray - The array of tasks to search through.
- * @param {Array} searchArray - The array to store tasks that match the search criteria.
- * @param {HTMLElement} dragField - The DOM element where the search results will be rendered.
- * @returns {void} This function does not return any value, it modifies the search array and DOM directly.
+ * @param {string} searchWord - The term to search for within the task title and description.
+ * @param {number} index - The index of the current search field.
+ * @param {Array<Object>} originalArray - The array of tasks to search through.
+ * @param {Array<Object>} searchArray - The array that will hold the tasks that match the search criteria.
+ * @param {HTMLElement} dragField - The HTML element where the search results will be rendered.
  */
-function searchTasksinArray(searchWord, originalArray, searchArray, dragField) {
+function searchTasksinArray(searchWord, index, originalArray, searchArray, dragField) {
     originalArray.forEach(element => {
         if (element.taskTitle.toLowerCase().includes(searchWord.toLowerCase()) || element.taskDescription.toLowerCase().includes(searchWord.toLowerCase())) {
             searchArray.push(element);
