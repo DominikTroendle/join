@@ -773,6 +773,17 @@ function clearPrioButtonsForBigTaskCardEdit() {
     }
 }
 
+/**
+ * Displays the selected contacts for the big task card edit.
+ * 
+ * This function clears the existing assigned contacts from the container, 
+ * renders the selected contacts preview, and adds or removes padding 
+ * based on the number of selected contacts.
+ * 
+ * @example
+ * displaySelectedContactsForBigTaskCard();
+ * // This will update the UI with the selected contacts and apply appropriate padding.
+ */
 function displaySelectedContactsForBigTaskCard() {
     let container = document.getElementById('big-task-card-edit__assigned-contacts-box');
     container.innerHTML = "";
@@ -784,6 +795,19 @@ function displaySelectedContactsForBigTaskCard() {
     }
 }
 
+/**
+ * Renders the preview of the selected contacts for the big task card edit.
+ * 
+ * This function loops through the `selectedContactsBigTaskCardEdit` array, 
+ * extracts each contact's name and color, calculates their initials, 
+ * and appends the corresponding contact preview HTML to the provided container.
+ * 
+ * @param {HTMLElement} container - The DOM element where the selected contact previews will be rendered.
+ * 
+ * @example
+ * renderSelectedContactsPreviewForBigTaskCardEdit(document.getElementById('contact-preview-container'));
+ * // This will display the previews of selected contacts inside the specified container.
+ */
 function renderSelectedContactsPreviewForBigTaskCardEdit(container) {
     for (let i = 0; i < selectedContactsBigTaskCardEdit.length; i++) {
         let name = selectedContactsBigTaskCardEdit[i].name;
@@ -793,12 +817,36 @@ function renderSelectedContactsPreviewForBigTaskCardEdit(container) {
     }
 }
 
+/**
+ * Toggles the focus on the "Assigned To" input field in the Big Task Card edit view.
+ * 
+ * This function checks if the dropdown for assigning contacts is visible. 
+ * If it is, it sets focus on the input field for assigning contacts.
+ * 
+ * @example
+ * toggleInputFocusForBigTaskCardEdit();
+ * // This will focus on the 'Assigned To' input if the dropdown is visible.
+ */
 function toggleInputFocusForBigTaskCardEdit() {
     if (!document.getElementById('big-task-card-edit__dropdown-assign').classList.contains('d-none')) {
         document.getElementById('big-task-card-edit__assigned-to-input').focus();
     }
 }
 
+/**
+ * Toggles the selection of a contact for the Big Task Card edit view.
+ * 
+ * This function checks if the contact is already selected. If the contact is not selected, it adds the contact to the 
+ * selected contacts list and updates the UI to reflect the selection. If the contact is already selected, it removes 
+ * the contact from the selected contacts list and updates the UI accordingly.
+ * 
+ * @param {string} name - The name of the contact to be selected or deselected.
+ * @param {string} color - The color associated with the contact.
+ * 
+ * @example
+ * selectContactForBigTaskCardEdit('John Doe', 'red');
+ * // This will select or deselect the contact 'John Doe' and update the UI accordingly.
+ */
 function selectContactForBigTaskCardEdit(name, color) {
     let contactDiv = document.getElementById(`edit-container-${name}`);
     let icon = document.getElementById(`edit-icon-${name}`);
@@ -812,6 +860,24 @@ function selectContactForBigTaskCardEdit(name, color) {
     displaySelectedContactsForBigTaskCard();
 }
 
+/**
+ * Updates the list of selected contacts for the Big Task Card edit view.
+ * 
+ * This function adds or removes a contact from the `selectedContactsBigTaskCardEdit` array based on the boolean flag.
+ * If the boolean is `true`, the contact is added to the selected list, and the list is sorted alphabetically.
+ * If the boolean is `false`, the contact is removed from the selected list.
+ * 
+ * @param {boolean} boolean - A flag indicating whether to add (`true`) or remove (`false`) the contact.
+ * @param {string} contactName - The name of the contact to be added or removed from the list.
+ * @param {string} contactColor - The color associated with the contact.
+ * 
+ * @example
+ * updateSelectedContactsForBigTaskCard(true, 'John Doe', 'blue');
+ * // This will add 'John Doe' to the selected contacts list with a blue color.
+ * 
+ * updateSelectedContactsForBigTaskCard(false, 'John Doe', 'blue');
+ * // This will remove 'John Doe' from the selected contacts list.
+ */
 function updateSelectedContactsForBigTaskCard(boolean, contactName, contactColor) {
     let obj = { name: contactName, color: contactColor };
     if (boolean) {
@@ -823,6 +889,22 @@ function updateSelectedContactsForBigTaskCard(boolean, contactName, contactColor
     }
 }
 
+/**
+ * Toggles the visibility of the input button and subtask buttons in the Big Task Card edit view.
+ * 
+ * This function shows or hides the subtask input button and subtask buttons based on the provided boolean flag.
+ * - If the boolean is `true`, the subtask input button is hidden, and the subtask buttons are displayed.
+ * - If the boolean is `false`, the subtask input button is shown, and the subtask buttons are hidden.
+ * 
+ * @param {boolean} boolean - A flag to determine whether to show the subtask buttons (`true`) or the subtask input button (`false`).
+ * 
+ * @example
+ * changeInputButtonForBigTaskCardEdit(true);
+ * // This will hide the subtask input button and show the subtask buttons.
+ * 
+ * changeInputButtonForBigTaskCardEdit(false);
+ * // This will show the subtask input button and hide the subtask buttons.
+ */
 function changeInputButtonForBigTaskCardEdit(boolean) {
     if (boolean) {
         document.getElementById('big-task-card-edit__subtask-button-add').classList.add('d-none');
@@ -833,9 +915,19 @@ function changeInputButtonForBigTaskCardEdit(boolean) {
     }
 }
 
+/**
+ * Filters the contacts based on the search value entered in the assigned-to input field and updates the contact display.
+ * 
+ * This function retrieves the value from the assigned-to input field, performs a case-insensitive search on the contacts list, 
+ * and displays the filtered contacts. The contacts whose names contain the search value are displayed in the Big Task Card 
+ * edit view.
+ * 
+ * @example
+ * filterContactsForBigTaskCardEdit();
+ * // This will filter contacts based on the value entered in the assigned-to input field and update the contact display.
+ */
 function filterContactsForBigTaskCardEdit() {
     let searchValue = document.getElementById('big-task-card-edit__assigned-to-input').value.toLowerCase();
     let filteredContacts = contactsBigTaskCardEdit.filter(contact => contact.name.toLowerCase().includes(searchValue));
     renderAssignOptionsForBigTaskCardEdit(filteredContacts);
 }
-
