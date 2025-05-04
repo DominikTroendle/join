@@ -1298,12 +1298,10 @@ async function updateAllTasksInDatabase(userKey, tasks, updates) {
 }
 
 /**
- * Opens a mobile move menu with animation when a user story card is clicked.
- * It also ensures that other move menus are closed and updates the visual state of the current menu.
+ * Opens the move menu for a mobile user story card, highlights the current category, 
+ * disables interaction with the active segment, and triggers the opening animation.
  * 
- * @function openMobileMoveMenu
- * @param {Event} event - The event triggered by clicking on the move menu button.
- * @returns {void}
+ * @param {Event} event - The click event triggered from a mobile button inside a user story card.
  */
 function openMobileMoveMenu(event) {
     let currentCardClicked = event.currentTarget.closest(".user-story__all-content-box");
@@ -1312,25 +1310,23 @@ function openMobileMoveMenu(event) {
     let currentCenterButtonText = currentCardClicked.querySelector('.user-story__mobile-move-menu__center-button-text');
     let currentCategoryName = currentCardClicked.closest(".drag-field").getAttribute("data-category");
     let currentCenterButton = currentCardClicked.querySelector(".user-story__mobile-move-menu__center-button");
-    event.stopPropagation();
     closeOtherMoveMenus(currentCenterButton)
     currentMoveMenu.querySelector(`.${currentCategoryName}`).style.fill = "#D08770";
     currentMoveMenu.querySelector(`.${currentCategoryName}`).style.pointerEvents = "none";
+    currentUserStoryBox.style.pointerEvents = "none";
+    setPointerEventsFromMobileButtons("none", 0);
     openMoveMenuWithAnimation(currentUserStoryBox, currentMoveMenu, currentCenterButtonText);
 }
 
 /**
- * Opens the move menu with an animation and disables interactions with the user story box while the menu is open.
- * It also updates the center button text from "Move to" to "Close" and animates the text fade-out and fade-in effects.
+ * Displays and animates the opening of the mobile move menu for a user story card.
+ * Disables pointer events during animation and updates the center button text to "Close" after animation.
  *
- * @function openMoveMenuWithAnimation
- * @param {HTMLElement} currentUserStoryBox - The DOM element representing the user story box that is currently being interacted with.
- * @param {HTMLElement} currentMoveMenu - The DOM element representing the move menu that will be shown.
- * @param {HTMLElement} currentCenterButtonText - The DOM element representing the center button's text, which will change during the animation.
- * @returns {void}
+ * @param {HTMLElement} currentUserStoryBox - The container element of the current user story card.
+ * @param {HTMLElement} currentMoveMenu - The SVG-based move menu element to be shown.
+ * @param {HTMLElement} currentCenterButtonText - The text element of the center button to update.
  */
 function openMoveMenuWithAnimation(currentUserStoryBox, currentMoveMenu, currentCenterButtonText) {
-    currentUserStoryBox.style.pointerEvents = "none";
     currentMoveMenu.style.display = "flex";
     currentMoveMenu.style.pointerEvents = "none";
     addAnimationClassToTaskContent(currentUserStoryBox);
@@ -1340,8 +1336,23 @@ function openMoveMenuWithAnimation(currentUserStoryBox, currentMoveMenu, current
             currentCenterButtonText.textContent = 'Close';
             currentCenterButtonText.classList.remove('fade-out');
             currentMoveMenu.style.pointerEvents = "auto";
+            setPointerEventsFromMobileButtons("auto", 200);
         }, 300);
     }, 1200);
+}
+
+/**
+ * Sets the CSS `pointer-events` property for all elements with the class `.user-story__mobile-button`
+ * after a specified delay.
+ *
+ * @param {string} propertyValue - The value to set for `pointer-events` (e.g., "none" or "auto").
+ * @param {number} time - The delay in milliseconds before applying the change.
+ */
+function setPointerEventsFromMobileButtons(propertyValue, time) {
+    let allUserStoryMobileButtons = Array.from(document.querySelectorAll(".user-story__mobile-button"));
+    setTimeout(() => {
+        allUserStoryMobileButtons.forEach(element => element.style.pointerEvents = propertyValue);
+    }, time);
 }
 
 /**

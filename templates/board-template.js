@@ -80,7 +80,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                         <div class="user-story__category-box ${taskTypeCssClass}">
                             <span class="user-story__category-text">${taskType}</span>
                         </div>
-                        <button class="user-story__mobile-button" onclick="openMobileMoveMenu(event)">
+                        <button class="user-story__mobile-button" onclick="openMobileMoveMenu(event); event.stopPropagation();">
                             <svg viewBox="0 0 55 45">
                                 <rect x="0" y="0" width="55" height="45" rx="10" ry="10" fill="#ECEFF4" stroke="#D8DEE9" stroke-width="2" />
                                 <circle cx="22" cy="22.5" r="16" fill="#4C566A" />
