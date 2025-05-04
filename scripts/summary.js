@@ -1,4 +1,10 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
+const priorities = ['urgent', 'medium', 'low'];
+const priorityIcons = {
+    urgent: 'assets/icons/urgent-summary.png',
+    medium: 'assets/icons/medium-summary.svg',
+    low: 'assets/icons/low-summary.svg',
+};
 
 /**
  * Changes the source of an image element based on its ID.
@@ -234,27 +240,40 @@ function loadNumberOfTasksinHtmlElements(allLoadTasks) {
     document.getElementById("number-of-all-tasks").innerHTML = allLoadTasks.length;
 }
 
+/**
+ * Loads the number of tasks by priority and updates the display in the summary section.
+ * 
+ * The priorities are checked in the order of 'urgent', 'medium', and 'low'.
+ * Once tasks with a specific priority are found (excluding 'done' tasks),
+ * the display is updated accordingly. If none of these priorities are found,
+ * "finished" is displayed.
+ *
+ * @param {Array<Object>} allLoadTasks - A list of all loaded tasks, each with properties such as `taskPriority` and `category`.
+ */
 function loadNumberOfPriorityTasks(allLoadTasks) {
-    let numberOfUrgentTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "urgent" && element.category !== "done").length : 0;
-    let numberOfMediumTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "medium" && element.category !== "done").length : 0;
-    let numberOfLowTasks = allLoadTasks.length > 0 ? allLoadTasks.filter(element => element.taskPriority === "low" && element.category !== "done").length : 0;
-    if (numberOfUrgentTasks !== 0) {
-        updatePriorityTaskDisplay(numberOfUrgentTasks, "Urgent", "assets/icons/urgent-summary.png", allLoadTasks);
-        return;
-    } else if (numberOfMediumTasks !== 0) {
-        updatePriorityTaskDisplay(numberOfMediumTasks, "Medium", "assets/icons/medium-summary.svg", allLoadTasks);
-        return;
-    } else if (numberOfLowTasks !== 0) {
-        updatePriorityTaskDisplay(numberOfLowTasks, "Low", "assets/icons/low-summary.svg", allLoadTasks)
-        return;
-    } else {
-        let numberOfPriorityTasks = document.getElementById("number-of-priority-tasks");
-        numberOfPriorityTasks.innerHTML = "&#x1F3C1";
-        document.getElementById("priority-text").innerHTML = "finished";
-        document.getElementById("priority-img").src = "assets/icons/all-ready-summary.svg";
+    for (let priority of priorities) {
+        let numberOfTasks = allLoadTasks.filter(element => element.taskPriority === priority && element.category !== "done").length;
+        if (numberOfTasks > 0) {
+            updatePriorityTaskDisplay(numberOfTasks, priority.charAt(0).toUpperCase() + priority.slice(1), priorityIcons[priority], allLoadTasks);
+            return;
+        }
     }
+    document.getElementById("number-of-priority-tasks").innerHTML = "&#x1F3C1";
+    document.getElementById("priority-text").innerHTML = "finished";
+    document.getElementById("priority-img").src = "assets/icons/all-ready-summary.svg";
 }
 
+/**
+ * Updates the display of the priority task section in the summary.
+ * 
+ * This function updates the number of priority tasks, the priority text, and the associated priority icon in the UI. 
+ * Additionally, it triggers the loading of the upcoming deadline for the tasks of that specific priority.
+ * 
+ * @param {number} numberOfPriorityTasks - The number of tasks with the current priority.
+ * @param {string} priorityText - The text representing the priority (e.g., 'Urgent', 'Medium', 'Low').
+ * @param {string} priorityImg - The path to the icon image corresponding to the current priority.
+ * @param {Array<Object>} allLoadTasks - A list of all loaded tasks, each with properties like `taskPriority` and `category`.
+ */
 function updatePriorityTaskDisplay(numberOfPriorityTasks, priorityText, priorityImg, allLoadTasks) {
     document.getElementById("number-of-priority-tasks").innerHTML = numberOfPriorityTasks;
     document.getElementById("priority-text").innerHTML = priorityText;
@@ -262,12 +281,38 @@ function updatePriorityTaskDisplay(numberOfPriorityTasks, priorityText, priority
     loadUpcomingDeadline(allLoadTasks, priorityText.toLowerCase());
 }
 
+/**
+ * Loads the upcoming deadline for tasks of a given priority and separates their due dates
+ * into past and future deadlines based on the current date.
+ *
+ * Filters out tasks with the category "done" and processes only those with the specified priority.
+ * The deadlines are passed to a helper function to be sorted by date category.
+ *
+ * @param {Array<Object>} allLoadTasks - The list of all loaded tasks, each containing properties like `taskPriority`, `category`, and `taskDueDate`.
+ * @param {string} priority - The task priority to filter for (e.g., "urgent", "medium", or "low").
+ */
 function loadUpcomingDeadline(allLoadTasks, priority) {
     let tasksWithCurrentPriority = allLoadTasks.filter(element => element.taskPriority === priority && element.category !== "done");
     let datesOfUpcomingDeadlines = tasksWithCurrentPriority.map(element => element.taskDueDate);
     const currentDate = new Date();
     let pastDeadlines = [];
     let futureDeadlines = [];
+    splitDeadlinesByDate(datesOfUpcomingDeadlines, currentDate, pastDeadlines, futureDeadlines);
+}
+
+/**
+ * Sorts a list of deadline date strings into past and future deadlines based on the current date.
+ * 
+ * Converts date strings in "dd/mm/yyyy" format to JavaScript Date objects.
+ * Adds each date to either `pastDeadlines` or `futureDeadlines` depending on whether the date is
+ * before or after the current date. Then calls `displayClosestPastDeadline()` to update the display.
+ * 
+ * @param {string[]} datesOfUpcomingDeadlines - Array of task due dates as strings in "dd/mm/yyyy" format.
+ * @param {Date} currentDate - The reference date (usually today's date).
+ * @param {Date[]} pastDeadlines - Array to collect deadline dates that are in the past.
+ * @param {Date[]} futureDeadlines - Array to collect deadline dates that are in the future.
+ */
+function splitDeadlinesByDate(datesOfUpcomingDeadlines, currentDate, pastDeadlines, futureDeadlines) {
     if (datesOfUpcomingDeadlines) {
         for (let dateString of datesOfUpcomingDeadlines) {
             if (!dateString) continue;
@@ -278,48 +323,112 @@ function loadUpcomingDeadline(allLoadTasks, priority) {
                 futureDeadlines.push(taskDate);
             }
         }
-        let closestDeadline = null;
-        if (pastDeadlines.length > 0) {
-            closestDeadline = pastDeadlines.reduce((closest, current) => {
-                return (current > closest && current < currentDate) ? current : closest;
-            });
-            let deadlineText = document.getElementById("deadline-text");
-            deadlineText.innerHTML = "Expired Deadline";
-            deadlineText.style.color = "#FF8190";
-            deadlineText.style.fontWeight = "bold";
-        }
-        if (!closestDeadline && futureDeadlines.length > 0) {
-            closestDeadline = futureDeadlines.reduce((closest, current) => {
-                return (current < closest) ? current : closest;
-            });
-            let deadlineText = document.getElementById("deadline-text");
-            deadlineText.innerHTML = "Upcoming Deadline";
-        }
-        if (closestDeadline) {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById("currentDate").innerHTML = closestDeadline.toLocaleDateString('en-US', options);
-        }
+    }
+    displayClosestPastDeadline(currentDate, pastDeadlines, futureDeadlines);
+}
+
+/**
+ * Displays the closest past deadline if available, and updates the UI accordingly.
+ * 
+ * If any past deadlines exist, determines the most recent expired deadline that is before the current date.
+ * Updates the text, color, and font weight of the deadline display to indicate it is expired.
+ * Then proceeds to check for future deadlines by calling `displayClosestUpcomingDeadline()`.
+ * 
+ * @param {Date} currentDate - The current date used as a reference point.
+ * @param {Date[]} pastDeadlines - Array of past deadline dates.
+ * @param {Date[]} futureDeadlines - Array of future deadline dates.
+ */
+function displayClosestPastDeadline(currentDate, pastDeadlines, futureDeadlines) {
+    let closestDeadline = null;
+    if (pastDeadlines.length > 0) {
+        closestDeadline = pastDeadlines.reduce((closest, current) => {
+            return (current > closest && current < currentDate) ? current : closest;
+        });
+        let deadlineText = document.getElementById("deadline-text");
+        deadlineText.innerHTML = "Expired Deadline";
+        deadlineText.style.color = "#FF8190";
+        deadlineText.style.fontWeight = "bold";
+    }
+    displayClosestUpcomingDeadline(closestDeadline, futureDeadlines);
+}
+
+/**
+ * Displays the closest upcoming deadline if no past deadline has already been displayed.
+ * 
+ * If no `closestDeadline` was set by a past deadline, this function finds the nearest future deadline
+ * from the `futureDeadlines` array and updates the UI text accordingly.
+ * If a `closestDeadline` exists (either from past or future), its date is formatted and shown in the UI.
+ * 
+ * @param {Date|null} closestDeadline - The closest past deadline, or null if none was found.
+ * @param {Date[]} futureDeadlines - Array of future deadline dates to evaluate.
+ */
+function displayClosestUpcomingDeadline(closestDeadline, futureDeadlines) {
+    if (!closestDeadline && futureDeadlines.length > 0) {
+        closestDeadline = futureDeadlines.reduce((closest, current) => {
+            return (current < closest) ? current : closest;
+        });
+        let deadlineText = document.getElementById("deadline-text");
+        deadlineText.innerHTML = "Upcoming Deadline";
+    }
+    if (closestDeadline) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("currentDate").innerHTML = closestDeadline.toLocaleDateString('en-US', options);
     }
 }
 
+/**
+ * Controls the greeting animation sequence based on the window size and session storage state.
+ * 
+ * If the session storage item "valueAnimation" is set to "stop", the animation is skipped.
+ * If the window width is less than 1040 pixels, the name box visibility is toggled and the greeting 
+ * animation is triggered by fading out the name box and showing the user interface elements.
+ *
+ * @function
+ */
 function greetingAnimation() {
     let valueAnimation = sessionStorage.getItem("valueAnimation");
     if (valueAnimation === "stop") {
         return;
     }
     if (window.innerWidth < 1040) {
-        document.getElementById("name-box").style.display = "flex";
-        document.getElementById("title__box").style.opacity = 0;
-        document.getElementById("all-button-box").style.opacity = 0;
-        setTimeout(() => {
-            document.getElementById("name-box").classList.add("animation-fade-out");
-            document.getElementById("title__box").classList.add("animation-fade-in");
-            document.getElementById("all-button-box").classList.add("animation-fade-in");
-            setTimeout(() => {
-                document.getElementById("name-box").style.display = "none";
-                sessionStorage.setItem("valueAnimation", "stop");
-            }, 200);
-
-        }, 2000);
+        toggleNameBoxVisibility();
+        fadeOutNameBoxAndShowUI();
     }
+}
+
+/**
+ * Toggles the visibility of the name box and adjusts the opacity of UI elements.
+ * 
+ * This function displays the name box by setting its `display` style to `flex` and hides
+ * the other UI elements by setting their opacity to 0. This is typically used as part of 
+ * an animation or transition effect to show the name box while hiding other interface elements.
+ * 
+ * @function
+ */
+function toggleNameBoxVisibility() {
+    document.getElementById("name-box").style.display = "flex";
+    document.getElementById("title__box").style.opacity = 0;
+    document.getElementById("all-button-box").style.opacity = 0;
+}
+
+/**
+ * Initiates a fade-out animation for the name box and fade-in animation for the UI elements.
+ * 
+ * This function first waits for 2 seconds, then applies fade-out animation to the name box 
+ * and fade-in animations to the title box and button box. After the fade-out animation completes, 
+ * it hides the name box and stores the state in `sessionStorage` to prevent the animation from 
+ * triggering again.
+ * 
+ * @function
+ */
+function fadeOutNameBoxAndShowUI() {
+    setTimeout(() => {
+        document.getElementById("name-box").classList.add("animation-fade-out");
+        document.getElementById("title__box").classList.add("animation-fade-in");
+        document.getElementById("all-button-box").classList.add("animation-fade-in");
+        setTimeout(() => {
+            document.getElementById("name-box").style.display = "none";
+            sessionStorage.setItem("valueAnimation", "stop");
+        }, 200);
+    }, 2000);
 }
