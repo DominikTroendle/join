@@ -37,7 +37,6 @@
 #main {
     margin-left: 232px;
     width: calc(100vw - 232px);
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #F6F7F8;
@@ -1032,6 +1031,7 @@ input:focus {
         margin-left: 0;
         width: 100vw;
         align-items: center;
+        height: 100dvh;
     }
 
     #container-form {
@@ -1084,10 +1084,6 @@ input:focus {
     body {
         display: block;
         max-height: 100dvh;
-    }
-
-    #main {
-        height: 100dvh;
     }
 
     #container-form {
