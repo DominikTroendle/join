@@ -53,33 +53,15 @@ async function putData(path="", data={}) {
 
 async function addUserToRegister(event, form) {
     event.preventDefault();
-    color = await randomBgColor();
-    let isValid = await UserRegister();
-    if (!isValid) {
-        return false;
-    }
-    let name = form.querySelector('#name');
-    let email = form.querySelector('#email');
-    let password = form.querySelector('#password');
-    let newUser = {
-        "name" : name.value +  " (You)",
-        "email" : email.value,
-        "password" : password.value,
-        "color" : color,
-        "phone" : " "
-    };
-    let response = await sendData("/users", {});
-    if (response && response.name) {
-        let userId = response.name;
-        await putData(`/users/${userId}/userDatas`, newUser);
-        await sendData(`/users/${userId}/allContacts`, newUser);
-        name.value = '';
-        email.value = '';
-        password.value = '';
-        window.location.href = 'index.html?msg=You Signed Up successfully';
-    } else {
-        console.error("User registration failed.");
-    }
+    const color = await randomBgColor();
+    if (!await UserRegister()) return false;
+
+    const newUser = createUserObject(form, color);
+    const userId = await registerUser(newUser);
+    if (!userId) return false;
+
+    clearForm(form);
+    window.location.href = 'index.html?msg=You Signed Up successfully';
     return false;
 }
 
@@ -87,6 +69,35 @@ async function randomBgColor() {
     if (bgColors.length === 0) return ".bg-grey";
     let randomIndex = Math.floor(Math.random() * bgColors.length);
     return bgColors[randomIndex].name.replace(/^\./, '');
+}
+
+async function registerUser(user) {
+    const response = await sendData("/users", {});
+    if (response?.name) {
+        const userId = response.name;
+        await putData(`/users/${userId}/userDatas`, user);
+        await sendData(`/users/${userId}/allContacts`, user);
+        return userId;
+    } else {
+        console.error("User registration failed.");
+        return null;
+    }
+}
+
+function createUserObject(form, color) {
+    return {
+        name: form.querySelector('#name').value + " (You)",
+        email: form.querySelector('#email').value,
+        password: form.querySelector('#password').value,
+        color: color,
+        phone: " "
+    };
+}
+
+function clearForm(form) {
+    form.querySelector('#name').value = '';
+    form.querySelector('#email').value = '';
+    form.querySelector('#password').value = '';
 }
 
 function backToLogin() {
@@ -97,26 +108,23 @@ async function UserRegister() {
     const password = document.getElementById('password');
     const conrollPassword = document.getElementById('controllPassword');
     const checkbox = document.getElementById('checkbox');
-    let isValid = true;
+    const checkboxValid = validateCheckbox(checkbox);
+    const passwordValid = validatePasswords(password, conrollPassword);
+    return checkboxValid && passwordValid;
+}
 
-    if (!checkbox.checked) {
-        checkbox.style.border = "2px solid red";
-        isValid = false;
-    } else {
-        checkbox.style.border = "2px solid black";
-    } 
-    if (password.value !== conrollPassword.value) {
-        conrollPassword.style.border = "1px solid red";
-        conrollPassword.style.border = "solid 2px red"
-        document.getElementById('notCorrectValue').style.display = "flex";
-        isValid = false;
-    } else {
-        conrollPassword.style.border = "1px solid black";
-        conrollPassword.style.boxShadow = "none"
-        document.getElementById('notCorrectValue').style.display = "none";
-    }
-
+function validateCheckbox(checkbox) {
+    const isValid = checkbox.checked;
+    checkbox.style.border = `2px solid ${isValid ? 'black' : 'red'}`;
     return isValid;
+}
+
+function validatePasswords(password, conrollPassword) {
+    const match = password.value === conrollPassword.value;
+    conrollPassword.style.border = `1px solid ${match ? 'black' : 'red'}`;
+    conrollPassword.style.boxShadow = match ? 'none' : '';
+    document.getElementById('notCorrectValue').style.display = match ? 'none' : 'flex';
+    return match;
 }
 
 function changePasswordIcon(focused) {
