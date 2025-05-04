@@ -10,7 +10,6 @@ function addNewContactOverlay() {
     setTimeout(() => {
         newContactContainer.classList.add('active');
     }, 10)
-
     newContactOverlay.onclick = function (event) {
         if (event.target === newContactOverlay) {
             newContactOverlay.classList.remove('active');
@@ -60,11 +59,16 @@ async function addUserToContactList(event, form) {
     highlightNewContact(newContact);
     form.reset();
     successfullyContact();
-    let addButton = document.getElementById('addContactButton');
-    if (addButton) {
-        addButton.onclick = addNewContactOverlay;
-    }
+    resetAddContactButton();
     return false;
+}
+
+/**
+ * Resets the add contact button's click handler.
+ */
+function resetAddContactButton() {
+    let addButton = document.getElementById('addContactButton');
+    if (addButton) addButton.onclick = addNewContactOverlay;
 }
 
 /**
@@ -138,9 +142,9 @@ async function randomBgColor() {
 }
 
 /**
- * Edits a contact overlay.
+ * Opens and displays the contact edit overlay for the specified contact.
  * 
- * @param {string} contactKey - The key of the contact.
+ * @param {string} contactKey - The key of the contact to be edited.
  */
 function editContactOverlay(contactKey) {
     let refOverlay = document.getElementById('editContactOverlay');
@@ -152,16 +156,24 @@ function editContactOverlay(contactKey) {
     if (!contact) return;
     fillContactForm(contact);
     refOverlay.dataset.contactKey = contactKey;
-    setTimeout(() => {
-        editContactContainer.classList.add('active');
-    }, 10)
+    setTimeout(() => editContactContainer.classList.add('active'), 10);
+    attachEditOverlayClickHandler(editContactOverlay, editContactContainer);
+}
 
-    editContactOverlay.onclick = function (event) {
-        if (event.target === editContactOverlay) {
-            editContactOverlay.classList.remove('active');
-            editContactContainer.classList.remove('active');
+/**
+ * Attaches a click handler to remove 'active' class from overlay and container when overlay is clicked.
+ 
+* @param {HTMLElement} overlay - The overlay element.
+ 
+* @param {HTMLElement} container - The container element.
+ */
+function attachEditOverlayClickHandler(overlay, container) {
+    overlay.onclick = e => {
+        if (e.target === overlay) {
+            overlay.classList.remove('active');
+            container.classList.remove('active');
         }
-    }
+    };
 }
 
 /**
@@ -287,6 +299,7 @@ function procressingClickMenu() {
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.small-menu-button');
     let procressButton = document.querySelector('.mobile-procressing-area-button');
+    let procressMenu = document.querySelector('.procressing-mobile-menu-container ');
     procressOverlay.classList.add('active');
     procressOverlay.classList.remove('close');
     menuBox.classList.add('inactive');
@@ -294,7 +307,7 @@ function procressingClickMenu() {
     procressButton.classList.add('active');
     procressOverlay.onclick = (event) => {
         if (event.target === procressOverlay) {
-            handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton);
+            handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton, procressMenu);
         }
     };
 }
@@ -310,11 +323,12 @@ function procressingClickMenu() {
  * 
  * @param {HTMLElement} procressButton - The process button element.
  */
-function handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton) {
+function handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton, procressMenu) {
     procressOverlay.classList.add('close');
     procressOverlay.classList.remove('active');
     menuBox.classList.remove('inactive');
     supportBox.classList.remove('inactive');
+    procressMenu.style.disply = ('none')
     setTimeout(() => {
         procressButton.classList.remove('active');
     }, 1000);

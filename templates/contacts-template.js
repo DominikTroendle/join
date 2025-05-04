@@ -1,3 +1,14 @@
+/**
+ * Returns an HTML string for a contact list item.
+ * 
+ * @param {string} contactName - The contact's name.
+ * 
+ * @param {string} contactMail - The contact's email address.
+ * 
+ * @param {string} colorName - CSS class for contact's color.
+ * 
+ * @returns {Promise<string>} HTML template string.
+ */
 async function getContactListTemplate(contactName, contactMail, colorName) {
 return `
     <section>
@@ -13,6 +24,16 @@ return `
 `
 }
 
+
+/**
+ * Returns an HTML template string displaying detailed contact information.
+ * 
+ * @param {Object} contact - The contact object containing details like name, email, phone, and key.
+ * 
+ * @param {string} initial - The initials to display for the contact.
+ * 
+ * @returns {Promise<string>} A promise that resolves to the HTML string.
+ */
 async function selectMoreContactInformationTemplate(contact, initial) {
     return `
         <section class="contact-info-container" id="contact-${contact.key}">
@@ -74,6 +95,11 @@ async function selectMoreContactInformationTemplate(contact, initial) {
     `;
 }
 
+/**
+ * Returns the HTML template string for the "Add New Contact" form.
+ * 
+ * @returns {string} HTML markup as a string.
+ */
 function getToCreatANewContactTemplate() {
 return`
     <div class="new-Contect-Container">
@@ -121,6 +147,13 @@ return`
 `
 }
 
+/**
+ * Returns the HTML template for editing a contact with the given key.
+ * 
+ * @param {string} key - The contact's unique identifier.
+ * 
+ * @returns {string} HTML string for the edit contact form.
+ */
 function getEditContactTemplate(key) {
     return`
         <div class="edit-Contect-Container">

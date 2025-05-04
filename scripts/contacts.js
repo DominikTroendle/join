@@ -66,18 +66,25 @@ async function allUserContacts() {
         console.error("Fehler: contactResponse ist null oder undefined!");
         return;
     }
+    fillAllContacts(contactResponse);
+}
+
+/**
+ * Fills the allContacts array with contact data.
+ * 
+ * @param {Object} contactResponse The response containing contact data.
+ */
+function fillAllContacts(contactResponse) {
     let contactKeysArray = Object.keys(contactResponse);
-    for (let index = 0; index < contactKeysArray.length; index++) {
-        allContacts.push(
-            {
-                key : contactKeysArray[index],
-                name : contactResponse[contactKeysArray[index]]?.name,
-                email : contactResponse[contactKeysArray[index]]?.email,
-                phone : contactResponse[contactKeysArray[index]]?.phone,
-                color : contactResponse[contactKeysArray[index]]?.color,
-            }
-        )
-    }
+    contactKeysArray.forEach(key => {
+        allContacts.push({
+            key,
+            name: contactResponse[key]?.name,
+            email: contactResponse[key]?.email,
+            phone: contactResponse[key]?.phone,
+            color: contactResponse[key]?.color,
+        });
+    });
 }
 
 /**
@@ -125,7 +132,6 @@ function successfullyContact() {
     newContactOverlay.classList.remove('active');
     newContactContainer.classList.remove('active');
     procressButton.style.backgroundColor = '#2A3647';
-    
     setTimeout(() => {
         let messageBox = document.getElementById('succesfully-message-box');
         messageBox.style.display = "flex";
@@ -220,12 +226,25 @@ function selectContact(element) {
     let isSelected = element.classList.contains('select-contact');
     let moreInfoContainer = document.getElementById('moreInformationContact');
     let overlay = document.querySelector('.more-information-container');
-
     document.querySelectorAll('.container-contact').forEach(contact => {
         contact.classList.remove('select-contact');
         contact.style.color = "black";
     });
+    toggleContactSelection(isSelected, element, moreInfoContainer, overlay);
+}
 
+/**
+ * Toggles the selection state of the contact and updates UI elements.
+ * 
+ * @param {boolean} isSelected - Whether the contact is currently selected.
+ * 
+ * @param {HTMLElement} element - The clicked contact element.
+ * 
+ * @param {HTMLElement} moreInfoContainer - The container for more information.
+ * 
+ * @param {HTMLElement} overlay - The overlay for mobile view.
+ */
+function toggleContactSelection(isSelected, element, moreInfoContainer, overlay) {
     if (isSelected) {
         moreInfoContainer.style.transform = 'translateX(100%)';
         setTimeout(() => moreInfoContainer.innerHTML = '', 500);
@@ -234,7 +253,6 @@ function selectContact(element) {
         element.classList.add('select-contact');
         element.style.color = "white";
         moreContactInformation(element.querySelector('.contact-preview-name').id);
-        
         if (window.innerWidth <= 1040) {
             overlay.classList.add('mobile-overlay');
         }
@@ -266,17 +284,26 @@ async function moreContactInformation(contactName) {
         let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
-        if (window.innerWidth >= 1040) {
-            contactInfoContainer.style.transition = 'transform 0.5s ease-out';
-            setTimeout(() => {
-                contactInfoContainer.style.transform = 'translateX(0)';
-            }, 10);
-        } else {
-            contactInfoContainer.style.transition = 'none';
-            setTimeout(() => {
-                contactInfoContainer.style.transform = 'none';
-            }, 10);
-        }
+        animateContactInfo(contactInfoContainer); // Aufruf der neuen Funktion
+    }
+}
+
+/**
+ * Animates the contact info container based on the window width.
+ * 
+ * @param {HTMLElement} contactInfoContainer - The container element of the contact information.
+ */
+function animateContactInfo(contactInfoContainer) {
+    if (window.innerWidth >= 1040) {
+        contactInfoContainer.style.transition = 'transform 0.5s ease-out';
+        setTimeout(() => {
+            contactInfoContainer.style.transform = 'translateX(0)';
+        }, 10);
+    } else {
+        contactInfoContainer.style.transition = 'none';
+        setTimeout(() => {
+            contactInfoContainer.style.transform = 'none';
+        }, 10);
     }
 }
 
@@ -301,7 +328,7 @@ async function updateContactTemplate(contactKey, updatedContact) {
         contactElement.replaceWith(newElement);
     }
     if (contactElement) {
-        resetUiElements(); // Ruft die ausgelagerte Funktion auf
+        resetUiElements();
     }
 }
 
@@ -315,7 +342,6 @@ function resetUiElements() {
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.small-menu-button');
     let procressButton = document.querySelector('.mobile-procressing-area-button');
-
     procressOverlay.classList.add('close');
     procressOverlay.classList.remove('active');
     menuBox.classList.remove('inactive');
@@ -343,7 +369,6 @@ async function putData(key, data, path) {
         },
         body: JSON.stringify(data)
     });
-
     let responseToJson = await response.json();
     if (procressEditContainer) {
         procressEditContainer.classList.remove('active');
@@ -352,27 +377,32 @@ async function putData(key, data, path) {
 }
 
 /**
- * Deletes a contact by key.
+ * Deletes a contact by key from the user's contact list.
  * 
- * @param {string} key - Contact key.
+ * @param {string} key - Contact's unique identifier.
  */
 async function deleteContact(key) {
-    let procressEditContainer = document.querySelector('.edit-contact-overlay');
-    let procressButton = document.querySelector('.mobile-procressing-area-button');
+    if (!key) return;
     let userId = localStorage.getItem("userId");
-    if (!key) { return;}
+    let response;
     try {
-        let response = await fetch(`${BASE_URL}/users/${userId}/allContacts/${key}.json`, {
-            method: "DELETE",
-        });
-        if (!response.ok) {}
-        allContacts = allContacts.filter(contact => contact.key !== key);
-        loadContactList();
-        if (procressEditContainer) {
-            procressEditContainer.classList.remove('active');
-        }
-        document.getElementById('moreInformationContact').innerHTML = '';
-        document.querySelector('.more-information-container').classList.remove('mobile-overlay');
-        procressButton.style.backgroundColor = '#2A3647'
+        response = await fetch(`${BASE_URL}/users/${userId}/allContacts/${key}.json`, { method: "DELETE" });
+        handlePostDeleteUIUpdate(key);
     } catch (error) {}
+}
+
+/**
+ * Updates the UI after a contact is deleted.
+ * 
+ * @param {string} key - The key of the deleted contact.
+ */
+function handlePostDeleteUIUpdate(key) {
+    allContacts = allContacts.filter(contact => contact.key !== key);
+    loadContactList();
+    document.querySelector('.edit-contact-overlay')?.classList.remove('active');
+    document.getElementById('moreInformationContact').innerHTML = '';
+    document.querySelector('.more-information-container')?.classList.remove('mobile-overlay');
+    document.querySelector('.mobile-procressing-area-button').style.backgroundColor = '#2A3647';
+    menuBox.classList.add('active');
+    supportBox.classList.add('active');
 }
