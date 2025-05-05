@@ -182,7 +182,7 @@ function closeDropdown() {
 
 /**
  * Stops the propagation of the given event, preventing it from bubbling up the DOM tree
- * @param {Event} event - event object whose prpgataion sould be stopped
+ * @param {Event} event - event object whose propagation should be stopped
  */
 function stopPropagation(event) {
     event.stopPropagation();
@@ -317,8 +317,8 @@ function isInSelectedContacts(contactName) {
 
 /**
  * Generates initials from a contacts full name
- * @param {*} contactName - name of the contact to generate initials from
- * @returns {string} - returns generated initials
+ * @param {String} contactName - name of the contact to generate initials from
+ * @returns {String} - returns generated initials
  */
 function getInitials(contactName) {
     let name = contactName.trim().split(' ').filter(n => n);
@@ -347,6 +347,12 @@ function selectContact(name, color) {
     displaySelectedContacts();
 }
 
+/**
+ * Toggles selection of the given contactDiv by adding (if boolean is true) or removing (if boolean is false) differnet classes
+ * @param {Boolean} boolean - determines whether classes should be added or removed depending on the boolean
+ * @param {HTMLElement} contactDiv - div element whose classes are added or removed depending on the boolean
+ * @param {SVGElement} icon - svg icon whose source is changed depending on the boolean
+ */
 function toggleSelection(boolean, contactDiv, icon) {
     if (boolean) {
         contactDiv.classList.add('selected');
@@ -363,12 +369,18 @@ function toggleSelection(boolean, contactDiv, icon) {
     }
 }
 
+/**
+ * Filters contacts of an array by searchValue and renders them
+ */
 function filterContacts() {
     let searchValue = document.getElementById('assigned-to').value.toLowerCase();
     let filteredContacts = contacts.filter(contact => contact.name.toLowerCase().includes(searchValue));
     renderAssignOptions(filteredContacts);
 }
 
+/**
+ * Displays contacts in the corresponding container and adjusts padding-related classes depending on the number of contacts
+ */
 function displaySelectedContacts() {
     let container = document.getElementById('container-assigned-contacts');
     container.innerHTML = "";
@@ -385,6 +397,12 @@ function displaySelectedContacts() {
     }
 }
 
+/**
+ * Updates the selectedContacts array by adding (if boolean is true) or removing (if boolean is false) an object of the given contactName and contactColor to the array
+ * @param {Boolean} boolean - determines whether the array should be added to (true) or removed from (false)
+ * @param {String} contactName - name of the contact to add to or remove from array
+ * @param {String} contactColor - color of the contact to add to or remove from array
+ */
 function updateSelectedContacts(boolean, contactName, contactColor) {
     let obj = {name: contactName, color: contactColor};
     if (boolean) {
@@ -396,10 +414,18 @@ function updateSelectedContacts(boolean, contactName, contactColor) {
     }
 }
 
+/**
+ * Checks if the given contactDiv is selected
+ * @param {HTMLElement} contactDiv - div element whose classes are checked
+ * @returns true if contactDiv contains a specific class, otherwise false
+ */
 function isContactSelected(contactDiv) {
     return contactDiv.classList.contains('selected');
 }
 
+/**
+ * Clears all inputs, removes thrown error messages and resets variables to their default values
+ */
 function clearInputs() {
     removeError();
     subtasksCount = 0;
@@ -416,6 +442,9 @@ function clearInputs() {
     document.getElementById('container-input-subtask').classList.remove('input-unvalid');
 }
 
+/**
+ * Clears the values of all inputs defined in the array
+ */
 function clearInputValues() {
     let inputs = ["title", "description", "due-date", "subtasks"];
     for (let i = 0; i <inputs.length; i++) {
@@ -423,6 +452,10 @@ function clearInputValues() {
     }
 }
 
+/**
+ * Changes the visibility of two buttons to be displayed or hidden, depending on the boolean value
+ * @param {Boolean} boolean - determines which classes should be added to or removed from the buttons
+ */
 function changeInputButton(boolean) {
     if (boolean) {
         document.getElementById('button-add').classList.add('d-none');
@@ -433,6 +466,11 @@ function changeInputButton(boolean) {
     }
 }
 
+/**
+ * Processes subtask by checking the inputs value and determining whether to add the task (if boolean is true) or clear (if boolean is false) the input.
+ * Clears the input value afterwards.
+ * @param {Boolean} boolean - determines whether the subtask should be added (true) or the input should be cleared (false)
+ */
 function processSubtask(boolean) {
     let input = document.getElementById('subtasks');
     let invalidRef = document.getElementById('invalid-subtask');
@@ -448,6 +486,11 @@ function processSubtask(boolean) {
     }
 }
 
+/**
+ * Toggles visibility of the edition options based on the boolean value by addind or removing classes
+ * @param {String} id - id of the edition options whose visibility should be changed
+ * @param {Boolean} boolean - determines whether classes should be added (false) or removed (true)
+ */
 function showEditOptions(id, boolean) {
     if (boolean) {
         document.getElementById(`icons-subtask-${id}`).classList.remove('d-none');
@@ -456,14 +499,21 @@ function showEditOptions(id, boolean) {
     }
 }
 
+/**
+ * Checks if the pressed key is the Enter key
+ * @param {KeyboardEvent} event - key press event triggered by the user
+ */
 function isEnterKey(event) {
-    subtasksInput = document.getElementById('subtasks')
+    let subtasksInput = document.getElementById('subtasks')
     if (event.key === "Enter") {
         addSubtask();
         subtasksInput.value = "";
     }
 }
 
+/**
+ * Adds subtask if the inputs value is not empty, otherwise throws error
+ */
 function addSubtask() {
     let input = document.getElementById('subtasks');
     let containerSubtasks = document.getElementById('container-subtasks');
@@ -482,6 +532,11 @@ function addSubtask() {
     }
 }
 
+/**
+ * Determines whether a mobile HTML template should be rendered by checking the innerWindow width
+ * @param {HTMLElement} containerSubtasks - div element in which the HTML template is rendered
+ * @param {Number} subtasksCount - number of the subtask
+ */
 function determineSubtaskStyle(containerSubtasks, subtasksCount) {
     if (window.innerWidth <= 1040) {
         containerSubtasks.innerHTML += returnSubtaskMobileHTML(subtasksCount);
@@ -490,6 +545,10 @@ function determineSubtaskStyle(containerSubtasks, subtasksCount) {
     }
 }
 
+/**
+ * Deletes subtask by removing if from both the subtasks array and the DOM
+ * @param {String} id - id of the subtask the user clicked to delete
+ */
 function deleteSubtask(id) {
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
     let containerSubtasks = document.getElementById('container-subtasks');
@@ -499,6 +558,10 @@ function deleteSubtask(id) {
     checkForScrollableContainer(containerSubtasks);    
 }
 
+/**
+ * Edits subtask by updating its value based on the users input and adjusts padding-related class by determining whether the element is the last child
+ * @param {String} id - id of the subtask the user clicked to edit
+ */
 function editSubtask(id) {
     let child = document.getElementById(`container-subtask-${id}`);
     document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
