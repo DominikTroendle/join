@@ -572,10 +572,19 @@ function editSubtask(id) {
     }
 }
 
+/**
+ * Checks if the given child is the last child of its parent
+ * @param {HTMLElement} child - div element to check
+ * @returns true if the given child is the last child of its parent, otherwise false
+ */
 function isLastChild(child) {
     return (child === child.parentNode.children[child.parentNode.children.length-1]) 
 }
 
+/**
+ * Saves edited subtask by updating its value with the inputs value and adjusts padding-related class
+ * @param {Number} id - id of the subtask the user clicked to save
+ */
 function saveEditedSubtask(id) {
     let input = document.getElementById(`input-subtask-${id}`);
     let element = document.getElementById(`container-subtask-${id}`);
@@ -590,6 +599,9 @@ function saveEditedSubtask(id) {
     }
 }
 
+/**
+ * Creates task by validating all inputs and saving the task if all inputs are valid or throwing errors if inputs are unvalid
+ */
 function createTask() {
     removeError();
     let valid = validateInputs();
@@ -608,6 +620,10 @@ function createTask() {
     }
 }
 
+/**
+ * Validates a set of required form inputs and adds unvalid inputs to the unvalidInput array
+ * @returns true if all inputs are valid, otherwise false
+ */
 function validateInputs() {
     let valid = true;
     let inputs = ["title", "due-date", "category"];
@@ -622,6 +638,10 @@ function validateInputs() {
     return valid;
 }
 
+/**
+ * Tests date input value to match a specific format order and to be in the future
+ * @returns true if input value is valid or in the past, otherwise false
+ */
 function testDate() {
     let value = document.getElementById('due-date').value;
     let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
@@ -639,6 +659,14 @@ function testDate() {
     return true;
 }
 
+/**
+ * Checks if a given Date object matches the specified day, month, and year
+ * @param {Object} dateObj - date object to validate
+ * @param {Number} day - the expected day
+ * @param {Number} month - the expected month
+ * @param {Number} year - the expected year
+ * @returns false if the given date object is in the wrong format, otherwise true
+ */
 function correctDateFormat(dateObj, day, month, year) {
     let validDate = dateObj.getFullYear() === year &&
                     (dateObj.getMonth() + 1) === month &&
@@ -649,6 +677,11 @@ function correctDateFormat(dateObj, day, month, year) {
     return true;
 }
 
+/**
+ * Checks if the given date is in the past
+ * @param {Object} dateObj - date object to validate
+ * @returns true if the given date is in the past, otherwise false
+ */
 function isPastDate(dateObj) {
     let today = new Date();
     if (dateObj < today) {
@@ -657,6 +690,9 @@ function isPastDate(dateObj) {
     return false;
 }
 
+/**
+ * Throws error by removing classes from elements in the unvalidInputs array to show error messages
+ */
 function throwError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.remove('hidden');
@@ -668,11 +704,17 @@ function throwError() {
     });
 }
 
+/**
+ * Throws error on subtask container by removing classes from the subtask container to show error message
+ */
 function throwSubtaskError() {
     document.getElementById('invalid-subtask').classList.remove('d-none');
     document.getElementById('container-input-subtask').classList.add('input-unvalid');
 }
 
+/**
+ * Removes error messages by addignclasses to elements in the unvalidInputs array to hide error messages
+ */
 function removeError() {
     unvalidInputs.forEach(element => {
         document.getElementById(`required-${element}`).classList.add('hidden');
@@ -686,6 +728,9 @@ function removeError() {
     document.getElementById('invalid-subtask').classList.add('d-none');
 }
 
+/**
+ * Saves task by setting key-value pairs of the task object
+ */
 function saveTask() {
     task.category = setTaskCategory();
     task.taskType = document.getElementById('category').value;
@@ -701,6 +746,10 @@ function saveTask() {
     task = {};
 }
 
+/**
+ * Determines the task category based on the current window width
+ * @returns the determined task category
+ */
 function setTaskCategory() {
     let category;
     if(window.innerWidth <= 1040) {
@@ -711,6 +760,10 @@ function setTaskCategory() {
     return category;
 }
 
+/**
+ * Gets the tasks category by reading it from the session storage
+ * @returns the tasks category read from the session storage
+ */
 function getTaskCategory() {
     if (sessionStorage.getItem("taskCategory") === "toDo" || sessionStorage.getItem("taskCategory") == null) {
         return "toDos";
@@ -719,6 +772,11 @@ function getTaskCategory() {
     }
 }
 
+/**
+ * Saves the task object to a specified path of a firebase database
+ * @param {String} path - path of the location where the task is saved
+ * @param {Object} task - task object which is saved
+ */
 async function saveToFirebase(path, task) {
     if (userId == "guest") {
         path = "guest/" + path;
@@ -729,6 +787,12 @@ async function saveToFirebase(path, task) {
     }
 }
 
+/**
+ * Sends a POST request with JSON data to a specified endpoint
+ * @param {String} path - path of the location where the task is saved
+ * @param {Object} data - data object which is sent to the database
+ * @returns a promise that resolves to the Fetch API Response object
+ */
 async function postData(path="", data={}) {
     let response = await fetch(BASE_URL_ADDTASK + path + ".json", {
         method: "POST",
@@ -740,6 +804,11 @@ async function postData(path="", data={}) {
     return response;
 }
 
+/**
+ * Retrieves contact data from an endpoint based on the current user's ID
+ * @param {*} path - path of the location where the contact data is retrieved from
+ * @returns a promise that resolves to the parsed JSON response containing the contact data
+ */
 async function getContacts(path="") {
     userId = localStorage.getItem('userId');
     if (userId !== "guest") {
@@ -755,6 +824,10 @@ async function getContacts(path="") {
     }
 }
 
+/**
+ * Loads contact information from the given contacts object and saves them in a global array
+ * @param {Object} contactsObj - object of contacts
+ */
 async function loadContactInfo(contactsObj) {
     let keys = Object.keys(contactsObj.allContacts);
     for (let index = 0; index < keys.length; index++) {
@@ -768,6 +841,10 @@ async function loadContactInfo(contactsObj) {
     sortContactsAlphabetically(contacts);
 }
 
+/**
+ * Loads and displays the user's initials in the specified element
+ * @returns a window.location object
+ */
 async function loadSmallInitials() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
@@ -779,6 +856,11 @@ async function loadSmallInitials() {
     document.getElementById('smallInitials').innerText = getInitials(userData.userDatas.name) || "G";
 }
 
+/**
+ * /**
+ * Sorts a given array of contact objects alphabetically by name
+ * @param {Array} contactsArray - array of contact objects to sort
+ */
 function sortContactsAlphabetically(contactsArray) {
     if (userId != "guest") {
         let user = contactsArray.splice(0, 1);
@@ -793,6 +875,10 @@ function sortContactsAlphabetically(contactsArray) {
     }
 }
 
+/**
+ * Checks the length of the given inputField and shows an errorElement when the input is too long
+ * @param {String} inputField - name of the input whose values length is checked
+ */
 function checkInputLength(inputField) {
     let input = document.getElementById(`${inputField}`);
     let errorElement = document.getElementById(`max-char-${inputField}`);
@@ -807,6 +893,9 @@ function checkInputLength(inputField) {
     }
 }
 
+/**
+ * Displays the value of the date picker as the inputs value
+ */
 function putDateToInput() {
     let datePicker = document.getElementById('date-picker');
     let input = document.getElementById('due-date');
