@@ -651,6 +651,8 @@ input:focus {
     align-items: center;
     padding: 5px 15px;
     border-radius: 10px;
+    word-break: normal;
+    overflow-wrap: anywhere;
 }
 
 .subtask-scroll-margin {

@@ -407,16 +407,20 @@ function clearInputs() {
     document.getElementById('container-assigned-contacts').innerHTML = "";
     clearPrioButtons();
     selectDefaultPrioButton();
-    let inputs = ["title", "description", "due-date", "subtasks"];
-    for (let i = 0; i <inputs.length; i++) {
-        document.getElementById(`${inputs[i]}`).value = "";
-    }
+    clearInputValues();
     document.getElementById('category').value = "";
     selectedContacts = [];
     renderAssignOptions(contacts);
     document.getElementById('max-char-title').classList.add('d-none');
     document.getElementById('invalid-date').classList.add('d-none');
     document.getElementById('container-input-subtask').classList.remove('input-unvalid');
+}
+
+function clearInputValues() {
+    let inputs = ["title", "description", "due-date", "subtasks"];
+    for (let i = 0; i <inputs.length; i++) {
+        document.getElementById(`${inputs[i]}`).value = "";
+    }
 }
 
 function changeInputButton(boolean) {
@@ -620,11 +624,7 @@ function removeError() {
 }
 
 function saveTask() {
-    if(window.innerWidth <= 1040) {
-        task.category = getTaskCategory();
-    } else {
-        task.category = "toDos";
-    }
+    task.category = setTaskCategory();
     task.taskType = document.getElementById('category').value;
     task.taskTitle = document.getElementById('title').value;
     task.taskDescription = document.getElementById('description').value;
@@ -636,6 +636,16 @@ function saveTask() {
     task.assignedContacts = selectedContacts;
     saveToFirebase("tasks/", task);
     task = {};
+}
+
+function setTaskCategory() {
+    let category;
+    if(window.innerWidth <= 1040) {
+        category = getTaskCategory();
+    } else {
+        category = "toDos";
+    }
+    return category;
 }
 
 function getTaskCategory() {
