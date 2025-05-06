@@ -477,12 +477,14 @@ function addSubtaskForBigTaskCardEdit() {
  * @returns {void} 
  */
 function processSubtaskInput(input, containerSubtasks, subtaskObj) {
-    if (input.value !== "") {
+    inputValue = input.value;
+    inputValue = inputValue.trim();
+    if (inputValue !== "") {
         document.getElementById('invalid-subtask-big-task-card-edit__subtask-input').classList.add('d-none');
         document.getElementById('big-task-card-edit__subtask-box').classList.remove('input-unvalid');
         determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCountBigTaskCardEdit);
-        document.getElementById(`big-task-card-edit__subtask-${subtasksCountBigTaskCardEdit}`).innerText = input.value;
-        subtaskObj.subtask = input.value;
+        document.getElementById(`big-task-card-edit__subtask-${subtasksCountBigTaskCardEdit}`).innerText = inputValue;
+        subtaskObj.subtask = inputValue;
         subtasksBigTaskCardEdit.push(subtaskObj);
         checkForScrollableContainerForBigTaskCardEdit(containerSubtasks);
     } else {
@@ -651,12 +653,14 @@ function processSubtaskForBigTaskCardEdit(boolean) {
     let input = document.getElementById('big-task-card-edit__subtask-input');
     let invalidRef = document.getElementById('invalid-subtask-big-task-card-edit__subtask-input');
     invalidRef.classList.add('d-none');
+    inputValue = input.value;
+    inputValue = inputValue.trim();
     document.getElementById('max-char-big-task-card-edit__subtask-input').classList.add('d-none')
-    if (boolean && (input.value != "")) {
+    if (boolean && (inputValue != "")) {
         addSubtaskForBigTaskCardEdit();
-        input.value = "";
-    } else if (!boolean && (input.value != "" || input.value == "")) {
-        input.value = "";
+        inputValue = "";
+    } else if (!boolean && (inputValue != "" || inputValue == "")) {
+        inputValue = "";
     } else {
         invalidRef.classList.remove('d-none');
     }
