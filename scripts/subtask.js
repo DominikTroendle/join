@@ -139,3 +139,17 @@ function throwSubtaskError() {
     document.getElementById('invalid-subtask').classList.remove('d-none');
     document.getElementById('container-input-subtask').classList.add('input-unvalid');
 }
+
+/**
+ * Changes the visibility of two buttons to be displayed or hidden, depending on the boolean value
+ * @param {Boolean} boolean - determines which classes should be added to or removed from the buttons
+ */
+function changeInputButton(boolean) {
+    if (boolean) {
+        document.getElementById('button-add').classList.add('d-none');
+        document.getElementById('container-buttons').classList.remove('d-none');
+    } else {
+        document.getElementById('button-add').classList.remove('d-none');
+        document.getElementById('container-buttons').classList.add('d-none');
+    }
+}
