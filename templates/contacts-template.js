@@ -120,12 +120,12 @@ return`
             <form onsubmit="return addUserToContactList(event, this);">
                 <div class="input-container">
                     <div class="input-area">
-                        <input type="text" placeholder="Name" id="name" required>
+                        <input type="text" placeholder="Name" id="name" pattern="^\\S(.*\\S)?$" title="No spaces allowed at the beginning or end" required>
                         <img src="assets/img/person-grey.png" alt="">
                     </div>
                     <div class="input-container">
                         <div class="input-area">
-                                <input type="email" placeholder="Email" id="email" required>
+                                <input type="email" placeholder="Email" id="email" pattern="^\\S+$" title="No spaces allowed" required>
                                 <img src="assets/img/mail.png" alt="">
                         </div> 
                     </div>
@@ -173,12 +173,12 @@ function getEditContactTemplate(key) {
                 <form onsubmit="return editContact(event, this);">
                     <div class="input-container mobile-container">
                         <div class="input-area">
-                            <input type="text" placeholder="Name" id="editName" required>
+                            <input type="text" placeholder="Name" id="editName" pattern="^\\S(.*\\S)?$" title="No spaces allowed at the beginning or end" required>
                             <img src="assets/img/person-grey.png" alt="">
                         </div>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="email" placeholder="Email" id="editEmail" required>
+                                <input type="email" placeholder="Email" id="editEmail" pattern="^\\S+$" title="No spaces allowed" required>
                                 <img src="assets/img/mail.png" alt="">
                             </div> 
                         </div>
