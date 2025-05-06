@@ -630,6 +630,7 @@ function validateInputs() {
     unvalidInputs = [];
     for (let i = 0; i < inputs.length; i++) {
         let inputValue = document.getElementById(`${inputs[i]}`).value;
+        inputValue = inputValue.trim();
         if (inputValue == "" || ((inputs[i] == "due-date") && !testDate())) {
             valid = false;
             unvalidInputs.push(inputs[i]);

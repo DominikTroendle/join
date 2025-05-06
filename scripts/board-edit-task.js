@@ -360,6 +360,7 @@ function validateInputsForBigTaskCardEdit() {
     unvalidInputsBigTaskCardEdit = [];
     for (let i = 0; i < inputs.length; i++) {
         let inputValue = document.getElementById(`${inputs[i]}`).value;
+        inputValue = inputValue.trim();
         if (inputValue == "" || ((inputs[i] == "big-task-card-edit__input-due-date") && !testDateForBigTaskCardEdit())) {
             valid = false;
             unvalidInputsBigTaskCardEdit.push(inputs[i]);
