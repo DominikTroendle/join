@@ -352,31 +352,6 @@ function resetUiElements() {
 }
 
 /**
- * Updates data at the specified path.
- * 
- * @param {string} key - The key for the data.
- * 
- * @param {Object} data - The data to store.
- * 
- * @param {string} path - The user path.
- */
-async function putData(key, data, path) {
-    let procressEditContainer = document.querySelector('.edit-contact-overlay');
-    let response = await fetch(`${BASE_URL}users/${path}/allContacts/${key}.json`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    let responseToJson = await response.json();
-    if (procressEditContainer) {
-        procressEditContainer.classList.remove('active');
-    }
-    return responseToJson;
-}
-
-/**
  * Deletes a contact by key from the user's contact list.
  * 
  * @param {string} key - Contact's unique identifier.

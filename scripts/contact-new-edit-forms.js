@@ -292,6 +292,33 @@ function formatPhone(phone) {
 }
 
 /**
+ * Updates data at the specified path.
+ * 
+ * @param {string} key - The key for the data.
+ * 
+ * @param {Object} data - The data to store.
+ * 
+ * @param {string} path - The user path.
+ */
+async function putData(key, data, path) {
+    let procressEditContainer = document.querySelector('.edit-contact-overlay');
+    let procressOverlay = document.querySelector('.mobile-procressing-area-overlay');
+    let response = await fetch(`${BASE_URL}users/${path}/allContacts/${key}.json`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    let responseToJson = await response.json();
+    if (procressEditContainer || procressOverlay) {
+        procressEditContainer.classList.remove('active');
+        procressOverlay.classList.add('close');
+    }
+    return responseToJson;
+}
+
+/**
  * Handles click events for the mobile processing menu, toggling visibility of UI elements.
  */
 function procressingClickMenu() {
