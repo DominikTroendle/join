@@ -147,9 +147,7 @@ function createTask() {
     if (valid && validDateFormat) {
         saveTask();
         document.getElementById('overlay-task-added').classList.remove('d-none');
-        setTimeout(() => {
-            window.location.href = 'board.html';
-        }, "900");
+        setTimeout(() => {window.location.href = 'board.html';}, "900");
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
         throwError();
         document.getElementById('invalid-date').classList.remove('hidden');

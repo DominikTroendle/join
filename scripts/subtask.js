@@ -47,22 +47,30 @@ function isEnterKey(event) {
  * Adds subtask if the inputs value is not empty, otherwise throws error
  */
 function addSubtask() {
-    let containerSubtasks = document.getElementById('container-subtasks');
-    let subtaskObj = {"checked" : "false"};
     let inputValue = document.getElementById('subtasks').value;
     inputValue = inputValue.trim();
     if (inputValue !== "") {
-        document.getElementById('invalid-subtask').classList.add('d-none');
-        document.getElementById('container-input-subtask').classList.remove('input-unvalid');
-        subtasksCount++;
-        determineSubtaskStyle(containerSubtasks, subtasksCount);
-        document.getElementById(`subtask-${subtasksCount}`).innerText = inputValue;
-        subtaskObj.subtask = inputValue;
-        subtasks.push(subtaskObj);
-        checkForScrollableContainer(containerSubtasks);
+        renderSubtask(inputValue);
     } else {
         throwSubtaskError();
     }
+}
+
+/**
+ * Renders subtask by hiding error messages, determining the subtasks style (mobile/desktop and scrollable/unscrollable) and filling in the inputValue as innerText
+ * @param {String} inputValue - value of the subtask that is to be filled in
+ */
+function renderSubtask(inputValue) {
+    let containerSubtasks = document.getElementById('container-subtasks');
+    let subtaskObj = {"checked" : "false"};
+    document.getElementById('invalid-subtask').classList.add('d-none');
+    document.getElementById('container-input-subtask').classList.remove('input-unvalid');
+    subtasksCount++;
+    determineSubtaskStyle(containerSubtasks, subtasksCount);
+    document.getElementById(`subtask-${subtasksCount}`).innerText = inputValue;
+    subtaskObj.subtask = inputValue;
+    subtasks.push(subtaskObj);
+    checkForScrollableContainer(containerSubtasks);
 }
 
 /**
