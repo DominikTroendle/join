@@ -25,6 +25,7 @@ if (msg) {
  */
 function init() {
     animationLogo()
+    // sessionSorage()
 }
 
 /**
