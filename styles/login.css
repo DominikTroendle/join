@@ -324,7 +324,7 @@ body {
 }
 
 .resposive-logo-color {
-    fill: rgb(0, 0, 0);
+    fill: #2A3647
 }
 
 @media (min-width: 1920px) {
@@ -385,7 +385,7 @@ body {
     }
 
     .resposive-logo-color {
-        fill: rgb(253, 253, 253);
+        fill: #2A3647
     }
 
     .logo {
@@ -443,7 +443,7 @@ body {
         position: absolute;
         display: flex;
         justify-content: center;
-        top: 1130px;
+        top: 750px;
         width: 100%;
         margin-top: 0;
         padding-right: 0;

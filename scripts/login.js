@@ -136,6 +136,10 @@ function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
     loginLogo.style.display = "flex";
     overlay.classList.add('login-overlay');
     logoPaths.forEach(logoPath => logoPath.classList.add('animation-change-logo-color'));
+    setTimeout(() => {
+        logoPaths.forEach(logoPath => logoPath.classList.remove('animation-change-logo-color'));
+    }, 1000);
+    
 }
 
 /**
