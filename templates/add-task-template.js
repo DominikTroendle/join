@@ -1,3 +1,9 @@
+/**
+ * Returns an HTML string representing a contact option element with the given name and color
+ * @param {String} name - name of the contact used as id
+ * @param {String} color - color associated with the contact
+ * @returns an HTML string
+ */
 function returnAssignedContactHTML(name, color) {
     return `<div id="container-${name}" class="container-custom-select-option select-option-with-scrollbar" onclick="selectContact('${name}','${color}'), stopPropagation(event)">
                 <div class="flex-align gap-15">
@@ -8,10 +14,21 @@ function returnAssignedContactHTML(name, color) {
             </div>`;
 }
 
+/**
+ * Returns an HTML string representing an initials element
+ * @param {String} initials - initials to be displayed
+ * @param {String} color - color assciated with the initials
+ * @returns an HTML string
+ */
 function returnAssignedContactPreviewHTML(initials, color) {
     return `<span class="initials ${color}">${initials}</span>`;
 }
 
+/**
+ * Returns an HTML string representing a subtask container with the given id passed on to a few onclick functions
+ * @param {String} id - id of the subtask, used as element ids and in select functions
+ * @returns an HTML string
+ */
 function returnSubtaskHTML(id) {
     return `<div id="container-subtask-${id}" class="position-relative">
                 <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
@@ -36,6 +53,11 @@ function returnSubtaskHTML(id) {
             </div>`;
 }
 
+/**
+ * Returns an HTML string representing a mobile subtask container with the given id passed on to a few onclick functions
+ * @param {String} id - id of the subtask, used as element ids and in select functions
+ * @returns an HTML string
+ */
 function returnSubtaskMobileHTML (id) {
     return `<div id="container-subtask-${id}" class="position-relative">
                 <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
