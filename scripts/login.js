@@ -139,7 +139,6 @@ function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
     setTimeout(() => {
         logoPaths.forEach(logoPath => logoPath.classList.remove('animation-change-logo-color'));
     }, 1000);
-    
 }
 
 /**
