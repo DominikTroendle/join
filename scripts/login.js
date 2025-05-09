@@ -1,6 +1,6 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
-let logoAnimation = localStorage.getItem("moveAnimation");
+let logoAnimation = sessionStorage.getItem("moveAnimation");
 const urlParams = new URLSearchParams(window.location.search);
 const msg = urlParams.get('msg');
 
@@ -25,7 +25,6 @@ if (msg) {
  */
 function init() {
     animationLogo()
-    sessionSorage()
 }
 
 /**
@@ -123,7 +122,7 @@ function animationLogo() {
             setTimeout(() => {
                 overlay.classList.remove('login-overlay');
             }, 1000);
-            localStorage.setItem("moveAnimation", false);
+            sessionStorage.setItem("moveAnimation", false);
         }, 200);
     }
 }
