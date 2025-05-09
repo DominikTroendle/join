@@ -29,9 +29,7 @@ function init() {
 }
 
 /**
- * Authenticates the user by checking email and password against stored data.
- * If successful, stores user ID in local storage, sets session, and redirects to summary page.
- * If unsuccessful, highlights input fields and displays an error message.
+ * Handles user login by validating email and password.
  */
 async function UserLogin() {
     let emailInput = document.getElementById('email');
@@ -41,14 +39,24 @@ async function UserLogin() {
     let usersResponse = await fetch(BASE_URL + "users.json");
     let users = await usersResponse.json();
     let userId = Object.keys(users).find(key => users[key].userDatas.email === email && users[key].userDatas.password === password);
+    handleUserLogin(userId, emailInput, passwordInput);
+}
+
+/**
+ * Handles user login by storing user info and redirecting, or showing an error if login fails.
+ * @param {string} userId - The user's ID.
+ * @param {HTMLElement} emailInput - The email input element.
+ * @param {HTMLElement} passwordInput - The password input element.
+ */
+function handleUserLogin(userId, emailInput, passwordInput) {
     if (userId) {
         localStorage.setItem("userId", userId);
-        sessionSorage("loggedIn");
+        sessionStorage.setItem("loggedIn", "true");
         window.location.href = 'summary.html?';
     } else {
         emailInput.style.border = "1px solid red";
         passwordInput.style.border = "1px solid red";
-        document.getElementById('notCorrectValue').style.display = ("block")
+        document.getElementById('notCorrectValue').style.display = "block";
     }
 }
 
@@ -110,21 +118,24 @@ function animationLogo() {
         backLogin();
     } else {
         setTimeout(() => {
-            const { passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
-            passivLogo.style.display = "none";
-            loginLogo.style.display = "flex";
-            overlay.classList.add('login-overlay');
-            logoPath1.classList.add('animation-change-logo-color');
-            logoPath2.classList.add('animation-change-logo-color');
-            logoPath3.classList.add('animation-change-logo-color');
-            logoPath4.classList.add('animation-change-logo-color');
-            logoPath5.classList.add('animation-change-logo-color');
+            const {passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
+            updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
             setTimeout(() => {
                 overlay.classList.remove('login-overlay');
             }, 1000);
             localStorage.setItem("moveAnimation", false);
         }, 200);
     }
+}
+
+/**
+ * Updates the logo elements and triggers the animation.
+ */
+function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
+    passivLogo.style.display = "none";
+    loginLogo.style.display = "flex";
+    overlay.classList.add('login-overlay');
+    logoPaths.forEach(logoPath => logoPath.classList.add('animation-change-logo-color'));
 }
 
 /**

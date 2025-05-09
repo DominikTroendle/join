@@ -1,8 +1,7 @@
-function sessionSorage(status) {
-    sessionStorage.setItem("currentPage", window.location.pathname);
-    sessionStorage.setItem("loginStatus", status);
-}
-
+/**
+ * Stores current page path and login status in sessionStorage.
+ * @param {string} status - The user's login status.
+ */
 function logOut() {
     localStorage.removeItem("userId", "guest");
 }
@@ -23,6 +22,10 @@ function accountClickMenu() {
     let overlay = document.getElementById('subMenuOverlayContent');
     let menuBox = document.querySelector('.menu-box');
     let supportBox = document.querySelector('.account-submenu-container');
+    toggleMenu(overlay, menuBox, supportBox);
+}
+
+function toggleMenu(overlay, menuBox, supportBox) {
     if (overlay.classList.contains('active')) {
         supportBox.classList.remove('active');
         setTimeout(() => {
@@ -58,31 +61,24 @@ function saveMenuId(menuId) {
 
 function toLastClickedMenu() {
     const lastClickedMenu = localStorage.getItem('lastClickedMenu');
-    if (lastClickedMenu) {
-        let targetUrl;
-        switch (lastClickedMenu) {
-            case 'summary-menu-button':
-                targetUrl = 'summary.html';
-                break;
-            case 'add-task-menu-button':
-                targetUrl = 'add-task.html';
-                break;
-            case 'board-menu-button':
-                targetUrl = 'board.html';
-                break;
-            case 'contacts-menu-button':
-                targetUrl = 'contacts.html';
-                break;
-            case 'privacy-policy-menu-button-bottom':
-                targetUrl = 'privacy-policy.html';
-                break;
-            case 'legal-notice-menu-button-bottom':
-                targetUrl = 'legal-notice.html';
-                break;
-            default:
-                targetUrl = 'summary.html';
-                break;
-        }
-        window.location.href = targetUrl;
-    }
+    const menuUrls = {
+        'summary-menu-button': getSummaryUrl,
+        'add-task-menu-button': getAddTaskUrl,
+        'board-menu-button': getBoardUrl,
+        'board-menu-button-mobile': getBoardUrlMobile,
+        'contacts-menu-button': getContactsUrl,
+        'privacy-policy-menu-button-bottom': getPrivacyPolicyUrl,
+        'legal-notice-menu-button-bottom': getLegalNoticeUrl,
+    };
+    
+    const targetUrl = (lastClickedMenu && menuUrls[lastClickedMenu]) ? menuUrls[lastClickedMenu]() : getSummaryUrl();
+    window.location.href = targetUrl;
 }
+
+function getSummaryUrl() { return 'summary.html'; }
+function getAddTaskUrl() { return 'add-task.html'; }
+function getBoardUrl() { return 'board.html'; }
+function getBoardUrlMobile() { return 'board.html'; }
+function getContactsUrl() { return 'contacts.html'; }
+function getPrivacyPolicyUrl() { return 'privacy-policy.html'; }
+function getLegalNoticeUrl() { return 'legal-notice.html'; }

@@ -311,11 +311,20 @@ async function putData(key, data, path) {
         body: JSON.stringify(data)
     });
     let responseToJson = await response.json();
-    if (procressEditContainer || procressOverlay) {
-        procressEditContainer.classList.remove('active');
-        procressOverlay.classList.add('close');
-    }
+    handleOverlay(procressEditContainer, procressOverlay);
     return responseToJson;
+}
+
+/**
+ * Toggles the visibility of the process edit container and overlay.
+ * @param {HTMLElement} procressEditContainer - The container to toggle.
+ * @param {HTMLElement} procressOverlay - The overlay to close.
+ */
+function handleOverlay(procressEditContainer, procressOverlay) {
+    if (procressEditContainer || procressOverlay) {
+        procressEditContainer?.classList.remove('active');
+        procressOverlay?.classList.add('close');
+    }
 }
 
 /**
@@ -332,11 +341,16 @@ function procressingClickMenu() {
     menuBox.classList.add('inactive');
     supportBox.classList.add('inactive');
     procressButton.classList.add('active');
-    procressOverlay.onclick = (event) => {
-        if (event.target === procressOverlay) {
-            handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton, procressMenu);
-        }
-    };
+    procressOverlay.onclick = (event) => handleOverlayClickEvent(event, procressOverlay, menuBox, supportBox, procressButton, procressMenu);
+}
+
+/**
+ * Handles the click event when the overlay is clicked.
+ */
+function handleOverlayClickEvent(event, procressOverlay, menuBox, supportBox, procressButton, procressMenu) {
+    if (event.target === procressOverlay) {
+        handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton, procressMenu);
+    }
 }
 
 /**

@@ -40,7 +40,9 @@ async function selectMoreContactInformationTemplate(contact, initial) {
             <div class="info-name-container">
                 <div class="more-info-initials ${contact.color}"><p>${initial}</p></div>
                 <div class="procressing-area">
-                    <h1>${contact.name}</h1>
+                    <div class="container-user-name">
+                        <h1>${contact.name}</h1>
+                    </div>
                     <div class="procressing-area-button-container">
                         <button class="procressing-area-button" onclick="editContactOverlay('${contact.key}')">
                             <svg class="icon" width="19" height="19" viewBox="0 0 19 19" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
