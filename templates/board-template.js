@@ -462,7 +462,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                     
                     
                     <div id="big-task-card-edit__prioritys-box" class="big-task-card-edit__prioritys-box container-input-label">
-                            <label for="big-task-card-edit__prioritys-button-box" class="label-add-task">Priority</label>
+                            <span class="label-add-task">Priority</span>
                             <div id="big-task-card-edit__prioritys-button-box" class="big-task-card-edit__prioritys-button-box">
                                 <button id="big-task-card-edit__urgent-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__urgent-button')">
                                     Urgent
@@ -495,7 +495,7 @@ function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskP
                             <div id="big-task-card-edit__assigned-contacts-box" class="big-task-card-edit__assigned-contacts-box"></div>
                         </div>
                     <div class="container-input-label">
-                            <label id="label-subtasks" for="big-task-card-edit__input-subtask" class="label-add-task" placeholder="Add new subtask">
+                            <label id="label-subtasks" for="big-task-card-edit__subtask-input" class="label-add-task" placeholder="Add new subtask">
                                 Subtasks
                                 <p id="invalid-subtask-big-task-card-edit__subtask-input" class="required d-none">Enter at least one character to save subtask!</p>
                                 <p id="max-char-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
@@ -580,7 +580,7 @@ function addTaskTemplate() {
                 <hr id="separator">
                 <div id="form-right">
                     <div id="container-prioritys" class="container-input-label">
-                        <label for="buttons-prio" class="label-add-task">Priority</label>
+                        <span class="label-add-task">Priority</span>
                         <div id="buttons-prio">
                             <button id="urgent" class="button-prio button-prio-hover" type="button" onclick="selectPrioButton('urgent')">
                                 Urgent
