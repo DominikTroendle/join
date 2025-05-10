@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
 header {
     position: fixed;
     display: flex;
@@ -120,12 +126,6 @@ p{
         width: calc(1920px - 232px);
     }
 }
-
-/* @media (min-width: 2026px) {
-    .text-content {
-        width: 1592px;
-    }
-} */
 
 @media (max-width: 1040px){
     nav {
