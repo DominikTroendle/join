@@ -83,7 +83,8 @@
 
 .container-user-name {
     margin-right: 20px;
-    word-break: break-all;
+    inline-size: auto;
+    overflow-wrap: break-word;
 }
 
 .contact-headline {
