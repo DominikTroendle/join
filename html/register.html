@@ -5,18 +5,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join Register</title>
-    <link rel="icon" href="assets/img/join-logo.svg" type="image/gif" sizes="16x16" />
-    <link rel="stylesheet" href="styles/font.css">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="styles/register.css" />
+    <link rel="icon" href="../assets/img/join-logo.svg" type="image/gif" sizes="16x16" />
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/register.css" />
 </head>
 
 <body onload="init()">
-    <img src="assets/img/join-logo.png" alt="Logo" class="logo" />
+    <img src="../assets/img/join-logo.png" alt="Logo" class="logo" />
     <div class="user-register-container">
         <div class="user-register">
             <div class="returnLoginButton">
-                <button class="left-btn"><img src="assets/img/arrow-left-line.png" alt=""
+                <button class="left-btn"><img src="../assets/img/arrow-left-line.png" alt=""
                         onclick="backToLogin()"></button>
             </div>
 
@@ -28,21 +28,21 @@
                 <div class="register-input">
                     <div class="input-container">
                         <input type="name" id="name" placeholder="Name" pattern="^\S(.*\S)?$" title="No spaces allowed at the beginning or end" required />
-                        <img src="assets/img/person.svg" alt="person Icon" class="input-icon">
+                        <img src="../assets/img/person.svg" alt="person Icon" class="input-icon">
                     </div>
                     <div class="input-container">
                         <input type="email" id="email" placeholder="Email" pattern="^\S(.*\S)?$" title="No spaces allowed at the beginning or end" required />
-                        <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
+                        <img src="../assets/img/mail.png" alt="Mail Icon" class="input-icon">
                     </div>
                     <div class="input-container">
                         <input type="password" id="password" placeholder="Password" pattern="^\S{8,}$" title="At least 8 characters, no spaces allowed" required
                             onfocus="changePasswordIcon(true)" onblur="changePasswordIcon(false)" />
-                        <img id="passwordIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon">
+                        <img id="passwordIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon">
                     </div>
                     <div class="input-container">
                         <input type="password" id="controllPassword" placeholder="Confirm Password" pattern="^\S{8,}$" title="At least 8 characters, no spaces allowed" required
                             onfocus="changeConrollPasswordIcon(true)" onblur="changeConrollPasswordIcon(false)" />
-                        <img id="passwordControllIcon" src="assets/img/lock.png" alt="lock Icon" class="input-icon"
+                        <img id="passwordControllIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon"
                             onclick="togglePasswordVisibility()">
                     </div>
                     <div class="no-value-content">
@@ -70,8 +70,8 @@
     <div class="overlay-landscape-spinner">
         <span class="loader"><span class="loader2"></span></span>
     </div>
-    <script src="scripts/register.js"></script>
-    <script src="script.js"></script>
+    <script src="../scripts/register.js"></script>
+    <script src="../script.js"></script>
 </body>
 
 </html>

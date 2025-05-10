@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Contacts</title>
-    <link rel="shortcut icon" href="assets/img/join-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="styles/font.css">
-    <link rel="stylesheet" href="styles/colors.css">
-    <link rel="stylesheet" href="./styles/contacts.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../assets/img/join-logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../styles/colors.css">
+    <link rel="stylesheet" href="../styles/contacts.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body onload="init(), addClassSelectedMenuButton('contacts-menu-button', 'loggedIn')">
@@ -17,11 +17,11 @@
         <div class="content">
             <header>
                 <nav>
-                    <img class="mobile-logo" src="assets/img/join-logo.png" alt="">
+                    <img class="mobile-logo" src="../assets/img/join-logo.png" alt="">
                     <span class="text-nav">Kanban Project Management Tool</span>
                     <div class="button-box">
                         <a href="help.html" class="help-button">
-                            <img class="help-img" src="assets/img/Property 1=Default.png">
+                            <img class="help-img" src="../assets/img/Property 1=Default.png">
                         </a>
                         <button onclick="accountClickMenu()" id="smallInitials" class="small-menu-button"></button>
                     </div>
@@ -33,12 +33,12 @@
                         <li class="mobile-help"><a href="help.html">Help</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="legal-notice.html">Legal Notice</a></li>
-                        <li><a href="index.html">Log out</a></li>
+                        <li><a href="../index.html">Log out</a></li>
                     </ul>
                 </div>
             </div>
             <div class="menu-box">
-                <img class="menu-logo" src="assets/img/Capa 2.png" alt="">
+                <img class="menu-logo" src="../assets/img/Capa 2.png" alt="">
                 <div class="menu-button-box">
                     <a href="summary.html" class="menu-button" id="summary-menu-button">
                         <svg viewBox="0 0 30 31" class="menu-button-icon">
@@ -80,7 +80,7 @@
                 <section id="container-contacts-button">
                     <button onclick="addNewContactOverlay()">
                         <p>Add new contact</p>
-                        <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
+                        <img src="../assets/icons/person_add.svg" alt="icon-add-contact">
                     </button>
                 </section>
                 <div class="contacs-box-container">
@@ -89,7 +89,7 @@
             </div>
             <div class="add-new-button-mobile-container">
                 <button class="add-new-button" onclick="toggleButtonBackgroundcolor(this); addNewContactOverlay()">
-                    <img src="./assets/icons/person_add.svg" alt="icon-add-contact">
+                    <img src="../assets/icons/person_add.svg" alt="icon-add-contact">
                 </button>
             </div>
 
@@ -97,16 +97,16 @@
                 <div class="headline-container">
                     <div class="contact-headline">
                         <h1>Contacts</h1>
-                        <img class="desktope-line" src="./assets/icons/vector.svg" alt="icon-line">
+                        <img class="desktope-line" src="../assets/icons/vector.svg" alt="icon-line">
                         <span>Better with a team</span>
-                        <img class="mobile-img-line" src="./assets/img/Vector 5.svg" alt="mobile-line">
+                        <img class="mobile-img-line" src="../assets/img/Vector 5.svg" alt="mobile-line">
                     </div>
-                    <img class="back-to-contactlist-btn" src="assets/img/arrow-left-line.png" alt=""
+                    <img class="back-to-contactlist-btn" src="../assets/img/arrow-left-line.png" alt=""
                         onclick="closeContactMobilButton()">
                 </div>
                 <div id="moreInformationContact"></div>
                 <div class="mobile-procressing-area-button" onclick="procressingClickMenu(this)">
-                    <button><img src="assets/img/more_vert.svg" alt=""></button>
+                    <button><img src="../assets/img/more_vert.svg" alt=""></button>
                 </div>
             </div>
 
@@ -121,12 +121,11 @@
         <div class="overlay-landscape-spinner">
             <span class="loader"><span class="loader2"></span></span>
         </div>
-        <script src="./templates/contacts-template.js"></script>
-        <script src="scripts/contact-new-edit-forms.js"></script>
-        <script src="scripts/contact-mobile-buttons.js"></script>
-        <script src="./scripts/contacts.js"></script>
-        
-        <script src="script.js" defer></script>
+        <script src="../templates/contacts-template.js"></script>
+        <script src="../scripts/contact-new-edit-forms.js"></script>
+        <script src="../scripts/contact-mobile-buttons.js"></script>
+        <script src="../scripts/contacts.js"></script>
+        <script src="../script.js" defer></script>
 </body>
 
 </html>

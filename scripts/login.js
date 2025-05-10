@@ -52,7 +52,7 @@ function handleUserLogin(userId, emailInput, passwordInput) {
     if (userId) {
         localStorage.setItem("userId", userId);
         sessionStorage.setItem("loggedIn", "true");
-        window.location.href = 'summary.html?';
+        window.location.href = 'html/summary.html?';
     } else {
         emailInput.style.border = "1px solid red";
         passwordInput.style.border = "1px solid red";
@@ -65,8 +65,7 @@ function handleUserLogin(userId, emailInput, passwordInput) {
  */
 function loginGuastAccount() {
     localStorage.setItem("userId", "guest");
-    sessionStorage.setItem("loggedIn", "true");
-    window.location.href = "summary.html?"
+    window.location.href = "html/summary.html?"
 }
 
 /**

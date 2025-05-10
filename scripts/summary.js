@@ -1,9 +1,9 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 const priorities = ['urgent', 'medium', 'low'];
 const priorityIcons = {
-    urgent: 'assets/icons/urgent-summary.png',
-    medium: 'assets/icons/medium-summary.svg',
-    low: 'assets/icons/low-summary.svg',
+    urgent: '../assets/icons/urgent-summary.png',
+    medium: '../assets/icons/medium-summary.svg',
+    low: '../assets/icons/low-summary.svg',
 };
 
 /**
@@ -260,7 +260,7 @@ function loadNumberOfPriorityTasks(allLoadTasks) {
     }
     document.getElementById("number-of-priority-tasks").innerHTML = "&#x1F3C1";
     document.getElementById("priority-text").innerHTML = "finished";
-    document.getElementById("priority-img").src = "assets/icons/all-ready-summary.svg";
+    document.getElementById("priority-img").src = "../assets/icons/all-ready-summary.svg";
 }
 
 /**
