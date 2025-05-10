@@ -81,6 +81,11 @@
     background-color: #F6F7F8;
 }
 
+.container-user-name {
+    margin-right: 20px;
+    word-break: break-all;
+}
+
 .contact-headline {
     display: flex;
     align-items: center;
@@ -278,8 +283,8 @@
 }
 
 .more-info-initials {
-    width: 120px;
-    height: 120px;
+    min-width: 120px;
+    min-height: 120px;
     border-radius: 50%;
     border: 3px solid white;
     display: flex;
