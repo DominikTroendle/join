@@ -420,8 +420,8 @@ body {
 
     @keyframes moveLogo {
         0% {
-            top: 40%;
-            left: 45%;
+            top: 35%;
+            left: 35%;
             transform: translate(-50, -50) scale(1);
         }
 
@@ -637,3 +637,4 @@ body {
         margin-top: 0;
     }
 }
+
