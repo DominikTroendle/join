@@ -231,6 +231,10 @@ button {
     background-color: transparent;
 }
 
+input {
+    cursor: pointer;
+}
+
 .overlay {
     position: absolute;
     top: 0;
