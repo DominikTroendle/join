@@ -43,7 +43,7 @@ async function loadAllUserContacts(path) {
  * Loads background colors from a CSS file.
  */
 async function loadColors() {
-    let responseColors = await fetch("styles/colors.css");
+    let responseColors = await fetch("../styles/colors.css");
     let responseColorText = await responseColors.text();
     const regex = /\.bg-([\w-]+)\s*\{[^}]*background(?:-color)?:\s*([^;}]+)/g;
     let matches = [...responseColorText.matchAll(regex)];
