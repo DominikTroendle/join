@@ -158,3 +158,35 @@ function backLogin() {
 //         logoPath5: document.getElementById('moveLogo5')
 //     };
 // }
+
+function moveLogoOnce() {
+    // if (localStorage.getItem("logoMoved")) return;
+    const overlay = document.getElementById("testOverlay");
+    const logo = document.getElementById("testLogo");
+    const littleLogo = document.getElementById("littleLogo");
+
+    // Schrittweise Bewegung mit einfacher Animation per JS
+    let step = 0;
+    const totalSteps = 60;
+    const interval = setInterval(() => {
+      step++;
+      const progress = step / totalSteps;
+      logo.style.top = 50 - (34 * progress) + "%";   // 50% → ~20px (in Prozent gerechnet)
+      logo.style.left = 50 - (37 * progress) + "%";  // 50% → ~20px
+      logo.style.transform = `translate(-50%, -50%) scale(${1 - 0.6 * progress})`;
+
+      if (step >= totalSteps) {
+        clearInterval(interval);
+        overlay.style.opacity = "0"
+        logo.style.top = "80px";
+        logo.style.left = "77px";
+        logo.style.transform = "none";
+        logo.style.height = "122px";
+        logo.style.width = "100px";
+        localStorage.setItem("logoMoved", "true");
+        littleLogo.style.display = "flex"
+      }
+    }, 10);
+  }
+
+  moveLogoOnce(); // Direkt aufrufen

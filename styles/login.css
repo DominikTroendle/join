@@ -643,7 +643,7 @@ body {
     position: absolute;
     height: 100%;
     width: 100%;
-    background-color: #d1d1d1c4;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -655,10 +655,10 @@ body {
 }
 
 .little-test-logo{
+    order: 0;
     position: relative;
-    
-    top: 80px;
     left: 77px;
     width: 100px;
     height: 122px;
+    display: none;
 }
