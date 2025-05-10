@@ -26,9 +26,9 @@ function toggleAssignOptions() {
 function changeDropdownArrow(boolean, dropdown) {
     let dropwdownArrow = document.getElementById(`arrow-dropdown-${dropdown}`);
     if (boolean) {
-        dropwdownArrow.src = "./assets/icons/arrow_drop_down_mirrored.svg";
+        dropwdownArrow.src = "../assets/icons/arrow_drop_down_mirrored.svg";
     } else {
-        dropwdownArrow.src = "./assets/icons/arrow_drop_down.svg";
+        dropwdownArrow.src = "../assets/icons/arrow_drop_down.svg";
     }
 }
 
@@ -248,13 +248,13 @@ function toggleSelection(boolean, contactDiv, icon) {
         contactDiv.classList.add('selected');
         contactDiv.classList.add('selected-hover');
         contactDiv.classList.add('white');
-        icon.src = "./assets/icons/checked.svg";
+        icon.src = "../assets/icons/checked.svg";
         icon.classList.add('filter-white');
     } else {
         contactDiv.classList.remove('selected');
         contactDiv.classList.remove('selected-hover');
         contactDiv.classList.remove('white');
-        icon.src = "./assets/icons/unchecked.svg";
+        icon.src = "../assets/icons/unchecked.svg";
         icon.classList.remove('filter-white');
     }
 }
