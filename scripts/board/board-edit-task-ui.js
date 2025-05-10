@@ -90,9 +90,9 @@ function checkForSelectedContactsForBigTaskCard(array, dropDown) {
 function changeDropdownArrowForBigTaskCardEdit(boolean, dropdown) {
     let dropwdownArrow = document.getElementById(`big-task-card-edit__arrow-dropdown-${dropdown}`);
     if (boolean) {
-        dropwdownArrow.src = "./assets/icons/arrow_drop_down_mirrored.svg";
+        dropwdownArrow.src = "../assets/icons/arrow_drop_down_mirrored.svg";
     } else {
-        dropwdownArrow.src = "./assets/icons/arrow_drop_down.svg";
+        dropwdownArrow.src = "../assets/icons/arrow_drop_down.svg";
     }
 }
 
