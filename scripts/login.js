@@ -65,6 +65,7 @@ function handleUserLogin(userId, emailInput, passwordInput) {
  */
 function loginGuastAccount() {
     localStorage.setItem("userId", "guest");
+    sessionStorage.setItem("loggedIn", "true");
     window.location.href = "summary.html?"
 }
 

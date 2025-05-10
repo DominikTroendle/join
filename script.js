@@ -4,6 +4,7 @@
  */
 function logOut() {
     localStorage.removeItem("userId", "guest");
+    sessionStorage.removeItem("loggedIn");
 }
 
 /**

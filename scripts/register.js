@@ -8,7 +8,7 @@ let bgColors = [];
 async function init() {
     await loadColors();
     await loadAllUserData();
-    sessionSorage()
+    sessionStorage();
 }
 
 /**
@@ -248,14 +248,14 @@ function togglePasswordVisibility() {
  * Hides certain links based on login status and screen width.
  */
 function hideLoggendInLinks() {
-    let status = sessionStorage.getItem("loginStatus");
-    if (status === "undefined" && window.innerWidth > 1040) {
+    let status = sessionStorage.getItem("loggedIn");
+    if (status === null && window.innerWidth > 1040) {
         const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
         loggedInLinks.forEach( li => {
         li.style.display = 'none';
         document.getElementById('login-button').classList.add('menu-login-button')
         });
-    } else if (status === "undefined" && window.innerWidth < 1040) {
+    } else if (status === null && window.innerWidth < 1040) {
         const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
         loggedInLinks.forEach( li => {
         li.style.display = 'none';
@@ -263,21 +263,10 @@ function hideLoggendInLinks() {
         });
         document.getElementById('menu-button-bottom-box').style.display = "flex";
     }
-    if (status ===  "loggedIn") {
+    if (status === "true") {
         const loginInLink = Array.from(document.getElementsByClassName('login'));
         loginInLink.forEach( li => {
         li.style.display = 'none';
     });
-    }
-}
-
-/**
- * Updates sessionStorage with login status if user is logged in.
- */
-function correctLoginStatus() {
-    let loginStatus;
-    if (document.getElementById('login-button').style.display === "none") {loginStatus = "loggedIn"};
-    if (loginStatus === "loggedIn") {
-        sessionStorage.setItem("loginStatus", loginStatus);
     }
 }
