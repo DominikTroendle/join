@@ -8,7 +8,7 @@ let bgColors = [];
 async function init() {
     await loadColors();
     await loadAllUserData();
-    sessionStorage();
+    // sessionStorage();
 }
 
 /**

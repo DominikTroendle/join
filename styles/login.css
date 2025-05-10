@@ -630,12 +630,10 @@ body {
     }
 
     .legal-information {
-        margin-top: 50px;
+        margin-top: 16px;
     }
-}
 
-@media(max-width: 360px) {
-    .legal-information {
-        margin-top: 50px;
+    .login-buttons {
+        margin-top: 0;
     }
 }
