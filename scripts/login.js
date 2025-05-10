@@ -178,6 +178,7 @@ function moveLogoOnce() {
       if (step >= totalSteps) {
         clearInterval(interval);
         overlay.style.opacity = "0"
+        overlay.style.display = "none"
         logo.style.top = "80px";
         logo.style.left = "77px";
         logo.style.transform = "none";
