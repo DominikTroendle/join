@@ -106,41 +106,41 @@ function getToCreatANewContactTemplate() {
 return`
     <div class="new-Contect-Container">
         <div class="information-content-container">
-            <img src="assets/img/Capa 2.png" alt="">
+            <img src="../assets/img/Capa 2.png" alt="">
             <h1>Add contact</h1>
             <p>Tasks are better whit a team!</p>
             <hr>
         </div>
         <div class="add-input-contect-container">
             <div class="close-btn">
-                <button class="desktop-close-btn" onclick="closeAddNewContact()"><img src="assets/icons/close.svg" alt=""></button>
-                <button class="mobile-close-btn" onclick="closeAddNewContact()"><img src="assets/img/close-mobile-white.png" alt=""></button>
+                <button class="desktop-close-btn" onclick="closeAddNewContact()"><img src="../assets/icons/close.svg" alt=""></button>
+                <button class="mobile-close-btn" onclick="closeAddNewContact()"><img src="../assets/img/close-mobile-white.png" alt=""></button>
             </div>
             <div class="new-user-image">
-                <img src="assets/img/person.png" alt="">
+                <img src="../assets/img/person.png" alt="">
             </div>
             <form onsubmit="return addUserToContactList(event, this);">
                 <div class="input-container">
                     <div class="input-area">
                         <input type="text" placeholder="Name" id="name" pattern="^\\S(.*\\S)?$" title="No spaces allowed at the beginning or end" required>
-                        <img src="assets/img/person-grey.png" alt="">
+                        <img src="../assets/img/person-grey.png" alt="">
                     </div>
                     <div class="input-container">
                         <div class="input-area">
                                 <input type="email" placeholder="Email" id="email" pattern="^\\S+$" title="No spaces allowed" required>
-                                <img src="assets/img/mail.png" alt="">
+                                <img src="../assets/img/mail.png" alt="">
                         </div> 
                     </div>
                     <div class="input-container">
                         <div class="input-area">
                             <input type="tel" name="phone" pattern="^\\+?[0-9]+$" placeholder="Phone" id="phone" required>
-                            <img src="assets/img/call.png" alt="">
+                            <img src="../assets/img/call.png" alt="">
                         </div>
                     </div>
                     <div class="contact-button-container">
                         <button class="cancel-btn" onclick="closeAddNewContact(); return false;">Cancel <p>X</p>
                         </button>
-                        <button class="create-btn" type="submit">Create contact <img src="assets/icons/check.svg" alt=""></button>
+                        <button class="create-btn" type="submit">Create contact <img src="../assets/icons/check.svg" alt=""></button>
                     </div>
                 </form>
             </div>
@@ -160,14 +160,14 @@ function getEditContactTemplate(key) {
     return`
         <div class="edit-Contect-Container">
             <div class="information-content-container">
-                <img src="assets/img/Capa 2.png" alt="">
+                <img src="../assets/img/Capa 2.png" alt="">
                 <h1>Edit contact</h1>
                 <hr>
             </div>
             <div class="edit-add-input-contect-container">
                 <div class="close-btn">
-                    <button class="desktop-close-btn" onclick="closeEditContact('${key}')"><img src="assets/icons/close.svg" alt=""></button>
-                    <button class="mobile-close-btn" onclick="closeEditContact('${key}')"><img src="assets/img/close-mobile-white.png" alt=""></button>
+                    <button class="desktop-close-btn" onclick="closeEditContact('${key}')"><img src="../assets/icons/close.svg" alt=""></button>
+                    <button class="mobile-close-btn" onclick="closeEditContact('${key}')"><img src="../assets/img/close-mobile-white.png" alt=""></button>
                 </div>
                 <div class="edit-contact-initcolor" id="editUserInitials">
                     <p class="edit-contact-initialien" id="editUserInitialsText">AB</p>
@@ -176,23 +176,23 @@ function getEditContactTemplate(key) {
                     <div class="input-container mobile-container">
                         <div class="input-area">
                             <input type="text" placeholder="Name" id="editName" pattern="^\\S(.*\\S)?$" title="No spaces allowed at the beginning or end" required>
-                            <img src="assets/img/person-grey.png" alt="">
+                            <img src="../assets/img/person-grey.png" alt="">
                         </div>
                         <div class="input-container">
                             <div class="input-area">
                                 <input type="email" placeholder="Email" id="editEmail" pattern="^\\S+$" title="No spaces allowed" required>
-                                <img src="assets/img/mail.png" alt="">
+                                <img src="../assets/img/mail.png" alt="">
                             </div> 
                         </div>
                         <div class="input-container">
                             <div class="input-area">
                                 <input type="tel" name="phone" pattern="^\\+?[0-9]+$" placeholder="Phone" id="editPhone" required>
-                                <img src="assets/img/call.png" alt="">
+                                <img src="../assets/img/call.png" alt="">
                             </div>
                         </div>
                         <div class="contact-button-container">
                             <button class="edit-cancel-btn mobile-delete-view" type="button" onclick="deleteContact('${key}')";>Delete</button>
-                            <button class="save-btn" type="buttom">Save<img src="assets/icons/check.svg" alt="" onclick="putData('${key}')"></button>
+                            <button class="save-btn" type="buttom">Save<img src="../assets/icons/check.svg" alt="" onclick="putData('${key}')"></button>
                         </div>
                     </form>
                 </div>
