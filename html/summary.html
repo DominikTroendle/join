@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Summary</title>
-    <link rel="icon" href="assets/img/join-logo.png" type="image/gif" sizes="16x16">
-    <link rel="stylesheet" href="styles/font.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles/summary.css">
+    <link rel="icon" href="../assets/img/join-logo.png" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" href="../styles/font.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/summary.css">
 </head>
 
 <body
@@ -17,11 +17,11 @@
         <div class="content">
             <header>
                 <nav>
-                    <img class="mobile-logo" src="assets/img/join-logo.png" alt="">
+                    <img class="mobile-logo" src="../assets/img/join-logo.png" alt="">
                     <span class="text-nav">Kanban Project Management Tool</span>
                     <div class="button-box">
                         <a href="help.html" class="help-button">
-                            <img class="help-img" src="assets/img/Property 1=Default.png">
+                            <img class="help-img" src="../assets/img/Property 1=Default.png">
                         </a>
                         <button onclick="accountClickMenu()" class="small-menu-button" id="smallInitials"></button>
                     </div>
@@ -33,12 +33,12 @@
                         <li class="mobile-help"><a href="help.html">Help</a></li>
                         <li><a href="privacy-policy.html">Privacy Policy</a></li>
                         <li><a href="legal-notice.html">Legal Notice</a></li>
-                        <li><a href="index.html" onclick="logOut()">Log out</a></li>
+                        <li><a href="../index.html" onclick="logOut()">Log out</a></li>
                     </ul>
                 </div>
             </div>
             <div class="menu-box">
-                <img class="menu-logo" src="assets/img/Capa 2.png" alt="">
+                <img class="menu-logo" src="../assets/img/Capa 2.png" alt="">
                 <div class="menu-button-box">
                     <a href="summary.html" class="menu-button" id="summary-menu-button">
                         <svg viewBox="0 0 30 31" class="menu-button-icon">
@@ -88,22 +88,22 @@
                 <div class="all-button-box" id="all-button-box">
                     <div class="button-top-box">
                         <a href="board.html" class="button-top transform-origin-left"
-                            onmouseover="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"
-                            onmouseleave="changeImgSource('to-do-img', 'assets/icons/Frame 59.png')"
-                            onmousedown="changeImgSource('to-do-img', 'assets/icons/Frame 59.png')"
-                            onmouseup="changeImgSource('to-do-img', 'assets/icons/Frame 59(3).png')"><img id="to-do-img"
-                                class="button-img" src="assets/icons/Frame 59.png" alt="">
+                            onmouseover="changeImgSource('to-do-img', '../assets/icons/Frame 59(3).png')"
+                            onmouseleave="changeImgSource('to-do-img', '../assets/icons/Frame 59.png')"
+                            onmousedown="changeImgSource('to-do-img', '../assets/icons/Frame 59.png')"
+                            onmouseup="changeImgSource('to-do-img', '../assets/icons/Frame 59(3).png')"><img id="to-do-img"
+                                class="button-img" src="../assets/icons/Frame 59.png" alt="">
                             <div class="text-big-button-top-box">
                                 <span class="text-big-button-top" id="number-of-tasks-in-to-do"></span>
                                 <span class="text-small-button-top">To-do</span>
                             </div>
                         </a>
                         <a href="board.html" class="button-top transform-origin-right"
-                            onmouseover="changeImgSource('done-img', 'assets/icons/Group 7.png')"
-                            onmouseleave="changeImgSource('done-img', 'assets/icons/Frame 59(1).png')"
-                            onmousedown="changeImgSource('done-img', 'assets/icons/Frame 59(1).png')"
-                            onmouseup="changeImgSource('done-img', 'assets/icons/Group 7.png')"><img id="done-img"
-                                class="button-img" src="assets/icons/Frame 59(1).png" alt="">
+                            onmouseover="changeImgSource('done-img', '../assets/icons/Group 7.png')"
+                            onmouseleave="changeImgSource('done-img', '../assets/icons/Frame 59(1).png')"
+                            onmousedown="changeImgSource('done-img', '../assets/icons/Frame 59(1).png')"
+                            onmouseup="changeImgSource('done-img', '../assets/icons/Group 7.png')"><img id="done-img"
+                                class="button-img" src="../assets/icons/Frame 59(1).png" alt="">
                             <div class="text-big-button-top-box">
                                 <span class="text-big-button-top" id="number-of-tasks-in-done"></span>
                                 <span class="text-small-button-top">Done</span>
@@ -190,8 +190,8 @@
     <div class="overlay-landscape-spinner">
         <span class="loader"><span class="loader2"></span></span>
     </div>
-    <script src="script.js"></script>
-    <script src="scripts/summary.js"></script>
+    <script src="../script.js"></script>
+    <script src="../scripts/summary.js"></script>
 </body>
 
 </html>

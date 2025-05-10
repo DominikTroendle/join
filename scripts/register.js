@@ -153,7 +153,7 @@ function clearForm(form) {
  * Redirects the user to the login page.
  */
 function backToLogin() {
-    window.location.href = 'index.html?';
+    window.location.href = '../index.html?';
 }
 
 /**
