@@ -1730,10 +1730,6 @@ footer {
     }
 }
 
-.menu-box-mobile {
-    display: none;
-}
-
 #overlay-task-added {
     width: 100%;
 }
@@ -2239,10 +2235,6 @@ footer {
     }
 
     .menu-box {
-        display: none;
-    }
-
-    .menu-box-mobile {
         display: flex;
         width: 100%;
         height: 80px;
