@@ -24,7 +24,7 @@ if (msg) {
  * Initializes the animation and session storage.
  */
 function init() {
-    animationLogo()
+    // animationLogo()
     // sessionSorage()
 }
 
@@ -114,47 +114,47 @@ function backLogin() {
  * Toggles the logo animation and updates the logo and overlay elements.
  * If animation is disabled, calls backLogin function.
  */
-function animationLogo() {
-    if (logoAnimation === "false") {
-        backLogin();
-    } else {
-        setTimeout(() => {
-            const {passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
-            updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
-            setTimeout(() => {
-                overlay.classList.remove('login-overlay');
-            }, 1000);
-            sessionStorage.setItem("moveAnimation", false);
-        }, 200);
-    }
-}
+// function animationLogo() {
+//     if (logoAnimation === "false") {
+//         backLogin();
+//     } else {
+//         setTimeout(() => {
+//             const {passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
+//             updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
+//             setTimeout(() => {
+//                 overlay.classList.remove('login-overlay');
+//             }, 1000);
+//             sessionStorage.setItem("moveAnimation", false);
+//         }, 200);
+//     }
+// }
 
-/**
- * Updates the logo elements and triggers the animation.
- */
-function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
-    passivLogo.style.display = "none";
-    loginLogo.style.display = "flex";
-    overlay.classList.add('login-overlay');
-    logoPaths.forEach(logoPath => logoPath.classList.add('animation-change-logo-color'));
-    setTimeout(() => {
-        logoPaths.forEach(logoPath => logoPath.classList.remove('animation-change-logo-color'));
-    }, 1000);
-}
+// /**
+//  * Updates the logo elements and triggers the animation.
+//  */
+// function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
+//     passivLogo.style.display = "none";
+//     loginLogo.style.display = "flex";
+//     overlay.classList.add('login-overlay');
+//     logoPaths.forEach(logoPath => logoPath.classList.add('animation-change-logo-color'));
+//     setTimeout(() => {
+//         logoPaths.forEach(logoPath => logoPath.classList.remove('animation-change-logo-color'));
+//     }, 1000);
+// }
 
-/**
- * Retrieves logo-related DOM elements.
- * @returns {Object} An object containing the logo elements.
- */
-function getLogoElements() {
-    return {
-        passivLogo: document.getElementById('passivLogo'),
-        loginLogo: document.getElementById('loginLogo'),
-        overlay: document.getElementById('loginOverlay'),
-        logoPath1: document.getElementById('moveLogo1'),
-        logoPath2: document.getElementById('moveLogo2'),
-        logoPath3: document.getElementById('moveLogo3'),
-        logoPath4: document.getElementById('moveLogo4'),
-        logoPath5: document.getElementById('moveLogo5')
-    };
-}
+// /**
+//  * Retrieves logo-related DOM elements.
+//  * @returns {Object} An object containing the logo elements.
+//  */
+// function getLogoElements() {
+//     return {
+//         passivLogo: document.getElementById('passivLogo'),
+//         loginLogo: document.getElementById('loginLogo'),
+//         overlay: document.getElementById('loginOverlay'),
+//         logoPath1: document.getElementById('moveLogo1'),
+//         logoPath2: document.getElementById('moveLogo2'),
+//         logoPath3: document.getElementById('moveLogo3'),
+//         logoPath4: document.getElementById('moveLogo4'),
+//         logoPath5: document.getElementById('moveLogo5')
+//     };
+// }

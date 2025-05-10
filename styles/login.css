@@ -638,3 +638,27 @@ body {
     }
 }
 
+.test-overlay{
+    z-index: 3;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #d1d1d1c4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test-logo{
+     width: 274px;
+     height: 334;
+}
+
+.little-test-logo{
+    position: relative;
+    
+    top: 80px;
+    left: 77px;
+    width: 100px;
+    height: 122px;
+}
