@@ -258,19 +258,20 @@ function highlightTaskCardWithAnimation() {
 }
 
 /**
- * Finds the newly created task based on the provided title and description,
- * then highlights and scrolls to it.
+ * Finds the newly created task based on the given title and description inputs,
+ * then highlights and scrolls to that task in the DOM.
  *
  * @function findAndHighlightNewlyCreatedTask
- * @param {HTMLInputElement} titleInput - The input element containing the task title.
- * @param {HTMLInputElement} descriptionInput - The input element containing the task description.
- * @returns {void} This function does not return any value.
- * 
+ * @param {HTMLInputElement} titleInput - Input element containing the task's title text.
+ * @param {HTMLInputElement} descriptionInput - Input element containing the task's description text.
+ * @returns {void}
+ *
  * @description
  * This function performs the following steps:
- * 1. Hides the "task-added" overlay once the task is saved.
- * 2. Searches for the task in the DOM by comparing the title and description values.
- * 3. Highlights and scrolls to the newly created task if found.
+ * 1. Hides the "task-added" overlay by adding the "d-none" class.
+ * 2. Collects all task title elements from the DOM.
+ * 3. Finds a matching task by comparing the trimmed text content of the title and description.
+ * 4. If a match is found, it highlights and scrolls to the newly created task.
  */
 function findAndHighlightNewlyCreatedTask(titleInput, descriptionInput) {
     document.getElementById('overlay-task-added').classList.add('d-none');
@@ -282,7 +283,9 @@ function findAndHighlightNewlyCreatedTask(titleInput, descriptionInput) {
             element.innerText.trim() === titleInput.value.trim() && description?.innerText.trim() === descriptionInput.value.trim()
         )
     });
+    if(findNewCreateTask){
     highlightAndScrollToNewTask(findNewCreateTask);
+    }
 }
 
 /**
@@ -312,5 +315,5 @@ function highlightAndScrollToNewTask(findNewCreateTask) {
         }, 3300);
     }
     document.getElementById("add-task__overlay").classList.remove("fade-out");
-    document.getElementById('add-task__overlay').classList.toggle('d-none');
+    document.getElementById('add-task__overlay').classList.add('d-none');
 }

@@ -195,3 +195,48 @@ function renderSelectedContactsPreviewForBigTaskCardEdit(container) {
         container.innerHTML += returnAssignedContactPreviewHTML(initials, color);
     }
 }
+
+/**
+ * Reads task data from sessionStorage and tries to find the newly created task in the DOM.
+ * If found, it highlights and scrolls to the corresponding task element.
+ *
+ * @function readTaskFromSessionAndFindTask
+ * @returns {void} This function does not return anything.
+ *
+ * @description
+ * This function performs the following steps:
+ * 1. Checks if a new task was added (using a sessionStorage flag).
+ * 2. Searches through all user story titles to find the one matching the stored title and description.
+ * 3. If a matching task is found, it highlights and scrolls to that task.
+ * 4. Resets the sessionStorage flag to prevent repeated highlighting.
+ */
+function readTaskFromSessionAndFindTask() {
+    if (sessionStorage.getItem("add-task") === "true") {
+        let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
+        let findNewCreateTask = allUserStoryTitle.find(element => {
+            let userStoryBox = element.closest(".user-story__box");
+            let description = userStoryBox.querySelector(".user-story__description");
+            return element.innerText.trim() === sessionStorage.getItem("title").trim() && description?.innerText.trim() === sessionStorage.getItem("description").trim();
+        });
+        if (findNewCreateTask) {
+            highlightAndScrollToNewTask(findNewCreateTask);
+        }
+        sessionStorage.setItem("add-task", "false");
+    }
+}
+
+/**
+ * Waits for the full page to load, then delays execution by 1 second
+ * before attempting to read and highlight a newly created task from sessionStorage.
+ *
+ * @event window:load
+ * @description
+ * This event listener waits until the entire page (including all resources like images and stylesheets)
+ * has fully loaded. After a 1000ms delay, it calls `readTaskFromSessionAndFindTask` to locate and highlight
+ * a task that was recently added and saved in sessionStorage.
+ */
+window.addEventListener("load", function () {
+    setTimeout(() => {
+      readTaskFromSessionAndFindTask();  
+    }, 1000);  
+});

@@ -294,7 +294,7 @@ function displaySelectedContacts() {
  * @param {String} contactColor - color of the contact to add to or remove from array
  */
 function updateSelectedContacts(boolean, contactName, contactColor) {
-    let obj = {name: contactName, color: contactColor};
+    let obj = { name: contactName, color: contactColor };
     if (boolean) {
         selectedContacts.push(obj);
         sortContactsAlphabetically(selectedContacts);
@@ -347,4 +347,22 @@ function sortContactsAlphabetically(contactsArray) {
     } else {
         contactsArray.sort((a, b) => a.name.localeCompare(b.name));
     }
+}
+
+/**
+ * Saves the task title and description input values to sessionStorage.
+ *
+ * Retrieves values from input fields with IDs "title" and "description"
+ * and stores them under the keys "title" and "description" in sessionStorage.
+ * Also sets the flag "add-task" to true to indicate a task should be added.
+ *
+ * @function saveTaskToSession
+ * @returns {void}
+ */
+function saveTaskToSession() {
+    let titleInput = document.getElementById("title");
+    let descriptionInput = document.getElementById("description");
+    sessionStorage.setItem("add-task", "true");
+    sessionStorage.setItem("title", titleInput.value);
+    sessionStorage.setItem("description", descriptionInput.value);
 }
