@@ -728,17 +728,14 @@ li{
 
     @keyframes glowingBorder {
         0% {
-            /* border: 1px solid orangered; */
             box-shadow: 0 0 50px orangered;
         }
 
         50% {
-            /* border: 1px solid lightgreen; */
             box-shadow: 0 0 50px lightgreen;
         }
 
         100% {
-            /* border: 1px solid lightgreen; */
             box-shadow: 0 0 50px lightgreen;
         }
     }

@@ -20,7 +20,7 @@ async function init() {
 async function loadSmallInitials() {
     let userId = localStorage.getItem("userId");
     if (!userId) {
-        console.log("Kein eingeloggter User gefunden!");
+        console.error("No logged in user found!");
         return window.location.href = "index.html?";
     }
     let dataPath = userId === "guest" ? "users/guest.json" : `users/${userId}.json`;
@@ -284,7 +284,7 @@ async function moreContactInformation(contactName) {
         let contactDetailsTemplate = await selectMoreContactInformationTemplate(contact, initials);
         let contactInfoContainer = document.getElementById('moreInformationContact');
         contactInfoContainer.innerHTML = contactDetailsTemplate;
-        animateContactInfo(contactInfoContainer); // Aufruf der neuen Funktion
+        animateContactInfo(contactInfoContainer);
     }
 }
 
