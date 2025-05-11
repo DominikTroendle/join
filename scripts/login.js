@@ -24,7 +24,7 @@ if (msg) {
  * Initializes the animation and session storage.
  */
 function init() {
-    // animationLogo()
+    animationLogo()
     // sessionSorage()
 }
 
@@ -114,80 +114,49 @@ function backLogin() {
  * Toggles the logo animation and updates the logo and overlay elements.
  * If animation is disabled, calls backLogin function.
  */
-// function animationLogo() {
-//     if (logoAnimation === "false") {
-//         backLogin();
-//     } else {
-//         setTimeout(() => {
-//             const {passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
-//             updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
-//             setTimeout(() => {
-//                 overlay.classList.remove('login-overlay');
-//             }, 1000);
-//             sessionStorage.setItem("moveAnimation", false);
-//         }, 200);
-//     }
-// }
+function animationLogo() {
+    if (logoAnimation === "false") {
+        backLogin();
+    } else {
+        setTimeout(() => {
+            const {passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
+            updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
+            setTimeout(() => {
+                overlay.classList.remove('login-overlay');
+                passivLogo.style.display = "flex";
+                loginLogo.style.display = "none";
+            }, 1000);
+            sessionStorage.setItem("moveAnimation", false);
+        }, 200);
+    }
+}
 
 // /**
 //  * Updates the logo elements and triggers the animation.
 //  */
-// function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
-//     passivLogo.style.display = "none";
-//     loginLogo.style.display = "flex";
-//     overlay.classList.add('login-overlay');
-//     logoPaths.forEach(logoPath => logoPath.classList.add('animation-change-logo-color'));
-//     setTimeout(() => {
-//         logoPaths.forEach(logoPath => logoPath.classList.remove('animation-change-logo-color'));
-//     }, 1000);
-// }
+function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
+    passivLogo.style.display = "none";
+    loginLogo.style.display = "flex";
+    overlay.classList.add('login-overlay');
+    logoPaths.forEach(logoPath => logoPath.classList.add('animation-change-logo-color'));
+    setTimeout(() => {
+        logoPaths.forEach(logoPath => logoPath.classList.remove('animation-change-logo-color'));
+    }, 1000);
+}
 
 // /**
 //  * Retrieves logo-related DOM elements.
 //  * @returns {Object} An object containing the logo elements.
 //  */
-// function getLogoElements() {
-//     return {
-//         passivLogo: document.getElementById('passivLogo'),
-//         loginLogo: document.getElementById('loginLogo'),
-//         overlay: document.getElementById('loginOverlay'),
-//         logoPath1: document.getElementById('moveLogo1'),
-//         logoPath2: document.getElementById('moveLogo2'),
-//         logoPath3: document.getElementById('moveLogo3'),
-//         logoPath4: document.getElementById('moveLogo4'),
-//         logoPath5: document.getElementById('moveLogo5')
-//     };
-// }
-
-function moveLogoOnce() {
-    // if (localStorage.getItem("logoMoved")) return;
-    const overlay = document.getElementById("testOverlay");
-    const logo = document.getElementById("testLogo");
-    const littleLogo = document.getElementById("littleLogo");
-
-    // Schrittweise Bewegung mit einfacher Animation per JS
-    let step = 0;
-    const totalSteps = 60;
-    const interval = setInterval(() => {
-      step++;
-      const progress = step / totalSteps;
-      logo.style.top = 50 - (34 * progress) + "%";   // 50% → ~20px (in Prozent gerechnet)
-      logo.style.left = 50 - (37 * progress) + "%";  // 50% → ~20px
-      logo.style.transform = `translate(-50%, -50%) scale(${1 - 0.6 * progress})`;
-
-      if (step >= totalSteps) {
-        clearInterval(interval);
-        overlay.style.opacity = "0"
-        overlay.style.display = "none"
-        logo.style.top = "80px";
-        logo.style.left = "77px";
-        logo.style.transform = "none";
-        logo.style.height = "122px";
-        logo.style.width = "100px";
-        localStorage.setItem("logoMoved", "true");
-        littleLogo.style.display = "flex"
-      }
-    }, 10);
-  }
-
-  moveLogoOnce(); // Direkt aufrufen
+function getLogoElements() {
+    return {
+        passivLogo: document.getElementById('passivLogo'),
+        loginLogo: document.getElementById('loginLogo'),
+        overlay: document.getElementById('loginOverlay'),
+        logoPath1: document.getElementById('moveLogo1'),
+        logoPath2: document.getElementById('moveLogo2'),
+        logoPath3: document.getElementById('moveLogo3'),
+        logoPath4: document.getElementById('moveLogo4'),
+        logoPath5: document.getElementById('moveLogo5')
+    };
+}

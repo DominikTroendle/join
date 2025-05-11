@@ -73,16 +73,19 @@ body {
 .login-overlay {
     display: flex;
     position: absolute;
-    height: 100vh;
+    height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    background-color: #ffffff;
+    bottom: 0;
+    right: 0;
+    background-color: #f4f4f4;
     z-index: 2;
     opacity: 1;
     align-items: center;
     justify-content: center;
-    animation: moveOverlay 3.5s cubic-bezier(0.98, -3.35, 0.80, 18);
+    overflow: hidden;
+    animation: moveOverlay 0.5s forwards linear 0.5s;
 }
 
 @keyframes moveOverlay {
@@ -96,12 +99,6 @@ body {
 }
 
 @keyframes moveLogo {
-    0% {
-        top: 34%;
-        left: 37%;
-        transform: translate(-50, -50) scale(1);
-    }
-
     100% {
         width: 100px;
         height: 121px;
@@ -118,7 +115,10 @@ body {
     z-index: 3;
     height: 334px;
     width: 274px;
-    animation: moveLogo 1.5s ease-in forwards;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    animation: moveLogo 0.5s forwards linear 0.5s;
 }
 
 .logo {
@@ -345,6 +345,16 @@ body {
     #passivLogo {
         left: calc(((100vw - 1920px) / 2) + 77px);
     }
+
+    @keyframes moveLogo {
+        100% {
+            width: 100px;
+            height: 121px;
+            top: 80px;
+            left: calc(((100vw - 1920px) / 2) + 77px);
+            transform: translate(0px, 0px) scale(1);
+        }
+    }
 }
 
 @media(max-width: 1280px) {
@@ -366,7 +376,15 @@ body {
 @media(max-width: 680px) {
     .login-overlay {
         position: absolute;
-        background-color: rgb(0, 0, 0);
+        background-color: #2A3647;
+    }
+
+    .login-logo {
+        top: 50%;
+        left: 50%;
+        height: 121.97px;
+        width: 100.03px;
+        transform: translate(-50%, -50%) scale(1);
     }
 
     .overlay-massage {
@@ -419,18 +437,12 @@ body {
     }
 
     @keyframes moveLogo {
-        0% {
-            top: 35%;
-            left: 35%;
-            transform: translate(-50, -50) scale(1);
-        }
-
         100% {
             width: 64px;
             height: 78px;
             top: 38px;
             left: 37px;
-            transform: translate(0px, 0px) scale(1);
+            transform: translate(0%, 0%) scale(1);
         }
     }
 
@@ -553,18 +565,12 @@ body {
     }
 
     @keyframes moveLogo {
-        0% {
-            top: 40%;
-            left: 40%;
-            transform: translate(-50, -50) scale(1);
-        }
-
         100% {
             width: 64px;
             height: 78px;
             top: 38px;
             left: 37px;
-            transform: translate(0px, 0px) scale(1);
+            transform: translate(0%, 0%) scale(1);
         }
     }
 
@@ -632,33 +638,10 @@ body {
     .legal-information {
         margin-top: 16px;
     }
+}
 
+@media(max-width: 360px) {
     .login-buttons {
         margin-top: 0;
     }
-}
-
-.test-overlay{
-    z-index: 3;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.test-logo{
-     width: 274px;
-     height: 334;
-}
-
-.little-test-logo{
-    order: 0;
-    position: relative;
-    left: 77px;
-    width: 100px;
-    height: 122px;
-    display: none;
 }
