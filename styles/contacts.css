@@ -20,16 +20,18 @@ body {
 
 .all-content {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex-direction: column;
-    margin-left: 232px;
-    width: calc(100% - 232px);
+    width: 100%;
     flex: 1;
 }
 
 .content {
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    margin-left: 232px;
+    width: calc(100% - 232px)
 }
 
 .small-menu-button.inactive {
@@ -835,6 +837,11 @@ button .close-icon:hover path {
 }
 
 @media(max-width: 1040px) {
+    .content {
+        width: 100%;
+        margin: 0;
+    }
+    
     header {
         position: relative;
         z-index: 1;
