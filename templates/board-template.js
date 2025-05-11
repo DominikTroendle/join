@@ -340,7 +340,7 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
                         </svg>
                         Delete</button>
                     <span class="big-task-card__seperator"></span>
-                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); selectPrioButtonForBigTaskCardEdit('${taskPriorityForEdit}'); loadAllContacts(); displaySelectedContactsForBigTaskCard()">
+                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); selectPrioButtonForBigTaskCardEdit('${taskPriorityForEdit}'); loadAllContacts(); displaySelectedContactsForBigTaskCard(); deactivatePastDays('big-task-card-edit__input-date-picker')">
                         <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
                             <path
                                 d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />

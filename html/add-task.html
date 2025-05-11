@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../styles/add-task.css">
 </head>
 
-<body onload="addClassSelectedMenuButton('add-task-menu-button', 'loggedIn')">
+<body onload="addClassSelectedMenuButton('add-task-menu-button', 'loggedIn'); deactivatePastDays('date-picker')">
     <div id="overlay-task-added" class="d-none">
         <div id="task-added">
             <span>Task added to board</span>

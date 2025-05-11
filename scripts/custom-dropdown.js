@@ -366,3 +366,21 @@ function saveTaskToSession() {
     sessionStorage.setItem("title", titleInput.value);
     sessionStorage.setItem("description", descriptionInput.value);
 }
+
+/**
+ * Disables the selection of past dates in a specific date picker input
+ * by setting the minimum allowed date to today's date.
+ *
+ * @function deactivatePastDays
+ * @param {string} id - The ID of the input element to modify.
+ * @returns {void} This function does not return anything.
+ *
+ * @description
+ * Calculates the current date in ISO format and sets it as the `min` attribute
+ * on the input element with the given ID. This ensures that the user cannot select
+ * a date earlier than today.
+ */
+function deactivatePastDays(id) {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById(id).setAttribute("min", today);
+}
