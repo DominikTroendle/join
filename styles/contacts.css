@@ -558,6 +558,12 @@ body {
     border-radius: 100%;
 }
 
+.close-btn:active {
+    background-color: #cccccc52;
+    padding: 5px;
+    border-radius: 100%;
+}
+
 .new-user-image {
     height: 120px;
     width: 120px;
