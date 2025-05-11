@@ -382,10 +382,6 @@ body {
     display: none;
 }
 
-.overlay-landscape-spinner {
-    display: none;
-}
-
 @media(max-width: 1450px) {
     .title__box {
         margin-left: 32px;
