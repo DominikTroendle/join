@@ -106,7 +106,7 @@ function getToCreatANewContactTemplate() {
 return`
     <div class="new-Contect-Container">
         <div class="information-content-container">
-            <img src="../assets/img/Capa 2.png" alt="">
+            <img src="../assets/img/join-logo-weiß.png" alt="">
             <h1>Add contact</h1>
             <p>Tasks are better whit a team!</p>
             <hr>
@@ -160,7 +160,7 @@ function getEditContactTemplate(key) {
     return`
         <div class="edit-Contect-Container">
             <div class="information-content-container">
-                <img src="../assets/img/Capa 2.png" alt="">
+                <img src="../assets/img/join-logo-weiß.png" alt="">
                 <h1>Edit contact</h1>
                 <hr>
             </div>
