@@ -28,7 +28,6 @@
 function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts) {
     let taskTypeCssClass = taskType == "User Story" ? `user-story__category-box-user-story`
         : `user-story__category-box-technical-task`;
-
     const priorityMapping = [
         {
             priority: "low",
@@ -43,13 +42,10 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
             src: "../assets/icons/urgent.svg"
         }
     ];
-
     let taskPriorityImgSrc = priorityMapping.find(element => element.priority == taskPriority)?.src || "";
-
     let subtaskHtml = "";
     let scaleFillCalculate;
     let scaleColor;
-
     if (numberOfSubtasks != 0 && numberOfCompletedSubtasks != 0) {
         scaleFillCalculate = (100 / numberOfSubtasks) * numberOfCompletedSubtasks;
         scaleColor = numberOfSubtasks === numberOfCompletedSubtasks ? `background-color: lightgreen` : "";
@@ -60,7 +56,6 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
                     <span class="user-story__subtask-text">${numberOfCompletedSubtasks}/${numberOfSubtasks} Subtasks</span>
                 </div>`
     }
-
     assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     let assignedContactsHtml = "";
     let initialsOverSix = "";
@@ -73,7 +68,6 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
             assignedContactsHtml += `<span class="user-story__name ${backgroundColors[index]}">${initials[index]}</span>`
         }
     }
-
     return `<div class="user-story__all-content-box">
                 <div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event); disablePointerEventsForAllTasks(event)" ondragend="removeDragRotation(event); activatePointerEventsForAllTasks(); removeCardBorderBox()" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
                     <div class="user-story__category-mobile-button-box">
@@ -162,12 +156,9 @@ function noCardTemplate(category, searchMode) {
     let noTaskBoxText;
     if (searchMode === "false") {
         noTaskBoxText = "No tasks";
-
     } else {
         noTaskBoxText = "No Search Tasks";
     }
-
-
     return `<div class="no-task-box">
                 <span class="no-task-text">${noTaskBoxText} ${category}</span>
             </div>`;
@@ -193,10 +184,9 @@ function cardBorderdragEnterTemplate(cardHeight) {
             </div>`;
 }
 
-function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasks) {
+function bigTaskCardTemplate(taskType, taskTitle, taskDescription, taskPriority, taskDueDate, assignedContacts, subtasks) {
     let taskTypeCssClass = taskType == "User Story" ? `big-task-card__category-box-user-story`
         : `big-task-card__category-box-technical-task`;
-
     const priorityMapping = [
         {
             priority: "low",
@@ -214,7 +204,6 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
             priorityText: "Urgent"
         }
     ];
-
     let taskPriorityImg = "";
     let taskPriorityText = "";
     let taskPriorityForEdit = "";
@@ -223,7 +212,6 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         taskPriorityText = priorityMapping.find(element => element.priority == taskPriority)?.priorityText || "";
         taskPriorityForEdit = taskPriority === "big-task-card-edit__medium-button" ? "" : `big-task-card-edit__${taskPriority}-button`
     }
-
     let dueDate = "";
     if (taskDueDate) {
         dueDate = taskDueDate;
@@ -235,7 +223,6 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         let initials = assignedContacts.map(element => element.name.slice(0, 1) + element.name.slice(element.name.indexOf(" ") + 1, element.name.indexOf(" ") + 2) || "");
         let backgroundColors = assignedContacts.map(element => element.color);
         let names = assignedContacts.map(element => element.name);
-
         for (let index = 0; index < initials.length; index++) {
             assignedContactsHtml += `<div class="big-task-card__initials-name-box">
                                         <span class="big-task-card__initials ${backgroundColors[index]}">${initials[index]}</span>
@@ -244,7 +231,6 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         }
         assignedContacts.length > 3 ? scrollClassAssignedContacts = `big-task-card__div-scroll` : "";
     }
-
     let scrollClassSubtasks = "";
     let subtasksHtml = "";
     if (subtasks) {
@@ -285,70 +271,68 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
         }
         subtasks.length > 2 ? scrollClassSubtasks = `big-task-card__div-scroll` : "";
     }
-
-    return `    <div class="big-task-card__task-type-text-button-box">
-                    <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
-                        <span class="big-task-card__task-type-text">${taskType}</span>
-                    </div>
-                    <button class="big-task-card__task-type-button" onclick="addClassSlideBack()">
-                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
-                            <rect x="0.144531" width="24" height="24" fill="none"/>
-                            <path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
-                        </svg>
-                    </button>
+    return `<div class="big-task-card__task-type-text-button-box">
+                <div class="big-task-card__task-type-text-box ${taskTypeCssClass}">
+                    <span class="big-task-card__task-type-text">${taskType}</span>
                 </div>
-                <div class="big-task-card__scroll-box">
-                    <div class="big-task-card__title-box">
-                        <span class="big-task-card__title">${taskTitle}</span>
-                    </div>
-                    <div class="big-task-card__task-description-box">
-                        <span class="big-task-card__task-description-text">${taskDescription}</span>
-                    </div>
-                    <div class="big-task-card__due-date-box">
-                        <span class="big-task-card__due-date-text">Due date:</span>
-                        <span class="big-task-card__due-date-text">${dueDate}</span>
-                    </div>
-                    <div class="big-task-card__priority-box">
-                        <span class="big-task-card__priority-text">Priority:</span>
-                        <div class="big-task-card__priority-text-img-box">
-                            <span class="big-task-card__priority-text">${taskPriorityText}</span>
-                            ${taskPriorityImg}
-                        </div>
-                    </div>
-                    <div class="big-task-card__assigned-to-box">
-                        <div class="big-task-card__assigned-to-text-box">
-                            <span class="big-task-card__assigned-to-text">Assigned To:</span>
-                        </div>
-                        <div class="big-task-card__assigned-to-names-box ${scrollClassAssignedContacts}">
-                            ${assignedContactsHtml}
-                        </div>
-                    </div>
-                    <div class="big-task-card__subtasks-box">
-                        <div class="big-task-card__subtasks-title-box">
-                            <span class="big-task-card__subtasks-title">Subtasks</span>
-                        </div>
-                        <div class="big-task-card__all-subtasks-box ${scrollClassSubtasks}">
-                            ${subtasksHtml}
-                        </div>
+                <button class="big-task-card__task-type-button" onclick="addClassSlideBack()">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
+                        <rect x="0.144531" width="24" height="24" fill="none"/>
+                        <path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="big-task-card__scroll-box">
+                <div class="big-task-card__title-box">
+                    <span class="big-task-card__title">${taskTitle}</span>
+                </div>
+                <div class="big-task-card__task-description-box">
+                    <span class="big-task-card__task-description-text">${taskDescription}</span>
+                </div>
+                <div class="big-task-card__due-date-box">
+                    <span class="big-task-card__due-date-text">Due date:</span>
+                    <span class="big-task-card__due-date-text">${dueDate}</span>
+                </div>
+                <div class="big-task-card__priority-box">
+                    <span class="big-task-card__priority-text">Priority:</span>
+                    <div class="big-task-card__priority-text-img-box">
+                        <span class="big-task-card__priority-text">${taskPriorityText}</span>
+                        ${taskPriorityImg}
                     </div>
                 </div>
-                <div class="big-task-card__button-box">
-                    <button class="big-task-card__button" onclick="deleteCurrentTask(); fadeOutBigTaskCard(); setHeightForDragFields()">
-                        <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                            <path
-                                d="M7.7 21.4c-.55 0-1.02-.2-1.41-.59-.39-.39-.59-.86-.59-1.41V6.4h-.01a1 1 0 0 1 0-2h4V4.4c0-.28.1-.52.29-.71.19-.19.43-.29.71-.29h4c.28 0 .52.1.71.29.19.19.29.43.29.71h4a1 1 0 0 1 0 2h-.41v13c0 .55-.2 1.02-.59 1.41-.39.39-.86.59-1.41.59H7.7ZM7.7 6.4v13h10v-13h-10Zm2 10c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Zm4 0c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Z" />
-                        </svg>
-                        Delete</button>
-                    <span class="big-task-card__seperator"></span>
-                    <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); selectPrioButtonForBigTaskCardEdit('${taskPriorityForEdit}'); loadAllContacts(); displaySelectedContactsForBigTaskCard(); deactivatePastDays('big-task-card-edit__input-date-picker')">
-                        <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
-                            <path
-                                d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />
-                        </svg>
-                        Edit</button>
-                </div>`;
+                <div class="big-task-card__assigned-to-box">
+                    <div class="big-task-card__assigned-to-text-box">
+                        <span class="big-task-card__assigned-to-text">Assigned To:</span>
+                    </div>
+                    <div class="big-task-card__assigned-to-names-box ${scrollClassAssignedContacts}">
+                        ${assignedContactsHtml}
+                    </div>
+                </div>
+                <div class="big-task-card__subtasks-box">
+                    <div class="big-task-card__subtasks-title-box">
+                        <span class="big-task-card__subtasks-title">Subtasks</span>
+                    </div>
+                    <div class="big-task-card__all-subtasks-box ${scrollClassSubtasks}">
+                        ${subtasksHtml}
+                    </div>
+                </div>
+            </div>
+            <div class="big-task-card__button-box">
+                <button class="big-task-card__button" onclick="deleteCurrentTask(); fadeOutBigTaskCard(); setHeightForDragFields()">
+                    <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path
+                            d="M7.7 21.4c-.55 0-1.02-.2-1.41-.59-.39-.39-.59-.86-.59-1.41V6.4h-.01a1 1 0 0 1 0-2h4V4.4c0-.28.1-.52.29-.71.19-.19.43-.29.71-.29h4c.28 0 .52.1.71.29.19.19.29.43.29.71h4a1 1 0 0 1 0 2h-.41v13c0 .55-.2 1.02-.59 1.41-.39.39-.86.59-1.41.59H7.7ZM7.7 6.4v13h10v-13h-10Zm2 10c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Zm4 0c0 .28.1.52.29.71.19.19.43.29.71.29s.52-.1.71-.29c.19-.19.29-.43.29-.71v-7c0-.28-.1-.52-.29-.71-.19-.19-.43-.29-.71-.29s-.52.1-.71.29c-.19.19-.29.43-.29.71v7Z" />
+                    </svg>
+                    Delete</button>
+                <span class="big-task-card__seperator"></span>
+                <button class="big-task-card__button" onclick="renderContentBigTaskCardEdit(); selectPrioButtonForBigTaskCardEdit('${taskPriorityForEdit}'); loadAllContacts(); displaySelectedContactsForBigTaskCard(); deactivatePastDays('big-task-card-edit__input-date-picker')">
+                    <svg class="big-task-card__button-img" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                        <path
+                            d="M5.68 19.4h1.4l8.63-8.63-1.4-1.4-8.63 8.63v1.4ZM19.98 9.32l-4.25-4.2 1.4-1.4c.38-.38.85-.56 1.41-.56s1.03.18 1.41.56l1.4 1.4c.38.38.58.85.6 1.41.02.55-.16 1.02-.54 1.41l-1.43 1.42ZM18.53 10.8 7.93 21.4H3.68v-4.25L14.28 6.55l4.25 4.25Z" />
+                    </svg>
+                    Edit</button>
+            </div>`;
 }
-
 
 /**
  * Generates an HTML template for a big task card with detailed information.
@@ -381,150 +365,137 @@ function bigTaskCardTemplate(id, taskType, taskTitle, taskDescription, taskPrior
  * - The assigned contacts are displayed as initials with corresponding background colors.
  * - The task card includes buttons for deleting and editing the task.
  */
-function bigTaskCardEditTemplate(id, taskType, taskTitle, taskDescription, taskPriority, taskDueDate, numberOfSubtasks, numberOfCompletedSubtasks, assignedContacts, subtasksEdit) {
+function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assignedContacts, subtasksEdit) {
     let dueDate = "";
     if (taskDueDate) {
         dueDate = taskDueDate;
     }
-
     selectedContactsBigTaskCardEdit.length = 0;
     subtasksBigTaskCardEdit.length = 0;
     subtasksCountBigTaskCardEdit = 1;
-
     assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     assignedContacts.forEach(element => selectedContactsBigTaskCardEdit.push(element));
-
     if (subtasksEdit) {
         subtasksEdit.forEach(element => subtasksBigTaskCardEdit.push(element));
     }
-
     let subtasksHtml = "";
     for (let index = 0; index < subtasksBigTaskCardEdit.length; index++) {
         let id = subtasksCountBigTaskCardEdit++;
         subtasksHtml += `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
-                <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
-                    <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
-                    <div class="flex">
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
-                        <hr class="edit-hr">
-                        <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
-                    </div>
-                </div>
-                <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)" ondblclick="editSubtaskForBigTaskCard(${id})">
-                    <div class="subtask-text" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
-                        <span>&bull;</span>
-                        <span id="big-task-card-edit__subtask-${id}">${subtasksBigTaskCardEdit[index].subtask}</span>
-                    </div>
-                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
-                        <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
-                        <hr>
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
-                    </div>
-                </div>
-            </div>`;
-    }
-
-    return `    <div class="big-task-card-edit__task-type-text-button-box edit">
-                    <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">
-                        <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
-                            <rect x="0.144531" width="24" height="24" fill="none"/>
-                            <path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="big-task-card-edit__scroll-box">
-                    <div class="container-input-label big-task-card-edit__text-input-box">
-                        <label for="big-task-card-edit__input-title" class="label-add-task flex class="big-task-card-edit__text">
-                            Title
-                            <span class="asterisk">&#42;</span>
-                            <p id="max-char-big-task-card-edit__input-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
-                        </label>
-                        <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__input-title')">
-                        <p id="required-big-task-card-edit__input-title" class="required hidden">This field is required</p>
-                    </div>
-
-                    <div class="big-task-card-edit__text-textarea-box">
-                        <span class="big-task-card-edit__text">Description</span>
-                        <textarea class="big-task-card-edit__textarea" id="big-task-card-edit__textarea-description" placeholder="Enter a Description">${taskDescription}</textarea>
-                    </div>
-                    <div class="container-input-label big-task-card-edit__text-input-box">
-                        <label for="big-task-card-edit__input-due-date" class="label-add-task flex big-task-card-edit__text" id="label-due-date">
-                            Due date
-                            <span class="asterisk" id="asterisk-due-date">&#42;</span>
-                            <p id="invalid-date-big-task-card-edit__input-due-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
-                        </label>
-                        <div id="big-task-card-edit__input-due-date-box" class="big-task-card-edit__input-due-date-box">
-                            <input id="big-task-card-edit__input-due-date" class="big-task-card-edit__input big-task-card-edit__input-due-date input" type="text" name="due-date" placeholder="dd/mm/yyyy" value="${dueDate}" size="10" required  maxlength="10">
-                            <input id="big-task-card-edit__input-date-picker" class="big-task-card-edit__input-date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit()">
-                        </div>
-                        <p id="required-big-task-card-edit__input-due-date" class="required hidden">This field is required</p>
-                    </div>
-                    
-                    
-                    <div id="big-task-card-edit__prioritys-box" class="big-task-card-edit__prioritys-box container-input-label">
-                            <span class="label-add-task">Priority</span>
-                            <div id="big-task-card-edit__prioritys-button-box" class="big-task-card-edit__prioritys-button-box">
-                                <button id="big-task-card-edit__urgent-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__urgent-button')">
-                                    Urgent
-                                    <img id="svg-big-task-card-edit__urgent-button" src="../assets/icons/urgent.svg" alt="icon-urgent">
-                                </button>
-                                <button id="big-task-card-edit__medium-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__medium-button')">
-                                    Medium
-                                    <img id="svg-big-task-card-edit__medium-button" src="../assets/icons/medium.svg" alt="icon-medium">
-                                </button>
-                                <button id="big-task-card-edit__low-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__low-button')">
-                                    Low
-                                    <img id="svg-big-task-card-edit__low-button" src="../assets/icons/low.svg" alt="icon-low">
-                                </button>
-                            </div>
-                        </div>
-                    
-                    <div class="container-input-label custom-select">
-                            <label for="big-task-card-edit__assigned-to-input" class="label-add-task">
-                                Assigned to
-                            </label>
-                            <div id="big-task-card-edit__assigned-to-box" class="big-task-card-edit__assigned-to-box">
-                                <input id="big-task-card-edit__assigned-to-input" class="big-task-card-edit__assigned-to-input assigned-to__input" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptionsForBigTaskCardEdit(), stopPropagation(event)" onkeyup="filterContactsForBigTaskCardEdit()">
-                                <button class="button-dropdown" type="button" onclick="toggleAssignOptionsForBigTaskCardEdit(), toggleInputFocusForBigTaskCardEdit(), stopPropagation(event)">
-                                    <img id="big-task-card-edit__arrow-dropdown-assigned" src="../assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
-                                </button>
-                            </div>
-                            <div id="big-task-card-edit__assigned-to-dropdown" class="big-task-card-edit__assigned-to-dropdown">
-                                <div id="big-task-card-edit__dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
-                            </div>
-                            <div id="big-task-card-edit__assigned-contacts-box" class="big-task-card-edit__assigned-contacts-box"></div>
-                        </div>
-                    <div class="container-input-label">
-                            <label id="label-subtasks" for="big-task-card-edit__subtask-input" class="label-add-task" placeholder="Add new subtask">
-                                Subtasks
-                                <p id="invalid-subtask-big-task-card-edit__subtask-input" class="required d-none">Enter at least one character to save subtask!</p>
-                                <p id="max-char-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
-                            </label>
-                            <div id="big-task-card-edit__subtask-box" class="big-task-card-edit__subtask-box" onclick="changeInputButtonForBigTaskCardEdit(true), stopPropagation(event)">
-                                <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__subtask-input')" onkeydown="isEnterKeyForBigTaskCard(event)">                         
-                                 <button id="big-task-card-edit__subtask-button-add" class="button-add" type="button">
-                                <img src="../assets/icons/add.svg" alt="icon-arrow-down">
-                                </button>
-                                <div id="big-task-card-edit__subtask-buttons-box" class="big-task-card-edit__subtask-buttons-box container-button-confirm d-none">
-                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtaskForBigTaskCardEdit(false)">
-                                        <img src="../assets/icons/close.svg" alt="icon-reject">
-                                    </button>
-                                    <hr>
-                                    <button type="button" class="button-add button-accept-reject" onclick="processSubtaskForBigTaskCardEdit(true)">
-                                        <img src="../assets/icons/check_blue.svg" alt="icon-accept">
-                                    </button>
+                            <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
+                                <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
+                                <div class="flex">
+                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                                    <hr class="edit-hr">
+                                    <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
                                 </div>
                             </div>
-                            <div id="big-task-card-edit__subtasks-box" class="big-task-card-edit__subtasks-box big-task-card-edit__container-subtasks">${subtasksHtml}</div>
-                        </div>
-                    
-                    
-                    
-                    
+                            <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask subtask-scroll-margin" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)" ondblclick="editSubtaskForBigTaskCard(${id})">
+                                <div class="subtask-text" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                                    <span>&bull;</span>
+                                    <span id="big-task-card-edit__subtask-${id}">${subtasksBigTaskCardEdit[index].subtask}</span>
+                                </div>
+                                <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                                    <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
+                                    <hr>
+                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                                </div>
+                            </div>
+                        </div>`;
+    }
+    return `<div class="big-task-card-edit__task-type-text-button-box edit">
+                <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none">
+                        <rect x="0.144531" width="24" height="24" fill="none"/>
+                        <path d="M12.1443 13.4L7.24434 18.3C7.061 18.4834 6.82767 18.575 6.54434 18.575C6.261 18.575 6.02767 18.4834 5.84434 18.3C5.661 18.1167 5.56934 17.8834 5.56934 17.6C5.56934 17.3167 5.661 17.0834 5.84434 16.9L10.7443 12L5.84434 7.10005C5.661 6.91672 5.56934 6.68338 5.56934 6.40005C5.56934 6.11672 5.661 5.88338 5.84434 5.70005C6.02767 5.51672 6.261 5.42505 6.54434 5.42505C6.82767 5.42505 7.061 5.51672 7.24434 5.70005L12.1443 10.6L17.0443 5.70005C17.2277 5.51672 17.461 5.42505 17.7443 5.42505C18.0277 5.42505 18.261 5.51672 18.4443 5.70005C18.6277 5.88338 18.7193 6.11672 18.7193 6.40005C18.7193 6.68338 18.6277 6.91672 18.4443 7.10005L13.5443 12L18.4443 16.9C18.6277 17.0834 18.7193 17.3167 18.7193 17.6C18.7193 17.8834 18.6277 18.1167 18.4443 18.3C18.261 18.4834 18.0277 18.575 17.7443 18.575C17.461 18.575 17.2277 18.4834 17.0443 18.3L12.1443 13.4Z" fill="#2A3647"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="big-task-card-edit__scroll-box">
+                <div class="container-input-label big-task-card-edit__text-input-box">
+                    <label for="big-task-card-edit__input-title" class="label-add-task flex class="big-task-card-edit__text">
+                        Title
+                        <span class="asterisk">&#42;</span>
+                        <p id="max-char-big-task-card-edit__input-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
+                    </label>
+                    <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__input-title')">
+                    <p id="required-big-task-card-edit__input-title" class="required hidden">This field is required</p>
+                </div>
+                <div class="big-task-card-edit__text-textarea-box">
+                    <span class="big-task-card-edit__text">Description</span>
+                    <textarea class="big-task-card-edit__textarea" id="big-task-card-edit__textarea-description" placeholder="Enter a Description">${taskDescription}</textarea>
+                </div>
+                <div class="container-input-label big-task-card-edit__text-input-box">
+                    <label for="big-task-card-edit__input-due-date" class="label-add-task flex big-task-card-edit__text" id="label-due-date">
+                        Due date
+                        <span class="asterisk" id="asterisk-due-date">&#42;</span>
+                        <p id="invalid-date-big-task-card-edit__input-due-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
+                    </label>
+                    <div id="big-task-card-edit__input-due-date-box" class="big-task-card-edit__input-due-date-box">
+                        <input id="big-task-card-edit__input-due-date" class="big-task-card-edit__input big-task-card-edit__input-due-date input" type="text" name="due-date" placeholder="dd/mm/yyyy" value="${dueDate}" size="10" required  maxlength="10">
+                        <input id="big-task-card-edit__input-date-picker" class="big-task-card-edit__input-date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit()">
                     </div>
-                    <div class="big-task-card-edit__task-type-text-button-box">
-                        <button class="big-task-card-edit__Ok-button" onclick="readFromEditAndSaveData()">Ok <img class="big-task-card-edit__Ok-button-img" src="../assets/icons/check.png"></button>
-                    </div>`;
+                    <p id="required-big-task-card-edit__input-due-date" class="required hidden">This field is required</p>
+                </div>
+                <div id="big-task-card-edit__prioritys-box" class="big-task-card-edit__prioritys-box container-input-label">
+                    <span class="label-add-task">Priority</span>
+                    <div id="big-task-card-edit__prioritys-button-box" class="big-task-card-edit__prioritys-button-box">
+                        <button id="big-task-card-edit__urgent-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__urgent-button')">
+                            Urgent
+                            <img id="svg-big-task-card-edit__urgent-button" src="../assets/icons/urgent.svg" alt="icon-urgent">
+                        </button>
+                        <button id="big-task-card-edit__medium-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__medium-button')">
+                            Medium
+                            <img id="svg-big-task-card-edit__medium-button" src="../assets/icons/medium.svg" alt="icon-medium">
+                        </button>
+                        <button id="big-task-card-edit__low-button" class="button-prio button-prio-hover" type="button" onclick="selectPrioButtonForBigTaskCardEdit('big-task-card-edit__low-button')">
+                            Low
+                            <img id="svg-big-task-card-edit__low-button" src="../assets/icons/low.svg" alt="icon-low">
+                        </button>
+                    </div>
+                </div>
+                <div class="container-input-label custom-select">
+                    <label for="big-task-card-edit__assigned-to-input" class="label-add-task">
+                        Assigned to
+                    </label>
+                    <div id="big-task-card-edit__assigned-to-box" class="big-task-card-edit__assigned-to-box">
+                        <input id="big-task-card-edit__assigned-to-input" class="big-task-card-edit__assigned-to-input assigned-to__input" type="text" name="assigned-to" placeholder="Select contacts to assign" onclick="toggleAssignOptionsForBigTaskCardEdit(), stopPropagation(event)" onkeyup="filterContactsForBigTaskCardEdit()">
+                        <button class="button-dropdown" type="button" onclick="toggleAssignOptionsForBigTaskCardEdit(), toggleInputFocusForBigTaskCardEdit(), stopPropagation(event)">
+                            <img id="big-task-card-edit__arrow-dropdown-assigned" src="../assets/icons/arrow_drop_down.svg" alt="icon-arrow-down">
+                        </button>
+                    </div>
+                    <div id="big-task-card-edit__assigned-to-dropdown" class="big-task-card-edit__assigned-to-dropdown">
+                        <div id="big-task-card-edit__dropdown-assign" class="container-custom-select-options d-none" onmousedown="preventDefault(event)"></div>
+                    </div>
+                    <div id="big-task-card-edit__assigned-contacts-box" class="big-task-card-edit__assigned-contacts-box"></div>
+                </div>
+                <div class="container-input-label">
+                    <label id="label-subtasks" for="big-task-card-edit__subtask-input" class="label-add-task" placeholder="Add new subtask">
+                        Subtasks
+                        <p id="invalid-subtask-big-task-card-edit__subtask-input" class="required d-none">Enter at least one character to save subtask!</p>
+                        <p id="max-char-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
+                    </label>
+                    <div id="big-task-card-edit__subtask-box" class="big-task-card-edit__subtask-box" onclick="changeInputButtonForBigTaskCardEdit(true), stopPropagation(event)">
+                        <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__subtask-input')" onkeydown="isEnterKeyForBigTaskCard(event)">                         
+                        <button id="big-task-card-edit__subtask-button-add" class="button-add" type="button">
+                            <img src="../assets/icons/add.svg" alt="icon-arrow-down">
+                        </button>
+                        <div id="big-task-card-edit__subtask-buttons-box" class="big-task-card-edit__subtask-buttons-box container-button-confirm d-none">
+                            <button type="button" class="button-add button-accept-reject" onclick="processSubtaskForBigTaskCardEdit(false)">
+                                <img src="../assets/icons/close.svg" alt="icon-reject">
+                            </button>
+                            <hr>
+                            <button type="button" class="button-add button-accept-reject" onclick="processSubtaskForBigTaskCardEdit(true)">
+                                <img src="../assets/icons/check_blue.svg" alt="icon-accept">
+                            </button>
+                        </div>
+                    </div>
+                    <div id="big-task-card-edit__subtasks-box" class="big-task-card-edit__subtasks-box big-task-card-edit__container-subtasks">${subtasksHtml}</div>
+                </div>
+            </div>
+                <div class="big-task-card-edit__task-type-text-button-box">
+                    <button class="big-task-card-edit__Ok-button" onclick="readFromEditAndSaveData()">Ok <img class="big-task-card-edit__Ok-button-img" src="../assets/icons/check.png"></button>
+                </div>`;
 }
 
 /**
@@ -771,7 +742,7 @@ function returnSubtaskHTMLForBigTaskCardEdit(id) {
  * const subtaskMobileHTML = returnSubtaskMobileHTMLForBigTaskCardEdit(1);
  * document.getElementById("subtasks-container-mobile").innerHTML = subtaskMobileHTML;
  */
-function returnSubtaskMobileHTMLForBigTaskCardEdit (id) {
+function returnSubtaskMobileHTMLForBigTaskCardEdit(id) {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit d-none">
                     <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
