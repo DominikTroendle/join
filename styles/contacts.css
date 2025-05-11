@@ -841,7 +841,7 @@ button .close-icon:hover path {
         width: 100%;
         margin: 0;
     }
-    
+
     header {
         position: relative;
         z-index: 1;
@@ -983,6 +983,8 @@ button .close-icon:hover path {
         display: flex;
         width: 32px;
         height: 32px;
+        justify-content: center;
+        align-items: center;
     }
 
     .new-user-image {

@@ -114,7 +114,7 @@ return`
         <div class="add-input-contect-container">
             <div class="close-btn">
                 <button class="desktop-close-btn" onclick="closeAddNewContact()"><img src="../assets/icons/close.svg" alt=""></button>
-                <button class="mobile-close-btn" onclick="closeAddNewContact()"><img src="../assets/img/close-mobile-white.png" alt=""></button>
+                <button class="mobile-close-btn" onclick="closeAddNewContact()"><img src="../assets/img/close-mobile-white.svg" alt=""></button>
             </div>
             <div class="new-user-image">
                 <img src="../assets/img/person.png" alt="">
@@ -167,7 +167,7 @@ function getEditContactTemplate(key) {
             <div class="edit-add-input-contect-container">
                 <div class="close-btn">
                     <button class="desktop-close-btn" onclick="closeEditContact('${key}')"><img src="../assets/icons/close.svg" alt=""></button>
-                    <button class="mobile-close-btn" onclick="closeEditContact('${key}')"><img src="../assets/img/close-mobile-white.png" alt=""></button>
+                    <button class="mobile-close-btn" onclick="closeEditContact('${key}')"><img src="../assets/img/close-mobile-white.svg" alt=""></button>
                 </div>
                 <div class="edit-contact-initcolor" id="editUserInitials">
                     <p class="edit-contact-initialien" id="editUserInitialsText">AB</p>
