@@ -371,6 +371,14 @@ form{
     .legal-information{
         margin-top: 106px;
     }
+
+    .no-value-content {
+        width: 364px;
+    }
+
+    .error-massage {
+        margin-right: 0;
+    }
 }
 
 @media(max-width: 420px){
@@ -384,6 +392,10 @@ form{
 
     .legal-information{
         margin-top: 106px;
+    }
+
+    .no-value-content {
+        width: 324px;
     }
 }
 
@@ -427,6 +439,10 @@ form{
     }
 
     .register-input input {
+        width: 264px;
+    }
+
+    .no-value-content {
         width: 264px;
     }
 }
