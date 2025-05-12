@@ -244,28 +244,29 @@ function togglePasswordVisibility() {
 }
 
 /**
- * Hides certain links based on login status and screen width.
+ * Hides login-related links based on login status and screen width.
  */
 function hideLoggendInLinks() {
-    let status = sessionStorage.getItem("loggedIn");
+    const status = sessionStorage.getItem("loggedIn");
     if (status === null && window.innerWidth > 1040) {
-        const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
-        loggedInLinks.forEach( li => {
-        li.style.display = 'none';
-        document.getElementById('login-button').classList.add('menu-login-button')
-        });
+        hideLoggedInLinksDesktop();
     } else if (status === null && window.innerWidth < 1040) {
-        const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
-        loggedInLinks.forEach( li => {
-        li.style.display = 'none';
-        document.getElementById('login-button').classList.add('menu-login-button');
-        });
+        hideLoggedInLinksDesktop();
         document.getElementById('menu-button-bottom-box').style.display = "flex";
     }
     if (status === "true") {
-        const loginInLink = Array.from(document.getElementsByClassName('login'));
-        loginInLink.forEach( li => {
-        li.style.display = 'none';
-    });
+        Array.from(document.getElementsByClassName('login'))
+            .forEach(li => li.style.display = 'none');
     }
+}
+
+/**
+ * Hides elements for logged-in users on desktop and updates the login button style.
+ */
+function hideLoggedInLinksDesktop() {
+    const loggedInLinks = Array.from(document.getElementsByClassName('logged-in'));
+    loggedInLinks.forEach(li => {
+        li.style.display = 'none';
+        document.getElementById('login-button').classList.add('menu-login-button');
+    });
 }
