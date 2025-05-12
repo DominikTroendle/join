@@ -114,8 +114,7 @@ function stopPropagation(event) {
 function clearInputs() {
     removeError();
     subtasksCount = 0;
-    document.getElementById('container-subtasks').innerHTML = "";
-    document.getElementById('container-assigned-contacts').innerHTML = "";
+    ['container-subtasks', 'container-assigned-contacts'].forEach(id => document.getElementById(id).innerHTML = "");
     clearPrioButtons();
     selectDefaultPrioButton();
     clearInputValues();
@@ -151,9 +150,7 @@ function createTask() {
     } else if (!validDateFormat && document.getElementById('due-date').value !== "") {
         throwError();
         document.getElementById('invalid-date').classList.remove('hidden');
-    } else {
-        throwError();
-    }
+    } else throwError();
 }
 
 /**
@@ -182,7 +179,7 @@ function validateInputs() {
 function testDate() {
     let value = document.getElementById('due-date').value;
     let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-    if (date === null) {return false;}
+    if (date === null) return false;
     let day = +date[1], month = +date[2], year = +date[3];
     let dateObj = new Date(`${year}-${month}-${day}`);
     if (!correctDateFormat(dateObj, day, month, year)) {
