@@ -21,7 +21,7 @@ let unvalidInputs = [];
  */
 async function initialize() {
     let contactsObj = await getContacts();
-    loadContactInfo(contactsObj);
+    await loadContactInfo(contactsObj);
     loadSmallInitials();
 }
 
