@@ -201,11 +201,11 @@ function changePasswordIcon(focused) {
     const icon = document.getElementById("passwordIcon");
     const passwordInput = document.getElementById("password")
     if (focused && !isPasswordVisible) {
-        icon.src = "assets/img/visibility_off.png";
+        icon.src = "../assets/img/visibility_off.png";
     } else if (passwordInput.value.trim().length > 0) {
-        icon.src = "assets/img/visibility_off.png";
+        icon.src = "../assets/img/visibility_off.png";
     } else {
-        icon.src = "assets/img/lock.png";
+        icon.src = "../assets/img/lock.png";
     }
 }
 
@@ -218,11 +218,11 @@ function changeConrollPasswordIcon(focused) {
     const passwordInput = document.getElementById("controllPassword");
     if (isPasswordVisible) return;
     if (focused) {
-        icon.src = "assets/img/visibility_off.png";
+        icon.src = "../assets/img/visibility_off.png";
     } else if (passwordInput.value.trim().length > 0) {
-        icon.src = "assets/img/visibility_off.png";
+        icon.src = "../assets/img/visibility_off.png";
     } else {
-        icon.src = "assets/img/lock.png";
+        icon.src = "../assets/img/lock.png";
     }
 }
 
@@ -234,11 +234,11 @@ function togglePasswordVisibility() {
     const icon = document.getElementById("passwordControllIcon");
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
-        icon.src = "assets/img/visibility.png";
+        icon.src = "../assets/img/visibility.png";
         isPasswordVisible = true;
     } else {
         passwordInput.type = "password";
-        icon.src = "assets/img/visibility_off.png";
+        icon.src = "../assets/img/visibility_off.png";
         isPasswordVisible = false;
     }
 }
