@@ -186,7 +186,7 @@ function validateCheckbox(checkbox) {
  * @returns {boolean} - Returns true if passwords match, false otherwise.
  */
 function validatePasswords(password, conrollPassword) {
-    const match = password.value === conrollPassword.value;
+    const match = password.value !== "" && password.value === conrollPassword.value;
     conrollPassword.style.border = `1px solid ${match ? 'black' : 'red'}`;
     conrollPassword.style.boxShadow = match ? 'none' : '';
     document.getElementById('notCorrectValue').style.display = match ? 'none' : 'flex';
