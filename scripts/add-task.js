@@ -182,9 +182,7 @@ function validateInputs() {
 function testDate() {
     let value = document.getElementById('due-date').value;
     let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
-    if (date === null) {
-        return false;
-    }
+    if (date === null) {return false;}
     let day = +date[1], month = +date[2], year = +date[3];
     let dateObj = new Date(`${year}-${month}-${day}`);
     if (!correctDateFormat(dateObj, day, month, year)) {
