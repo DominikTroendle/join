@@ -769,6 +769,8 @@ button .close-icon:hover path {
     display: none;
 }
 
+
+
 @media(max-width: 1300px) {
     .contact-headline {
         display: flex;
@@ -1212,6 +1214,11 @@ button .close-icon:hover path {
         color: black;
         font-size: 16px;
     }
+
+     .procressing-area-edit-button-mobile.active{
+        color: red;
+        background-color: #007CEE;
+     }
 
     .procressing-area-delete-button-mobile {
         display: flex;
