@@ -156,16 +156,36 @@ function backToLogin() {
 }
 
 /**
- * Validates user registration input (checkbox and passwords).
- * @returns {Promise<boolean>} True if both the checkbox and passwords are valid, otherwise false.
+ * Validates user registration inputs (name, email, checkbox and passwords).
+ * @returns {Promise<boolean>} True if all variables (name, email, checkbox and passwords) are valid, otherwise false.
  */
 async function UserRegister() {
     const password = document.getElementById('password');
     const conrollPassword = document.getElementById('controllPassword');
     const checkbox = document.getElementById('checkbox');
     const checkboxValid = validateCheckbox(checkbox);
-    const passwordValid = validatePasswords(password, conrollPassword);
-    return checkboxValid && passwordValid;
+    const passwordMatch = validatePasswords(password, conrollPassword);
+    const nameValid = validateSignupInputs('name');
+    const emailValid = validateSignupInputs('email');
+    const passwordValid = validateSignupInputs('password');
+    return nameValid && emailValid && checkboxValid && passwordValid && passwordMatch;
+}
+
+/**
+ * Validates if inputs of name and email are filled and updates its border color.
+ * @param {String} input - name of the input to validate
+ * @returns {boolean} true if the input is valid, false otherwise
+ */
+function validateSignupInputs(input) {
+    const inputRef = document.getElementById(`${input}`);
+    let isValid = true;
+    if (inputRef.value.length === 0) {
+        inputRef.style.border = '1px solid red';
+        isValid = false;
+    } else {
+        inputRef.style.border = '1px solid #D1D1D1';
+    }
+    return isValid;
 }
 
 /**
