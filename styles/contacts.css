@@ -215,7 +215,7 @@ body {
 
 .container-contact {
     width: 352px;
-    height: 78px;
+    min-height: 78px;
     border-radius: 10px;
     padding: 15px 24px;
     display: flex;
