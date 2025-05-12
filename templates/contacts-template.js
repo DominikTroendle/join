@@ -41,7 +41,7 @@ async function selectMoreContactInformationTemplate(contact, initial) {
                 <div class="more-info-initials ${contact.color}"><p>${initial}</p></div>
                 <div class="procressing-area">
                     <div class="container-user-name">
-                        <h1>${contact.name}</h1>
+                        <h1 id="title-user-name">${contact.name}</h1>
                     </div>
                     <div class="procressing-area-button-container">
                         <button class="procressing-area-button" onclick="editContactOverlay('${contact.key}')">

@@ -101,6 +101,7 @@ body {
     margin-right: 20px;
     inline-size: auto;
     overflow-wrap: break-word;
+    max-width: fit-content;
 }
 
 .contact-headline {
@@ -241,8 +242,8 @@ body {
 }
 
 .container-initials {
-    width: 42px;
-    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
     border-radius: 50%;
     border: 2px solid white;
     display: flex;
@@ -787,6 +788,12 @@ button .close-icon:hover path {
 
     .mobile-img-line {
         display: flex;
+    }
+}
+
+@media(max-width: 1250px) {
+    .container-user-name h1 {
+        font-size: 40px;
     }
 }
 
@@ -1478,17 +1485,6 @@ button .close-icon:hover path {
         height: 100%;
         background: #ffffff;
         padding: 20px;
-    }
-
-    .more-info-initials {
-        height: 80px;
-        width: 80px;
-    }
-
-    .more-info-initials p {
-        font-size: 27px;
-        font-weight: 400;
-        line-height: 32px;
     }
 
     .info-name-container {

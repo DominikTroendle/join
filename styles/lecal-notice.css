@@ -134,7 +134,7 @@ p{
     }
 
     .button-box {
-        display: flex;
+        display: none;
     }
 
     .text-content-container{
