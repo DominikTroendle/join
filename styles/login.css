@@ -85,7 +85,11 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+}
+
+.animation-move-overlay {
     animation: moveOverlay 0.5s forwards linear 0.5s;
+    will-change: opacity;
 }
 
 @keyframes moveOverlay {
@@ -118,7 +122,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.animation-move-logo {
     animation: moveLogo 0.5s forwards linear 0.5s;
+    will-change: transform, width, height, top, left;
 }
 
 .logo {

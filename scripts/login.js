@@ -21,13 +21,6 @@ if (msg) {
 }
 
 /**
- * Initializes the animation and session storage.
- */
-function init() {
-    animationLogo()
-}
-
-/**
  * Handles user login by validating email and password.
  */
 async function UserLogin() {
@@ -146,16 +139,15 @@ function backLogin() {
  */
 function animationLogo() {
     if (logoAnimation === "false") return backLogin();
+    const { passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
+    updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
     setTimeout(() => {
-        const { passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
-        updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
-        setTimeout(() => {
-            overlay.classList.remove('login-overlay');
-            passivLogo.style.display = "flex";
-            loginLogo.style.display = "none";
-        }, 1000);
-        sessionStorage.setItem("moveAnimation", false);
-    }, 200);
+        overlay.classList.remove('login-overlay');
+        passivLogo.style.display = "flex";
+        loginLogo.style.display = "none";
+        resetLoginAnimation();
+    }, 1000);
+    sessionStorage.setItem("moveAnimation", "false");
 }
 
 // /**
@@ -187,3 +179,45 @@ function getLogoElements() {
         logoPath5: document.getElementById('moveLogo5')
     };
 }
+
+/**
+ * Resets the login animation by removing animation-related classes
+ * and restoring the logo's default transform and positioning styles.
+ *
+ * This function targets the login logo and overlay elements,
+ * removes animation classes, and sets the logo back to its
+ * centered and scaled default state.
+ *
+ * Elements affected:
+ * - #loginLogo: The main logo element displayed on the login screen.
+ * - #loginOverlay: The overlay element involved in the animation.
+ */
+function resetLoginAnimation() {
+    const loginLogo = document.getElementById("loginLogo");
+    const loginOverlay = document.getElementById("loginOverlay");
+    loginLogo.classList.remove("animation-move-logo");
+    loginOverlay.classList.remove("animation-move-overlay");
+    loginLogo.style.transform = "translate(-50%, -50%) scale(1)";
+    loginLogo.style.top = "50%";
+    loginLogo.style.left = "50%";
+}
+
+/**
+ * Initializes the login animation sequence once the window has fully loaded.
+ *
+ * This event listener waits for the entire page (including images, stylesheets, etc.)
+ * to load, then adds animation classes to the login logo and overlay elements.
+ * It also triggers the `animationLogo` function to begin any additional animations.
+ *
+ * Elements affected:
+ * - #loginLogo: The logo element to be animated on page load.
+ * - #loginOverlay: The overlay element that accompanies the logo animation.
+ *
+ * Functions triggered:
+ * - animationLogo(): Handles any custom logic or animations after initial class-based animation starts.
+ */
+window.addEventListener('load', function () {
+    document.getElementById("loginLogo").classList.add("animation-move-logo");
+    document.getElementById("loginOverlay").classList.add("animation-move-overlay");
+    animationLogo();
+})
