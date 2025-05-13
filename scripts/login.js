@@ -38,25 +38,56 @@ async function UserLogin() {
     let usersResponse = await fetch(BASE_URL + "users.json");
     let users = await usersResponse.json();
     let userId = Object.keys(users).find(key => users[key].userDatas.email === email && users[key].userDatas.password === password);
-    handleUserLogin(userId, emailInput, passwordInput);
+    handleUserLogin(userId, users, emailInput, passwordInput);
 }
 
 /**
  * Handles user login by storing user info and redirecting, or showing an error if login fails.
  * @param {string} userId - The user's ID.
+ * @param {object} users - Object containing all users.
  * @param {HTMLElement} emailInput - The email input element.
  * @param {HTMLElement} passwordInput - The password input element.
  */
-function handleUserLogin(userId, emailInput, passwordInput) {
+function handleUserLogin(userId, users, emailInput, passwordInput) {
     if (userId) {
         localStorage.setItem("userId", userId);
         sessionStorage.setItem("loggedIn", "true");
         window.location.href = 'html/summary.html?';
     } else {
-        emailInput.style.border = "1px solid red";
-        passwordInput.style.border = "1px solid red";
-        document.getElementById('notCorrectValue').style.display = "block";
+        throwLoginDataError(users, emailInput, passwordInput);
     }
+}
+
+/**
+ * Displays an error border and message on the corresponding input if the input value doesnt match the server`s data
+ * @param {object} users - Object containing all users.
+ * @param {HTMLElement} emailInput - Input element where the user enters his email address
+ * @param {HTMLElement} passwordInput - Input element where the user enters his password
+ */
+function throwLoginDataError(users, emailInput, passwordInput) {
+    const email = emailInput.value, password = passwordInput.value;
+    const user = Object.values(users).find(u => u.userDatas.email === email);
+    const emailValid = !!user, passwordValid = user?.userDatas.password === password;
+    setInputBorder(emailInput, emailValid);
+    setInputBorder(passwordInput, emailValid && passwordValid);
+    toggleErrorMessage(!(emailValid && passwordValid));
+}
+
+/**
+ * Sets input border to red or grey, depending on the value of isValid (red if true, grey otherwise)
+ * @param {HTMLElement} input - Input elemen whose border should be adjusted
+ * @param {boolean} isValid - boolean to determine which color the input border should get
+ */
+function setInputBorder(input, isValid) {
+    input.style.border = `1px solid ${isValid ? '#D1D1D1' : 'red'}`;
+}
+
+/**
+ * Displays or removes an errror message, depending on the value of show (remove if false, show otherwise)
+ * @param {boolean} show - boolean to determine whether the error message should be shown or not
+ */
+function toggleErrorMessage(show) {
+    document.getElementById('notCorrectValue').style.display = show ? 'block' : 'none';
 }
 
 /**
