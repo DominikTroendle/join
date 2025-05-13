@@ -179,7 +179,7 @@ async function UserRegister() {
 function validateSignupInputs(input) {
     const inputRef = document.getElementById(`${input}`);
     let isValid = true;
-    if (inputRef.value.length === 0) {
+    if (inputRef.value.length === 0 || !inputRef.value.includes("@")) {
         inputRef.style.border = '1px solid red';
         isValid = false;
     } else {
