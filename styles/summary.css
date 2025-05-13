@@ -358,6 +358,8 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+    word-break: normal;
+    overflow-wrap: anywhere;
 }
 
 .daytime-text {
@@ -420,10 +422,16 @@ body {
     }
 
     .name-text {
-        font-size: 47px;
+        font-size: 40px;
         font-weight: 700;
         line-height: 120%;
         letter-spacing: 0;
+    }
+}
+
+@media (max-width: 1085px) {
+    .name-text {
+        font-size: 33px;
     }
 }
 
@@ -483,6 +491,10 @@ body {
         left: 0;
         right: 0;
         align-items: center;
+    }
+
+    .name-text {
+        font-size: 47px;
     }
 
     .content {
