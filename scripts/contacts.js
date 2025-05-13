@@ -226,11 +226,14 @@ function selectContact(element) {
     let isSelected = element.classList.contains('select-contact');
     let moreInfoContainer = document.getElementById('moreInformationContact');
     let overlay = document.querySelector('.more-information-container');
+    let newContactButtonColor = document.querySelector('.add-new-button')
     document.querySelectorAll('.container-contact').forEach(contact => {
         contact.classList.remove('select-contact');
         contact.style.color = "black";
     });
+    newContactButtonColor.classList.remove('active')
     toggleContactSelection(isSelected, element, moreInfoContainer, overlay);
+   
 }
 
 /**

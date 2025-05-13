@@ -189,6 +189,10 @@ body {
     box-shadow: 0px 2px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
+.add-new-button.active{
+    background-color: #29abe2;
+}
+
 .mobile-img-line {
     display: none;
 }

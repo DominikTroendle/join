@@ -54,12 +54,9 @@ function procressingClickMenu(button) {
  * 
  * @param {HTMLButtonElement} button - The button element to toggle.
  */
-function toggleButtonBackgroundcolor(button) {
-    if (!button.style.backgroundColor || button.style.backgroundColor === '#2A3647') {
-        button.style.backgroundColor = '#29abe2';
-    } else {
-        button.style.backgroundColor = '#2A3647';
-    }
+function toggleButtonBackgroundcolor() {
+    let backgroundcolor = document.querySelector('.add-new-button')
+    backgroundcolor.classList.toggle('active')
 }
 
 /**
