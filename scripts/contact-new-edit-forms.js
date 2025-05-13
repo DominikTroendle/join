@@ -7,9 +7,7 @@ function addNewContactOverlay() {
     let newContactOverlay = document.querySelector('.new-contact-overlay');
     let newContactContainer = document.querySelector('.new-Contect-Container');
     newContactOverlay.classList.add('active');
-    setTimeout(() => {
-        newContactContainer.classList.add('active');
-    }, 10)
+    setTimeout(() => { newContactContainer.classList.add('active'); }, 10)
     newContactOverlay.onclick = function (event) {
         if (event.target === newContactOverlay) {
             newContactOverlay.classList.remove('active');
@@ -55,11 +53,8 @@ async function addUserToContactList(event, form) {
         newContact.key = response.name;
         allContacts.push(newContact);
         await loadContactList();
-        moreContactInformation(newContact.name);
-        highlightNewContact(newContact);
-        form.reset();
-        successfullyContact();
-        resetAddContactButton();
+        moreContactInformation(newContact.name); highlightNewContact(newContact);
+        form.reset(); successfullyContact(); resetAddContactButton();
         return false;
     }
 }
@@ -295,14 +290,12 @@ async function editContact(event, form) {
         let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
         if (!contactKey) return;
         let updatedContact = await createEditContact(form, await randomBgColor());
-        updatedContact.name = form.querySelector('#editName').value;
-        updatedContact.email = form.querySelector('#editEmail').value;
+        updatedContact.name = form.querySelector('#editName').value, updatedContact.email = form.querySelector('#editEmail').value;
         await putData(contactKey, updatedContact, userId);
         let contactIndex = allContacts.findIndex(c => c.key === contactKey);
         if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
-        updateContactTemplate(contactKey, updatedContact);
-        await loadContactList();
-    } 
+        updateContactTemplate(contactKey, updatedContact); await loadContactList();
+    }
 }
 
 /**

@@ -9,13 +9,9 @@ function toggleAssignOptions() {
     container.classList.toggle('d-none');
     containerDropdown.classList.toggle('box-shadow');
     renderAssignOptions(contacts);
-    if (input.placeholder == "Select contacts to assign") {
-        input.placeholder = "";
-        changeDropdownArrow(true, 'assigned');
-    } else if (input.placeholder == "") {
-        input.placeholder = "Select contacts to assign";
-        changeDropdownArrow(false, 'assigned');
-    }
+    input.placeholder == "Select contacts to assign"
+        ? (input.placeholder = "", changeDropdownArrow(true, 'assigned'))
+        : (input.placeholder = "Select contacts to assign", changeDropdownArrow(false, 'assigned'));
 }
 
 /**
@@ -238,10 +234,15 @@ function selectContact(name, color) {
 }
 
 /**
- * Toggles selection of the given contactDiv by adding (if boolean is true) or removing (if boolean is false) differnet classes
- * @param {Boolean} boolean - determines whether classes should be added or removed depending on the boolean
- * @param {HTMLElement} contactDiv - div element whose classes are added or removed depending on the boolean
- * @param {SVGElement} icon - svg icon whose source is changed depending on the boolean
+ * Toggles the selection state of a contact element.
+ * 
+ * Adds or removes CSS classes and updates the icon source based on the given boolean.
+ * If `true`, it highlights the contact as selected; if `false`, it resets the selection using `deselectContact()`.
+ * 
+ * @function
+ * @param {boolean} boolean - Determines whether to select (`true`) or deselect (`false`) the contact.
+ * @param {HTMLElement} contactDiv - The container element representing the contact.
+ * @param {HTMLElement} icon - The icon element whose appearance reflects the selection state.
  */
 function toggleSelection(boolean, contactDiv, icon) {
     if (boolean) {
@@ -250,13 +251,25 @@ function toggleSelection(boolean, contactDiv, icon) {
         contactDiv.classList.add('white');
         icon.src = "../assets/icons/checked.svg";
         icon.classList.add('filter-white');
-    } else {
-        contactDiv.classList.remove('selected');
-        contactDiv.classList.remove('selected-hover');
-        contactDiv.classList.remove('white');
-        icon.src = "../assets/icons/unchecked.svg";
-        icon.classList.remove('filter-white');
-    }
+    } else deselectContact(contactDiv, icon);
+}
+
+/**
+ * Deselects a contact by removing styling classes and resetting the icon.
+ * 
+ * This function removes visual indicators of selection from the provided contact element
+ * and updates the icon to reflect an unselected state.
+ * 
+ * @function
+ * @param {HTMLElement} contactDiv - The contact element to update (visual deselection).
+ * @param {HTMLElement} icon - The icon element whose source and style will be reset.
+ */
+function deselectContact(contactDiv, icon) {
+    contactDiv.classList.remove('selected');
+    contactDiv.classList.remove('selected-hover');
+    contactDiv.classList.remove('white');
+    icon.src = "../assets/icons/unchecked.svg";
+    icon.classList.remove('filter-white');
 }
 
 /**
@@ -282,9 +295,7 @@ function displaySelectedContacts() {
     }
     if (selectedContacts.length > 8) {
         document.getElementById('container-assigned-contacts').classList.add('padding-bottom-8');
-    } else {
-        document.getElementById('container-assigned-contacts').classList.remove('padding-bottom-8');
-    }
+    } else document.getElementById('container-assigned-contacts').classList.remove('padding-bottom-8');
 }
 
 /**

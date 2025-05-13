@@ -193,9 +193,7 @@ function processSubtaskInput(input, containerSubtasks, subtaskObj) {
         subtaskObj.subtask = inputValue;
         subtasksBigTaskCardEdit.push(subtaskObj);
         checkForScrollableContainerForBigTaskCardEdit(containerSubtasks);
-    } else {
-        throwSubtaskError();
-    }
+    } else throwSubtaskError();
 }
 
 /**
@@ -367,7 +365,5 @@ function processSubtaskForBigTaskCardEdit(boolean) {
         inputValue = "";
     } else if (!boolean && (inputValue != "" || inputValue == "")) {
         inputValue = "";
-    } else {
-        invalidRef.classList.remove('d-none');
-    }
+    } else invalidRef.classList.remove('d-none');
 }

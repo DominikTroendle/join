@@ -135,9 +135,7 @@ function successfullyContact() {
     setTimeout(() => {
         let messageBox = document.getElementById('succesfully-message-box');
         messageBox.style.display = "flex";
-        setTimeout(() => {
-            messageBox.style.display = "none";
-        }, 2000);
+        setTimeout(() => {messageBox.style.display = "none";}, 2000);
     }, 500);
 }
 
@@ -233,7 +231,6 @@ function selectContact(element) {
     });
     newContactButtonColor.classList.remove('active')
     toggleContactSelection(isSelected, element, moreInfoContainer, overlay);
-   
 }
 
 /**
@@ -330,9 +327,7 @@ async function updateContactTemplate(contactKey, updatedContact) {
         newElement.innerHTML = template;
         contactElement.replaceWith(newElement);
     }
-    if (contactElement) {
-        resetUiElements();
-    }
+    if (contactElement) resetUiElements();
 }
 
 /**

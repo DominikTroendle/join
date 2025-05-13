@@ -54,9 +54,7 @@ function toggleMenu(overlay, menuBox, supportBox) {
     } else {
         overlay.classList.add('active');
         menuBox.classList.add('inactive');
-        setTimeout(() => {
-            supportBox.classList.add('active');
-        }, 10);
+        setTimeout(() => { supportBox.classList.add('active'); }, 10);
     }
 }
 

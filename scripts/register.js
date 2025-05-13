@@ -83,11 +83,9 @@ async function addUserToRegister(event, form) {
     event.preventDefault();
     const color = await randomBgColor();
     if (!await UserRegister()) return false;
-
     const newUser = createUserObject(form, color);
     const userId = await registerUser(newUser);
     if (!userId) return false;
-
     clearForm(form);
     window.location.href = 'index.html?msg=You Signed Up successfully';
     return false;

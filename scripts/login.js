@@ -145,20 +145,17 @@ function backLogin() {
  * If animation is disabled, calls backLogin function.
  */
 function animationLogo() {
-    if (logoAnimation === "false") {
-        backLogin();
-    } else {
+    if (logoAnimation === "false") return backLogin();
+    setTimeout(() => {
+        const { passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
+        updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
         setTimeout(() => {
-            const {passivLogo, loginLogo, overlay, logoPath1, logoPath2, logoPath3, logoPath4, logoPath5 } = getLogoElements();
-            updateLogoElements(passivLogo, loginLogo, overlay, [logoPath1, logoPath2, logoPath3, logoPath4, logoPath5]);
-            setTimeout(() => {
-                overlay.classList.remove('login-overlay');
-                passivLogo.style.display = "flex";
-                loginLogo.style.display = "none";
-            }, 1000);
-            sessionStorage.setItem("moveAnimation", false);
-        }, 200);
-    }
+            overlay.classList.remove('login-overlay');
+            passivLogo.style.display = "flex";
+            loginLogo.style.display = "none";
+        }, 1000);
+        sessionStorage.setItem("moveAnimation", false);
+    }, 200);
 }
 
 // /**
