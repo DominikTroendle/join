@@ -44,23 +44,91 @@ function resetContactForm() {
  * Adds a new user to the contact list.
  * 
  * @param {Event} event - The event object.
- * 
  * @param {HTMLFormElement} form - The form containing user data.
  */
 async function addUserToContactList(event, form) {
-    event.preventDefault();
-    let userId = localStorage.getItem("userId"), color = await randomBgColor();
-    let newContact = await createContact(form, color);
-    let response = await sendData(`${userId}/allContacts`, newContact);
-    newContact.key = response.name;
-    allContacts.push(newContact);
-    await loadContactList();
-    moreContactInformation(newContact.name);
-    highlightNewContact(newContact);
-    form.reset();
-    successfullyContact();
-    resetAddContactButton();
-    return false;
+    if (handleContactUnvalidInputs(false)) {
+        event.preventDefault();
+        let userId = localStorage.getItem("userId"), color = await randomBgColor();
+        let newContact = await createContact(form, color);
+        let response = await sendData(`${userId}/allContacts`, newContact);
+        newContact.key = response.name;
+        allContacts.push(newContact);
+        await loadContactList();
+        moreContactInformation(newContact.name);
+        highlightNewContact(newContact);
+        form.reset();
+        successfullyContact();
+        resetAddContactButton();
+        return false;
+    }
+}
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactUnvalidInputs(isEdit) {
+    let nameRef = document.getElementById(`${isEdit ? 'editName' : 'name'}`);
+    let emailRef = document.getElementById(`${isEdit ? 'editEmail' : 'email'}`);
+    let phoneRef = document.getElementById(`${isEdit ? 'editPhone' : 'phone'}`);
+    resetBorders(nameRef, emailRef, phoneRef);
+    let isValid = true;
+    isValid &= validateField(nameRef);
+    isValid &= validateEmail(emailRef);
+    isValid &= validatePhone(phoneRef);
+    return isValid;
+}
+
+/**
+ * Resets inputs borders to default style
+ * @param {HTMLElement} nameRef - name input element whose border should be reset
+ * @param {HTMLElement} emailRef - email input element whose border should be reset
+ * @param {HTMLElement} phoneRef - phone input element whose border should be reset
+ */
+function resetBorders(nameRef, emailRef, phoneRef) {
+    let refs = [nameRef, emailRef, phoneRef]
+    refs.forEach(ref => ref.style.border = "");
+}
+
+/**
+ * Validates a given input field (ref) and changes its border if its unvalid
+ * @param {HTMLElement} ref - the input element to be validated
+ * @returns true if the inputs value is valid, otherwise false
+ */
+function validateField(ref) {
+    if (ref.value === "") {
+        ref.style.border = "1px solid red";
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Validates a given input field (ref) and changes its border if its unvalid
+ * @param {HTMLElement} ref - the input element to be validated
+ * @returns true if the inputs value is valid, otherwise false
+ */
+function validateEmail(ref) {
+    if (ref.value === "" || !ref.value.includes('@')) {
+        ref.style.border = "1px solid red";
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Validates a given input field (ref) and changes its border if its unvalid
+ * @param {HTMLElement} ref - the input element to be validated
+ * @returns true if the inputs value is valid, otherwise false
+ */
+function validatePhone(ref) {
+    if (ref.value === "" || !/^\d+$/.test(ref.value)) {
+        ref.style.border = "1px solid red";
+        return false;
+    }
+    return true;
 }
 
 /**
@@ -221,18 +289,20 @@ function fillContactForm(contact) {
  * @param {HTMLFormElement} form - The form containing contact data.
  */
 async function editContact(event, form) {
-    event.preventDefault();
-    let userId = localStorage.getItem("userId");
-    let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
-    if (!contactKey) return;
-    let updatedContact = await createEditContact(form, await randomBgColor());
-    updatedContact.name = form.querySelector('#editName').value;
-    updatedContact.email = form.querySelector('#editEmail').value;
-    await putData(contactKey, updatedContact, userId);
-    let contactIndex = allContacts.findIndex(c => c.key === contactKey);
-    if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
-    updateContactTemplate(contactKey, updatedContact);
-    await loadContactList();
+    if (handleContactUnvalidInputs(true)) {
+        event.preventDefault();
+        let userId = localStorage.getItem("userId");
+        let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
+        if (!contactKey) return;
+        let updatedContact = await createEditContact(form, await randomBgColor());
+        updatedContact.name = form.querySelector('#editName').value;
+        updatedContact.email = form.querySelector('#editEmail').value;
+        await putData(contactKey, updatedContact, userId);
+        let contactIndex = allContacts.findIndex(c => c.key === contactKey);
+        if (contactIndex !== -1) allContacts[contactIndex] = { key: contactKey, ...updatedContact };
+        updateContactTemplate(contactKey, updatedContact);
+        await loadContactList();
+    } 
 }
 
 /**

@@ -140,7 +140,7 @@ return`
                     <div class="contact-button-container">
                         <button class="cancel-btn" onclick="closeAddNewContact(); return false;">Cancel <p>X</p>
                         </button>
-                        <button class="create-btn" type="submit">Create contact <img src="../assets/icons/check.svg" alt=""></button>
+                        <button class="create-btn" type="submit" onclick="addUserToContactList(event, form)">Create contact <img src="../assets/icons/check.svg" alt=""></button>
                     </div>
                 </form>
             </div>
@@ -192,7 +192,7 @@ function getEditContactTemplate(key) {
                         </div>
                         <div class="contact-button-container">
                             <button class="edit-cancel-btn mobile-delete-view" type="button" onclick="deleteContact('${key}')";>Delete</button>
-                            <button class="save-btn" type="buttom">Save<img src="../assets/icons/check.svg" alt="" onclick="putData('${key}')"></button>
+                            <button class="save-btn" type="buttom" onclick="editContact(event, this)">Save<img src="../assets/icons/check.svg" alt="" onclick="putData('${key}')"></button>
                         </div>
                     </form>
                 </div>
