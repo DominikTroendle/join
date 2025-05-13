@@ -19,6 +19,7 @@ function handleOverlayClickEvent(event, procressOverlay, menuBox, supportBox, pr
  * @param {HTMLElement} procressButton - The process button element.
  */
 function handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton, procressMenu) {
+    let backgroundColor = document.querySelector('.procressing-area-edit-button-mobile');
     procressOverlay.classList.add('close');
     procressOverlay.classList.remove('active');
     menuBox.classList.remove('inactive');
@@ -26,6 +27,7 @@ function handleOverlayClick(procressOverlay, menuBox, supportBox, procressButton
     procressMenu.style.disply = ('none')
     setTimeout(() => {
         procressButton.classList.remove('active');
+        backgroundColor.classList.remove('active')
     }, 1000);
 }
 
@@ -71,8 +73,11 @@ function toggleButtonColor(button) {
     }else{
         toggleRemoveButtonColor(button)
     }
-    button = document.querySelector('.procressing-area-edit-button-mobile');
-    button.classList.add('procressing-area-button-mobile-backgroundcolor');
+}
+
+function toggleBackgroundProcressButton() {
+    let backgroundColor = document.querySelector('.procressing-area-edit-button-mobile');
+    backgroundColor.classList.add('active')
 }
 
 /**

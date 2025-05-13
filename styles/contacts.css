@@ -1216,16 +1216,17 @@ button .close-icon:hover path {
 
     .procressing-area-edit-button-mobile {
         display: flex;
+        background-color: #ffffff;
         padding: 8px 20px 8px 10px;
         gap: 8px;
         color: black;
         font-size: 16px;
     }
 
-     .procressing-area-edit-button-mobile.active{
-        color: red;
-        background-color: #007CEE;
-     }
+    .procressing-area-edit-button-mobile.active{
+        background-color: #e9e9e9;
+        border-radius: 10px;
+    }
 
     .procressing-area-delete-button-mobile {
         display: flex;
@@ -1233,11 +1234,6 @@ button .close-icon:hover path {
         gap: 8px;
         color: black;
         font-size: 16px;
-    }
-
-    .procressing-area-button-mobile-backgroundcolor {
-        background-color: #d1d1d13b;
-        border-radius: 10px;
     }
 
     .massage-box {
