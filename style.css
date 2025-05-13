@@ -663,7 +663,7 @@ li{
         z-index: 5;
     }
 
-    .loader {
+    .landscape-spinner {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -683,7 +683,7 @@ li{
         animation: rotateToPortrait 2s ease-in-out infinite, glowingBorder 2s ease-in-out infinite;
     }
 
-    .loader2 {
+    .spinner-ring {
         width: 48px;
         height: 48px;
         display: inline-block;
@@ -695,8 +695,8 @@ li{
         animation: 3s rotate linear infinite;
     }
 
-    .loader2:before,
-    .loader2:after {
+    .spinner-ring:before,
+    .spinner-ring:after {
         content: '';
         top: 0;
         left: 0;
@@ -706,7 +706,7 @@ li{
         transform: translate(-10px, 19px) rotate(-35deg);
     }
 
-    .loader2:after {
+    .spinner-ring:after {
         border-color: #de3500 #0000 #0000 #0000;
         transform: translate(32px, 3px) rotate(-35deg);
     }
