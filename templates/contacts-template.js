@@ -200,4 +200,3 @@ function getEditContactTemplate(key) {
         </div>
     `
 }
-
