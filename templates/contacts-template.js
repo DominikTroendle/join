@@ -119,24 +119,27 @@ return`
             <div class="new-user-image">
                 <img src="../assets/img/person.png" alt="">
             </div>
-            <form onsubmit="return addUserToContactList(event, this);">
+            <form onsubmit="addUserToContactList(event, this);" novalidate>
                 <div class="input-container">
                     <div class="input-area">
-                        <input type="text" placeholder="Name" id="name" pattern="^\\S(.*\\S)?$" title="No spaces allowed at the beginning or end" required>
+                        <input type="text" placeholder="Name" id="name" required>
                         <img src="../assets/img/person-grey.png" alt="">
                     </div>
+                    <p id="error-message-name" class="error-message">This field is required!</p>
                     <div class="input-container">
                         <div class="input-area">
-                                <input type="email" placeholder="Email" id="email" pattern="^\\S+$" title="No spaces allowed" required>
+                                <input type="email" placeholder="Email" id="email" required>
                                 <img src="../assets/img/mail.png" alt="">
                         </div> 
                     </div>
+                    <p id="error-message-email" class="error-message">This field is required!</p>
                     <div class="input-container">
                         <div class="input-area">
-                            <input type="tel" name="phone" pattern="^\\+?[0-9]+$" placeholder="Phone" id="phone" required>
+                            <input type="tel" name="phone" placeholder="Phone" id="phone" required>
                             <img src="../assets/img/call.png" alt="">
                         </div>
                     </div>
+                    <p id="error-message-phone" class="error-message">This field is required!</p>
                     <div class="contact-button-container">
                         <button class="cancel-btn" onclick="closeAddNewContact(); return false;">Cancel <p>X</p>
                         </button>

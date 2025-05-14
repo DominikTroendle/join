@@ -88,6 +88,16 @@ body {
     display: flex;
 }
 
+.error-message{
+    font-size: 9px;
+    color: white;
+    margin: 2px 0 22px 0;
+}
+
+.error-text-red {
+    color: red !important;
+}
+
 .more-information-container {
     position: fixed;
     top: 96px;
@@ -605,7 +615,6 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 32px;
 }
 
 .input-area {

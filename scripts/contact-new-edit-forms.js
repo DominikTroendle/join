@@ -45,8 +45,8 @@ function resetContactForm() {
  * @param {HTMLFormElement} form - The form containing user data.
  */
 async function addUserToContactList(event, form) {
+    event.preventDefault();
     if (handleContactUnvalidInputs(false)) {
-        event.preventDefault();
         let userId = localStorage.getItem("userId"), color = await randomBgColor();
         let newContact = await createContact(form, color);
         let response = await sendData(`${userId}/allContacts`, newContact);
@@ -95,20 +95,30 @@ function resetBorders(nameRef, emailRef, phoneRef) {
 function validateField(ref) {
     if (ref.value === "") {
         ref.style.border = "1px solid red";
+        document.getElementById(`error-message-${ref.id}`).classList.add('error-text-red');
         return false;
+    } else {
+        document.getElementById(`error-message-${ref.id}`).classList.remove('error-text-red');
     }
     return true;
 }
 
 /**
- * Validates a given input field (ref) and changes its border if its unvalid
+ * Validates a given input field (ref) and changes its border if its unvalid. Adjusts the error message if the format is unvalid.
  * @param {HTMLElement} ref - the input element to be validated
  * @returns true if the inputs value is valid, otherwise false
  */
 function validateEmail(ref) {
     if (ref.value === "" || !ref.value.includes('@')) {
         ref.style.border = "1px solid red";
+        document.getElementById(`error-message-${ref.id}`).innerText = 'This field is required!';
+        document.getElementById(`error-message-${ref.id}`).classList.add('error-text-red');
+        if (ref.value.length !== 0 && !ref.value.includes("@")) {
+            document.getElementById(`error-message-${ref.id}`).innerText = 'Unvalid format (example@domain.de)!';
+        }
         return false;
+    } else {
+        document.getElementById(`error-message-${ref.id}`).classList.remove('error-text-red');
     }
     return true;
 }
@@ -121,7 +131,14 @@ function validateEmail(ref) {
 function validatePhone(ref) {
     if (ref.value === "" || !/^\d+$/.test(ref.value)) {
         ref.style.border = "1px solid red";
+        document.getElementById(`error-message-${ref.id}`).innerText = 'This field is required!';
+        document.getElementById(`error-message-${ref.id}`).classList.add('error-text-red');
+         if (ref.value.length !== 0 && !/^\d+$/.test(ref.value)) {
+            document.getElementById(`error-message-${ref.id}`).innerText = 'Only numbers are valid!';
+        }
         return false;
+    } else {
+        document.getElementById(`error-message-${ref.id}`).classList.remove('error-text-red');
     }
     return true;
 }
