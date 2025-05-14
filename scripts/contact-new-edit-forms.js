@@ -93,7 +93,8 @@ function resetBorders(nameRef, emailRef, phoneRef) {
  * @returns true if the inputs value is valid, otherwise false
  */
 function validateField(ref) {
-    if (ref.value === "") {
+    let refValue = ref.value.trim();
+    if (refValue === "") {
         ref.style.border = "1px solid red";
         document.getElementById(`error-message-${ref.id}`).classList.add('error-text-red');
         return false;
