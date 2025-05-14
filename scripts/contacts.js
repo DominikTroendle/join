@@ -107,7 +107,6 @@ function highlightNewContact(contact) {
  * Sends data to the specified path.
  * 
  * @param {string} path - The API endpoint.
- * 
  * @param {Object} data - The data to send.
  */
 async function sendData(path, data) {
@@ -157,9 +156,7 @@ async function loadContactList() {
  * Creates a contact group by first letter.
  * 
  * @param {Object} contact - The contact object.
- * 
  * @param {string} currentLetter - The current letter.
- * 
  * @param {Array} contactList - The contact list.
  */
 async function createContactGroup(contact, currentLetter, contactList) {
@@ -176,7 +173,6 @@ async function createContactGroup(contact, currentLetter, contactList) {
  * Adds a group header to the contact list.
  * 
  * @param {HTMLElement} contactList - The contact list container.
- * 
  * @param {string} letter - The letter for the group header.
  */
 function addGroupHeader(contactList, letter) {
@@ -190,7 +186,6 @@ function addGroupHeader(contactList, letter) {
  * Adds a contact to the corresponding group.
  * 
  * @param {Object} contact - The contact object.
- * 
  * @param {string} letter - The group identifier.
  */
 async function addContactToGroup(contact, letter) {
@@ -237,11 +232,8 @@ function selectContact(element) {
  * Toggles the selection state of the contact and updates UI elements.
  * 
  * @param {boolean} isSelected - Whether the contact is currently selected.
- * 
  * @param {HTMLElement} element - The clicked contact element.
- * 
  * @param {HTMLElement} moreInfoContainer - The container for more information.
- * 
  * @param {HTMLElement} overlay - The overlay for mobile view.
  */
 function toggleContactSelection(isSelected, element, moreInfoContainer, overlay) {
@@ -311,9 +303,7 @@ function animateContactInfo(contactInfoContainer) {
  * Updates a contact template in the DOM with new information.
  * 
  * @param {string} contactKey - The unique identifier for the contact.
- * 
  * @param {Object} updatedContact - The updated contact information.
- * 
  * @returns {Promise<void>} - A promise that resolves when the update is complete.
  */
 async function updateContactTemplate(contactKey, updatedContact) {
@@ -332,7 +322,6 @@ async function updateContactTemplate(contactKey, updatedContact) {
 
 /**
  * Resets UI elements by updating their class lists.
- * 
  * Hides processing overlay, enables menu and support boxes, and deactivates the process button after a delay.
  */
 function resetUiElements() {

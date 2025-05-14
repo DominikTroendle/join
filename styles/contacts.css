@@ -218,7 +218,8 @@ body {
 }
 
 .container-contact {
-    width: 352px;
+    min-width: 346px;
+    max-width: 346px;
     min-height: 78px;
     border-radius: 10px;
     padding: 15px 24px;
@@ -263,6 +264,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    max-width: calc(346px - 24px - 24px - 42px - 35px);
+    overflow-wrap: break-word;
 }
 
 .contact-preview-name {
@@ -1593,14 +1596,12 @@ button .close-icon:hover path {
     }
 
     .container-contact {
-        width: 300px;
-        height: 78px;
-        border-radius: 10px;
-        padding: 15px 0 15px 10px;
-        display: flex;
-        align-items: center;
-        gap: 35px;
-        margin: 0;
+        min-width: 300px;
+        max-width: 300px;
+    }
+
+    .container-contact-preview {
+        max-width: calc(300px - 24px - 24px - 42px - 35px);
     }
 
     section {
