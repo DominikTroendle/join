@@ -146,6 +146,10 @@ form{
     margin-right: 330px;
 }
 
+.error-massage-medium {
+    margin-right: 255px;
+}
+
 .checkbox-privacy-policy-container {
     position: relative;
     display: flex;

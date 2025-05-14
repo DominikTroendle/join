@@ -179,13 +179,32 @@ function validateSignupInputs(input) {
     let isValid = true;
     if (inputRef.value.length == 0 || (input == "email" && !inputRef.value.includes("@"))) {
         inputRef.style.border = '1px solid red';
-        if (input !== "password") document.getElementById(`error-message-${input}`).style.display = 'flex';
+        if (input !== "password") throwErrorMessage(input);
+        if (input == "email" && inputRef.value.length !== 0 && !inputRef.value.includes("@")) updateErrorMesssage();
         isValid = false;
     } else {
         inputRef.style.border = '1px solid #D1D1D1';
         if (input !== "password") document.getElementById(`error-message-${input}`).style.display = 'none';
     }
     return isValid;
+}
+
+/**
+ * Shows a error message by changing styles and removing classes
+ * @param {*} input - name of the input whose error message should be displayed
+ */
+function throwErrorMessage(input) {
+    document.getElementById(`error-message-${input}`).style.display = 'flex';
+    document.getElementById(`error-message-${input}`).innerText = 'This field is required!';
+    document.getElementById('error-message-email').classList.remove('error-massage-medium');
+}
+
+/**
+ * Updates the error message for the email input
+ */
+function updateErrorMesssage() {
+    document.getElementById('error-message-email').innerText = 'Unvalid format (example@domain.de)!';
+    document.getElementById('error-message-email').classList.add('error-massage-medium');
 }
 
 /**
