@@ -205,7 +205,7 @@ function validateCheckbox(checkbox) {
  */
 function validatePasswords(password, conrollPassword) {
     const match = password.value !== "" && password.value === conrollPassword.value;
-    conrollPassword.style.border = `1px solid ${match ? 'black' : 'red'}`;
+    conrollPassword.style.border = `1px solid ${match ? '#D1D1D1' : 'red'}`;
     conrollPassword.style.boxShadow = match ? 'none' : '';
     document.getElementById('notCorrectValue').style.display = match ? 'none' : 'flex';
     return match;
