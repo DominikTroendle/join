@@ -207,7 +207,7 @@ async function saveTasksToDatabase(userKey, tasks) {
     }
     try {
         let updates = {};
-        updateAllTasksInDatabase(userKey, tasks, updates)
+        await updateAllTasksInDatabase(userKey, tasks, updates)
     } catch (error) {
         console.error("Error when saving the tasks:", error);
     }

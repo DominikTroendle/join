@@ -268,7 +268,7 @@ function editDataInArray(taskCardObject, data) {
 async function syncAllContactsWithTasks(userKey) {
     await readAllContactsFromDatabase(userKey);
     await readAllTasksFromDatabase(userKey);
-    updateAssignedContactsInTasks(userKey);
+    await updateAssignedContactsInTasks(userKey);
 }
 
 /**
