@@ -87,7 +87,7 @@ async function addUserToRegister(event, form) {
     const userId = await registerUser(newUser);
     if (!userId) return false;
     clearForm(form);
-    window.location.href = '/index.html?msg=You Signed Up successfully';
+    window.location.href = '../index.html?msg=You Signed Up successfully';
     return false;
 }
 
