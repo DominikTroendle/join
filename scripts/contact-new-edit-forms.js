@@ -133,7 +133,7 @@ function validatePhone(ref) {
         ref.style.border = "1px solid red";
         document.getElementById(`error-message-${ref.id}`).innerText = 'This field is required!';
         document.getElementById(`error-message-${ref.id}`).classList.add('error-text-red');
-         if (ref.value.length !== 0 && !/^\d+$/.test(ref.value)) {
+        if (ref.value.length !== 0 && !/^\d+$/.test(ref.value)) {
             document.getElementById(`error-message-${ref.id}`).innerText = 'Only numbers are valid!';
         }
         return false;
@@ -301,8 +301,8 @@ function fillContactForm(contact) {
  * @param {HTMLFormElement} form - The form containing contact data.
  */
 async function editContact(event, form) {
+    event.preventDefault();
     if (handleContactUnvalidInputs(true)) {
-        event.preventDefault();
         let userId = localStorage.getItem("userId");
         let contactKey = document.getElementById('editContactOverlay').dataset.contactKey;
         if (!contactKey) return;
