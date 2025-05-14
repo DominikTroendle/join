@@ -238,5 +238,5 @@ function readTaskFromSessionAndFindTask() {
 window.addEventListener("load", function () {
     setTimeout(() => {
       readTaskFromSessionAndFindTask();  
-    }, 1000);  
+    }, 2000);  
 });
