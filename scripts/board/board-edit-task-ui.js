@@ -357,13 +357,11 @@ function processSubtaskForBigTaskCardEdit(boolean) {
     let input = document.getElementById('big-task-card-edit__subtask-input');
     let invalidRef = document.getElementById('invalid-subtask-big-task-card-edit__subtask-input');
     invalidRef.classList.add('d-none');
-    inputValue = input.value;
-    inputValue = inputValue.trim();
     document.getElementById('max-char-big-task-card-edit__subtask-input').classList.add('d-none')
-    if (boolean && (inputValue != "")) {
+    if (boolean && (input.value != "")) {
         addSubtaskForBigTaskCardEdit();
-        inputValue = "";
-    } else if (!boolean && (inputValue != "" || inputValue == "")) {
-        inputValue = "";
+        input.value = "";
+    } else if (!boolean && (input.value != "" || input.value == "")) {
+        input.value = "";
     } else invalidRef.classList.remove('d-none');
 }
