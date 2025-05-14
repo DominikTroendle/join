@@ -2,7 +2,6 @@ let contactsBigTaskCardEdit = [];
 let selectedContactsBigTaskCardEdit = [];
 let unvalidInputsBigTaskCardEdit = [];
 let subtasksBigTaskCardEdit = [];
-let subtasksCountBigTaskCardEdit = subtasksBigTaskCardEdit.length;
 let selectedPriorityBigTaskCardEdit = "medium";
 const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
 

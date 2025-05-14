@@ -183,9 +183,9 @@ function addSubtaskForBigTaskCardEdit() {
  * @returns {void} 
  */
 function processSubtaskInput(input, containerSubtasks, subtaskObj) {
-    inputValue = input.value;
-    inputValue = inputValue.trim();
+    let inputValue = input.value.trim();
     if (inputValue !== "") {
+        let subtasksCountBigTaskCardEdit = subtasksBigTaskCardEdit.length + 1;
         document.getElementById('invalid-subtask-big-task-card-edit__subtask-input').classList.add('d-none');
         document.getElementById('big-task-card-edit__subtask-box').classList.remove('input-unvalid');
         determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCountBigTaskCardEdit);
