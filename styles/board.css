@@ -1340,7 +1340,6 @@ footer {
     border: none;
 }
 
-#container-assigned-contacts,
 .big-task-card-edit__assigned-contacts-box {
     flex-wrap: wrap;
 }
