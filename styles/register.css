@@ -92,10 +92,14 @@ form{
     padding: 0 0 0 30px;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
-    margin-top: 25px;
     outline: none;
     font-size: 20px;
     font-weight: 400;
+}
+
+.register-input div:first-child,
+#controllPassword {
+    margin-top: 20px;
 }
 
 .register-input input::placeholder{
@@ -115,7 +119,10 @@ form{
     right: 20px; 
     width: 20px;
     height: 20px;
-    margin-top: 25px;
+}
+
+#passwordControllIcon {
+    margin-top: 20px;
 }
 
 .user-register input:focus{
@@ -133,6 +140,10 @@ form{
     font-size: 9px;
     color: red;
     margin-right: 220px;
+}
+
+.error-massage-short {
+    margin-right: 330px;
 }
 
 .checkbox-privacy-policy-container {

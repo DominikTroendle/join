@@ -30,9 +30,15 @@
                         <input type="name" id="name" placeholder="Name" pattern="^\S(.*\S)?$" title="No spaces allowed at the beginning or end" required />
                         <img src="../assets/img/person.svg" alt="person Icon" class="input-icon">
                     </div>
+                    <div class="no-value-content">
+                        <p id="error-message-name" class="error-massage error-massage-short">This field is required!</p>
+                    </div>
                     <div class="input-container">
                         <input type="email" id="email" placeholder="Email" pattern="^\S(.*\S)?$" title="No spaces allowed at the beginning or end" required />
                         <img src="../assets/img/mail.png" alt="Mail Icon" class="input-icon">
+                    </div>
+                    <div class="no-value-content">
+                        <p id="error-message-email" class="error-massage error-massage-short">This field is required!</p>
                     </div>
                     <div class="input-container">
                         <input type="password" id="password" placeholder="Password" pattern="^\S{8,}$" title="At least 8 characters, no spaces allowed" required

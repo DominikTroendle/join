@@ -179,9 +179,11 @@ function validateSignupInputs(input) {
     let isValid = true;
     if (inputRef.value.length == 0 || (input == "email" && !inputRef.value.includes("@"))) {
         inputRef.style.border = '1px solid red';
+        if (input !== "password") document.getElementById(`error-message-${input}`).style.display = 'flex';
         isValid = false;
     } else {
         inputRef.style.border = '1px solid #D1D1D1';
+        if (input !== "password") document.getElementById(`error-message-${input}`).style.display = 'none';
     }
     return isValid;
 }
