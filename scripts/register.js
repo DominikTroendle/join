@@ -176,11 +176,12 @@ async function UserRegister() {
  */
 function validateSignupInputs(input) {
     const inputRef = document.getElementById(`${input}`);
+    let inputRefValue = inputRef.value.trim();
     let isValid = true;
-    if (inputRef.value.length == 0 || (input == "email" && !inputRef.value.includes("@"))) {
+    if (inputRefValue.length == 0 || (input == "email" && !inputRefValue.includes("@"))) {
         inputRef.style.border = '1px solid red';
         if (input !== "password") throwErrorMessage(input);
-        if (input == "email" && inputRef.value.length !== 0 && !inputRef.value.includes("@")) updateErrorMesssage();
+        if (input == "email" && inputRefValue.length !== 0 && !inputRefValue.includes("@")) updateErrorMesssage();
         isValid = false;
     } else {
         inputRef.style.border = '1px solid #D1D1D1';
@@ -225,7 +226,9 @@ function validateCheckbox(checkbox) {
  * @returns {boolean} - Returns true if passwords match, false otherwise.
  */
 function validatePasswords(password, conrollPassword) {
-    const match = password.value !== "" && password.value === conrollPassword.value;
+    let passwordValue = password.value.trim();
+    let conrollPasswordValue = conrollPassword.value.trim();
+    const match = passwordValue !== "" && passwordValue === conrollPasswordValue;
     conrollPassword.style.border = `1px solid ${match ? '#D1D1D1' : 'red'}`;
     conrollPassword.style.boxShadow = match ? 'none' : '';
     document.getElementById('notCorrectValue').style.display = match ? 'none' : 'flex';

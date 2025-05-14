@@ -175,24 +175,27 @@ function getEditContactTemplate(key) {
                 <div class="edit-contact-initcolor" id="editUserInitials">
                     <p class="edit-contact-initialien" id="editUserInitialsText">AB</p>
                 </div>
-                <form onsubmit="return editContact(event, this);">
+                <form onsubmit="return editContact(event, this);" novalidate>
                     <div class="input-container mobile-container">
                         <div class="input-area">
-                            <input type="text" placeholder="Name" id="editName" pattern="^\\S(.*\\S)?$" title="No spaces allowed at the beginning or end" required>
+                            <input type="text" placeholder="Name" id="editName" required>
                             <img src="../assets/img/person-grey.png" alt="">
                         </div>
+                        <p id="error-message-editName" class="error-message">This field is required!</p>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="email" placeholder="Email" id="editEmail" pattern="^\\S+$" title="No spaces allowed" required>
+                                <input type="email" placeholder="Email" id="editEmail"  required>
                                 <img src="../assets/img/mail.png" alt="">
-                            </div> 
+                            </div>
                         </div>
+                        <p id="error-message-editEmail" class="error-message">This field is required!</p> 
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="tel" name="phone" pattern="^\\+?[0-9]+$" placeholder="Phone" id="editPhone" required>
+                                <input type="tel" name="phone" placeholder="Phone" id="editPhone" required>
                                 <img src="../assets/img/call.png" alt="">
                             </div>
                         </div>
+                        <p id="error-message-editPhone" class="error-message">This field is required!</p>
                         <div class="contact-button-container">
                             <button class="edit-cancel-btn mobile-delete-view" type="button" onclick="deleteContact('${key}')";>Delete</button>
                             <button class="save-btn" type="buttom" onclick="editContact(event, this.closest('form'))">Save<img src="../assets/icons/check.svg" alt=""></button>
