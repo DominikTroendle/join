@@ -83,7 +83,7 @@ function handleContactUnvalidInputs(isEdit) {
  * @param {HTMLElement} phoneRef - phone input element whose border should be reset
  */
 function resetBorders(nameRef, emailRef, phoneRef) {
-    let refs = [nameRef, emailRef, phoneRef]
+    let refs = [nameRef, emailRef, phoneRef];
     refs.forEach(ref => ref.style.border = "");
 }
 

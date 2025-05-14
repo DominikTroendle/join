@@ -633,6 +633,16 @@ body {
     color: #D1D1D1;
 }
 
+.input-area input:focus {
+    border: 1px solid #29abe2;
+    outline: none;
+    box-shadow: none;
+}
+
+.red-focus-border:focus {
+    border: 1px solid red !important;
+}
+
 .contact-button-container {
     display: flex;
     gap: 24px;
