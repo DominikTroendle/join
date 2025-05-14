@@ -1328,7 +1328,7 @@ footer {
 }
 
 .subtask-text {
-    width: 350px;
+    padding-right: 40px;
 }
 
 .big-task-card-edit__assigned-to-input,
@@ -2166,10 +2166,6 @@ footer {
         width: 348px;
     }
 
-    .subtask-text {
-        width: 253px;
-    }
-
     .container-custom-select-options {
         width: 345px;
     }
@@ -2306,11 +2302,7 @@ footer {
     .big-task-card-edit__assigned-to-dropdown {
         width: 270px;
     }
-
-    .subtask-text {
-        width: 175px;
-    }
-
+    
     .container-custom-select-options {
         width: 270px;
     }
