@@ -226,17 +226,29 @@ function readTaskFromSessionAndFindTask() {
 }
 
 /**
- * Waits for the full page to load, then delays execution by 1 second
- * before attempting to read and highlight a newly created task from sessionStorage.
+ * Waits for the page to fully load and checks periodically whether all task elements 
+ * have been rendered in the DOM before attempting to highlight a task from sessionStorage.
  *
  * @event window:load
  * @description
- * This event listener waits until the entire page (including all resources like images and stylesheets)
- * has fully loaded. After a 1000ms delay, it calls `readTaskFromSessionAndFindTask` to locate and highlight
- * a task that was recently added and saved in sessionStorage.
+ * This event listener waits until the entire page (including all external resources) has fully loaded.
+ * It then starts polling every 200ms to compare the number of tasks in memory with the number of 
+ * rendered DOM elements (task cards). Once both match—or after a maximum number of attempts—
+ * it calls `readTaskFromSessionAndFindTask()` to highlight the task that was recently added 
+ * and stored in sessionStorage.
+ *
+ * This prevents the function from running too early before the DOM is fully rendered.
  */
 window.addEventListener("load", function () {
-    setTimeout(() => {
-      readTaskFromSessionAndFindTask();  
-    }, 2000);  
+    let attempts = 0;
+    const maxAttempts = 20;
+    let intervalId = setInterval(() => {
+        let allArrayLength = toDoArray.length + inProgressArray.length + awaitFeedbackArray.length + doneArray.length;
+        let numberOfAllSmallTasks = document.querySelectorAll(".user-story__all-content-box").length;
+        if (allArrayLength === numberOfAllSmallTasks || attempts >= maxAttempts) {
+            clearInterval(intervalId);
+            readTaskFromSessionAndFindTask();
+        }
+        attempts++;
+    }, 200);
 });
