@@ -1046,7 +1046,11 @@ button .close-icon:hover path {
 
     .input-container {
         align-items: center;
-        gap: 24px;
+    }
+
+    .error-message {
+        margin: 2px 0 11px 0;
+        align-self: flex-start;
     }
 
     .input-area {
@@ -1307,10 +1311,6 @@ button .close-icon:hover path {
         top: calc((358px / 2) + 60px) !important;
     }
 
-    .input-container {
-        gap: 20px !important;
-    }
-
     .create-btn {
         margin-top: 0 !important;
     }
@@ -1431,10 +1431,6 @@ button .close-icon:hover path {
         position: absolute;
         margin-left: 0;
         top: 295px;
-    }
-
-    .mobile-container {
-        gap: 24px;
     }
 
     .mobile-delete-view {
