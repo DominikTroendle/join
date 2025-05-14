@@ -340,6 +340,62 @@ body {
     fill: #2A3647
 }
 
+@media (max-width: 1040px) and (max-height: 950px) {
+    .user-login {
+        margin-top:  167.5px !important;
+    }
+}
+
+@media (max-width: 1040px) and (max-height: 900px) {
+    .logo {
+        top: 40px;
+    }
+}
+
+@media (max-width: 1040px) and (max-height: 875px) {
+    .user-login {
+        margin-top: 200px;
+        height: 400px;
+    }
+}
+
+@media (max-width: 1040px) and (max-height: 800px) {
+    .legal-information {
+        margin-top: 60px !important;
+    }
+}
+
+@media (max-width: 680px) and (max-height: 875px) {
+    .legal-information {
+        margin-top: 30px !important;
+    }
+}
+
+@media (max-width: 680px) and (max-height: 800px) {
+    .user-login {
+        margin-top: 120px !important;
+    }
+
+    .login-buttons {
+        gap: 10px !important;
+        margin-top: 10px !important;
+    }
+
+    .user-login {
+        height: 420px !important;
+    }
+}
+
+@media (max-width: 400px) and (max-height: 700px) {
+    .login-container {
+        margin-top: 10px !important;
+    }
+
+    .legal-information {
+        margin-top: 10px !important;
+    }
+}
+
 @media (min-width: 1920px) {
     body {
         display: flex;
@@ -613,7 +669,6 @@ body {
 @media(max-width: 490px) {
     .no-value-content {
         margin-top: 140px;
-        margin-right: 55px;
     }
 }
 
@@ -631,6 +686,10 @@ body {
 
     .input-container input {
         width: 270px;
+    }
+
+    .no-value-content {
+        margin-right: 55px;
     }
 }
 
