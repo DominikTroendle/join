@@ -219,21 +219,22 @@ function saveEditedSubtaskForBigTaskCard(id) {
 }
 
 /**
- * Initiates the editing process for a subtask by displaying the input field with the current subtask text.
- * The subtask's current text is populated into the input field, and the edit view is shown while hiding the details view.
- * If the subtask is the last one in the list, additional styling is applied to it.
+ * Enables editing mode for a specific subtask within the big task card.
+ * This function populates the edit input field with the current subtask text,
+ * hides the subtask's details view, and displays the edit view.
+ * If the subtask is the last in the list, special styling may be applied separately.
  *
- * @param {number} id - The unique identifier for the subtask being edited.
- * @returns {void} 
+ * @param {number} id - The unique identifier of the subtask to be edited.
+ * @returns {void}
  */
 function editSubtaskForBigTaskCard(id) {
-    let child = document.getElementById(`big-task-card-edit__container-subtask-${id}`);
+    let allEditSubtasks = Array.from(document.querySelectorAll(".container-subtask-edit"));
+    let allDetailsSubtasks = Array.from(document.querySelectorAll(".container-subtask"));
+    allEditSubtasks.forEach(element => element.classList.add('d-none'));
+    allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
     document.getElementById(`big-task-card-edit__input-subtask-${id}`).value = document.getElementById(`big-task-card-edit__subtask-${id}`).innerText;
     document.getElementById(`big-task-card-edit__details-subtask-${id}`).classList.add('d-none');
     document.getElementById(`big-task-card-edit__edit-subtask-${id}`).classList.remove('d-none');
-    if (isLastChild(child)) {
-        child.classList.add('padding-top');
-    }
 }
 
 /**
