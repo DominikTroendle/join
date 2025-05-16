@@ -271,9 +271,9 @@ function changeConrollPasswordIcon(focused) {
 /**
  * Toggles the visibility of the password input field.
  */
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById("controllPassword");
-    const icon = document.getElementById("passwordControllIcon");
+function togglePasswordVisibility(inputId, iconId) {
+    const passwordInput = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
     if (passwordInput.type === "password") {
         passwordInput.type = "text";
         icon.src = "../assets/img/visibility.png";
