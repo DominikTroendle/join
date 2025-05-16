@@ -702,6 +702,7 @@ input:focus {
     font-size: 16px;
     font-weight: 400;
     line-height: 19px;
+    width: calc(100% - 45px);
 }
 
 .subtask-text-span {
@@ -712,6 +713,11 @@ input:focus {
     display: flex;
     gap: 7px;
     max-height: 19px;
+}
+
+.subtask-icons,
+.flex {
+    padding-left: 6px;
 }
 
 .subtask-icons img {
