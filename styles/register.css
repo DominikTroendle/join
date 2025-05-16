@@ -42,6 +42,11 @@ body{
     gap: 25%;
 }
 
+#passwordIcon,
+#passwordControllIcon {
+    cursor: pointer;
+}
+
 .returnLoginButton{
     position: fixed;
     margin-top: 32px;
