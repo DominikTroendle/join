@@ -1357,6 +1357,11 @@ footer {
     position: relative;
 }
 
+.subtask-icons,
+.flex {
+    padding-left: 6px;
+}
+
 .big-task-card-edit__prioritys-button-box {
     width: 445px;
 }
