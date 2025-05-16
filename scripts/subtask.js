@@ -104,13 +104,13 @@ function deleteSubtask(id) {
  * @param {String} id - id of the subtask the user clicked to edit
  */
 function editSubtask(id) {
-    let child = document.getElementById(`container-subtask-${id}`);
+    let allEditSubtasks = Array.from(document.querySelectorAll(".container-subtask-edit"));
+    let allDetailsSubtasks = Array.from(document.querySelectorAll(".container-subtask"));
+    allEditSubtasks.forEach(element => element.classList.add('d-none'));
+    allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
     document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
     document.getElementById(`details-subtask-${id}`).classList.add('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
-    if (isLastChild(child)) {
-        child.classList.add('padding-top');
-    }
 }
 
 /**
