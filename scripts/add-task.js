@@ -210,9 +210,11 @@ function correctDateFormat(dateObj, day, month, year) {
 }
 
 /**
- * Checks if the given date is in the past
- * @param {Object} dateObj - date object to validate
- * @returns true if the given date is in the past, otherwise false
+ * Checks if the given date is in the past (before today).
+ * The time portion of both dates is ignored by resetting it to 00:00:00.
+ *
+ * @param {Date} dateObj - The date to check.
+ * @returns {boolean} True if the date is before today, otherwise false.
  */
 function isPastDate(dateObj) {
     let today = new Date();
