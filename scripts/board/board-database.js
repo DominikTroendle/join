@@ -134,7 +134,7 @@ async function readAllTasksFromDatabase(userKey) {
     try {
         let result = await fetch(`${BASE_URL}/users/${userKey}/tasks.json`);
         if (!result.ok) {
-            throw new Error(`Fehler beim Abrufen der Daten: ${result.statusText}`);
+            throw new Error(`Error when retrieving the data: ${result.statusText}`);
         }
         let data = await result.json();
         allTasks.length = 0;

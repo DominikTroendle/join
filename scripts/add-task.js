@@ -181,7 +181,7 @@ function testDate() {
     let date = value.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
     if (date === null) return false;
     let day = +date[1], month = +date[2], year = +date[3];
-    let dateObj = new Date(`${year}-${month}-${day}`);
+    let dateObj = new Date(year, month - 1, day);
     if (!correctDateFormat(dateObj, day, month, year)) {
         return false;
     } else if (isPastDate(dateObj)) {
@@ -216,6 +216,8 @@ function correctDateFormat(dateObj, day, month, year) {
  */
 function isPastDate(dateObj) {
     let today = new Date();
+    today.setHours(0, 0, 0, 0);
+    dateObj.setHours(0, 0, 0, 0);
     if (dateObj < today) {
         return true;
     }

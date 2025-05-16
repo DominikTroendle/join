@@ -169,7 +169,7 @@ function testDateForBigTaskCardEdit() {
         return false;
     }
     let day = +date[1], month = +date[2], year = +date[3];
-    let dateObj = new Date(`${year}-${month}-${day}`);
+    let dateObj = new Date(year, month - 1, day);
     return validateDueDateForBigTaskCardEdit(dateObj, day, month, year);
 }
 
