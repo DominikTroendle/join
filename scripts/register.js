@@ -1,5 +1,6 @@
 const BASE_URL = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/"
 let isPasswordVisible = false;
+let isControllPasswordVisible = false;
 let bgColors = [];
 
 /**
@@ -237,31 +238,34 @@ function validatePasswords(password, conrollPassword) {
 
 /**
  * Updates the password icon based on input focus and visibility state.
- * @param {boolean} focused - Whether the password input is focused.
+ * @param focused - Whether the password input is focused.
  */
 function changePasswordIcon(focused) {
     const icon = document.getElementById("passwordIcon");
-    const passwordInput = document.getElementById("password")
-    if (focused && !isPasswordVisible) {
-        icon.src = "../assets/img/visibility_off.png";
-    } else if (passwordInput.value.trim().length > 0) {
-        icon.src = "../assets/img/visibility_off.png";
-    } else {
-        icon.src = "../assets/img/lock.png";
+    const passwordInput = document.getElementById("password");
+    if (focused) {
+        icon.src = isPasswordVisible
+            ? "../assets/img/visibility.png"
+            : "../assets/img/visibility_off.png";
+        return;
     }
+    updatePasswordIconState(passwordInput, icon);
 }
 
 /**
- * Updates the password visibility icon based on input focus and value.
- * @param {boolean} focused - Indicates if the password input is focused.
+ * Updates the password icon based on input state and visibility.
+ * @param {HTMLInputElement} passwordInput - The password input field.
+ * @param {HTMLImageElement} icon - The icon element to update.
  */
-function changeConrollPasswordIcon(focused) {
-    const icon = document.getElementById("passwordControllIcon");
-    const passwordInput = document.getElementById("controllPassword");
-    if (isPasswordVisible) return;
-    if (focused) {
-        icon.src = "../assets/img/visibility_off.png";
-    } else if (passwordInput.value.trim().length > 0) {
+function updatePasswordIconState(passwordInput, icon) {
+    const isEmpty = passwordInput.value.trim().length === 0;
+    if (isPasswordVisible && isEmpty) {
+        isPasswordVisible = false;
+        passwordInput.type = "password";
+        icon.src = "../assets/img/lock.png";
+    } else if (isPasswordVisible) {
+        icon.src = "../assets/img/visibility.png";
+    } else if (!isEmpty) {
         icon.src = "../assets/img/visibility_off.png";
     } else {
         icon.src = "../assets/img/lock.png";
@@ -272,16 +276,70 @@ function changeConrollPasswordIcon(focused) {
  * Toggles the visibility of the password input field.
  */
 function togglePasswordVisibility(inputId, iconId) {
-    const passwordInput = document.getElementById(inputId);
+    const input = document.getElementById(inputId);
     const icon = document.getElementById(iconId);
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
+    isPasswordVisible = !isPasswordVisible;
+    if (isPasswordVisible) {
+        input.type = "text";
         icon.src = "../assets/img/visibility.png";
-        isPasswordVisible = true;
     } else {
-        passwordInput.type = "password";
+        input.type = "password";
         icon.src = "../assets/img/visibility_off.png";
-        isPasswordVisible = false;
+    }
+}
+
+/**
+ * Updates the password visibility icon based on input focus and value.
+ * @param {boolean} focused - Indicates if the password input is focused.
+ */
+function changeConrollPasswordIcon(focused) {
+    const icon = document.getElementById("passwordControllIcon");
+    const passwordInput = document.getElementById("controllPassword");
+    const isEmpty = passwordInput.value.trim().length === 0;
+    if (focused) {
+        icon.src = isControllPasswordVisible 
+            ? "../assets/img/visibility.png" 
+            : "../assets/img/visibility_off.png";
+        return;
+    }
+    updateIconOnBlur(isEmpty, passwordInput, icon);
+}
+
+/**
+ * Updates the icon based on input blur state and password visibility.
+ * @param {boolean} isEmpty - Whether the input is empty.
+ * @param {HTMLInputElement} passwordInput - The password input element.
+ * @param {HTMLImageElement} icon - The icon element to update.
+ */
+function updateIconOnBlur(isEmpty, passwordInput, icon) {
+    if (isControllPasswordVisible && isEmpty) {
+        isControllPasswordVisible = false;
+        passwordInput.type = "password";
+        icon.src = "../assets/img/lock.png";
+    } else if (isControllPasswordVisible) {
+        icon.src = "../assets/img/visibility.png";
+    } else if (!isEmpty) {
+        icon.src = "../assets/img/visibility_off.png";
+    } else {
+        icon.src = "../assets/img/lock.png";
+    }
+}
+
+/**
+ * Toggles password visibility and updates the icon.
+ * @param {string} inputId - ID of the password input element.
+ * @param {string} iconId - ID of the icon element.
+ */
+function toggleControllPasswordVisibility(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    isControllPasswordVisible = !isControllPasswordVisible;
+    if (isControllPasswordVisible) {
+        input.type = "text";
+        icon.src = "../assets/img/visibility.png";
+    } else {
+        input.type = "password";
+        icon.src = "../assets/img/visibility_off.png";
     }
 }
 
