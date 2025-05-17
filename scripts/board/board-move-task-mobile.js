@@ -251,7 +251,7 @@ function highlightTaskCardWithAnimation() {
     setTimeout(() => {
         document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
         document.getElementById(currentCardId).classList.add('highlight-flash');
-    }, 300);
+    }, 500);
     setTimeout(() => {
         document.getElementById(currentCardId).classList.remove('highlight-flash');
     }, 3300);
