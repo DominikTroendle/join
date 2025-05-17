@@ -69,7 +69,7 @@ function smallCardTemplate(id, taskType, taskTitle, taskDescription, taskPriorit
         }
     }
     return `<div class="user-story__all-content-box">
-                <div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event); disablePointerEventsForAllTasks(event)" ondragend="removeDragRotation(event); activatePointerEventsForAllTasks(); removeCardBorderBox()" onclick="toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
+                <div class="user-story__box" id="${id}" draggable="true" ondragstart="startDragging('${id}'); addDragRotation(event); saveCurrentCardId(event); disablePointerEventsForAllTasks(event)" ondragend="removeDragRotation(event); activatePointerEventsForAllTasks(); removeCardBorderBox()" onclick="saveCurrentCardId(event); toggleDnoneBigTaskCard(); renderContentBigTaskCard(event)">
                     <div class="user-story__category-mobile-button-box">
                         <div class="user-story__category-box ${taskTypeCssClass}">
                             <span class="user-story__category-text">${taskType}</span>

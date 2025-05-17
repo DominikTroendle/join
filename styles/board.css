@@ -1749,6 +1749,28 @@ footer {
     }
 }
 
+.highlight-flash-delete {
+    animation: flash-red 1s ease-in-out 2;
+    box-shadow: 0 0 5px #ff6b6b;
+}
+
+@keyframes flash-red {
+    0% {
+        box-shadow: 0 0 5px #ff6b6b;
+        opacity: 0.2;
+    }
+
+    50% {
+        box-shadow: 0 0 15px #ff6b6b;
+        opacity: 1;
+    }
+
+    100% {
+        box-shadow: 0 0 5px #ff6b6b;
+        opacity: 0.2;
+    }
+}
+
 #overlay-task-added {
     width: 100%;
 }

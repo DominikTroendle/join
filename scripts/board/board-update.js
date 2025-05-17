@@ -340,22 +340,50 @@ function shortenText(text, maxChars) {
 }
 
 /**
- * Deletes the currently selected task from the UI and the database.
- * Removes the task from the local array, re-renders the UI, and sends a DELETE request to the database.
+ * Deletes the currently selected task from both the UI and the database.
+ * 
+ * This function performs the following steps:
+ * 1. Removes the task from the local array if it exists.
+ * 2. Triggers a highlight animation to visually indicate the deletion.
+ * 3. Re-renders the task cards after a short delay.
+ * 4. Sends a DELETE request to the database to remove the task permanently.
  *
  * @async
- * @function
- * @returns {Promise<void>} Resolves when the task is successfully deleted or logs an error if it fails.
+ * @function deleteCurrentTask
+ * @returns {Promise<void>} Resolves when the task is successfully deleted from both the UI and database.
+ *                          Logs an error to the console if the deletion request fails.
  */
 async function deleteCurrentTask() {
     let indexFromCurrentTask = currentArray.findIndex(element => element.id === currentTaskCardId);
     if (indexFromCurrentTask !== -1) {
         currentArray.splice(indexFromCurrentTask, 1);
     }
-    renderSmallCard(currentDragFieldId, currentArray);
+    highlightDeleteTaskCardWithAnimation();
+    setTimeout(() => renderSmallCard(currentDragFieldId, currentArray), 2500);
     let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), currentTaskCardId);
     if (!deleteResponse.ok) {
         console.error("error when saving:", putResponse.statusText);
         return;
     }
+}
+
+/**
+ * Visually highlights the task card that is about to be deleted using a flashing animation.
+ *
+ * This function performs the following actions:
+ * 1. Waits briefly, then scrolls the task card into view.
+ * 2. Adds a CSS class to trigger a flashing delete animation.
+ * 3. After the animation duration, removes the CSS class to reset the style.
+ *
+ * @function highlightDeleteTaskCardWithAnimation
+ * @returns {void} This function does not return a value.
+ */
+function highlightDeleteTaskCardWithAnimation() {
+    setTimeout(() => {
+        document.getElementById(currentCardId).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById(currentCardId).classList.add('highlight-flash-delete');
+    }, 500);
+    setTimeout(() => {
+        document.getElementById(currentCardId).classList.remove('highlight-flash-delete');
+    }, 2500);
 }
