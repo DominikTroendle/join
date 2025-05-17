@@ -45,8 +45,8 @@ async function loadAllUserData(path) {
  * @param {Object} data - Data to send in the request body.
  * @returns {Promise<Object>} - Parsed JSON response.
  */
-async function sendData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
+async function sendData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -63,8 +63,8 @@ async function sendData(path="", data={}) {
  * @param {Object} data - Data to send in the request body.
  * @returns {Promise<Object>} - Parsed JSON response.
  */
-async function putData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
+async function putData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
@@ -184,10 +184,7 @@ function validateSignupInputs(input) {
         if (input !== "password") throwErrorMessage(input);
         if (input == "email" && inputRefValue.length !== 0 && !inputRefValue.includes("@")) updateErrorMesssage();
         isValid = false;
-    } else {
-        inputRef.style.border = '1px solid #D1D1D1';
-        if (input !== "password") document.getElementById(`error-message-${input}`).style.display = 'none';
-    }
+    } else inputRef.style.border = '1px solid #D1D1D1', input !== "password" && (document.getElementById(`error-message-${input}`).style.display = 'none');
     return isValid;
 }
 
@@ -297,8 +294,8 @@ function changeConrollPasswordIcon(focused) {
     const passwordInput = document.getElementById("controllPassword");
     const isEmpty = passwordInput.value.trim().length === 0;
     if (focused) {
-        icon.src = isControllPasswordVisible 
-            ? "../assets/img/visibility.png" 
+        icon.src = isControllPasswordVisible
+            ? "../assets/img/visibility.png"
             : "../assets/img/visibility_off.png";
         return;
     }
