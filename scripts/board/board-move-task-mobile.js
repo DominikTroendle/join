@@ -258,34 +258,34 @@ function highlightTaskCardWithAnimation() {
 }
 
 /**
- * Finds the newly created task based on the given title and description inputs,
- * then highlights and scrolls to that task in the DOM.
+ * Finds the newly created task in the DOM based on the provided title and description input elements,
+ * then highlights and scrolls to that task.
  *
  * @function findAndHighlightNewlyCreatedTask
- * @param {HTMLInputElement} titleInput - Input element containing the task's title text.
- * @param {HTMLInputElement} descriptionInput - Input element containing the task's description text.
+ * @param {HTMLInputElement} titleInput - The input element containing the task's title.
+ * @param {HTMLInputElement} descriptionInput - The input element containing the task's description.
  * @returns {void}
  *
  * @description
- * This function performs the following steps:
+ * The function executes the following steps:
  * 1. Hides the "task-added" overlay by adding the "d-none" class.
  * 2. Collects all task title elements from the DOM.
- * 3. Finds a matching task by comparing the trimmed text content of the title and description.
- * 4. If a match is found, it highlights and scrolls to the newly created task.
+ * 3. Normalizes and shortens the input description, and normalizes the input title.
+ * 4. Searches for a matching task by comparing normalized title and description text content.
+ * 5. If a matching task is found, highlights it and scrolls it into view.
  */
 function findAndHighlightNewlyCreatedTask(titleInput, descriptionInput) {
     document.getElementById('overlay-task-added').classList.add('d-none');
     let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
+    let descriptionFromInput = shortenText(normalizeText(descriptionInput.value), 50);
+    let titleFromInput = normalizeText(titleInput.value);
     let findNewCreateTask = allUserStoryTitle.find(element => {
         let userStoryBox = element.closest(".user-story__box");
-        let description = userStoryBox.querySelector(".user-story__description");
-        return (
-            element.innerText.trim() === titleInput.value.trim() && description?.innerText.trim() === descriptionInput.value.trim()
-        )
+        let title = normalizeText(element.innerText);
+        let description = normalizeText(userStoryBox.querySelector(".user-story__description")?.innerText);
+        return title == titleFromInput && description == descriptionFromInput;
     });
-    if(findNewCreateTask){
-    highlightAndScrollToNewTask(findNewCreateTask);
-    }
+    if (findNewCreateTask) highlightAndScrollToNewTask(findNewCreateTask);
 }
 
 /**
