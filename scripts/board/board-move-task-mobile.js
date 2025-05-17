@@ -254,7 +254,7 @@ function highlightTaskCardWithAnimation() {
     }, 500);
     setTimeout(() => {
         document.getElementById(currentCardId).classList.remove('highlight-flash');
-    }, 3300);
+    }, 3500);
 }
 
 /**
