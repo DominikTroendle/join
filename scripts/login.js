@@ -98,27 +98,49 @@ function loginGuastAccount() {
  */
 function changePasswordIcon(focused) {
     const icon = document.getElementById("passwordIcon");
-    if (focused && !isPasswordVisible) {
-        icon.src = "assets/img/visibility_off.png";
-    } else if (!focused && !isPasswordVisible) {
-        icon.src = "assets/img/lock.png";
+    const passwordInput = document.getElementById("password");
+    if (focused) {
+        icon.src = isPasswordVisible
+            ? "../assets/img/visibility.png"
+            : "../assets/img/visibility_off.png";
+        return;
+    }
+    updatePasswordIconState(passwordInput, icon);
+}
+
+/**
+ * Updates the password icon based on input state and visibility.
+ * @param {HTMLInputElement} passwordInput - The password input field.
+ * @param {HTMLImageElement} icon - The icon element to update.
+ */
+function updatePasswordIconState(passwordInput, icon) {
+    const isEmpty = passwordInput.value.trim().length === 0;
+    if (isPasswordVisible && isEmpty) {
+        isPasswordVisible = false;
+        passwordInput.type = "password";
+        icon.src = "../assets/img/lock.png";
+    } else if (isPasswordVisible) {
+        icon.src = "../assets/img/visibility.png";
+    } else if (!isEmpty) {
+        icon.src = "../assets/img/visibility_off.png";
+    } else {
+        icon.src = "../assets/img/lock.png";
     }
 }
 
 /**
  * Toggles password visibility and changes the icon.
  */
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById("password");
-    const icon = document.getElementById("passwordIcon");
-    if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        icon.src = "assets/img/visibility.png";
-        isPasswordVisible = true;
+function togglePasswordVisibility(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    isPasswordVisible = !isPasswordVisible;
+    if (isPasswordVisible) {
+        input.type = "text";
+        icon.src = "../assets/img/visibility.png";
     } else {
-        passwordInput.type = "password";
-        icon.src = "assets/img/visibility_off.png";
-        isPasswordVisible = false;
+        input.type = "password";
+        icon.src = "../assets/img/visibility_off.png";
     }
 }
 
