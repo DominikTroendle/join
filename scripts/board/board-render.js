@@ -224,7 +224,7 @@ function readTaskFromSessionAndFindTask() {
             }
             sessionStorage.setItem("add-task", "false");
         }
-    }, 1000);
+    }, 500);
 }
 
 /**
