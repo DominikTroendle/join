@@ -86,6 +86,7 @@ async function init() {
     await readFromDatabase(localStorage.getItem("userId"), "awaitFeedback", awaitFeedbackArray, "await-feedback-drag-field");
     await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
     setHeightForDragFields();
+    readTaskFromSessionAndFindTask()
     removeSessionStorageTaskCategory()
 }
 

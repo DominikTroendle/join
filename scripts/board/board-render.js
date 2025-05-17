@@ -197,58 +197,77 @@ function renderSelectedContactsPreviewForBigTaskCardEdit(container) {
 }
 
 /**
- * Reads task data from sessionStorage and tries to find the newly created task in the DOM.
- * If found, it highlights and scrolls to the corresponding task element.
+ * Searches for a newly created task in the DOM based on sessionStorage data and, if found,
+ * highlights and scrolls to it.
  *
  * @function readTaskFromSessionAndFindTask
- * @returns {void} This function does not return anything.
+ * @returns {void}
  *
  * @description
  * This function performs the following steps:
- * 1. Checks if a new task was added (using a sessionStorage flag).
- * 2. Searches through all user story titles to find the one matching the stored title and description.
- * 3. If a matching task is found, it highlights and scrolls to that task.
- * 4. Resets the sessionStorage flag to prevent repeated highlighting.
+ * 1. Waits briefly to ensure all DOM elements are loaded.
+ * 2. Checks if a new task was added via the 'add-task' flag in sessionStorage.
+ * 3. Retrieves the stored title and description, normalizes and shortens them.
+ * 4. Searches through all user story titles in the DOM to find a matching task.
+ * 5. If a match is found, it highlights and scrolls to the corresponding task element.
+ * 6. Resets the sessionStorage flag to prevent duplicate actions.
  */
 function readTaskFromSessionAndFindTask() {
-    if (sessionStorage.getItem("add-task") === "true") {
-        let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
-        let findNewCreateTask = allUserStoryTitle.find(element => {
-            let userStoryBox = element.closest(".user-story__box");
-            let description = userStoryBox.querySelector(".user-story__description");
-            return element.innerText.trim() === sessionStorage.getItem("title").trim() && description?.innerText.trim() === sessionStorage.getItem("description").trim();
-        });
-        if (findNewCreateTask) {
-            highlightAndScrollToNewTask(findNewCreateTask);
+    setTimeout(() => {
+        if (sessionStorage.getItem("add-task") === "true") {
+            const titleFromStorage = normalizeText(sessionStorage.getItem("title"));
+            const descriptionFromStorage = shortenText(normalizeText(sessionStorage.getItem("description")), 50);
+            let allUserStoryTitle = Array.from(document.querySelectorAll(".user-story__title"));
+            let findNewCreateTask = findTaskByTitleAndDescription(titleFromStorage, descriptionFromStorage, allUserStoryTitle);
+            if (findNewCreateTask) {
+                highlightAndScrollToNewTask(findNewCreateTask);
+            }
+            sessionStorage.setItem("add-task", "false");
         }
-        sessionStorage.setItem("add-task", "false");
-    }
+    }, 1000);
 }
 
 /**
- * Waits for the page to fully load and checks periodically whether all task elements 
- * have been rendered in the DOM before attempting to highlight a task from sessionStorage.
+ * Searches the DOM for a user story element that matches the given title and description.
  *
- * @event window:load
+ * @function findTaskByTitleAndDescription
+ * @param {string} titleFromStorage - The normalized title string retrieved from sessionStorage.
+ * @param {string} descriptionFromStorage - The normalized and optionally shortened description string from sessionStorage.
+ * @param {Element[]} allUserStoryTitle - An array of DOM elements representing all user story titles.
+ * @returns {Element|null} The matching DOM element if found, otherwise null.
+ *
  * @description
- * This event listener waits until the entire page (including all external resources) has fully loaded.
- * It then starts polling every 200ms to compare the number of tasks in memory with the number of 
- * rendered DOM elements (task cards). Once both match—or after a maximum number of attempts—
- * it calls `readTaskFromSessionAndFindTask()` to highlight the task that was recently added 
- * and stored in sessionStorage.
- *
- * This prevents the function from running too early before the DOM is fully rendered.
+ * This function iterates over all user story title elements in the DOM and compares their
+ * normalized text content (title and description) to the provided title and description values.
+ * If a match is found, the corresponding element is returned.
  */
-window.addEventListener("load", function () {
-    let attempts = 0;
-    const maxAttempts = 20;
-    let intervalId = setInterval(() => {
-        let allArrayLength = toDoArray.length + inProgressArray.length + awaitFeedbackArray.length + doneArray.length;
-        let numberOfAllSmallTasks = document.querySelectorAll(".user-story__all-content-box").length;
-        if (allArrayLength === numberOfAllSmallTasks || attempts >= maxAttempts) {
-            clearInterval(intervalId);
-            readTaskFromSessionAndFindTask();
-        }
-        attempts++;
-    }, 200);
-});
+function findTaskByTitleAndDescription(titleFromStorage, descriptionFromStorage, allUserStoryTitle) {
+    let findTask = allUserStoryTitle.find(element => {
+        let userStoryBox = element.closest(".user-story__box");
+        let description = userStoryBox?.querySelector(".user-story__description");
+        let titleInDOM = normalizeText(element.innerText);
+        let descriptionInDOM = normalizeText(description?.innerText);
+        return titleInDOM == titleFromStorage && descriptionInDOM == descriptionFromStorage;
+    });
+    return findTask;
+}
+
+/**
+ * Normalizes a string by replacing multiple whitespaces and non-breaking spaces,
+ * trimming the result, and converting it to lowercase.
+ *
+ * @function normalizeText
+ * @param {string} [string] - The input string to normalize.
+ * @returns {string} The normalized string.
+ *
+ * @description
+ * This function performs the following transformations on the input string:
+ * 1. Replaces multiple whitespace characters with a single space.
+ * 2. Replaces non-breaking spaces (Unicode U+00A0) with regular spaces.
+ * 3. Trims leading and trailing spaces.
+ * 4. Converts the string to lowercase.
+ * If the input is null or undefined, it returns undefined.
+ */
+function normalizeText(string) {
+    return string?.replace(/\s+/g, ' ').replace(/\u00A0/g, ' ').trim().toLowerCase();
+}
