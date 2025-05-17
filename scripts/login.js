@@ -11,7 +11,6 @@ const msg = urlParams.get('msg');
 if (msg) {
     const msgBox = document.getElementById('msgBox');
     const msgText = document.getElementById('msgText');
-
     msgText.innerHTML = msg;
     msgBox.classList.add('show');
     history.replaceState(null, "", window.location.pathname);
