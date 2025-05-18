@@ -1,20 +1,22 @@
 /**
- * Renders small task cards inside the specified drag field by generating HTML content 
- * for each task in the given array and inserting it into the corresponding field.
- * If the array is empty, no cards are rendered.
- *
- * @param {string} dragFieldId - The ID of the drag field where the task cards should be rendered.
- * @param {Array} dragFieldArray - The array of tasks to be rendered as small cards.
- * @returns {void} This function does not return any value.
+ * Renders small task cards inside a specified drag field element.
+ * 
+ * Clears the container and populates it with task cards based on the provided array.
+ * If the array is empty, it renders a placeholder template instead.
+ * 
+ * @param {string} dragFieldId - The ID of the container element where the cards will be rendered.
+ * @param {Array<Object>} dragFieldArray - Array of task objects to render as small cards.
  */
 function renderSmallCard(dragFieldId, dragFieldArray) {
+    let dragField = document.getElementById(dragFieldId);
     if (dragFieldArray.length != 0) {
-        let dragField = document.getElementById(dragFieldId);
         dragField.innerHTML = "";
         for (let index = 0; index < dragFieldArray.length; index++) {
             let description = shortenText(dragFieldArray[index].taskDescription, 50);
             dragField.innerHTML += smallCardTemplate(dragFieldArray[index].id, dragFieldArray[index].taskType, dragFieldArray[index].taskTitle, description, dragFieldArray[index].taskPriority, dragFieldArray[index].numberOfSubtasks, dragFieldArray[index].numberOfCompletedSubtasks, dragFieldArray[index].assignedContacts)
         }
+    } else {
+        dragField.innerHTML = noCardTemplate(categorysObject[dragField.dataset.category], searchMode);
     }
 }
 
