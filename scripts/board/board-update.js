@@ -74,18 +74,18 @@ async function changeNumberOfCompletedSubtasks() {
 }
 
 /**
- * Checks if the task is in the "done" category and marks all subtasks as completed.
+ * If the task is in the "done" category and has subtasks, marks all subtasks as completed.
  * Then updates the number of completed subtasks in the database and re-renders the "done" category.
  *
  * @async
  * @function checkAllSubtasksOfTask
- * @param {string} category - The category identifier to check if it's the "done" column.
+ * @param {string} category - The ID of the drag field category (e.g. "done-drag-field").
  */
 async function checkAllSubtasksOfTask(category) {
     if (category === "done-drag-field") {
         let currentDoneArray = searchMode === "true" ? doneArraySearch : doneArray
         let objectFromCurrentSmallTaskCard = currentDoneArray.find(element => element.id == currentCardId);
-        if (!objectFromCurrentSmallTaskCard) return;
+        if (!objectFromCurrentSmallTaskCard || objectFromCurrentSmallTaskCard.numberOfSubtasks == 0) return;
         let newNumberOfSubtasksCompleted = objectFromCurrentSmallTaskCard.subtasks.length;
         completeAllSubtasks(objectFromCurrentSmallTaskCard, newNumberOfSubtasksCompleted);
         renderSmallCard("done-drag-field", currentDoneArray);
