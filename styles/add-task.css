@@ -1219,7 +1219,6 @@ input:focus {
     .container-custom-select-options,
     .container-custom-select-options-noscroll {
         width: 100%;
-        margin-top: 42px;
     }
 
     #buttons-prio,
