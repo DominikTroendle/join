@@ -178,9 +178,9 @@ function animationLogo() {
     sessionStorage.setItem("moveAnimation", "false");
 }
 
-// /**
-//  * Updates the logo elements and triggers the animation.
-//  */
+/**
+ * Updates the logo elements and triggers the animation.
+ */
 function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
     passivLogo.style.display = "none";
     loginLogo.style.display = "flex";
@@ -191,10 +191,10 @@ function updateLogoElements(passivLogo, loginLogo, overlay, logoPaths) {
     }, 1000);
 }
 
-// /**
-//  * Retrieves logo-related DOM elements.
-//  * @returns {Object} An object containing the logo elements.
-//  */
+/**
+ * Retrieves logo-related DOM elements.
+ * @returns {Object} An object containing the logo elements.
+ */
 function getLogoElements() {
     return {
         passivLogo: document.getElementById('passivLogo'),
