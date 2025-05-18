@@ -538,7 +538,7 @@ body {
 
 }
 
-.add-input-contect-container {
+.add-input-contact-container {
     width: 840px;
     height: 100%;
     border-radius: 0 30px 30px 0;
@@ -548,7 +548,7 @@ body {
     gap: 70px;
 }
 
-.edit-add-input-contect-container {
+.edit-add-input-contact-container {
     width: 840px;
     height: 100%;
     border-radius: 0 30px 30px 0;
@@ -837,7 +837,7 @@ button .close-icon:hover path {
         height: 600px;
     }
 
-    .add-input-contect-container {
+    .add-input-contact-container {
         width: 640px;
         height: 100%;
         border-radius: 0 30px 30px 0;
@@ -845,7 +845,7 @@ button .close-icon:hover path {
         gap: 10px;
     }
 
-    .edit-add-input-contect-container {
+    .edit-add-input-contact-container {
         width: 640px;
         height: 100%;
         border-radius: 0 30px 30px 0;
@@ -1097,7 +1097,7 @@ button .close-icon:hover path {
         color: white;
     }
 
-    .add-input-contect-container {
+    .add-input-contact-container {
         width: 100%;
         height: 408px;
         border-radius: 0 0 30px 30px;
@@ -1108,7 +1108,7 @@ button .close-icon:hover path {
         gap: 70px;
     }
 
-    .edit-add-input-contect-container {
+    .edit-add-input-contact-container {
         width: 100%;
         height: 408px;
         border-radius: 0 0 30px 30px;
@@ -1298,8 +1298,8 @@ button .close-icon:hover path {
         height: 302px !important;
     }
 
-    .add-input-contect-container,
-    .edit-add-input-contect-container {
+    .add-input-contact-container,
+    .edit-add-input-contact-container {
         height: 358px !important;
     }
 
