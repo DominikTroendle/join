@@ -22,7 +22,7 @@ if (msg) {
 /**
  * Handles user login by validating email and password.
  */
-async function UserLogin() {
+async function userLogin() {
     let emailInput = document.getElementById('email');
     let passwordInput = document.getElementById('password');
     let email = emailInput.value;
