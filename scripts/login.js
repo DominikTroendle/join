@@ -107,8 +107,8 @@ function changePasswordIcon(focused) {
     const passwordInput = document.getElementById("password");
     if (focused) {
         icon.src = isPasswordVisible
-            ? "../assets/img/visibility.png"
-            : "../assets/img/visibility_off.png";
+            ? "assets/img/visibility.png"
+            : "assets/img/visibility_off.png";
         return;
     }
     updatePasswordIconState(passwordInput, icon);
@@ -124,13 +124,13 @@ function updatePasswordIconState(passwordInput, icon) {
     if (isPasswordVisible && isEmpty) {
         isPasswordVisible = false;
         passwordInput.type = "password";
-        icon.src = "../assets/img/lock.png";
+        icon.src = "assets/img/lock.png";
     } else if (isPasswordVisible) {
-        icon.src = "../assets/img/visibility.png";
+        icon.src = "assets/img/visibility.png";
     } else if (!isEmpty) {
-        icon.src = "../assets/img/visibility_off.png";
+        icon.src = "assets/img/visibility_off.png";
     } else {
-        icon.src = "../assets/img/lock.png";
+        icon.src = "assets/img/lock.png";
     }
 }
 
@@ -143,10 +143,10 @@ function togglePasswordVisibility(inputId, iconId) {
     isPasswordVisible = !isPasswordVisible;
     if (isPasswordVisible) {
         input.type = "text";
-        icon.src = "../assets/img/visibility.png";
+        icon.src = "assets/img/visibility.png";
     } else {
         input.type = "password";
-        icon.src = "../assets/img/visibility_off.png";
+        icon.src = "assets/img/visibility_off.png";
     }
 }
 
