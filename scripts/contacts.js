@@ -339,9 +339,11 @@ function resetUiElements() {
 }
 
 /**
- * Deletes a contact by key from the user's contact list.
- * 
- * @param {string} key - Contact's unique identifier.
+ * Deletes a contact from the user's contact list based on the given key.
+ * Displays a success message and updates the UI after deletion.
+ *
+ * @param {string} key - The unique identifier of the contact to be deleted.
+ * @returns {Promise<void>} - A promise that resolves when the contact is deleted and the UI is updated.
  */
 async function deleteContact(key) {
     if (!key) return;
@@ -349,6 +351,8 @@ async function deleteContact(key) {
     let response;
     try {
         response = await fetch(`${BASE_URL}/users/${userId}/allContacts/${key}.json`, { method: "DELETE" });
+        showSuccessEditedMessage("Contact successfully deleted");
+        resetUiElements();
         handlePostDeleteUIUpdate(key);
     } catch (error) {}
 }

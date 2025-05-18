@@ -1269,12 +1269,60 @@ h1 {
     display: none;
 }
 
-footer {
+#overlay-task-edited {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    margin-top: auto;
+    z-index: 5;
+    overflow: hidden;
+}
+
+#overlay-task-edited .animation-fade-out{
+    animation: fade-out-overlay-task-edited 120ms forwards ease-in-out;
+}
+
+@keyframes fade-out-overlay-task-edited {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+#task-edited {
+    position: absolute;
+    width: 326px;
+    height: 74px;
+    padding: 0 24px;
+    background-color: #2A3647;
+    border-radius: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    animation: slide-in-task-edited 50ms linear;
+}
+
+@keyframes slide-in-task-edited {
+    from {
+        top: 100vh;
+    }
+
+    to {
+        top: 50%;
+    }
 }
 
 #main {
@@ -2437,6 +2485,10 @@ footer {
     #big-task-card-edit__medium-button,
     .big-task-card-edit__low-button {
         padding: 1px 4px;
+    }
+
+    #task-edited {
+        width: 280px;
     }
 }
 

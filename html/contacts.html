@@ -53,7 +53,6 @@
                     <img src="../assets/icons/person_add.svg" alt="icon-add-contact">
                 </button>
             </div>
-
             <div class="more-information-container">
                 <div class="headline-container">
                     <div class="contact-headline">
@@ -70,12 +69,11 @@
                     <button><img src="../assets/img/more_vert.svg" alt=""></button>
                 </div>
             </div>
-
             <div id="newContactOverlay" class="new-contact-overlay"></div>
             <div id="editContactOverlay" class="edit-contact-overlay"></div>
             <div id="succesfully-message-box" class="massage-box d-none">
                 <div class="text-message">
-                    <h1>Contact succesfully created</h1>
+                    <h1 id="text-message-h1">Contact succesfully created</h1>
                 </div>
             </div>
         </div>
@@ -121,7 +119,8 @@
         <span class="landscape-spinner"><span class="spinner-ring"></span></span>
     </div>
     <script src="../templates/contacts-template.js"></script>
-    <script src="../scripts/contact-new-edit-forms.js"></script>
+    <script src="../scripts/contact-form.js"></script>
+    <script src="../scripts/contact-storage.js"></script>
     <script src="../scripts/contact-mobile-buttons.js"></script>
     <script src="../scripts/contacts.js"></script>
     <script src="../script.js" defer></script>

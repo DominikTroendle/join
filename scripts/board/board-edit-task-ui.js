@@ -366,3 +366,22 @@ function processSubtaskForBigTaskCardEdit(boolean) {
         input.value = "";
     } else invalidRef.classList.remove('d-none');
 }
+
+/**
+ * Displays a temporary overlay with a custom message to indicate a task was edited or deleted.
+ * The overlay fades out automatically after a short delay to provide visual feedback.
+ *
+ * @param {string} text - The message to display inside the overlay.
+ */
+function showTaskEditedOverlay(text) {
+    let taskEditedText = document.getElementById("task-edited-text");
+    taskEditedText.innerHTML = text;
+    document.getElementById('overlay-task-edited').classList.remove('d-none');
+    setTimeout(() => {
+        document.getElementById('overlay-task-edited').classList.add('animation-fade-out');
+        setTimeout(() => {
+            document.getElementById('overlay-task-edited').classList.remove('animation-fade-out');
+            document.getElementById('overlay-task-edited').classList.add('d-none');
+        }, 200);
+    }, 900);
+}

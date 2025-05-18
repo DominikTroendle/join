@@ -179,6 +179,7 @@ async function updateTaskAndRender() {
     completedSubtasksArray = subtasksBigTaskCardEdit.filter(element => element.checked === "true");
     prepareTaskDataForUpdate(taskCardObject);
     editDataInArray(taskCardObject, data);
+    showTaskEditedOverlay("Task edited in Board");
     renderNewContentFromBigTaskCard(taskCardObject)
     let editResponse = await editDataInDatabase(localStorage.getItem("userId"), currentTaskCardId, data);
     if (!editResponse.ok) {
@@ -341,23 +342,25 @@ function shortenText(text, maxChars) {
 
 /**
  * Deletes the currently selected task from both the UI and the database.
- * 
+ *
  * This function performs the following steps:
- * 1. Removes the task from the local array if it exists.
- * 2. Triggers a highlight animation to visually indicate the deletion.
- * 3. Re-renders the task cards after a short delay.
- * 4. Sends a DELETE request to the database to remove the task permanently.
+ * 1. Removes the task from the local data array if it exists.
+ * 2. Displays a temporary overlay message to confirm deletion.
+ * 3. Triggers a visual animation indicating the task was deleted.
+ * 4. Re-renders the task cards after a short delay.
+ * 5. Sends a DELETE request to remove the task from the database.
  *
  * @async
  * @function deleteCurrentTask
- * @returns {Promise<void>} Resolves when the task is successfully deleted from both the UI and database.
- *                          Logs an error to the console if the deletion request fails.
+ * @returns {Promise<void>} Resolves when the task is removed from both the UI and the database.
+ *                          Logs an error to the console if the database deletion fails.
  */
 async function deleteCurrentTask() {
     let indexFromCurrentTask = currentArray.findIndex(element => element.id === currentTaskCardId);
     if (indexFromCurrentTask !== -1) {
         currentArray.splice(indexFromCurrentTask, 1);
     }
+    showTaskEditedOverlay("Task deleted in Board");
     highlightDeleteTaskCardWithAnimation();
     setTimeout(() => renderSmallCard(currentDragFieldId, currentArray), 2500);
     let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), currentTaskCardId);

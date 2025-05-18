@@ -14,8 +14,7 @@
 
 </head>
 
-<body
-    onload="addClassSelectedMenuButton('board-menu-button', 'loggedIn'); init()">
+<body onload="addClassSelectedMenuButton('board-menu-button', 'loggedIn'); init()">
     <div class="all-content">
         <div class="content">
             <header>
@@ -69,8 +68,8 @@
                             </button>
                         </div>
                         <button class="add-task__button" data-category="toDos"
-                            onclick="renderAddTaskOverlay(); saveCategoryFromClickedButton(event); deactivatePastDays('date-picker')">Add task <img
-                                class="add-task__img" src="../assets/icons/add.png" alt="">
+                            onclick="renderAddTaskOverlay(); saveCategoryFromClickedButton(event); deactivatePastDays('date-picker')">Add
+                            task <img class="add-task__img" src="../assets/icons/add.png" alt="">
                         </button>
                     </div>
                 </div>
@@ -183,13 +182,11 @@
         <div class="big-task-card__overlay d-none" id="big-task-card__overlay"
             onclick="event.stopPropagation(); addClassSlideBack()">
             <div class="big-task-card__box" id="big-task-card__box" onclick="event.stopPropagation()">
-
             </div>
         </div>
         <div class="add-task__overlay d-none" id="add-task__overlay"
             onclick="event.stopPropagation(); addTaskBoxAddClassSlideBack()">
             <div class="add-task__box" id="add-task__box" onclick="event.stopPropagation()">
-
             </div>
         </div>
     </div>
@@ -228,6 +225,12 @@
                 Policy</a>
             <a href="legal-notice.html" class="menu-button-bottom" id="legal-notice-menu-button-bottom">Legal
                 Notice</a>
+        </div>
+    </div>
+    <div id="overlay-task-edited" class="d-none">
+        <div id="task-edited">
+            <span id="task-edited-text"></span>
+            <img class="menu-button-icon" src="../assets/icons/board.svg" alt="icon-board">
         </div>
     </div>
     <div class="overlay-landscape-spinner">
