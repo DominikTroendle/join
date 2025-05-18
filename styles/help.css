@@ -27,7 +27,7 @@ nav {
     padding-left: 348px;
 }
 
-.text-content-container{
+.text-content-container {
     position: absolute;
     height: calc(100% - 10%);
     top: 96px;
@@ -36,24 +36,24 @@ nav {
     word-wrap: break-word;
 }
 
-.text-content{
+.text-content {
     margin: 110px 96px 64px 96px;
 }
 
-.text-back-arrow-container{
+.text-back-arrow-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 35px;
 }
 
-.text-container{
+.text-container {
     display: flex;
     gap: 30px;
     margin-bottom: 20px;
 }
 
-.left-btn img{
+.left-btn img {
     position: fixed;
     width: 32px;
     height: 32px;
@@ -62,45 +62,46 @@ nav {
     transform-origin: right;
 }
 
-.left-btn img:hover{
+.left-btn img:hover {
     background-color: rgba(0, 0, 0, 0.034);
     border-radius: 50px;
     transform: scale(1.1);
 }
 
-.text-container > strong{
+.text-container>strong {
     font-size: 25px;
 }
 
-h1{
+h1 {
     font-size: 61px;
 }
 
-h2{
+h2 {
     font-size: 27px;
     margin-bottom: 10px;
 }
 
-h3{
+h3 {
     font-size: 23;
     margin-bottom: 10px;
 }
 
-p{
+p {
     font-size: 16px;
     margin-bottom: 5px;
 }
 
-.bigger-area{
+.bigger-area {
     margin-bottom: 30px;
 }
 
-d, a{
+a,
+.join-text {
     color: #29ABE2;
     text-decoration: none;
 }
 
-.enjoy{
+.enjoy {
     margin-top: 50px;
 }
 
@@ -123,7 +124,7 @@ d, a{
     }
 }
 
-@media (max-width: 1040px){
+@media (max-width: 1040px) {
     nav {
         padding: 16px;
     }
@@ -132,13 +133,13 @@ d, a{
         display: flex;
     }
 
-    .text-content-container{
+    .text-content-container {
         top: 80px;
         left: 0;
         height: calc(100% - 16.8%);
     }
 
-    .text-content{
+    .text-content {
         margin: 48px 26px 48px 16px;
     }
 
@@ -151,7 +152,7 @@ d, a{
         right: 0;
     }
 
-    .left-btn img:hover{
+    .left-btn img:hover {
         background-color: transparent;
         border-radius: 50px;
         transform: scale(1);
