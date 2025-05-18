@@ -66,12 +66,19 @@ function throwLoginDataError(users, emailInput, passwordInput) {
 }
 
 /**
- * Sets input border to red or grey, depending on the value of isValid (red if true, grey otherwise)
- * @param {HTMLElement} input - Input elemen whose border should be adjusted
- * @param {boolean} isValid - boolean to determine which color the input border should get
+ * Sets the input border color based on validity: grey if valid, red if invalid.
+ * @param {HTMLElement} input - The input element whose border will be updated.
+ * @param {boolean} isValid - Determines if the input is valid (true = grey border, false = red border).
  */
 function setInputBorder(input, isValid) {
-    input.style.border = `1px solid ${isValid ? '#D1D1D1' : 'red'}`;
+    if (isValid) {
+        input.classList.remove("input-error");
+        input.classList.add("input-default");
+
+    } else {
+        input.classList.remove("input-default");
+        input.classList.add("input-error");
+    }
 }
 
 /**

@@ -236,7 +236,6 @@ body {
 .input-container input {
     width: 422px;
     padding: 10px 40px 10px 20px;
-    border: 1px solid #D1D1D1;
     border-radius: 10px;
     margin-top: 15px;
     font-size: 20px;
@@ -256,9 +255,17 @@ body {
     color: rgba(128, 128, 128, 0.356);
 }
 
-.login input:focus {
+.input-default {
+    border: 1px solid #D1D1D1;
+}
+
+.input-default:focus {
     border: 1px solid #29ABE2;
     transition: all 175ms ease-in-out;
+}
+
+.input-error {
+    border: 1px solid red;
 }
 
 .no-value-content {
