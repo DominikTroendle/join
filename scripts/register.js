@@ -171,21 +171,38 @@ async function UserRegister() {
 }
 
 /**
- * Validates if inputs of name and email are filled and updates its border color.
- * @param {String} input - name of the input to validate
- * @returns {boolean} true if the input is valid, false otherwise
+ * Validates if the specified input (name or email) is filled correctly and updates its border style accordingly.
+ *
+ * @param {string} input - The ID of the input element to validate.
+ * @returns {boolean} Returns true if the input is valid, otherwise false.
  */
 function validateSignupInputs(input) {
     const inputRef = document.getElementById(`${input}`);
     let inputRefValue = inputRef.value.trim();
     let isValid = true;
     if (inputRefValue.length == 0 || (input == "email" && !inputRefValue.includes("@"))) {
-        inputRef.style.border = '1px solid red';
+        inputRef.classList.remove("input-default");
+        inputRef.classList.add("input-error");
         if (input !== "password") throwErrorMessage(input);
         if (input == "email" && inputRefValue.length !== 0 && !inputRefValue.includes("@")) updateErrorMesssage();
         isValid = false;
-    } else inputRef.style.border = '1px solid #D1D1D1', input !== "password" && (document.getElementById(`error-message-${input}`).style.display = 'none');
+    } else resetInputStyleAndError(inputRef, input);
     return isValid;
+}
+
+/**
+ * Resets the input element’s style to default and hides the associated error message (if applicable).
+ *
+ * @param {HTMLElement} inputRef - The input element to reset styles for.
+ * @param {string} input - The name/ID of the input, used to identify the related error message element.
+ * @returns {void}
+ */
+function resetInputStyleAndError(inputRef, input) {
+    inputRef.classList.remove("input-error");
+    inputRef.classList.add("input-default");
+    if (input !== "password") {
+        document.getElementById(`error-message-${input}`).style.display = 'none';
+    }
 }
 
 /**
@@ -218,17 +235,18 @@ function validateCheckbox(checkbox) {
 }
 
 /**
- * Validates if the provided passwords match and updates the UI accordingly.
+ * Validates whether the provided passwords match and updates the UI accordingly.
+ *
  * @param {HTMLInputElement} password - The password input element.
- * @param {HTMLInputElement} conrollPassword - The confirmation password input element.
- * @returns {boolean} - Returns true if passwords match, false otherwise.
+ * @param {HTMLInputElement} confirmPassword - The confirmation password input element.
+ * @returns {boolean} True if the passwords match and are not empty; otherwise, false.
  */
 function validatePasswords(password, conrollPassword) {
     let passwordValue = password.value.trim();
     let conrollPasswordValue = conrollPassword.value.trim();
     const match = passwordValue !== "" && passwordValue === conrollPasswordValue;
-    conrollPassword.style.border = `1px solid ${match ? '#D1D1D1' : 'red'}`;
-    conrollPassword.style.boxShadow = match ? 'none' : '';
+    conrollPassword.classList.toggle("input-error", !match);
+    conrollPassword.classList.toggle("input-default", match);
     document.getElementById('notCorrectValue').style.display = match ? 'none' : 'flex';
     return match;
 }

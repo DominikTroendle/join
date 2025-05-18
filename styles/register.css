@@ -95,7 +95,6 @@ form{
     width: 422px;
     height: 48px;
     padding: 0 0 0 30px;
-    border: 1px solid #D1D1D1;
     border-radius: 10px;
     outline: none;
     font-size: 20px;
@@ -130,9 +129,17 @@ form{
     margin-top: 20px;
 }
 
-.user-register input:focus{
+.input-default {
+border: 1px solid #D1D1D1;
+}
+
+.input-default:focus{
     border: 1px solid #29ABE2;
     transition: all 175ms ease-in-out;
+}
+
+.input-error {
+border: 1px solid red;
 }
 
 .no-value-content {

@@ -27,28 +27,30 @@
             <form onsubmit="return addUserToRegister(event, this);">
                 <div class="register-input">
                     <div class="input-container">
-                        <input type="name" id="name" placeholder="Name" required />
+                        <input class="input-default" type="name" id="name" placeholder="Name" required />
                         <img src="../assets/img/person.svg" alt="person Icon" class="input-icon">
                     </div>
                     <div class="no-value-content">
                         <p id="error-message-name" class="error-massage error-massage-short">This field is required!</p>
                     </div>
                     <div class="input-container">
-                        <input type="email" id="email" placeholder="Email" required />
+                        <input class="input-default" type="email" id="email" placeholder="Email" required />
                         <img src="../assets/img/mail.png" alt="Mail Icon" class="input-icon">
                     </div>
                     <div class="no-value-content">
-                        <p id="error-message-email" class="error-massage error-massage-short">This field is required!</p>
+                        <p id="error-message-email" class="error-massage error-massage-short">This field is required!
+                        </p>
                     </div>
                     <div class="input-container">
-                        <input type="password" id="password" placeholder="Password" required
+                        <input class="input-default" type="password" id="password" placeholder="Password" required
                             onfocus="changePasswordIcon(true)" onblur="changePasswordIcon(false)" />
-                        <img id="passwordIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon" 
+                        <img id="passwordIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon"
                             onpointerdown="togglePasswordVisibility('password', 'passwordIcon'); event.preventDefault()">
                     </div>
                     <div class="input-container">
-                        <input type="password" id="controllPassword" placeholder="Confirm Password" required
-                            onfocus="changeConrollPasswordIcon(true)" onblur="changeConrollPasswordIcon(false)" />
+                        <input class="input-default" type="password" id="controllPassword"
+                            placeholder="Confirm Password" required onfocus="changeConrollPasswordIcon(true)"
+                            onblur="changeConrollPasswordIcon(false)" />
                         <img id="passwordControllIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon"
                             onpointerdown="toggleControllPasswordVisibility('controllPassword', 'passwordControllIcon'); event.preventDefault()">
                     </div>
