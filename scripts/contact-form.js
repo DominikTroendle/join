@@ -302,3 +302,57 @@ function resetPhoneBorders(phoneRef) {
     let refs = [phoneRef];
     refs.forEach(ref => ref.style.border = "");
 }
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactEditNameUnvalidInputs() {
+    let nameRef = document.getElementById('editName');
+    resetEditNameBorders(nameRef);
+    let isValid = true;
+    isValid &= validateField(nameRef);
+    return isValid;
+}
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactEditEmailUnvalidInputs() {
+    let emailRef = document.getElementById('editEmail');
+    resetEditEmailBorders(emailRef)
+    let isValid = true;
+    isValid &= validateEmail(emailRef);
+    return isValid;
+}
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactEditPhoneUnvalidInputs() {
+    let phoneRef = document.getElementById('editPhone');
+    resetEditPhoneBorders(phoneRef)
+    let isValid = true;
+    isValid &= validatePhone(phoneRef);
+    return isValid;
+}
+
+function resetEditNameBorders(nameRef) {
+    let refs = [nameRef];
+    refs.forEach(ref => ref.style.border = "");
+}
+
+function resetEditEmailBorders(emailRef) {
+    let refs = [emailRef];
+    refs.forEach(ref => ref.style.border = "");
+}
+
+function resetEditPhoneBorders(phoneRef) {
+    let refs = [phoneRef];
+    refs.forEach(ref => ref.style.border = "");
+}
