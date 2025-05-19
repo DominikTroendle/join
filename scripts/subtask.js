@@ -90,6 +90,7 @@ function determineSubtaskStyle(containerSubtasks, subtasksCount) {
 /**
  * Deletes subtask by removing if from both the subtasks array and the DOM
  * @param {String} id - id of the subtask the user clicked to delete
+ * @param {*} event - event whose prapagation should be stopped
  */
 function deleteSubtask(id, event) {
     event.stopPropagation();
