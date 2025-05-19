@@ -375,6 +375,8 @@ function hideLoggendInLinks() {
     }
 }
 
+window.addEventListener("resize", hideLoggendInLinks);
+
 /**
  * Hides elements for logged-in users on desktop and updates the login button style.
  */
