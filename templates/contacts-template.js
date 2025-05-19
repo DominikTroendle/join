@@ -116,20 +116,20 @@ return` <div class="new-Contect-Container">
                 <form onsubmit="addUserToContactList(event, this);" novalidate>
                     <div class="input-container">
                         <div class="input-area">
-                            <input type="text" onkeyup="handleContactUnvalidInputs()" placeholder="Name" id="name" required>
+                            <input type="text" onkeyup="handleContactNameUnvalidInputs()" placeholder="Name" id="name" required>
                             <img src="../assets/img/person-grey.png" alt="">
                         </div>
                         <p id="error-message-name" class="error-message">This field is required!</p>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="email" onkeyup="handleContactUnvalidInputs()" placeholder="Email" id="email" required>
+                                <input type="email" onkeyup="handleContactEmailUnvalidInputs()" placeholder="Email" id="email" required>
                                 <img src="../assets/img/mail.png" alt="">
                             </div> 
                         </div>
                         <p id="error-message-email" class="error-message">This field is required!</p>
                         <div class="input-container">
                             <div class="input-area">
-                                <input type="tel" onkeyup="handleContactUnvalidInputs()" name="phone" placeholder="Phone" id="phone" required>
+                                <input type="tel" onkeyup="handleContactPhoneUnvalidInputs()" name="phone" placeholder="Phone" id="phone" required>
                                 <img src="../assets/img/call.png" alt="">
                             </div>
                         </div>

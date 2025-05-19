@@ -248,3 +248,57 @@ function handleOverlay(procressEditContainer, procressOverlay) {
         procressOverlay?.classList.add('close');
     }
 }
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactNameUnvalidInputs() {
+    let nameRef = document.getElementById('name');
+    resetNameBorders(nameRef);
+    let isValid = true;
+    isValid &= validateField(nameRef);
+    return isValid;
+}
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactEmailUnvalidInputs() {
+    let emailRef = document.getElementById('email');
+    resetEmailBorders(emailRef)
+    let isValid = true;
+    isValid &= validateEmail(emailRef);
+    return isValid;
+}
+
+/**
+ * Handles input validation on different input elements by calling different helper functions
+ * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
+ * @returns {boolean} true if all inputs are valid, otherwise false
+ */
+function handleContactPhoneUnvalidInputs() {
+    let phoneRef = document.getElementById('phone');
+    resetPhoneBorders(phoneRef)
+    let isValid = true;
+    isValid &= validatePhone(phoneRef);
+    return isValid;
+}
+
+function resetNameBorders(nameRef) {
+    let refs = [nameRef];
+    refs.forEach(ref => ref.style.border = "");
+}
+
+function resetEmailBorders(emailRef) {
+    let refs = [emailRef];
+    refs.forEach(ref => ref.style.border = "");
+}
+
+function resetPhoneBorders(phoneRef) {
+    let refs = [phoneRef];
+    refs.forEach(ref => ref.style.border = "");
+}
