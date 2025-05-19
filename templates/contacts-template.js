@@ -170,20 +170,20 @@ function getEditContactTemplate(key) {
                     <form onsubmit="return editContact(event, this);" novalidate>
                         <div class="input-container mobile-container">
                             <div class="input-area">
-                                <input type="text" placeholder="Name" id="editName" required>
+                                <input type="text" onkeyup="handleContactEditNameUnvalidInputs()" placeholder="Name" id="editName" required>
                                 <img src="../assets/img/person-grey.png" alt="">
                             </div>
                             <p id="error-message-editName" class="error-message">This field is required!</p>
                             <div class="input-container">
                                 <div class="input-area">
-                                    <input type="email" placeholder="Email" id="editEmail"  required>
+                                    <input type="email" onkeyup="handleContactEditEmailUnvalidInputs()" placeholder="Email" id="editEmail"  required>
                                     <img src="../assets/img/mail.png" alt="">
                                 </div>
                             </div>
                             <p id="error-message-editEmail" class="error-message">This field is required!</p> 
                             <div class="input-container">
                                 <div class="input-area">
-                                    <input type="tel" name="phone" placeholder="Phone" id="editPhone" required>
+                                    <input type="tel" onkeyup="handleContactEditPhoneUnvalidInputs()" name="phone" placeholder="Phone" id="editPhone" required>
                                     <img src="../assets/img/call.png" alt="">
                                 </div>
                             </div>
