@@ -250,9 +250,8 @@ function handleOverlay(procressEditContainer, procressOverlay) {
 }
 
 /**
- * Handles input validation on different input elements by calling different helper functions
- * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
- * @returns {boolean} true if all inputs are valid, otherwise false
+ * Validates the contact name input and resets its border style.
+ * @returns {boolean} Whether the name input is valid.
  */
 function handleContactNameUnvalidInputs() {
     let nameRef = document.getElementById('name');
@@ -263,9 +262,8 @@ function handleContactNameUnvalidInputs() {
 }
 
 /**
- * Handles input validation on different input elements by calling different helper functions
- * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
- * @returns {boolean} true if all inputs are valid, otherwise false
+ * Validates the email input and resets its border style.
+ * @returns {boolean} True if email is valid, otherwise false.
  */
 function handleContactEmailUnvalidInputs() {
     let emailRef = document.getElementById('email');
@@ -276,9 +274,8 @@ function handleContactEmailUnvalidInputs() {
 }
 
 /**
- * Handles input validation on different input elements by calling different helper functions
- * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
- * @returns {boolean} true if all inputs are valid, otherwise false
+ * Validates the phone input and resets its border style.
+ * @returns {boolean} True if phone input is valid, else false.
  */
 function handleContactPhoneUnvalidInputs() {
     let phoneRef = document.getElementById('phone');
@@ -288,25 +285,36 @@ function handleContactPhoneUnvalidInputs() {
     return isValid;
 }
 
+/**
+ * Clears the border style of the name input element.
+ * @param {HTMLElement} nameRef - Reference to the name input element.
+ */
 function resetNameBorders(nameRef) {
     let refs = [nameRef];
     refs.forEach(ref => ref.style.border = "");
 }
 
+/**
+ * Clears the border style of the email input element.
+ * @param {HTMLElement} emailRef - Reference to the email input element.
+ */
 function resetEmailBorders(emailRef) {
     let refs = [emailRef];
     refs.forEach(ref => ref.style.border = "");
 }
 
+/**
+ * Clears the border style of the phone input element.
+ * @param {HTMLElement} phoneRef - Reference to the phone input element.
+ */
 function resetPhoneBorders(phoneRef) {
     let refs = [phoneRef];
     refs.forEach(ref => ref.style.border = "");
 }
 
 /**
- * Handles input validation on different input elements by calling different helper functions
- * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
- * @returns {boolean} true if all inputs are valid, otherwise false
+ * Validates the edited contact name input and resets its borders.
+ * @returns {boolean} True if the input is valid, otherwise false.
  */
 function handleContactEditNameUnvalidInputs() {
     let nameRef = document.getElementById('editName');
@@ -317,9 +325,8 @@ function handleContactEditNameUnvalidInputs() {
 }
 
 /**
- * Handles input validation on different input elements by calling different helper functions
- * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
- * @returns {boolean} true if all inputs are valid, otherwise false
+ * Validates the edited contact email input and resets its borders.
+ * @returns {boolean} Whether the email input is valid.
  */
 function handleContactEditEmailUnvalidInputs() {
     let emailRef = document.getElementById('editEmail');
@@ -330,9 +337,8 @@ function handleContactEditEmailUnvalidInputs() {
 }
 
 /**
- * Handles input validation on different input elements by calling different helper functions
- * @param {boolean} isEdit - determines which inputs should be checked by changing the ids depending on the value of isEdit
- * @returns {boolean} true if all inputs are valid, otherwise false
+ * Validates the edited phone input and resets its border styling.
+ * @returns {boolean} True if the phone input is valid, else false.
  */
 function handleContactEditPhoneUnvalidInputs() {
     let phoneRef = document.getElementById('editPhone');
@@ -342,16 +348,28 @@ function handleContactEditPhoneUnvalidInputs() {
     return isValid;
 }
 
+/**
+ * Clears the border style of the given name input element.
+ * @param {HTMLElement} nameRef - The name input element.
+ */
 function resetEditNameBorders(nameRef) {
     let refs = [nameRef];
     refs.forEach(ref => ref.style.border = "");
 }
 
+/**
+ * Clears the border style of the given email input element.
+ * @param {HTMLElement} emailRef - The email input element.
+ */
 function resetEditEmailBorders(emailRef) {
     let refs = [emailRef];
     refs.forEach(ref => ref.style.border = "");
 }
 
+/**
+ * Clears the border style of the given phone input element.
+ * @param {HTMLElement} phoneRef - The phone input element.
+ */
 function resetEditPhoneBorders(phoneRef) {
     let refs = [phoneRef];
     refs.forEach(ref => ref.style.border = "");
