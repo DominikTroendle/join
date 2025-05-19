@@ -409,7 +409,7 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
                         <span class="asterisk">&#42;</span>
                         <p id="max-char-big-task-card-edit__input-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                     </label>
-                    <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__input-title')">
+                    <input id="big-task-card-edit__input-title" class="input big-task-card-edit__input" type="text" name="title" placeholder="Enter a title" value="${taskTitle}" maxlength="50" size="10" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__input-title'); resetOrShowDateErrorForBigTaskCardEdit()">
                     <p id="required-big-task-card-edit__input-title" class="required hidden">This field is required</p>
                 </div>
                 <div class="big-task-card-edit__text-textarea-box">
@@ -423,8 +423,8 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
                         <p id="invalid-date-big-task-card-edit__input-due-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
                     </label>
                     <div id="big-task-card-edit__input-due-date-box" class="big-task-card-edit__input-due-date-box">
-                        <input id="big-task-card-edit__input-due-date" class="big-task-card-edit__input big-task-card-edit__input-due-date input" type="text" name="due-date" placeholder="dd/mm/yyyy" value="${dueDate}" size="10" required  maxlength="10">
-                        <input id="big-task-card-edit__input-date-picker" class="big-task-card-edit__input-date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit()">
+                        <input id="big-task-card-edit__input-due-date" class="big-task-card-edit__input big-task-card-edit__input-due-date input" type="text" name="due-date" placeholder="dd/mm/yyyy" value="${dueDate}" size="10" required  maxlength="10" onkeyup="resetOrShowDateErrorForBigTaskCardEdit()">
+                        <input id="big-task-card-edit__input-date-picker" class="big-task-card-edit__input-date-picker" type="date" onchange="putDateToInputForBigTaskCardEdit(); resetOrShowDateErrorForBigTaskCardEdit()">
                     </div>
                     <p id="required-big-task-card-edit__input-due-date" class="required hidden">This field is required</p>
                 </div>
@@ -467,7 +467,7 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
                         <p id="max-char-big-task-card-edit__subtask-input" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                     </label>
                     <div id="big-task-card-edit__subtask-box" class="big-task-card-edit__subtask-box" onclick="changeInputButtonForBigTaskCardEdit(true), stopPropagation(event)">
-                        <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="checkInputLengthForBigTaskCardEdit('big-task-card-edit__subtask-input')" onkeydown="isEnterKeyForBigTaskCard(event)">                         
+                        <input id="big-task-card-edit__subtask-input" class="big-task-card-edit__subtask-input input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" onkeyup="resetSubtaskValidationForBigTaskCardEdit()" onkeydown="isEnterKeyForBigTaskCard(event)">                         
                         <button id="big-task-card-edit__subtask-button-add" class="button-add" type="button">
                             <img src="../assets/icons/add.svg" alt="icon-arrow-down">
                         </button>

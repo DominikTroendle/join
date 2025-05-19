@@ -149,3 +149,28 @@ function showSubtaskDetailsForBigTaskCard() {
     allEditSubtasks.forEach(element => element.classList.add('d-none'));
     allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
 }
+
+/**
+ * Validates the due date input on the big task card edit view.
+ * Clears previous error messages and shows a new one if the date format is invalid.
+ */
+function resetOrShowDateErrorForBigTaskCardEdit() {
+    removeErrorForBigTaskCardEdit();
+    validateInputsForBigTaskCardEdit();
+    let validDateFormat = testDateForBigTaskCardEdit();
+    if (!validDateFormat && document.getElementById('big-task-card-edit__input-due-date').value !== "") {
+        throwErrorForBigTaskCardEdit();
+        document.getElementById('invalid-date-big-task-card-edit__input-due-date').classList.remove('hidden');
+    } else throwErrorForBigTaskCardEdit();
+}
+
+/**
+ * Hides subtask input error messages and checks input length
+ * in the big task card edit view to reset validation state.
+ */
+function resetSubtaskValidationForBigTaskCardEdit() {
+    let invalidRef = document.getElementById('invalid-subtask-big-task-card-edit__subtask-input');
+    invalidRef.classList.add('d-none');
+    document.getElementById('max-char-big-task-card-edit__subtask-input').classList.add('d-none')
+    checkInputLengthForBigTaskCardEdit('big-task-card-edit__subtask-input');
+}
