@@ -27,14 +27,14 @@
             <form onsubmit="return addUserToRegister(event, this);">
                 <div class="register-input">
                     <div class="input-container">
-                        <input class="input-default" type="name" id="name" placeholder="Name" required />
+                        <input class="input-default" onkeyup="UserRegister()" type="name" id="name" placeholder="Name" required />
                         <img src="../assets/img/person.svg" alt="person Icon" class="input-icon">
                     </div>
                     <div class="no-value-content">
                         <p id="error-message-name" class="error-massage error-massage-short">This field is required!</p>
                     </div>
                     <div class="input-container">
-                        <input class="input-default" type="email" id="email" placeholder="Email" required />
+                        <input class="input-default" onkeyup="UserRegister()" type="email" id="email" placeholder="Email" required />
                         <img src="../assets/img/mail.png" alt="Mail Icon" class="input-icon">
                     </div>
                     <div class="no-value-content">
@@ -42,13 +42,13 @@
                         </p>
                     </div>
                     <div class="input-container">
-                        <input class="input-default" type="password" id="password" placeholder="Password" required
+                        <input class="input-default" onkeyup="UserRegister()" type="password" id="password" placeholder="Password" required
                             onfocus="changePasswordIcon(true)" onblur="changePasswordIcon(false)" />
                         <img id="passwordIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon"
                             onpointerdown="togglePasswordVisibility('password', 'passwordIcon'); event.preventDefault()">
                     </div>
                     <div class="input-container">
-                        <input class="input-default" type="password" id="controllPassword"
+                        <input class="input-default" onkeyup="UserRegister()" type="password" id="controllPassword"
                             placeholder="Confirm Password" required onfocus="changeConrollPasswordIcon(true)"
                             onblur="changeConrollPasswordIcon(false)" />
                         <img id="passwordControllIcon" src="../assets/img/lock.png" alt="lock Icon" class="input-icon"
@@ -59,7 +59,7 @@
                     </div>
                 </div>
                 <div class="checkbox-privacy-policy-container">
-                    <input type="checkbox" id="checkbox">
+                    <input type="checkbox" id="checkbox" onclick="UserRegister()">
                     <div class="privacy-policy">
                         <p>I accept the</p>
                         <a href="privacy-policy.html">Privacy Policy</a>
