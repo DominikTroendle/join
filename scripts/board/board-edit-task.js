@@ -135,3 +135,17 @@ function deactivatePastDays(id) {
     const today = new Date().toISOString().split('T')[0];
     document.getElementById(id).setAttribute("min", today);
 }
+
+/**
+ * Displays the subtask detail view for all subtasks in the big task card.
+ * 
+ * This function hides all subtask edit containers by adding the 'd-none' class
+ * and shows all subtask detail containers by removing the 'd-none' class.
+ * It is typically used when exiting edit mode and returning to the standard view.
+ */
+function showSubtaskDetailsForBigTaskCard() {
+    let allEditSubtasks = Array.from(document.querySelectorAll(".container-subtask-edit"));
+    let allDetailsSubtasks = Array.from(document.querySelectorAll(".container-subtask"));
+    allEditSubtasks.forEach(element => element.classList.add('d-none'));
+    allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
+}

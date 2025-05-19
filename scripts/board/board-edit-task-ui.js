@@ -168,6 +168,7 @@ function addSubtaskForBigTaskCardEdit() {
     let input = document.getElementById('big-task-card-edit__subtask-input');
     let containerSubtasks = document.getElementById('big-task-card-edit__subtasks-box');
     let subtaskObj = { "checked": "false" };
+    showSubtaskDetailsForBigTaskCard();
     processSubtaskInput(input, containerSubtasks, subtaskObj);
 }
 
