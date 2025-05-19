@@ -335,35 +335,45 @@ function bigTaskCardTemplate(taskType, taskTitle, taskDescription, taskPriority,
 }
 
 /**
- * Generates an HTML template for a big task card with detailed information.
- * 
- * This function creates a comprehensive template for a big task card, displaying various details 
- * including task type, title, description, priority, due date, assigned contacts, and subtasks. 
- * The template is dynamic, with content adjusting based on the input parameters.
- * 
- * @function bigTaskCardTemplate
- * @param {string} id - The unique identifier for the task.
- * @param {string} taskType - The type of the task, e.g., "User Story" or "Technical Task".
- * @param {string} taskTitle - The title of the task.
- * @param {string} taskDescription - A detailed description of the task.
- * @param {string} taskPriority - The priority of the task, such as "low", "medium", or "urgent".
- * @param {string} taskDueDate - The due date for the task.
- * @param {number} numberOfSubtasks - The number of subtasks associated with the task.
- * @param {number} numberOfCompletedSubtasks - The number of subtasks that are completed.
- * @param {Array} assignedContacts - An array of objects representing the contacts assigned to the task, each object containing a `name` and `color`.
- * @param {Array} subtasks - An array of objects representing subtasks, each with a `subtask` and `checked` field.
- * 
- * @returns {string} The HTML string for the big task card with the provided task details.
- * 
+ * Generates the editable HTML template for a "Big Task Card" with full task details.
+ *
+ * This function returns a dynamic HTML string for rendering a task editing interface.
+ * It includes inputs and controls for modifying title, description, due date, priority,
+ * assigned contacts, and subtasks. The layout adjusts depending on the screen width
+ * to support both desktop and mobile views.
+ *
+ * @function bigTaskCardEditTemplate
+ *
+ * @param {string} taskTitle - The current title of the task.
+ * @param {string} taskDescription - The current description of the task.
+ * @param {string} taskDueDate - The current due date in format `dd/mm/yyyy`.
+ * @param {Array<{name: string, color: string}>} assignedContacts - Array of contact objects assigned to the task. Each contact includes a name and a background color.
+ * @param {Array<{subtask: string, checked: boolean}>} subtasksEdit - Array of subtasks, each with a `subtask` string and a `checked` boolean indicating completion.
+ *
+ * @returns {string} - The generated HTML markup string for the editable big task card.
+ *
  * @description
- * This function generates an HTML string representing a detailed task card with various sections 
- * like task type, title, description, due date, priority, assigned contacts, and subtasks. The task card 
- * allows users to edit or delete tasks and includes dynamic behavior for task subtasks and contacts.
- * 
- * - The task priority is represented by an icon and a text label.
- * - The subtasks section includes checkboxes to mark each subtask as complete or not.
- * - The assigned contacts are displayed as initials with corresponding background colors.
- * - The task card includes buttons for deleting and editing the task.
+ * The returned HTML includes:
+ * - A title input with validation for required input and character limit.
+ * - A description textarea.
+ * - A due date input with a native date picker fallback.
+ * - Priority selection buttons (Urgent, Medium, Low) with icons.
+ * - A searchable "Assigned to" multi-select input with dropdown and visual feedback.
+ * - A subtask section allowing users to add, edit, or delete subtasks with live feedback.
+ * - A final confirmation button ("OK") to save the updated task data.
+ *
+ * The HTML is responsive, with different rendering logic for subtasks depending on whether the
+ * view is mobile (`window.innerWidth <= 1040`) or desktop.
+ *
+ * @example
+ * const html = bigTaskCardEditTemplate(
+ *   "Implement login",
+ *   "Allow users to log in via email and password",
+ *   "25/06/2025",
+ *   [{ name: "Alice", color: "#FF5733" }, { name: "Bob", color: "#33FF57" }],
+ *   [{ subtask: "Design form", checked: false }, { subtask: "Connect API", checked: true }]
+ * );
+ * document.getElementById("edit-card-container").innerHTML = html;
  */
 function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assignedContacts, subtasksEdit) {
     let dueDate = "";
@@ -381,8 +391,8 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
     let subtasksHtml = "";
     for (let index = 0; index < subtasksBigTaskCardEdit.length; index++) {
         let id = ++subtasksCountBigTaskCardEdit;
-        subtasksHtml += window.innerWidth <= 1040? returnSubtaskMobileHTMLForBigTaskCardEdit(id, subtasksBigTaskCardEdit[index].subtask)
-        : returnSubtaskHTMLForBigTaskCardEdit(id, subtasksBigTaskCardEdit[index].subtask);
+        subtasksHtml += window.innerWidth <= 1040 ? returnSubtaskMobileHTMLForBigTaskCardEdit(id, subtasksBigTaskCardEdit[index].subtask)
+            : returnSubtaskHTMLForBigTaskCardEdit(id, subtasksBigTaskCardEdit[index].subtask);
     }
     return `<div class="big-task-card-edit__task-type-text-button-box edit">
                 <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">
@@ -669,18 +679,24 @@ function returnAssignedContactHTMLForBigTaskCardEdit(name, color) {
 
 /**
  * Generates the HTML structure for displaying a subtask in the "Big Task Card Edit" view.
- * This includes the subtask's details, the ability to edit or delete the subtask, and visual options 
- * that appear on hover. The subtask can be edited or removed, with corresponding buttons for those actions.
- * The ID of the subtask is dynamically included in the HTML structure to ensure each subtask is unique.
  *
- * @param {number} id - The unique identifier for the subtask to be displayed. This ID is used to create unique 
- *                      element IDs and to reference the specific subtask for editing or deletion.
- * 
- * @returns {string} - The HTML structure for the subtask element.
+ * The generated HTML includes:
+ * - A container for the subtask with a unique ID.
+ * - An editable input field for modifying the subtask.
+ * - Buttons for saving or deleting the subtask.
+ * - A display view of the subtask text with edit/delete icons that appear on hover.
+ *
+ * This structure allows the subtask to be dynamically manipulated in the UI, including editing
+ * via double-click and showing edit options on hover.
+ *
+ * @param {number} id - The unique identifier for the subtask. Used to create element IDs and bind event handlers.
+ * @param {string} [subtaskText=""] - The text content of the subtask to be displayed. Defaults to an empty string.
+ *
+ * @returns {string} The full HTML string for rendering the subtask element in the edit view.
  *
  * @example
- * const subtaskHTML = returnSubtaskHTMLForBigTaskCardEdit(1);
- * document.getElementById("subtasks-container").innerHTML = subtaskHTML;
+ * const subtaskHTML = returnSubtaskHTMLForBigTaskCardEdit(1, "Write documentation");
+ * document.getElementById("subtasks-container").innerHTML += subtaskHTML;
  */
 function returnSubtaskHTMLForBigTaskCardEdit(id, subtaskText = "") {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
@@ -707,21 +723,25 @@ function returnSubtaskHTMLForBigTaskCardEdit(id, subtaskText = "") {
 }
 
 /**
- * Generates the HTML structure for displaying a subtask in the "Big Task Card Edit" view 
- * specifically optimized for mobile view. This includes the subtask's details, 
- * the ability to edit or delete the subtask, and the visual options that appear for 
- * editing or deleting the subtask. The subtask ID is dynamically included to ensure 
- * the HTML elements are uniquely identifiable.
+ * Generates the HTML structure for displaying a subtask in the "Big Task Card Edit" view,
+ * specifically optimized for mobile devices.
  *
- * @param {number} id - The unique identifier for the subtask to be displayed. This ID is used 
- *                      to create unique element IDs and to reference the specific subtask for 
- *                      editing or deletion actions.
- * 
- * @returns {string} - The HTML structure for the subtask element, formatted for mobile view.
+ * The generated HTML includes:
+ * - An edit container with an input field for modifying the subtask text.
+ * - Action icons for deleting or saving the subtask while in edit mode.
+ * - A display container for showing the subtask text.
+ * - Edit and delete icons that are always visible in the mobile layout (no hover required).
+ * - Unique element IDs based on the subtask ID to support dynamic interaction and DOM updates.
+ *
+ * @param {number} id - The unique identifier for the subtask. Used to generate unique HTML element IDs
+ *                      and bind functionality such as edit and delete actions.
+ * @param {string} [subtaskText=""] - The text content of the subtask. Defaults to an empty string if not provided.
+ *
+ * @returns {string} The HTML string representing the subtask element, formatted for mobile view.
  *
  * @example
- * const subtaskMobileHTML = returnSubtaskMobileHTMLForBigTaskCardEdit(1);
- * document.getElementById("subtasks-container-mobile").innerHTML = subtaskMobileHTML;
+ * const subtaskMobileHTML = returnSubtaskMobileHTMLForBigTaskCardEdit(1, "Fix login bug");
+ * document.getElementById("subtasks-container-mobile").innerHTML += subtaskMobileHTML;
  */
 function returnSubtaskMobileHTMLForBigTaskCardEdit(id, subtaskText = "") {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">

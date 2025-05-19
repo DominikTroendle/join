@@ -159,3 +159,20 @@ async function loadAllDataFromDatabaseAndRenderSearchTasks() {
     await readFromDatabase(localStorage.getItem("userId"), "done", doneArray, "done-drag-field");
     checkSearchWordAndLoadAllSearchTasks();
 }
+
+/**
+ * Removes the currently selected task from the given search results array,
+ * but only if search mode is active.
+ *
+ * @param {Array} currentArraySearch - The array of search result tasks.
+ *
+ * This function checks if the global `searchMode` is set to "true". If so,
+ * it finds the task with the ID stored in `currentTaskCardId` and removes it
+ * from the provided array using `splice()`.
+ */
+function removeTaskFromSearchArray(currentArraySearch) {
+    if (searchMode == "true") {
+        let indexFromCurrentSearchTask = currentArraySearch.findIndex(element => element.id === currentTaskCardId);
+        if (indexFromCurrentSearchTask !== -1) currentArraySearch.splice(indexFromCurrentSearchTask, 1);
+    }
+}

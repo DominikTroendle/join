@@ -343,30 +343,29 @@ function shortenText(text, maxChars) {
 /**
  * Deletes the currently selected task from both the UI and the database.
  *
- * This function performs the following steps:
- * 1. Removes the task from the local data array if it exists.
- * 2. Displays a temporary overlay message to confirm deletion.
- * 3. Triggers a visual animation indicating the task was deleted.
- * 4. Re-renders the task cards after a short delay.
- * 5. Sends a DELETE request to remove the task from the database.
+ * This asynchronous function performs the following steps:
+ * 1. Locates and removes the task from the main data array (`currentArray`).
+ * 2. Also removes the task from the search result array if `searchMode` is active.
+ * 3. Displays a temporary overlay message to inform the user of the deletion.
+ * 4. Triggers a visual animation effect on the deleted task card.
+ * 5. Re-renders the task cards in the relevant category column after a delay.
+ * 6. Sends a DELETE request to remove the task from the backend database.
  *
  * @async
  * @function deleteCurrentTask
- * @returns {Promise<void>} Resolves when the task is removed from both the UI and the database.
- *                          Logs an error to the console if the database deletion fails.
+ * @returns {Promise<void>} Resolves once the task has been removed from the UI and the database.
+ *                          If the database deletion fails, an error is logged to the console.
  */
 async function deleteCurrentTask() {
     let indexFromCurrentTask = currentArray.findIndex(element => element.id === currentTaskCardId);
+    let currentArraySearch = searchArraysBasedOnCategory[document.getElementById(currentDragFieldId).dataset.category];
     if (indexFromCurrentTask !== -1) {
         currentArray.splice(indexFromCurrentTask, 1);
-    }
-    showTaskEditedOverlay("Task deleted in Board");
-    highlightDeleteTaskCardWithAnimation();
-    setTimeout(() => renderSmallCard(currentDragFieldId, currentArray), 2500);
-    let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), currentTaskCardId);
-    if (!deleteResponse.ok) {
-        console.error("error when saving:", putResponse.statusText);
-        return;
+        removeTaskFromSearchArray(currentArraySearch);
+        showTaskEditedOverlay("Task deleted in Board");
+        highlightDeleteTaskCardWithAnimation();
+        setTimeout(() => renderSmallCard(currentDragFieldId, searchMode == "true" ? currentArraySearch : currentArray), 2500);
+        deleteTaskFromDatabase()
     }
 }
 

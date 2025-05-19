@@ -304,3 +304,23 @@ function renderCategoryContent(category, categoryArray, dragFieldId) {
         document.getElementById(dragFieldId).innerHTML = noCardTemplate(categorysObject[category], searchMode);
     }
 }
+
+/**
+ * Deletes the current task from the database for the logged-in user.
+ *
+ * This asynchronous function retrieves the user ID from localStorage
+ * and calls `deleteInDatabase` with the user ID and the current task ID.
+ * If the delete operation fails (i.e., the response is not OK),
+ * an error message is logged to the console.
+ *
+ * @async
+ * @function
+ * @returns {Promise<void>}
+ */
+async function deleteTaskFromDatabase() {
+    let deleteResponse = await deleteInDatabase(localStorage.getItem("userId"), currentTaskCardId);
+    if (!deleteResponse.ok) {
+        console.error("error when saving:", putResponse.statusText);
+        return;
+    }
+}
