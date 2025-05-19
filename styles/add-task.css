@@ -874,6 +874,23 @@ input:focus {
     }
 }
 
+@media(min-width: 1921px) {
+    #container-form {
+        justify-content: flex-start;
+        gap: 100px;
+    }
+
+    #form-add-task {
+        width: 1538px;
+        gap: 0;
+        justify-content: space-between;
+    }
+
+    #footer-add-task {
+        width: 1538px;
+    }
+}
+
 @media only screen and (min-width: 1040px) and (max-height: 950px) {
     #form-top {
         margin-bottom: 0;
