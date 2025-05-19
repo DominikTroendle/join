@@ -381,27 +381,8 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
     let subtasksHtml = "";
     for (let index = 0; index < subtasksBigTaskCardEdit.length; index++) {
         let id = ++subtasksCountBigTaskCardEdit;
-        subtasksHtml += `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
-                            <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit big-task-card-edit__edit-subtask d-none">
-                                <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
-                                <div class="flex">
-                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
-                                    <hr class="edit-hr">
-                                    <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
-                                </div>
-                            </div>
-                            <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask big-task-card-edit__details-subtask subtask-scroll-margin" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)" ondblclick="editSubtaskForBigTaskCard(${id})">
-                                <div class="subtask-text" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
-                                    <span>&bull;</span>
-                                    <span id="big-task-card-edit__subtask-${id}">${subtasksBigTaskCardEdit[index].subtask}</span>
-                                </div>
-                                <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
-                                    <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
-                                    <hr>
-                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
-                                </div>
-                            </div>
-                        </div>`;
+        subtasksHtml += window.innerWidth <= 1040? returnSubtaskMobileHTMLForBigTaskCardEdit(id, subtasksBigTaskCardEdit[index].subtask)
+        : returnSubtaskHTMLForBigTaskCardEdit(id, subtasksBigTaskCardEdit[index].subtask);
     }
     return `<div class="big-task-card-edit__task-type-text-button-box edit">
                 <button class="big-task-card-edit__task-type-button" onclick="addClassSlideBack()">
@@ -701,7 +682,7 @@ function returnAssignedContactHTMLForBigTaskCardEdit(name, color) {
  * const subtaskHTML = returnSubtaskHTMLForBigTaskCardEdit(1);
  * document.getElementById("subtasks-container").innerHTML = subtaskHTML;
  */
-function returnSubtaskHTMLForBigTaskCardEdit(id) {
+function returnSubtaskHTMLForBigTaskCardEdit(id, subtaskText = "") {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit big-task-card-edit__edit-subtask d-none">
                     <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
@@ -714,9 +695,9 @@ function returnSubtaskHTMLForBigTaskCardEdit(id) {
                 <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask big-task-card-edit__details-subtask subtask-scroll-margin" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)" ondblclick="editSubtaskForBigTaskCard(${id})">
                     <div class="subtask-text" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
                         <span>&bull;</span>
-                        <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span"></span>
+                        <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span">${subtaskText}</span>
                     </div>
-                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
                         <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
                         <hr>
                         <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
@@ -742,7 +723,7 @@ function returnSubtaskHTMLForBigTaskCardEdit(id) {
  * const subtaskMobileHTML = returnSubtaskMobileHTMLForBigTaskCardEdit(1);
  * document.getElementById("subtasks-container-mobile").innerHTML = subtaskMobileHTML;
  */
-function returnSubtaskMobileHTMLForBigTaskCardEdit(id) {
+function returnSubtaskMobileHTMLForBigTaskCardEdit(id, subtaskText = "") {
     return `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit big-task-card-edit__edit-subtask d-none">
                     <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
@@ -755,7 +736,7 @@ function returnSubtaskMobileHTMLForBigTaskCardEdit(id) {
                 <div id="big-task-card-edit__details-subtask-${id}" class="container-subtask big-task-card-edit__details-subtask subtask-scroll-margin">
                     <div class="subtask-text">
                         <span>&bull;</span>
-                        <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span"></span>
+                        <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span">${subtaskText}</span>
                     </div>
                     <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons">
                         <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
