@@ -517,7 +517,7 @@ function addTaskTemplate() {
                             <span class="asterisk">&#42;</span>
                             <p id="max-char-title" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                         </label>
-                        <input id="title" class="input" type="text" name="title" placeholder="Enter a title" maxlength="50" size="10" onkeyup="checkInputLength('title')">
+                        <input id="title" class="input" onkeyup="resetOrShowDateError()" type="text" name="title" placeholder="Enter a title" maxlength="50" size="10" onkeyup="checkInputLength('title')">
                         <p id="required-title" class="required hidden">This field is required</p>
                     </div>
                     <div id="container-description" class="container-input-label">
@@ -533,8 +533,8 @@ function addTaskTemplate() {
                             <p id="invalid-date" class="required hidden">Invalid date format (dd/mm/jjjj)!</p>
                         </label>
                         <div id="container-input-due-date">
-                            <input id="due-date" class="input" type="text" name="due-date" placeholder="dd/mm/yyyy" size="10" required  maxlength="10">
-                            <input id="date-picker" type="date" onchange="putDateToInput()">
+                            <input id="due-date" class="input" onkeyup="resetOrShowDateError()" type="text" name="due-date" placeholder="dd/mm/yyyy" size="10" required  maxlength="10">
+                            <input id="date-picker" type="date" onchange="putDateToInput(); resetOrShowDateError()">
                         </div>
                         <p id="required-due-date" class="required hidden">This field is required</p>
                     </div>
@@ -610,7 +610,7 @@ function addTaskTemplate() {
                             <p id="max-char-subtasks" class="required-max-chars d-none">Reached maximum amount of 50 chars!</p>
                         </label>
                         <div id="container-input-subtask" onclick="changeInputButton(true), stopPropagation(event)">
-                            <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" size="10" onkeyup="checkInputLength('subtasks')" onkeydown="isEnterKey(event)">
+                            <input id="subtasks" class="input" type="text" name="subtasks" placeholder="Add new subtask" maxlength="50" size="10" onkeyup="resetSubtaskValidation()" onkeydown="isEnterKey(event)">
                             <button id="button-add" class="button-add" type="button">
                                 <img src="../assets/icons/add.svg" alt="icon-arrow-down">
                             </button>
