@@ -27,10 +27,6 @@ nav {
     padding-left: 348px;
 }
 
-.button-box {
-    display: none;
-}
-
 .login-button-none{
     display: none;
 }
@@ -129,15 +125,19 @@ p{
         height: calc(100dvh - 96px);
         width: calc(1920px - 232px);
     }
+
+    header {
+        justify-content: flex-start;
+    }
+
+    nav {
+        width: 1920px;
+    }
 }
 
 @media (max-width: 1040px){
     nav {
         padding: 16px;
-    }
-
-    .button-box {
-        display: none;
     }
 
     #generator_results{
