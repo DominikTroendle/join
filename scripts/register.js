@@ -386,4 +386,8 @@ function hideLoggedInLinksDesktop() {
         li.style.display = 'none';
         document.getElementById('login-button').classList.add('menu-login-button');
     });
+    const buttonBox = Array.from(document.getElementsByClassName('button-box'));
+    buttonBox.forEach(box => {
+        box.style.display = 'none';
+    })
 }
