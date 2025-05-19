@@ -63,7 +63,7 @@ function addSubtask() {
  */
 function renderSubtask(inputValue) {
     let containerSubtasks = document.getElementById('container-subtasks');
-    let subtaskObj = {"checked" : "false"};
+    let subtaskObj = { "checked": "false" };
     document.getElementById('invalid-subtask').classList.add('d-none');
     document.getElementById('container-input-subtask').classList.remove('input-unvalid');
     subtasksCount++;
@@ -91,13 +91,14 @@ function determineSubtaskStyle(containerSubtasks, subtasksCount) {
  * Deletes subtask by removing if from both the subtasks array and the DOM
  * @param {String} id - id of the subtask the user clicked to delete
  */
-function deleteSubtask(id) {
+function deleteSubtask(id, event) {
+    event.stopPropagation();
+    let index = subtasks.findIndex(element => element.subtask == document.getElementById(`subtask-${id}`)?.innerText);
     let subtaskContainer = document.getElementById(`container-subtask-${id}`);
     let containerSubtasks = document.getElementById('container-subtasks');
-    subtasks.splice((id-1), 1);
+    subtasks.splice(index, 1);
     subtaskContainer.remove();
-    subtasksCount--;
-    checkForScrollableContainer(containerSubtasks);    
+    checkForScrollableContainer(containerSubtasks);
 }
 
 /**
@@ -106,9 +107,14 @@ function deleteSubtask(id) {
  */
 function editSubtask(id) {
     showSubtaskDetails();
-    document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
-    document.getElementById(`details-subtask-${id}`).classList.add('d-none');
-    document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
+    let inputSubtask = document.getElementById(`input-subtask-${id}`);
+    let detailsSubtask = document.getElementById(`details-subtask-${id}`);
+    let editSubtask = document.getElementById(`edit-subtask-${id}`);
+    let subtask = document.getElementById(`subtask-${id}`);
+    if (!inputSubtask || !detailsSubtask || !editSubtask || !subtask) return;
+    inputSubtask.value = subtask.innerText;
+    detailsSubtask.classList.add('d-none');
+    editSubtask.classList.remove('d-none');
 }
 
 /**
@@ -127,7 +133,7 @@ function showSubtaskDetails() {
  * @returns true if the given child is the last child of its parent, otherwise false
  */
 function isLastChild(child) {
-    return (child === child.parentNode.children[child.parentNode.children.length-1]) 
+    return (child === child.parentNode.children[child.parentNode.children.length - 1])
 }
 
 /**
@@ -135,14 +141,15 @@ function isLastChild(child) {
  * @param {Number} id - id of the subtask the user clicked to save
  */
 function saveEditedSubtask(id) {
+    let index = subtasks.findIndex(element => element.subtask == document.getElementById(`subtask-${id}`)?.innerText);
     let input = document.getElementById(`input-subtask-${id}`);
     let element = document.getElementById(`container-subtask-${id}`);
     document.getElementById(`details-subtask-${id}`).classList.remove('d-none');
     document.getElementById(`edit-subtask-${id}`).classList.add('d-none');
     document.getElementById(`subtask-${id}`).innerText = input.value;
-    subtasks[`${id-1}`].subtask = input.value;
+    subtasks[index].subtask = input.value;
     input.value = "";
-    if (window.innerWidth > 1040) {showEditOptions(id, false);}
+    if (window.innerWidth > 1040) { showEditOptions(id, false); }
     if (element.classList.contains('padding-top')) {
         element.classList.remove('padding-top');
     }

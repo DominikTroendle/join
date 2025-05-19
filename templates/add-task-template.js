@@ -34,7 +34,7 @@ function returnSubtaskHTML(id) {
                 <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
                     <input id="input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                     <div class="flex">
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id}, event)">
                         <hr class="edit-hr">
                         <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtask(${id})">
                     </div>
@@ -47,7 +47,7 @@ function returnSubtaskHTML(id) {
                     <div id="icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptions(${id}, true)" onmouseleave="showEditOptions(${id}, false)">
                         <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
                         <hr>
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id}, event)">
                     </div>
                 </div>
             </div>`;
@@ -63,7 +63,7 @@ function returnSubtaskMobileHTML (id) {
                 <div id="edit-subtask-${id}" class="container-subtask-edit d-none">
                     <input id="input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                     <div class="flex">
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id}, event)">
                         <hr class="edit-hr">
                         <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtask(${id})">
                     </div>
@@ -76,7 +76,7 @@ function returnSubtaskMobileHTML (id) {
                     <div id="icons-subtask-${id}" class="subtask-icons">
                         <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtask(${id})">
                         <hr>
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtask(${id}, event)">
                     </div>
                 </div>
             </div>`;
