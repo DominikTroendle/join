@@ -40,11 +40,11 @@
         <div class="blue-line"></div>
         <form onsubmit="userLogin(); return false">
           <div class="input-container">
-            <input class="input-default" onkeyup="validateLoginInputs()" type="text" id="email" placeholder="Email"/>
+            <input class="input-default" onkeyup="validateEmailLoginInputs()" type="text" id="email" placeholder="Email"/>
             <img src="assets/img/mail.png" alt="Mail Icon" class="input-icon">
           </div>
           <div class="input-container">
-            <input class="input-default" onkeyup="validateLoginInputs()" type="password" id="password" placeholder="Password" onfocus="changePasswordIcon(true)"
+            <input class="input-default" onkeyup="validatePasswordLoginInputs" type="password" id="password" placeholder="Password" onfocus="changePasswordIcon(true)"
               onblur="changePasswordIcon(false)" />
             <img id="passwordIcon" src="assets/img/lock.png" alt="Lock Icon" class="input-icon"
               onpointerdown="togglePasswordVisibility('password', 'passwordIcon'); event.preventDefault()">

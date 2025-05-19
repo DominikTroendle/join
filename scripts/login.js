@@ -69,17 +69,47 @@ function throwLoginDataError(users, emailInput, passwordInput) {
  * Fetches user data and validates login inputs.
  * Adds error borders and shows a message if credentials are invalid.
  */
-async function validateLoginInputs() {
+// async function validateLoginInputs() {
+//     let usersResponse = await fetch(BASE_URL + "users.json");
+//     let users = await usersResponse.json();
+//     let emailInput = document.getElementById('email');
+//     let passwordInput = document.getElementById('password');
+//     const email = emailInput.value, password = passwordInput.value;
+//     const user = Object.values(users).find(u => u.userDatas.email === email);
+//     const emailValid = !!user, passwordValid = user?.userDatas.password === password;
+//     setInputBorder(emailInput, emailValid);
+//     setInputBorder(passwordInput, emailValid && passwordValid);
+//     toggleErrorMessage(!(emailValid && passwordValid));
+// }
+
+/**
+ * Fetches user data and validates login inputs.
+ * Adds error borders and shows a message if credentials are invalid.
+ */
+async function validateEmailLoginInputs() {
     let usersResponse = await fetch(BASE_URL + "users.json");
     let users = await usersResponse.json();
     let emailInput = document.getElementById('email');
-    let passwordInput = document.getElementById('password');
-    const email = emailInput.value, password = passwordInput.value;
+    const email = emailInput.value
     const user = Object.values(users).find(u => u.userDatas.email === email);
-    const emailValid = !!user, passwordValid = user?.userDatas.password === password;
+    const emailValid = !!user
     setInputBorder(emailInput, emailValid);
-    setInputBorder(passwordInput, emailValid && passwordValid);
-    toggleErrorMessage(!(emailValid && passwordValid));
+    toggleErrorMessage(!(emailValid));
+}
+
+/**
+ * Fetches user data and validates login inputs.
+ * Adds error borders and shows a message if credentials are invalid.
+ */
+async function validatePasswordLoginInputs() {
+    let usersResponse = await fetch(BASE_URL + "users.json");
+    let users = await usersResponse.json();
+    let passwordInput = document.getElementById('password');
+    const password = passwordInput.value;
+    const user = Object.values(users).find(u => u.userDatas.email === email);
+    const passwordValid = user?.userDatas.password === password;
+    setInputBorder(passwordInput);
+    toggleErrorMessage(!(passwordValid));
 }
 
 /**
