@@ -198,12 +198,10 @@ function processSubtaskInput(input, containerSubtasks, subtaskObj) {
 }
 
 /**
- * Saves the edited subtask and updates the task card display.
- * The subtask is updated with the new value entered by the user, and the edit view is replaced with the details view.
- * Additionally, the input field is cleared, and any relevant styles or options are adjusted based on the screen size.
+ * Saves the edited subtask, updates its value and resets the edit view.
  *
- * @param {number} id - The unique identifier for the subtask being edited.
- * @returns {void} 
+ * @param {number} id - ID of the subtask to update.
+ * @returns {void}
  */
 function saveEditedSubtaskForBigTaskCard(id) {
     let index = subtasksBigTaskCardEdit.findIndex(element => element.subtask == document.getElementById(`big-task-card-edit__subtask-${id}`)?.innerText);
@@ -221,11 +219,11 @@ function saveEditedSubtaskForBigTaskCard(id) {
 }
 
 /**
- * Enables edit mode for a specific subtask within the big task card.
- * This function populates the edit input field with the current subtask text,
- * hides the subtask's details view, and shows the edit view.
- * It also resets visibility of all subtasks' edit and details containers.
- * 
+ * Prepares the subtask for editing in the big task card view.  
+ * Hides all other edit fields and switches the selected subtask from display mode to input mode.  
+ * The current subtask text is prefilled in the input field for editing.  
+ * If any required element is missing, the function exits early without making changes.
+ *
  * @param {number} id - The unique identifier of the subtask to be edited.
  * @returns {void}
  */
@@ -280,12 +278,13 @@ function showEditOptionsForBigTaskCardEdit(id, boolean) {
 }
 
 /**
- * Determines and applies the appropriate HTML structure for a subtask based on the screen size.
- * If the window width is less than or equal to 1040px, the mobile-specific HTML structure is used.
- * Otherwise, the desktop-specific HTML structure is used.
+ * Selects and renders the subtask layout based on screen size.  
+ * Adds mobile-specific markup for small screens, and desktop markup for larger screens.  
+ * The generated HTML is appended to the provided container, using the given subtask index.  
+ * This ensures responsive display of subtasks in the edit view of the big task card.
  *
- * @param {HTMLElement} containerSubtasks - The container element where the subtask HTML will be appended.
- * @param {number} subtasksCount - The current count of subtasks, used to generate the correct subtask identifier.
+ * @param {HTMLElement} containerSubtasks - The container element where the subtask is added.
+ * @param {number} subtasksCount - The subtask index used to assign unique IDs.
  * @returns {void}
  */
 function determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCount) {
