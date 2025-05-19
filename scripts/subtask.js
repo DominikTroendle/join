@@ -50,6 +50,7 @@ function addSubtask() {
     let inputValue = document.getElementById('subtasks').value;
     inputValue = inputValue.trim();
     if (inputValue !== "") {
+        showSubtaskDetails();
         renderSubtask(inputValue);
     } else {
         throwSubtaskError();
@@ -104,13 +105,20 @@ function deleteSubtask(id) {
  * @param {String} id - id of the subtask the user clicked to edit
  */
 function editSubtask(id) {
+    showSubtaskDetails();
+    document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
+    document.getElementById(`details-subtask-${id}`).classList.add('d-none');
+    document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
+}
+
+/**
+ * Hides all edition menus on subtasks and shows the details containers
+ */
+function showSubtaskDetails() {
     let allEditSubtasks = Array.from(document.querySelectorAll(".container-subtask-edit"));
     let allDetailsSubtasks = Array.from(document.querySelectorAll(".container-subtask"));
     allEditSubtasks.forEach(element => element.classList.add('d-none'));
     allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
-    document.getElementById(`input-subtask-${id}`).value = document.getElementById(`subtask-${id}`).innerText;
-    document.getElementById(`details-subtask-${id}`).classList.add('d-none');
-    document.getElementById(`edit-subtask-${id}`).classList.remove('d-none');
 }
 
 /**
