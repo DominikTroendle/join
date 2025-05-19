@@ -236,9 +236,9 @@ function editSubtaskForBigTaskCard(id) {
     let detailsSubtask = document.getElementById(`big-task-card-edit__details-subtask-${id}`);
     let editSubtask = document.getElementById(`big-task-card-edit__edit-subtask-${id}`);
     let subtask = document.getElementById(`big-task-card-edit__subtask-${id}`);
-    if (!inputSubtask || !detailsSubtask || !editSubtask || !subtask) return;
     allEditSubtasks.forEach(element => element.classList.add('d-none'));
     allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
+    if (!inputSubtask || !detailsSubtask || !editSubtask || !subtask) return;
     inputSubtask.value = subtask.innerText;
     detailsSubtask.classList.add('d-none');
     editSubtask.classList.remove('d-none');
