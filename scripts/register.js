@@ -375,6 +375,9 @@ function hideLoggendInLinks() {
     }
 }
 
+/**
+ * Hides logged-in user links on window resize to ensure responsive layout behavior.
+ */
 window.addEventListener("resize", hideLoggendInLinks);
 
 /**
