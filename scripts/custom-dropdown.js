@@ -57,6 +57,7 @@ function toggleCategoryOptions() {
  */
 function displayCategory(category) {
     document.getElementById('category').value = category;
+    resetOrShowDateError();
     closeDropdown();
 }
 

@@ -177,3 +177,28 @@ function changeInputButton(boolean) {
         document.getElementById('container-buttons').classList.add('d-none');
     }
 }
+
+/**
+ * Validates the due date input and shows an error message if the format is invalid.
+ * Removes any existing error messages before validation.
+ */
+function resetOrShowDateError() {
+    removeError();
+    validateInputs();
+    let validDateFormat = testDate();
+    if (!validDateFormat && document.getElementById('due-date').value !== "") {
+        throwError();
+        document.getElementById('invalid-date').classList.remove('hidden');
+    } else throwError();
+}
+
+/**
+ * Hides subtask input error messages and checks the input length.
+ * Used to reset validation state when editing or typing a subtask.
+ */
+function resetSubtaskValidation() {
+    let invalidRef = document.getElementById('invalid-subtask');
+    invalidRef.classList.add('d-none');
+    document.getElementById('max-char-subtasks').classList.add('d-none')
+    checkInputLength('subtasks');
+}
