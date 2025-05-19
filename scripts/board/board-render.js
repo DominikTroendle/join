@@ -187,7 +187,7 @@ function renderContactAsDefaultForBigTaskCardEdit(dropDown, contactName, color) 
  * 
  * @example
  * renderSelectedContactsPreviewForBigTaskCardEdit(document.getElementById('contact-preview-container'));
- * // This will display the previews of selected contacts inside the specified container.
+ * This will display the previews of selected contacts inside the specified container.
  */
 function renderSelectedContactsPreviewForBigTaskCardEdit(container) {
     for (let i = 0; i < selectedContactsBigTaskCardEdit.length; i++) {

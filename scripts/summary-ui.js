@@ -9,7 +9,7 @@
  * 
  * @example
  * changeImgSource('myImageId', 'https://example.com/new-image.jpg');
- * // This will change the source of the image with ID 'myImageId' to the new image URL.
+ * This will change the source of the image with ID 'myImageId' to the new image URL.
  */
 function changeImgSource(id, imgSource) {
     imgId = document.getElementById(id)

@@ -67,7 +67,7 @@ async function loadUserData() {
  *                     only the first letter of the first word is returned.
  * 
  * @example
- * const initials = findInitials("John Doe"); // returns "JD"
+ * const initials = findInitials("John Doe"); returns "JD"
  */
 function findInitials(contactName) {
     let name = contactName.trim().split(' ').filter(n => n);

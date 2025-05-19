@@ -17,7 +17,7 @@ const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebased
  * 
  * @example
  * selectPrioButtonForBigTaskCardEdit('big-task-card-edit__urgent-button');
- * // This will set the priority to "urgent" and toggle the respective button.
+ * This will set the priority to "urgent" and toggle the respective button.
  */
 function selectPrioButtonForBigTaskCardEdit(prio) {
     if (prio !== "") {
@@ -42,7 +42,7 @@ function selectPrioButtonForBigTaskCardEdit(prio) {
  * 
  * @example
  * togglePriorityForBigTaskCardEdit("urgent", urgentButton, svgElement);
- * // This will toggle the 'urgent' priority on the button and update the selected priority.
+ * This will toggle the 'urgent' priority on the button and update the selected priority.
  */
 function togglePriorityForBigTaskCardEdit(priority, button, svg) {
     if (button.classList.contains(priority)) {
@@ -65,7 +65,7 @@ function togglePriorityForBigTaskCardEdit(priority, button, svg) {
  * 
  * @example
  * clearPrioButtonsForBigTaskCardEdit();
- * // This will clear all priority selections and reset the button styles.
+ * This will clear all priority selections and reset the button styles.
  */
 function clearPrioButtonsForBigTaskCardEdit() {
     let prios = ["urgent", "medium", "low"];
@@ -89,7 +89,7 @@ function clearPrioButtonsForBigTaskCardEdit() {
  * 
  * @example
  * displaySelectedContactsForBigTaskCard();
- * // This will update the UI with the selected contacts and apply appropriate padding.
+ * This will update the UI with the selected contacts and apply appropriate padding.
  */
 function displaySelectedContactsForBigTaskCard() {
     let container = document.getElementById('big-task-card-edit__assigned-contacts-box');
@@ -110,7 +110,7 @@ function displaySelectedContactsForBigTaskCard() {
  * 
  * @example
  * toggleInputFocusForBigTaskCardEdit();
- * // This will focus on the 'Assigned To' input if the dropdown is visible.
+ * This will focus on the 'Assigned To' input if the dropdown is visible.
  */
 function toggleInputFocusForBigTaskCardEdit() {
     if (!document.getElementById('big-task-card-edit__dropdown-assign').classList.contains('d-none')) {
