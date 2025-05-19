@@ -372,7 +372,7 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
     }
     selectedContactsBigTaskCardEdit.length = 0;
     subtasksBigTaskCardEdit.length = 0;
-    subtasksCountBigTaskCardEdit = 1;
+    subtasksCountBigTaskCardEdit = 0;
     assignedContacts.sort((element1, element2) => element1.name.localeCompare(element2.name));
     assignedContacts.forEach(element => selectedContactsBigTaskCardEdit.push(element));
     if (subtasksEdit) {
@@ -380,12 +380,12 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
     }
     let subtasksHtml = "";
     for (let index = 0; index < subtasksBigTaskCardEdit.length; index++) {
-        let id = subtasksCountBigTaskCardEdit++;
+        let id = ++subtasksCountBigTaskCardEdit;
         subtasksHtml += `<div id="big-task-card-edit__container-subtask-${id}" class="position-relative">
                             <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit big-task-card-edit__edit-subtask d-none">
                                 <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                                 <div class="flex">
-                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
                                     <hr class="edit-hr">
                                     <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
                                 </div>
@@ -398,7 +398,7 @@ function bigTaskCardEditTemplate(taskTitle, taskDescription, taskDueDate, assign
                                 <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
                                     <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
                                     <hr>
-                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                                    <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
                                 </div>
                             </div>
                         </div>`;
@@ -706,7 +706,7 @@ function returnSubtaskHTMLForBigTaskCardEdit(id) {
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit big-task-card-edit__edit-subtask d-none">
                     <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                     <div class="flex">
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
                         <hr class="edit-hr">
                         <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
                     </div>
@@ -716,10 +716,10 @@ function returnSubtaskHTMLForBigTaskCardEdit(id) {
                         <span>&bull;</span>
                         <span id="big-task-card-edit__subtask-${id}" class="subtask-text-span"></span>
                     </div>
-                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons d-none" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
+                    <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons" onmouseover="showEditOptionsForBigTaskCardEdit(${id}, true)" onmouseleave="showEditOptionsForBigTaskCardEdit(${id}, false)">
                         <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
                         <hr>
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
                     </div>
                 </div>
             </div>`;
@@ -747,7 +747,7 @@ function returnSubtaskMobileHTMLForBigTaskCardEdit(id) {
                 <div id="big-task-card-edit__edit-subtask-${id}" class="container-subtask-edit big-task-card-edit__edit-subtask d-none">
                     <input id="big-task-card-edit__input-subtask-${id}" class="input-edit" type="text"  maxlength="50">
                     <div class="flex">
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
                         <hr class="edit-hr">
                         <img class="check-blue" src="../assets/icons/check_blue.svg" alt="icon-accept" onclick="saveEditedSubtaskForBigTaskCard(${id})">
                     </div>
@@ -760,7 +760,7 @@ function returnSubtaskMobileHTMLForBigTaskCardEdit(id) {
                     <div id="big-task-card-edit__icons-subtask-${id}" class="subtask-icons">
                         <img src="../assets/icons/edit.svg" alt="icon-edit" onclick="editSubtaskForBigTaskCard(${id})">
                         <hr>
-                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id})">
+                        <img src="../assets/icons/delete.svg" alt="icon-delete" onclick="deleteSubtaskForBigTaskCardEdit(${id}, event)">
                     </div>
                 </div>
             </div>`;

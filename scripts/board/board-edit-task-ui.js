@@ -185,7 +185,7 @@ function addSubtaskForBigTaskCardEdit() {
 function processSubtaskInput(input, containerSubtasks, subtaskObj) {
     let inputValue = input.value.trim();
     if (inputValue !== "") {
-        let subtasksCountBigTaskCardEdit = subtasksBigTaskCardEdit.length + 1;
+        ++subtasksCountBigTaskCardEdit;
         document.getElementById('invalid-subtask-big-task-card-edit__subtask-input').classList.add('d-none');
         document.getElementById('big-task-card-edit__subtask-box').classList.remove('input-unvalid');
         determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCountBigTaskCardEdit);
@@ -205,12 +205,13 @@ function processSubtaskInput(input, containerSubtasks, subtaskObj) {
  * @returns {void} 
  */
 function saveEditedSubtaskForBigTaskCard(id) {
+    let index = subtasksBigTaskCardEdit.findIndex(element => element.subtask == document.getElementById(`big-task-card-edit__subtask-${id}`)?.innerText);
     let input = document.getElementById(`big-task-card-edit__input-subtask-${id}`);
     let element = document.getElementById(`big-task-card-edit__container-subtask-${id}`);
     document.getElementById(`big-task-card-edit__details-subtask-${id}`).classList.remove('d-none');
     document.getElementById(`big-task-card-edit__edit-subtask-${id}`).classList.add('d-none');
     document.getElementById(`big-task-card-edit__subtask-${id}`).innerText = input.value;
-    subtasksBigTaskCardEdit[`${id - 1}`].subtask = input.value;
+    subtasksBigTaskCardEdit[index].subtask = input.value;
     input.value = "";
     if (window.innerWidth > 1040) { showEditOptionsForBigTaskCardEdit(id, false); }
     if (element.classList.contains('padding-top')) {
@@ -219,38 +220,45 @@ function saveEditedSubtaskForBigTaskCard(id) {
 }
 
 /**
- * Enables editing mode for a specific subtask within the big task card.
+ * Enables edit mode for a specific subtask within the big task card.
  * This function populates the edit input field with the current subtask text,
- * hides the subtask's details view, and displays the edit view.
- * If the subtask is the last in the list, special styling may be applied separately.
- *
+ * hides the subtask's details view, and shows the edit view.
+ * It also resets visibility of all subtasks' edit and details containers.
+ * 
  * @param {number} id - The unique identifier of the subtask to be edited.
  * @returns {void}
  */
 function editSubtaskForBigTaskCard(id) {
     let allEditSubtasks = Array.from(document.querySelectorAll(".container-subtask-edit"));
     let allDetailsSubtasks = Array.from(document.querySelectorAll(".container-subtask"));
+    let inputSubtask = document.getElementById(`big-task-card-edit__input-subtask-${id}`);
+    let detailsSubtask = document.getElementById(`big-task-card-edit__details-subtask-${id}`);
+    let editSubtask = document.getElementById(`big-task-card-edit__edit-subtask-${id}`);
+    let subtask = document.getElementById(`big-task-card-edit__subtask-${id}`);
+    if (!inputSubtask || !detailsSubtask || !editSubtask || !subtask) return;
     allEditSubtasks.forEach(element => element.classList.add('d-none'));
     allDetailsSubtasks.forEach(element => element.classList.remove('d-none'));
-    document.getElementById(`big-task-card-edit__input-subtask-${id}`).value = document.getElementById(`big-task-card-edit__subtask-${id}`).innerText;
-    document.getElementById(`big-task-card-edit__details-subtask-${id}`).classList.add('d-none');
-    document.getElementById(`big-task-card-edit__edit-subtask-${id}`).classList.remove('d-none');
+    inputSubtask.value = subtask.innerText;
+    detailsSubtask.classList.add('d-none');
+    editSubtask.classList.remove('d-none');
 }
 
 /**
- * Deletes a subtask from the list of subtasks and updates the task view.
- * The subtask is removed from both the displayed UI and the internal data structure.
- * The count of subtasks is decremented, and the scrollability of the subtask container is rechecked.
+ * Deletes a subtask from the list and updates the UI accordingly.
+ * Stops the event from propagating, removes the subtask from the DOM,
+ * updates the internal subtask array, and checks if the subtask container should be scrollable.
  *
- * @param {number} id - The unique identifier of the subtask to be deleted.
+ * @param {number} id - The identifier of the subtask to be deleted (based on its rendered position).
+ * @param {Event} event - The event object, used to stop propagation.
  * @returns {void}
  */
-function deleteSubtaskForBigTaskCardEdit(id) {
+function deleteSubtaskForBigTaskCardEdit(id, event) {
+    let index = subtasksBigTaskCardEdit.findIndex(element => element.subtask == document.getElementById(`big-task-card-edit__subtask-${id}`)?.innerText);
+    event.stopPropagation();
     let subtaskContainer = document.getElementById(`big-task-card-edit__container-subtask-${id}`);
     let containerSubtasks = document.getElementById('big-task-card-edit__subtasks-box');
-    subtasksBigTaskCardEdit.splice((id - 1), 1);
+    subtasksBigTaskCardEdit.splice(index, 1);
     subtaskContainer.remove();
-    subtasksCountBigTaskCardEdit--;
     checkForScrollableContainerForBigTaskCardEdit(containerSubtasks);
 }
 
@@ -281,9 +289,9 @@ function showEditOptionsForBigTaskCardEdit(id, boolean) {
  */
 function determineSubtaskStyleForBigTaskCardEdit(containerSubtasks, subtasksCount) {
     if (window.innerWidth <= 1040) {
-        containerSubtasks.innerHTML += returnSubtaskHTMLForBigTaskCardEdit(subtasksCount);
-    } else {
         containerSubtasks.innerHTML += returnSubtaskMobileHTMLForBigTaskCardEdit(subtasksCount);
+    } else {
+        containerSubtasks.innerHTML += returnSubtaskHTMLForBigTaskCardEdit(subtasksCount);
     }
 }
 
