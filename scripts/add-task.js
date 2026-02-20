@@ -1,4 +1,4 @@
-const BASE_URL_ADDTASK = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
+const BASE_URL_ADDTASK = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
 let userId;
 

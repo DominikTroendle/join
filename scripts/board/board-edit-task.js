@@ -4,7 +4,7 @@ let unvalidInputsBigTaskCardEdit = [];
 let subtasksBigTaskCardEdit = [];
 let subtasksCountBigTaskCardEdit = 0;
 let selectedPriorityBigTaskCardEdit = "medium";
-const BASE_URL_ADDTASK2 = "https://join-user-default-rtdb.europe-west1.firebasedatabase.app/users/";
+const BASE_URL_ADDTASK2 = "https://join-demo-87ca4-default-rtdb.europe-west1.firebasedatabase.app/users/";
 
 /**
  * Selects and toggles the priority button for a big task card edit.
